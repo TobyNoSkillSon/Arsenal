@@ -32,6 +32,13 @@ import AppKit
     /// material, so renders fill the accent colour in its place (`rendersSelectionFill`).
     var forcesHighlight = false { didSet { needsDisplay = true } }
     var rendersSelectionFill = false
+    /// A warm accent (Support the Developer): its heart filled in this colour over a faint glow at rest, and under the
+    /// pointer a soft wash of it instead of the blue selection. Static: nothing animates or blinks.
+    var accent: NSColor? { didSet { needsDisplay = true } }
+    /// Increase Contrast: the accent keeps its heart but highlights with the system's selection, like every other row.
+    var increaseContrast: () -> Bool = { NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast }
+    private var accentWash: Bool { accent != nil && !increaseContrast() }
+    static let accentGlow: CGFloat = 0.13, accentWashDark: CGFloat = 0.22, accentWashLight: CGFloat = 0.16, glowRadius: CGFloat = 9
 
     /// Becomes `item`'s view.
     init(item: NSMenuItem) {
@@ -78,18 +85,30 @@ import AppKit
     override func viewWillDraw() {
         super.viewWillDraw()
         selection.frame = rowRect
-        selection.isHidden = !highlighted || rendersSelectionFill
+        selection.isHidden = !highlighted || rendersSelectionFill || accentWash
     }
+    private var isDark: Bool { effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua }
     override func draw(_ dirtyRect: NSRect) {
         let item = menuItem
         let lit = highlighted
-        if lit && rendersSelectionFill {
+        if lit && rendersSelectionFill && !accentWash {
             NSColor.controlAccentColor.setFill()
             NSBezierPath(roundedRect: rowRect, xRadius: Self.radius, yRadius: Self.radius).fill()
         }
         let enabled = item?.isEnabled ?? true
-        let color: NSColor = lit ? .selectedMenuItemTextColor : enabled ? .labelColor : .tertiaryLabelColor
-        if let image = item?.image.map(Self.menuSized), let tinted = Self.tinted(image, color) {
+        var color: NSColor = lit ? .selectedMenuItemTextColor : enabled ? .labelColor : .tertiaryLabelColor
+        var iconColor = color
+        if let accent, enabled, !(lit && !accentWash) {
+            color = .labelColor; iconColor = accent
+            if lit {
+                accent.withAlphaComponent(isDark ? Self.accentWashDark : Self.accentWashLight).setFill()
+                NSBezierPath(roundedRect: rowRect, xRadius: Self.radius, yRadius: Self.radius).fill()
+            }
+            let centre = NSPoint(x: leading + Self.iconCentre, y: bounds.midY)
+            NSGradient(colors: [accent.withAlphaComponent(Self.accentGlow * (isDark ? 1 : 0.8)), accent.withAlphaComponent(0)])?
+                .draw(fromCenter: centre, radius: 0, toCenter: centre, radius: Self.glowRadius, options: [])
+        }
+        if let image = item?.image.map(Self.menuSized), let tinted = Self.tinted(image, iconColor) {
             let size = tinted.size
             tinted.draw(
                 in: NSRect(x: leading + Self.iconCentre - size.width / 2, y: (bounds.height - size.height) / 2, width: size.width, height: size.height),

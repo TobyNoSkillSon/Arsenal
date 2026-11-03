@@ -2,21 +2,14 @@
 import Foundation
 import os
 
-/// Quiet collection of weights nothing will use: the weights of models the signed catalog no longer lists, orphan blobs and asset snapshots, and, at startup,
-/// interrupted downloads and snapshot files that are copies of their blob. One log line per run; errors only reach the UI.
+/// Quiet collection of what no model uses: orphan blobs and asset snapshots, and, at startup, interrupted downloads and
+/// snapshot files that are copies of their blob. One log line per run; errors only reach the UI.
+///
+/// A model's weights are never collected, also when the signed catalog no longer lists the model: Arsenal never deletes
+/// downloaded weights without the user's word (1.0.1; 1.0 deleted a dropped model's weights at first launch). A dropped
+/// model stays on the table as "No longer in the catalog" with Remove, which deletes its weights when the user chooses.
 extension RealModelsService {
     private static let collectionLog = Logger(subsystem: "dev.arsenal.app", category: "WeightsCollection")
-
-    /// The model IDs whose weights a collection deletes: on disk, not in the catalog, not a local folder model, not loaded.
-    /// Models withdrawn from the catalog for their licence terms (28 Oct 2026). Weights already on a Mac stay until the user
-    /// deletes them (Models table, `arsenal_delete`); the collection never removes them on its own.
-    static let keptWithdrawnWeights: Set<String> = ["sam-audio-large", "sam-audio-small", "sam3.1", "trellis2-4b", "nemotron-3-diarization"]
-
-    func droppedWeightIDs(onDisk: [String], kept: Set<String> = RealModelsService.keptWithdrawnWeights) -> [String] {
-        let signed = Set(catalog.models.map(\.id)).union(kept)
-        let localFolders = Set((try? FileManager.default.contentsOfDirectory(atPath: paths.directory("local-models").path)) ?? [])
-        return onDisk.filter { !signed.contains($0) && !localFolders.contains($0) && localModels[$0] == nil && residents[$0] == nil }
-    }
 
     /// `startup` adds what only a fresh launch may touch: interrupted downloads (a pinned partial from the last day stays to resume)
     /// and relinking snapshot copies. Skipped while another process owns the support folder (its Gets and loads are invisible here).
@@ -29,18 +22,15 @@ extension RealModelsService {
             return 0
         }
         let pinned = allManifests.reduce(into: Set<String>()) { $0.formUnion(partialHashes($1)) }
-        let keptManifests = Self.keptWithdrawnWeights.compactMap { droppedCatalogModels[$0]?.manifest }
-        let keepAssets = Set((allManifests + keptManifests).flatMap { $0.separateAssets.map { $0.id + "/" + $0.revision } })
-        var freed: Int64 = 0, dropped: [String] = [], failures = 0
-        // A catalog override (a branch catalog in development) must never delete weights the shipped catalog still lists.
-        if ProcessInfo.processInfo.environment["ARSENAL_CATALOG"] == nil {
-            for id in droppedWeightIDs(onDisk: (try? await store.onDiskModelIDs()) ?? []) {
-                let hashes = (droppedCatalogModels[id]?.manifest.map { partialHashes($0) } ?? []).subtracting(pinned)
-                do { freed += try await store.delete(model: id, partialSHA256s: hashes); dropped.append(id) } catch {
-                    failures += 1; emit(.error(id: id, message: "Removing \(id)'s weights failed: \(error.localizedDescription)"))
-                }
-            }
+        // A dropped model's separate assets (a vocoder, a lexicon) are part of its weights and stay with them, also when the
+        // model has left the table and only its weights remain (its installed descriptor names them).
+        var droppedManifests = droppedCatalogModels.values.compactMap(\.manifest)
+        let listed = Set(allManifests.map(\.id)).union(droppedCatalogModels.keys)
+        for id in ((try? await store.onDiskModelIDs()) ?? []) where !listed.contains(id) {
+            if let manifest = try? await installer.installedManifest(id: id) { droppedManifests.append(manifest) }
         }
+        let keepAssets = Set((allManifests + droppedManifests).flatMap { $0.separateAssets.map { $0.id + "/" + $0.revision } })
+        var freed: Int64 = 0, failures = 0
         var interrupted: Int64 = 0, relinked: Int64 = 0, orphans: Int64 = 0
         if startup {
             do { interrupted = try await store.removeInterruptedDownloads(pinned: pinned, resumableSince: Date().addingTimeInterval(-86_400)) } catch {
@@ -53,19 +43,14 @@ extension RealModelsService {
         }
         freed += interrupted + relinked + orphans
         let summary: [String: Any] = [
-            "startup": startup, "dropped": dropped, "freed_bytes": freed, "interrupted_bytes": interrupted, "relinked_bytes": relinked,
+            "startup": startup, "freed_bytes": freed, "interrupted_bytes": interrupted, "relinked_bytes": relinked,
             "orphan_bytes": orphans, "failures": failures
         ]
         try? await store.logCollection(summary)
         let line =
-            "weights collection: freed \(freed) bytes; dropped [\(dropped.joined(separator: ","))]; "
+            "weights collection: freed \(freed) bytes; "
             + "interrupted \(interrupted), relinked \(relinked), orphans \(orphans), failures \(failures)"
         Self.collectionLog.notice("\(line, privacy: .public)")
-        if !dropped.isEmpty {
-            // A dropped model left on the table now has nothing on disk, so reconciling forgets it like any emptied dropped model.
-            try? await reconcileDroppedCatalogModels()
-            await refreshInstalled(forceDownloadSizes: true); changed()
-        }
         return freed
     }
 }

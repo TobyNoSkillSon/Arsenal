@@ -328,7 +328,7 @@ struct ModelsMenuView: View {
         if let root { return root }
         let root = NSMenuItem(title: "Models", action: nil, keyEquivalent: "")
         self.root = root
-        root.image = NSImage(systemSymbolName: "square.stack.3d.up", accessibilityDescription: nil)
+        root.image = Symbol.menu("square.stack.3d.up")
         root.showMenuImage()
         let menu = NSMenu(); menu.autoenablesItems = false; menu.delegate = self; tableMenu = menu
         let item = NSMenuItem()

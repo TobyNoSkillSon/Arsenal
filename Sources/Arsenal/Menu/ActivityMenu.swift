@@ -61,7 +61,7 @@ import SwiftUI
         if let root { return root }
         let root = NSMenuItem(title: "Activity", action: nil, keyEquivalent: "")
         self.root = root
-        root.image = NSImage(systemSymbolName: "gauge.with.dots.needle.50percent", accessibilityDescription: nil)
+        root.image = Symbol.menu("gauge.with.dots.needle.50percent")
         root.showMenuImage()
         root.toolTip = "What is running now, for whom, and how busy the GPU is."
         let menu = NSMenu(); menu.autoenablesItems = false; menu.delegate = self; panelMenu = menu

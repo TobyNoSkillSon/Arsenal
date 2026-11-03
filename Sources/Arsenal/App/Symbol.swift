@@ -7,6 +7,16 @@ import AppKit
     private struct Key: Hashable { var name: String; var size: CGFloat; var weight: NSFont.Weight; var color: NSColor?; var knockout = false }
     private static var cache: [Key: NSImage] = [:]
 
+    /// A status-menu item's symbol, one image per name: the menu is rebuilt on every table refresh, and reconciliation
+    /// leaves an item alone only when its image is the same object (a new image makes AppKit re-measure the item).
+    private static var menuImages: [String: NSImage] = [:]
+    static func menu(_ name: String) -> NSImage? {
+        if let image = menuImages[name] { return image }
+        let image = NSImage(systemSymbolName: name, accessibilityDescription: nil)
+        menuImages[name] = image
+        return image
+    }
+
     /// `color` nil: a template image (an NSImageView tints it).
     static func image(_ name: String, size: CGFloat, weight: NSFont.Weight = .regular, color: NSColor? = nil) -> NSImage? {
         let key = Key(name: name, size: size, weight: weight, color: color)

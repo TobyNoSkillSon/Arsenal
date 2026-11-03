@@ -30,7 +30,10 @@ private struct DroppedCatalogFixture {
     static let id = "former-chat"
     static let payload = Data([1, 2, 3])
 
-    static func make(root: URL, installed: Bool) async throws -> Self {
+    static let assetID = "former-vocoder", assetRevision = String(repeating: "c", count: 40)
+
+    /// `asset`: the descriptor also declares a separate asset (a vocoder kept as its own snapshot, as YuE2's VAE is).
+    static func make(root: URL, installed: Bool, asset: Bool = false) async throws -> Self {
         let paths = ArsenalPaths(support: root.appendingPathComponent("support"), cache: root.appendingPathComponent("cache"))
         try paths.create()
         let descriptor = """
@@ -72,8 +75,22 @@ private struct DroppedCatalogFixture {
             [bench]
             recipe = "bench.toml"
             """
+        let assetBlock = """
+
+            [[asset]]
+            id = "\(assetID)"
+            repo = "fixture/former-vocoder"
+            repo_type = "model"
+            revision = "\(assetRevision)"
+            files = ["vocoder.bin"]
+            licence = "MIT"
+            [asset.sha256]
+            "vocoder.bin" = "\(FileDigest.sha256(payload))"
+            [asset.bytes]
+            "vocoder.bin" = 3
+            """
         let files = [
-            "model.toml": Data(descriptor.utf8), "gate.toml": Data("schema=1".utf8), "bench.toml": Data("schema=1".utf8),
+            "model.toml": Data((descriptor + (asset ? assetBlock : "")).utf8), "gate.toml": Data("schema=1".utf8), "bench.toml": Data("schema=1".utf8),
             "README.md": Data("Fixture".utf8), "log/001-fixture.md": Data("Fixture".utf8)
         ]
         let folder = root.appendingPathComponent("source/" + id)
@@ -123,9 +140,14 @@ private struct DroppedCatalogFixture {
     }
 }
 
+/// A model the signed catalog no longer lists keeps its weights (Arsenal 1.0.1). Arsenal 1.0 deleted them at first launch
+/// (a user's 320 MB BS-RoFormer, 3 Nov 2026); now the row stays on the table as "No longer in the catalog", locked, and only
+/// the user's Remove deletes its weights. A dropped model with nothing on this Mac is still forgotten quietly.
 struct DroppedCatalogTests {
+    static let dropped = "No longer in the catalog"
+
     @Test(arguments: ["service", "http", "mcp"], [false, true])
-    func refreshDeletesDroppedWeightsAndForgetsTheRow(path: String, installed: Bool) async throws {
+    func refreshKeepsDroppedWeightsUntilTheUserRemovesThem(path: String, installed: Bool) async throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("tmp/catalog-dropped-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }
@@ -154,39 +176,62 @@ struct DroppedCatalogTests {
                 #expect(result.isError != true)
             }
         }
-        func checkRows() async throws {
-            let rows = await f.service.rows()
+        /// The table as the service, HTTP and MCP each show it: the dropped row while its weights are here, nothing otherwise.
+        func checkRows(_ service: RealModelsService) async throws {
+            let rows = await service.rows()
             let httpRows = try JSONDecoder().decode([ModelRow].self, from: await http("models"))
+            for rows in [rows, httpRows] {
+                #expect(rows.map(\.id) == (installed ? [DroppedCatalogFixture.id] : []))
+                if let row = rows.first {
+                    #expect(row.catalogRemoved && row.verification == Self.dropped && row.name == f.entry.manifest.name && !row.local)
+                    #expect(row.states["int4"]?.state == .ready)
+                }
+            }
             let result = try await router.callMCPTool(
                 MCPNames.tool("find"), arguments: ["on_mac": "table", "format": "json"], requester: "Catalog regression", server: nil, progress: nil)
             let object = try WireJSON.decode(JSONEncoder().encode(try #require(result.structuredContent)))
-            // "delete everything that is dropped". The withdrawn model's weights go and its row with them.
-            #expect(object["models"]?.array?.compactMap { $0["id"]?.string } == [])
-            for rows in [rows, httpRows] { #expect(rows.isEmpty) }
+            #expect(object["models"]?.array?.compactMap { $0["id"]?.string } == (installed ? [DroppedCatalogFixture.id] : []))
         }
         do {
             let before = try f.weightEvidence()
             _ = try f.publish(sequence: 2, included: true)
             try await refresh()
-            // The table holds the model only while its weights are on this Mac; the catalog lists it either way.
             #expect(await f.service.rows().count == (installed ? 1 : 0))
             #expect(await f.service.catalog().first { $0.id == DroppedCatalogFixture.id }?.row.catalogRemoved == false)
             let removedCatalog = try f.publish(sequence: 3, included: false)
-            try await refresh(); try await checkRows()
-            #expect(installed ? try f.weightEvidence().isEmpty : try f.weightEvidence() == before)
-            #expect(try ArsenalConfiguration.read(f.paths.support.appendingPathComponent("config.json")).table.isEmpty)
-            // Repeated reads/refresh cannot resurrect the withdrawn row.
-            try await refresh(); try await checkRows()
+            try await refresh(); try await checkRows(f.service)
+            // Not one weights file changed: the collection that ran with the refresh left the dropped model alone.
+            #expect(try f.weightEvidence() == before)
+            #expect(try ArsenalConfiguration.read(f.paths.support.appendingPathComponent("config.json")).table == (installed ? [DroppedCatalogFixture.id] : []))
+            // The dropped model cannot run: its row is the record of the user's files, not an offer.
+            if installed {
+                await #expect(throws: WorkerFailure.self) { try await f.service.load(id: DroppedCatalogFixture.id, precision: nil, fast: nil) }
+            }
+            try await refresh(); try await checkRows(f.service)
             #expect(await f.service.supervisor.residentIDs().isEmpty)
             await f.service.shutdown()
+            // A restart is the first launch of a new version: its startup collection keeps them too.
             let restarted = try await f.reopen(removedCatalog)
-            #expect(await restarted.rows().isEmpty)
-            #expect(installed ? try f.weightEvidence().isEmpty : try f.weightEvidence() == before)
-            await restarted.shutdown()
+            #expect(await restarted.rows().map(\.id) == (installed ? [DroppedCatalogFixture.id] : []))
+            #expect(await restarted.rows().first?.catalogRemoved ?? true)
+            #expect(try f.weightEvidence() == before)
+            if installed {
+                // The user's Remove, with its delete: the weights go and the row with them, and they stay gone after a restart.
+                try await restarted.remove(id: DroppedCatalogFixture.id, deleteWeights: true)
+                #expect(await restarted.rows().isEmpty)
+                #expect(try f.weightEvidence().isEmpty)
+                #expect(try ArsenalConfiguration.read(f.paths.support.appendingPathComponent("config.json")).table.isEmpty)
+                await restarted.shutdown()
+                let again = try await f.reopen(removedCatalog)
+                #expect(await again.rows().isEmpty)
+                await again.shutdown()
+            } else {
+                await restarted.shutdown()
+            }
         } catch { await f.service.shutdown(); throw error }
     }
 
-    @Test(arguments: [false, true]) func upgradeWithAlreadyRemovedCatalogReconcilesAtOpen(installed: Bool) async throws {
+    @Test(arguments: [false, true]) func upgradeWithAlreadyRemovedCatalogKeepsTheWeightsAtOpen(installed: Bool) async throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("tmp/catalog-upgrade-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }
@@ -194,12 +239,14 @@ struct DroppedCatalogTests {
         await f.service.shutdown()
         let before = try f.weightEvidence(), data = try f.publish(sequence: 2, included: false)
         let service = try await f.reopen(data)
-        #expect(await service.rows().isEmpty)
-        #expect(installed ? try f.weightEvidence().isEmpty : try f.weightEvidence() == before)
+        let rows = await service.rows()
+        #expect(rows.map(\.id) == (installed ? [DroppedCatalogFixture.id] : []))
+        #expect(rows.allSatisfy { $0.catalogRemoved && $0.verification == Self.dropped })
+        #expect(try f.weightEvidence() == before)
         await service.shutdown()
     }
 
-    @Test(arguments: [false, true]) func restartDeletesWithdrawnWeightsWithoutInstalledMetadata(knownIdentity: Bool) async throws {
+    @Test(arguments: [false, true]) func restartKeepsWithdrawnWeightsWithoutInstalledMetadata(knownIdentity: Bool) async throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("tmp/catalog-missing-metadata-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }
@@ -212,32 +259,40 @@ struct DroppedCatalogTests {
             config.catalogModelIdentities = [:]
             try config.write(f.paths.support.appendingPathComponent("config.json"))
         }
+        let before = try f.weightEvidence()
         let data = try f.publish(sequence: 2, included: false)
         let service = try await f.reopen(data)
-        // Missing manifests must not keep the withdrawn weights on disk.
+        // Missing manifests are no reason to delete: the row names what is known (the id at least) and keeps Remove.
+        let row = try #require(await service.rows().first)
+        #expect(row.id == DroppedCatalogFixture.id && row.catalogRemoved && row.verification == Self.dropped)
+        #expect(row.name == (knownIdentity ? f.entry.manifest.name : DroppedCatalogFixture.id))
+        #expect(try f.weightEvidence() == before)
+        try await service.refresh()
+        #expect(await service.rows().count == 1)
+        #expect(try f.weightEvidence() == before)
+        try await service.remove(id: DroppedCatalogFixture.id, deleteWeights: true)
         #expect(await service.rows().isEmpty)
         #expect(try f.weightEvidence().isEmpty)
-        try await service.refresh()
-        #expect(await service.rows().isEmpty)
         await service.shutdown()
     }
 
-    @Test(arguments: [false, true]) func malformedLegacyDescriptorStillDeletesWithdrawnWeights(restart: Bool) async throws {
+    @Test(arguments: [false, true]) func malformedLegacyDescriptorKeepsWithdrawnWeights(restart: Bool) async throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("tmp/catalog-malformed-descriptor-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }
         let f = try await DroppedCatalogFixture.make(root: root, installed: true)
         try FileManager.default.removeItem(at: f.paths.support.appendingPathComponent("state/installed-catalog/" + DroppedCatalogFixture.id + ".json"))
         try Data("malformed = [".utf8).write(to: f.paths.directory("models").appendingPathComponent(DroppedCatalogFixture.id + "/model.toml"))
+        let before = try f.weightEvidence()
         let data = try f.publish(sequence: 2, included: false)
         let service: RealModelsService
         if restart { await f.service.shutdown(); service = try await f.reopen(data) } else { service = f.service; try await service.refresh() }
-        #expect(await service.rows().isEmpty)
-        #expect(try f.weightEvidence().isEmpty)
+        #expect(await service.rows().first?.catalogRemoved == true)
+        #expect(try f.weightEvidence() == before)
         await service.shutdown()
     }
 
-    @Test(arguments: ["root", "revision"]) func unreadableSnapshotDirectoryKeepsWithdrawnRowUntilReadable(level: String) async throws {
+    @Test(arguments: ["root", "revision"]) func unreadableSnapshotDirectoryKeepsWithdrawnRow(level: String) async throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .appendingPathComponent("tmp/catalog-unreadable-snapshot-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }
@@ -258,24 +313,41 @@ struct DroppedCatalogTests {
         let restarted = try await f.reopen(data)
         #expect(await restarted.rows().first?.catalogRemoved == true)
         try FileManager.default.setAttributes([.posixPermissions: 0o755], ofItemAtPath: unreadable.path)
-        // Once the directory reads again, the next refresh deletes the withdrawn weights and forgets the row.
+        let before = try f.weightEvidence()
+        // Readable again, the next refresh still keeps the weights and the row.
         try await restarted.refresh()
-        #expect(await restarted.rows().isEmpty)
-        #expect(try f.weightEvidence().isEmpty)
+        #expect(await restarted.rows().first?.catalogRemoved == true)
+        #expect(try f.weightEvidence() == before && !before.isEmpty)
         await restarted.shutdown()
     }
 
-    /// Weights of the five models withdrawn for their licences stay on disk until the user deletes them; any other model the
-    /// catalog no longer lists is still collected.
-    @Test func licenceWithdrawnModelsKeepTheirWeights() async throws {
+    /// A dropped model the user took off the table but whose weights stayed (Remove without delete, or weights on disk from
+    /// an install that never had it on the table) keeps its separate assets too: its installed descriptor names them, so
+    /// the orphan collection never leaves weights that cannot run. Before 1.0.1's review fix only table members kept them.
+    @Test func droppedModelOffTheTableKeepsItsSeparateAssets() async throws {
         let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-            .appendingPathComponent("tmp/catalog-kept-withdrawn-" + UUID().uuidString)
+            .appendingPathComponent("tmp/catalog-dropped-asset-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }
-        let f = try await DroppedCatalogFixture.make(root: root, installed: false)
-        let kept = RealModelsService.keptWithdrawnWeights.sorted()
-        #expect(kept == ["nemotron-3-diarization", "sam-audio-large", "sam-audio-small", "sam3.1", "trellis2-4b"])
-        #expect(await f.service.droppedWeightIDs(onDisk: kept + ["gone-model"]) == ["gone-model"])
+        let f = try await DroppedCatalogFixture.make(root: root, installed: true, asset: true)
+        #expect(f.entry.manifest.separateAssets.map(\.id) == [DroppedCatalogFixture.assetID])
+        // The asset's own snapshot, with no reference file naming it (installs from before reference files had none).
+        let asset = f.paths.support.appendingPathComponent(
+            "weights/snapshots/asset-\(DroppedCatalogFixture.assetID)/\(DroppedCatalogFixture.assetRevision)")
+        try FileManager.default.createDirectory(at: asset, withIntermediateDirectories: true)
+        try DroppedCatalogFixture.payload.write(to: asset.appendingPathComponent("vocoder.bin"))
+        let data = try f.publish(sequence: 2, included: false)
+        try await f.service.refresh()
+        #expect(await f.service.rows().first?.catalogRemoved == true)
+        #expect(FileManager.default.fileExists(atPath: asset.appendingPathComponent("vocoder.bin").path))
+        // Off the table, weights kept: the next start's collection still keeps the asset.
+        try await f.service.remove(id: DroppedCatalogFixture.id, deleteWeights: false)
+        #expect(await f.service.rows().isEmpty)
         await f.service.shutdown()
+        let restarted = try await f.reopen(data)
+        try await restarted.refresh()
+        #expect(RealModelsService.hasInstalledSnapshot(id: DroppedCatalogFixture.id, support: f.paths.support))
+        #expect(FileManager.default.fileExists(atPath: asset.appendingPathComponent("vocoder.bin").path))
+        await restarted.shutdown()
     }
 
     @Test func quietRemovalForgetsPerModelStateWithoutChangingKindOrder() async throws {

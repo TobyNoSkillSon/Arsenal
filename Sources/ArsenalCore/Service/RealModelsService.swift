@@ -1519,7 +1519,7 @@ extension RealModelsService {
             if residents[id] != nil { armTimer(id) }
         }
         emit(.catalog(catalogStatus())); changed()
-        // A model the new catalog drops loses its weights now, unless it is loaded (then the next start collects it).
+        // Orphans and staging only: a model the new catalog drops keeps its weights until the user removes them.
         await collectWeights(startup: false)
     }
 }

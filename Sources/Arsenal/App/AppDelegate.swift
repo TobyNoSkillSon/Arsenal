@@ -35,7 +35,40 @@ import SwiftUI
     let api: APIHost
     /// Launch at Login (SMAppService): on from a fresh install's first launch, then the user's choice (applyLaunchAtLoginDefault);
     /// tests replace these.
-    var loginStatus: () -> SMAppService.Status = { Bundle.main.bundleIdentifier == nil ? .notRegistered : SMAppService.mainApp.status }
+    /// Launch at Login as the system reports it. `SMAppService.status` is a synchronous round trip to the system's login-item
+    /// service, 60–150 ms while models run (measured, 1.0.1), so the menu never asks it while it is built: `loginState` is read
+    /// once, after each change, and again off the main thread whenever the status menu opens. Tests replace this reader.
+    var loginStatus: () -> SMAppService.Status = AppDelegate.systemLoginStatus { didSet { loginReaderReplaced = true; forgetLoginState() } }
+    nonisolated static let systemLoginStatus: @Sendable () -> SMAppService.Status = {
+        Bundle.main.bundleIdentifier == nil ? .notRegistered : SMAppService.mainApp.status
+    }
+    private var loginReaderReplaced = false
+    private var loginStateCache: SMAppService.Status?
+    /// Bumped by every change of the state (a toggle, the first-run default, a new reader): a background reading begun
+    /// before it is stale and is dropped.
+    private var loginGeneration = 0
+    private func forgetLoginState() { loginStateCache = nil; loginGeneration += 1 }
+    /// The status the menu shows: the last reading, read now only when there is none.
+    var loginState: SMAppService.Status {
+        if let loginStateCache { return loginStateCache }
+        let status = loginStatus(); loginStateCache = status; return status
+    }
+    /// Reads the status again away from the main thread and updates the menu in place if it changed (Login Items can be
+    /// changed in System Settings while Arsenal runs). A replaced reader (tests) is read on the main thread at the next use.
+    func refreshLoginStateInBackground(reader: (@Sendable () -> SMAppService.Status)? = nil) {
+        guard reader != nil || !loginReaderReplaced else { forgetLoginState(); return }
+        let read = reader ?? AppDelegate.systemLoginStatus, generation = loginGeneration
+        loginRead = Task.detached(priority: .utility) { [weak self] in
+            let status = read()
+            await MainActor.run {
+                guard let self, generation == self.loginGeneration, self.loginStateCache != status else { return }
+                self.loginStateCache = status
+                self.rebuildMenu()
+            }
+        }
+    }
+    /// The last background reading (tests wait for it).
+    private(set) var loginRead: Task<Void, Never>?
     var registerLogin: () throws -> Void = { try SMAppService.mainApp.register() }
     var unregisterLogin: () throws -> Void = { try SMAppService.mainApp.unregister() }
     var openLoginSettings: () -> Void = { SMAppService.openSystemSettingsLoginItems() }
@@ -255,6 +288,7 @@ import SwiftUI
             menuDiagnostics.menuWillOpen(menu)
             rebuildMenu()
             menuOpen = true
+            refreshLoginStateInBackground()
             menuDiagnostics.recordAfterOpen(menu: menu, name: .main)
         }
     }
@@ -287,7 +321,7 @@ import SwiftUI
         if let updater, let line = MenuContent.update(updater.updateState) {
             let item = NSMenuItem(title: line.title, action: #selector(updateClicked), keyEquivalent: "")
             item.target = self; item.isEnabled = line.enabled && !quitting; item.toolTip = line.help
-            item.image = NSImage(systemSymbolName: "arrow.down.circle.fill", accessibilityDescription: nil)
+            item.image = Symbol.menu("arrow.down.circle.fill")
             item.showMenuImage()
             if line.orange {
                 item.attributedTitle = NSAttributedString(string: line.title, attributes: [.foregroundColor: NSColor.systemOrange, .font: NSFont.menuFont(ofSize: 0)])
@@ -318,9 +352,9 @@ import SwiftUI
         menu.addItem(.separator())
         item("About Arsenal", "info.circle", #selector(about), in: menu)
         // Above Quit, to the author's support page.
-        let support = item(Self.supportTitle, "heart", #selector(supportDeveloper), in: menu)
+        let support = item(Self.supportTitle, "heart.fill", #selector(supportDeveloper), in: menu)
         support.toolTip = Self.supportHelp
-        _ = ProminentMenuItemView(item: support)
+        ProminentMenuItemView(item: support).accent = Self.supportAccent
         let quit = item("Quit Arsenal", "power", #selector(QuitTarget.quit(_:)), key: "q", in: menu)
         quit.target = QuitTarget.shared; quit.toolTip = Self.quitHelp
         Self.tidySeparators(menu)
@@ -344,7 +378,7 @@ import SwiftUI
             let item = NSMenuItem(title: entry.title, action: #selector(openTask(_:)), keyEquivalent: "")
             item.target = self; item.isEnabled = !quitting; item.toolTip = entry.help; item.isHidden = !entry.shown
             item.representedObject = Self.taskKey(entry.task)
-            item.image = NSImage(systemSymbolName: entry.symbol, accessibilityDescription: nil)
+            item.image = Symbol.menu(entry.symbol)
             item.showMenuImage()
             // A model that cannot run yet still opens its window; the menu only says where it stands.
             if let note = entry.note { item.badge = NSMenuItemBadge(string: note) }
@@ -397,7 +431,7 @@ import SwiftUI
         let playback = tools.playback
         let stop = NSMenuItem(title: "Stop Speaking", action: #selector(stopSpeaking), keyEquivalent: "")
         stop.target = self; stop.isEnabled = !quitting
-        stop.image = NSImage(systemSymbolName: "stop.circle", accessibilityDescription: nil)
+        stop.image = Symbol.menu("stop.circle")
         stop.showMenuImage()
         if let now = playback.current, playback.playing {
             let model = table.rows.first { $0.id == now.model }?.name ?? now.model
@@ -478,7 +512,7 @@ import SwiftUI
     private func settingsItem() -> NSMenuItem {
         let root = NSMenuItem(title: "Settings", action: nil, keyEquivalent: "")
         root.identifier = MenuDiagnosticName.settings.itemIdentifier
-        root.image = NSImage(systemSymbolName: "gearshape", accessibilityDescription: nil)
+        root.image = Symbol.menu("gearshape")
         root.showMenuImage()
         let sub = NSMenu(); sub.autoenablesItems = false
         sub.addItem(keepHotItem())
@@ -494,14 +528,14 @@ import SwiftUI
         let playback = tools.playback
         let mute = NSMenuItem(title: "Mute Agent Speech", action: #selector(toggleMute), keyEquivalent: "")
         mute.target = self; mute.isEnabled = !quitting; mute.state = playback.muted ? .on : .off
-        mute.image = NSImage(systemSymbolName: "speaker.slash", accessibilityDescription: nil)
+        mute.image = Symbol.menu("speaker.slash")
         mute.showMenuImage()
         mute.toolTip = "Agents and Speak Clipboard stay silent; their audio files are still made."
         sub.addItem(mute)
         sub.addItem(.separator())
         // The token for gated Hugging Face models; Vella's two items stay last.
         item(HuggingFaceToken.title, "key", #selector(editHuggingFaceToken), in: sub).toolTip = HuggingFaceToken.help
-        let loginState = loginStatus()
+        let loginState = self.loginState
         let login = item(
             loginState == .requiresApproval ? Self.loginApprovalTitle : Self.loginTitle, "power.circle", #selector(toggleLogin), in: sub)
         login.state = loginState == .enabled ? .on : .off
@@ -515,13 +549,13 @@ import SwiftUI
     private func recentItem() -> NSMenuItem? {
         guard let lastOutput, !lastOutput.recent.isEmpty else { return nil }
         let root = NSMenuItem(title: "Recent", action: nil, keyEquivalent: "")
-        root.image = NSImage(systemSymbolName: "clock.arrow.circlepath", accessibilityDescription: nil)
+        root.image = Symbol.menu("clock.arrow.circlepath")
         root.showMenuImage()
         let sub = NSMenu(); sub.autoenablesItems = false
         for (index, entry) in lastOutput.recent.enumerated() {
             let item = NSMenuItem(title: LastOutput.title(entry), action: nil, keyEquivalent: "")
             item.subtitle = LastOutput.subtitle(entry)
-            item.image = NSImage(systemSymbolName: LastOutput.symbol(entry), accessibilityDescription: nil)
+            item.image = Symbol.menu(LastOutput.symbol(entry))
             item.showMenuImage()
             let actions = NSMenu(); actions.autoenablesItems = false
             func add(_ title: String, _ selector: Selector) {
@@ -557,7 +591,7 @@ import SwiftUI
     private func addAction(_ action: LoadedAction, title: String, subtitle: String?, in menu: NSMenu) {
         let item = NSMenuItem(title: title, action: #selector(runAction(_:)), keyEquivalent: "")
         item.target = self; item.subtitle = subtitle; item.representedObject = action.id
-        item.image = NSImage(systemSymbolName: Self.symbol(action.op), accessibilityDescription: nil)
+        item.image = Symbol.menu(Self.symbol(action.op))
         item.showMenuImage()
         item.isEnabled = runner.running == nil && !quitting
         menu.addItem(item)
@@ -583,7 +617,7 @@ import SwiftUI
         let voice = NSMenuItem(title: (named ? row.name + " Voice: " : "Agent Voice: ") + selection, action: nil, keyEquivalent: "")
         voice.identifier = MenuDiagnosticName.voice.itemIdentifier
         voice.representedObject = [ToolKind.voice.rawValue, row.id]
-        voice.image = NSImage(systemSymbolName: "person.wave.2", accessibilityDescription: nil)
+        voice.image = Symbol.menu("person.wave.2")
         voice.showMenuImage()
         voice.isEnabled = !quitting && row.residentDType != nil
         voice.toolTip = "The voice agents and Speak Clipboard use with \(row.name). The Speak window chooses its own."
@@ -643,7 +677,7 @@ import SwiftUI
     @discardableResult private func item(_ title: String, _ icon: String, _ action: Selector, key: String = "", in menu: NSMenu) -> NSMenuItem {
         let entry = NSMenuItem(title: title, action: action, keyEquivalent: key)
         entry.target = self
-        entry.image = NSImage(systemSymbolName: icon, accessibilityDescription: nil)
+        entry.image = Symbol.menu(icon)
         entry.showMenuImage()
         menu.addItem(entry)
         return entry
@@ -652,7 +686,7 @@ import SwiftUI
     private func keepHotItem() -> NSMenuItem {
         let root = NSMenuItem(title: MenuContent.keepLoadedTitle, action: nil, keyEquivalent: "")
         root.identifier = MenuDiagnosticName.keepHot.itemIdentifier
-        root.image = NSImage(systemSymbolName: "flame", accessibilityDescription: nil)
+        root.image = Symbol.menu("flame")
         root.showMenuImage()
         let sub = NSMenu(); sub.autoenablesItems = false
         for (index, group) in [
@@ -678,7 +712,7 @@ import SwiftUI
     private func memoryItem() -> NSMenuItem {
         let root = NSMenuItem(title: "Memory", action: nil, keyEquivalent: "")
         root.identifier = MenuDiagnosticName.memory.itemIdentifier
-        root.image = NSImage(systemSymbolName: "memorychip", accessibilityDescription: nil)
+        root.image = Symbol.menu("memorychip")
         root.showMenuImage()
         let sub = NSMenu(); sub.autoenablesItems = false
         for (title, help, swap) in [(MenuContent.fitTitle, MenuContent.fitHelp, false), (MenuContent.swapTitle, MenuContent.swapHelp, true)] {
@@ -803,6 +837,7 @@ import SwiftUI
     /// never changes it on its own, so a user who turns it off stays off.
     func applyLaunchAtLoginDefault(applies: Bool = launchDefaultApplies()) {
         guard applies, !loginChoiceRecorded else { return }
+        defer { forgetLoginState() }
         guard loginDefaultOwed else {
             recordLoginChoice()
             return
@@ -847,6 +882,7 @@ import SwiftUI
     /// is a choice the first-run default never overrides.
     func changeLogin() throws {
         recordLoginChoice()
+        defer { forgetLoginState() }
         switch loginStatus() {
         case .requiresApproval: openLoginSettings()
         case .enabled: try unregisterLogin()
@@ -876,6 +912,8 @@ import SwiftUI
     }
     static let supportTitle = "Support the Developer\u{2026}"
     static let supportURL = URL(string: "https://tobynoskillson.com/#support")!
+    /// Support the Developer's warm accent: the system's pink, so it follows the system's light and dark variants.
+    static let supportAccent = NSColor.systemPink
     static let supportHelp = "Opens tobynoskillson.com: GitHub Sponsors and Buy Me a Coffee."
     static let quitHelp = "Stops running work and every model, and frees their memory."
     @objc private func supportDeveloper() {

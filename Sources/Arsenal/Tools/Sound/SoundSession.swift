@@ -43,7 +43,12 @@ struct SoundTake: Identifiable, Equatable {
         super.init(models: models, selected: selected, client: client, inbox: inbox, outputDirectory: outputDirectory, scratch: scratch)
     }
 
-    override func offers(_ op: OperationDescriptor) -> Bool { op.output == "audio" && (task.map { $0.operations.contains(op.name) } ?? true) }
+    /// An operation that answers with audio, or a sound task's operation that answers with files: songs from ACE-Step,
+    /// YuE2 and MiniMax Music come back as files from a job (`output = "file"`), not as streamed audio.
+    override func offers(_ op: OperationDescriptor) -> Bool {
+        guard op.output == "audio" || (op.output == "file" && Self.task(for: op.name) != nil) else { return false }
+        return task.map { $0.operations.contains(op.name) } ?? true
+    }
     /// The task's own operations first (Speak's `speak` before cloning); without a task, sound before speech before music.
     override var preferredOperations: [String] { task?.operations ?? ["generate_sound", "speak", "generate_music"] }
     /// The task's title; a window without one names what its chosen operation's task is.
@@ -67,22 +72,28 @@ struct SoundTake: Identifiable, Equatable {
     override var shownSeed: Int? { current?.seed }
     override var shownFile: URL? { current?.url }
 
-    /// The take's audio, saved as `<date> <time> <model> <seed or voice>.wav`, its length and envelope read once.
+    /// The take's audio, saved as `<date> <time> <model> <seed or voice>.wav`, its length and envelope read once. A batch
+    /// (ACE-Step, YuE2 and MiniMax Music take `batch_size`) gives one take per song, the last one shown.
     override func deliver(_ result: OperationResult, op: OperationDescriptor, model: ModelChoice, input: JSONObject) throws {
-        guard let file = result.files.first(where: \.isAudio) ?? result.files.first else { throw Undelivered(.init(message: "The model answered without audio.", action: nil)) }
+        let audio = result.files.filter(\.isAudio)
+        let files = audio.isEmpty ? Array(result.files.prefix(1)) : audio
+        guard !files.isEmpty else { throw Undelivered(.init(message: "The model answered without audio.", action: nil)) }
         let seed = input["seed"]?.number.flatMap(\.roundedInt), voice = input["voice"]?.string
-        let url = try ToolFiles.save(file.url, into: outputDirectory, model: model.id, tag: seed.map(String.init) ?? voice ?? "", what: "sound")
-        guard let shape = AudioShape.read(url) else {
-            throw Undelivered(
-                .init(
-                    message: "\(model.name) answered with audio Arsenal cannot read; it is saved in \(outputDirectory.lastPathComponent) as \(url.lastPathComponent).", action: nil)
-            )
-        }
         let text = form?.main.flatMap { input[$0.key]?.string } ?? ""
-        takes.append(
-            SoundTake(
-                url: url, model: model.id, modelName: model.name, operation: op.title, text: text, seed: seed, voice: voice, shape: shape, seconds: result.seconds,
-                operationName: op.name, values: values))
+        for file in files {
+            let url = try ToolFiles.save(file.url, into: outputDirectory, model: model.id, tag: seed.map(String.init) ?? voice ?? "", what: "sound")
+            guard let shape = AudioShape.read(url) else {
+                throw Undelivered(
+                    .init(
+                        message: "\(model.name) answered with audio Arsenal cannot read; it is saved in \(outputDirectory.lastPathComponent) as \(url.lastPathComponent).",
+                        action: nil)
+                )
+            }
+            takes.append(
+                SoundTake(
+                    url: url, model: model.id, modelName: model.name, operation: op.title, text: text, seed: seed, voice: voice, shape: shape,
+                    seconds: result.seconds, operationName: op.name, values: values))
+        }
         shown = takes.last?.id
         if model.id == selected, voices == nil { listVoices() }
     }

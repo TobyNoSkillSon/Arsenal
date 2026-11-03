@@ -594,6 +594,9 @@ enum ToolKind: String, CaseIterable {
     func refreshVoices(_ rows: [ModelRow], service: any ModelsService) async {
         voiceGeneration += 1
         let generation = voiceGeneration
+        // Every table refresh ends here (several a second while models run): the menu rebuilds only when voices changed.
+        let before = (voices, currentVoice, errors)
+        defer { if generation == voiceGeneration, before != (voices, currentVoice, errors) { onChange() } }
         for row in rows where row.tools.contains(ToolKind.voice.rawValue) && row.residentDType != nil {
             do {
                 let setting = try await service.settings(id: row.id).first(where: { $0.id == "voice" })
@@ -624,7 +627,6 @@ enum ToolKind: String, CaseIterable {
                 errors[row.id] = "Voices unavailable: \(error.localizedDescription)"
             }
         }
-        onChange()
     }
 
     func chooseVoice(_ model: String, _ voice: String) {
