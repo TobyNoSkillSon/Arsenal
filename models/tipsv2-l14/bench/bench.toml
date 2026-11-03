@@ -1,0 +1,7 @@
+schema = 1
+suite = "tipsv2-l14-native-v1"
+version = 1
+precision = "fp16"
+runner = "native"
+status = "deferred-by-user"
+metrics = ["seconds_per_request", "peak_ram_mb"]

@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "weights_downloaded": 0,
+  "graph": "reduced random weights",
+  "precisions": [
+    {
+      "model": "ui-venus-2-9b",
+      "precision": "fp16",
+      "parameters": 98,
+      "eligible_matrices": 46,
+      "packed_matrices": 0,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "ground_screen",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return a single valid grounding point or box on its 0\u20131000 grid.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "ui-venus-2-9b",
+      "precision": "int8",
+      "parameters": 190,
+      "eligible_matrices": 46,
+      "packed_matrices": 46,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "ground_screen",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return a single valid grounding point or box on its 0\u20131000 grid.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "ui-venus-2-9b",
+      "precision": "int4",
+      "parameters": 190,
+      "eligible_matrices": 46,
+      "packed_matrices": 46,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "ground_screen",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return a single valid grounding point or box on its 0\u20131000 grid.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    }
+  ],
+  "interpretation": "Structured cases pass only on the declared invalid_model_output parser rejection. Maker parser fixtures independently exercise positive schema-valid results."
+}

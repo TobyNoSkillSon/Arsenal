@@ -1,0 +1,10 @@
+{
+  "model": "hy-mt2-7b",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 0,
+    "plain_tokens": 3,
+    "roundtrip": "Hello"
+  }
+}

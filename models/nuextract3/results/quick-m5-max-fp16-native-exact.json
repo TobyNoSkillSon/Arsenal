@@ -1,0 +1,59 @@
+{
+  "mode": "exact",
+  "model": "nuextract3",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T03:12:52Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Read document at fp16: one ordinary Load, then two Read document requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "c99dc8f5641b866aa0192b6ea78f84bf9f3535f1",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "chat",
+    "metrics": {
+      "batteryPercentPer100000Tokens": {
+        "state": "notMeasured"
+      },
+      "firstTokenSeconds": {
+        "state": "notMeasured"
+      },
+      "loadPeakMemoryGB": {
+        "state": "notMeasured"
+      },
+      "maximumContextTokens": {
+        "state": "notMeasured"
+      },
+      "nextTokenAgreementPercent": {
+        "state": "notMeasured"
+      },
+      "nextTokenKL": {
+        "state": "notMeasured"
+      },
+      "peakMemoryGB": {
+        "basis": "Load and two Read document requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:12:52Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Read document requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "c99dc8f5641b866aa0192b6ea78f84bf9f3535f1",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 17.179869184
+      },
+      "tokensPerSecond": {
+        "state": "notMeasured"
+      }
+    },
+    "runner": "native"
+  }
+}

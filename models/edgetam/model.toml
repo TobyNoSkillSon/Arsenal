@@ -1,0 +1,59 @@
+schema = 3
+id = "edgetam"
+name = "EdgeTAM On-Device Track Anything Model"
+kind = "local.segmentation"
+summary = "Cut one object out of a photo by clicking or boxing it, on the Mac."
+description = "EdgeTAM is an on-device variant of SAM 2 for promptable segmentation and tracking, made by Meta and published in 2025 (arXiv 2501.07256). Its image encoder is a RepViT-M1 backbone with a feature-pyramid neck, and it was trained on the maker's own data mix, which excludes SAM 2's internal datasets. It is built to run on phones."
+purpose = "Segment an object by click or box"
+publisher = "Meta"
+released = 2025
+params = "13.9M"
+tasks = ["image-segmentation"]
+languages = ["und"]
+good_for = ["Boxing one object in a photo for an exact mask", "Fast mask prediction on the Mac in FP16"]
+limits = ["A single click can be ambiguous: on the test photo a click on a cab window gave only the window, and a click on the truck bed gave speckled edges, while a box gave a clean whole-truck mask", "Image path only: the video memory and tracking modules are not loaded", "Masks are predicted at 256 pixels and upsampled, so fine edges are soft", "No language input or output", "Parity with the maker's transformers EdgeTAM on MPS FP16: mask logits cosine 0.99996 or better on five photo and prompt pairs"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/mlx-community/EdgeTAM-fp16"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/mlx-community/EdgeTAM-fp16/blob/e7770c15b913841cb657e6d2fbb33a6541c3bb32/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+
+[weights]
+repo = "mlx-community/EdgeTAM-fp16"
+revision = "e7770c15b913841cb657e6d2fbb33a6541c3bb32"
+dtype = "fp16"
+files = ["model.safetensors"]
+
+[weights.sha256]
+"model.safetensors" = "18c7f247c0dfca00fc723d2fade7a0c24f3859aa114d790f1ee75ed6441aa1d9"
+
+[weights.bytes]
+"model.safetensors" = 28002263
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-edgetam"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

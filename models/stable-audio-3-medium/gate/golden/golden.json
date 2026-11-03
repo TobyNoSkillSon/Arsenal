@@ -1,0 +1,68 @@
+{
+ "commit": "c15efde77198c4a0a381daff946e4ca5d67caf4f",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [],
+  "request": [
+   {
+    "accept": "audio/wav",
+    "body": {
+     "duration": 2,
+     "prompt": "Rain on a tin roof",
+     "seed": 1,
+     "steps": 8,
+     "stream": false
+    },
+    "op": "generate_sound"
+   }
+  ]
+ },
+ "maker_reference": {
+  "none": "No maker capture: the maker's repository stabilityai/stable-audio-3-medium is gated and this Mac's Hugging Face account has not accepted it; the pinned stabilityai/stable-audio-3-optimized files are Stability's own MLX export, but Stability's reference code was not run."
+ },
+ "model": "stable-audio-3-medium",
+ "note": "Prompt 'Rain on a tin roof', 2 s, 8 steps, seed 1.",
+ "output": [
+  {
+   "file_count": 1,
+   "files": [
+    {
+     "channels": 2,
+     "finite": true,
+     "frames": 88200,
+     "peak": 0.638641,
+     "rms": 0.044016,
+     "sample_rate": 44100,
+     "seconds": 2.0,
+     "sha256": "67e762fdcc953610672744263ba347823b8ec2a6f044cd891d21bb982ef7662c",
+     "type": "wav"
+    }
+   ],
+   "op": "generate_sound",
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "fp16",
+ "schema": "golden-1",
+ "tolerance": {
+  "channels": 2,
+  "frames_exact": true,
+  "note": "seeded sampling; waveform comparison needs the same build and seed",
+  "rms_min": 0.005,
+  "sample_rate": 44100
+ },
+ "weights": {
+  "repo": "stabilityai/stable-audio-3-optimized",
+  "revision": "da6edc54ddba10bfd79a077102ded687f80e882b",
+  "sha256": {
+   "LICENSE.md": "d6f6b1a4dce5c852bd6d7d9482d002baf0ccdb71e662250b73be9eec8764ee8d",
+   "LICENSE_GEMMA.md": "e77acc0d3163bb7534675045c584b4d04b387b529239fc4b3647da0a01ba4745",
+   "MLX/dit_medium_f16.npz": "f9e5647ea3225818657d47d47ae4b34afa29c0568206ca89566c1a758944a38e",
+   "MLX/same_l_decoder_f32.npz": "84924be2122d3a20fce443f40b782d9cd88e8e73707476326003ac47659a2287",
+   "MLX/t5gemma_f16.npz": "8deb20489f36d9aec539f26c9c67321f99bc5fe300d470435ed6e76be4f16bbd",
+   "NOTICE": "66f856d7da72797f528fca46b7c80634ab481f917bfe020960e123d84b19f75f"
+  }
+ }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "passed-with-planned-get-casts",
+  "source_dtype": "fp32",
+  "runtime_dtype": "fp16",
+  "source_tensors": 509,
+  "runtime_parameters": 508,
+  "source_repo": "Roboflow/rf-detr-large",
+  "source_revision": "f62f7dd5252b61097cbace33886045816dadbde9",
+  "mapping_sha256": "35070912566d98a57c5b4d4dcfefa74211facffa2732672054953abf10ebeca5",
+  "header_only": true,
+  "tensor_payload_bytes_downloaded": 0,
+  "header_bytes_read": 62504,
+  "planned_transform": "cast each floating tensor to FP16 during Get",
+  "ignored_source_tensors": [
+    "backbone.0.encoder.encoder.embeddings.mask_token"
+  ],
+  "planned_get_casts": 508,
+  "dtype_mismatches": 0,
+  "errors": [],
+  "inventory": "parameter_inventory of the shipped perception worker on the full-size random graph (model-check.py smoke, full_inventory)"
+}

@@ -1,0 +1,6 @@
+schema = 1
+id = "tiger-speech-kit-v1"
+reference_runner = "pinned-maker-implementation"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Parity with the maker's TIGER code in PyTorch on MPS: cosine >= 0.999 per output track on fixed mixtures (passed 2026-10-31, log/003-parity.md)"]

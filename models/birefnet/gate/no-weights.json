@@ -1,0 +1,16 @@
+{
+  "config": {},
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVR4nGMIqFjwnxLMMGrAqAGjBgwXAwBqsGcfY7qOyAAAAABJRU5ErkJggg=="
+  },
+  "operations": [
+    {
+      "operation": "remove_background",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        }
+      }
+    }
+  ]
+}

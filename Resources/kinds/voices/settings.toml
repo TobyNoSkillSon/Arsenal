@@ -1,0 +1,26 @@
+# Settings panel reference for voice models with preset voices (docs/MODEL-FOLDER.md, "Settings panel"). The voice
+# list comes from the loaded model and shows language headings when its voices span languages. Copy it beside
+# model.toml and tailor it.
+schema = 1
+
+[[section]]
+
+[[section.row]]
+setting = "voice"
+
+[[section.row]]
+label = "Speed"
+presets = [
+  { title = "0.85×", values = { speed = 0.85 } },
+  { title = "1×", values = { speed = 1.0 } },
+  { title = "1.2×", values = { speed = 1.2 } },
+]
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "speed"
+label = "Exact speed"
+unit = "×"

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "description": "Keypoints of the one person in the photo, in the photo's own pixels (origin top left).",
+  "required": ["keypoints", "image_width", "image_height"],
+  "properties": {
+    "keypoints": {
+      "type": "array",
+      "description": "The 17 COCO keypoints in model order.",
+      "items": {
+        "type": "object",
+        "required": ["name", "x", "y", "score"],
+        "properties": {
+          "name": {"type": "string", "description": "Keypoint name, e.g. Nose, L_Shoulder, R_Ankle."},
+          "x": {"type": "number", "description": "Horizontal position in pixels."},
+          "y": {"type": "number", "description": "Vertical position in pixels."},
+          "score": {"type": "number", "description": "Heatmap peak, about 0 to 1. Below about 0.4 the joint is weak."}
+        }
+      }
+    },
+    "image_width": {"type": "integer", "description": "Width of the input photo in pixels."},
+    "image_height": {"type": "integer", "description": "Height of the input photo in pixels."}
+  }
+}

@@ -1,0 +1,135 @@
+{
+ "split": [
+  {
+   "text": "Hello there.",
+   "chunks": [
+    "Hello there."
+   ]
+  },
+  {
+   "text": "   ",
+   "chunks": []
+  },
+  {
+   "text": "Sentence number 0 talks about the weather, the sea; and 3.14 apples! Sentence number 1 talks about the weather, the sea; and 3.14 apples! Sentence number 2 talks about the weather, the sea; and 3.14 apples! Sentence number 3 talks about the weather, the sea; and 3.14 apples! Sentence number 4 talks about the weather, the sea; and 3.14 apples! Sentence number 5 talks about the weather, the sea; and 3.14 apples! Sentence number 6 talks about the weather, the sea; and 3.14 apples! Sentence number 7 talks about the weather, the sea; and 3.14 apples! Sentence number 8 talks about the weather, the sea; and 3.14 apples! Sentence number 9 talks about the weather, the sea; and 3.14 apples! Sentence number 10 talks about the weather, the sea; and 3.14 apples! Sentence number 11 talks about the weather, the sea; and 3.14 apples!",
+   "chunks": [
+    "Sentence number 0 talks about the weather, the sea; and 3.14 apples! Sentence number 1 talks about the weather, the sea; and 3.14 apples! Sentence number 2 talks about the weather, the sea; and 3.14 apples! Sentence number 3 talks about the weather, the sea; and 3.14 apples!",
+    "Sentence number 4 talks about the weather, the sea; and 3.14 apples! Sentence number 5 talks about the weather, the sea; and 3.14 apples! Sentence number 6 talks about the weather, the sea; and 3.14 apples! Sentence number 7 talks about the weather, the sea; and 3.14 apples!",
+    "Sentence number 8 talks about the weather, the sea; and 3.14 apples! Sentence number 9 talks about the weather, the sea; and 3.14 apples! Sentence number 10 talks about the weather, the sea; and 3.14 apples! Sentence number 11 talks about the weather, the sea; and 3.14 apples!"
+   ]
+  },
+  {
+   "text": "[whispers] Sentence number 0 talks about the weather, the sea; and 3.14 apples! Sentence number 1 talks about the weather, the sea; and 3.14 apples! Sentence number 2 talks about the weather, the sea; and 3.14 apples! Sentence number 3 talks about the weather, the sea; and 3.14 apples! Sentence number 4 talks about the weather, the sea; and 3.14 apples! Sentence number 5 talks about the weather, the sea; and 3.14 apples! Sentence number 6 talks about the weather, the sea; and 3.14 apples! Sentence number 7 talks about the weather, the sea; and 3.14 apples! Sentence number 8 talks about the weather, the sea; and 3.14 apples! Sentence number 9 talks about the weather, the sea; and 3.14 apples! Sentence number 10 talks about the weather, the sea; and 3.14 apples! Sentence number 11 talks about the weather, the sea; and 3.14 apples! <whisper>this part is never cut even if it runs on</whisper> end.",
+   "chunks": [
+    "[whispers] Sentence number 0 talks about the weather, the sea; and 3.14 apples! Sentence number 1 talks about the weather, the sea; and 3.14 apples! Sentence number 2 talks about the weather, the sea; and 3.14 apples! Sentence number 3 talks about the weather, the sea; and 3.14 apples!",
+    "Sentence number 4 talks about the weather, the sea; and 3.14 apples! Sentence number 5 talks about the weather, the sea; and 3.14 apples! Sentence number 6 talks about the weather, the sea; and 3.14 apples! Sentence number 7 talks about the weather, the sea; and 3.14 apples!",
+    "Sentence number 8 talks about the weather, the sea; and 3.14 apples! Sentence number 9 talks about the weather, the sea; and 3.14 apples! Sentence number 10 talks about the weather, the sea; and 3.14 apples! Sentence number 11 talks about the weather, the sea; and 3.14 apples!",
+    "<whisper>this part is never cut even if it runs on</whisper> end."
+   ]
+  },
+  {
+   "text": "<|speaker:1|> Hi. <|speaker:2|> Sentence number 0 talks about the weather, the sea; and 3.14 apples! Sentence number 1 talks about the weather, the sea; and 3.14 apples! Sentence number 2 talks about the weather, the sea; and 3.14 apples! Sentence number 3 talks about the weather, the sea; and 3.14 apples! Sentence number 4 talks about the weather, the sea; and 3.14 apples! Sentence number 5 talks about the weather, the sea; and 3.14 apples! Sentence number 6 talks about the weather, the sea; and 3.14 apples! Sentence number 7 talks about the weather, the sea; and 3.14 apples! Sentence number 8 talks about the weather, the sea; and 3.14 apples! Sentence number 9 talks about the weather, the sea; and 3.14 apples! Sentence number 10 talks about the weather, the sea; and 3.14 apples! Sentence number 11 talks about the weather, the sea; and 3.14 apples! <|speaker:3|> Yes. <|speaker:4|> No.",
+   "chunks": [
+    "<|speaker:1|>  Hi. ",
+    "<|speaker:2|> Sentence number 0 talks about the weather, the sea; and 3.14 apples! Sentence number 1 talks about the weather, the sea; and 3.14 apples! Sentence number 2 talks about the weather, the sea; and 3.14 apples! Sentence number 3 talks about the weather, the sea; and 3.14 apples!",
+    "<|speaker:2|> Sentence number 4 talks about the weather, the sea; and 3.14 apples! Sentence number 5 talks about the weather, the sea; and 3.14 apples! Sentence number 6 talks about the weather, the sea; and 3.14 apples! Sentence number 7 talks about the weather, the sea; and 3.14 apples!",
+    "<|speaker:2|> Sentence number 8 talks about the weather, the sea; and 3.14 apples! Sentence number 9 talks about the weather, the sea; and 3.14 apples! Sentence number 10 talks about the weather, the sea; and 3.14 apples! Sentence number 11 talks about the weather, the sea; and 3.14 apples!",
+    "<|speaker:3|>  Yes. \n<|speaker:4|>  No."
+   ]
+  },
+  {
+   "text": "Lead in. <|speaker:0|> a <|speaker:1|> b <|speaker:2|> c <|speaker:3|> d",
+   "chunks": [
+    "<|speaker:0|> Lead in. \n<|speaker:0|>  a \n<|speaker:1|>  b \n<|speaker:2|>  c ",
+    "<|speaker:3|>  d"
+   ]
+  },
+  {
+   "text": "日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。",
+   "chunks": [
+    "日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。",
+    "日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。",
+    "日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。",
+    "日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。日本語の文章です。"
+   ]
+  },
+  {
+   "text": "Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — ",
+   "chunks": [
+    "Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade,",
+    "naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade,",
+    "naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café — Ünïcödé façade, naïve café —"
+   ]
+  },
+  {
+   "text": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "chunks": [
+    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   ]
+  },
+  {
+   "text": "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word ",
+   "chunks": [
+    "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+    "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word",
+    "word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word"
+   ]
+  },
+  {
+   "text": "Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. ",
+   "chunks": [
+    "Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two",
+    "Line three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three. Line one\nLine two\n\nLine three."
+   ]
+  }
+ ],
+ "speaker_tag": [
+  {
+   "text": "Hello",
+   "tagged": "<|speaker:0|> Hello"
+  },
+  {
+   "text": "  <|speaker:3|> Hi",
+   "tagged": "  <|speaker:3|> Hi"
+  },
+  {
+   "text": "<|speaker:12|>x",
+   "tagged": "<|speaker:12|>x"
+  },
+  {
+   "text": "　 text",
+   "tagged": "<|speaker:0|> 　 text"
+  }
+ ],
+ "reference_transcript": [
+  {
+   "text": "Hello world.",
+   "transcript": "<|speaker:0|> Hello world."
+  },
+  {
+   "text": "  <|speaker:2|>  spaced",
+   "transcript": "<|speaker:2|>    spaced"
+  },
+  {
+   "text": "\n<|speaker:0|>tight",
+   "transcript": "<|speaker:0|>\ntight"
+  }
+ ],
+ "invalid": [
+  "",
+  "  \t\n",
+  "a <|im_start|> b",
+  "x <|speaker:16|> y",
+  "x <|speaker:01|> y",
+  "x <|speaker:|> y",
+  "<|semantic:3|>",
+  "hi <|voice|>"
+ ],
+ "valid": [
+  "a <|speaker:15|> b",
+  "<|speaker:0|>",
+  "plain"
+ ]
+}

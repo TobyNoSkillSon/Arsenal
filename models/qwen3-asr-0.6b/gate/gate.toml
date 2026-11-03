@@ -1,0 +1,6 @@
+schema = 1
+id = "qwen3-asr-0.6b-native-v1"
+reference_runner = "pinned-vendor-reference-pending"
+precision = "fp16"
+independent_vendor_qualified = false
+status = "no-weights"

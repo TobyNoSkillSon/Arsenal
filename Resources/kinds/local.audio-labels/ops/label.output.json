@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "description": "How well each of the given labels describes the clip, best first.",
+  "required": ["labels", "top", "seconds"],
+  "properties": {
+    "labels": {
+      "type": "array",
+      "description": "Every given label, sorted by score, highest first.",
+      "items": {
+        "type": "object",
+        "required": ["label", "score", "similarity"],
+        "properties": {
+          "label": {"type": "string", "description": "The label as given."},
+          "score": {"type": "number", "description": "Probability among the given labels (they sum to 1)."},
+          "similarity": {"type": "number", "description": "Cosine similarity between the clip and the label, -1 to 1; comparable across requests."}
+        }
+      }
+    },
+    "top": {"type": "string", "description": "The best label."},
+    "seconds": {"type": "number", "description": "Length of the clip in seconds."},
+    "audio_embedding": {"type": "array", "items": {"type": "number"}, "description": "The clip's 512-number unit-length embedding, when return_embedding is true."}
+  }
+}

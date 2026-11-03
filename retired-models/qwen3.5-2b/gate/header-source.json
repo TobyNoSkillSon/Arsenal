@@ -1,0 +1,10 @@
+{
+  "repo": "mlx-community/Qwen3.5-2B-bf16",
+  "revision": "fb270110eb5a9af244937040c9c3e57addab8ee9",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 617,
+  "header_bytes": 75241,
+  "errors": []
+}

@@ -1,0 +1,38 @@
+schema = 3
+id = "fixture-layers"
+name = "Fixture layers"
+kind = "local.layers"
+kind_file = "kinds/local.layers.toml"
+summary = "Deterministic protocol fixture"
+publisher = "Arsenal"
+released = 2026
+tasks = ["fixture"]
+languages = ["en"]
+params = "0"
+[licence]
+spdx = "MIT"
+commercial = true
+url = "https://example.com/licence"
+[weights]
+repo = "fixture/layers"
+revision = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+dtype = "bf16"
+files = ["base.bin"]
+[weights.sha256]
+"base.bin" = "651f3a7ba220e024b0d76f3df555f406db4912ae05d63f13af6b02d7dcc0fa53"
+[weights.bytes]
+"base.bin" = 3
+[[runner]]
+name = "swift"
+language = "swift"
+worker = "stub"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+[selection]
+default = "swift"
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

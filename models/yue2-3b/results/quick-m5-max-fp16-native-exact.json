@@ -1,0 +1,47 @@
+{
+  "mode": "exact",
+  "model": "yue2-3b",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-10-22T07:51:46Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Make music at fp16: one ordinary Load, then two Make music requests (warm-up, timed) through Arsenal's API. Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "8f24312f187763b9854adeec87e437e2b03bbff1",
+        "run": "night-2026-10-22-fp16",
+        "source": "results/quick-checks/night-2026-10-22.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "sound",
+    "metrics": {
+      "batteryPercentPerHourAudio": {
+        "state": "notMeasured"
+      },
+      "peakMemoryGB": {
+        "basis": "Load and two Make music requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-10-22T07:51:46Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Make music requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "8f24312f187763b9854adeec87e437e2b03bbff1",
+          "run": "night-2026-10-22-fp16",
+          "source": "results/quick-checks/night-2026-10-22.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 11.811160064
+      },
+      "realTimeFactor": {
+        "state": "notMeasured"
+      },
+      "spectralDistance": {
+        "state": "notMeasured"
+      }
+    },
+    "runner": "native"
+  }
+}

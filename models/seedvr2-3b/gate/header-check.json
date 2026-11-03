@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "remote_tensors": 996,
+  "module_parameters": 996,
+  "errors": [],
+  "weight_payload_bytes_read": 0,
+  "header_bytes_read": 107836,
+  "sources": [
+    {
+      "repo": "mlx-community/SeedVR2-3B-mlx",
+      "revision": "46f851fe23b2a9fbefee6419b94e4fdf07b92965",
+      "files": [
+        "transformer.safetensors",
+        "vae.safetensors",
+        "pos_emb.safetensors"
+      ]
+    }
+  ]
+}

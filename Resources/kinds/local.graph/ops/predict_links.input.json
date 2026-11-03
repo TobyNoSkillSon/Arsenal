@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "triples",
+    "relation"
+  ],
+  "properties": {
+    "triples": {
+      "type": "array",
+      "description": "The knowledge graph: known facts as [head, relation, tail] lists of names, e.g. [\"Paris\", \"capital_of\", \"France\"]. Names are any strings (or numbers); the same name is the same entity or relation everywhere. Every fact is also read backwards (tail, inverse relation, head). At most 1,000,000 triples.",
+      "minItems": 1,
+      "maxItems": 1000000,
+      "items": {
+        "type": "array",
+        "minItems": 3,
+        "maxItems": 3,
+        "items": {
+          "type": [
+            "string",
+            "number"
+          ]
+        }
+      }
+    },
+    "relation": {
+      "type": "string",
+      "description": "The query relation; it must appear in triples.",
+      "minLength": 1
+    },
+    "head": {
+      "type": "string",
+      "description": "Find missing tails of (head, relation, ?). Give head or tail, not both.",
+      "minLength": 1
+    },
+    "tail": {
+      "type": "string",
+      "description": "Find missing heads of (?, relation, tail). Give head or tail, not both.",
+      "minLength": 1
+    },
+    "top_k": {
+      "type": "integer",
+      "description": "How many ranked entities to return.",
+      "minimum": 1,
+      "default": 10
+    },
+    "exclude_known": {
+      "type": "boolean",
+      "description": "Leave out answers already stated in triples, so the list holds only missing links (the standard filtered ranking).",
+      "default": true
+    }
+  }
+}

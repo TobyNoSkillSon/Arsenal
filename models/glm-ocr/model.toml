@@ -1,0 +1,85 @@
+schema = 3
+id = "glm-ocr"
+name = "GLM-OCR"
+kind = "local.document"
+summary = "Reads the text in a document image or screenshot and returns it as plain text, keeping lines and paragraphs."
+description = "GLM-OCR from Z.ai (zai-org): a CogViT vision encoder, a token-downsampling connector and a GLM-0.5B language decoder, built on the GLM-V encoder-decoder design and trained with multi-token prediction and reinforcement learning for document OCR. The card reports 94.62 on OmniDocBench V1.5, first overall. The checkpoint holds 1.3B parameters including an unused multi-token-prediction layer; the card counts 0.9B. Arsenal runs its Text Recognition task on the whole image."
+purpose = "Read text from a document"
+publisher = "zai-org"
+released = 2026
+params = "1.3B"
+tasks = ["image-to-text"]
+languages = ["zh", "en", "fr", "es", "ru", "de", "ja", "ko"]
+good_for = [
+  "Printed documents, receipts, forms and screenshots: text comes back line by line with blank lines between blocks",
+  "Pages in Chinese, English, French, Spanish, Russian, German, Japanese or Korean",
+]
+limits = [
+  "Runs only the card's Text Recognition prompt; the Formula Recognition, Table Recognition and JSON extraction prompts are not offered, and there is no layout analysis (the maker's SDK adds PP-DocLayoutV3 for that).",
+  "Polish is not among the card's languages; plain Latin text reads fine, but Polish diacritics are untested.",
+  "Column alignment is lost: a three-column table came back as single-spaced rows (Oak shelf 2 149.00).",
+  "A tiny image still gets an answer: a 33x17 photo of a zebra was read as 'Zebra'.",
+  "A large page becomes thousands of image tokens (up to about 4.8 million pixels after resizing), which needs several GB of memory.",
+  "Parity with the maker code: output tokens identical on 3 of 3 fixed inputs (transformers 5.22 GlmOcrForConditionalGeneration, MPS fp16); see log/003-parity.md.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/zai-org/GLM-OCR"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/zai-org/GLM-OCR/blob/2e85a62840ccac27daa451df36c736c4636b8628/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "zai-org/GLM-OCR"
+revision = "2e85a62840ccac27daa451df36c736c4636b8628"
+dtype = "bf16"
+files = ["model.safetensors", "config.json", "generation_config.json", "preprocessor_config.json", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+
+[weights.sha256]
+"model.safetensors" = "a16eb0de98d199293371c560f95f83130d2a2c9612449df16839f08ff9498815"
+"config.json" = "ad537817b2becde827cbb23569a1dd83a352ee64cc34ce751a4ef000ecce4b5f"
+"generation_config.json" = "4e2a3412f65b2a21d315d928986c55723d3e60dfb92c3982a5b9fd56835b0aa5"
+"preprocessor_config.json" = "02cc50c36240882ae35e8cd4077a25a379664108185d728d261cb785aefeccff"
+"processor_config.json" = "a56fbd559186fefd6c22a3acc6a393a18a9fe52c264692a122a143d24042112b"
+"tokenizer.json" = "aa0fd058c73a5718bb191f6672dc16d122ee0147b20c123d1726514298f9968a"
+"tokenizer_config.json" = "95abd49942be9cdc6e2653528aed7b4c1cb9e180828421d3488ab38da3057016"
+
+[weights.bytes]
+"model.safetensors" = 2650579464
+"config.json" = 1737
+"generation_config.json" = 165
+"preprocessor_config.json" = 367
+"processor_config.json" = 1334
+"tokenizer.json" = 6838609
+"tokenizer_config.json" = 1138
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-glm-ocr"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,116 @@
+{
+  "cases": [
+    {
+      "operation": "ground_screen",
+      "source": "inclusionAI/UI-Venus@1ffbaf653fb3d5d08e9ea14b013865496d68408e models/grounding/ui_venus2_gd.py extract_coordinates_qwen35 ([x, y] point)",
+      "input": {
+        "image": {
+          "path": "$INBOX/image.png"
+        },
+        "instruction": "Save"
+      },
+      "raw": "[250,750]",
+      "expected": {
+        "detections": [
+          {
+            "label": "Save",
+            "point": {
+              "x": 8,
+              "y": 24
+            }
+          }
+        ],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 32,
+          "height": 32
+        }
+      }
+    },
+    {
+      "operation": "ground_screen",
+      "source": "inclusionAI/UI-Venus@1ffbaf653fb3d5d08e9ea14b013865496d68408e models/grounding/ui_venus2_gd.py extract_coordinates_qwen35 ([x1, y1, x2, y2] box center)",
+      "input": {
+        "image": {
+          "path": "$INBOX/image.png"
+        },
+        "instruction": "Save"
+      },
+      "raw": "[125,500,375,1000]",
+      "expected": {
+        "detections": [
+          {
+            "label": "Save",
+            "point": {
+              "x": 8,
+              "y": 24
+            },
+            "box": {
+              "xmin": 4,
+              "ymin": 16,
+              "xmax": 12,
+              "ymax": 32
+            }
+          }
+        ],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 32,
+          "height": 32
+        }
+      }
+    },
+    {
+      "operation": "ground_screen",
+      "source": "inclusionAI/UI-Venus@1ffbaf653fb3d5d08e9ea14b013865496d68408e models/grounding/ui_venus2_gd.py extract_coordinates_qwen35 ([x1, y1], [x2, y2] center)",
+      "input": {
+        "image": {
+          "path": "$INBOX/image.png"
+        },
+        "instruction": "Save"
+      },
+      "raw": "[125,500], [375,1000]",
+      "expected": {
+        "detections": [
+          {
+            "label": "Save",
+            "point": {
+              "x": 8,
+              "y": 24
+            },
+            "box": {
+              "xmin": 4,
+              "ymin": 16,
+              "xmax": 12,
+              "ymax": 32
+            }
+          }
+        ],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 32,
+          "height": 32
+        }
+      }
+    },
+    {
+      "operation": "ground_screen",
+      "source": "inclusionAI/UI-Venus@1ffbaf653fb3d5d08e9ea14b013865496d68408e models/grounding/ui_venus2_gd.py extract_coordinates_qwen35 ([-1,-1] infeasible)",
+      "input": {
+        "image": {
+          "path": "$INBOX/image.png"
+        },
+        "instruction": "Missing"
+      },
+      "raw": "[-1,-1]",
+      "expected": {
+        "detections": [],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 32,
+          "height": 32
+        }
+      }
+    }
+  ]
+}

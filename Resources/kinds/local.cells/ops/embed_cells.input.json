@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "genes": {
+      "type": "array",
+      "description": "One cell's expressed genes as human Ensembl gene IDs (e.g. ENSG00000141510), highest rank first: Geneformer ranks genes by expression normalised by the cell's total counts and by the gene's median across its training corpus. Genes missing from the model's dictionary are skipped; at most 4,094 are used. Give genes or gene_tokens.",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 100000
+    },
+    "gene_tokens": {
+      "type": "array",
+      "description": "The same cell as token ids from Geneformer's 104M token dictionary (the maker's TranscriptomeTokenizer output without <cls> and <eos>), highest rank first.",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 1,
+      "maxItems": 100000
+    },
+    "last_layer": {
+      "type": "boolean",
+      "description": "Take the embeddings from the last layer instead of the second-to-last (the maker's default, a more general representation).",
+      "default": false
+    }
+  }
+}

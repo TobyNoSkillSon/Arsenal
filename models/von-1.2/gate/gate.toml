@@ -1,0 +1,18 @@
+# Gate = Verdict's pinned-SDK Von gate (Projects/Verdict/lab/tests/test_von_helper.py @ f8177ed), through the Arsenal wire runner,
+# plus typed accuracy on the frozen decisions suite.
+# The fixture files named below are maintainer-only references kept outside this repository.
+schema = 1
+model = "von-1.2"
+fixture = "Projects/Verdict/lab/fixtures/von-1.2-sdk.json.gz"     # von-sdk 1.2.2 reference, 5 items x 3 questions
+command = "scripts/mlock gpulock decisions -- python3 Workers/Decisions/scripts/parity.py von von-1.2"
+
+[criteria]
+fp32 = "lab precision (not offered): every probability within 0.0001 of the SDK in single, single-question and five-item modes"
+fp16 = "same argmax / noul side as the SDK and max |dp| <= 0.1 (Verdict's 16-bit rule)"
+int8 = "valid answers for every item (lossy by design; max |dp| reported)"
+int4 = "valid answers for every item (lossy by design; max |dp| reported)"
+typed_accuracy = "4/4 on bench/kinds/decisions/fixtures-v1.json at fp16, int8 and int4"
+
+[evidence]
+parity = "gate/parity-von-sdk.json"
+suite = "gate/smoke-suite-v1.json"

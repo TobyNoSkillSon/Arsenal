@@ -1,0 +1,234 @@
+{
+  "chip": "m5-max",
+  "date": "2026-10-15T10:49:11Z",
+  "fp16_selected": true,
+  "gpu_cores": 40,
+  "model": "stable-audio-3-medium",
+  "network_bytes": 0,
+  "note": "Screening only. No new tier is offered until independent reference qualification and coordinator review.",
+  "policy": {
+    "audio_max_spectral_relative_l2": 0.05,
+    "audio_max_waveform_relative_l2": 0.1,
+    "fixture": {
+      "duration": 5,
+      "prompt": "Gentle rain on a window.",
+      "seed": 42,
+      "steps": 8,
+      "stream": false
+    },
+    "image_min_psnr_db": 30,
+    "independent_reference_qualified": false,
+    "quality_fixture": {
+      "duration": 1.5,
+      "prompt": "rain on a tin roof",
+      "seed": 20260927,
+      "steps": 2,
+      "stream": false
+    },
+    "source": "Engineering screening thresholds, fixed before capture; not a seed-noise qualification",
+    "audio_metric_definition": "StatsQuality.spectralDistance: Hann-window magnitude spectra on interleaved stereo PCM16 samples normalized to [-1,1], frame256/hop128, relative L2; waveform relative L2 checks both channels without sign/phase alignment."
+  },
+  "reference_audio_sha256": "a6a3e07fef38ef6ea96c47ef0137e5ef821b6a1fcf9e39bc33dd794cadf9f065",
+  "revision": "da6edc54ddba10bfd79a077102ded687f80e882b",
+  "rows": [
+    {
+      "load": {
+        "engine": "optimized",
+        "engine_reason": "fp16 residual stream (self-test passed: log-mel distance 0.06 dB to stock) + SWA views in the decoder (self-test passed: 3 decodes bit-identical to stock)",
+        "id": 1,
+        "load_s": 3.6882519721984863,
+        "memory": {
+          "footprint_mb": 4721.315992,
+          "mlx_active_mb": 4323.068532,
+          "mlx_cache_mb": 134.27364
+        },
+        "ok": true,
+        "timing": {
+          "load_s": 3.688461041660048,
+          "peak_mb": 6198.229384,
+          "queue_s": 0.007154541672207415
+        }
+      },
+      "machine_in_use": true,
+      "peak_gb": 5.620748728,
+      "precision": "fp16",
+      "qualified": false,
+      "quality_metric": 0.015686813037119128,
+      "quality_reply": {
+        "bytes": 264644,
+        "channels": 2,
+        "duration_s": 1.5,
+        "gen_s": 0.0990450382232666,
+        "id": 3,
+        "ok": true,
+        "path": "tmp/intake-audio-final/jobs/intake-fp16/quality/20386197-E920-4F59-B07E-961D6ACCFCEC.wav",
+        "rtf": 0.06603002548217773,
+        "sample_rate": 44100,
+        "seconds": 0.0990450382232666,
+        "seed": 20260927,
+        "sha256": "defc0df167da59f56007f8e855e5006ef40035ebe3df1090e6f025b329310299",
+        "timing": {
+          "peak_mb": 4578.293244,
+          "queue_s": 2.9875081963837147e-05
+        }
+      },
+      "reference": "Pinned saved original PCM capture (3 Oct); no FP32 model execution",
+      "relative_gate_passed": true,
+      "reply": {
+        "bytes": 882044,
+        "channels": 2,
+        "duration_s": 5,
+        "gen_s": 0.22892999649047852,
+        "id": 2,
+        "ok": true,
+        "path": "tmp/intake-audio-final/jobs/intake-fp16/70B2D6F1-B9C8-4922-B893-6C1B42909D60.wav",
+        "rtf": 0.0457859992980957,
+        "sample_rate": 44100,
+        "seconds": 0.22892999649047852,
+        "seed": 42,
+        "sha256": "b7ffaa61c3cff67095341a81273e11c51234158728b08263b9abb57e393af9e7",
+        "timing": {
+          "peak_mb": 5424.884052,
+          "queue_s": 3.333331551402807e-05
+        }
+      },
+      "rtf": 0.046797641669400036,
+      "seconds": 0.23398820834700018,
+      "state": "quickCheck",
+      "waveform_relative_l2": 0.021175605106257968
+    },
+    {
+      "load": {
+        "engine": "optimized",
+        "engine_reason": "fp16 residual stream (self-test passed: log-mel distance 0.24 dB to stock) + SWA views in the decoder (self-test passed: 3 decodes bit-identical to stock)",
+        "id": 1,
+        "load_s": 2.4521989822387695,
+        "memory": {
+          "footprint_mb": 2717.10908,
+          "mlx_active_mb": 2312.12914,
+          "mlx_cache_mb": 134.47269
+        },
+        "ok": true,
+        "timing": {
+          "load_s": 2.4524096666136757,
+          "peak_mb": 4204.306232,
+          "queue_s": 0.007663916680030525
+        }
+      },
+      "machine_in_use": true,
+      "peak_gb": 4.592995304,
+      "precision": "int8",
+      "qualified": false,
+      "quality_metric": 0.10080720995322828,
+      "quality_reply": {
+        "bytes": 264644,
+        "channels": 2,
+        "duration_s": 1.5,
+        "gen_s": 0.11111295223236084,
+        "id": 3,
+        "ok": true,
+        "path": "tmp/intake-audio-final/jobs/intake-int8/quality/8A106BD4-06B5-4D40-9F98-71DE8569439B.wav",
+        "rtf": 0.07407530148824056,
+        "sample_rate": 44100,
+        "seconds": 0.11111295223236084,
+        "seed": 20260927,
+        "sha256": "6d555ca9164a7e283b25545d867156467df2fe638926cc533678755a0f590dd4",
+        "timing": {
+          "peak_mb": 2580.234248,
+          "queue_s": 2.9999995604157448e-05
+        }
+      },
+      "reference": "Pinned saved original PCM capture (3 Oct); no FP32 model execution",
+      "relative_gate_passed": false,
+      "reply": {
+        "bytes": 882044,
+        "channels": 2,
+        "duration_s": 5,
+        "gen_s": 0.2450200319290161,
+        "id": 2,
+        "ok": true,
+        "path": "tmp/intake-audio-final/jobs/intake-int8/A46A92B2-35F9-4A02-BE8C-4D7908F73765.wav",
+        "rtf": 0.049004006385803225,
+        "sample_rate": 44100,
+        "seconds": 0.2450200319290161,
+        "seed": 42,
+        "sha256": "2e64351a55c0ab8764b5e9beae020f47a5e79dd995c3846a08320ea6bcb4c884",
+        "timing": {
+          "peak_mb": 3602.778524,
+          "queue_s": 3.670831210911274e-05
+        }
+      },
+      "rtf": 0.050090741668827835,
+      "seconds": 0.25045370834413916,
+      "state": "quickCheck",
+      "waveform_relative_l2": 0.13550819846137113
+    },
+    {
+      "load": {
+        "engine": "optimized",
+        "engine_reason": "fp16 residual stream (self-test passed: log-mel distance 0.03 dB to stock) + SWA views in the decoder (self-test passed: 3 decodes bit-identical to stock)",
+        "id": 1,
+        "load_s": 2.046808958053589,
+        "memory": {
+          "footprint_mb": 1636.501592,
+          "mlx_active_mb": 1237.469812,
+          "mlx_cache_mb": 134.385784
+        },
+        "ok": true,
+        "timing": {
+          "load_s": 2.04700795840472,
+          "peak_mb": 3129.644228,
+          "queue_s": 0.007241833256557584
+        }
+      },
+      "machine_in_use": true,
+      "peak_gb": 3.412265096,
+      "precision": "int4",
+      "qualified": false,
+      "quality_metric": 0.6302696342072246,
+      "quality_reply": {
+        "bytes": 264644,
+        "channels": 2,
+        "duration_s": 1.5,
+        "gen_s": 0.10941696166992188,
+        "id": 3,
+        "ok": true,
+        "path": "tmp/intake-audio-final/jobs/intake-int4/quality/A3F72F6C-AD86-45B6-8702-2D1F6D8DBBBD.wav",
+        "rtf": 0.07294464111328125,
+        "sample_rate": 44100,
+        "seconds": 0.10941696166992188,
+        "seed": 20260927,
+        "sha256": "86380fc894edd2dcda9acbd818368920076e076557a7a65cdca1c44ff651d524",
+        "timing": {
+          "peak_mb": 1505.58516,
+          "queue_s": 2.9499991796910763e-05
+        }
+      },
+      "reference": "Pinned saved original PCM capture (3 Oct); no FP32 model execution",
+      "relative_gate_passed": false,
+      "reply": {
+        "bytes": 882044,
+        "channels": 2,
+        "duration_s": 5,
+        "gen_s": 0.23414301872253418,
+        "id": 2,
+        "ok": true,
+        "path": "tmp/intake-audio-final/jobs/intake-int4/4879D34B-11E0-4915-BE32-8FCC5A0D50DF.wav",
+        "rtf": 0.046828603744506835,
+        "sample_rate": 44100,
+        "seconds": 0.23414301872253418,
+        "seed": 42,
+        "sha256": "b31179b726904e79923cbf53420f0dfe0710a8067041818ef1fa8befc6de9165",
+        "timing": {
+          "peak_mb": 2528.119346,
+          "queue_s": 3.604171797633171e-05
+        }
+      },
+      "rtf": 0.04786519166082144,
+      "seconds": 0.2393259583041072,
+      "state": "quickCheck",
+      "waveform_relative_l2": 0.9038930082583629
+    }
+  ],
+  "worker_sha256": "5c3e336291195d53ce7c793223078cbded230308c8b2b8ffa4581b5d0a79fb51"
+}

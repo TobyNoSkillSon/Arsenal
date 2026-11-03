@@ -1,0 +1,810 @@
+{
+  "entries": [
+    {
+      "kind": "local.audio-quality",
+      "model": "audiobox-aesthetics",
+      "peakMemoryGB": {
+        "basis": "Load and two Score quality requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:25:43Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Score quality requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "9b1dd8e5df9af7216e836a98974fe3b82c56ded6",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/audiobox-aesthetics/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 1.1489247232
+      },
+      "precision": "fp16",
+      "revision": "9b1dd8e5df9af7216e836a98974fe3b82c56ded6",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Score quality request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:25:43Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Score quality request, one sample, after one ordinary Load, then two Score quality requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "9b1dd8e5df9af7216e836a98974fe3b82c56ded6",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/audiobox-aesthetics/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.081
+      }
+    },
+    {
+      "kind": "local.vision",
+      "model": "blip-image-captioning-base",
+      "peakMemoryGB": {
+        "basis": "Load and two Caption requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:13:00Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Caption requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "cc2b3ef90a0723068afd83742483601af16bc7cf",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "planned-models/blip-image-captioning-base/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.848297984
+      },
+      "precision": "fp16",
+      "revision": "cc2b3ef90a0723068afd83742483601af16bc7cf",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Caption request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:13:00Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Caption request, one sample, after one ordinary Load, then two Caption requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "cc2b3ef90a0723068afd83742483601af16bc7cf",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "planned-models/blip-image-captioning-base/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.093
+      }
+    },
+    {
+      "kind": "local.forecast",
+      "model": "chronos-2",
+      "peakMemoryGB": {
+        "basis": "Load and two Forecast requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:48:46Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/chronos-2/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.4080009216
+      },
+      "precision": "fp16",
+      "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Forecast request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:48:46Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Forecast request, one sample, after one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/chronos-2/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.073
+      }
+    },
+    {
+      "kind": "local.forecast",
+      "model": "chronos-bolt-small",
+      "peakMemoryGB": {
+        "basis": "Load and two Forecast requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:47:04Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "772f3d25d38aec6d914c8949dab4462e2d46f5d8",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/chronos-bolt-small/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.2577399808
+      },
+      "precision": "fp16",
+      "revision": "772f3d25d38aec6d914c8949dab4462e2d46f5d8",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Forecast request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:47:04Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Forecast request, one sample, after one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "772f3d25d38aec6d914c8949dab4462e2d46f5d8",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/chronos-bolt-small/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.066
+      }
+    },
+    {
+      "kind": "local.audio-labels",
+      "model": "clap-htsat-fused",
+      "peakMemoryGB": {
+        "basis": "Load and two Label requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:14:14Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Label requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "365dea6ef167def6676140ed93bbc43f84dabb28",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/clap-htsat-fused/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.6335496192000001
+      },
+      "precision": "fp16",
+      "revision": "365dea6ef167def6676140ed93bbc43f84dabb28",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Label request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:14:14Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Label request, one sample, after one ordinary Load, then two Label requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "365dea6ef167def6676140ed93bbc43f84dabb28",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/clap-htsat-fused/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.096
+      }
+    },
+    {
+      "kind": "local.segmentation",
+      "model": "edgetam",
+      "peakMemoryGB": {
+        "basis": "Load and two Segment with points or boxes requests on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:28:14Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Segment with points or boxes requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "e7770c15b913841cb657e6d2fbb33a6541c3bb32",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/edgetam/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.805306368
+      },
+      "precision": "fp16",
+      "revision": "e7770c15b913841cb657e6d2fbb33a6541c3bb32",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Segment with points or boxes request on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:28:14Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Segment with points or boxes request, one sample, after one ordinary Load, then two Segment with points or boxes requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "e7770c15b913841cb657e6d2fbb33a6541c3bb32",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/edgetam/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.228
+      }
+    },
+    {
+      "kind": "local.science",
+      "model": "esm2-t33-650m",
+      "peakMemoryGB": {
+        "basis": "Load and two Science requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:58:50Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Science requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "08e4846e537177426273712802403f7ba8261b6c",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/esm2-t33-650m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 1.4710472704000002
+      },
+      "precision": "fp16",
+      "revision": "08e4846e537177426273712802403f7ba8261b6c",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Science request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:58:50Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Science request, one sample, after one ordinary Load, then two Science requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "08e4846e537177426273712802403f7ba8261b6c",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/esm2-t33-650m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.085
+      }
+    },
+    {
+      "kind": "local.science",
+      "model": "esm2-t6-8m",
+      "peakMemoryGB": {
+        "basis": "Load and two Science requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:46:18Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Science requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "c731040fcd8d73dceaa04b0a8e6329b345b0f5df",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/esm2-t6-8m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.17175674880000003
+      },
+      "precision": "fp16",
+      "revision": "c731040fcd8d73dceaa04b0a8e6329b345b0f5df",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Science request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:46:18Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Science request, one sample, after one ordinary Load, then two Science requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "c731040fcd8d73dceaa04b0a8e6329b345b0f5df",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/esm2-t6-8m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.073
+      }
+    },
+    {
+      "kind": "local.vision",
+      "model": "florence-2-base",
+      "peakMemoryGB": {
+        "basis": "Load and two Caption requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:23:15Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Caption requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/florence-2-base/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 2.190475264
+      },
+      "precision": "fp16",
+      "revision": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Caption request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:23:15Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Caption request, one sample, after one ordinary Load, then two Caption requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/florence-2-base/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.174
+      }
+    },
+    {
+      "kind": "local.vision",
+      "model": "florence-2-large",
+      "peakMemoryGB": {
+        "basis": "Load and two Caption requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:06:13Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Caption requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "21a599d414c4d928c9032694c424fb94458e3594",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/florence-2-large/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 4.1339060224
+      },
+      "precision": "fp16",
+      "revision": "21a599d414c4d928c9032694c424fb94458e3594",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Caption request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:06:13Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Caption request, one sample, after one ordinary Load, then two Caption requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "21a599d414c4d928c9032694c424fb94458e3594",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/florence-2-large/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.179
+      }
+    },
+    {
+      "kind": "local.cells",
+      "model": "geneformer-v2-104m",
+      "peakMemoryGB": {
+        "basis": "Load and two Embed cell requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:05:58Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Embed cell requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "1f7fbae4e469a5f4f1af8c111a529cfe1b3829f5",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/geneformer-v2-104m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.3543138304
+      },
+      "precision": "fp16",
+      "revision": "1f7fbae4e469a5f4f1af8c111a529cfe1b3829f5",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Embed cell request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:05:58Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Embed cell request, one sample, after one ordinary Load, then two Embed cell requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "1f7fbae4e469a5f4f1af8c111a529cfe1b3829f5",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/geneformer-v2-104m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.082
+      }
+    },
+    {
+      "kind": "local.document",
+      "model": "glm-ocr",
+      "peakMemoryGB": {
+        "basis": "Load and two Read requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:10:27Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Read requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "2e85a62840ccac27daa451df36c736c4636b8628",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/glm-ocr/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 6.313580953600001
+      },
+      "precision": "fp16",
+      "revision": "2e85a62840ccac27daa451df36c736c4636b8628",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Read request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:10:27Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Read request, one sample, after one ordinary Load, then two Read requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "2e85a62840ccac27daa451df36c736c4636b8628",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/glm-ocr/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.428
+      }
+    },
+    {
+      "kind": "local.forecast",
+      "model": "granite-ttm-r3",
+      "peakMemoryGB": {
+        "basis": "Load and two Forecast requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:26:13Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "ea17cfd2e3edcaea21eb8dcecd18bf88971482fa",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/granite-ttm-r3/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.17175674880000003
+      },
+      "precision": "fp16",
+      "revision": "ea17cfd2e3edcaea21eb8dcecd18bf88971482fa",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Forecast request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:26:13Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Forecast request, one sample, after one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "ea17cfd2e3edcaea21eb8dcecd18bf88971482fa",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/granite-ttm-r3/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.077
+      }
+    },
+    {
+      "kind": "local.document",
+      "model": "manga-ocr-base",
+      "peakMemoryGB": {
+        "basis": "Load and two Read requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:49:00Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Read requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "82c77fb84369e0fce0d6e8f0ad96fa82646d0346",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/manga-ocr-base/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.4509925376
+      },
+      "precision": "fp16",
+      "revision": "82c77fb84369e0fce0d6e8f0ad96fa82646d0346",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Read request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:49:00Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Read request, one sample, after one ordinary Load, then two Read requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "82c77fb84369e0fce0d6e8f0ad96fa82646d0346",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/manga-ocr-base/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.097
+      }
+    },
+    {
+      "kind": "local.tabular",
+      "model": "mitra-classifier-2",
+      "peakMemoryGB": {
+        "basis": "Load and two Classify rows requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:55:54Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Classify rows requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "edada0d20759c58ada8c8605c25f22f6e98ea5f0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/mitra-classifier-2/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.7086276608
+      },
+      "precision": "fp16",
+      "revision": "edada0d20759c58ada8c8605c25f22f6e98ea5f0",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Classify rows request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:55:54Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Classify rows request, one sample, after one ordinary Load, then two Classify rows requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "edada0d20759c58ada8c8605c25f22f6e98ea5f0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/mitra-classifier-2/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.093
+      }
+    },
+    {
+      "kind": "local.molecules",
+      "model": "molformer-xl-both-10pct",
+      "peakMemoryGB": {
+        "basis": "Load and two Embed molecule requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:46:33Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Embed molecule requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "361063d0ad524ef77cf39b08469f6be770dc550f",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/molformer-xl-both-10pct/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.2577399808
+      },
+      "precision": "fp16",
+      "revision": "361063d0ad524ef77cf39b08469f6be770dc550f",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Embed molecule request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:46:33Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Embed molecule request, one sample, after one ordinary Load, then two Embed molecule requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "361063d0ad524ef77cf39b08469f6be770dc550f",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/molformer-xl-both-10pct/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.095
+      }
+    },
+    {
+      "kind": "local.forecast",
+      "model": "t0-alpha",
+      "peakMemoryGB": {
+        "basis": "Load and two Forecast requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:47:49Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "741927847fe02367624749bb9290b2f09f128e7d",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/t0-alpha/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.3651141632
+      },
+      "precision": "fp16",
+      "revision": "741927847fe02367624749bb9290b2f09f128e7d",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Forecast request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:47:49Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Forecast request, one sample, after one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "741927847fe02367624749bb9290b2f09f128e7d",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/t0-alpha/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.073
+      }
+    },
+    {
+      "kind": "local.forecast",
+      "model": "timesfm-2.5-200m",
+      "peakMemoryGB": {
+        "basis": "Load and two Forecast requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:51:45Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/timesfm-2.5-200m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.6442450944
+      },
+      "precision": "fp16",
+      "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Forecast request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:51:45Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Forecast request, one sample, after one ordinary Load, then two Forecast requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "1d952420fba87f3c6dee4f240de0f1a0fbc790e3",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/timesfm-2.5-200m/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.071
+      }
+    },
+    {
+      "kind": "local.graph",
+      "model": "ultra-50g",
+      "peakMemoryGB": {
+        "basis": "Load and two Predict links requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:44:56Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Predict links requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "d46107d8415549e7c7386d26903ad11c9a8de4fd",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/ultra-50g/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.1503657984
+      },
+      "precision": "fp16",
+      "revision": "d46107d8415549e7c7386d26903ad11c9a8de4fd",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Predict links request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:44:56Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Predict links request, one sample, after one ordinary Load, then two Predict links requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "d46107d8415549e7c7386d26903ad11c9a8de4fd",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/ultra-50g/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.059
+      }
+    },
+    {
+      "kind": "local.dewarp",
+      "model": "uvdoc",
+      "peakMemoryGB": {
+        "basis": "Load and two Flatten page requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:24:03Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Flatten page requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "bfa6aad03b549c7e2cf89cefd2fb02ba3bef2ae4",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/uvdoc/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.9878634496
+      },
+      "precision": "fp16",
+      "revision": "bfa6aad03b549c7e2cf89cefd2fb02ba3bef2ae4",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Flatten page request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:24:03Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Flatten page request, one sample, after one ordinary Load, then two Flatten page requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "bfa6aad03b549c7e2cf89cefd2fb02ba3bef2ae4",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/uvdoc/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.112
+      }
+    },
+    {
+      "kind": "local.pose",
+      "model": "vitpose-base-simple",
+      "peakMemoryGB": {
+        "basis": "Load and two Estimate pose requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:07:46Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Estimate pose requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "a93ac0c67e0b7e2c55287d21d4c460c8f3c54d45",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/vitpose-base-simple/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.3865051136
+      },
+      "precision": "fp16",
+      "revision": "a93ac0c67e0b7e2c55287d21d4c460c8f3c54d45",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Estimate pose request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:07:46Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Estimate pose request, one sample, after one ordinary Load, then two Estimate pose requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "a93ac0c67e0b7e2c55287d21d4c460c8f3c54d45",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/vitpose-base-simple/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.073
+      }
+    },
+    {
+      "kind": "local.video",
+      "model": "vjepa2-vitl-fpc64-256",
+      "peakMemoryGB": {
+        "basis": "Load and two Embed video requests on three short sentences.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:20:44Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Embed video requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "8eec39e665ffce8ac09174ea3ab2f2d65940ef5f",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/vjepa2-vitl-fpc64-256/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 1.8468569088
+      },
+      "precision": "fp16",
+      "revision": "8eec39e665ffce8ac09174ea3ab2f2d65940ef5f",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Embed video request on three short sentences.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:20:44Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Embed video request, one sample, after one ordinary Load, then two Embed video requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "8eec39e665ffce8ac09174ea3ab2f2d65940ef5f",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/vjepa2-vitl-fpc64-256/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 1.384
+      }
+    },
+    {
+      "kind": "local.gender",
+      "model": "voice-gender-ecapa",
+      "peakMemoryGB": {
+        "basis": "Load and two Classify requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:48:03Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Classify requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "db1222153bd60337e900be22add7af180452adc0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/voice-gender-ecapa/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.22544384
+      },
+      "precision": "fp16",
+      "revision": "db1222153bd60337e900be22add7af180452adc0",
+      "runner": "kit",
+      "secondsPerRequest": {
+        "basis": "One warm Classify request on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:48:03Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Classify request, one sample, after one ordinary Load, then two Classify requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "db1222153bd60337e900be22add7af180452adc0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "models/voice-gender-ecapa/results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.096
+      }
+    }
+  ],
+  "schema": "folder-figures-1"
+}

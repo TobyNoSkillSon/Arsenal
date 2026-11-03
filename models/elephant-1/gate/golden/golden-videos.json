@@ -1,0 +1,260 @@
+{
+ "schema": "golden-1",
+ "model": "elephant-1",
+ "date": "2026-11-02",
+ "commit": "9b388421ae38abd5091c41e607eb53391990c9c2",
+ "precision": "fp16",
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "weights": {
+  "repo": "baselabs/elephant-1",
+  "revision": "b3f8a93462fb1051a9de031e94a7ff380e254072",
+  "sha256": {
+   "config.json": "f26324589d15932e2742dbb13dbc7c561865ce4f80990af3b7dff05efe4dadab",
+   "model.safetensors": "682f02348dfe4617dd21bba2915c12e805de8cf16327a61e895a831ea681d0ba",
+   "processor_config.json": "bfbc24af59a3e73a9cd0653b8d4ae758dfaec4e3e6c15dfb1c6c8ee8d5683c85",
+   "tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+   "tokenizer_config.json": "2984c03425a28d242744e234a5003786fd289b3713db79fe0958c65eb59d85b2"
+  }
+ },
+ "input": {
+  "fixtures": [
+   {
+    "file": "ball-0.png",
+    "sha256": "4e1232ea0da1b00a6038f5594e2002da9b24c629a7526464d803a32217a3f2f2",
+    "bytes": 1043
+   },
+   {
+    "file": "ball-1.png",
+    "sha256": "6eb143d3742780e854a7642bc8b595f346a5e4f1dfa45b7f60fb02e2932ea941",
+    "bytes": 1032
+   },
+   {
+    "file": "ball-2.png",
+    "sha256": "2ce6e9919797223dfd9cd7b3cebcac55e1238fc07b6ff3e3824f6f86137053bc",
+    "bytes": 1028
+   },
+   {
+    "file": "ball-3.png",
+    "sha256": "65383e5a298fa720d5be75fada27b556590a853f3d8307c912e42cf297314513",
+    "bytes": 1036
+   },
+   {
+    "file": "light-0.png",
+    "sha256": "745cfa9ea1100e5bbc708dd46c82df770ee8c347c273efe44375182d4be8325a",
+    "bytes": 1080
+   },
+   {
+    "file": "light-1.png",
+    "sha256": "50cb1a200780d4485ba7fa95a5cf09b3d356f6294b382655061d43883403b69d",
+    "bytes": 1083
+   },
+   {
+    "file": "light-2.png",
+    "sha256": "e1b0e56300172e2129aec27dc9b12d8631895aa90fc60fb68d499f39e726a21c",
+    "bytes": 1081
+   },
+   {
+    "file": "ball-0.png",
+    "sha256": "4e1232ea0da1b00a6038f5594e2002da9b24c629a7526464d803a32217a3f2f2",
+    "bytes": 1043
+   }
+  ],
+  "request": [
+   {
+    "op": "decide",
+    "body": {
+     "state": {
+      "clip": "<video:1>",
+      "camera": "fixed"
+     },
+     "media": [
+      {
+       "type": "video",
+       "frames": [
+        {
+         "path": "ball-0.png"
+        },
+        {
+         "path": "ball-1.png"
+        },
+        {
+         "path": "ball-2.png"
+        },
+        {
+         "path": "ball-3.png"
+        }
+       ],
+       "fps": 2.0
+      }
+     ],
+     "questions": {
+      "right": {
+       "type": "noul",
+       "instructions": "Does the red ball move to the right during the clip?"
+      },
+      "object": {
+       "type": "choice",
+       "instructions": "What moves in the clip?",
+       "criteria": {
+        "ball": "a red ball",
+        "car": "a car",
+        "nothing": "nothing moves"
+       }
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": "Traffic camera: <video:1>",
+     "media": [
+      {
+       "type": "video",
+       "frames": [
+        {
+         "path": "light-0.png"
+        },
+        {
+         "path": "light-1.png"
+        },
+        {
+         "path": "light-2.png"
+        }
+       ],
+       "fps": 1.0
+      }
+     ],
+     "questions": {
+      "green": {
+       "type": "noul",
+       "instructions": "Is the light green at the end of the clip?"
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": "I was charged twice this month, please refund one of them.",
+     "questions": {
+      "refund": {
+       "type": "noul",
+       "instructions": "Is the customer asking for a refund?"
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": "Clip: <video:1>",
+     "media": [
+      {
+       "type": "video",
+       "frames": [
+        {
+         "path": "ball-0.png"
+        }
+       ]
+      }
+     ],
+     "questions": {
+      "x": {
+       "type": "noul"
+      }
+     }
+    }
+   }
+  ]
+ },
+ "output": [
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "object": {
+      "choice": "ball",
+      "confidence": 0.99984,
+      "probabilities": {
+       "ball": 0.99989,
+       "car": 3e-05,
+       "nothing": 7e-05
+      },
+      "type": "choice"
+     },
+     "right": {
+      "noul": 0.99725,
+      "type": "noul"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 359,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "green": {
+      "noul": 0.99906,
+      "type": "noul"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 226,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "refund": {
+      "noul": 0.99168,
+      "type": "noul"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 118,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 422,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": "{\"code\":\"invalid_request\",\"error\":\"input.media[0]: no schema alternative matched\"}"
+  }
+ ],
+ "maker_reference": {
+  "none": "Makers' trained multimodal path (OneJev qev @81ce62f + serve.patch, train.common.batch_scores with the block mask; Qwen3VLVideoProcessor with do_sample_frames=False, cap_pixels_per_frame=True) on PyTorch MPS, lab/evidence/elephant-1/maker-video-2026-11-02. Answers within 0.00015 of the makers' BF16 and FP16 runs; prompts, grids, pixels, ids with timestamps and rotary positions identical."
+ },
+ "tolerance": {
+  "argmax": "unchanged on every question",
+  "max_abs_probability_difference_vs_maker": 0.025,
+  "frozen": "lab/evidence/elephant-1/bounds-video-2026-11-02.json"
+ },
+ "note": "Videos through the real service on the final code: a ball moving right (4 frames, 2 fps), a light turning green (3 frames, 1 fps), frames as {path} objects as the operation schema requires, a text-only request (unchanged from the text golden) and a one-frame video (refused by the operation schema, 422, by design). Request key order kept."
+}

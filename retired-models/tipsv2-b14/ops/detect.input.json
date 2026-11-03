@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "maxItems": 512
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1,
+      "default": 0.3,
+      "x-arsenal-control": "slider"
+    }
+  },
+  "required": [
+    "image",
+    "labels"
+  ],
+  "additionalProperties": false
+}

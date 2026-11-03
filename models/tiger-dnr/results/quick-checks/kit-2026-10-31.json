@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of separate_audio through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "tiger-dnr",
+  "revision": "b7a59560bbca10febbcd46fb01600f868e587f57",
+  "rows": [
+    {
+      "date": "2026-10-31T01:32:46Z",
+      "load_seconds": 0.566,
+      "ops": {
+        "separate_audio": {
+          "seconds_first": 21.515,
+          "seconds_warm": 21.89,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 550.2,
+      "precision": "fp16",
+      "runner_sha256": "c24da8d8acd1a7794a6150e5805e6b9ac276864d618a39f4bbf3e14d9f344d62",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

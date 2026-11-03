@@ -1,0 +1,67 @@
+schema = 3
+architecture = "pyannote_community_1"
+id = "pyannote-community-1"
+name = "Pyannote Community-1"
+kind = "audio"
+params = "8.1M"
+publisher = "pyannote"
+released = 2025
+suggested = false
+summary = "Find who spoke when, including overlapping speech, using a native Swift MLX worker."
+purpose = "Who spoke when, with overlaps"
+good_for = ["Meeting and interview speaker turns", "Overlapping speech", "Exclusive one-speaker-at-a-time turns for aligning transcripts", "Known, bounded or automatic speaker counts", "RTTM export and per-speaker embeddings"]
+limits = ["At most ten minutes per recording and 32 requested speakers.", "Not streaming: the whole recording is processed at once.", "Trained-weight and precision-quality verification is pending."]
+languages = ["und"]
+tasks = ["diarize"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "CC-BY-4.0"
+name = "Creative Commons Attribution 4.0"
+commercial = true
+url = "https://huggingface.co/pyannote-community/speaker-diarization-community-1/tree/8a527374977391da736e0daaef26855d949d9685"
+[weights]
+repo = "pyannote-community/speaker-diarization-community-1"
+revision = "8a527374977391da736e0daaef26855d949d9685"
+dtype = "fp32"
+files = ["config.yaml", "segmentation/pytorch_model.bin", "embedding/pytorch_model.bin", "plda/plda.npz", "plda/xvec_transform.npz"]
+[weights.sha256]
+"config.yaml" = "5ce2bfa9a938dc132cec1172592d65173cbb8f444ea1e4133f10f9391de155be"
+"segmentation/pytorch_model.bin" = "7ad24338d844fb95985486eb1a464e32d229f6d7a03c9abe60f978bacf3f816e"
+"embedding/pytorch_model.bin" = "6f10ff60898a1d185fa22e1d11e0bfa8a92efec811f11bca48cb8cafebefd929"
+"plda/plda.npz" = "9b77bcd840692710dd3496f62ecfeed8d8e5f002fd991b785079b244eab7d255"
+"plda/xvec_transform.npz" = "325f1ce8e48f7e55e9c8aa47e05d2766b7c48c4b25b8de8dd751e7a4cc5fbe8f"
+[weights.bytes]
+"config.yaml" = 444
+"segmentation/pytorch_model.bin" = 5906507
+"embedding/pytorch_model.bin" = 26646242
+"plda/plda.npz" = 133852
+"plda/xvec_transform.npz" = 134376
+[derive]
+fp16 = "cast:audio-community1-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "diarize"
+title = "Who spoke when"
+input = "ops/diarize.input.json"
+output_schema = "ops/diarize.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

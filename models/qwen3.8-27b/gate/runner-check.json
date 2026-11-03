@@ -1,0 +1,17 @@
+{
+  "ops": {
+    "chat": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "Hello"
+        }
+      ],
+      "max_tokens": 8,
+      "stream": true
+    },
+    "count_tokens": {
+      "text": "Hello"
+    }
+  }
+}

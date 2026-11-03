@@ -1,0 +1,20 @@
+# Frozen v1: changing a case, parameter, label or aggregation requires suite-v2.
+schema = 1
+id = "arsenal-images-suite-v1"
+version = 1
+kind = "images"
+fixtures = "fixtures-v1.json"
+aggregation = "median per-case latency; throughput is summed units / summed seconds"
+
+[quick]
+repeats = 1
+warmup = 1
+
+[full]
+repeats = 10
+warmup = 1
+
+[quality]
+reference_deviation = "null: no pinned reference images qualified for v1"
+resolution = "512x512"
+steps = 4

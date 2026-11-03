@@ -1,0 +1,42 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "qwen-image-2.1",
+  "revision": "d26bb61231c349cf6b7896fa83353113880e1ba3",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T09:22:11Z",
+      "load_seconds": 6.36,
+      "mac_peak_in_use_mb": 63526.8,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "edit": {
+          "error": "{\"code\":\"invalid_request\",\"error\":\"input.images[0]: expected object\"}",
+          "seconds_first": 0.01,
+          "seconds_warm": 0.01,
+          "status": 422
+        },
+        "generate": {
+          "files": [
+            {
+              "name": "image-1-47f0c3e5.png",
+              "sha256": "5d2b2a3350f60c31ff1952956acdaceb22752e08cdf4f53c81ad2b3e07c73782"
+            }
+          ],
+          "seconds_first": 59.228,
+          "seconds_warm": 60.784,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 37888.0,
+      "precision": "bf16",
+      "sampled_peak_mb": 34816.0,
+      "samples": 374
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

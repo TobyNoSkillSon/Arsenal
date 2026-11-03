@@ -1,0 +1,71 @@
+schema = 3
+id = "qwen3-asr-0.6b"
+name = "Qwen3 ASR 0.6B"
+kind = "audio"
+architecture = "qwen3_asr_vella"
+params = "782M"
+publisher = "Qwen"
+released = 2026
+suggested = false
+summary = "The smaller Qwen3 ASR: the same 30 languages in less memory"
+purpose = "Speech transcription, 30 languages"
+good_for = ["Chinese, Japanese, Korean and 27 more languages on Macs with less memory", "Language detection and context prompts"]
+limits = ["Ten minutes per recording, transcribed in segments of up to 30 seconds.", "No word timestamps: the separate Qwen forced aligner is not included.", "A little less accurate than the 1.7B in Vella's measurements.", "Checked live at FP16 on 20 Oct: an English test sentence transcribed exactly."]
+languages = ["zh", "en", "yue", "ar", "de", "fr", "es", "pt", "id", "it", "ko", "ru", "th", "vi", "ja", "tr", "hi", "ms", "nl", "sv", "da", "fi", "pl", "cs", "fil", "fa", "el", "hu", "mk", "ro"]
+tasks = ["transcribe"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/mlx-community/Qwen3-ASR-0.6B-bf16/tree/eae2b51f96265328f1e7beced788adb0e4536f92"
+[weights]
+repo = "mlx-community/Qwen3-ASR-0.6B-bf16"
+revision = "eae2b51f96265328f1e7beced788adb0e4536f92"
+dtype = "bf16"
+files = ["chat_template.json", "config.json", "generation_config.json", "merges.txt", "model.safetensors", "preprocessor_config.json", "tokenizer_config.json", "vocab.json"]
+[weights.sha256]
+"chat_template.json" = "75a8cfca24f00de72d796fbfed6858fc9614ef3dabd8696684cc3bc03a9c58ff"
+"config.json" = "dae1fbfa8b858aceefe5afcc7ecc9184e4a6045bc4a1bca8a41834724f490874"
+"generation_config.json" = "1da527824d81e07118facff437e03f2e24a23311e3bdeb2368973fe77e5f275c"
+"merges.txt" = "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+"model.safetensors" = "a6e635fd9c8dfd5cdd7465db9bd8c947ab30737b90b83b6b09c304e836bb8a7f"
+"preprocessor_config.json" = "45e120a4eda2c20c5d7f2ea9354e63536bf35e27aa573fb7cdf78017b378770d"
+"tokenizer_config.json" = "4942d005604266809309cabc9f4e9cb89ce855d59b14681fdc0e1cc62ea26c4c"
+"vocab.json" = "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+[weights.bytes]
+"chat_template.json" = 1161
+"config.json" = 6982
+"generation_config.json" = 142
+"merges.txt" = 1671853
+"model.safetensors" = 1564921888
+"preprocessor_config.json" = 330
+"tokenizer_config.json" = 12487
+"vocab.json" = 2776833
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "transcribe"
+title = "Transcribe"
+input = "ops/transcribe.input.json"
+output_schema = "ops/transcribe.output.json"
+output = "json"
+stream = true
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,7 @@
+schema = 1
+id = "birefnet-swift-fp16-v1"
+reference_runner = "pinned-vendor-pytorch-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["754 source tensors; 687 FP16 + 67 integer buffers", "12 saved-input GPU component calls; 20 FP16 outputs", "exact keys and shapes", "finite; relative L2 below 0.01; cosine above 0.9999", "one served screenshot mask with two validated artifacts"]
+evidence = "gate/evidence/native/components.json"

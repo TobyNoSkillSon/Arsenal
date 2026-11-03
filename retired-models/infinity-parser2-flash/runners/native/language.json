@@ -1,0 +1,76 @@
+{
+  "operations": [
+    "read_document"
+  ],
+  "processor": "Qwen3VLProcessor",
+  "prompts": {
+    "ocr": "\n- Extract layout information from the provided PDF image.\n- For each layout element, output its bbox, category, and the text content within the bbox.\n- Bbox format: [x1, y1, x2, y2].\n- Allowed layout categories: ['header', 'title', 'text', 'figure', 'table', 'formula', 'figure_caption', 'table_caption', 'formula_caption', 'figure_footnote', 'table_footnote', 'page_footnote', 'footer'].\n- Text extraction and formatting:\n  1) For 'figure', the text field must be an empty string.\n  2) For 'formula', format text as LaTeX.\n  3) For 'table', format text as HTML.\n  4) For all other categories (e.g., text, title), format text as Markdown.\n- The output text must be exactly the original text from the image, with no translation or rewriting.\n- Sort all layout elements in human reading order.\n- Final output must be a single JSON object.\n",
+    "markdown": "\nYou are an AI assistant specialized in converting PDF images to Markdown format. Please follow these instructions for the conversion:\n\n1. Text Processing:\n- Accurately recognize all text content in the PDF image without guessing or inferring.\n- Convert the recognized text into Markdown format.\n- Maintain the original document structure, including headings, paragraphs, lists, etc.\n\n2. Mathematical Formula Processing:\n- Convert all mathematical formulas to LaTeX format.\n- Enclose inline formulas with $ $. For example: This is an inline formula $E = mc^2$\n- Enclose block formulas with $$ $$. For example: $$\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n\n3. Table Processing:\n- Convert tables to HTML format.\n\n4. Figure Handling:\n- Ignore figures content in the PDF image. Do not attempt to describe or convert images.\n\n5. Output Format:\n- Ensure the output Markdown document has a clear structure with appropriate line breaks between elements.\n- For complex layouts, try to maintain the original document's structure and format as closely as possible.\n\nPlease strictly follow these guidelines to ensure accuracy and consistency in the conversion. Your task is to accurately convert the content of the PDF image into Markdown format without adding any extra explanations or comments.\n"
+  },
+  "processor_config": {
+    "image_processor": {
+      "data_format": "channels_first",
+      "do_convert_rgb": true,
+      "do_normalize": true,
+      "do_rescale": true,
+      "do_resize": true,
+      "image_mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "image_processor_type": "Qwen2VLImageProcessorFast",
+      "image_std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "merge_size": 2,
+      "patch_size": 16,
+      "resample": 3,
+      "rescale_factor": 0.00392156862745098,
+      "size": {
+        "longest_edge": 16777216,
+        "shortest_edge": 65536
+      },
+      "temporal_patch_size": 2
+    },
+    "processor_class": "Qwen3VLProcessor",
+    "video_processor": {
+      "data_format": "channels_first",
+      "default_to_square": true,
+      "do_convert_rgb": true,
+      "do_normalize": true,
+      "do_rescale": true,
+      "do_resize": true,
+      "do_sample_frames": true,
+      "fps": 2,
+      "image_mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "image_std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "max_frames": 768,
+      "merge_size": 2,
+      "min_frames": 4,
+      "patch_size": 16,
+      "resample": 3,
+      "rescale_factor": 0.00392156862745098,
+      "return_metadata": false,
+      "size": {
+        "longest_edge": 25165824,
+        "shortest_edge": 4096
+      },
+      "temporal_patch_size": 2,
+      "video_processor_type": "Qwen3VLVideoProcessor"
+    }
+  },
+  "min_pixels": 2048,
+  "max_pixels": 16777216,
+  "pdf_dpi": 300
+}

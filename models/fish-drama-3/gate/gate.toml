@@ -1,0 +1,6 @@
+schema = 1
+kind = "voices"
+recipe = "mlx-audio-fish-drama3-reference-parity"
+source_commit = "dad2087f790dfe96b07d5aac1405db4b578b411f"
+checks = ["framed-load-speak-unload", "finite-nonempty-pcm", "reference-parity", "round-trip-intelligibility"]
+status = "unverified"

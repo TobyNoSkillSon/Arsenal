@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "speaker": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "speaker"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 100000,
+      "description": "Each speaker's speech; overlapping speech has several speakers. Speakers are numbered SPEAKER_00…SPEAKER_03 in order of arrival."
+    },
+    "speakers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4
+    },
+    "rttm": {
+      "type": "string",
+      "description": "The segments in RTTM format."
+    },
+    "frame_seconds": {
+      "type": "number",
+      "description": "Duration of one probability frame (0.08 s), with include_probabilities."
+    },
+    "probabilities": {
+      "type": "array",
+      "maxItems": 45000,
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minItems": 4,
+        "maxItems": 4
+      },
+      "description": "Per 80 ms frame, the activity probability of SPEAKER_00…SPEAKER_03, with include_probabilities."
+    }
+  },
+  "required": [
+    "segments",
+    "speakers",
+    "rttm"
+  ],
+  "additionalProperties": false
+}

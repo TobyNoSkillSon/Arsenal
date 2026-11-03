@@ -1,0 +1,8 @@
+schema = 1
+id = "lco-embedding-omni-7b-native-v1"
+kind = "embeddings"
+reference_runner = "pinned-vendor-transformers-mps-bf16-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Prompt (sentence-transformers template), rotary positions (get_rope_index), vision window index, smart_resize, frame sampling and Whisper log-mel match Transformers 5.22.1 and qwen-omni-utils without weights (EmbedWorkerTests, Fixtures/lco-reference.json)", "token ids identical to the maker's processor for text, image, audio and video", "component parity on the maker's own inputs, captured once from Transformers on PyTorch MPS in BF16 and FP16: vision tower, audio tower, language model pooled state, within the maker's own BF16-versus-FP16 spread", "FP16 accepted: every hidden state finite, largest |activation| 7,184 of 65,504"]
+evidence = "gate/golden/golden.json"

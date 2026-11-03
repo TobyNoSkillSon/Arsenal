@@ -1,0 +1,10 @@
+{
+  "model": "teleocr",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 23,
+    "plain_tokens": 20,
+    "roundtrip": "Hello"
+  }
+}

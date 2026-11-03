@@ -1,0 +1,332 @@
+{
+ "schema": "golden-1",
+ "model": "elephant-1",
+ "date": "2026-11-02",
+ "commit": "835751e07d08c988d8b61a93570619a7102bdb02",
+ "precision": "fp16",
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "weights": {
+  "repo": "baselabs/elephant-1",
+  "revision": "b3f8a93462fb1051a9de031e94a7ff380e254072",
+  "sha256": {
+   "config.json": "f26324589d15932e2742dbb13dbc7c561865ce4f80990af3b7dff05efe4dadab",
+   "model.safetensors": "682f02348dfe4617dd21bba2915c12e805de8cf16327a61e895a831ea681d0ba",
+   "processor_config.json": "bfbc24af59a3e73a9cd0653b8d4ae758dfaec4e3e6c15dfb1c6c8ee8d5683c85",
+   "tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+   "tokenizer_config.json": "2984c03425a28d242744e234a5003786fd289b3713db79fe0958c65eb59d85b2"
+  }
+ },
+ "input": {
+  "fixtures": [
+   {
+    "file": "probe-320x240.png",
+    "sha256": "194a8c4f72a21f1291fc50ada89649781015da78a2d71d8ee54bf0870c23f89c",
+    "bytes": 1233
+   },
+   {
+    "file": "photo-aerial.jpg",
+    "sha256": "e914b6570f38189ef9be505529f695dc5742f34833cb99134da52b38457caebc",
+    "bytes": 316009
+   },
+   {
+    "file": "light-red-256x256.png",
+    "sha256": "455589301b0e0d174e1c198e57e34a8bf8ab75176f0afcdc6f77234b4ea0654a",
+    "bytes": 1081
+   },
+   {
+    "file": "light-green-400x300.png",
+    "sha256": "4841b2cd2d31dc6798bfbfbcf65f2e5cf5d5bea939153d73f1dbb3bc34ca070d",
+    "bytes": 1373
+   },
+   {
+    "file": "tiny-50x40.png",
+    "sha256": "1eed2c3839efe041b55cb6d61f7b7c20a900cd028c46a70bb16e2d181e70ffd0",
+    "bytes": 159
+   },
+   {
+    "file": "probe-320x240.png",
+    "sha256": "194a8c4f72a21f1291fc50ada89649781015da78a2d71d8ee54bf0870c23f89c",
+    "bytes": 1233
+   }
+  ],
+  "request": [
+   {
+    "op": "decide",
+    "body": {
+     "state": {
+      "screen": "<image:1>",
+      "task": "Pay the open invoice."
+     },
+     "media": [
+      {
+       "type": "image",
+       "path": "probe-320x240.png"
+      }
+     ],
+     "questions": {
+      "a": {
+       "type": "noul",
+       "instructions": "Is there a red rectangle on the screen?"
+      },
+      "b": {
+       "type": "choice",
+       "instructions": "Which shape is blue?",
+       "criteria": {
+        "circle": "a round shape",
+        "rectangle": "a box",
+        "none": "no blue shape"
+       }
+      },
+      "c": {
+       "type": "score",
+       "instructions": "How cluttered is the screen?",
+       "criteria": [
+        "empty",
+        "a few items",
+        "crowded"
+       ]
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": {
+      "picture": "<image:1>",
+      "source": "aerial camera"
+     },
+     "media": [
+      {
+       "type": "image",
+       "path": "photo-aerial.jpg"
+      }
+     ],
+     "questions": {
+      "water": {
+       "type": "noul",
+       "instructions": "Is there water in the picture?"
+      },
+      "scene": {
+       "type": "choice",
+       "instructions": "What kind of scene is it?",
+       "criteria": {
+        "landscape": "natural landscape seen from above",
+        "city": "dense city streets",
+        "indoors": "an indoor room"
+       }
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": "Camera at 08:00: <image:1>\nCamera at 08:01: <image:2>",
+     "media": [
+      {
+       "type": "image",
+       "path": "light-red-256x256.png"
+      },
+      {
+       "type": "image",
+       "path": "light-green-400x300.png"
+      }
+     ],
+     "questions": {
+      "go": {
+       "type": "noul",
+       "instructions": "Did the traffic light turn green between the two pictures?"
+      },
+      "first": {
+       "type": "choice",
+       "instructions": "What colour is the light in the first picture?",
+       "criteria": {
+        "red": null,
+        "yellow": null,
+        "green": null
+       }
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": "I was charged twice this month, please refund one of them.",
+     "questions": {
+      "refund": {
+       "type": "noul",
+       "instructions": "Is the customer asking for a refund?"
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": "Two pictures: <image:2> and <image:1>",
+     "media": [
+      {
+       "type": "image",
+       "path": "tiny-50x40.png"
+      },
+      {
+       "type": "image",
+       "path": "probe-320x240.png"
+      }
+     ],
+     "questions": {
+      "x": {
+       "type": "noul"
+      }
+     }
+    }
+   }
+  ]
+ },
+ "output": [
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "a": {
+      "noul": 0.99936,
+      "type": "noul"
+     },
+     "b": {
+      "choice": "circle",
+      "confidence": 0.99998,
+      "probabilities": {
+       "circle": 0.99999,
+       "none": 0.0,
+       "rectangle": 1e-05
+      },
+      "type": "choice"
+     },
+     "c": {
+      "confidence": 0.54527,
+      "legend": {
+       "0": "empty",
+       "1": "a few items",
+       "2": "crowded"
+      },
+      "probabilities": {
+       "0": 0.69771,
+       "1": 0.30143,
+       "2": 0.00086
+      },
+      "score": 0.30315,
+      "type": "score"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 324,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "scene": {
+      "choice": "landscape",
+      "confidence": 0.99949,
+      "probabilities": {
+       "city": 0.0003,
+       "indoors": 5e-05,
+       "landscape": 0.99966
+      },
+      "type": "choice"
+     },
+     "water": {
+      "noul": 0.99974,
+      "type": "noul"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 1485,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "first": {
+      "choice": "red",
+      "confidence": 0.9998,
+      "probabilities": {
+       "green": 3e-05,
+       "red": 0.99987,
+       "yellow": 0.0001
+      },
+      "type": "choice"
+     },
+     "go": {
+      "noul": 0.99913,
+      "type": "noul"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 353,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "refund": {
+      "noul": 0.99168,
+      "type": "noul"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 118,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 422,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": "{\"code\":\"invalid_request\",\"message\":\"media must be referenced once each, in order, by <image:N>; saw [2, 1] for 2 items\",\"status\":422}"
+  }
+ ],
+ "maker_reference": {
+  "none": "Makers' trained multimodal path (OneJev qev @81ce62f + serve.patch, train.common.batch_scores with the block mask) on PyTorch MPS, lab/evidence/elephant-1/maker-mm-2026-11-02. Eleven picture questions: answers within 0.0063 (FP16) and 0.0044 (BF16) of the makers, no answer changes. PNG pixels, token ids, grids and rotary positions identical; JPEG decoded by ImageIO (differs from PIL's libjpeg-turbo, up to 62 levels at edges, mean 1.3)."
+ },
+ "tolerance": {
+  "argmax": "unchanged on every question",
+  "max_abs_probability_difference_vs_maker": 0.025,
+  "frozen": "lab/evidence/elephant-1/bounds-mm-2026-11-02.json"
+ },
+ "note": "Pictures through the real service: the makers' probe screen, a real aerial photo (JPEG, lab copy of a macOS wallpaper, not tracked), two traffic lights in one state, a text-only request (unchanged from the text golden) and placeholders in the wrong order (refused, 422, by design). Request key order kept."
+}

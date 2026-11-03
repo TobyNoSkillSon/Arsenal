@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "length",
+    "sequence",
+    "masked",
+    "secondary_structure",
+    "sasa",
+    "residue_annotations"
+  ],
+  "properties": {
+    "length": {
+      "type": "integer"
+    },
+    "sequence": {
+      "type": "string",
+      "description": "The sequence with every masked residue filled by its most likely amino acid."
+    },
+    "masked": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "position",
+          "residue",
+          "top"
+        ],
+        "properties": {
+          "position": {
+            "type": "integer"
+          },
+          "residue": {
+            "type": "string"
+          },
+          "top": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "residue": {
+                  "type": "string"
+                },
+                "probability": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "secondary_structure": {
+      "type": "string",
+      "description": "Most likely 8-class secondary structure per residue."
+    },
+    "sasa": {
+      "type": "array",
+      "items": {
+        "type": [
+          "number",
+          "null"
+        ]
+      },
+      "description": "Expected solvent-accessible area per residue (square angstrom); null above 151.4."
+    },
+    "residue_annotations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "keyword",
+              "interpro"
+            ]
+          },
+          "interpro": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "logits": {
+      "type": "object",
+      "properties": {
+        "sequence": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "structure": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "secondary_structure": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "sasa": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "function": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "residue_annotations": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "detections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "box": {
+            "type": "object",
+            "properties": {
+              "xmin": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "ymin": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "xmax": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "ymax": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "xmin",
+              "ymin",
+              "xmax",
+              "ymax"
+            ],
+            "additionalProperties": false
+          },
+          "point": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "y": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "label": {
+                "type": "string",
+                "enum": [
+                  "foreground",
+                  "background"
+                ],
+                "default": "foreground"
+              }
+            },
+            "required": [
+              "x",
+              "y"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "label"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 1024
+    },
+    "coordinate_system": {
+      "type": "string",
+      "enum": [
+        "normalized"
+      ]
+    }
+  },
+  "required": [
+    "detections",
+    "coordinate_system"
+  ],
+  "additionalProperties": false
+}

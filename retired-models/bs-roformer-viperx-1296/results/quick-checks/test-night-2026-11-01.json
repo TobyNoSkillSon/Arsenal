@@ -1,0 +1,25 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "bs-roformer-viperx-1296",
+  "revision": "929e057b81aa49bc2e6490bef8671f47b2c120f6",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-11-01T02:21:20Z",
+      "machine": "test night 1 Nov 2026: quiet Mac (idle check before each reading)",
+      "ops": {
+        "separate_audio": {
+          "seconds_warm": 0.301,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 1638.4,
+      "precision": "fp16"
+    }
+  ],
+  "run": "test-night-2026-11-01",
+  "schema": "quick-check-1",
+  "source": "lab/test-night-1101/table-import.jsonl"
+}

@@ -1,0 +1,6 @@
+schema = 1
+id = "triposr-kit-v1"
+reference_runner = "pinned-maker-implementation"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Parity with the maker's TripoSR code in PyTorch on MPS: triplane and density cosine >= 0.999 on fixed images (passed 2026-10-31, log/003-parity.md)"]

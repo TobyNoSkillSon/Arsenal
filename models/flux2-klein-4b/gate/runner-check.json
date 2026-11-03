@@ -1,0 +1,10 @@
+{
+  "ops": {
+    "generate": {
+      "prompt": "A red square",
+      "resolution": "512x512",
+      "steps": 1,
+      "seed": 1
+    }
+  }
+}

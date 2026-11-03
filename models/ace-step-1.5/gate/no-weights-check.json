@@ -1,0 +1,111 @@
+{
+  "status": "passed",
+  "worker": "mobius-worker-music",
+  "random_config": {
+    "model_type": "acestep",
+    "small": true
+  },
+  "operation_cases_per_tier": 5,
+  "operation_smokes": [
+    {
+      "status": "passed",
+      "operations": [
+        "generate_music"
+      ],
+      "parameters": 467,
+      "precision": "fp16",
+      "weights_downloaded": 0,
+      "effective_dtype": "fp16",
+      "eligible_matrices": null,
+      "compression": "model-policy"
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "generate_music"
+      ],
+      "parameters": 657,
+      "precision": "int8",
+      "weights_downloaded": 0,
+      "effective_dtype": "int8",
+      "eligible_matrices": null,
+      "compression": "model-policy"
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "generate_music"
+      ],
+      "parameters": 657,
+      "precision": "int4",
+      "weights_downloaded": 0,
+      "effective_dtype": "int4",
+      "eligible_matrices": null,
+      "compression": "model-policy"
+    }
+  ],
+  "full_graph_tensors": 1589,
+  "eligible_matrices": 785,
+  "eligible_values": 4842038272,
+  "total_values": 5013513478,
+  "weight_payload_bytes_read": 0,
+  "trained_quality": "not-tested",
+  "performance": "not-measured",
+  "lifecycle": [
+    {
+      "model": "ace-step-1.5",
+      "case": "malformed",
+      "error": "invalid_request"
+    },
+    {
+      "model": "ace-step-1.5",
+      "case": "malformed",
+      "error": "invalid_request"
+    },
+    {
+      "model": "ace-step-1.5",
+      "case": "malformed",
+      "error": "invalid_request"
+    },
+    {
+      "model": "ace-step-1.5",
+      "case": "malformed",
+      "error": "invalid_request"
+    },
+    {
+      "model": "ace-step-1.5",
+      "case": "malformed",
+      "error": "invalid_request"
+    },
+    {
+      "model": "ace-step-1.5",
+      "case": "cancel-after-progress",
+      "error": "cancelled",
+      "cancel_ack": true,
+      "unload_exit": 0,
+      "output_files": 0
+    }
+  ],
+  "stored_snapshot_tests": {
+    "status": "passed",
+    "tiers": [
+      "fp16",
+      "int8",
+      "int4"
+    ],
+    "source": "Synthetic original-layout source tensors (not trained weights)",
+    "checks": [
+      "Verified separate YuE asset and nested ACE components",
+      "Actual base callback and ordinary nonrandom adapter load/generation",
+      "Recursive derived conversion and direct stored-pack load/generation",
+      "Every eligible matrix packed; learned tensors half or packed",
+      "Nontrivial bias preservation",
+      "Independent weight-normalization and convolution-permutation fixture"
+    ]
+  },
+  "family_tests": {
+    "suites": 2,
+    "tests": 3,
+    "passed": 3
+  }
+}

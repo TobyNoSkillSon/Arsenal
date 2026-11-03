@@ -1,0 +1,98 @@
+context = 2048
+id = "von-1.1"
+kind = "decisions"
+languages = ["en"]
+name = "Von · 1.1"
+params = "395M"
+publisher = "wfzyx (Victor Hugo Panisa)"
+released = 2026
+schema = 2
+summary = "Earlier Von: answers can change when options are reordered; 2048-token context; English only."
+purpose = "Option scoring, order-sensitive"
+tasks = ["yes-no", "choice", "score"]
+
+[bench]
+recipe = "bench/bench.toml"
+
+[derive]
+bf16 = "cast:von-bf16-2"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[licence]
+commercial = true
+spdx = "Apache-2.0"
+url = "https://huggingface.co/wfzyx/von/blob/d8bb5e0745d8ee1fb65d536d6d4892d54d5a93fd/README.md"
+
+[[op]]
+input = "kinds/decisions/ops/decide.input.json"
+name = "decide"
+output = "json"
+output_schema = "kinds/decisions/ops/decide.output.json"
+stream = false
+title = "Decide"
+
+[[op]]
+input = "kinds/decisions/ops/judge.input.json"
+name = "judge"
+output = "json"
+output_schema = "kinds/decisions/ops/judge.output.json"
+stream = false
+title = "Judge"
+
+[popularity]
+as_of = "2026-10-03"
+hf_downloads = 80938
+hf_likes = 53
+
+[[runner]]
+chips = ["*"]
+fast_exact = true
+language = "swift"
+min_macos = "26.0"
+name = "native"
+protocol = 1
+worker = "decisions"
+
+[selection]
+default = "native"
+
+[[setting]]
+applies = "load"
+default = false
+help = "Run plain MLX without Verdict's fast tokenizer and kernels: same answers as Exact, slower; for diagnosis."
+id = "stock_mlx"
+title = "Stock MLX path"
+type = "toggle"
+
+[weights]
+dtype = "fp32"
+files = ["option_marker.pt", "config.json", "tokenizer.json", "tokenizer_config.json", "marker_calibration.json"]
+repo = "wfzyx/von"
+revision = "d8bb5e0745d8ee1fb65d536d6d4892d54d5a93fd"
+
+[weights.bytes]
+"config.json" = 6349
+"marker_calibration.json" = 664
+"option_marker.pt" = 1581316050
+"tokenizer.json" = 3583485
+"tokenizer_config.json" = 599
+
+[weights.sha256]
+"config.json" = "968db6072229e54691be4d535487a5c8d8132cc4893b6a3fdfa1e605457a7ec3"
+"marker_calibration.json" = "c3b5345c89be9ee802a5587dcda4e530e69a9bb5965dd839b877b7e8cfff048f"
+"option_marker.pt" = "52202f176080d1efe38ca62c45264894fc7e444d332f4af6bac86f4e3146e0f2"
+"tokenizer.json" = "3703d011b3ee259e00b59b60772f8fd54998d79e8fa5a1388d507eff28f8f09e"
+"tokenizer_config.json" = "57170b72a72c60407eec1f7894000c567309a8e41c5d0504b946c624cb069984"
+
+[[format]]
+id = "bf16"
+bits_per_weight = 16
+storage = "bf16"
+source = "derived"
+runners = ["native"]

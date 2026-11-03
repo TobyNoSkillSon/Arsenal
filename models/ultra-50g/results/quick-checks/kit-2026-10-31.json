@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of predict_links through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "ultra-50g",
+  "revision": "d46107d8415549e7c7386d26903ad11c9a8de4fd",
+  "rows": [
+    {
+      "date": "2026-10-31T01:30:22Z",
+      "load_seconds": 0.048,
+      "ops": {
+        "predict_links": {
+          "seconds_first": 0.011,
+          "seconds_warm": 0.002,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 145.9,
+      "precision": "fp16",
+      "runner_sha256": "9d8673ac4f085f9e817df01f4c558f478bdb766b97bd75a44dbbd94eb383aaef",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

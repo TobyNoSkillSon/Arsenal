@@ -1,0 +1,59 @@
+schema = 3
+architecture = "htdemucs_ft"
+id = "htdemucs-ft"
+name = "HTDemucs fine-tuned"
+kind = "audio"
+params = "168M"
+publisher = "Meta"
+released = 2026
+suggested = false
+summary = "Separate music into four stems using a native Swift MLX worker."
+purpose = "Separate music into four stems"
+good_for = ["Separate music into four stems"]
+limits = ["All four fine-tuned submodels run.", "Length depends on selected outputs under the 4 GiB per-job file limit.", "Trained-weight and precision-quality verification is pending."]
+languages = ["und"]
+tasks = ["separate_audio"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/mlx-community/demucs-mlx-fp16/tree/908d2d05cf3035bf4017fc0f52be64163689a61f"
+[weights]
+repo = "mlx-community/demucs-mlx-fp16"
+revision = "908d2d05cf3035bf4017fc0f52be64163689a61f"
+dtype = "fp16"
+files = ["htdemucs_ft.safetensors", "htdemucs_ft_config.json"]
+[weights.sha256]
+"htdemucs_ft.safetensors" = "6eb655cf72902869d3118fb3c4b243d6e6de73225472433af6fe54f3a5575a89"
+"htdemucs_ft_config.json" = "904728ae2e45da1a72f57ddd0ce76fd021bbadc6c1ec154d11c67a6af34a1227"
+[weights.bytes]
+"htdemucs_ft.safetensors" = 336148303
+"htdemucs_ft_config.json" = 2087
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "separate_audio"
+title = "Separate Audio"
+input = "ops/separate_audio.input.json"
+output_schema = "ops/separate_audio.output.json"
+output = "file"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,16 @@
+schema = 1
+id = "esm3-sm-open-v1-kit-v1"
+reference_runner = "pinned-vendor-pytorch-mps-bf16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = [
+  "2,701,421,969 checkpoint values load by exact name and shape across the four archives; only the codebook's EMA statistics (codebook.N, codebook.z_avg) and the function decoder's unused keyword_tfidf head are skipped",
+  "input tokens identical to the maker's for all five tracks on the fixed prompts (sequence, structure from the encoder, SS8, SASA, function)",
+  "per-component parity against esm 3.4.2 (commit 8f0834c) captured once on MPS with bf16 weights under bf16 autocast: input embedding, blocks 0, 1, 23 and 47, the pre-norm embeddings and each of the six heads within the frozen bounds of lab/evidence/esm3-sm-open-v1/bounds.json (relative L2 at most 0.01 to 0.05 by depth, cosine at least 0.998)",
+  "structure encoder: identical structure tokens for the 64-residue crop and pre-quantisation vectors within relative L2 0.02",
+  "structure decoder on those tokens: pLDDT within 0.01, pTM within 0.01, PAE within 0.25 angstrom, backbone within the maker's own bf16-vs-fp32 spread (0.30 angstrom max, 0.18 angstrom RMSD)",
+  "function decoder: InterPro and keyword logits within relative L2 0.03 and the same decoded annotation list",
+  "one argmax generation step: the same filled sequence, the same decoded function annotations, structure tokens agreeing on at least 90% of residues",
+  "one isolated end-to-end run: the runner's convert op turns the pinned .pth and .npy/.npz files into FP16 safetensors, Load reads that copy, every implemented op answers once and bad inputs are refused",
+]
+evidence = "gate/golden/golden.json"

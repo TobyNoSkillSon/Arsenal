@@ -1,0 +1,78 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "groundgui-8b"
+name = "GroundGUI 8B"
+architecture = "qwen3_vl"
+kind = "perception"
+params = "8.8B"
+publisher = "PrentisAI"
+released = 2026
+suggested = false
+summary = "Locate screen elements from instructions."
+purpose = "Locate screen elements from instructions"
+good_for = ["Locate screen elements from instructions"]
+limits = ["Trained weights, tokenizer correctness and FP16/int8/int4 task quality await the approved live trial."]
+tasks = ["ground_screen"]
+languages = ["und"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/PrentisAI/GroundGUI-8B/tree/9db378189fddaabb5f6e347b9053858a392022ac"
+[weights]
+repo = "PrentisAI/GroundGUI-8B"
+revision = "9db378189fddaabb5f6e347b9053858a392022ac"
+dtype = "bf16"
+files = ["added_tokens.json", "chat_template.jinja", "config.json", "generation_config.json", "model.safetensors", "preprocessor_config.json", "processor_config.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"added_tokens.json" = "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680"
+"chat_template.jinja" = "3636d0f0bd6bef02654cdffdc447b79cb2cef8ab02cc75267345946291a489e4"
+"config.json" = "34b92ac2f75248c5693812df9d4d3d0ef4fffe6938fd25f57f8fc6b71c16e012"
+"generation_config.json" = "1052c48f0eb1afc69324f420371e8628b578dc106f424a4c106c8e9445d557da"
+"model.safetensors" = "fbaee7f2fd09150eb3b937732c803802974f5e45b2b6651fc1f101b4d190f265"
+"preprocessor_config.json" = "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+"processor_config.json" = "51c5f33646392e0bf1ed3e96be02504da47406c21c6cb86925d8908d1a6c4da7"
+"special_tokens_map.json" = "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+"tokenizer.json" = "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+"tokenizer_config.json" = "81ec7bb9530159b326c0bef1d0b6c33d392090524014ea3f0123a3c1eb9c2af5"
+[weights.bytes]
+"added_tokens.json" = 707
+"chat_template.jinja" = 5292
+"config.json" = 1683
+"generation_config.json" = 199
+"model.safetensors" = 17534340584
+"preprocessor_config.json" = 390
+"processor_config.json" = 1312
+"special_tokens_map.json" = 613
+"tokenizer.json" = 11422654
+"tokenizer_config.json" = 5445
+[derive]
+int8 = "cast:language-half-g64-v2"
+int4 = "cast:language-half-g64-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "ground_screen"
+title = "Ground screen"
+input = "ops/ground_screen.input.json"
+output_schema = "ops/ground_screen.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

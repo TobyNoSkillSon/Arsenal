@@ -1,0 +1,103 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "locateanything-3b",
+  "revision": "b409aade8f6aae828a0c8e0f4190bf28eb8f0244",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:09:54Z",
+      "load_seconds": 1.55,
+      "mac_peak_in_use_mb": 38688.5,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "detect": {
+          "error": "{\"code\":\"invalid_model_output\",\"details\":{\"code\":\"invalid_model_output\",\"message\":\"LocateAnything generation stopped because its output was repeating (finish_reason repetition).\"},\"error\":\"LocateAnything generation stopped because its output was repeating (finish_reason repetition).\",\"status\":500}",
+          "seconds_first": 7.302,
+          "seconds_warm": 7.302,
+          "status": 500
+        },
+        "ground_screen": {
+          "files": [],
+          "seconds_first": 1.958,
+          "seconds_warm": 1.953,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 11264.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 9053.0,
+      "samples": 45
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:11:59Z",
+      "derived_now": true,
+      "derived_seconds": 9.2,
+      "load_seconds": 1.82,
+      "mac_peak_in_use_mb": 31945.8,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "detect": {
+          "error": "{\"code\":\"invalid_model_output\",\"details\":{\"code\":\"invalid_model_output\",\"message\":\"LocateAnything generation stopped because its output was repeating (finish_reason repetition).\"},\"error\":\"LocateAnything generation stopped because its output was repeating (finish_reason repetition).\",\"status\":500}",
+          "seconds_first": 3.278,
+          "seconds_warm": 3.278,
+          "status": 500
+        },
+        "ground_screen": {
+          "files": [],
+          "seconds_first": 1.803,
+          "seconds_warm": 1.808,
+          "status": 200,
+          "vs16": {
+            "cosine": 0.9999999999999998,
+            "files_identical": true,
+            "rel_l2": 0.0,
+            "text_similarity": 1.0
+          }
+        }
+      },
+      "peak_footprint_mb": 4762.0,
+      "precision": "int4",
+      "sampled_peak_mb": 4147.0,
+      "samples": 33
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:10:53Z",
+      "derived_now": true,
+      "derived_seconds": 12.2,
+      "load_seconds": 1.97,
+      "mac_peak_in_use_mb": 33858.8,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "detect": {
+          "error": "{\"code\":\"invalid_model_output\",\"details\":{\"code\":\"invalid_model_output\",\"message\":\"LocateAnything generation stopped because its output was repeating (finish_reason repetition).\"},\"error\":\"LocateAnything generation stopped because its output was repeating (finish_reason repetition).\",\"status\":500}",
+          "seconds_first": 3.304,
+          "seconds_warm": 3.304,
+          "status": 500
+        },
+        "ground_screen": {
+          "files": [],
+          "seconds_first": 1.827,
+          "seconds_warm": 1.829,
+          "status": 200,
+          "vs16": {
+            "cosine": 0.9999999999999998,
+            "files_identical": true,
+            "rel_l2": 0.0,
+            "text_similarity": 1.0
+          }
+        }
+      },
+      "peak_footprint_mb": 6386.0,
+      "precision": "int8",
+      "sampled_peak_mb": 6130.0,
+      "samples": 33
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "annotations",
+    "keywords",
+    "interpro",
+    "length",
+    "sequence",
+    "seed",
+    "steps"
+  ],
+  "properties": {
+    "annotations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "keyword",
+              "interpro"
+            ]
+          },
+          "interpro": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "interpro": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "length": {
+      "type": "integer"
+    },
+    "sequence": {
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "steps": {
+      "type": "integer"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "layers"
+  ],
+  "properties": {
+    "layers": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8,
+      "default": 4
+    },
+    "delay": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "bad": {
+      "type": "string"
+    },
+    "image": {
+      "type": "object",
+      "x-arsenal-file": {
+        "accept": [
+          "image/png"
+        ]
+      },
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

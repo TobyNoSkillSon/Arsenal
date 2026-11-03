@@ -1,0 +1,67 @@
+# Reference settings for an image model that takes free width and height. A model that takes one size choice uses
+# kinds/images/resolution/ instead. Copy the [[setting]] blocks its runner really accepts into model.toml, with that
+# model's defaults, bounds and help; settings.toml beside this file arranges exactly these.
+#
+# steps: default = the step count the model is tuned for (its model card). The panel's Final preset uses that same
+# value and Draft about a third of it. A distilled model tuned for 4 steps or fewer gets no Quality row.
+# guidance: leave it out when the model has none (distilled models usually do not).
+# seed: no default on purpose: nothing is sent, so every request gets a new random seed until one is pinned.
+
+[[setting]]
+id = "width"
+title = "Width"
+type = "number"
+default = 1024
+min = 256
+max = 2048
+step = 16
+applies = "request"
+maps_to = "request.width"
+help = "Image width in pixels."
+
+[[setting]]
+id = "height"
+title = "Height"
+type = "number"
+default = 1024
+min = 256
+max = 2048
+step = 16
+applies = "request"
+maps_to = "request.height"
+help = "Image height in pixels."
+
+[[setting]]
+id = "steps"
+title = "Steps"
+type = "number"
+default = 28
+min = 1
+max = 100
+step = 1
+applies = "request"
+maps_to = "request.steps"
+help = "Denoising passes per image: more is slower and can add detail."
+
+[[setting]]
+id = "guidance"
+title = "Guidance"
+type = "slider"
+default = 3.5
+min = 0
+max = 10
+step = 0.5
+applies = "request"
+maps_to = "request.guidance"
+help = "How closely the image follows the prompt."
+
+[[setting]]
+id = "seed"
+title = "Seed"
+type = "number"
+min = 0
+max = 4294967295
+step = 1
+applies = "request"
+maps_to = "request.seed"
+help = "Starting noise: empty is a new random seed each request; the same seed and prompt give the same image."

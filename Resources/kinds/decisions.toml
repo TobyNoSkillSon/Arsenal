@@ -1,0 +1,48 @@
+id = "decisions"
+title = "Decisions"
+icon = "arrow.triangle.branch"
+title_singular = "Decision"
+order = 1
+suite = "bench/kinds/decisions/suite-v1.toml"
+
+[[columns]]
+id = "accuracy"
+title = "Accuracy"
+unit = "%"
+
+[[columns]]
+id = "latency"
+title = "Latency"
+unit = "ms"
+
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+
+[api]
+decide = "/v1/systemone"
+judge = "/v1/judge"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+# Every decisions model answers both (Verdict's System One and batch judge contracts, docs/CONTRACTS.md §4).
+[[op]]
+name = "decide"
+default = true
+title = "Decide"
+input = "ops/decide.input.json"
+output_schema = "ops/decide.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "judge"
+default = true
+title = "Judge"
+input = "ops/judge.input.json"
+output_schema = "ops/judge.output.json"
+output = "json"
+stream = false

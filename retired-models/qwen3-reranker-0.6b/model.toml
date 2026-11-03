@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "qwen3-reranker-0.6b"
+name = "Qwen3-Reranker-0.6B"
+kind = "embeddings"
+params = "596M"
+publisher = "Qwen"
+released = 2025
+suggested = false
+summary = "Rank candidate passages against a search query."
+purpose = "Rank search results by relevance"
+good_for = ["reranking search results"]
+limits = ["Trained output and precision quality await an approved real-weight trial."]
+tasks = ["text-ranking"]
+languages = ["mul"]
+tools = ["operation"]
+context = 32768
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/Qwen/Qwen3-Reranker-0.6B/tree/e61197ed45024b0ed8a2d74b80b4d909f1255473"
+[weights]
+repo = "Qwen/Qwen3-Reranker-0.6B"
+revision = "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+dtype = "bf16"
+files = ["config.json", "model.safetensors", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0"
+"model.safetensors" = "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b"
+"tokenizer.json" = "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+"tokenizer_config.json" = "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+[weights.bytes]
+"config.json" = 727
+"model.safetensors" = 1191588280
+"tokenizer.json" = 11422654
+"tokenizer_config.json" = 9706
+[derive]
+fp16 = "cast:embed-qwen3-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "embed"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "rerank"
+title = "Rank passages"
+input = "ops/rerank.input.json"
+output_schema = "ops/rerank.output.json"
+output = "json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

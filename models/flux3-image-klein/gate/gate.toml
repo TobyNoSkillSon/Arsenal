@@ -1,0 +1,11 @@
+schema = 1
+id = "flux3-image-klein-native-v1"
+reference_runner = "mflux 9669af51 (MLX Python, BF16), run once per capture in a sealed lab environment"
+precision = "bf16"
+width = 512
+height = 512
+steps = 16
+independent_vendor_qualified = false
+status = "component-parity-on-random-weights"
+human_checks = ["A sign in the image reads its quoted text exactly.", "Faces and hands at 100% have no extra or fused fingers and no warped features.", "An edit keeps the reference's subject and composition and changes what the caption changes."]
+passing_requires = ["Exact checkpoint names and shapes (strict load)", "Per-component parity with mflux on a tiny random checkpoint within BF16 rounding (log/002-parity.md)", "Real-weight per-component parity and 512 x 512 generations against mflux with the same seeds (lab/flux3/phase-b.sh)", "Finite outputs", "Visual review at 100%"]

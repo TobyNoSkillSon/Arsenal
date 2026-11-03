@@ -1,0 +1,82 @@
+schema = 3
+architecture = "locateanything"
+id = "locateanything-3b"
+name = "LocateAnything 3B"
+kind = "perception"
+params = "3.52B"
+publisher = "NVIDIA"
+released = 2026
+suggested = false
+summary = "Find objects from descriptions. Native MLX inference with FP16 and locally derived int8/int4."
+purpose = "Find objects from descriptions"
+good_for = ["Open-vocabulary localization and screen pointing"]
+limits = ["Research-only model terms; localization scores are not calibrated confidence"]
+languages = ["en"]
+tasks = ["object-detection"]
+tools = ["operation"]
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "NVIDIA-Research"
+name = "NVIDIA-Research"
+commercial = false
+url = "https://huggingface.co/mlx-community/LocateAnything-3B-bf16/blob/b409aade8f6aae828a0c8e0f4190bf28eb8f0244/README.md"
+[weights]
+repo = "mlx-community/LocateAnything-3B-bf16"
+revision = "b409aade8f6aae828a0c8e0f4190bf28eb8f0244"
+dtype = "bf16"
+files = ["model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "config.json", "vocab.json", "merges.txt", "tokenizer_config.json", "special_tokens_map.json"]
+[weights.sha256]
+"model-00001-of-00002.safetensors" = "9a8ab7cc5bb62a950f4d13e8945296525022ee0594f48376b4b1eb3637a45ddc"
+"model-00002-of-00002.safetensors" = "3d5e60fc6e92015660270e1494ad55a2f34b4587aceb020bc780c4025243e950"
+"config.json" = "01e5c6876deda76ee9ab854e1a886815873ef23eb457bd4dc4ffbd34bd3c2c7c"
+"vocab.json" = "87a257b04b17642a0688c98cd1df89c398bda4fee532d6f88b38a659ecb4ac8d"
+"merges.txt" = "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+"tokenizer_config.json" = "930b057de30312f861a22780017b09eccd87e893d966bd004bf4d70eec0e2652"
+"special_tokens_map.json" = "bfadce2f545458bf9d39fc9153cd2ac1077371ed5ab553fa4988061fefe67ac7"
+[weights.bytes]
+"model-00001-of-00002.safetensors" = 5331918800
+"model-00002-of-00002.safetensors" = 1704124922
+"config.json" = 2173
+"vocab.json" = 3383407
+"merges.txt" = 1671853
+"tokenizer_config.json" = 195313
+"special_tokens_map.json" = 13872
+[derive]
+fp16 = "cast:locateanything-affine-v1"
+int8 = "cast:locateanything-affine-v1"
+int4 = "cast:locateanything-affine-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "perception"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "detect"
+title = "Detect"
+input = "ops/detect.input.json"
+output = "json"
+output_schema = "ops/detect.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[[op]]
+name = "ground_screen"
+title = "Ground screen"
+input = "ops/ground_screen.input.json"
+output = "json"
+output_schema = "ops/ground_screen.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

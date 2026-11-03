@@ -1,0 +1,414 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "lyrics": {
+      "type": "string",
+      "maxLength": 100000,
+      "x-arsenal-control": "lyrics"
+    },
+    "duration": {
+      "type": "number",
+      "minimum": 10,
+      "maximum": 600
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "language": {
+      "type": "string",
+      "x-arsenal-control": "language",
+      "enum": [
+        "ar",
+        "az",
+        "bg",
+        "bn",
+        "ca",
+        "cs",
+        "da",
+        "de",
+        "el",
+        "en",
+        "es",
+        "fa",
+        "fi",
+        "fr",
+        "he",
+        "hi",
+        "hr",
+        "ht",
+        "hu",
+        "id",
+        "is",
+        "it",
+        "ja",
+        "ko",
+        "la",
+        "lt",
+        "ms",
+        "ne",
+        "nl",
+        "no",
+        "pa",
+        "pl",
+        "pt",
+        "ro",
+        "ru",
+        "sa",
+        "sk",
+        "sr",
+        "sv",
+        "sw",
+        "ta",
+        "te",
+        "th",
+        "tl",
+        "tr",
+        "uk",
+        "ur",
+        "vi",
+        "yue",
+        "zh",
+        "unknown"
+      ],
+      "default": "unknown"
+    },
+    "instrumental": {
+      "type": "boolean",
+      "default": false
+    },
+    "bpm": {
+      "type": "integer",
+      "minimum": 30,
+      "maximum": 300
+    },
+    "key": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "time_signature": {
+      "type": "integer",
+      "enum": [
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200
+    },
+    "batch_size": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 1
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": true
+    },
+    "normalization_db": {
+      "type": "number",
+      "minimum": -40,
+      "maximum": 0
+    },
+    "fade_in": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 30
+    },
+    "fade_out": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 30
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "wav",
+        "wav32",
+        "flac",
+        "m4a",
+        "alac"
+      ],
+      "default": "wav"
+    },
+    "task": {
+      "type": "string",
+      "enum": [
+        "text2music",
+        "cover",
+        "repaint"
+      ],
+      "default": "text2music"
+    },
+    "source_audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "audio/*"
+        ]
+      },
+      "x-arsenal-control": "audio-picker"
+    },
+    "reference_audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "audio/*"
+        ]
+      },
+      "x-arsenal-control": "audio-picker"
+    },
+    "thinking": {
+      "type": "boolean",
+      "default": true
+    },
+    "plan_metadata": {
+      "type": "boolean",
+      "default": true
+    },
+    "rewrite_caption": {
+      "type": "boolean",
+      "default": true
+    },
+    "detect_language": {
+      "type": "boolean",
+      "default": true
+    },
+    "constrained_decoding": {
+      "type": "boolean",
+      "default": true
+    },
+    "dcw": {
+      "type": "boolean",
+      "default": true
+    },
+    "guidance": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 20
+    },
+    "guidance_start": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "guidance_end": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "shift": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "velocity_norm_threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "velocity_ema": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "dcw_scaler": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "dcw_high_scaler": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "retake_variance": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "latent_shift": {
+      "type": "number",
+      "minimum": -10,
+      "maximum": 10
+    },
+    "latent_rescale": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "planner_temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 5
+    },
+    "planner_guidance": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 20
+    },
+    "planner_top_p": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "planner_repetition_penalty": {
+      "type": "number",
+      "minimum": 0.01,
+      "maximum": 10
+    },
+    "repaint_start": {
+      "type": "number",
+      "minimum": -600,
+      "maximum": 600
+    },
+    "repaint_end": {
+      "type": "number",
+      "minimum": -1,
+      "maximum": 1200
+    },
+    "repaint_strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "repaint_wave_crossfade": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 30
+    },
+    "cover_strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "cover_noise_strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "planner_top_k": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 217088
+    },
+    "retake_seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "repaint_crossfade_frames": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 15000
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "ode",
+        "sde"
+      ]
+    },
+    "sampler": {
+      "type": "string",
+      "enum": [
+        "euler",
+        "heun"
+      ]
+    },
+    "dcw_mode": {
+      "type": "string",
+      "enum": [
+        "low",
+        "high",
+        "double",
+        "pix"
+      ]
+    },
+    "repaint_mode": {
+      "type": "string",
+      "enum": [
+        "conservative",
+        "balanced",
+        "aggressive"
+      ]
+    },
+    "chunk_mask_mode": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "explicit"
+      ]
+    },
+    "planner_negative_prompt": {
+      "type": "string",
+      "maxLength": 10000
+    },
+    "instruction": {
+      "type": "string",
+      "maxLength": 10000
+    },
+    "audio_codes": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 63999
+      },
+      "minItems": 1,
+      "maxItems": 3000
+    },
+    "timesteps": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "minItems": 1,
+      "maxItems": 20
+    },
+    "include_metadata": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "prompt"
+  ],
+  "additionalProperties": false
+}

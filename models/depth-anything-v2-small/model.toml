@@ -1,0 +1,77 @@
+schema = 3
+id = "depth-anything-v2-small"
+name = "Depth Anything V2 Small"
+kind = "perception"
+summary = "Estimates how near or far everything in a photo is, as a relative depth map."
+description = "Depth Anything V2 Small is a 24.8M-parameter monocular depth model by Lihe Yang and colleagues (HKU and TikTok): a DINOv2 ViT-S encoder with a DPT decoder. It was trained on about 595K synthetic labeled images and over 62M real unlabeled images, and its card claims finer detail and more robustness than Depth Anything V1 and Stable-Diffusion-based depth models such as Marigold, at about 10x their speed. This is the transformers release of the checkpoint."
+purpose = "Relative depth from one photo"
+publisher = "depth-anything"
+released = 2024
+params = "24.8M"
+tasks = ["depth-estimation"]
+languages = ["mul"]
+good_for = ["Fast relative depth for a single photo, indoors or outdoors", "Sharp object edges in the depth map", "Depth cues for masking, blurring or 3D effects"]
+limits = ["Relative inverse depth only: larger values are nearer, with no unit and no metric scale", "One image per request; no camera intrinsics, poses or point maps", "The image is resized to about 518 pixels on its fitted side, so very small detail is lost; the map is returned at the photo's size", "Parity with the maker's transformers code on MPS FP16: cosine 0.99996 on a fixed photo; edge pixels can differ by up to 0.2 of the range"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/blob/5426e4f0f36572d16453bbda7a8389317b1bef99/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "depth-anything/Depth-Anything-V2-Small-hf"
+revision = "5426e4f0f36572d16453bbda7a8389317b1bef99"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "preprocessor_config.json"]
+
+[weights.sha256]
+"model.safetensors" = "3152477ce0d8d6978d76b995120de97cb5b928701fd0f817769f59e249a16b70"
+"config.json" = "c56698d3643dde1f83ea2212759e6b31a22b8f827246a36dd007ee8a22b3ff75"
+"preprocessor_config.json" = "d41175c0d889477ca8fc67191e540faef14baf6275157b3fdecf78469e6bbf84"
+
+[weights.bytes]
+"model.safetensors" = 99173660
+"config.json" = 950
+"preprocessor_config.json" = 775
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-depth-anything-v2-small"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "estimate_depth"
+title = "Estimate depth"
+input = "ops/estimate_depth.input.json"
+output = "json"
+output_schema = "ops/estimate_depth.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

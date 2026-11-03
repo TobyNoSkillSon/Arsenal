@@ -1,0 +1,47 @@
+{
+  "config": {},
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAG0lEQVR4nGNgGF5gQYDGf2LwqAGjBtDWgKEJAGzu0P1EEB1aAAAAAElFTkSuQmCC"
+  },
+  "operations": [
+    {
+      "operation": "image_to_3d",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "resolution": 512,
+        "texture_size": 256,
+        "steps": 1,
+        "target_faces": 128,
+        "seed": 42
+      }
+    },
+    {
+      "operation": "image_to_3d",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "resolution": 1024,
+        "texture_size": 256,
+        "steps": 1,
+        "target_faces": 128,
+        "seed": 42
+      }
+    },
+    {
+      "operation": "image_to_3d",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "resolution": 1536,
+        "texture_size": 256,
+        "steps": 1,
+        "target_faces": 128,
+        "seed": 42
+      }
+    }
+  ]
+}

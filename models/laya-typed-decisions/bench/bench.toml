@@ -1,0 +1,8 @@
+schema = 1
+model = "laya-typed-decisions"
+suite = "bench/kinds/decisions/suite-v1.toml"
+profile = "quick"
+precision = "fp16"
+mode = "fast"
+# Real runs: scripts/mlock measure decisions-laya-typed-decisions -- arsenal-bench run laya-typed-decisions --precision fp16 --mode fast --suite suite-v1 --profile quick
+# Load takes well under a second and the quick profile is a few seconds (gate/smoke-suite-v1.json), inside the scope limit.

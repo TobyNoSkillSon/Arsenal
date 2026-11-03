@@ -1,0 +1,529 @@
+[
+  {
+    "model": "kokoro-82m",
+    "sections": {
+      "weights": {
+        "config.json": {
+          "sha256": "5abb01e2403b072bf03d04fde160443e209d7a0dad49a423be15196b9b43c17f",
+          "bytes": 2351,
+          "source": "small Git file SHA-256"
+        },
+        "kokoro-v1_0.safetensors": {
+          "sha256": "4e9ecdf03b8b6cf906070390237feda473dc13327cb8d56a43deaa374c02acd8",
+          "bytes": 327115152,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_alloy.safetensors": {
+          "sha256": "5bb848d02ade7e37981809acad52a1761ef7a586ff9f30d02d65fd71c4af95f9",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_aoede.safetensors": {
+          "sha256": "23809148777f2a2378983dd856bc14b9c261018279f916f98c23d86e844409a5",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_bella.safetensors": {
+          "sha256": "112d310468cbb3cf23404d3d0b50ad3adf017b87bf38bf9edd15f4ad572df6a3",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_heart.safetensors": {
+          "sha256": "2c1c733b0e6576c810e268d3e440c21dea4e0f0131a3ba4cfc98d7fe6136d094",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_jessica.safetensors": {
+          "sha256": "c358448e4277b79e8b13b92033711660a1a2205c3940c2dfb16698b99fed58a8",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_kore.safetensors": {
+          "sha256": "c491174280cb1ad25210a842f2f34b46a9ef904ec6f6a8e784839531795fa278",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_nicole.safetensors": {
+          "sha256": "574656386022c81a029e9a72558191925f44c3de2dad2fa2e45751938557d062",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_nova.safetensors": {
+          "sha256": "242b9a0a01eac1ac2865c69fc617a756b20d86df82d5fae3970533e2312ca50e",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_river.safetensors": {
+          "sha256": "82c866b0b976d50e82cbd781ac7bc771471ce5bd21decf05ab92812a08fb1c04",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_sarah.safetensors": {
+          "sha256": "4940072182542f54c1035d1daf4c1cf3136ca9baa9ac57c8e006b4befcc50be6",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/af_sky.safetensors": {
+          "sha256": "957af332330db8e9bd7f9dc449475a946cb0d7d689afef64b91007bbbf20eaa0",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_adam.safetensors": {
+          "sha256": "a4f60a3b9c20353c2604a17485ba53260502a758681a84d41e8af53cc559d929",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_echo.safetensors": {
+          "sha256": "031fc608a900332c4e1a29bd0884f5d0e84bd0348261fa79981e5cbd138c950d",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_eric.safetensors": {
+          "sha256": "1fb4a61dcee1f114f90886ecf29bc2feed05e29eed9caa6ddb109f1934d73274",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_fenrir.safetensors": {
+          "sha256": "9abed964b906c4cae6f404d9849e76260689aea862bc6ca85fc3f5207ba96538",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_liam.safetensors": {
+          "sha256": "66b65a96e16c3d91035a6e9019d9986ed524d27ce35b487270cdf61c99e3ebad",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_michael.safetensors": {
+          "sha256": "3940147ded35deba0bb52e8132f89b719298e0520258c34584358aa5a24da2ea",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_onyx.safetensors": {
+          "sha256": "b5d6132a5747648d98c82c9c4aaa9cf52d7230e63e403c1cb9c12858446ca5f5",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_puck.safetensors": {
+          "sha256": "9a8c2e56413bd2063f814cb4c3885fc425876157369117c3f8258d03c8a9ad89",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/am_santa.safetensors": {
+          "sha256": "d1f433b57ffccf105ea9e434ea19af6c2a8a7916ba6d1a73c34f0046bd226084",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bf_alice.safetensors": {
+          "sha256": "9c77e390d93d9db7c4a7526c3b1f393290a2be46f233b89a00b8188e850c20a8",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bf_emma.safetensors": {
+          "sha256": "8878a75a6661305849eeb1d6293a7177250193616e161b4c3100636434dfe69f",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bf_isabella.safetensors": {
+          "sha256": "f7b6076f025649699fcfed1a6debf13049a87afdc7aafc8c72b7d81246db6ead",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bf_lily.safetensors": {
+          "sha256": "ee77a419046a765420ac82cb46e8b8cf5754a0b9d20c340fece1d4b18be7ecdb",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bm_daniel.safetensors": {
+          "sha256": "b195dec592ee024f57ddc5bf481464596082ba60998a2a295eba90bfc1064f4b",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bm_fable.safetensors": {
+          "sha256": "9fa80184e96d016a744bc13b0b2e7695e55d6b855556fa003325cb1e5ebf2c2b",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bm_george.safetensors": {
+          "sha256": "a3d9b8995cbbe5536f954b6be2a0f1f312f077118ba0d4d2178fc41dc8306672",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        },
+        "voices/bm_lewis.safetensors": {
+          "sha256": "e1e68013c21a141efe527aaec561e1174c2f5a6951b3bcecc8396adab315b247",
+          "bytes": 522320,
+          "source": "HF LFS metadata"
+        }
+      }
+    },
+    "assets": {
+      "kokoro-english-g2p": {
+        "us_bart.safetensors": {
+          "sha256": "dc4a02e62d4fcb4bb4097ecf00db89b8e1a12a549a52ab6adfbba220b80a55c5",
+          "bytes": 3011692,
+          "source": "HF LFS metadata"
+        },
+        "us_bart_config.json": {
+          "sha256": "8deb3537fb29c63cd9f20d75515ae06e4c92f1b6db0703a2d45bca95b33a53a4",
+          "bytes": 1257,
+          "source": "small Git file SHA-256"
+        },
+        "us_gold.json": {
+          "sha256": "8507f89840f0813b10cf584740942f58e9cc9ad3660e24088b442ab0a6b126be",
+          "bytes": 3001196,
+          "source": "small Git file SHA-256"
+        },
+        "us_silver.json": {
+          "sha256": "ea0e1abca0c9b18fb0d3402034633a337154a3153e9a9f49f97d668c908e140c",
+          "bytes": 3105352,
+          "source": "small Git file SHA-256"
+        }
+      },
+      "kokoro-british-lexicon": {
+        "gb_gold.json": {
+          "sha256": "090cdecbe6bda9516a2cdc21563d62def0b91f5b55ea74fe6ef729eef682785f",
+          "bytes": 2841062,
+          "source": "small Git file SHA-256"
+        },
+        "gb_silver.json": {
+          "sha256": "cb8655f5e614e6306146e0da1bf93522ac542ebd39dcd9892afcf51c9aa52e1a",
+          "bytes": 3677750,
+          "source": "small Git file SHA-256"
+        }
+      }
+    }
+  },
+  {
+    "model": "pocket-tts",
+    "sections": {
+      "weights": {
+        "config.json": {
+          "sha256": "403ff12260596fbfa348c7b07237c378b9ad8db9d8acd04d671470421954a68e",
+          "bytes": 1664,
+          "source": "small Git file SHA-256"
+        },
+        "embeddings/alba.safetensors": {
+          "sha256": "ad234695323e4030336b6afc8a050c97e3110603e11ecd8226d9562488300a50",
+          "bytes": 512088,
+          "source": "HF LFS metadata"
+        },
+        "embeddings/azelma.safetensors": {
+          "sha256": "ef33fad34437cb187d2702f0a946d8ba7a01efdb8efbc8088c770d49c181ba73",
+          "bytes": 659544,
+          "source": "HF LFS metadata"
+        },
+        "embeddings/eponine.safetensors": {
+          "sha256": "bb31940f62da665391de139da2e57d740757df26b73d7ec24152c78a3b8ac0c5",
+          "bytes": 573528,
+          "source": "HF LFS metadata"
+        },
+        "embeddings/fantine.safetensors": {
+          "sha256": "b6918a2ece002d2d9037ff53c4ea38730175e8798786658b0958443edf49d355",
+          "bytes": 540760,
+          "source": "HF LFS metadata"
+        },
+        "embeddings/javert.safetensors": {
+          "sha256": "2e857904ee76657e083b0e92664d21bd133e37df320af6eb04f752e679422d91",
+          "bytes": 512088,
+          "source": "HF LFS metadata"
+        },
+        "embeddings/marius.safetensors": {
+          "sha256": "33f75e45fac0005630671f4b1bb632d51b6a083b18417de94855bbd7596a0630",
+          "bytes": 512088,
+          "source": "HF LFS metadata"
+        },
+        "model.safetensors": {
+          "sha256": "60ddd85019dddbe6c1d220e311ca5fc753972978a89f563c0bbe1ae943120072",
+          "bytes": 235739497,
+          "source": "HF LFS metadata"
+        },
+        "special_tokens_map.json": {
+          "sha256": "0655d856e7dd462048486aac66d4247753e5cab12480baeb9f4e8f7fe03f7d4c",
+          "bytes": 95,
+          "source": "small Git file SHA-256"
+        },
+        "tokenizer.json": {
+          "sha256": "ef29c4871fd62c7beb928150edc095be1327f0924c0eab9e06b95918b39eff5f",
+          "bytes": 244993,
+          "source": "small Git file SHA-256"
+        },
+        "tokenizer_config.json": {
+          "sha256": "ad6dc6a5790d0f94170998ab79921c97d28ea54602abcdb33cba3132d13ac233",
+          "bytes": 220,
+          "source": "small Git file SHA-256"
+        }
+      }
+    },
+    "assets": {}
+  },
+  {
+    "model": "qwen3-tts-voicedesign",
+    "sections": {
+      "weights": {
+        "config.json": {
+          "sha256": "8a9be83c045ee9ab9d2e6609655f547b9291a070f5acae3428c3ff07a365de40",
+          "bytes": 5232,
+          "source": "small Git file SHA-256"
+        },
+        "generation_config.json": {
+          "sha256": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa",
+          "bytes": 245,
+          "source": "small Git file SHA-256"
+        },
+        "merges.txt": {
+          "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "bytes": 1671839,
+          "source": "small Git file SHA-256"
+        },
+        "model.safetensors": {
+          "sha256": "96ae28bec2205ec0b5e0c750bea2b8a5deac4f14d33a8a25a5f753299486b70e",
+          "bytes": 3833402589,
+          "source": "HF LFS metadata"
+        },
+        "model.safetensors.index.json": {
+          "sha256": "abf019e063dcc595d7aef7c9554d2806ffdc58746a7ac6238cb26177af8d431f",
+          "bytes": 32458,
+          "source": "small Git file SHA-256"
+        },
+        "preprocessor_config.json": {
+          "sha256": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119",
+          "bytes": 127,
+          "source": "small Git file SHA-256"
+        },
+        "speech_tokenizer/config.json": {
+          "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+          "bytes": 2336,
+          "source": "small Git file SHA-256"
+        },
+        "speech_tokenizer/configuration.json": {
+          "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+          "bytes": 76,
+          "source": "small Git file SHA-256"
+        },
+        "speech_tokenizer/model.safetensors": {
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "bytes": 682293092,
+          "source": "HF LFS metadata"
+        },
+        "speech_tokenizer/preprocessor_config.json": {
+          "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+          "bytes": 234,
+          "source": "small Git file SHA-256"
+        },
+        "tokenizer_config.json": {
+          "sha256": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670",
+          "bytes": 7344,
+          "source": "small Git file SHA-256"
+        },
+        "vocab.json": {
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "bytes": 2776833,
+          "source": "small Git file SHA-256"
+        }
+      }
+    },
+    "assets": {}
+  },
+  {
+    "model": "qwen3-tts-base",
+    "sections": {
+      "weights": {
+        "config.json": {
+          "sha256": "39ffdadc03c1a7c7f8116ee8830d6a577ac87039edcbd88759b4fcc4db272070",
+          "bytes": 5317,
+          "source": "small Git file SHA-256"
+        },
+        "generation_config.json": {
+          "sha256": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa",
+          "bytes": 245,
+          "source": "small Git file SHA-256"
+        },
+        "merges.txt": {
+          "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "bytes": 1671839,
+          "source": "small Git file SHA-256"
+        },
+        "model.safetensors": {
+          "sha256": "81fb76175ff74e69be25fef2cc3e54f016df3034f1514c8e1c89da06a3510cff",
+          "bytes": 3857414009,
+          "source": "HF LFS metadata"
+        },
+        "model.safetensors.index.json": {
+          "sha256": "f5bb337c2f77c5046024c7342ed8d6ade28fdfbab862baf9f13269743b920005",
+          "bytes": 38742,
+          "source": "small Git file SHA-256"
+        },
+        "preprocessor_config.json": {
+          "sha256": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119",
+          "bytes": 127,
+          "source": "small Git file SHA-256"
+        },
+        "speech_tokenizer/config.json": {
+          "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+          "bytes": 2336,
+          "source": "small Git file SHA-256"
+        },
+        "speech_tokenizer/configuration.json": {
+          "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+          "bytes": 76,
+          "source": "small Git file SHA-256"
+        },
+        "speech_tokenizer/model.safetensors": {
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "bytes": 682293092,
+          "source": "HF LFS metadata"
+        },
+        "speech_tokenizer/preprocessor_config.json": {
+          "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+          "bytes": 234,
+          "source": "small Git file SHA-256"
+        },
+        "tokenizer_config.json": {
+          "sha256": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670",
+          "bytes": 7344,
+          "source": "small Git file SHA-256"
+        },
+        "vocab.json": {
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "bytes": 2776833,
+          "source": "small Git file SHA-256"
+        }
+      }
+    },
+    "assets": {}
+  },
+  {
+    "model": "breeze-tts-2",
+    "sections": {
+      "weights": {
+        "audio_tokenizer/config.json": {
+          "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+          "bytes": 2336,
+          "source": "small Git file SHA-256"
+        },
+        "audio_tokenizer/configuration.json": {
+          "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+          "bytes": 76,
+          "source": "small Git file SHA-256"
+        },
+        "audio_tokenizer/model.safetensors": {
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "bytes": 682293092,
+          "source": "HF LFS metadata"
+        },
+        "audio_tokenizer/preprocessor_config.json": {
+          "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+          "bytes": 234,
+          "source": "small Git file SHA-256"
+        },
+        "config.json": {
+          "sha256": "11f40bae4cb68c87638d3998c78926f7b5143c4ca7aa782e50c02209dbb072c0",
+          "bytes": 12176,
+          "source": "small Git file SHA-256"
+        },
+        "generation_config.json": {
+          "sha256": "2ef3f2c0ab8d9ad241059138a795433c5410fd9954efb9625674ecd2a9529434",
+          "bytes": 251,
+          "source": "small Git file SHA-256"
+        },
+        "model-00001-of-00002.safetensors": {
+          "sha256": "06c0acb9057e13659aa297a889001dcf86f181d1355ef84c1134ba8b72313572",
+          "bytes": 4904052381,
+          "source": "HF LFS metadata"
+        },
+        "model-00002-of-00002.safetensors": {
+          "sha256": "83e7d3a903b70a0be2a1f3dc1b37c4605678536efe9e1a45b86fd70599f5bf77",
+          "bytes": 2004566801,
+          "source": "HF LFS metadata"
+        },
+        "model.safetensors.index.json": {
+          "sha256": "b2b8ad998777f80440a51b8504d22c44575623e8bae3a76a925bccc59725ad02",
+          "bytes": 73409,
+          "source": "small Git file SHA-256"
+        },
+        "special_tokens_map.json": {
+          "sha256": "194f265bb588d142a16f27d9576104eb3dab3d7ba9961541d2d6e3d5e77e6470",
+          "bytes": 886,
+          "source": "small Git file SHA-256"
+        },
+        "tokenizer.json": {
+          "sha256": "d3ec9ac3eb2392389b9f5112e85d8b43316494addb587ba7b7a9d61eac23af96",
+          "bytes": 33386945,
+          "source": "HF LFS metadata"
+        },
+        "tokenizer_config.json": {
+          "sha256": "2c084fd6725c2284e8aa6da095a8d036d48fe79665595bfcd50371821b620e44",
+          "bytes": 1157960,
+          "source": "small Git file SHA-256"
+        }
+      },
+      "vendor.int4": {
+        "LICENSE": {
+          "sha256": "2a143ae167cb0253d95bafa694e415570dcce336d712230d205c538523bbd855",
+          "bytes": 18856,
+          "source": "small Git file SHA-256"
+        },
+        "NOTICE": {
+          "sha256": "70bc248b98e5bb527f160c86be56d60ef8c63776c43051273643db036ebee40d",
+          "bytes": 146,
+          "source": "small Git file SHA-256"
+        },
+        "audio_tokenizer/config.json": {
+          "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+          "bytes": 2336,
+          "source": "small Git file SHA-256"
+        },
+        "audio_tokenizer/configuration.json": {
+          "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+          "bytes": 76,
+          "source": "small Git file SHA-256"
+        },
+        "audio_tokenizer/model.safetensors": {
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "bytes": 682293092,
+          "source": "HF LFS metadata"
+        },
+        "audio_tokenizer/preprocessor_config.json": {
+          "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+          "bytes": 234,
+          "source": "small Git file SHA-256"
+        },
+        "config.json": {
+          "sha256": "f6871e70a5e937cf23f8ca6eb252ea377c9e489f87f3f7c70b76066ff5768bdf",
+          "bytes": 12379,
+          "source": "small Git file SHA-256"
+        },
+        "generation_config.json": {
+          "sha256": "2ef3f2c0ab8d9ad241059138a795433c5410fd9954efb9625674ecd2a9529434",
+          "bytes": 251,
+          "source": "small Git file SHA-256"
+        },
+        "model.safetensors": {
+          "sha256": "e8499e75e043b16d0734897869a124198aca2fa88436eb83c855d58a39fdac0a",
+          "bytes": 2325487160,
+          "source": "HF LFS metadata"
+        },
+        "model.safetensors.index.json": {
+          "sha256": "fe6889d333789126501d6f3c5aa9fe198b00477403c7c1507d86f8cf3b32e381",
+          "bytes": 98863,
+          "source": "small Git file SHA-256"
+        },
+        "special_tokens_map.json": {
+          "sha256": "194f265bb588d142a16f27d9576104eb3dab3d7ba9961541d2d6e3d5e77e6470",
+          "bytes": 886,
+          "source": "small Git file SHA-256"
+        },
+        "tokenizer.json": {
+          "sha256": "d3ec9ac3eb2392389b9f5112e85d8b43316494addb587ba7b7a9d61eac23af96",
+          "bytes": 33386945,
+          "source": "HF LFS metadata"
+        },
+        "tokenizer_config.json": {
+          "sha256": "2c084fd6725c2284e8aa6da095a8d036d48fe79665595bfcd50371821b620e44",
+          "bytes": 1157960,
+          "source": "small Git file SHA-256"
+        }
+      }
+    },
+    "assets": {}
+  }
+]

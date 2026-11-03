@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "text"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 5000,
+      "description": "Text in any of the 30 languages, no language tag needed; up to 5,000 characters (estimated to finish within a request's 590 s limit). Longer text is spoken in chunks of about 400 characters."
+    },
+    "instructions": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000,
+      "description": "A voice described in words (gender, age, tone, emotion, pace), or the style of a cloned voice; no parentheses."
+    },
+    "voice": {
+      "type": "string",
+      "pattern": "^(voice-[0-9a-f-]+)?$",
+      "description": "Saved voice ID from the voices operation; VoxCPM2 has no preset voices."
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Exact transcript of the clip; enables continuation cloning."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Your own clip of the voice to clone (half a second to 30 seconds), optionally with its transcript."
+    },
+    "clone_mode": {
+      "type": "string",
+      "enum": [
+        "reference",
+        "continuation",
+        "both"
+      ],
+      "description": "How the clip is used: reference (timbre only), continuation (the clip starts the utterance; needs its transcript) or both. Default: both with a transcript, reference without."
+    },
+    "cfg_value": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 10,
+      "default": 2,
+      "description": "Classifier-free guidance; higher follows the text and voice more closely."
+    },
+    "inference_timesteps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 10,
+      "description": "Diffusion steps per patch; more is slower and can be cleaner."
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4096,
+      "description": "Cap on audio patches per chunk (6.25 per second); default 4096, and never more than 6 per text token plus 10."
+    },
+    "retry_badcase": {
+      "type": "boolean",
+      "default": true,
+      "description": "Up to three attempts per chunk (seed, seed + 1, seed + 2) while a chunk runs to its length cap without stopping."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "stream": {
+      "type": "boolean"
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "additionalProperties": false
+}

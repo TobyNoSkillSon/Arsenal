@@ -1,0 +1,37 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "nuextract3",
+  "revision": "c99dc8f5641b866aa0192b6ea78f84bf9f3535f1",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:50:49Z",
+      "load_seconds": 2.66,
+      "mac_peak_in_use_mb": 41318.0,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "extract": {
+          "error": "{\"code\":\"invalid_model_output\",\"details\":{\"code\":\"invalid_model_output\",\"message\":\"The model did not return valid JSON.\"},\"error\":\"The model did not return valid JSON.\",\"status\":500}",
+          "seconds_first": 1.066,
+          "seconds_warm": 1.066,
+          "status": 500
+        },
+        "read_document": {
+          "files": [],
+          "seconds_first": 3.217,
+          "seconds_warm": 3.331,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 12288.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 12288.0,
+      "samples": 35
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

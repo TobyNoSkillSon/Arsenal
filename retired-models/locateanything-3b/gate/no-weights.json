@@ -1,0 +1,50 @@
+{
+  "config": {
+    "model_type": "locateanything"
+  },
+  "assets": {
+    "tokenizer": "$PERCEPTION_FIXTURES/tokenizers/locateanything"
+  },
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVR4nGMIqFjwnxLMMGrAqAGjBgwXAwBqsGcfY7qOyAAAAABJRU5ErkJggg=="
+  },
+  "operations": [
+    {
+      "operation": "detect",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "car",
+          "person"
+        ],
+        "max_tokens": 6
+      },
+      "expect_error": "invalid_model_output"
+    },
+    {
+      "operation": "ground_screen",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "instruction": "Point to the button.",
+        "max_tokens": 6
+      },
+      "expect_error": "invalid_model_output"
+    },
+    {
+      "operation": "detect",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "phrase": "red button",
+        "output_mode": "points",
+        "max_tokens": 6
+      },
+      "expect_error": "invalid_model_output"
+    }
+  ]
+}

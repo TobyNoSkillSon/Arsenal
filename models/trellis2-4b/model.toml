@@ -1,0 +1,132 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "trellis2-4b"
+name = "TRELLIS.2 4B"
+architecture = "trellis2"
+kind = "geometry"
+params = "4B"
+publisher = "Microsoft"
+released = 2025
+suggested = false
+summary = "Generate a textured 3D mesh from an image."
+purpose = "Image to textured 3D"
+good_for = ["Single-image 3D with base color, metallic, roughness and opacity", "512, 1024 and 1536 voxel resolution"]
+limits = ["Requires BiRefNet added with installed weights for background removal", "Trained-weight parity and FP16/int8/int4 quality await the approved live trial", "Mesh retexturing is not exposed by the current image_to_3d contract", "4 GiB per-job artifact limit", "Precision exception: the DINOv3 encoder keeps its residual stream in float32, because in FP16 it overflows (about 153,000 against FP16's 65,504) and the condition turns to NaN"]
+languages = ["und"]
+tasks = ["image-to-3d"]
+tools = ["operation"]
+assets = ["trellis-structure-decoder", "trellis-dinov3"]
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = false
+conditions = "TRELLIS.2 itself is MIT. Its DINOv3 image encoder is under Meta's DINOv3 License, accepted on Hugging Face (Meta approves each request): Arsenal downloads from facebook/dinov3-vitl16-pretrain-lvd1689m with your token. No ITAR or other trade-controlled uses; anything redistributed carries that licence."
+url = "https://huggingface.co/microsoft/TRELLIS.2-4B/tree/af44b45f2e35a493886929c6d786e563ec68364d"
+[weights]
+repo = "microsoft/TRELLIS.2-4B"
+revision = "af44b45f2e35a493886929c6d786e563ec68364d"
+dtype = "bf16"
+files = ["ckpts/ss_flow_img_dit_1_3B_64_bf16.safetensors", "ckpts/ss_flow_img_dit_1_3B_64_bf16.json", "ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.safetensors", "ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.json", "ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.safetensors", "ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.json", "ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.safetensors", "ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.json", "ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.safetensors", "ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.json", "ckpts/shape_dec_next_dc_f16c32_fp16.safetensors", "ckpts/shape_dec_next_dc_f16c32_fp16.json", "ckpts/tex_dec_next_dc_f16c32_fp16.safetensors", "ckpts/tex_dec_next_dc_f16c32_fp16.json", "pipeline.json"]
+
+[weights.sha256]
+"ckpts/ss_flow_img_dit_1_3B_64_bf16.safetensors" = "ca01377c485bec418076d38ee80166d32dc776d744f2553b835cba1e97a7abf6"
+"ckpts/ss_flow_img_dit_1_3B_64_bf16.json" = "6cdfb636854f60ffcadd8c49244169cd449f34c5ccdb55b5ff7c04678f9c399e"
+"ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.safetensors" = "ec5e0917ef9b7e25ad51dffc7d19687a42019871f94239f2fa7f86264c55b70f"
+"ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.json" = "ddbd7a1d34ce9a8e7af2f6ef9ae686d9ab49f69e62dacb98d8409b511cdbd5e2"
+"ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.safetensors" = "07cd0596f634c5adc1890023d16023afc5eed02fb84b22bb23aff5bf0030fbbd"
+"ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.json" = "7ebd6d367393f52fee9e92c2b3d727a9026a338549c6a6fa84c7ea122140ffdd"
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.safetensors" = "8371aa1c5d13be79dcd5ddfd2cf3835e902e204dc34427169a1c702828e1a94d"
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.json" = "3093796257a62f838d2e5578ac4580ca3b7d88d10b87d348065d3fdfcc4c2077"
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.safetensors" = "580401269059a339b8318ab9ced459a13ba63391721c83a6c383198c29e77686"
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.json" = "31f4fdad9974930e5e9324ac9dfb6ef7de6b30cea51854ba515ef827a8d353b2"
+"ckpts/shape_dec_next_dc_f16c32_fp16.safetensors" = "e3b718d3e43e4f8780e9a24ac6fff231811a67e3b058e336e10fe654c911d581"
+"ckpts/shape_dec_next_dc_f16c32_fp16.json" = "5f1b856dffce79466fb18f5f0eefc08f08c673b24b3c05b20359c0b6d318a209"
+"ckpts/tex_dec_next_dc_f16c32_fp16.safetensors" = "97ea69addea2ecd9312910f5f548234665eef51c088386180b7cd5b258645e3c"
+"ckpts/tex_dec_next_dc_f16c32_fp16.json" = "22074e4ab5b28e2b72d33a3fe61bf416134b89e12d0fc5c729f37da75da0c4d1"
+"pipeline.json" = "222c359ab1ed9bc6735a640a34f95d47f8681b9bc4aaa101bfb80274676253c6"
+[weights.bytes]
+"ckpts/ss_flow_img_dit_1_3B_64_bf16.safetensors" = 2584426920
+"ckpts/ss_flow_img_dit_1_3B_64_bf16.json" = 467
+"ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.safetensors" = 2584574424
+"ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.json" = 458
+"ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.safetensors" = 2584574424
+"ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.json" = 458
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.safetensors" = 2584672728
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.json" = 458
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.safetensors" = 2584672728
+"ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.json" = 458
+"ckpts/shape_dec_next_dc_f16c32_fp16.safetensors" = 948490494
+"ckpts/shape_dec_next_dc_f16c32_fp16.json" = 678
+"ckpts/tex_dec_next_dc_f16c32_fp16.safetensors" = 948458812
+"ckpts/tex_dec_next_dc_f16c32_fp16.json" = 705
+"pipeline.json" = 4186
+[derive]
+fp16 = "cast:geometry-trellis-v1"
+int8 = "cast:geometry-trellis-v1"
+int4 = "cast:geometry-trellis-v1"
+
+[[asset]]
+id = "trellis-structure-decoder"
+repo = "microsoft/TRELLIS-image-large"
+repo_type = "model"
+into = "components/trellis-structure-decoder"
+revision = "25e0d31ffbebe4b5a97464dd851910efc3002d96"
+files = ["ckpts/ss_dec_conv3d_16l8_fp16.safetensors", "ckpts/ss_dec_conv3d_16l8_fp16.json"]
+licence = "MIT"
+
+[asset.sha256]
+"ckpts/ss_dec_conv3d_16l8_fp16.safetensors" = "1c76d4a40519aa2d711cc263a8404105231ac26db31d946bed48b84fee79009a"
+"ckpts/ss_dec_conv3d_16l8_fp16.json" = "646781293f1cda74720de85d1cef50a957fb4aebd9a4bd014e454e32f2330ac5"
+[asset.bytes]
+"ckpts/ss_dec_conv3d_16l8_fp16.safetensors" = 147591972
+"ckpts/ss_dec_conv3d_16l8_fp16.json" = 245
+
+[[asset]]
+id = "trellis-dinov3"
+repo = "facebook/dinov3-vitl16-pretrain-lvd1689m"
+repo_type = "model"
+into = "components/trellis-dinov3"
+revision = "ea8dc2863c51be0a264bab82070e3e8836b02d51"
+files = ["model.safetensors", "config.json", "preprocessor_config.json"]
+licence = "LicenseRef-DINOv3"
+
+[asset.sha256]
+"model.safetensors" = "dcb2e45127cccbf1601e5f42fef165eea275c8e5213197e8dcf3f48822718179"
+"config.json" = "135ecd23e34a70b6fbed8b083fdecb319b7e3a54e3d849258bbe4ddcf1783bb5"
+"preprocessor_config.json" = "960c41d1f3a7778b936365769a2d90550b318a6c0a53a0296957adacfe5e0dd7"
+[asset.bytes]
+"model.safetensors" = 1212559808
+"config.json" = 745
+"preprocessor_config.json" = 585
+
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "geometry"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "image_to_3d"
+title = "Make a 3D mesh"
+input = "ops/image_to_3d.input.json"
+output_schema = "ops/image_to_3d.output.json"
+output = "file"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 3600
+[op.prepare_image]
+model = "birefnet"
+operation = "remove_background"
+file_id = "foreground"
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

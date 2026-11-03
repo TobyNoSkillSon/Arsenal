@@ -1,0 +1,10 @@
+schema = 1
+suite = "birefnet-swift-fp16-v1"
+version = 1
+precision = "fp16"
+runner = "native"
+fast_exact = false
+width = 1024
+height = 1024
+status = "deferred-by-user"
+metrics = ["seconds_per_image", "peak_ram_mb"]

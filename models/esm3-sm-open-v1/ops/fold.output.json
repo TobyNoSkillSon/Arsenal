@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "files",
+    "sequence",
+    "length",
+    "plddt",
+    "mean_plddt",
+    "ptm",
+    "structure_tokens",
+    "seed",
+    "steps"
+  ],
+  "properties": {
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "id",
+          "path",
+          "mime"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "mime": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer"
+          },
+          "bytes": {
+            "type": "integer"
+          },
+          "sha256": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sequence": {
+      "type": "string"
+    },
+    "length": {
+      "type": "integer"
+    },
+    "plddt": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "mean_plddt": {
+      "type": "number"
+    },
+    "ptm": {
+      "type": "number"
+    },
+    "structure_tokens": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "predicted_aligned_error": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "steps": {
+      "type": "integer"
+    }
+  }
+}

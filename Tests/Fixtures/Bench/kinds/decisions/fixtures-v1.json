@@ -1,0 +1,76 @@
+[
+  {
+    "id": "yes",
+    "op": "decide",
+    "params": {
+      "state": "The box contains three red apples.",
+      "questions": {
+        "present": {
+          "type": "noul",
+          "instructions": "Does the box contain apples?"
+        }
+      }
+    },
+    "labels": {
+      "present": true
+    }
+  },
+  {
+    "id": "no",
+    "op": "decide",
+    "params": {
+      "state": "The box is empty.",
+      "questions": {
+        "present": {
+          "type": "noul",
+          "instructions": "Does the box contain apples?"
+        }
+      }
+    },
+    "labels": {
+      "present": false
+    }
+  },
+  {
+    "id": "choice",
+    "op": "decide",
+    "params": {
+      "state": "A cat is sleeping on the sofa.",
+      "questions": {
+        "animal": {
+          "type": "choice",
+          "instructions": "Which animal is mentioned?",
+          "criteria": {
+            "cat": null,
+            "dog": null,
+            "bird": null
+          }
+        }
+      }
+    },
+    "labels": {
+      "animal": "cat"
+    }
+  },
+  {
+    "id": "score",
+    "op": "decide",
+    "params": {
+      "state": "The shop is closed and no customer can buy anything.",
+      "questions": {
+        "severity": {
+          "type": "score",
+          "instructions": "How much does this block shopping?",
+          "criteria": [
+            "No impact",
+            "Minor inconvenience",
+            "Completely blocked"
+          ]
+        }
+      }
+    },
+    "labels": {
+      "severity": 2
+    }
+  }
+]

@@ -1,0 +1,94 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "gemma-4-e4b-it"
+name = "Gemma 4 E4B"
+architecture = "gemma4"
+kind = "chat"
+tools = ["chat", "operation"]
+params = "7.6B"
+publisher = "google"
+released = 2026
+suggested = false
+summary = "Chat about text and images."
+purpose = "Chat about text and images"
+good_for = ["Chat about text and images"]
+limits = ["Trained weights, tokenizer correctness and FP16/int8/int4 task quality await the approved live trial.", "Text and image input only; audio tower is excluded."]
+tasks = ["chat", "count_tokens", "describe", "tag"]
+languages = ["mul"]
+context = 131072
+native_context = 131072
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/google/gemma-4-E4B-it/tree/ee0ef6023621cff504d758262d4e04895a5af4a2"
+[weights]
+repo = "google/gemma-4-E4B-it"
+revision = "ee0ef6023621cff504d758262d4e04895a5af4a2"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "generation_config.json", "model.safetensors", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "0a2c8073c878ab1da004bee933a998606537bbb62016310352c7285c3f01c5b5"
+"config.json" = "33b10c02df3c2e8536cf323d29d53262aaa2f4d11dbe19bc729373fbe90295d4"
+"generation_config.json" = "d4226bbe3117d2d253ba4609720ba82c6c4ce4627a9a6ae05387c78983ac03de"
+"model.safetensors" = "cfbd3d2f1cd71bd471c37fe2bf8546d5028d41e5736f64e1ca6c6b8893125503"
+"processor_config.json" = "32bdf45d2ad4cc29a0822ddd157a182de76644f0419a6228d151495256e9813c"
+"tokenizer.json" = "cc8d3a0ce36466ccc1278bf987df5f71db1719b9ca6b4118264f45cb627bfe0f"
+"tokenizer_config.json" = "9f4fec4b1dc6ecddf8f4a92e9caea5971c0e67d81309f3f9066a2bee8c362633"
+[weights.bytes]
+"chat_template.jinja" = 18569
+"config.json" = 5145
+"generation_config.json" = 208
+"model.safetensors" = 15992595884
+"processor_config.json" = 1689
+"tokenizer.json" = 32169626
+"tokenizer_config.json" = 3082
+[derive]
+int8 = "cast:language-half-g64-v2"
+int4 = "cast:language-half-g64-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "chat"
+title = "Chat"
+input = "ops/chat.input.json"
+output_schema = "ops/chat.output.json"
+output = "text-stream"
+stream = true
+[[op]]
+name = "count_tokens"
+title = "Count tokens"
+input = "ops/count_tokens.input.json"
+output_schema = "ops/count_tokens.output.json"
+output = "json"
+stream = false
+[[op]]
+name = "describe"
+title = "Describe"
+input = "ops/describe.input.json"
+output_schema = "ops/describe.output.json"
+output = "json"
+stream = false
+[[op]]
+name = "tag"
+title = "Tag"
+input = "ops/tag.input.json"
+output_schema = "ops/tag.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "triposr",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T02:27:42Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Image to 3d at fp16: one ordinary Load, then two Image to 3d requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "4e22858523f295f3c2b3852c39c90f399ea0e7d3",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "geometry",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Image to 3d requests on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:27:42Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Image to 3d requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "4e22858523f295f3c2b3852c39c90f399ea0e7d3",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 2.5554845696
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Image to 3d request on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:27:42Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Image to 3d request, one sample, after one ordinary Load, then two Image to 3d requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "4e22858523f295f3c2b3852c39c90f399ea0e7d3",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 2.26
+      }
+    },
+    "runner": "kit"
+  }
+}

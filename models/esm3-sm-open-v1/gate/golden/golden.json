@@ -1,0 +1,650 @@
+{
+ "bounds": "lab/evidence/esm3-sm-open-v1/bounds.json, frozen before any comparison; sha256 939f226a21ce888413fb24d3f28e54235ba3405ddf61d510cb9bc9828a520592",
+ "candidate": {
+  "driven": "Arsenal wire protocol, one process, ARSENAL_ESM3_CAPTURE_DIR saving each component",
+  "runner": "kit (runners/swift, MLX, FP16 weights; float32 for the geometric frames and attention logits, the structure head's frames, codebook distances, pLDDT/PAE/pTM and every returned logit; sampling and the schedule on the host in Double)"
+ },
+ "components": {
+  "A.argmax.function": {
+   "agreement": 0.9958,
+   "bound": 0.9,
+   "passed": true
+  },
+  "A.argmax.residue_annotations": {
+   "agreement": 0.9833,
+   "bound": 0.9,
+   "passed": true
+  },
+  "A.argmax.sasa": {
+   "agreement": 0.9833,
+   "bound": 0.9,
+   "passed": true
+  },
+  "A.argmax.secondary_structure": {
+   "agreement": 1.0,
+   "bound": 0.95,
+   "passed": true
+  },
+  "A.argmax.sequence": {
+   "agreement": 1.0,
+   "bound": 0.95,
+   "passed": true
+  },
+  "A.argmax.structure": {
+   "agreement": 0.6167,
+   "bound": 0.8,
+   "passed": false
+  },
+  "A.block.0": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.02,
+   "cosine": 0.9999991,
+   "max_abs": 1.5,
+   "passed": true,
+   "ref_max_abs": 448.0,
+   "rel_l2": 0.001369
+  },
+  "A.block.1": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.02,
+   "cosine": 0.9999977,
+   "max_abs": 2.25,
+   "passed": true,
+   "ref_max_abs": 480.0,
+   "rel_l2": 0.002163
+  },
+  "A.block.23": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.03,
+   "cosine": 0.9999589,
+   "max_abs": 14.5,
+   "passed": true,
+   "ref_max_abs": 580.0,
+   "rel_l2": 0.011471
+  },
+  "A.block.47": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999835,
+   "max_abs": 80.0,
+   "passed": true,
+   "ref_max_abs": 11136.0,
+   "rel_l2": 0.005739
+  },
+  "A.embed_in": {
+   "bound_cosine": 0.9999,
+   "bound_rel_l2": 0.01,
+   "cosine": 0.9999968,
+   "max_abs": 0.078125,
+   "passed": true,
+   "ref_max_abs": 16.125,
+   "rel_l2": 0.002572
+  },
+  "A.embeddings": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999835,
+   "max_abs": 80.0,
+   "passed": true,
+   "ref_max_abs": 11136.0,
+   "rel_l2": 0.005739
+  },
+  "A.logits.function": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999983,
+   "max_abs": 0.6875,
+   "passed": true,
+   "ref_max_abs": 105.5,
+   "rel_l2": 0.002305
+  },
+  "A.logits.residue_annotations": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999957,
+   "max_abs": 0.51953125,
+   "passed": true,
+   "ref_max_abs": 19.75,
+   "rel_l2": 0.003049
+  },
+  "A.logits.sasa": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999974,
+   "max_abs": 0.09375,
+   "passed": true,
+   "ref_max_abs": 23.5,
+   "rel_l2": 0.00233
+  },
+  "A.logits.secondary_structure": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999971,
+   "max_abs": 0.078125,
+   "passed": true,
+   "ref_max_abs": 16.375,
+   "rel_l2": 0.002407
+  },
+  "A.logits.sequence": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999975,
+   "max_abs": 0.109375,
+   "passed": true,
+   "ref_max_abs": 19.875,
+   "rel_l2": 0.002244
+  },
+  "A.logits.structure": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999979,
+   "max_abs": 0.25,
+   "passed": true,
+   "ref_max_abs": 43.25,
+   "rel_l2": 0.002084
+  },
+  "A.tokens.sequence": {
+   "mismatches": 0,
+   "passed": true,
+   "shape": [
+    62
+   ]
+  },
+  "B.argmax.function": {
+   "agreement": 0.9941,
+   "bound": 0.9,
+   "passed": true
+  },
+  "B.argmax.residue_annotations": {
+   "agreement": 1.0,
+   "bound": 0.9,
+   "passed": true
+  },
+  "B.argmax.sasa": {
+   "agreement": 1.0,
+   "bound": 0.9,
+   "passed": true
+  },
+  "B.argmax.secondary_structure": {
+   "agreement": 1.0,
+   "bound": 0.95,
+   "passed": true
+  },
+  "B.argmax.sequence": {
+   "agreement": 1.0,
+   "bound": 0.95,
+   "passed": true
+  },
+  "B.argmax.structure": {
+   "agreement": 0.9531,
+   "bound": 0.8,
+   "passed": true
+  },
+  "B.block.0": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.02,
+   "cosine": 0.9999948,
+   "max_abs": 4.0,
+   "passed": true,
+   "ref_max_abs": 624.0,
+   "rel_l2": 0.003219
+  },
+  "B.block.1": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.02,
+   "cosine": 0.9999931,
+   "max_abs": 4.5,
+   "passed": true,
+   "ref_max_abs": 640.0,
+   "rel_l2": 0.003743
+  },
+  "B.block.23": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.03,
+   "cosine": 0.999941,
+   "max_abs": 18.5,
+   "passed": true,
+   "ref_max_abs": 756.0,
+   "rel_l2": 0.010939
+  },
+  "B.block.47": {
+   "bound_cosine": 0.999,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999569,
+   "max_abs": 72.0,
+   "passed": true,
+   "ref_max_abs": 9920.0,
+   "rel_l2": 0.009438
+  },
+  "B.embed_in": {
+   "bound_cosine": 0.9999,
+   "bound_rel_l2": 0.01,
+   "cosine": 0.9999943,
+   "max_abs": 0.109375,
+   "passed": true,
+   "ref_max_abs": 13.625,
+   "rel_l2": 0.003389
+  },
+  "B.embeddings": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999569,
+   "max_abs": 72.0,
+   "passed": true,
+   "ref_max_abs": 9920.0,
+   "rel_l2": 0.009438
+  },
+  "B.logits.function": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999879,
+   "max_abs": 0.6875,
+   "passed": true,
+   "ref_max_abs": 51.5,
+   "rel_l2": 0.005804
+  },
+  "B.logits.residue_annotations": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999958,
+   "max_abs": 0.4375,
+   "passed": true,
+   "ref_max_abs": 24.875,
+   "rel_l2": 0.002971
+  },
+  "B.logits.sasa": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999886,
+   "max_abs": 0.234375,
+   "passed": true,
+   "ref_max_abs": 33.25,
+   "rel_l2": 0.004903
+  },
+  "B.logits.secondary_structure": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999905,
+   "max_abs": 0.1796875,
+   "passed": true,
+   "ref_max_abs": 22.125,
+   "rel_l2": 0.004367
+  },
+  "B.logits.sequence": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999962,
+   "max_abs": 0.25,
+   "passed": true,
+   "ref_max_abs": 32.5,
+   "rel_l2": 0.00285
+  },
+  "B.logits.structure": {
+   "bound_cosine": 0.998,
+   "bound_rel_l2": 0.05,
+   "cosine": 0.9999931,
+   "max_abs": 0.34375,
+   "passed": true,
+   "ref_max_abs": 48.0,
+   "rel_l2": 0.003719
+  },
+  "B.tokens.function": {
+   "mismatches": 0,
+   "passed": true,
+   "shape": [
+    66,
+    8
+   ]
+  },
+  "B.tokens.sasa": {
+   "mismatches": 0,
+   "passed": true,
+   "shape": [
+    66
+   ]
+  },
+  "B.tokens.secondary_structure": {
+   "mismatches": 0,
+   "passed": true,
+   "shape": [
+    66
+   ]
+  },
+  "B.tokens.sequence": {
+   "mismatches": 0,
+   "passed": true,
+   "shape": [
+    66
+   ]
+  },
+  "B.tokens.structure": {
+   "mismatches": 0,
+   "passed": true,
+   "shape": [
+    66
+   ]
+  },
+  "C.encoder.latent": {
+   "bound_cosine": null,
+   "bound_rel_l2": 0.02,
+   "cosine": 0.9999999,
+   "max_abs": 0.010839462280273438,
+   "passed": true,
+   "ref_max_abs": 22.029415130615234,
+   "rel_l2": 0.000395
+  },
+  "C.encoder.tokens": {
+   "agreement": 1.0,
+   "mismatches": 0,
+   "passed": true
+  },
+  "D.backbone": {
+   "max_abs_A": 0.26874518394470215,
+   "passed": false,
+   "rmsd_A": 0.15963229537010193,
+   "tokens_identical": true
+  },
+  "D.pae": {
+   "max_abs_A": 0.11658430099487305,
+   "passed": true
+  },
+  "D.plddt": {
+   "max_abs": 0.002315223217010498,
+   "passed": true
+  },
+  "D.ptm": {
+   "maker": 0.755736231803894,
+   "passed": true,
+   "port": 0.7569149136543274
+  },
+  "E.interpro_logits": {
+   "bound_cosine": null,
+   "bound_rel_l2": 0.03,
+   "cosine": 0.9999981,
+   "max_abs": 0.25,
+   "passed": true,
+   "ref_max_abs": 50.0,
+   "rel_l2": 0.001994
+  },
+  "E.keyword_logits": {
+   "bound_cosine": null,
+   "bound_rel_l2": 0.03,
+   "cosine": 0.999998,
+   "max_abs": 0.1875,
+   "passed": true,
+   "ref_max_abs": 45.75,
+   "rel_l2": 0.002009
+  },
+  "F1.sequence": {
+   "maker": "MSKGLELFTGVGPILVELDGDVDGHKFSVSGEGTGDATYGKLTLTFICTTGKLPVGWPTL",
+   "passed": true,
+   "port": "MSKGLELFTGVGPILVELDGDVDGHKFSVSGEGTGDATYGKLTLTFICTTGKLPVGWPTL"
+  },
+  "F2.ca_rmsd": {
+   "passed": false,
+   "rmsd_A": 2.491029977798462
+  },
+  "F2.plddt": {
+   "mean_abs": 0.028777859608332314,
+   "passed": false
+  },
+  "F2.ptm": {
+   "maker": 0.3592631220817566,
+   "passed": false,
+   "port": 0.40183189511299133
+  },
+  "F2.structure_tokens": {
+   "agreement": 0.5667,
+   "passed": false
+  },
+  "G.annotations": {
+   "maker_count": 21,
+   "only_maker": [],
+   "only_port": [],
+   "passed": true,
+   "port_count": 21
+  },
+  "G.function_tokens": {
+   "passed": true,
+   "row_agreement": 1.0
+  }
+ },
+ "fixture": "lab/evidence/esm3-sm-open-v1/fixtures.json (not shipped; sha256 below)",
+ "fixture_sha256": "edbfd3736a9465c6e87ab617b15a6dc940f374464f70c5ef00efd24abcfa49e1",
+ "kind": "local.protein (its own kind; the local.science kind of the planned ESM-2 folders is unchanged)",
+ "model": "esm3-sm-open-v1",
+ "pdb_fixture_sha256": "eaef790a4c8e58177447bb8f1f779cfa64de99241de8f4a9c38a6c3602eaa253",
+ "precision": {
+  "float32_islands": [
+   "the backbone frames and translations of geometric attention and its distance and rotation logits (Angstrom-scale, and a float32 matmul on Metal was measured about 1e-3 relative, enough to move the softmax by 10%: both are elementwise sums)",
+   "the structure head's 6D rotation, translation and backbone placement",
+   "the structure codebook's squared distances",
+   "the pLDDT, PAE and pTM expectations",
+   "the rotary angle table (MLX's RoPE)",
+   "every logit returned or sampled"
+  ],
+  "reason": "every component passed in FP16 and no activation came near FP16's 65,504: the largest value anywhere in the reference capture is 11,136 (block 47 of the 60-residue case). BF16 was not needed.",
+  "selected": "fp16"
+ },
+ "real_check": {
+  "encode_structure": {
+   "first_tokens": [
+    1169,
+    588,
+    82,
+    2945,
+    2742,
+    3005,
+    373,
+    1541
+   ],
+   "round_trip_ptm": 0.7569
+  },
+  "fold": {
+   "mean_plddt": 0.6938,
+   "pdb_bytes": 18717,
+   "ptm": 0.3545
+  },
+  "inverse_fold": {
+   "designed": "IIGGSECGAHNWPWQVSLDFGGHFCGGTIINENWVLTAAHCYRDGITVVAGAHNLNVDEGNEQR",
+   "native": "IVGGYTCGANTVPYQVSLNSGYHFCGGSLINSQWVVSAAHCYKSGIQVRLGEDNINVVEGNEQF",
+   "recovery": 0.5938
+  },
+  "ops": {
+   "embed_per_residue": {
+    "ok": true
+   },
+   "embed_sequence": {
+    "ok": true
+   },
+   "encode_structure": {
+    "ok": true
+   },
+   "fold": {
+    "ok": true
+   },
+   "generate_cot": {
+    "ok": true
+   },
+   "generate_inpaint": {
+    "ok": true
+   },
+   "generate_motif": {
+    "ok": true
+   },
+   "inverse_fold": {
+    "ok": true
+   },
+   "predict_function": {
+    "ok": true
+   },
+   "predict_masked": {
+    "ok": true
+   },
+   "refuse_bad_label": {
+    "ok": false
+   },
+   "refuse_bad_variant": {
+    "ok": false
+   },
+   "refuse_chainbreak": {
+    "ok": false
+   },
+   "refuse_letters": {
+    "ok": false
+   },
+   "refuse_long": {
+    "ok": false
+   },
+   "refuse_mask_in_fold": {
+    "ok": false
+   },
+   "refuse_no_masks": {
+    "ok": false
+   },
+   "refuse_no_structure": {
+    "ok": false
+   },
+   "refuse_schedule": {
+    "ok": false
+   },
+   "refuse_ss_length": {
+    "ok": false
+   },
+   "score_variants": {
+    "ok": true
+   },
+   "score_wildtype": {
+    "ok": true
+   }
+  },
+  "refusals": [
+   "refuse_long",
+   "refuse_letters",
+   "refuse_chainbreak",
+   "refuse_mask_in_fold",
+   "refuse_no_masks",
+   "refuse_bad_variant",
+   "refuse_bad_label",
+   "refuse_ss_length",
+   "refuse_schedule",
+   "refuse_no_structure"
+  ]
+ },
+ "reference": {
+  "captured": "once; raw tensors in lab/evidence/esm3-sm-open-v1 (not tracked)",
+  "code": "esm 3.4.2 (github.com/Biohub/esm at 8f0834cbc350aeaf507f755475873f7c61fa44a1), ESM3_sm_open_v0 cast to bfloat16, logits() under torch.autocast(mps, bfloat16) as the maker's GPU path",
+  "date": "2026-11-02",
+  "device": "mps",
+  "floor_probe": "the same code in float32 on the CPU (MPS refuses this model in float32) on the 60-residue fixture, and the structure decoder in float32 on MPS",
+  "torch": "2.11.0"
+ },
+ "reference_rounding_floor": {
+  "fold_step_structure_tokens": {
+   "maker_bf16_vs_maker_fp32_argmax": 0.5333,
+   "port_fp16_vs_maker_bf16_argmax": 0.5667,
+   "port_fp16_vs_maker_fp32_argmax": 0.9667,
+   "track": "fold_step_structure_tokens"
+  },
+  "sasa": {
+   "bf16_top1_top2_gap_median": 0.082,
+   "fp32_top1_top2_gap_median": 0.0802,
+   "maker_bf16_vs_fp32_rel_l2": 0.00228,
+   "maker_bf16_vs_maker_fp32_argmax": 0.9833,
+   "port_fp16_vs_maker_bf16_argmax": 0.9833,
+   "port_fp16_vs_maker_fp32_argmax": 1.0,
+   "port_vs_fp32_rel_l2": 0.00033,
+   "track": "sasa"
+  },
+  "sequence": {
+   "bf16_top1_top2_gap_median": 0.2754,
+   "fp32_top1_top2_gap_median": 0.2781,
+   "maker_bf16_vs_fp32_rel_l2": 0.00224,
+   "maker_bf16_vs_maker_fp32_argmax": 1.0,
+   "port_fp16_vs_maker_bf16_argmax": 1.0,
+   "port_fp16_vs_maker_fp32_argmax": 1.0,
+   "port_vs_fp32_rel_l2": 0.00027,
+   "track": "sequence"
+  },
+  "structure": {
+   "bf16_top1_top2_gap_median": 0.0,
+   "fp32_top1_top2_gap_median": 0.0777,
+   "maker_bf16_vs_fp32_rel_l2": 0.00207,
+   "maker_bf16_vs_maker_fp32_argmax": 0.5667,
+   "port_fp16_vs_maker_bf16_argmax": 0.6167,
+   "port_fp16_vs_maker_fp32_argmax": 0.9333,
+   "port_vs_fp32_rel_l2": 0.00027,
+   "track": "structure"
+  }
+ },
+ "schema": 1,
+ "verdict": {
+  "missed": {
+   "A.argmax.structure": "a miss against the bf16 GPU reference, kept as a miss. Diagnostic only (not the reference): the port agrees with the maker's float32 structure head on 93.3% of residues; the maker's own bf16 run agrees on 56.7%, because in bf16 the median gap between its top two of 4,096 structure logits is 0.0 (0.078 in float32). The frozen 0.8 bound was set against the bf16 run and is not reachable by any implementation.",
+   "D.backbone": "a miss against the bf16 GPU reference, kept as a miss: 0.269 A max and 0.160 A RMSD on identical tokens, against a frozen bound of 0.25 A. Diagnostic only (not the reference): the maker's own decoder in float32 on MPS is 0.299 A from its bf16 output and 0.041 A from the port.",
+   "F2.ca_rmsd": "a miss against the bf16 GPU reference, kept as a miss. Diagnostic only (not the reference): 2.49 A against the bf16 reference backbone follows from those flipped tokens, not from the decoder: on identical tokens the port's backbone is 0.04 A from the maker's float32 decoder.",
+   "F2.plddt": "a miss against the bf16 GPU reference, kept as a miss. Diagnostic only (not the reference): 0.029 mean difference, from the same flipped tokens; on identical tokens the pLDDT difference is at most 0.0023.",
+   "F2.ptm": "a miss against the bf16 GPU reference, kept as a miss. Diagnostic only (not the reference): 0.402 vs 0.359, from the same flipped tokens; on identical tokens pTM differs by 0.0012.",
+   "F2.structure_tokens": "a miss against the bf16 GPU reference, kept as a miss. Diagnostic only (not the reference): same cause: 96.7% agreement with the maker's float32 logits, 53.3% between its own bf16 and float32 runs."
+  },
+  "passed": [
+   "A.tokens.sequence",
+   "B.tokens.sequence",
+   "B.tokens.structure",
+   "B.tokens.secondary_structure",
+   "B.tokens.sasa",
+   "B.tokens.function",
+   "A.embed_in",
+   "A.block.0",
+   "A.block.1",
+   "A.block.23",
+   "A.block.47",
+   "A.embeddings",
+   "A.logits.sequence",
+   "A.argmax.sequence",
+   "A.logits.structure",
+   "A.logits.secondary_structure",
+   "A.argmax.secondary_structure",
+   "A.logits.sasa",
+   "A.argmax.sasa",
+   "A.logits.function",
+   "A.argmax.function",
+   "A.logits.residue_annotations",
+   "A.argmax.residue_annotations",
+   "B.embed_in",
+   "B.block.0",
+   "B.block.1",
+   "B.block.23",
+   "B.block.47",
+   "B.embeddings",
+   "B.logits.sequence",
+   "B.argmax.sequence",
+   "B.logits.structure",
+   "B.argmax.structure",
+   "B.logits.secondary_structure",
+   "B.argmax.secondary_structure",
+   "B.logits.sasa",
+   "B.argmax.sasa",
+   "B.logits.function",
+   "B.argmax.function",
+   "B.logits.residue_annotations",
+   "B.argmax.residue_annotations",
+   "C.encoder.latent",
+   "C.encoder.tokens",
+   "D.plddt",
+   "D.ptm",
+   "D.pae",
+   "E.interpro_logits",
+   "E.keyword_logits",
+   "F1.sequence",
+   "G.function_tokens",
+   "G.annotations"
+  ]
+ },
+ "weights": {
+  "converted": "the runner's convert op: four .pth and two NumPy files to FP16 safetensors",
+  "esm3_sm_open_v1.pth_sha256": "5ead5a135c658068db6a4f1b933e72d6110992c4668822e1c0e2dcc53e38acd9",
+  "repo": "biohub/esm3-sm-open-v1",
+  "revision": "47f0545b2b6daf26a93439a3cd610f4f7f3d5478"
+ }
+}

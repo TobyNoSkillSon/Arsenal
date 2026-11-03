@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "input": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "text"
+              },
+              "text": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "image"
+              },
+              "image": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false,
+                "x-arsenal-file": {
+                  "accept": [
+                    "image/png",
+                    "image/jpeg"
+                  ]
+                },
+                "x-arsenal-control": "image-picker"
+              }
+            },
+            "required": [
+              "type",
+              "image"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "video"
+              },
+              "video": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false,
+                "x-arsenal-file": {
+                  "accept": [
+                    "video/*"
+                  ]
+                },
+                "x-arsenal-control": "video-picker"
+              }
+            },
+            "required": [
+              "type",
+              "video"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "document"
+              },
+              "document": {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 4096
+                  }
+                },
+                "required": [
+                  "path"
+                ],
+                "additionalProperties": false,
+                "x-arsenal-file": {
+                  "accept": [
+                    "application/pdf"
+                  ]
+                },
+                "x-arsenal-control": "document-picker"
+              }
+            },
+            "required": [
+              "type",
+              "document"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "content"
+              },
+              "content": {
+                "type": "array",
+                "items": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "text"
+                        },
+                        "text": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "text"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "image"
+                        },
+                        "image": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 4096
+                            }
+                          },
+                          "required": [
+                            "path"
+                          ],
+                          "additionalProperties": false,
+                          "x-arsenal-file": {
+                            "accept": [
+                              "image/png",
+                              "image/jpeg"
+                            ]
+                          },
+                          "x-arsenal-control": "image-picker"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "image"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "video"
+                        },
+                        "video": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 4096
+                            }
+                          },
+                          "required": [
+                            "path"
+                          ],
+                          "additionalProperties": false,
+                          "x-arsenal-file": {
+                            "accept": [
+                              "video/*"
+                            ]
+                          },
+                          "x-arsenal-control": "video-picker"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "video"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "const": "document"
+                        },
+                        "document": {
+                          "type": "object",
+                          "properties": {
+                            "path": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 4096
+                            }
+                          },
+                          "required": [
+                            "path"
+                          ],
+                          "additionalProperties": false,
+                          "x-arsenal-file": {
+                            "accept": [
+                              "application/pdf"
+                            ]
+                          },
+                          "x-arsenal-control": "document-picker"
+                        }
+                      },
+                      "required": [
+                        "type",
+                        "document"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                },
+                "minItems": 1,
+                "maxItems": 32
+              }
+            },
+            "required": [
+              "type",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 2048
+    },
+    "task": {
+      "type": "string",
+      "enum": [
+        "query",
+        "document"
+      ]
+    },
+    "instruction": {
+      "type": "string",
+      "maxLength": 32768
+    },
+    "dimensions": {
+      "type": "integer",
+      "enum": [
+        2048
+      ]
+    },
+    "normalize": {
+      "const": true
+    }
+  },
+  "required": [
+    "input"
+  ],
+  "additionalProperties": false
+}

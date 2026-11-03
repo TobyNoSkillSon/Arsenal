@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "label": {
+            "type": "string",
+            "enum": [
+              "foreground",
+              "background"
+            ],
+            "default": "foreground"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "x-arsenal-control": "image-points",
+      "x-arsenal-image": "image",
+      "x-arsenal-coordinates": "normalized"
+    },
+    "boxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "xmin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "xmax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "xmin",
+          "ymin",
+          "xmax",
+          "ymax"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 1,
+      "x-arsenal-control": "image-boxes",
+      "x-arsenal-image": "image",
+      "x-arsenal-coordinates": "normalized"
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 10000
+    },
+    "threshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.5
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "image"
+      ]
+    },
+    {
+      "required": [
+        "session_id"
+      ]
+    }
+  ]
+}

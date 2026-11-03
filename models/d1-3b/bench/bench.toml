@@ -1,0 +1,7 @@
+schema = 1
+model = "d1-3b"
+suite = "bench/kinds/decisions/suite-v1.toml"
+profile = "quick"
+precision = "bf16"
+mode = "exact"
+# No controlled benchmark run authorized; task-probe timings are daytime observations.

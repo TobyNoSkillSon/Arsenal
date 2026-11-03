@@ -1,0 +1,9 @@
+[
+ {"id": "ball", "state": {"clip": "<video:1>", "camera": "fixed"}, "media": [{"type": "video", "frames": ["ball-0.png", "ball-1.png", "ball-2.png", "ball-3.png"], "fps": 2.0}],
+  "questions": {"right": {"type": "noul", "instructions": "Does the red ball move to the right during the clip?"},
+                "object": {"type": "choice", "instructions": "What moves in the clip?", "criteria": {"ball": "a red ball", "car": "a car", "nothing": "nothing moves"}}}},
+ {"id": "light", "state": "Traffic camera: <video:1>", "media": [{"type": "video", "frames": ["light-0.png", "light-1.png", "light-2.png"], "fps": 1.0}],
+  "questions": {"green": {"type": "noul", "instructions": "Is the light green at the end of the clip?"}}},
+ {"id": "mixed", "state": "Screen: <image:1>\nRecording: <video:2>", "media": [{"type": "image", "path": "probe-320x240.png"}, {"type": "video", "frames": ["ball-0.png", "ball-1.png", "ball-2.png", "ball-3.png"], "fps": 2.0}],
+  "questions": {"both": {"type": "noul", "instructions": "Do both the screen and the recording show something red?"}}}
+]

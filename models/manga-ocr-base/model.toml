@@ -1,0 +1,82 @@
+schema = 3
+id = "manga-ocr-base"
+name = "Manga OCR Base"
+kind = "local.document"
+summary = "Reads the Japanese text in a manga speech bubble or text crop, vertical or horizontal."
+description = "Manga OCR is a vision encoder-decoder for Japanese text: a ViT (DeiT-base) image encoder and a 2-layer character-level BERT-Japanese decoder, 111M parameters, by Maciej Budyś (kha-white). It was trained on Manga109-s and synthetic manga-style text, and aims to stay robust to vertical and horizontal text, furigana, text over pictures, many fonts and low-quality scans. It reads one text block per image and also works as a general printed-Japanese OCR. The card gives no benchmark score."
+purpose = "Read Japanese manga text"
+publisher = "kha-white"
+released = 2022
+params = "111.0M"
+tasks = ["image-to-text"]
+languages = ["ja"]
+good_for = [
+  "One speech bubble or caption cropped from a manga page, vertical or horizontal",
+  "Short printed Japanese text crops: signs, screenshots, titles, furigana-heavy text",
+]
+limits = [
+  "Reads one text block per image and has no text detector: crop each bubble first, a whole page is not split into bubbles.",
+  "Trained for Japanese only; it is not meant for Polish. Latin letters and digits inside Japanese text come out full-width (ＬＩＮＫ, ７).",
+  "On a tiny or blurred crop it invents plausible Japanese instead of refusing (a 33x17 crop gave a made-up sentence).",
+  "Up to 299 characters per image.",
+  "Parity with the maker code: 4-beam output tokens identical on 6 of 6 fixed inputs (transformers 5.22, MPS fp16); see log/003-parity.md.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/kha-white/manga-ocr-base"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/kha-white/manga-ocr-base/blob/82c77fb84369e0fce0d6e8f0ad96fa82646d0346/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "kha-white/manga-ocr-base"
+revision = "82c77fb84369e0fce0d6e8f0ad96fa82646d0346"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "preprocessor_config.json", "special_tokens_map.json", "tokenizer_config.json", "vocab.txt"]
+
+[weights.sha256]
+"model.safetensors" = "218bc3b6f1bce855a8d6eb86150de1f0407115627e68729ab36a6e4f33480ad9"
+"config.json" = "8c0e395de8fa699daaac21aee33a4ba9bd1309cfbff03147813d2a025f39f349"
+"preprocessor_config.json" = "af4eb4d79cf61b47010fc0bc9352ee967579c417423b4917188d809b7e048948"
+"special_tokens_map.json" = "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+"tokenizer_config.json" = "d775ad1deac162dc56b84e9b8638f95ed8a1f263d0f56f4f40834e26e205e266"
+"vocab.txt" = "344fbb6b8bf18c57839e924e2c9365434697e0227fac00b88bb4899b78aa594d"
+
+[weights.bytes]
+"model.safetensors" = 444059876
+"config.json" = 77546
+"preprocessor_config.json" = 228
+"special_tokens_map.json" = 112
+"tokenizer_config.json" = 486
+"vocab.txt" = 24072
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-manga-ocr-base"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

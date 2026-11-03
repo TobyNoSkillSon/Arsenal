@@ -1,0 +1,12 @@
+{
+  "image_to_3d": {
+    "image": {
+      "path": "$INBOX/fixture.png"
+    },
+    "resolution": 512,
+    "texture_size": 256,
+    "steps": 1,
+    "target_faces": 128,
+    "seed": 42
+  }
+}

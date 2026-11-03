@@ -1,0 +1,28 @@
+[
+  {
+    "id": "photo",
+    "op": "generate",
+    "params": {
+      "prompt": "A red ceramic teapot on a wooden table, soft daylight, product photograph.",
+      "seed": 24301,
+      "width": 512,
+      "height": 512,
+      "steps": 4,
+      "guidance": 1,
+      "n": 1
+    }
+  },
+  {
+    "id": "text",
+    "op": "generate",
+    "params": {
+      "prompt": "A white sign with the word ARSENAL in black capital letters, straight-on photograph.",
+      "seed": 48879,
+      "width": 512,
+      "height": 512,
+      "steps": 4,
+      "guidance": 1,
+      "n": 1
+    }
+  }
+]

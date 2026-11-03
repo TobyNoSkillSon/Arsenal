@@ -1,0 +1,161 @@
+{
+ "commit": "1b3e35c1995dab3332495aab88a85afc16685d7d",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [
+   {
+    "bytes": 32044,
+    "file": "input.wav",
+    "sha256": "df37326be54da7c8b33cdbf6509e7bead060e05b6bd5dcc1dd381284d5c6c8ae"
+   }
+  ],
+  "request": [
+   {
+    "accept": "audio/wav",
+    "body": {
+     "audio": {
+      "path": "input.wav"
+     },
+     "mode": "denoise",
+     "stream": false
+    },
+    "op": "enhance"
+   }
+  ]
+ },
+ "maker_reference": {
+  "evidence": "lab/evidence/re-use/maker-2026-11-02",
+  "frames_equal": true,
+  "maker_output": {
+   "channels": 1,
+   "finite": true,
+   "frames": 16000,
+   "peak": 0.339264,
+   "rms": 0.086362,
+   "sample_rate": 16000,
+   "seconds": 1.0,
+   "sha256": "c1f9d330821d6c175c96d21d36656d175a77ebc38245beb01b351a8a34987650",
+   "type": "wav"
+  },
+  "note": "Maker code (inference.py pipeline) on MPS in FP16 with a pure-PyTorch mamba_ssm stand-in (mamba_ssm's own selective_scan_ref); STFT/ISTFT and the scan state in FP32 as in the maker's reference path.",
+  "reference": {
+   "device": "mps",
+   "input": {
+    "rms": 0.10933521389961243,
+    "sample_rate": 16000,
+    "samples": 16000,
+    "sha256": "df37326be54da7c8b33cdbf6509e7bead060e05b6bd5dcc1dd381284d5c6c8ae"
+   },
+   "load_state_dict": {
+    "missing": [],
+    "strict": true,
+    "unexpected": []
+   },
+   "model_dtype": "float16",
+   "model_input_dtype": "float16",
+   "model_params": 9607747,
+   "model_safetensors_sha256": "06badaf4029b297f97f7fe48d62990b48d5482608210df577354e0d4e0ed70e1",
+   "note_default_dtype": "torch default dtype set to model dtype only around SEMamba.forward (maker's torch.zeros padding)",
+   "ops_kept_fp32": [
+    "torch.stft/mag_phase_stft (input, window, magnitude, phase)",
+    "mag_phase_istft (expm1/cos/sin/complex/istft)",
+    "selective_scan internals (u, delta, A, B, C, exp/softplus/state recurrence; mamba_ssm's own reference does this in float32)"
+   ],
+   "output": {
+    "inf": 0,
+    "nan": 0,
+    "peak": 0.3392599821090698,
+    "rms": 0.08636445552110672,
+    "samples": 16000
+   },
+   "stages": {
+    "amp_g_min_max": [
+     -0.005603790283203125,
+     3.458984375
+    ],
+    "amp_g_nonfinite": 0,
+    "amp_g_shape": [
+     1,
+     321,
+     201
+    ],
+    "noisy_mag_shape": [
+     1,
+     321,
+     201
+    ],
+    "noisy_pha_shape": [
+     1,
+     321,
+     201
+    ],
+    "pha_g_nonfinite": 0,
+    "pha_g_shape": [
+     1,
+     321,
+     201
+    ],
+    "sweep_masked_frames": 0,
+    "total_frames": 201
+   },
+   "stft": {
+    "base": {
+     "hop": 40,
+     "n_fft": 320,
+     "sampling_rate": 8000,
+     "win": 320
+    },
+    "center": true,
+    "compress_factor": "relu_log1p",
+    "pad_mode": "reflect",
+    "scaled": {
+     "hop": 80,
+     "n_fft": 640,
+     "win": 640
+    }
+   },
+   "torch_version": "2.15.0",
+   "wall_time_s_load_plus_run": 5.3062121868133545
+  },
+  "snr_db_vs_maker": 39.36
+ },
+ "model": "re-use",
+ "note": "Arsenal BF16 (cast at Get from NVIDIA's FP32 checkpoint). The served kernel path (Metal or stock MLX) is not exposed by the API.",
+ "output": [
+  {
+   "file_count": 1,
+   "files": [
+    {
+     "channels": 1,
+     "finite": true,
+     "frames": 16000,
+     "peak": 0.339447,
+     "rms": 0.086801,
+     "sample_rate": 16000,
+     "seconds": 1.0,
+     "sha256": "0f29d2de2ea9ca8bef7142a6811e39a53caa218143fd6e664801cbf4a60fb14c",
+     "type": "wav"
+    }
+   ],
+   "op": "enhance",
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "bf16",
+ "schema": "golden-1",
+ "tolerance": {
+  "finite": true,
+  "frames_equal": true,
+  "snr_db_vs_maker_min": 30
+ },
+ "weights": {
+  "repo": "nvidia/NVIDIA-NemotronLabs-RE-USE",
+  "revision": "31f82f2efad1095034492f236e8dac9239ba713b",
+  "sha256": {
+   "LICENSE": "a3d882953f026d3e2fdd57842d9c522c8320d4c0388af2278bcf4d438d255a2c",
+   "model.safetensors": "06badaf4029b297f97f7fe48d62990b48d5482608210df577354e0d4e0ed70e1"
+  }
+ }
+}

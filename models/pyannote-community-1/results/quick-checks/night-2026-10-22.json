@@ -1,0 +1,31 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "pyannote-community-1",
+  "revision": "8a527374977391da736e0daaef26855d949d9685",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T02:54:12Z",
+      "load_seconds": 1.18,
+      "mac_peak_in_use_mb": 29255.9,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "diarize": {
+          "files": [],
+          "seconds_first": 0.725,
+          "seconds_warm": 0.161,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 395.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 395.0,
+      "samples": 9
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

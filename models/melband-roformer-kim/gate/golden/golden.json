@@ -1,0 +1,147 @@
+{
+ "model": "melband-roformer-kim",
+ "reference": "KimberleyJensen/Mel-Band-Roformer-Vocal-Model @25f44ffb (inference.py config, utils.demix_track), torch 2.15.0 on MPS: network float16 via model.half(), STFT/iSTFT and mask averaging float32 (band_split input cast to half, mask-estimator output cast to float32). librosa 1.0.0. Captured once, 2 Nov 2026.",
+ "fixture": {
+  "file": "lab/evidence/melband-roformer-kim/fixture-song.wav",
+  "sha256": "e3d7cf4f658cd3c86c2836273e385ebbd9257e044b983f77aeb3c8277f3ea20e",
+  "frames": 529200,
+  "rate": 44100,
+  "channels": 2,
+  "content": "12 s, macOS Samantha voice over synthesized A-G-F-G chords and a kick, peak 0.8, 16-bit PCM"
+ },
+ "layout": {
+  "freq_indices_count": 3958,
+  "freq_indices_sha256_int32le": "c087bfc8e1a110a16a7aa998de5fe43b025ea08de0e4606c7b80e258b1ed5ecc",
+  "num_bands_per_freq_sha256_int32le": "41947c540f2511f98bb2530176d9a9a3576e5a954135dbf5ef207247e0933683",
+  "max_bands_per_freq": 2
+ },
+ "maker": {
+  "features": {
+   "shape": [
+    801,
+    60,
+    384
+   ],
+   "rms": 0.946849,
+   "max_abs": 8.453125
+  },
+  "trunk": {
+   "shape": [
+    801,
+    60,
+    384
+   ],
+   "rms": 0.781945,
+   "max_abs": 5.78125
+  },
+  "mask": {
+   "shape": [
+    801,
+    7916
+   ],
+   "rms": 0.57748,
+   "max_abs": 6.582031
+  },
+  "chunk_out": {
+   "shape": [
+    2,
+    352800
+   ],
+   "rms": 0.099248,
+   "max_abs": 0.571024
+  },
+  "chunk_out_samples": {
+   "44100": [
+    -0.000571,
+    0.00041
+   ],
+   "176400": [
+    0.012454,
+    0.021457
+   ],
+   "300000": [
+    -4.5e-05,
+    -3.8e-05
+   ]
+  },
+  "demix_vocals": {
+   "shape": [
+    2,
+    529200
+   ],
+   "rms": 0.081039,
+   "max_abs": 0.571409
+  },
+  "demix_vocals_rms_per_channel": [
+   0.086353,
+   0.07535
+  ],
+  "demix_vocals_samples": {
+   "88200": [
+    0.494734,
+    0.43726
+   ],
+   "264600": [
+    -0.080731,
+    -0.069127
+   ],
+   "441000": [
+    -0.0,
+    -1e-06
+   ]
+  },
+  "sdr_db_vs_true_voice": 28.79
+ },
+ "arsenal_parity_relative_l2": {
+  "chunk_out": 0.000878,
+  "demix_vocals": 0.000857,
+  "features": 0.00268,
+  "layer0": 0.000819,
+  "mask": 0.000301,
+  "render_from_ref_mask": 3.84e-07,
+  "trunk": 0.00495
+ },
+ "arsenal_sdr_db_vs_true_voice": 28.79,
+ "tolerance": {
+  "relative_l2": {
+   "render_from_ref_mask": 0.0001,
+   "features": 0.005,
+   "layer0": 0.01,
+   "trunk": 0.03,
+   "mask": 0.05,
+   "chunk_out": 0.05,
+   "demix_vocals": 0.05
+  },
+  "counts_first": "two files (vocals, instrumental), 529200 frames, 2 channels, 44100 Hz; layout hashes exact",
+  "set": "before the comparison, as BS-RoFormer's bounds"
+ },
+ "test": "Workers/Audio/Tests/AudioWorkerTests/MelBandRoformerTests.swift (layout and demix weight-free; trainedWeightsMatchTheMaker heavy)",
+ "real_run": {
+  "service": "arsenal-testserver --real, isolated profile, commit 2a4df6b6",
+  "request": {
+   "op": "separate_audio",
+   "body": {
+    "audio": {
+     "path": "fixture-song.wav"
+    }
+   }
+  },
+  "counts": {
+   "files": 2,
+   "ids": [
+    "vocals",
+    "instrumental"
+   ],
+   "frames": 529200,
+   "channels": 2,
+   "rate": 44100
+  },
+  "relative_l2_vs_maker": {
+   "vocals": 0.00086,
+   "instrumental": 0.00103
+  },
+  "vocals_peak": 0.571,
+  "instrumental_peak": 0.412,
+  "served_path": "native audio worker, runner native, fp16, no kernels"
+ }
+}

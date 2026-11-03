@@ -1,0 +1,31 @@
+Arsenal
+Copyright 2026 Arsenal contributors
+
+Arsenal is licensed under the MIT License; see LICENSE.
+
+Third-party code and model weights keep their own licences. Code ported or
+vendored into this repository (with its source path and commit) and the
+licences of bundled third-party software are listed below in the copy of this
+file that ships inside Arsenal.app (Contents/Resources/NOTICE), assembled by
+scripts/assemble.sh from Workers/*/PORTED-FROM.md and docs/notices/*.md. Full
+licence texts of dependencies are in Contents/Resources/Licenses/. Each model's
+weights licence, including commercial-use limits, is stated in its model.toml
+and shown in the app.
+
+Exception to the MIT licence: Workers/Restoration/Sources/GIMMNative (the GIMM-VFI-R
+frame-interpolation engine, compiled into Arsenal's worker) is a port of
+GSeanCDAT/GIMM-VFI and stays under the S-Lab License 1.0: redistribution and use
+in source or binary form for non-commercial purposes only, with S-Lab's notice
+kept (Workers/Restoration/LICENSE-upstream-GIMMNative). Anyone redistributing
+Arsenal or a fork commercially must remove it or get the authors' permission.
+
+Not covered by the MIT licence: Workers/Geometry/Sources/MLXTrellis (the TRELLIS.2
+image-to-3D engine, compiled into Arsenal's worker) is vendored from
+xocialize/mlx-trellis2-swift@f0b8717511fb9573b901118e65d1fd7feb1174ce, whose own
+code carries no licence (its repository lists licences only for the third-party
+code it vendors: mlx-swift-mesh, xatlas, Microsoft's TRELLIS.2 dual-grid code and
+Eigen, all kept in Workers/Geometry/Licenses/). Arsenal's MIT licence does not
+extend to that code; its rights stay with its author. TRELLIS.2's weights are
+Microsoft's (MIT) and its DINOv3 encoder is Meta's (DINOv3 License).
+
+Official Swift MCP SDK 0.12.1 library is vendored in Packages/swift-sdk, with bounded replay and stream cleanup patches. Source provenance and the upstream licence are in that package; see docs/notices/mcp.md.

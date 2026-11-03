@@ -1,0 +1,73 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "type": "object",
+ "additionalProperties": false,
+ "description": "Probabilistic forecast of the target series at the returned quantile levels, in the input's units.",
+ "required": [
+  "horizon",
+  "quantile_levels",
+  "median",
+  "quantiles"
+ ],
+ "properties": {
+  "horizon": {
+   "type": "integer",
+   "description": "The number of forecast steps."
+  },
+  "quantile_levels": {
+   "type": "array",
+   "description": "The quantile levels of each quantiles row, ascending: the requested ones, or the 21 trained levels.",
+   "items": {
+    "type": "number"
+   }
+  },
+  "median": {
+   "type": "array",
+   "description": "The model's own 0.5 quantile for each future step.",
+   "items": {
+    "type": "number"
+   }
+  },
+  "quantiles": {
+   "type": "array",
+   "description": "One row per future step, one value per returned quantile level.",
+   "items": {
+    "type": "array",
+    "items": {
+     "type": "number"
+    }
+   }
+  },
+  "co_target_forecasts": {
+   "type": "array",
+   "description": "Present when co_targets were given: one forecast per co-target, in their order.",
+   "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+     "median",
+     "quantiles"
+    ],
+    "properties": {
+     "median": {
+      "type": "array",
+      "description": "The model's own 0.5 quantile for each future step.",
+      "items": {
+       "type": "number"
+      }
+     },
+     "quantiles": {
+      "type": "array",
+      "description": "One row per future step, one value per returned quantile level.",
+      "items": {
+       "type": "array",
+       "items": {
+        "type": "number"
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

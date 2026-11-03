@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "prompt"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32768,
+      "description": "What to draw. For a transparent image, set transparent, or begin with \"This is an RGBA image with transparency.\" and end with \"The image has alpha channel and the background is transparent.\""
+    },
+    "transparent": {
+      "type": "boolean",
+      "title": "Transparent background",
+      "default": false,
+      "description": "Transparent background (RGBA PNG): wraps the prompt in Qwen's transparency format. Each result's alpha says whether the PNG kept its alpha channel."
+    },
+    "negative_prompt": {
+      "type": "string",
+      "maxLength": 32768,
+      "description": "What to steer away from; used only when guidance is above 1."
+    },
+    "guidance": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "True classifier-free guidance. 1 (the model's default) runs without it; above 1 with a negative prompt doubles the work per step."
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 256,
+      "maximum": 2752,
+      "multipleOf": 32,
+      "description": "Image width in pixels, a multiple of 32; native up to 2K (2048 \u00d7 2048, 2752 \u00d7 1536)."
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 256,
+      "maximum": 2752,
+      "multipleOf": 32,
+      "description": "Image height in pixels, a multiple of 32."
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Denoising steps; the model is tuned for 40."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "mode": "exact",
+  "model": "qwen-image-2.1-turbo",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-10-22T08:24:36Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Generate at bf16: one ordinary Load, then two Generate requests (warm-up, timed) through Arsenal's API. Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "fc13ba1986fcb905854dc8de2f52eee395f49b5b",
+        "run": "night-2026-10-22-bf16",
+        "source": "results/quick-checks/night-2026-10-22.json; bf16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "bf16",
+    "kind": "images",
+    "metrics": {
+      "batteryPercentPer100Images": {
+        "state": "notMeasured"
+      },
+      "peakMemoryGB": {
+        "basis": "Load and two Generate requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-10-22T08:24:36Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Generate requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "fc13ba1986fcb905854dc8de2f52eee395f49b5b",
+          "run": "night-2026-10-22-bf16",
+          "source": "results/quick-checks/night-2026-10-22.json; bf16"
+        },
+        "state": "quickCheck",
+        "value": 39.728447488
+      },
+      "psnrDB": {
+        "state": "notMeasured"
+      },
+      "secondsPerImage": {
+        "state": "notMeasured"
+      }
+    },
+    "runner": "native"
+  }
+}

@@ -1,0 +1,9 @@
+Upstream repository: https://github.com/xocialize/seedvr2-mlx-swift
+Revision: 1dfa161ba9522bdf1295015fd0b00209a4e30093
+
+No standalone LICENSE file exists in this revision. The imported source headers say:
+  SPDX-License-Identifier: MIT (port). SeedVR2 model/weights: Apache-2.0 / ByteDance.
+The upstream README says:
+  Model/weights license: Apache-2.0 (ByteDance Seed). Port code: MIT.
+
+This records the available upstream notice; it is not a newly invented grant.

@@ -1,0 +1,77 @@
+schema = 3
+id = "eomt-coco-panoptic-large-640"
+name = "EoMT COCO Panoptic Large 640"
+kind = "perception"
+summary = "Splits a photo into its objects and regions (people, animals, cars, sky, road, wall) and returns a labelled mask for each."
+description = "EoMT (Encoder-only Mask Transformer) from TU Eindhoven and partners (CVPR 2025 highlight, 'Your ViT is Secretly an Image Segmentation Model') is a plain DINOv2 ViT-L whose last four layers also carry 200 learned queries, with no separate decoder. This checkpoint does panoptic segmentation at 640x640 with the 133 COCO classes (80 things and 53 stuff). The makers report 56.0 PQ on COCO val."
+purpose = "Label every object and region"
+publisher = "tue-mps"
+released = 2025
+params = "316.7M"
+tasks = ["image-segmentation"]
+languages = ["mul"]
+good_for = ["One-shot breakdown of a scene: each person, animal, vehicle and object instance plus stuff such as sky, road, grass and wall", "Picking a ready-made mask for a cut-out without clicking", "Counting the instances of a COCO class in a photo"]
+limits = ["Only the 133 COCO classes: anything else is folded into the nearest class or left out (a rainbow sculpture was not labelled)", "The photo is resized to 640 pixels on its longest side, so small or thin things are missed and edges are soft", "Takes no clicks, boxes or text: it segments the whole photo by itself; segments below the maker's 0.8 confidence are dropped", "Photos above about 4 megapixels get their map computed at a scaled size and enlarged, so edges there are blockier", "Class names are English; no language input", "Parity with the maker's transformers EoMT on MPS FP16: identical labels and segments on four images, mask logits cosine 0.99999 or better on the same pixels"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/tue-mps/coco_panoptic_eomt_large_640"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/tue-mps/coco_panoptic_eomt_large_640/blob/dcd130bed9b1ebda7041fd660fddb16f905b9c3b/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image", "text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "tue-mps/coco_panoptic_eomt_large_640"
+revision = "dcd130bed9b1ebda7041fd660fddb16f905b9c3b"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "preprocessor_config.json"]
+
+[weights.sha256]
+"model.safetensors" = "fcb440699a5eae1d21d4aa16c9f9b586635d9d572d879653d4ecda49ed28dc67"
+"config.json" = "0b1def7140606b1ac78ae5505df6c16ae31c50c5aac9b2d65367914546ab13e5"
+"preprocessor_config.json" = "8088c2597646d2a84effdfd11682ce70fd5e950c787fa86b4f4d9be706ddeef7"
+
+[weights.bytes]
+"model.safetensors" = 1266829336
+"config.json" = 6428
+"preprocessor_config.json" = 664
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-eomt-coco-panoptic-large-640"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "segment"
+title = "Select and segment"
+input = "ops/segment.input.json"
+output = "file"
+output_schema = "ops/segment.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "markdown": {
+            "type": "string"
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "content"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 0,
+            "maxItems": 1024
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "image_base64": {
+                  "type": "string"
+                },
+                "top_left_x": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                },
+                "top_left_y": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                },
+                "bottom_right_x": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                },
+                "bottom_right_y": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                }
+              },
+              "required": [
+                "id",
+                "top_left_x",
+                "top_left_y",
+                "bottom_right_x",
+                "bottom_right_y"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 0,
+            "maxItems": 1024
+          },
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65536
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65536
+              },
+              "dpi": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2400
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "truncated": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "index",
+          "markdown"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 1024
+    },
+    "model": {
+      "type": "string"
+    },
+    "usage_info": {
+      "type": "object"
+    },
+    "document_annotation": {
+      "type": "string"
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "mime": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967296
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "id",
+          "path",
+          "mime",
+          "bytes",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "pages",
+    "files"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "maxLength": 1000000
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "application/pdf",
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "document-picker"
+    },
+    "json_schema": {
+      "type": "object",
+      "x-arsenal-control": "json-schema"
+    },
+    "labels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "maxItems": 256
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "text"
+      ]
+    },
+    {
+      "required": [
+        "image"
+      ]
+    },
+    {
+      "required": [
+        "document"
+      ]
+    }
+  ],
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "required": [
+            "json_schema"
+          ]
+        },
+        {
+          "required": [
+            "labels"
+          ]
+        }
+      ]
+    }
+  ]
+}

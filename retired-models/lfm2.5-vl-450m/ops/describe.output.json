@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "finish_reason": {
+      "type": "string",
+      "enum": [
+        "stop",
+        "length"
+      ]
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "additionalProperties": false
+}

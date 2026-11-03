@@ -1,0 +1,73 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "lco-embedding-omni-7b"
+name = "LCO-Embedding Omni 7B"
+kind = "embeddings"
+params = "8.93B"
+publisher = "LCO-Embedding"
+released = 2025
+suggested = false
+summary = "Find text, images, PDF pages, audio and video by meaning, all in one vector space."
+description = "LCO-Embedding-Omni-7B, the language-centric omnimodal embedding model of 'Scaling Language-Centric Omnimodal Representation Learning' (NeurIPS 2025): the thinker of Qwen2.5-Omni 7B (a Qwen2.5 7B language model with a window-attention vision encoder and a Whisper-style audio encoder, 8.93B parameters) contrastively trained on text, so text, images, audio and video land in one 3,584-dimension space. The makers report state of the art on MIEB-Lite (51 image-embedding tasks) and on the MAEB audio benchmark without audio training."
+purpose = "Search text, images, audio and video"
+good_for = ["semantic search across text, photos, PDF pages, sound and video in one index", "text-to-image, text-to-audio and text-to-video retrieval", "visual document retrieval", "similarity, clustering and classification"]
+limits = ["The soundtrack of a video is not used; embed it separately as audio.", "32,768 tokens per input: about 13 letter-size PDF pages or 40 seconds of full-size video; at most 5 minutes of audio per part.", "One prompt for queries and documents; no instructions or shorter dimensions."]
+tasks = ["feature-extraction"]
+languages = ["mul"]
+tools = ["operation"]
+context = 32768
+[facets]
+modalities_in = ["text", "image", "audio", "video"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/LCO-Embedding/LCO-Embedding-Omni-7B/blob/108f6f1a5de3b2eedd1d1c7b7005aaca6ed3802c/README.md"
+[weights]
+repo = "LCO-Embedding/LCO-Embedding-Omni-7B"
+revision = "108f6f1a5de3b2eedd1d1c7b7005aaca6ed3802c"
+dtype = "bf16"
+files = ["config.json", "model-00001-of-00004.safetensors", "model-00002-of-00004.safetensors", "model-00003-of-00004.safetensors", "model-00004-of-00004.safetensors", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "fa9c367db750538e4e998d9d45702d3b8d370dc1cb7514ff72b90ad071086e48"
+"model-00001-of-00004.safetensors" = "3081f51bea7183109e3a3d9d8d85c2f0de8ee74c4760d7881f84fe5e8b6f19fa"
+"model-00002-of-00004.safetensors" = "80f511cc48f3435b11d245d7828dc455a55350dbf9da897136097617d40e930b"
+"model-00003-of-00004.safetensors" = "b4c4c9cfb39cbc06a1a1fd499c962ff32bd50cbb5a17aa139c59d280a8de1047"
+"model-00004-of-00004.safetensors" = "8c30926072397c39ed68e3ac30616388e2f3d44555e15263b36392c1bb3f1655"
+"tokenizer.json" = "8441917e39ae0244e06d704b95b3124795cec478e297f9afac39ba670d7e9d99"
+"tokenizer_config.json" = "569aa7a9171e36dfff80f0a7550ab0c9c09e46ac840fea5030641417394fb0d2"
+[weights.bytes]
+"config.json" = 3435
+"model-00001-of-00004.safetensors" = 4985047208
+"model-00002-of-00004.safetensors" = 4991495784
+"model-00003-of-00004.safetensors" = 4991495888
+"model-00004-of-00004.safetensors" = 2895739720
+"tokenizer.json" = 11421870
+"tokenizer_config.json" = 6469
+[derive]
+fp16 = "cast:embed-lco-omni-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "embed"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "embed"
+title = "Embed inputs"
+input = "ops/embed.input.json"
+output_schema = "ops/embed.output.json"
+output = "json"
+stream = false
+timeout_s = 600
+first_response_timeout_s = 600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arsenal research log front matter v1",
+  "type": "object",
+  "required": [
+    "hypothesis",
+    "change",
+    "measurement",
+    "verdict",
+    "numbers",
+    "links"
+  ],
+  "properties": {
+    "hypothesis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "change": {
+      "type": "string",
+      "minLength": 1
+    },
+    "measurement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "verdict": {
+      "enum": [
+        "kept",
+        "rejected",
+        "inconclusive"
+      ]
+    },
+    "numbers": {
+      "type": [
+        "object",
+        "array",
+        "string"
+      ]
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

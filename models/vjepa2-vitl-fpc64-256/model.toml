@@ -1,0 +1,62 @@
+schema = 3
+id = "vjepa2-vitl-fpc64-256"
+name = "V-JEPA 2 ViT-L"
+kind = "local.video"
+summary = "Turns a video clip, a sequence of frames or a still image into a vector of numbers for video search, retrieval, clustering or a classifier of your own."
+description = "V-JEPA 2 is Meta FAIR's self-supervised video model: a ViT-L/16 encoder (24 layers, 1,024 wide, 3-D rotary positions over 2-frame x 16 x 16 tubelets at 256 x 256) pretrained by predicting masked parts of video in its own feature space, with no labels. The card calls it a frontier video understanding model and intends it for video classification, retrieval and as a video encoder for vision-language models. Arsenal runs the encoder from the mlx-community FP16 conversion of facebook/vjepa2-vitl-fpc64-256 and returns its features averaged over the clip; the card gives no benchmark score."
+purpose = "Embed video clips"
+publisher = "facebook"
+released = 2025
+params = "326.0M"
+tasks = ["feature-extraction"]
+languages = ["mul"]
+good_for = ["Video similarity and retrieval: clips of the same activity land closer together (at 64 frames: two archery clips 0.73, archery vs bowling 0.65 to 0.66)", "Features for a small action or event classifier trained on top", "Time-resolved features: one embedding per pair of frames with per_step"]
+limits = ["Embeddings only: this pretrained checkpoint has no classifier, so it names no actions (Meta's separately fine-tuned SSv2 and Diving-48 heads are not served), and the JEPA predictor is not served", "At most 64 frames per request, centre-cropped to 256 x 256: whatever lies outside the centre square of a wide or tall frame is not seen, and long videos are sampled sparsely (use start and end to pick a window)", "Video sound is ignored", "Reads and writes no human language, so the Polish question does not apply", "Parity with transformers VJEPA2Model (MPS, float16) checked on the same weights: see log/003-parity.md"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/facebook/vjepa2-vitl-fpc64-256"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/mlx-community/V-JEPA2-vitl-fpc64-256/blob/8eec39e665ffce8ac09174ea3ab2f2d65940ef5f/README.md"
+
+[facets]
+modalities_in = ["video", "image"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "mlx-community/V-JEPA2-vitl-fpc64-256"
+revision = "8eec39e665ffce8ac09174ea3ab2f2d65940ef5f"
+dtype = "fp16"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "37547dbabcbca47f346c5861c948e33740c1c24e3201087076910fdeb2a6e358"
+"config.json" = "8c7ccee69c5c00cba8c50d4b34081416f93180c135d239bfe695341d9be780a3"
+
+[weights.bytes]
+"model.safetensors" = 652004321
+"config.json" = 515
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-vjepa2-vitl-fpc64-256"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

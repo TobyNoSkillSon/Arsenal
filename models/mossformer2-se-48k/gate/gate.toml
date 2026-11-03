@@ -1,0 +1,8 @@
+schema = 1
+id = "mossformer2-se-48k-native-v1"
+kind = "enhancement"
+reference_runner = "pinned-vendor-pytorch-mps-bf16"
+precision = "bf16"
+independent_vendor_qualified = true
+passing_requires = ["Kaldi fbank with deltas, STFT/iSTFT and the 4 s windowed decode match the maker on the golden fixture without weights (relative L2 at most 1e-4, 1e-4 and 1e-3)", "all 929 checkpoint tensors accounted for: 904 parameters with exact shapes, 25 frequency buffers checked against their formula", "component parity on the maker's own BF16 features, captured once from ClearerVoice-Studio on PyTorch MPS: encoder, blocks 0 and 11, computation block and mask", "FP16 rejected: the maker's half run turns to NaN in block 1 (gated FSMN product about 1.9e7)"]
+evidence = "gate/golden/golden.json"

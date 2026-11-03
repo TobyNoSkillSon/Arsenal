@@ -1,0 +1,119 @@
+{
+  "status": "passed",
+  "weights_downloaded": 0,
+  "graph": "reduced random weights",
+  "precisions": [
+    {
+      "model": "infinity-parser2-flash",
+      "precision": "fp16",
+      "parameters": 97,
+      "eligible_matrices": 45,
+      "packed_matrices": 0,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return valid JSON.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return valid JSON.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "infinity-parser2-flash",
+      "precision": "int8",
+      "parameters": 187,
+      "eligible_matrices": 45,
+      "packed_matrices": 45,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return valid JSON.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return valid JSON.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "infinity-parser2-flash",
+      "precision": "int4",
+      "parameters": 187,
+      "eligible_matrices": 45,
+      "packed_matrices": 45,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return valid JSON.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "error": "{'code': 'invalid_model_output', 'message': 'The model did not return valid JSON.'}",
+          "expected_error": "invalid_model_output",
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    }
+  ],
+  "interpretation": "Structured cases pass only on the declared invalid_model_output parser rejection. Maker parser fixtures independently exercise positive schema-valid results."
+}

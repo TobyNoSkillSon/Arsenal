@@ -1,0 +1,128 @@
+{
+  "app_build" : "33fc9291c5e2a395e1838a5f120a9a9e7e87e09d",
+  "cases" : [
+    {
+      "id" : "yes-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.004662036895751953
+      },
+      "wall_s" : 0.004662036895751953
+    },
+    {
+      "id" : "no-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.010609984397888184
+      },
+      "wall_s" : 0.010609984397888184
+    },
+    {
+      "id" : "choice-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.005674958229064941
+      },
+      "wall_s" : 0.005674958229064941
+    },
+    {
+      "id" : "score-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.010586977005004883
+      },
+      "wall_s" : 0.010586977005004883
+    },
+    {
+      "id" : "batch",
+      "metrics" : {
+        "batch_questions_per_s" : 1069.6230621287627
+      },
+      "wall_s" : 0.011218905448913574
+    }
+  ],
+  "chip" : "m5-max",
+  "conditions" : {
+    "contaminated" : true,
+    "contended" : true,
+    "cpu_limit_pct" : 250,
+    "energy" : "not_measured",
+    "gpu_limit_pct" : 10,
+    "idle_samples" : [
+      {
+        "at" : "2026-10-02T08:59:33Z",
+        "compositing_gpu_pct" : 13.072532771109426,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 150.10000000000008,
+        "other_gpu_pct" : 33.92746722889058,
+        "phase" : "idle",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T08:59:37Z",
+        "compositing_gpu_pct" : 12.86111214379278,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 164.3,
+        "other_gpu_pct" : 3.1388878562072193,
+        "phase" : "idle",
+        "valid" : true
+      },
+      {
+        "at" : "2026-10-02T08:59:41Z",
+        "compositing_gpu_pct" : 10.729872086585633,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 171.3,
+        "other_gpu_pct" : 0,
+        "phase" : "idle",
+        "valid" : true
+      }
+    ],
+    "measurement_lock" : false,
+    "note" : "Quick check under gpulock; gpulock quick proof; not controlled measurement, never ranked or Measured. Speed and quality only; energy not measured. RAM is sampled worker footprint, a lower bound on transient peak.",
+    "run_samples" : [
+      {
+        "at" : "2026-10-02T08:59:45Z",
+        "compositing_gpu_pct" : 12.06381316965879,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 373.9000000000005,
+        "other_gpu_pct" : 0.23870518356521614,
+        "phase" : "run",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T08:59:49Z",
+        "compositing_gpu_pct" : 12.732657017258411,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 309.80000000000007,
+        "other_gpu_pct" : 0.16451470169799023,
+        "phase" : "run",
+        "valid" : false
+      }
+    ],
+    "sample_interval_s" : 3
+  },
+  "date" : "2026-10-02T08:59:49Z",
+  "gate_passed" : false,
+  "kind" : "decisions",
+  "metrics" : {
+    "accuracy" : 1,
+    "batch_questions_per_s" : 1069.6230621287627,
+    "latency_s" : 0.008130967617034912,
+    "peak_ram_mb" : 1269
+  },
+  "mode" : "fast",
+  "model" : "laya-multilingual",
+  "os_build" : "25G72",
+  "precision" : "fp16",
+  "profile" : "quick",
+  "runner" : "native",
+  "schema" : 1,
+  "stub" : false,
+  "suite" : {
+    "id" : "mobius-decisions-suite-v1",
+    "sha256" : "ea637a0953492ef0c599719ddce031321a4564dbeca5d598c7f24848cfbd47b1",
+    "version" : 1
+  },
+  "worker_digest" : "46d6e3aa7dfe67f8bf333de93f8b40aec0067a38dfc56505aeaf7ec741fa50dc",
+  "gpu_cores": 40
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "relative",
+        "metric"
+      ]
+    },
+    "points": {
+      "type": "boolean"
+    },
+    "intrinsics": {
+      "type": "boolean"
+    },
+    "focal_length": {
+      "type": "number",
+      "minimum": 0.001,
+      "maximum": 100000
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "x-arsenal-file": {
+          "accept": [
+            "image/png",
+            "image/jpeg"
+          ]
+        },
+        "x-arsenal-control": "image-picker"
+      },
+      "minItems": 1,
+      "maxItems": 256
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "required": [
+        "image"
+      ]
+    },
+    {
+      "required": [
+        "images"
+      ]
+    }
+  ]
+}

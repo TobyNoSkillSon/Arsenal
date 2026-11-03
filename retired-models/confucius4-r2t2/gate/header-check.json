@@ -1,0 +1,24 @@
+{
+  "status": "header_read",
+  "method": "Exact HTTP Range reads of each pinned safetensors header (8-byte length, then the JSON header); no tensor payload read",
+  "checked": "2026-10-18",
+  "sources": [
+    "https://huggingface.co/netease-youdao/Confucius4-R2T2/resolve/185ce639118ad1362d049ca0d8ed04b6ec5cd6c9/model.safetensors"
+  ],
+  "header_sha256": {
+    "netease-youdao/Confucius4-R2T2@185ce639118ad1362d049ca0d8ed04b6ec5cd6c9/model.safetensors": "b451dba86eaabce028db9fbcbbdeb643cac979439b8a789cb260e0e312cb356e"
+  },
+  "header_bytes_read": 86680,
+  "tensor_payload_bytes_read": 0,
+  "remote_tensors": 707,
+  "remote_dtypes": {
+    "BF16": 707
+  },
+  "ignored": 0,
+  "mapped_tensors": 707,
+  "renamed_or_permuted": 707,
+  "planned_casts": 707,
+  "header_map_errors": [],
+  "full_precision_not_cast": [],
+  "graph_inventory": "pending: the comparison with the adapter graph needs its full-config parameter inventory from the built audio worker (scripts/model-check.py smoke --inventory with the real config.json), then scripts/model-check.py header --parameters"
+}

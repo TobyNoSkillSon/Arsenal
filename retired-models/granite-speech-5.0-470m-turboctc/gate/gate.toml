@@ -1,0 +1,6 @@
+schema = 1
+id = "granite-speech-5.0-470m-turboctc-native-v1"
+reference_runner = "pinned-vendor-reference-pending"
+precision = "fp16"
+independent_vendor_qualified = false
+status = "no-weights"

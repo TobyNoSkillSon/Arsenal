@@ -1,0 +1,64 @@
+{
+  "qualification": "negative decoding/lifecycle/packing checks only; all short random generations rejected; successful detection output and trained cast quality remain unqualified",
+  "configuration": "explicitly shrunk architecture using the production graph and operations",
+  "runs": [
+    {
+      "model": "locateanything-3b",
+      "precision": "fp16",
+      "operations": [
+        "detect",
+        "ground_screen"
+      ],
+      "calls": 3,
+      "successful_outputs": 0,
+      "rejected_incomplete_or_malformed": 3,
+      "parameters": 37,
+      "eligible_matrices": 14,
+      "packed_matrices": 0,
+      "malformed": "passed",
+      "sessions": 0,
+      "cancellation": "cancelled",
+      "unload_exit": 0,
+      "weights_downloaded": 0
+    },
+    {
+      "model": "locateanything-3b",
+      "precision": "int8",
+      "operations": [
+        "detect",
+        "ground_screen"
+      ],
+      "calls": 3,
+      "successful_outputs": 0,
+      "rejected_incomplete_or_malformed": 3,
+      "parameters": 65,
+      "eligible_matrices": 14,
+      "packed_matrices": 14,
+      "malformed": "passed",
+      "sessions": 0,
+      "cancellation": "cancelled",
+      "unload_exit": 0,
+      "weights_downloaded": 0
+    },
+    {
+      "model": "locateanything-3b",
+      "precision": "int4",
+      "operations": [
+        "detect",
+        "ground_screen"
+      ],
+      "calls": 3,
+      "successful_outputs": 0,
+      "rejected_incomplete_or_malformed": 3,
+      "parameters": 65,
+      "eligible_matrices": 14,
+      "packed_matrices": 14,
+      "malformed": "passed",
+      "sessions": 0,
+      "cancellation": "cancelled",
+      "unload_exit": 0,
+      "weights_downloaded": 0
+    }
+  ],
+  "worker": "stripped release perception helper with colocated resources"
+}

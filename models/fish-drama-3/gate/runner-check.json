@@ -1,0 +1,20 @@
+{
+  "speak": {
+    "text": "Done. The build passed.",
+    "stream": true,
+    "seed": 0,
+    "max_tokens": 96,
+    "reference": {
+      "path": "/tmp/arsenal-v2-voices/reference.wav",
+      "text": "Hello world."
+    }
+  },
+  "voices": {},
+  "clone_voice": {
+    "audio": {
+      "path": "/tmp/arsenal-v2-voices/reference.wav"
+    },
+    "transcript": "Hello world.",
+    "name": "Reference voice"
+  }
+}

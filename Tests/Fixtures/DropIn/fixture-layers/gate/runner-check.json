@@ -1,0 +1,25 @@
+{
+  "ops": {
+    "separate": {
+      "layers": 4
+    }
+  },
+  "expected": {
+    "separate": {
+      "files": 4,
+      "ids": [
+        "layer-0",
+        "layer-1",
+        "layer-2",
+        "layer-3"
+      ]
+    }
+  },
+  "cancel": {
+    "op": "separate",
+    "params": {
+      "layers": 4,
+      "delay": 1
+    }
+  }
+}

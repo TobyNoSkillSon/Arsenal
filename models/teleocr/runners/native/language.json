@@ -1,0 +1,64 @@
+{
+  "operations": [
+    "read_document"
+  ],
+  "processor": "Qwen2_5_VLProcessor",
+  "min_pixels": 3136,
+  "max_pixels": 12845056,
+  "prompts": {
+    "ocr": "\nPlease output the text content from the image.",
+    "table": "\nThis is the image of a table. Please output the table in OTSL format.",
+    "formula": "\nPlease write out the expression of the formula in the image using LaTeX format.",
+    "code": "\nThe image contains a code snippet, please output the parsing result.",
+    "layout": "\nAnalyze the image layout.",
+    "distorted_layout": "\nMulti-point Layout Segmentation Analysis.",
+    "scientific_figure": "\nThis is a scientific figure. Please extract the table implied by this figure.",
+    "text": "\nPlease output the text content from the image.",
+    "seal": "\nSeal Recognition:"
+  },
+  "processor_config": {
+    "min_pixels": 3136,
+    "max_pixels": 12845056,
+    "patch_size": 14,
+    "temporal_patch_size": 2,
+    "merge_size": 2,
+    "image_mean": [
+      0.48145466,
+      0.4578275,
+      0.40821073
+    ],
+    "image_std": [
+      0.26862954,
+      0.26130258,
+      0.27577711
+    ],
+    "image_processor_type": "Qwen2VLImageProcessor",
+    "processor_class": "Qwen2_5_VLProcessor"
+  },
+  "system": "You are a helpful assistant.",
+  "penalties": {
+    "default": {
+      "presence_penalty": 1.0,
+      "frequency_penalty": 0.05,
+      "no_repeat_ngram_size": 100
+    },
+    "table": {
+      "presence_penalty": 1.0,
+      "frequency_penalty": 0.005,
+      "no_repeat_ngram_size": 100
+    },
+    "char": {
+      "presence_penalty": 1.0,
+      "frequency_penalty": 0.005,
+      "no_repeat_ngram_size": 100
+    },
+    "seal": {
+      "presence_penalty": 1.0,
+      "frequency_penalty": 0.005,
+      "no_repeat_ngram_size": 100
+    },
+    "layout": {
+      "no_repeat_ngram_size": 100
+    }
+  }
+}

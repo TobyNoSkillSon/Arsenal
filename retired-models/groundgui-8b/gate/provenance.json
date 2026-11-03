@@ -1,0 +1,20 @@
+{
+  "source_repo": "PrentisAI/GroundGUI-8B",
+  "source_revision": "9db378189fddaabb5f6e347b9053858a392022ac",
+  "source_dtypes": [
+    "BF16"
+  ],
+  "port_repo": "https://github.com/ml-explore/mlx-swift-lm",
+  "port_revision": "bd4b7434e6bdb588c7ef55706ff8904cb7fd4c57",
+  "qualification": "pending trained weights",
+  "tokenizer_check": "Offline ASCII round-trip and native text/image chat-template execution passed; independent token-ID parity with the vendor remains unqualified.",
+  "prompt_reference": {
+    "repo": "PrentisAI/GroundGUI",
+    "revision": "a1a02a93cb626b86c0ba829c38b613b8a40ecd0b"
+  },
+  "source_parameters_derived": 8767123696,
+  "runtime_graph_parameters_derived": 8767123696,
+  "runtime_graph_matches_checkpoint": true,
+  "get_half_recipe": "cast:native-half-v1",
+  "tier_recipe": "cast:language-half-g64-v2"
+}

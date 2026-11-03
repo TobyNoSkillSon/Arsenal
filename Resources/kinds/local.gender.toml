@@ -1,0 +1,18 @@
+id = "local.gender"
+title = "Voice gender"
+title_singular = "Voice gender classifier"
+icon = "sparkles"
+order = 20
+suite = "bench/kinds/local.gender/suite-v1.toml"
+primary_operation = "classify"
+
+[[op]]
+name = "classify"
+title = "Classify"
+input = "ops/classify.input.json"
+output = "json"
+output_schema = "ops/classify.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

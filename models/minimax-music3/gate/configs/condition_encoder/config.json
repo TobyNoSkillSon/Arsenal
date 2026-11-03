@@ -1,0 +1,11 @@
+{
+  "_class_name": "MiniMaxMusic3ConditionEncoder",
+  "_diffusers_version": "0.40.0.dev0",
+  "condition_hidden_dim": 4096,
+  "input_hop_length": 960,
+  "input_sampling_rate": 24000,
+  "num_condition_layers": 8,
+  "out_dim": 2048,
+  "output_hop_length": 512,
+  "output_sampling_rate": 44100
+}

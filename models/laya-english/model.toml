@@ -1,0 +1,106 @@
+context = 512
+id = "laya-english"
+kind = "decisions"
+languages = ["en"]
+name = "Laya · English"
+params = "421M"
+publisher = "Convai Innovations"
+released = 2026
+schema = 2
+suggested = true
+summary = "Answers yes-no, choice and score questions about a text in one pass; English only."
+purpose = "English decisions"
+tasks = ["yes-no", "choice", "score"]
+
+[bench]
+recipe = "bench/bench.toml"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[licence]
+commercial = true
+spdx = "Apache-2.0"
+url = "https://huggingface.co/aac6fef/laya-mlx/blob/20aed815fc6acde75733882e7ec0e3f28aeb9717/LICENSE"
+
+[[op]]
+input = "kinds/decisions/ops/decide.input.json"
+name = "decide"
+output = "json"
+output_schema = "kinds/decisions/ops/decide.output.json"
+stream = false
+title = "Decide"
+
+[[op]]
+input = "kinds/decisions/ops/judge.input.json"
+name = "judge"
+output = "json"
+output_schema = "kinds/decisions/ops/judge.output.json"
+stream = false
+title = "Judge"
+
+[popularity]
+as_of = "2026-10-03"
+hf_downloads = 0
+hf_likes = 116
+
+[[runner]]
+chips = ["*"]
+fast_exact = true
+language = "swift"
+min_macos = "26.0"
+name = "native"
+protocol = 1
+worker = "decisions"
+
+[selection]
+default = "native"
+
+[[setting]]
+applies = "load"
+default = false
+help = "Run plain MLX without Verdict's fast tokenizer and kernels: same answers as Exact, slower; for diagnosis."
+id = "stock_mlx"
+title = "Stock MLX path"
+type = "toggle"
+
+[weights]
+dtype = "fp16"
+files = ["LICENSE", "NOTICE", "encoder/config.json", "manifest.json", "mlx_config.json", "model.safetensors", "rl_agent_config.json", "tokenizer/tokenizer.json", "tokenizer/tokenizer_config.json", "validation.json"]
+repo = "aac6fef/laya-mlx"
+revision = "20aed815fc6acde75733882e7ec0e3f28aeb9717"
+
+[weights.bytes]
+LICENSE = 10173
+NOTICE = 698
+"encoder/config.json" = 2083
+"manifest.json" = 1746
+"mlx_config.json" = 290
+"model.safetensors" = 842609225
+"rl_agent_config.json" = 746
+"tokenizer/tokenizer.json" = 3583228
+"tokenizer/tokenizer_config.json" = 308
+"validation.json" = 18257
+
+[weights.sha256]
+LICENSE = "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+NOTICE = "f23ae8ae701f5a43e186182e387aeef00b666daed18a946fc7c9ea827b00a8fa"
+"encoder/config.json" = "bf3ab80598fdccf414855a2ce80f22859e4492d06ca8a62ddd1cfb63972f8979"
+"manifest.json" = "d8e254b51322fc0462a3cb384bde4d1b449baec9a716cbbc0d0aa99c0cb216b6"
+"mlx_config.json" = "c022368f128dc9b7f6478a9163c96e0406f1da6a7c6bae660ea8515b016ed7ef"
+"model.safetensors" = "b9c07bf14be2fa5c78a9193a3e6d840ac80e89e62fc40f425834c3d8a6eaa3de"
+"rl_agent_config.json" = "d96dc2cb39d6375e030ff48c9957088f3c52668f45c30c56504f4e801ed3ee62"
+"tokenizer/tokenizer.json" = "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30"
+"tokenizer/tokenizer_config.json" = "50044de60daaa73df97d262e15a40d4faf0160e7d742df64b377877a1320dd12"
+"validation.json" = "adc9a4baac1430b58cd8fdaf7c7587b380d4a91834ba405bbdeeabd9d35b5771"
+
+
+[memory]
+basis = "Pinned safetensors headers: 842587660 FP16 tensor bytes; 738724864 bytes of eligible g64 Linear weights across 123 layers and the 103153664 byte token embedding follow the selected precision (int8 17/32, int4 9/32 including half scale/bias). Norms, biases and other small tensors remain FP16. LayaNetwork quantization scope (Linears and token embedding); unchanged nonweight memory."
+
+[memory.resident_bytes]
+fp16 = 842587660

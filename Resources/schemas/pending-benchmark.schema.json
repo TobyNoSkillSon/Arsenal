@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arsenal pending benchmark queue",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "model",
+      "kind",
+      "dtype",
+      "sourceDtype",
+      "revision",
+      "runner",
+      "mode",
+      "introducedAt",
+      "state"
+    ],
+    "properties": {
+      "model": {
+        "type": "string",
+        "pattern": "^[a-z0-9][a-z0-9.-]*$"
+      },
+      "kind": {
+        "enum": [
+          "decisions",
+          "chat",
+          "images",
+          "voices",
+          "sound",
+          "enhancement"
+        ]
+      },
+      "dtype": {
+        "enum": [
+          "fp16",
+          "bf16",
+          "int8",
+          "int4"
+        ]
+      },
+      "sourceDtype": {
+        "enum": [
+          "fp16",
+          "bf16"
+        ]
+      },
+      "revision": {
+        "type": "string",
+        "minLength": 1
+      },
+      "runner": {
+        "type": "string",
+        "minLength": 1
+      },
+      "mode": {
+        "enum": [
+          "fast",
+          "exact"
+        ]
+      },
+      "introducedAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "state": {
+        "enum": [
+          "pending",
+          "complete",
+          "superseded"
+        ]
+      },
+      "error": {
+        "type": "string"
+      },
+      "result": {
+        "type": "string"
+      }
+    }
+  }
+}

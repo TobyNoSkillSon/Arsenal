@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "infinity-parser2-flash"
+name = "Infinity Parser2 Flash"
+architecture = "qwen3_5"
+kind = "chat"
+params = "2.2B"
+publisher = "infly"
+released = 2026
+suggested = false
+summary = "Read documents, charts and boxes."
+purpose = "Read documents, charts and boxes"
+good_for = ["Read documents, charts and boxes"]
+limits = ["Trained weights, tokenizer correctness and FP16/int8/int4 task quality await the approved live trial.", "Primary document languages are English and Chinese; rotated, dense and complex chart layouts remain difficult."]
+tasks = ["read_document"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/infly/Infinity-Parser2-Flash/tree/cfddc4106b0abc4706f05575a164f7dd35d09c46"
+[weights]
+repo = "infly/Infinity-Parser2-Flash"
+revision = "cfddc4106b0abc4706f05575a164f7dd35d09c46"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "model.safetensors", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+"config.json" = "6994d988883d0ac746b7bc4a15792965db71b92f9c479e45bd637fe39c90cfc9"
+"model.safetensors" = "761cb9295e05047bc8628effd7381023458f193955b804098dd332c464f26150"
+"processor_config.json" = "14932921ca485d458a04dafd8069fbb0a4505622a48208d19ed247115801385b"
+"tokenizer.json" = "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4"
+"tokenizer_config.json" = "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182"
+[weights.bytes]
+"chat_template.jinja" = 7755
+"config.json" = 2741
+"model.safetensors" = 4426558832
+"processor_config.json" = 1300
+"tokenizer.json" = 19989343
+"tokenizer_config.json" = 1139
+[derive]
+int8 = "cast:language-half-g64-v2"
+int4 = "cast:language-half-g64-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "read_document"
+title = "Read document"
+input = "ops/read_document.input.json"
+output_schema = "ops/read_document.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of forecast through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "chronos-2",
+  "revision": "29ec3766d36d6f73f0696f85560a422f50e8498c",
+  "rows": [
+    {
+      "date": "2026-10-31T00:30:49Z",
+      "load_seconds": 0.153,
+      "ops": {
+        "forecast": {
+          "seconds_first": 0.689,
+          "seconds_warm": 0.009,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 844.5,
+      "precision": "fp16",
+      "runner_sha256": "3190c8465a3ca839d06fbf4a2d9ccd3904c677ed390611cf0b4004b7cf4d22ac",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

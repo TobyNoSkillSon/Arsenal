@@ -1,0 +1,25 @@
+# Reference settings for a voice model with preset voices whose ids carry their language (Kokoro's "af_heart" is
+# American English), so it takes no Language setting. A model that designs or clones voices, or needs a language,
+# uses kinds/voices/design/ instead. Copy the [[setting]] blocks its runner really accepts into model.toml, with that
+# model's default voice, bounds and help; settings.toml beside this file arranges exactly these.
+
+[[setting]]
+id = "voice"
+title = "Voice"
+type = "voice"
+default = ""
+applies = "request"
+maps_to = "request.voice"
+help = "The voice used when a request names none."
+
+[[setting]]
+id = "speed"
+title = "Speed"
+type = "slider"
+default = 1.0
+min = 0.5
+max = 2.0
+step = 0.05
+applies = "request"
+maps_to = "request.speed"
+help = "Speech speed relative to the voice's own."

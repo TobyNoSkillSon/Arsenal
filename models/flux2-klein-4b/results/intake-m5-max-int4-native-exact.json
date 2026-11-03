@@ -1,0 +1,64 @@
+{
+  "mode": "exact",
+  "model": "flux2-klein-4b",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "baseline": "Pinned BF16 served FLUX.2 Klein 4B; independent vendor qualification remains open",
+        "chip": "m5-max",
+        "date": "2026-10-16T03:51:25Z",
+        "defaultWorkload": true,
+        "gpuCores": 40,
+        "method": "Warm served ABBA BAAB, default 1024x1024/four-step image. Fresh ordinary Load/generation workers; no component captures. Busy Mac; quick check.",
+        "revision": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+        "run": "intake-2026-10-16T03-46-11Z-d8b28c6b-174a-46fc-b205-baa847790c58-int4",
+        "source": "results/intake/intake-2026-10-16T03-46-11Z-d8b28c6b-174a-46fc-b205-baa847790c58.json; bounds SHA256 21abdeed790f3495da50506b4657b38cd434811de0568e002846dfc18d0ea121"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "int4",
+    "kind": "images",
+    "metrics": {
+      "batteryPercentPer100Images": {
+        "state": "notMeasured"
+      },
+      "peakMemoryGB": {
+        "provenance": {
+          "baseline": "Pinned BF16 served FLUX.2 Klein 4B; independent vendor qualification remains open",
+          "chip": "m5-max",
+          "date": "2026-10-16T03:51:25Z",
+          "defaultWorkload": true,
+          "gpuCores": 40,
+          "method": "Warm served ABBA BAAB, default 1024x1024/four-step image. Fresh ordinary Load/generation workers; no component captures. Busy Mac; quick check.",
+          "revision": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+          "run": "intake-2026-10-16T03-46-11Z-d8b28c6b-174a-46fc-b205-baa847790c58-int4",
+          "source": "results/intake/intake-2026-10-16T03-46-11Z-d8b28c6b-174a-46fc-b205-baa847790c58.json; bounds SHA256 21abdeed790f3495da50506b4657b38cd434811de0568e002846dfc18d0ea121"
+        },
+        "state": "quickCheck",
+        "value": 9.005125928
+      },
+      "psnrDB": {
+        "state": "notMeasured"
+      },
+      "secondsPerImage": {
+        "provenance": {
+          "baseline": "Pinned BF16 served FLUX.2 Klein 4B; independent vendor qualification remains open",
+          "chip": "m5-max",
+          "date": "2026-10-16T03:51:25Z",
+          "defaultWorkload": true,
+          "gpuCores": 40,
+          "method": "Warm served ABBA BAAB, default 1024x1024/four-step image. Fresh ordinary Load/generation workers; no component captures. Busy Mac; quick check.",
+          "revision": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+          "run": "intake-2026-10-16T03-46-11Z-d8b28c6b-174a-46fc-b205-baa847790c58-int4",
+          "source": "results/intake/intake-2026-10-16T03-46-11Z-d8b28c6b-174a-46fc-b205-baa847790c58.json; bounds SHA256 21abdeed790f3495da50506b4657b38cd434811de0568e002846dfc18d0ea121"
+        },
+        "state": "quickCheck",
+        "value": 3.9082546874997206
+      }
+    },
+    "qualityCheckPassed": false,
+    "qualityIdentity": "91ca278a7cad51ed1d3a99d097927f5c07f742e2ff827a93d89255f916ebeb84",
+    "runner": "native"
+  }
+}

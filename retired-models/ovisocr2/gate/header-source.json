@@ -1,0 +1,10 @@
+{
+  "repo": "ATH-MaaS/OvisOCR2",
+  "revision": "1fc9221b7823a371d6e97f92d527cc847e24e107",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 473,
+  "header_bytes": 58656,
+  "errors": []
+}

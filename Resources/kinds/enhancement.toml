@@ -1,0 +1,26 @@
+id = "enhancement"
+title = "Enhancement"
+title_singular = "Enhancement"
+icon = "waveform.badge.magnifyingglass"
+order = 5
+suite = "bench/kinds/enhancement/suite-v1.toml"
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[[op]]
+name = "enhance"
+default = true
+title = "Enhance"
+input = "ops/enhance.input.json"
+output = "audio"
+stream = true
+[[columns]]
+id = "speed"
+title = "Speed"
+unit = "× real time"
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+[api]
+enhance = "/providers/elevenlabs/v1/audio-isolation"

@@ -1,0 +1,6 @@
+#!/bin/bash
+# exit 0 (prints "open") when Vella's measurement window is open or the coordinator hold exists; exit 1 otherwise.
+MAIN="${PWD%%/.worktrees/*}"; VELLA="$(dirname "$MAIN")/Vella"
+if [ -e "$MAIN/.gpu-hold" ]; then echo "open (hold)"; exit 0; fi
+if [ ! -e "$VELLA/lab/bench/full-measure.STOP" ] && pgrep -f full-measure.py >/dev/null; then echo "open"; exit 0; fi
+echo closed; exit 1

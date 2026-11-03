@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "scale": {
+      "type": "integer",
+      "enum": [
+        2,
+        4
+      ],
+      "default": 4
+    },
+    "target_height": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 16384
+    }
+  },
+  "required": [
+    "image"
+  ],
+  "additionalProperties": false
+}

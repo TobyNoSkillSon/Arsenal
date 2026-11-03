@@ -1,0 +1,133 @@
+schema = 2
+architecture = "voxcpm2"
+id = "voxcpm2"
+name = "VoxCPM2"
+kind = "voices"
+params = "2.4B"
+publisher = "OpenBMB"
+released = 2026
+suggested = false
+summary = "Speech in 30 languages, Polish included, at 48 kHz: a new voice, one described in words, or a clone of a short clip."
+description = "OpenBMB's tokenizer-free text-to-speech model: a MiniCPM-4 language model reads the text and writes continuous audio latents patch by patch, a residual acoustic model and a small diffusion transformer shape each patch, and the AudioVAE V2 decodes them straight to 48 kHz. It needs no language tag for its 30 languages and nine Chinese dialects. It speaks without a reference, in a voice described in words in parentheses before the text, in the voice of a short clip, or as a continuation of a clip with its exact transcript, which the maker calls ultimate cloning. A description can also steer the style of a cloned voice. 2.38B parameters in all (the AudioVAE 94M)."
+purpose = "Speech in 30 languages, voice cloning"
+good_for = ["Polish and 29 more languages from one model, with no language setting", "Cloning a voice from a few seconds of audio, closest with the clip's exact transcript", "A new voice from a description such as (a calm older man, deep voice)", "Steering pace, tone or emotion of a cloned voice with a description"]
+limits = ["No preset voices: a request speaks in a fresh voice, a described voice, a reference clip or a saved voice.", "The maker's reference denoiser (ZipEnhancer) and text normalizer (wetext) are not included; give clean clips and write numbers as words.", "No speed control; ask for a pace in the description instead.", "Audio arrives per chunk of text (about 400 characters), not per patch.", "Results vary between runs, as the maker says of voice design and style control; set seed to repeat one.", "Strictly forbidden by the maker for impersonation, fraud or disinformation; label AI-generated speech."]
+languages = ["ar", "my", "zh", "da", "nl", "en", "fi", "fr", "de", "el", "he", "hi", "id", "it", "ja", "km", "ko", "lo", "ms", "no", "pl", "pt", "ru", "es", "sw", "sv", "tl", "th", "tr", "vi"]
+tasks = ["text-to-speech"]
+tools = ["voice", "sound"]
+
+[facets]
+modalities_in = ["text", "audio"]
+modalities_out = ["audio"]
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/openbmb/VoxCPM2/blob/32279effe8c19989596f05d353d1447f51d9e915/README.md"
+
+[weights]
+repo = "mlx-community/VoxCPM2-bf16"
+revision = "a7fb80d9056983135a54ca3f71fcc5a637ccddf5"
+dtype = "bf16"
+files = ["config.json", "model-00001.safetensors", "model-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json"]
+
+[weights.sha256]
+"config.json" = "cf9f7d2b880e63720b6d886319b0d6ab14182bcf2939915fdf3aad12d60bc071"
+"model-00001.safetensors" = "676b05649d915e63f2291a0b091bd72250785b2448fe14ec81f3566cf5f47950"
+"model-00002.safetensors" = "adddb9b85026763751beb20ba050aa46ef19b6b55cf6cb6a8c44ac8b06ec5cff"
+"model.safetensors.index.json" = "e5c9dbe10f771ec0bc6ee244531475615547c1129b3adf6b51fd00b1466ee75a"
+"special_tokens_map.json" = "068594063e37662c02b21acf42ebb334ef6a74fb810e68a2368f88f08351de76"
+"tokenizer.json" = "f8984687e4a92a3503d521396d454b7d68e9fdaab2a0288eb3536c7c1aa4bc20"
+"tokenizer_config.json" = "466575c55f0cf49530666c2e46ed14f26237dbd227ba7f4bb3bbec93df90edfc"
+
+[weights.bytes]
+"config.json" = 5210
+"model-00001.safetensors" = 4286190791
+"model-00002.safetensors" = 669068875
+"model.safetensors.index.json" = 67424
+"special_tokens_map.json" = 1632
+"tokenizer.json" = 3676772
+"tokenizer_config.json" = 4952
+
+# Get casts the BF16 language models and the FP32 AudioVAE to FP16 with a range check (Workers/Voices/Sources/VoxCPM2).
+[derive]
+fp16 = "cast:voxcpm2"
+
+[selection]
+default = "native"
+chips = { m5 = "native" }
+
+[[runner]]
+name = "native"
+language = "swift"
+worker = "voices"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+
+[[setting]]
+id = "voice"
+title = "Voice"
+type = "voice"
+default = ""
+applies = "request"
+maps_to = "request.voice"
+help = "Saved voice cloned for VoxCPM2; leave empty for a fresh, described or reference voice."
+
+[[setting]]
+id = "instructions"
+title = "Voice description"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.instructions"
+help = "Describe a new voice, or the style of a cloned one: gender, age, tone, emotion, pace."
+
+[[setting]]
+id = "reference_path"
+title = "Reference clip"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.path"
+help = "Your own recording of the voice to clone, up to 30 seconds."
+
+[[setting]]
+id = "reference_text"
+title = "Reference transcript"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.text"
+help = "Exact words spoken in the reference clip; makes the clone closer."
+
+[[op]]
+name = "speak"
+title = "Speak"
+input = "ops/speak.input.json"
+output = "audio"
+stream = true
+timeout_s = 590
+first_response_timeout_s = 590
+
+[[op]]
+name = "voices"
+title = "Voices"
+input = "ops/voices.input.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "clone_voice"
+title = "Clone Voice"
+input = "ops/clone_voice.input.json"
+output = "json"
+stream = false
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

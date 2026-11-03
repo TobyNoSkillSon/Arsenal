@@ -1,0 +1,7 @@
+schema = 1
+id = "gimm-vfi-r-native-v1"
+reference_runner = "pinned-vendor-gimm-vfi-mps-fp16-autocast"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Get converts the 387 learned tensors of the pinned gimmvfi_r_arb.pt (FP32) to FP16 and Load refuses any other inventory", "RAFT flows, splatting weights, flow encoder, softsplat, residual refinement, hyponet, correlation lookups and frame synthesis against the makers' code on MPS (FP16 weights under autocast) on its own inputs", "the whole model from the padded fixture frames to three timesteps within the frozen PSNR bound", "the PyTorch softsplat that replaces the makers' CuPy kernel proved against the kernel's formula"]
+evidence = "gate/golden/golden.json"

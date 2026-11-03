@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "audio/*"
+        ]
+      },
+      "x-arsenal-control": "audio-picker"
+    },
+    "num_speakers": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32,
+      "description": "Exact number of speakers, when known."
+    },
+    "min_speakers": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32,
+      "description": "Lower bound on the number of speakers; ignored when num_speakers is set."
+    },
+    "max_speakers": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32,
+      "description": "Upper bound on the number of speakers; ignored when num_speakers is set."
+    }
+  },
+  "required": [
+    "audio"
+  ],
+  "additionalProperties": false
+}

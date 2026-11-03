@@ -1,0 +1,13 @@
+# Settings panel, from kinds/decisions/ (docs/MODEL-FOLDER.md, "Settings panel"). Questions and answers come with each
+# request; the only setting is the execution path, a diagnosis switch, so it sits behind More.
+schema = 1
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "stock_mlx"
+label = "Kernels"
+control = "segments"
+labels = { false = "Tuned", true = "Stock MLX" }

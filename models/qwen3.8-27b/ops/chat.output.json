@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "finish_reason",
+    "usage"
+  ],
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "finish_reason": {
+      "type": "string"
+    },
+    "usage": {
+      "type": "object",
+      "required": [
+        "prompt_tokens",
+        "completion_tokens"
+      ],
+      "properties": {
+        "prompt_tokens": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "completion_tokens": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "ttft_s": {
+      "type": "number",
+      "minimum": 0
+    },
+    "tokens_per_s": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

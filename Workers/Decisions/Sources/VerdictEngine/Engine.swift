@@ -1,0 +1,169 @@
+import Foundation
+
+/// The contract between the helper (routing, HTTP, lifecycle) and each model family.
+/// Mirrors the Python reference worker the models were qualified against: same field names, same rounding, same
+/// per-item errors. Changing it changes every model family: keep it stable.
+
+/// One typed question. `criteria` is ordered: Choice labels with descriptions, or Score levels.
+public enum QuestionKind: String, Codable, Sendable { case choice, score, noul }
+
+public struct Question: Sendable {
+    public let id: String
+    public let kind: QuestionKind
+    public let instructions: String
+    /// Choice: [(label, description)] in request order. Score: [(level, level)] in order. Noul: empty.
+    public let criteria: [(String, String)]
+    /// The question exactly as Python's json.dumps(question_dict, ensure_ascii=False) renders it
+    /// (original key order, list-vs-dict criteria, nulls). The helper fills it; models use it for
+    /// token counting where the Python worker counts the rendered question. nil = derive from fields.
+    public let sourceJSON: String?
+    public init(id: String, kind: QuestionKind, instructions: String, criteria: [(String, String)], sourceJSON: String? = nil) {
+        self.id = id; self.kind = kind; self.instructions = instructions; self.criteria = criteria; self.sourceJSON = sourceJSON
+    }
+}
+
+/// The JSON type the client sent an item as. A string that merely looks like JSON stays `.text`.
+public enum ItemKind: Sendable { case text, object, value }
+
+/// One item as the client sent it. Text items are strings; dict items keep their JSON rendering
+/// (exactly as Python's json.dumps(item, ensure_ascii=False) produced it) plus any media paths.
+/// `kind` records the original type: `text` holds the JSON rendering for `.object` (a dict) and
+/// `.value` (a list, number, bool or null), the string itself for `.text`.
+public struct Item: Sendable {
+    public let text: String
+    public let kind: ItemKind
+    public let images: [String]
+    public let audio: [String]
+    public let videos: [String]
+    public init(text: String, kind: ItemKind = .text, images: [String] = [], audio: [String] = [], videos: [String] = []) {
+        self.text = text; self.kind = kind; self.images = images; self.audio = audio; self.videos = videos
+    }
+    public var hasMedia: Bool { !(images.isEmpty && audio.isEmpty && videos.isEmpty) }
+}
+
+/// One answer, serialised by the helper with the Python worker's keys and 4-decimal rounding.
+public struct Answer: Sendable, Equatable {
+    public var choice: String? = nil
+    public var probabilities: Probabilities? = nil       // Choice: label -> p; Score: "0","1",… -> p
+    public var confidence: Double? = nil
+    public var noul: Double? = nil
+    public var score: Double? = nil
+    public var calibrated: Bool? = nil                  // nil for calibrated models; false for Gemma
+    public init() {}
+}
+
+/// Label -> probability in option order. Labels are distinct as exact UTF-8 bytes, like the client's JSON object
+/// keys: Swift `String` equality is canonical equivalence ("é" == "e\u{301}"), so a `[String: Double]` would
+/// merge (or, built with `uniqueKeysWithValues`, trap on) two labels the client sent as different keys.
+public struct Probabilities: Sendable, Equatable, Sequence, CustomStringConvertible {
+    public let labels: [String]
+    public let values: [Double]
+    public init(labels: [String], values: [Double]) {
+        let n = Swift.min(labels.count, values.count)
+        self.labels = Array(labels.prefix(n)); self.values = Array(values.prefix(n))
+    }
+    /// Byte-exact lookup.
+    public subscript(_ label: String) -> Double? {
+        labels.firstIndex { $0.utf8.elementsEqual(label.utf8) }.map { values[$0] }
+    }
+    public subscript(_ label: String, default fallback: Double) -> Double { self[label] ?? fallback }
+    public func makeIterator() -> IndexingIterator<[(key: String, value: Double)]> {
+        zip(labels, values).map { (key: $0.0, value: $0.1) }.makeIterator()
+    }
+    public var count: Int { labels.count }
+    public var description: String { "[" + zip(labels, values).map { "\($0.0): \($0.1)" }.joined(separator: ", ") + "]" }
+    public static func == (a: Probabilities, b: Probabilities) -> Bool {
+        a.values == b.values && a.labels.count == b.labels.count && zip(a.labels, b.labels).allSatisfy { $0.utf8.elementsEqual($1.utf8) }
+    }
+    /// Byte-exact uniqueness of request labels (what a JSON object / Python dict would keep apart).
+    public static func distinct(_ labels: [String]) -> Bool { Set(labels.map { Data($0.utf8) }).count == labels.count }
+}
+
+/// Question id -> Answer, in insertion order. Ids are distinct as exact UTF-8 bytes, like the request's JSON object
+/// keys: two questions whose ids differ only by Unicode normalization ("é" / "e\u{301}") keep separate answers
+/// (a `[String: Answer]` let the second overwrite the first).
+public struct Answers: Sendable, Sequence, ExpressibleByDictionaryLiteral {
+    public private(set) var ids: [String] = []
+    public private(set) var values: [Answer] = []
+    public init() {}
+    public init(dictionaryLiteral elements: (String, Answer)...) { for (id, answer) in elements { self[id] = answer } }
+    private func index(_ id: String) -> Int? { ids.firstIndex { $0.utf8.elementsEqual(id.utf8) } }
+    /// Byte-exact lookup; assigning nil removes.
+    public subscript(_ id: String) -> Answer? {
+        get { index(id).map { values[$0] } }
+        set {
+            if let i = index(id) {
+                if let newValue { values[i] = newValue } else { ids.remove(at: i); values.remove(at: i) }
+            } else if let newValue { ids.append(id); values.append(newValue) }
+        }
+    }
+    public var count: Int { ids.count }
+    public func makeIterator() -> IndexingIterator<[(key: String, value: Answer)]> {
+        zip(ids, values).map { (key: $0.0, value: $0.1) }.makeIterator()
+    }
+}
+
+public enum ItemResult: Sendable {
+    case answers(Answers)               // keyed by Question.id (exact bytes)
+    case error(String)                  // per-item failure; the batch continues
+}
+
+/// One request's share of a merged pass: its items and the questions every one of them is asked.
+public struct RequestGroup: Sendable {
+    public let items: [Item]
+    public let questions: [Question]
+    public init(items: [Item], questions: [Question]) { self.items = items; self.questions = questions }
+}
+
+/// A group's results in item order, and the tokens each item's rows fed the model (0 for an item refused before
+/// inference).
+public struct GroupResult: Sendable {
+    public var results: [ItemResult]
+    public var inputTokens: [Int]
+    public init(results: [ItemResult], inputTokens: [Int]) { self.results = results; self.inputTokens = inputTokens }
+}
+
+public protocol DecisionModel: AnyObject {
+    /// Catalog id, e.g. "laya-english".
+    var id: String { get }
+    /// Tokens this item needs with these questions; the helper refuses items over `contextLimit`.
+    func tokenCount(_ item: Item, _ questions: [Question]) throws -> Int
+    var contextLimit: Int { get }
+    /// Answer every question for every item. Batch across items internally (up to 64 rows per pass).
+    func predict(_ items: [Item], _ questions: [Question]) throws -> [ItemResult]
+    /// Several requests in one pass (the helper's micro-batching): rows of every group are sorted and chunked
+    /// together under the same rules as one `predict` call, then scattered back per group. A single group gives
+    /// exactly `predict(items, questions)`. Throws when any group's questions are invalid (the caller then runs
+    /// the groups one by one so only the offending request fails).
+    func predict(groups: [RequestGroup]) throws -> [GroupResult]
+    /// Bytes of weights resident, for status.json memory reporting.
+    var residentBytes: Int { get }
+}
+
+extension DecisionModel {
+    /// Groups one after another (no merging); input tokens from `tokenCount`. Models that batch override it.
+    public func predict(groups: [RequestGroup]) throws -> [GroupResult] {
+        try groups.map { group in
+            let results = try predict(group.items, group.questions)
+            let tokens = try zip(group.items, results).map { item, result -> Int in
+                if case .answers = result { return try tokenCount(item, group.questions) * group.questions.count }
+                return 0
+            }
+            return GroupResult(results: results, inputTokens: tokens)
+        }
+    }
+}
+
+/// Which of Verdict's kernels a loaded model may use: the Models table's cell, chosen per model.
+/// standard: the stock MLX path (library tokenizer, dense attention, unfused GeGLU), what any Apple Silicon Mac runs.
+/// exact: Verdict's kernels whose output is identical to standard (fast tokenizer, windowed attention, fused GeGLU).
+/// fast: exact plus the chip-specific kernels that passed their gate (small-M GEMM where it qualified).
+public enum KernelRecipe: String, Sendable, CaseIterable {
+    case standard, exact, fast
+}
+
+/// Loads a model family from a local snapshot directory (Hugging Face cache layout, or Verdict's model store).
+/// `bits` is 0 (native), 16, 8 or 4; `recipe` which kernels this model may use (per model, never process-wide).
+public protocol ModelLoader {
+    static func load(id: String, snapshot: URL, bits: Int, recipe: KernelRecipe) throws -> DecisionModel
+}

@@ -1,0 +1,7 @@
+schema = 1
+id = "bs-roformer-viperx-1296-native-v1"
+reference_runner = "pinned-vendor-pytorch-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["699 source tensors; 675 FP16 parameters + 24 rotary buffers checked equal to theta 10 000", "6 fixed first-chunk component comparisons against python-audio-separator 0.45.0 on MPS with FP16 weights", "relative L2: STFT and iSTFT below 1e-4, band split below 5e-3, one axial block below 1e-2, mask and chunk audio below 5e-2", "one 4 s end-to-end clip through audio-separator's own Separator: vocals and instrumental waveform and log-mel relative L2 below 1e-2"]
+evidence = "gate/evidence/native/parity.json"

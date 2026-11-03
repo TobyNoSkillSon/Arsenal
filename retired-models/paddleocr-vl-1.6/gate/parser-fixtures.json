@@ -1,0 +1,112 @@
+{
+  "cases": [
+    {
+      "operation": "read_document",
+      "source": "PaddlePaddle/PaddleX@c852371c701d83cd21955b2963834825920ffebb paddlex/inference/pipelines/paddleocr_vl/uilts.py post_process_for_spotting (LOC token grouping fallback; live decoding skips the special TEXT_START/TEXT_END/LOC_BEGIN/LOC_END markers)",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        },
+        "mode": "text_spotting"
+      },
+      "raw": "Hello<|LOC_125|><|LOC_250|><|LOC_875|><|LOC_250|><|LOC_875|><|LOC_500|><|LOC_125|><|LOC_500|>",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "Hello",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "tables": [],
+            "blocks": [
+              {
+                "category": "text",
+                "text": "Hello",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 4,
+                  "ymin": 8,
+                  "xmax": 28,
+                  "ymax": 16
+                },
+                "polygon": [
+                  {
+                    "x": 4,
+                    "y": 8
+                  },
+                  {
+                    "x": 28,
+                    "y": 8
+                  },
+                  {
+                    "x": 28,
+                    "y": 16
+                  },
+                  {
+                    "x": 4,
+                    "y": 16
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "operation": "read_document",
+      "source": "PaddlePaddle/PaddleX@c852371c701d83cd21955b2963834825920ffebb paddlex/inference/pipelines/paddleocr_vl/pipeline.py table block convert_otsl_to_html",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        },
+        "mode": "table"
+      },
+      "raw": "<fcel>Name<fcel>Value<nl><fcel>a<fcel>1<nl>",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "<table><tr><td>Name</td><td>Value</td></tr><tr><td>a</td><td>1</td></tr></table>",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "tables": [
+              {
+                "id": "table-0",
+                "content": "<table><tr><td>Name</td><td>Value</td></tr><tr><td>a</td><td>1</td></tr></table>"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "operation": "read_document",
+      "source": "PaddlePaddle/PaddleX@c852371c701d83cd21955b2963834825920ffebb paddlex/inference/pipelines/paddleocr_vl/pipeline.py LaTeX delimiter rewrite",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        },
+        "mode": "formula"
+      },
+      "raw": "\\[E=mc^2\\]",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": " $$ E=mc^2 $$ ",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "tables": []
+          }
+        ]
+      }
+    }
+  ]
+}

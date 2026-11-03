@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "jina-reranker-v3.5"
+name = "Jina Reranker v3.5"
+kind = "embeddings"
+params = "597M"
+publisher = "Jina AI"
+released = 2026
+suggested = false
+summary = "Rank candidate passages against a search query."
+purpose = "Rank search results by relevance"
+good_for = ["reranking search results"]
+limits = ["Checked live at FP16 on 19 Oct: the relevant document ranked first; scores within one request sit close together.", "Native cosine scores are mapped to the API range 0 to 1."]
+tasks = ["text-ranking"]
+languages = ["mul"]
+tools = ["operation"]
+context = 131072
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+[licence]
+spdx = "CC-BY-NC-4.0"
+name = "CC-BY-NC-4.0"
+commercial = false
+url = "https://huggingface.co/jinaai/jina-reranker-v3.5-mlx/tree/3dd4ac901ccdcac85abe3815df0a0aaaf44e4a21"
+[weights]
+repo = "jinaai/jina-reranker-v3.5-mlx"
+revision = "3dd4ac901ccdcac85abe3815df0a0aaaf44e4a21"
+dtype = "bf16"
+files = ["config.json", "model.safetensors", "projector.safetensors", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "3e8362dcce1b8430cded32557693fbb2592a86f1b01c6ae5590635985d0f7ad9"
+"model.safetensors" = "e85a0c28ef5061f301ef3a80bd681436c62511c012e0c3f21df3b8d6d9f34724"
+"projector.safetensors" = "b14c3d97315ca33490e630218c821640f183180fd971c5c3242f5b81aadcedf9"
+"tokenizer.json" = "4e95945ab0cef486709f760b81efcc7a6e75747f9165d13ead29159737455803"
+"tokenizer_config.json" = "1f37d8143c431bcdae5c4657ffe84ec3f7781ea7e3d8ee2a1929d2922ff2af2d"
+[weights.bytes]
+"config.json" = 29000
+"model.safetensors" = 1192134935
+"projector.safetensors" = 1573048
+"tokenizer.json" = 11423225
+"tokenizer_config.json" = 543
+[derive]
+fp16 = "cast:embed-qwen3-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "embed"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "rerank"
+title = "Rank passages"
+input = "ops/rerank.input.json"
+output_schema = "ops/rerank.output.json"
+output = "json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

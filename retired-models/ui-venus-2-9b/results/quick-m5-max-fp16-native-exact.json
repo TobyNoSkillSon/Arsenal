@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "ui-venus-2-9b",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-10-22T07:50:10Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Ground screen at fp16: one ordinary Load, then two Ground screen requests (warm-up, timed) through Arsenal's API. Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "90d6dfe13ece735f82793635b69bcc10c710e2ab",
+        "run": "night-2026-10-22-fp16",
+        "source": "results/quick-checks/night-2026-10-22.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "perception",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Ground screen requests on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-10-22T07:50:10Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Ground screen requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "90d6dfe13ece735f82793635b69bcc10c710e2ab",
+          "run": "night-2026-10-22-fp16",
+          "source": "results/quick-checks/night-2026-10-22.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 24.696061952
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Ground screen request on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-10-22T07:50:10Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Ground screen request, one sample, after one ordinary Load, then two Ground screen requests (warm-up, timed) through Arsenal's API; includes the API round trip. Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "90d6dfe13ece735f82793635b69bcc10c710e2ab",
+          "run": "night-2026-10-22-fp16",
+          "source": "results/quick-checks/night-2026-10-22.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 1.367
+      }
+    },
+    "runner": "native"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "operations": [
+    "read_document"
+  ],
+  "processor": "Qwen3VLProcessor",
+  "prompts": {
+    "ocr": "OCR this image to HTML, arranged as layout blocks.  Each layout block should be a div with the data-bbox attribute representing the bounding box of the block in x0 y0 x1 y1 format.  Bboxes are normalized 0-1000. The data-label attribute is the label for the block.\n\nUse the following labels:\n- Caption\n- Footnote\n- Equation-Block\n- List-Group\n- Page-Header\n- Page-Footer\n- Image\n- Section-Header\n- Table\n- Text\n- Complex-Block\n- Code-Block\n- Form\n- Table-Of-Contents\n- Figure\n- Chemical-Block\n- Diagram\n- Bibliography\n- Blank-Page\n\nOnly use these tags ['math', 'br', 'i', 'b', 'u', 'del', 'sup', 'sub', 'table', 'tr', 'td', 'p', 'th', 'div', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'ul', 'ol', 'li', 'input', 'a', 'span', 'img', 'hr', 'tbody', 'small', 'caption', 'strong', 'thead', 'big', 'code', 'chem'], and these attributes ['class', 'colspan', 'rowspan', 'display', 'checked', 'type', 'border', 'value', 'style', 'href', 'alt', 'align', 'data-bbox', 'data-label'].\n\nGuidelines:\n* Inline math: Surround math with <math>...</math> tags. Math expressions should be rendered in KaTeX-compatible LaTeX. Use display for block math.\n* Tables: Use colspan and rowspan attributes to match table structure.\n* Formatting: Maintain consistent formatting with the image, including spacing, indentation, subscripts/superscripts, and special characters.\n* Images: Include a description of any images in the alt attribute of an <img> tag. Do not fill out the src property. Describe in detail inside the div tag. Also convert charts to high fidelity data, and convert diagrams to mermaid.\n* Forms: Mark checkboxes and radio buttons properly.\n* Text: join lines together properly into paragraphs using <p>...</p> tags.  Use <br> tags for line breaks within paragraphs, but only when absolutely necessary to maintain meaning.\n* Chemistry: Use <chem>...</chem> tags for chemical formulas with reactive SMILES.\n* Lists: Preserve indents and proper list markers.\n* Use the simplest possible HTML structure that accurately represents the content of the block.\n* Make sure the text is accurate and easy for a human to read and interpret.  Reading order should be correct and natural."
+  },
+  "processor_config": {
+    "data_format": "channels_first",
+    "do_convert_rgb": true,
+    "do_normalize": true,
+    "do_rescale": true,
+    "do_resize": true,
+    "image_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "image_processor_type": "Qwen2VLImageProcessorFast",
+    "image_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "merge_size": 2,
+    "patch_size": 16,
+    "resample": 3,
+    "rescale_factor": 0.00392156862745098,
+    "size": {
+      "longest_edge": 16777216,
+      "shortest_edge": 65536
+    },
+    "temporal_patch_size": 2
+  },
+  "pdf_dpi": 192,
+  "pdf_min_short_side": 1024,
+  "image_min_short_side": 1536,
+  "scale_to_fit": {
+    "max_pixels": 6291456,
+    "min_pixels": 50176,
+    "grid": 28
+  }
+}

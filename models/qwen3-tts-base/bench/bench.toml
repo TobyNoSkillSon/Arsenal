@@ -1,0 +1,5 @@
+schema = 1
+kind = "voices"
+suite = "arsenal-voices-suite-v1"
+suite_path = "bench/kinds/voices/suite-v1.toml"
+profile = "quick"

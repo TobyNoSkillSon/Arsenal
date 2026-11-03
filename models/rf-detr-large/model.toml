@@ -1,0 +1,62 @@
+schema = 3
+architecture = "rf_detr"
+id = "rf-detr-large"
+name = "RF-DETR Large"
+kind = "perception"
+params = "33.9M"
+publisher = "Roboflow"
+released = 2026
+suggested = false
+summary = "Find 80 types of objects, more accurately than Nano. Native MLX inference in FP16."
+description = "RF-DETR Large is the most accurate Apache-licensed size of Roboflow's RF-DETR real-time detection transformers (ICLR 2026): a DINOv2-style ViT backbone that alternates windowed and full attention, a multi-scale projector and a four-layer deformable DETR decoder, at 704 × 704. It has 33.9M parameters and finds the 80 COCO classes end to end, without non-maximum suppression. The makers report 56.5 COCO AP50:95 and 75.1 AP50 at 6.8 ms on an NVIDIA T4; these are their figures, not reproduced here."
+purpose = "Find 80 types of objects"
+good_for = ["Fixed COCO object detection where small or distant objects matter more than speed", "Boxes to crop, count or feed into a segmentation model"]
+limits = ["Only 80 COCO classes; no open-vocabulary detection", "Matches the maker's Transformers code on Apple GPU in FP16: the same five detections on the COCO two-cats photo, scores within 0.005 and boxes within 0.0003 (2 Nov 2026)", "No masks or keypoints from this checkpoint"]
+languages = ["en"]
+tasks = ["object-detection"]
+tools = ["operation"]
+[facets]
+modalities_in = ["image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/Roboflow/rf-detr-large/blob/f62f7dd5252b61097cbace33886045816dadbde9/README.md"
+[weights]
+repo = "Roboflow/rf-detr-large"
+revision = "f62f7dd5252b61097cbace33886045816dadbde9"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+[weights.sha256]
+"model.safetensors" = "1ec604598aea748627eb5755a9989f3c80839fc7fb977a91bfba107ee76fcd7d"
+"config.json" = "6630951d97cc8dd2f32da43df7c79af153b032f6df196bbe9bf9e47bd7be0c0c"
+[weights.bytes]
+"model.safetensors" = 135795376
+"config.json" = 5771
+[derive]
+fp16 = "cast:rf-detr-nano-affine-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "perception"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "detect"
+title = "Detect"
+input = "ops/detect.input.json"
+output = "json"
+output_schema = "ops/detect.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,11 @@
+schema = 1
+suite = "qwen-image-2.1-native-v1"
+version = 1
+precision = "bf16"
+runner = "native"
+fast_exact = false
+width = 1024
+height = 1024
+steps = 40
+status = "quick-check"
+metrics = ["seconds_per_image", "peak_ram_mb"]

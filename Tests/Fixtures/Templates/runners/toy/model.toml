@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: MIT
+schema = 2
+id = "toy"
+name = "CPU toy arithmetic"
+kind = "toy"
+summary = "Protocol example, not a language model or a catalog offering."
+publisher = "Arsenal"
+released = 2026
+tasks = ["arithmetic"]
+languages = ["und"]
+params = "0"
+[licence]
+spdx = "MIT"
+commercial = true
+url = "https://opensource.org/license/mit"
+[weights]
+repo = "arsenal/toy"
+revision = "0000000000000000000000000000000000000000"
+dtype = "fp16"
+files = ["empty.bin"]
+[weights.sha256]
+"empty.bin" = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+[weights.bytes]
+"empty.bin" = 0
+[[runner]]
+name = "template"
+language = "swift"
+worker = "toy"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = true
+[[op]]
+name = "evaluate"
+title = "Evaluate"
+input = "ops/evaluate.input.json"
+output = "json"
+stream = false
+[[setting]]
+id = "scale"
+title = "Scale"
+type = "number"
+default = 1
+min = -100
+max = 100
+step = 1
+applies = "load"
+maps_to = "config.scale"
+[selection]
+default = "template"
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

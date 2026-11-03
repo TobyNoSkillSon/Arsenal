@@ -1,0 +1,4 @@
+schema = 1
+id = "paddleocr-vl-1.6-gate-v1"
+reject_crash = true
+reject_empty = true

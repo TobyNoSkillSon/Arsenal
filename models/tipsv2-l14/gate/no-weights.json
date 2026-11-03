@@ -1,0 +1,53 @@
+{
+  "config": {
+    "model_type": "tipsv2",
+    "variant": "l14"
+  },
+  "assets": {
+    "tokenizer": "$PERCEPTION_FIXTURES/tokenizers/tipsv2"
+  },
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVR4nGMIqFjwnxLMMGrAqAGjBgwXAwBqsGcfY7qOyAAAAABJRU5ErkJggg=="
+  },
+  "operations": [
+    {
+      "operation": "embed",
+      "input": {
+        "input": [
+          "a red car",
+          {
+            "type": "image",
+            "image": {
+              "path": "$INBOX/fixture.png"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation": "detect",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "car",
+          "person"
+        ],
+        "threshold": 0
+      }
+    },
+    {
+      "operation": "segment",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "background",
+          "car"
+        ]
+      }
+    }
+  ]
+}

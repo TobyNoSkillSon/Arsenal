@@ -1,0 +1,78 @@
+{
+  "cases": [
+    {
+      "operation": "ground_screen",
+      "source": "PrentisAI/GroundGUI-8B@9db378189fddaabb5f6e347b9053858a392022ac README.md output format; PrentisAI/GroundGUI@a1a02a93cb626b86c0ba829c38b613b8a40ecd0b eval/prompts.py ScaleCUAToolCallPrompt (desktop computer_use)",
+      "input": {
+        "image": {
+          "path": "$INBOX/image.png"
+        },
+        "instruction": "Save"
+      },
+      "raw": "<tool_call>\n{\"name\": \"computer_use\", \"arguments\": {\"action\": \"left_click\", \"coordinate\": [250, 750]}}\n</tool_call>",
+      "expected": {
+        "detections": [
+          {
+            "label": "Save",
+            "point": {
+              "x": 8,
+              "y": 24
+            }
+          }
+        ],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 32,
+          "height": 32
+        }
+      }
+    },
+    {
+      "operation": "ground_screen",
+      "source": "PrentisAI/GroundGUI-8B@9db378189fddaabb5f6e347b9053858a392022ac README.md output format; PrentisAI/GroundGUI@a1a02a93cb626b86c0ba829c38b613b8a40ecd0b eval/prompts.py ScaleCUAToolCallPrompt (mobile mobile_use click)",
+      "input": {
+        "image": {
+          "path": "$INBOX/image.png"
+        },
+        "instruction": "Send",
+        "platform": "mobile"
+      },
+      "raw": "<tool_call>\n{\"name\": \"mobile_use\", \"arguments\": {\"action\": \"click\", \"coordinate\": [500, 125]}}\n</tool_call>",
+      "expected": {
+        "detections": [
+          {
+            "label": "Send",
+            "point": {
+              "x": 16,
+              "y": 4
+            }
+          }
+        ],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 32,
+          "height": 32
+        }
+      }
+    },
+    {
+      "operation": "ground_screen",
+      "source": "PrentisAI/GroundGUI-8B@9db378189fddaabb5f6e347b9053858a392022ac README.md output format; PrentisAI/GroundGUI@a1a02a93cb626b86c0ba829c38b613b8a40ecd0b eval/prompts.py ScaleCUAToolCallPrompt (abstain schema)",
+      "input": {
+        "image": {
+          "path": "$INBOX/image.png"
+        },
+        "instruction": "Missing"
+      },
+      "raw": "<tool_call>\n{\"name\": \"computer_use\", \"arguments\": {\"action\": \"abstain\"}}\n</tool_call>",
+      "expected": {
+        "detections": [],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 32,
+          "height": 32
+        }
+      }
+    }
+  ]
+}

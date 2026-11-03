@@ -1,0 +1,32 @@
+{
+ "date": "2026-10-22",
+ "chip": "M5 Max",
+ "reference": "python-audio-separator 0.45.0, torch 2.14.1 MPS, network FP16, STFT/iSTFT float32",
+ "candidate": "Arsenal audio worker, FP16 snapshot from cast:audio-bs-roformer-v1",
+ "fixture": "4.0 s 44.1 kHz stereo mix (speech over generated music), first chunk 112455 samples",
+ "components_relative_l2": {
+  "band_split": 0.0004889,
+  "chunk_output": 0.000562,
+  "istft_from_ref_mask": 3e-07,
+  "layer0": 0.000615,
+  "mask": 0.0015371,
+  "stft": 5e-07
+ },
+ "end_to_end": {
+  "vocals": {
+   "wave_relative_l2": 0.000504,
+   "logmel_relative_l2": 0.001412
+  },
+  "instrumental": {
+   "wave_relative_l2": 0.000775,
+   "logmel_relative_l2": 0.00093
+  }
+ },
+ "run": {
+  "seconds_warm": 0.626,
+  "mlx_peak_gb": 1.32,
+  "note": "quick check, machine in use",
+  "clip_60s_seconds_warm": 8.6,
+  "clip_60s_mlx_peak_gb": 1.67
+ }
+}

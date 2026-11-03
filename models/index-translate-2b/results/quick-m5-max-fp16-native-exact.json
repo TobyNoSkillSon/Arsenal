@@ -1,0 +1,59 @@
+{
+  "mode": "exact",
+  "model": "index-translate-2b",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T03:09:57Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Translate at fp16: one ordinary Load, then two Translate requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "9bc08445315723eb9b77d1b93505915eb03c3f01",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "chat",
+    "metrics": {
+      "batteryPercentPer100000Tokens": {
+        "state": "notMeasured"
+      },
+      "firstTokenSeconds": {
+        "state": "notMeasured"
+      },
+      "loadPeakMemoryGB": {
+        "state": "notMeasured"
+      },
+      "maximumContextTokens": {
+        "state": "notMeasured"
+      },
+      "nextTokenAgreementPercent": {
+        "state": "notMeasured"
+      },
+      "nextTokenKL": {
+        "state": "notMeasured"
+      },
+      "peakMemoryGB": {
+        "basis": "Load and two Translate requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:09:57Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Translate requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "9bc08445315723eb9b77d1b93505915eb03c3f01",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 6.0666413056
+      },
+      "tokensPerSecond": {
+        "state": "notMeasured"
+      }
+    },
+    "runner": "native"
+  }
+}

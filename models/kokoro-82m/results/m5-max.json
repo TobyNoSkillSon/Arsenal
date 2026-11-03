@@ -1,0 +1,111 @@
+{
+  "app_build" : "7ab0bb5c8ad774ccf55b5cdf3b95c77b0a604eee",
+  "cases" : [
+    {
+      "id" : "short-0",
+      "metrics" : {
+        "_audio_s" : 3.25,
+        "_gen_s" : 0.07608997821807861,
+        "first_audio_s" : 0.07463204860687256,
+        "speed_x_realtime" : 42.712589438326525
+      },
+      "output" : "voice=af_heart",
+      "wall_s" : 0.07716405391693115
+    },
+    {
+      "id" : "long-0",
+      "metrics" : {
+        "_audio_s" : 18.375,
+        "_gen_s" : 0.3856610059738159,
+        "first_audio_s" : 0.10187506675720215,
+        "speed_x_realtime" : 47.64547028445897
+      },
+      "output" : "voice=af_heart",
+      "wall_s" : 0.38730502128601074
+    }
+  ],
+  "chip" : "m5-max",
+  "conditions" : {
+    "contaminated" : true,
+    "contended" : true,
+    "cpu_limit_pct" : 250,
+    "energy" : "not_measured",
+    "gpu_limit_pct" : 10,
+    "idle_samples" : [
+      {
+        "at" : "2026-10-02T09:09:57Z",
+        "compositing_gpu_pct" : 28.173074368960393,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 290.4000000000002,
+        "other_gpu_pct" : 9.826925631039607,
+        "phase" : "idle",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T09:10:01Z",
+        "compositing_gpu_pct" : 26.54057380234558,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 284.20000000000005,
+        "other_gpu_pct" : 9.45942619765442,
+        "phase" : "idle",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T09:10:05Z",
+        "compositing_gpu_pct" : 28.321628781129064,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 182.4999999999999,
+        "other_gpu_pct" : 8.678371218870936,
+        "phase" : "idle",
+        "valid" : false
+      }
+    ],
+    "measurement_lock" : false,
+    "note" : "Quick check under gpulock; gpulock quick proof; not controlled measurement, never ranked or Measured. Speed and quality only; energy not measured. RAM is sampled worker footprint, a lower bound on transient peak.",
+    "run_samples" : [
+      {
+        "at" : "2026-10-02T09:10:15Z",
+        "compositing_gpu_pct" : 22.64409278612762,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 324.1000000000005,
+        "other_gpu_pct" : 0.17368853315079072,
+        "phase" : "run",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T09:10:19Z",
+        "compositing_gpu_pct" : 27.98047327706948,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 202.59999999999982,
+        "other_gpu_pct" : 0.17888796577052396,
+        "phase" : "run",
+        "valid" : false
+      }
+    ],
+    "sample_interval_s" : 3
+  },
+  "date" : "2026-10-02T09:10:19Z",
+  "gate_passed" : false,
+  "kind" : "voices",
+  "metrics" : {
+    "first_audio_s" : 0.08825355768203735,
+    "peak_ram_mb" : 824.149288,
+    "round_trip_wer" : null,
+    "speed_x_realtime" : 46.83260185756979
+  },
+  "mode" : "fast",
+  "model" : "kokoro-82m",
+  "os_build" : "25G72",
+  "precision" : "fp16",
+  "profile" : "quick",
+  "runner" : "native",
+  "schema" : 1,
+  "stub" : false,
+  "suite" : {
+    "id" : "mobius-voices-suite-v1",
+    "sha256" : "18a7f8ae5a1255a2880c7cdafc1c010b09ea235996e85f0c9a91b54c720627d8",
+    "version" : 1
+  },
+  "worker_digest" : "31317d78f7e9a69e5862ea63348c1f6a45138b59f261d44e05ccc050b9324a7d",
+  "gpu_cores": 40
+}

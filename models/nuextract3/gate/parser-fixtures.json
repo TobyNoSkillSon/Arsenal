@@ -1,0 +1,128 @@
+{
+  "cases": [
+    {
+      "operation": "extract",
+      "source": "numind/NuExtract3@c99dc8f5641b866aa0192b6ea78f84bf9f3535f1 README.md: vLLM inference: structured extraction: text (example output)",
+      "input": {
+        "text": "Yesterday I bought apples and coffee at Trader Joe's for a total of $12.40.",
+        "template": {
+          "store": "verbatim-string",
+          "date": "date-time",
+          "total": "number",
+          "currency": [
+            "USD",
+            "EUR",
+            "GBP",
+            "JPY",
+            "Other"
+          ],
+          "items": [
+            {
+              "name": "verbatim-string",
+              "price": "number"
+            }
+          ]
+        },
+        "instructions": "Specify the time for the `date` entry only if it is present, otherwise only output the date component."
+      },
+      "raw": "{\n  \"store\": \"Trader Joe's\",\n  \"date\": null,\n  \"total\": 12.40,\n  \"currency\": \"USD\",\n  \"items\": [\n    {\n      \"name\": \"apples\",\n      \"price\": null\n    },\n    {\n      \"name\": \"coffee\",\n      \"price\": null\n    }\n  ]\n}",
+      "expected": {
+        "data": {
+          "store": "Trader Joe's",
+          "date": null,
+          "total": 12.4,
+          "currency": "USD",
+          "items": [
+            {
+              "name": "apples",
+              "price": null
+            },
+            {
+              "name": "coffee",
+              "price": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "operation": "extract",
+      "source": "numind/NuExtract3@c99dc8f5641b866aa0192b6ea78f84bf9f3535f1 README.md: In-context examples for extraction (example output)",
+      "input": {
+        "text": "John went to the restaurant with Mary. James went to the cinema.",
+        "template": {
+          "names": [
+            "string"
+          ]
+        },
+        "examples": [
+          {
+            "text": "Stephen is the manager at Susan's store.",
+            "output": {
+              "names": [
+                "-STEPHEN-",
+                "-SUSAN-"
+              ]
+            }
+          }
+        ]
+      },
+      "raw": "{\n  \"names\": [\"-JOHN-\", \"-MARY-\", \"-JAMES-\"]\n}",
+      "expected": {
+        "data": {
+          "names": [
+            "-JOHN-",
+            "-MARY-",
+            "-JAMES-"
+          ]
+        }
+      }
+    },
+    {
+      "operation": "extract",
+      "source": "numind/NuExtract3@c99dc8f5641b866aa0192b6ea78f84bf9f3535f1 README.md: vLLM inference: template generation (example output)",
+      "input": {
+        "text": "I want to extract the key details from a rental contract.",
+        "mode": "template-generation"
+      },
+      "raw": "{\n  \"contract_title\": \"verbatim-string\",\n  \"landlord\": \"verbatim-string\",\n  \"tenant\": \"verbatim-string\",\n  \"property_address\": \"verbatim-string\",\n  \"start_date\": \"date-time\",\n  \"end_date\": \"date-time\",\n  \"monthly_rent\": \"number\",\n  \"currency\": \"verbatim-string\",\n  \"deposit\": \"number\",\n  \"signatories\": [\"verbatim-string\"]\n}",
+      "expected": {
+        "data": {
+          "contract_title": "verbatim-string",
+          "landlord": "verbatim-string",
+          "tenant": "verbatim-string",
+          "property_address": "verbatim-string",
+          "start_date": "date-time",
+          "end_date": "date-time",
+          "monthly_rent": "number",
+          "currency": "verbatim-string",
+          "deposit": "number",
+          "signatories": [
+            "verbatim-string"
+          ]
+        }
+      }
+    },
+    {
+      "operation": "extract",
+      "source": "numind/NuExtract3@c99dc8f5641b866aa0192b6ea78f84bf9f3535f1 README.md: benchmark note, outputs deserializable after removing leading and trailing backticks",
+      "input": {
+        "text": "John went to the restaurant with Mary.",
+        "template": {
+          "names": [
+            "string"
+          ]
+        }
+      },
+      "raw": "```json\n{\"names\": [\"-JOHN-\", \"-MARY-\"]}\n```",
+      "expected": {
+        "data": {
+          "names": [
+            "-JOHN-",
+            "-MARY-"
+          ]
+        }
+      }
+    }
+  ]
+}

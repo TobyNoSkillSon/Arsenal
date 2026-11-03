@@ -1,0 +1,75 @@
+icon = "text.bubble"
+title_singular = "Chat"
+id = "chat"
+title = "Chat"
+order = 3
+suite = "bench/kinds/chat/suite-v1.toml"
+
+[[columns]]
+id = "context"
+title = "Context"
+unit = "tokens"
+
+[[columns]]
+id = "tokens_per_s"
+title = "Tokens/s"
+unit = "tokens/s"
+
+[[columns]]
+id = "first_token"
+title = "First token"
+unit = "s"
+
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+
+[api]
+chat = "/v1/chat/completions"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[[op]]
+default = true
+name = "chat"
+title = "Chat"
+input = "ops/chat.input.json"
+output_schema = "ops/chat.output.json"
+output = "text-stream"
+stream = true
+
+[[op]]
+default = true
+name = "count_tokens"
+title = "Count tokens"
+input = "ops/count_tokens.input.json"
+output_schema = "ops/count_tokens.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "translate"
+title = "Translate"
+input = "ops/translate.input.json"
+output_schema = "ops/translate.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "read_document"
+title = "Read document"
+input = "ops/read_document.input.json"
+output_schema = "ops/read_document.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "extract"
+title = "Extract"
+input = "ops/extract.input.json"
+output_schema = "ops/extract.output.json"
+output = "json"
+stream = false

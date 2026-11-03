@@ -1,0 +1,18 @@
+id = "local.cells"
+title = "Cells"
+title_singular = "Cell model"
+icon = "sparkles"
+order = 20
+suite = "bench/kinds/local.cells/suite-v1.toml"
+primary_operation = "embed_cells"
+
+[[op]]
+name = "embed_cells"
+title = "Embed cell"
+input = "ops/embed_cells.input.json"
+output = "json"
+output_schema = "ops/embed_cells.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

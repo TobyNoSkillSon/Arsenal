@@ -1,0 +1,38 @@
+Stable Audio 3 in Vireo
+
+Code
+- Sources/VireoEngine/Vendor/StableAudio3/{Conditioner,DiTMedium,FlowMatchingSampler,SAMELDecoder,
+  T5GemmaEncoder,UnigramTokenizer,Configuration,StableAudio3,StableAudio3WeightLoading,
+  SentencePieceModel}.swift are adapted from soniqo/speech-swift
+  (https://github.com/soniqo/speech-swift, commit 2af9c6c9f415ab1ad63fd8a5dc4ed0192f8263de,
+  targets StableAudio3MusicGen and AudioCommon), Copyright 2025 Ivan Digital, Apache License 2.0
+  (speech-swift-Apache-2.0.txt). Modified for Vireo: official F16 .npz loading, strict key checks,
+  plain Linear layers with optional quantization, configurable DiT shape, input-length local
+  conditioning, fp32 timestep, key(seed) noise, a byte-exact SentencePiece BPE tokenizer,
+  cancellation. Each modified file says what changed.
+- Behaviour was checked against Stability AI's MLX runtime
+  (https://github.com/Stability-AI/stable-audio-3/tree/main/optimized/mlx, MIT licence).
+  Sources/VireoEngine/Vendor/StableAudio3/SAMESDecoder.swift (the SAME-S decoder of the small
+  models) and the plain-attention path of DiTMedium.swift (the small DiTs) are Swift ports of its
+  models/defs/same_s_decoder.py and models/defs/dit_mlx.py (commit 779434a), Copyright (c) 2026
+  Stability AI, MIT licence (StableAudio3-MLX-MIT.txt). Nothing else from it is included beyond the
+  constants and structure it documents.
+
+Weights (not included; Vireo downloads them to the Hugging Face cache when the user presses Get
+or first asks for sound effects or music)
+- stabilityai/stable-audio-3-optimized, MLX/*.npz, revision da6edc54ddba10bfd79a077102ded687f80e882b:
+  Medium (dit_medium_f16.npz, same_l_decoder_f32.npz) and Small SFX (dit_sm-sfx_f16.npz,
+  same_s_decoder_f32.npz), both with t5gemma_f16.npz.
+  "This Stability AI Model is licensed under the Stability AI Community License, Copyright © Stability
+  AI Ltd. All Rights Reserved." (StableAudio3-weights-Stability-AI-Community-License.md)
+  Powered by Stability AI.
+  Free for research, non-commercial use and commercial use by individuals and organisations with
+  under USD 1M annual revenue; commercial users must register with Stability AI
+  (https://stability.ai/community-license).
+- T5Gemma (google/t5gemma-b-b-ul2 encoder, bundled in t5gemma_f16.npz): "Gemma is provided under and
+  subject to the Gemma Terms of Use found at ai.google.dev/gemma/terms"
+  (StableAudio3-T5Gemma-Gemma-Terms.md).
+- Vireo's 8-bit and 4-bit precisions of the DiT are made on the user's Mac from the downloaded
+  weights (attention and feed-forward projections quantized to affine 8/4-bit, group 64: 168 in
+  Medium, 140 in Small SFX; see Sources/VireoEngine/Quantization.swift) and
+  are not distributed.

@@ -1,0 +1,29 @@
+{
+  "status": "mapped-name-shape-pass-precision-unqualified",
+  "headers_inspected": [
+    {
+      "file": "model.safetensors",
+      "tensors": 628,
+      "dtypes": [
+        "BF16"
+      ]
+    },
+    {
+      "repo": "m-a-p/YuE2-Vae",
+      "revision": "152733a19ad43aa67e367f9b5503ef8075bb5126",
+      "file": "model.safetensors",
+      "tensors": 435,
+      "dtypes": [
+        "F32"
+      ]
+    }
+  ],
+  "weight_payload_bytes_read": 0,
+  "mapping": "component-map.json",
+  "native_tensors": 801,
+  "mapped_safetensors_tensors": 801,
+  "ignored_unused_tensors": 218,
+  "name_shape_errors": 0,
+  "dtype": "Prepared FP16 layout matches native inventory. Source BF16-to-FP16 and FP32-to-FP16 transforms are plans; trained precision quality is not qualified.",
+  "conditioning": null
+}

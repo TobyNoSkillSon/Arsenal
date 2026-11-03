@@ -1,0 +1,81 @@
+{
+ "commit": "ba8f7c73ab7883fdae4ee8d57d762b49c3771472",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [
+   {
+    "bytes": 573378,
+    "file": "speech-music.wav",
+    "sha256": "03b3b3bff564ed034d71041ff67b12419f2dfb8ca0e0cc33a4f27adfb19eb08c"
+   }
+  ],
+  "request": [
+   {
+    "body": {
+     "audio": {
+      "path": "speech-music.wav"
+     },
+     "prompt": "speech",
+     "seed": 7
+    },
+    "op": "separate_audio"
+   }
+  ]
+ },
+ "maker_reference": {
+  "none": "No maker capture: Meta's repository facebook/sam-audio-large is gated and this Mac's Hugging Face account has not accepted it, so Meta's code was not run. Drift check: the target correlates 0.94 with Arsenal's 22 Oct 2026 target for the same file (that run had no seed)."
+ },
+ "model": "sam-audio-large",
+ "note": "Prompt 'speech', seed 7, on a 3.25 s speech-over-music clip; target RMS 0.0096 against residual 0.0028.",
+ "output": [
+  {
+   "file_count": 2,
+   "files": [
+    {
+     "channels": 1,
+     "finite": true,
+     "frames": 156000,
+     "peak": 0.069336,
+     "rms": 0.009563,
+     "sample_rate": 48000,
+     "seconds": 3.25,
+     "sha256": "75465f456156105c6957459fc25cba2735ca1e59a846ba106a663049401104d7",
+     "type": "wav"
+    },
+    {
+     "channels": 1,
+     "finite": true,
+     "frames": 156000,
+     "peak": 0.005646,
+     "rms": 0.002816,
+     "sample_rate": 48000,
+     "seconds": 3.25,
+     "sha256": "b94e59fcab2b2f08bd3ade155269d77dbc30307357d3a4e0e235bd12c829e12f",
+     "type": "wav"
+    }
+   ],
+   "op": "separate_audio",
+   "reply": {},
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "fp16",
+ "schema": "golden-1",
+ "tolerance": {
+  "corr_vs_golden_target_min": 0.9,
+  "file_count": 2,
+  "frames_equal_input_at_48k": true,
+  "target_rms_over_residual_min": 2
+ },
+ "weights": {
+  "repo": "mlx-community/sam-audio-large-fp16",
+  "revision": "110947e651c2f7837c47d8897cfca1cb22ce9633",
+  "sha256": {
+   "config.json": "b768c3b04e107a7afb3865d9126c6159d4b604b4d3279f99446f4f50b9f2c26d",
+   "model-00001-of-00002.safetensors": "eaf6132e8cda499c79543a16a044082852d19c8ca44830ec0e3b881313d8251d",
+   "model-00002-of-00002.safetensors": "dd19411369d5a43d90cbbc30516b3d19ebfe38d39c5036fefba9636e66fd8431"
+  }
+ }
+}

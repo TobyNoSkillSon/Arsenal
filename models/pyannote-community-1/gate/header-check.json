@@ -1,0 +1,104 @@
+{
+  "source": "pyannote-community/speaker-diarization-community-1@8a527374977391da736e0daaef26855d949d9685",
+  "method": "HTTP Range reads of each ZIP central directory, local headers and data.pkl (non-executing unpickler) or .npy headers; no tensor payload read",
+  "checked": "2026-10-18",
+  "official_repo": "pyannote/speaker-diarization-community-1 (gated) lists identical paths and byte sizes; LFS hashes are hidden without accepting its conditions",
+  "checkpoints": {
+    "segmentation": {
+      "file": "segmentation/pytorch_model.bin",
+      "pyannote_audio": "4.0.0",
+      "tensors": 54,
+      "float32": 54,
+      "int64_ignored": 0
+    },
+    "embedding": {
+      "file": "embedding/pytorch_model.bin",
+      "pyannote_audio": "4.0.0",
+      "tensors": 218,
+      "float32": 182,
+      "int64_ignored": 36
+    }
+  },
+  "segmentation_hyperparameters": {
+    "sample_rate": 16000,
+    "num_channels": 1,
+    "sincnet": {
+      "stride": 10,
+      "sample_rate": 16000
+    },
+    "lstm": {
+      "hidden_size": 128,
+      "num_layers": 4,
+      "bidirectional": true,
+      "monolithic": true,
+      "dropout": 0.5,
+      "batch_first": true
+    },
+    "linear": {
+      "hidden_size": 128,
+      "num_layers": 2
+    }
+  },
+  "segmentation_specifications": {
+    "duration": 10.0,
+    "warm_up": [
+      0.0,
+      0.0
+    ],
+    "classes": 3,
+    "powerset_max_classes": 2,
+    "num_powerset_classes": 7
+  },
+  "embedding_hyperparameters": "none stored: WeSpeakerResNet34 defaults (80 mel, 25/10 ms, hamming, no fbank_centering_span)",
+  "descriptors_matched": 234,
+  "recomputed_buffers": [
+    "segmentation.sincnet.conv1d.0.filterbank.window_",
+    "segmentation.sincnet.conv1d.0.filterbank.n_"
+  ],
+  "plda": {
+    "xvec_transform.npz": {
+      "mean1": [
+        "<f8",
+        [
+          256
+        ]
+      ],
+      "mean2": [
+        "<f4",
+        [
+          128
+        ]
+      ],
+      "lda": [
+        "<f4",
+        [
+          256,
+          128
+        ]
+      ]
+    },
+    "plda.npz": {
+      "mu": [
+        "<f8",
+        [
+          128
+        ]
+      ],
+      "tr": [
+        "<f8",
+        [
+          128,
+          128
+        ]
+      ],
+      "psi": [
+        "<f8",
+        [
+          128
+        ]
+      ]
+    },
+    "cast": "float64/float32 to FP16 at Get"
+  },
+  "result": "passed"
+}

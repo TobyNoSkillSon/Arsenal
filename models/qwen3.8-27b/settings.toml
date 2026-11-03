@@ -1,0 +1,38 @@
+# Settings panel for Qwen3.8 27B, from kinds/chat/ (docs/MODEL-FOLDER.md, "Settings panel"). Context has one choice
+# (the model maximum), so it reads as plain text. Balanced is the runner's own sampling (temperature 0.6, top P 1).
+# Answer limit 1024 is what Arsenal's Chat window used before it left the limit to this setting.
+schema = 1
+
+[[section]]
+
+[[section.row]]
+setting = "context_limit"
+
+[[section.row]]
+setting = "thinking"
+
+[[section.row]]
+label = "Style"
+presets = [
+  { title = "Precise", values = { temperature = 0.2, top_p = 0.9 } },
+  { title = "Balanced", values = { temperature = 0.6, top_p = 1.0 } },
+  { title = "Creative", values = { temperature = 1.0, top_p = 1.0 } },
+]
+
+[[section.row]]
+setting = "system_prompt"
+control = "editor"
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "temperature"
+
+[[section.row]]
+setting = "top_p"
+
+[[section.row]]
+setting = "max_tokens"
+unit = "tokens"

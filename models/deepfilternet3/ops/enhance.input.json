@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "denoise"
+      ],
+      "default": "denoise"
+    },
+    "atten_lim_db": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 0,
+      "description": "Attenuation limit in dB: remove at most this much noise by mixing the original back in (0: no limit)."
+    },
+    "post_filter": {
+      "type": "boolean",
+      "default": false,
+      "description": "The maker's post filter, which slightly over-attenuates very noisy sections."
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stream": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "audio"
+  ],
+  "additionalProperties": false
+}

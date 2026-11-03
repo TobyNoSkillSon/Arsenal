@@ -1,0 +1,64 @@
+schema = 3
+id = "t0-alpha"
+name = "T0 Alpha"
+kind = "local.forecast"
+summary = "Forecasts the next values of one numeric series as a range of likely outcomes."
+description = "t0-alpha is an open-weights time-series forecasting foundation model from The Forecasting Company, the first public release of the t0 family. It is a decoder-style patch transformer that predicts five quantiles for each future step, with about 102M parameters. The maker reports a fev-bench skill score of 42.2 and a GIFT-Eval CRPS of 0.4941 and MASE of 0.7240; these are the maker's figures, not reproduced here."
+purpose = "Forecast numeric time series"
+publisher = "theforecastingcompany"
+released = 2026
+params = "101.6M"
+tasks = ["time-series-forecasting"]
+languages = ["und"]
+good_for = ["Probabilistic forecasts of one numeric series, such as load, sales or counts, up to 1024 steps ahead in one pass", "Clean seasonal series: a sine with period 24 is forecast almost exactly in a local check (RMSE 0.01)"]
+limits = ["Univariate here: one series in, no covariates and no multivariate input", "Horizons above 1024 steps need the maker's autoregressive rollout, which this runner does not port", "Returns only the trained quantile levels 0.1, 0.25, 0.5, 0.75 and 0.9; other levels are not interpolated", "Under-extrapolates trends: on a linear ramp the 24-step median ended about 0.5 low, and on a sine plus trend about 0.7 low at its peak", "Matches the maker's tfc-t0 code on Apple GPU in fp16 (cosine 0.99999996, largest gap 0.68 on forecasts up to 740); the maker's benchmark figures are not reproduced here", "Reads and writes no language, so the Polish question does not apply"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/theforecastingcompany/t0-alpha"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/theforecastingcompany/t0-alpha/blob/741927847fe02367624749bb9290b2f09f128e7d/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[weights]
+repo = "theforecastingcompany/t0-alpha"
+revision = "741927847fe02367624749bb9290b2f09f128e7d"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "16c030d3fd70f06dc4238e9a8356e9b5a631d07f80f1bc76ba539991aed5897f"
+"config.json" = "b2b545685283c579b99c774da0d7f07525683efca2b27dc4ffec99c109d5beba"
+
+[weights.bytes]
+"model.safetensors" = 406601492
+"config.json" = 250
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-t0-alpha"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

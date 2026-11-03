@@ -1,0 +1,107 @@
+{
+  "status": "passed",
+  "weights_downloaded": 0,
+  "graph": "reduced random weights",
+  "precisions": [
+    {
+      "model": "gemma-4-e4b-it",
+      "precision": "fp16",
+      "parameters": 152,
+      "eligible_matrices": 47,
+      "packed_matrices": 0,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "chat",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "count_tokens",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "describe",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "tag",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "gemma-4-e4b-it",
+      "precision": "int8",
+      "parameters": 246,
+      "eligible_matrices": 47,
+      "packed_matrices": 47,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "chat",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "count_tokens",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "describe",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "tag",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "gemma-4-e4b-it",
+      "precision": "int4",
+      "parameters": 246,
+      "eligible_matrices": 47,
+      "packed_matrices": 47,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "chat",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "count_tokens",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "describe",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "tag",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    }
+  ],
+  "interpretation": "Structured cases pass only on the declared invalid_model_output parser rejection. Maker parser fixtures independently exercise positive schema-valid results."
+}

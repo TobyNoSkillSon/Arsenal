@@ -1,0 +1,86 @@
+schema = 2
+id = "d1-3b"
+name = "d1 · 3B"
+kind = "decisions"
+publisher = "Liquid AI"
+params = "3.12B"
+released = 2026
+context = 32768
+native_context = 32768
+languages = ["ar", "zh", "en", "fr", "de", "hi", "id", "it", "ja", "ko", "pl", "pt", "ru", "es", "th", "vi"]
+tasks = ["yes-no", "choice", "score", "visual-inspection"]
+summary = "Single-pass text, JSON and image decisions; 32,768-token context."
+purpose = "Text and image decisions"
+
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+
+[licence]
+spdx = "LicenseRef-LFM-Open-1.0"
+name = "LFM Open License v1.0"
+commercial = false
+conditions = "Commercial use has a US$10 million annual-revenue threshold (legal entity, including affiliates); above it, a separate Liquid AI licence is required. Redistribution must retain the licence and attribution and identify modifications. See the pinned LICENSE for boundary wording."
+url = "https://huggingface.co/LiquidAI/d1-3B/blob/051bcc464b01b9f92942b364d9586b0ef5912432/LICENSE"
+
+[[runner]]
+name = "native"
+language = "swift"
+worker = "d1"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+
+[derive]
+int8 = "mlx-affine-g64:d1-3b"
+int4 = "mlx-affine-g64:d1-3b"
+
+[selection]
+default = "native"
+
+[[op]]
+name = "decide"
+title = "Decide"
+input = "ops/decide.input.json"
+output = "json"
+output_schema = "kinds/decisions/ops/decide.output.json"
+stream = false
+
+[[op]]
+name = "judge"
+title = "Judge"
+input = "ops/judge.input.json"
+output = "json"
+output_schema = "kinds/decisions/ops/judge.output.json"
+stream = false
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"
+
+[weights]
+repo = "LiquidAI/d1-3B"
+revision = "051bcc464b01b9f92942b364d9586b0ef5912432"
+dtype = "bf16"
+files = ["LICENSE", "chat_template.jinja", "config.json", "model.safetensors", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+
+[weights.sha256]
+"LICENSE" = "4d28ca14dedc0b3d0fcc2b3339f0e79931faa33874f3d24f522183a8fc70068c"
+"chat_template.jinja" = "86f4770449a4797c9b4212d110b0cc70fb993c1ce960095bcfb12eea22f61cca"
+"config.json" = "0cbac0f580bd8036ef94ac83aa632a57a170e66d20f381ef47c3f6486c9a3e8c"
+"model.safetensors" = "50e03317847caf6df9a9aee27ed40f20554a86a21e60d1d47ba41a422b546c0c"
+"processor_config.json" = "b9b82ad34a69e2f70a9033741e11f82b8a98bb5f8e6c13b3b2d5efdd3935d916"
+"tokenizer.json" = "8096ecb9f54599d756c8de728a598a340bc1e43c0deb77ddd62456c38349fcee"
+"tokenizer_config.json" = "ef6770d12dd9ac58d334e979bf160c5cdfd41f13d205fd5d5516857645feb0ea"
+
+[weights.bytes]
+"LICENSE" = 10574
+"chat_template.jinja" = 5436
+"config.json" = 2773
+"model.safetensors" = 6247065504
+"processor_config.json" = 824
+"tokenizer.json" = 17905750
+"tokenizer_config.json" = 507

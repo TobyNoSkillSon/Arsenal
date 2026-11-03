@@ -1,0 +1,68 @@
+schema = 3
+id = "nemotron-3-diarization"
+name = "Nemotron 3 Diarization"
+kind = "audio"
+params = "99M"
+publisher = "NVIDIA"
+released = 2026
+suggested = false
+summary = "Identify who spoke when using a native Swift MLX worker."
+purpose = "Identify who spoke when"
+good_for = ["Identify who spoke when"]
+limits = ["Up to eight speakers.", "Two streaming sessions; ten minutes per recording; a session idle for ten minutes is dropped when a new one needs its slot.", "Trained-weight and precision-quality verification is pending."]
+languages = ["und"]
+tasks = ["diarize"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "OpenMDW-1.1"
+name = "OpenMDW License Agreement 1.1"
+commercial = true
+# The pinned weights are mlx-community's conversion, whose card defers to NVIDIA's for the licence.
+url = "https://huggingface.co/nvidia/Nemotron-3-Diarization/blob/f667ed73aee57d40cc39428eb768b4fd87a0a29e/README.md"
+[weights]
+repo = "mlx-community/Nemotron-3-Diarization"
+revision = "59ed2dbfc1346dcea9d423c71306a3a2499c568f"
+dtype = "bf16"
+files = ["config.json", "model.safetensors"]
+[weights.sha256]
+"config.json" = "f215091252bc54f8dcc7d682962a659e03a6bcb26d1c86e4728b8c6730130eb4"
+"model.safetensors" = "21e8427d1795c9c46c5800f56b16061734ffd0dcadd71d9bcf0b4d6ef7261da5"
+[weights.bytes]
+"config.json" = 1521
+"model.safetensors" = 198632220
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "diarize"
+title = "Diarize"
+input = "ops/diarize.input.json"
+output_schema = "ops/diarize.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[[op]]
+name = "diarize_session"
+title = "Stream speaker diarization"
+input = "ops/diarize_session.input.json"
+output_schema = "ops/diarize_session.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

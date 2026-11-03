@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "translations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "detected_source_language": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "detected_source_language"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 128
+    }
+  },
+  "required": [
+    "translations"
+  ],
+  "additionalProperties": false
+}

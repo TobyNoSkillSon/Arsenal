@@ -1,0 +1,5 @@
+{
+  "load": {"config": {"settings": {"scale": 2}, "kernels": []}},
+  "ops": {"evaluate": {"values": [1, 2, 3], "iterations": 1}},
+  "cancel": {"op": "evaluate", "params": {"values": [1, 2, 3], "iterations": 1000000000}}
+}

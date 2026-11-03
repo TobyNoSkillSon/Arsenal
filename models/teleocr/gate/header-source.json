@@ -1,0 +1,10 @@
+{
+  "repo": "XingChen-AGI/TeleOCR",
+  "revision": "70a19ec6a3b036311af19ae5e762e650f41a5980",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 701,
+  "header_bytes": 77952,
+  "errors": []
+}

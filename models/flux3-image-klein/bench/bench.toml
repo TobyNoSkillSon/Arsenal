@@ -1,0 +1,11 @@
+schema = 1
+suite = "flux3-image-klein-native-v1"
+version = 1
+precision = "bf16"
+runner = "native"
+fast_exact = false
+width = 1024
+height = 1024
+steps = 16
+status = "not-run"
+metrics = ["seconds_per_image", "peak_ram_mb"]

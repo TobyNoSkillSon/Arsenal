@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "description": "The photo to colour. Only its brightness is used; colour photos work too.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "input_size": {
+      "type": "integer",
+      "enum": [
+        256,
+        512,
+        768,
+        1024
+      ],
+      "default": 512,
+      "description": "Square size, in pixels, at which colour is predicted; the photo keeps its own size and detail."
+    }
+  },
+  "required": [
+    "image"
+  ],
+  "additionalProperties": false
+}

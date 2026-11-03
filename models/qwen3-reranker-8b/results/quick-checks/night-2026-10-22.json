@@ -1,0 +1,79 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "qwen3-reranker-8b",
+  "revision": "77d193c791ed757ca307ee72715aa132723da912",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:50:31Z",
+      "load_seconds": 3.89,
+      "mac_peak_in_use_mb": 46076.3,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "rerank": {
+          "files": [],
+          "seconds_first": 0.286,
+          "seconds_warm": 0.154,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 17408.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 17408.0,
+      "samples": 16
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:50:40Z",
+      "load_seconds": 1.96,
+      "mac_peak_in_use_mb": 33161.9,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "rerank": {
+          "files": [],
+          "seconds_first": 0.231,
+          "seconds_warm": 0.14,
+          "status": 200,
+          "vs16": {
+            "cosine": 0.9999401919074068,
+            "files_identical": true,
+            "rel_l2": 0.010938560904495376
+          }
+        }
+      },
+      "peak_footprint_mb": 5023.0,
+      "precision": "int4",
+      "sampled_peak_mb": 5023.0,
+      "samples": 9
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:50:36Z",
+      "load_seconds": 2.47,
+      "mac_peak_in_use_mb": 37628.1,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "rerank": {
+          "files": [],
+          "seconds_first": 0.261,
+          "seconds_warm": 0.15,
+          "status": 200,
+          "vs16": {
+            "cosine": 0.999999922126502,
+            "files_identical": true,
+            "rel_l2": 0.0003946594868549024
+          }
+        }
+      },
+      "peak_footprint_mb": 9243.0,
+      "precision": "int8",
+      "sampled_peak_mb": 9205.0,
+      "samples": 11
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

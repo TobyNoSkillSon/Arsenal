@@ -1,0 +1,50 @@
+{
+  "config": {
+    "model_type": "rf_detr",
+    "decoder_layers": 4,
+    "num_queries": 300,
+    "backbone_config": {
+      "image_size": 704,
+      "patch_size": 16,
+      "hidden_size": 384,
+      "num_hidden_layers": 12,
+      "num_attention_heads": 6,
+      "num_windows": 2,
+      "out_indices": [
+        3,
+        6,
+        9,
+        12
+      ],
+      "window_block_indexes": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        7,
+        8,
+        10,
+        11
+      ]
+    }
+  },
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVR4nGMIqFjwnxLMMGrAqAGjBgwXAwBqsGcfY7qOyAAAAABJRU5ErkJggg=="
+  },
+  "operations": [
+    {
+      "operation": "detect",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "car",
+          "person"
+        ],
+        "threshold": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "denoise",
+        "restore",
+        "upscale"
+      ],
+      "default": "denoise"
+    },
+    "rate": {
+      "type": "integer",
+      "enum": [
+        8000,
+        16000,
+        22050,
+        24000,
+        32000,
+        44100,
+        48000
+      ]
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stream": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "audio"
+  ],
+  "additionalProperties": false
+}

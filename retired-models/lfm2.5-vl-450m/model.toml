@@ -1,0 +1,97 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "lfm2.5-vl-450m"
+name = "LFM2.5 VL 450M"
+architecture = "lfm2-vl"
+kind = "chat"
+tools = ["chat", "operation"]
+params = "449M"
+publisher = "LiquidAI"
+released = 2026
+suggested = false
+summary = "Describe images with a small model."
+purpose = "Describe images with a small model"
+good_for = ["Describe images with a small model"]
+limits = ["Trained weights, tokenizer correctness and FP16 task quality await the approved live trial.", "Not intended for fine-grained OCR.", "Bounding boxes come only from a chat prompt that asks for JSON bbox output; there is no detection operation", "LFM Open License v1.0 grants commercial use only while the licensee's annual revenue is below US$10 million; a Legal Entity at or above that threshold is not licensed for commercial use, and Qualified Non-Profit Organizations are exempt for non-commercial or research purposes"]
+tasks = ["chat", "count_tokens", "describe", "tag"]
+languages = ["en", "ar", "zh", "fr", "de", "ja", "ko", "pt", "es"]
+context = 32768
+native_context = 32768
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "LicenseRef-LFM-Open"
+name = "LFM Open License v1.0; revenue restriction"
+commercial = false
+url = "https://huggingface.co/LiquidAI/LFM2.5-VL-450M-MLX-bf16/tree/ed71acdae0799c98cb450787d049d1343b65cd52"
+[weights]
+repo = "LiquidAI/LFM2.5-VL-450M-MLX-bf16"
+revision = "ed71acdae0799c98cb450787d049d1343b65cd52"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "generation_config.json", "model.safetensors", "model.safetensors.index.json", "preprocessor_config.json", "processor_config.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "83a5de14f9680f9942135a701394b4e6bf94160dbb80db86fc94903e4a5c88b8"
+"config.json" = "383da38f0b74d53fcd966e14e89b4f754f7e97172f51541ba751b491329c8e80"
+"generation_config.json" = "40d17f9ec64c97e8fd5400540960b6a9761ed6d6acc0b1ab6a6656055e4755b3"
+"model.safetensors" = "3e5aa50581a0a8a2718f2731560366288a5f12302002f62d6d94ef38f955a4f7"
+"model.safetensors.index.json" = "3a934dcd6f972cc24f64e04570a5f1cce8c9abbab50779ca793c3fc220841757"
+"preprocessor_config.json" = "3bbdcf12a477e6e17a04051f2a14e0bd5914f440f4b476223bbb58c1b2718838"
+"processor_config.json" = "da781bd2b30c133e9470cfc504e4011226db1337f2d0c3429f115ef7bcb34da8"
+"special_tokens_map.json" = "a33ecf36d838dc264c8f960669aa3d26369d7a683c75a65bc5acdc3c65ca5ed9"
+"tokenizer.json" = "f3910942aa907c48b0cc20ec426ee38bfa8dcda8feecf035ced981918cb30f14"
+"tokenizer_config.json" = "4c778d46b817c46cc6a72da15bb2573b25b389caa7136149ebad972688a239a2"
+[weights.bytes]
+"chat_template.jinja" = 3889
+"config.json" = 2740
+"generation_config.json" = 136
+"model.safetensors" = 897493224
+"model.safetensors.index.json" = 29070
+"preprocessor_config.json" = 956
+"processor_config.json" = 4104
+"special_tokens_map.json" = 584
+"tokenizer.json" = 4733040
+"tokenizer_config.json" = 96225
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "chat"
+title = "Chat"
+input = "ops/chat.input.json"
+output_schema = "ops/chat.output.json"
+output = "text-stream"
+stream = true
+[[op]]
+name = "count_tokens"
+title = "Count tokens"
+input = "ops/count_tokens.input.json"
+output_schema = "ops/count_tokens.output.json"
+output = "json"
+stream = false
+[[op]]
+name = "describe"
+title = "Describe"
+input = "ops/describe.input.json"
+output_schema = "ops/describe.output.json"
+output = "json"
+stream = false
+[[op]]
+name = "tag"
+title = "Tag"
+input = "ops/tag.input.json"
+output_schema = "ops/tag.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

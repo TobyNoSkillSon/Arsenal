@@ -1,0 +1,6 @@
+schema = 1
+id = "da3-small-native-v1"
+reference_runner = "pinned-vendor-gpu-half"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Exact tensor inventory and layout", "Half learned parameters", "Random-weight operations in all three precisions", "Trained reference qualification after approval"]

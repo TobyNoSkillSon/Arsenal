@@ -1,0 +1,84 @@
+# SPDX-License-Identifier: MIT
+schema = 2
+id = "re-use"
+name = "RE-USE"
+kind = "enhancement"
+params = "9.6M"
+publisher = "NVIDIA"
+released = 2026
+suggested = false
+summary = "Universal speech cleanup: noise, reverb, clipping and codec damage."
+purpose = "Speech cleanup"
+tasks = ["audio-to-audio", "denoise"]
+languages = ["und"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "OpenMDW-1.1"
+name = "OpenMDW-1.1"
+commercial = true
+url = "https://huggingface.co/nvidia/NVIDIA-NemotronLabs-RE-USE/blob/31f82f2efad1095034492f236e8dac9239ba713b/LICENSE"
+# NVIDIA's own repository: the PyTorch checkpoint, which Get casts into the port's canonical BF16 file
+# (MLX names, channels-last convolutions; ReUseMakerLayout). It replaces faraday/re-use-mlx, an MLX conversion of
+# NVIDIA's earlier noncommercial release, whose weights differ from these.
+[weights]
+repo = "nvidia/NVIDIA-NemotronLabs-RE-USE"
+revision = "31f82f2efad1095034492f236e8dac9239ba713b"
+dtype = "fp32"
+files = ["model.safetensors", "LICENSE"]
+[weights.sha256]
+"model.safetensors" = "06badaf4029b297f97f7fe48d62990b48d5482608210df577354e0d4e0ed70e1"
+"LICENSE" = "a3d882953f026d3e2fdd57842d9c522c8320d4c0388af2278bcf4d438d255a2c"
+[weights.bytes]
+"model.safetensors" = 38592940
+"LICENSE" = 3211
+[derive]
+bf16 = "cast:re-use"
+[selection]
+default = "native"
+chips = { m5 = "native" }
+[[runner]]
+name = "native"
+language = "swift"
+worker = "sound"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = true
+[[op]]
+name = "enhance"
+title = "Enhance"
+input = "ops/enhance.input.json"
+output = "audio"
+stream = true
+[[setting]]
+id = "chunk_seconds"
+help = "Length of audio cleaned in one pass, in seconds; longer windows use more memory."
+title = "Chunk duration"
+type = "number"
+default = 5
+min = 0.1
+max = 30
+applies = "load"
+maps_to = "config.chunk_seconds"
+[[setting]]
+id = "mode"
+help = "Denoise and restore clean noise, reverb, clipping and codec damage at the input's rate; upscale also raises it to 48 kHz."
+title = "Mode"
+type = "choice"
+default = "denoise"
+choices = ["denoise", "restore", "upscale"]
+applies = "request"
+maps_to = "request.mode"
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"
+
+[[format]]
+id = "bf16"
+bits_per_weight = 16
+storage = "bf16"
+source = "derived"
+runners = ["native"]

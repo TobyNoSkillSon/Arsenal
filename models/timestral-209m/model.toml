@@ -1,0 +1,84 @@
+schema = 3
+id = "timestral-209m"
+name = "Timestral 209M"
+kind = "local.forecast"
+summary = "Forecasts the next values of a numeric series as a range of likely outcomes, optionally using related series and known future inputs."
+description = "Timestral 209M is Mistral AI's largest time-series forecasting foundation model: a 24-layer patch transformer (209M parameters, width 768) that alternates attention along time with attention across variates, reads up to 32,768 past steps and predicts 21 quantiles for up to 1,024 steps per pass. It handles several target series at once and numeric or categorical covariates, past-only or known in advance. The maker reports zero-shot GIFT-Eval MASE 0.658 and CRPS 0.446, TIME MASE 0.626 and fev-bench skill score 50.39, ahead of t0-gamma and Chronos-2 on all three; these are the maker's figures, not reproduced here."
+purpose = "Forecast series with covariates"
+publisher = "Mistral AI"
+released = 2026
+params = "209.3M"
+tasks = ["time-series-forecasting"]
+languages = ["und"]
+good_for = ["Probabilistic forecasts of a numeric series such as load, sales, traffic or counts, with 21 quantile levels from 0.01 to 0.99", "Long histories: up to 32,768 past steps, and horizons up to 4,096 steps (1,024 per pass, longer ones block by block)", "Forecasts that should use known future inputs (calendar features, holidays, promotions, prices, weather forecasts), numeric or categorical", "Several related series forecast jointly (co_targets), plus covariates only known in the past", "Series with gaps: missing observations are sent as null"]
+limits = [
+  "One series (with its co-targets and covariates) per request; the maker's batching of independent series in one call is not exposed",
+  "At most 32 series in all per request, and 31 in each covariate list",
+  "A reply holds at most 640,000 forecast numbers (forecast series x horizon x levels with the median, 16 MiB as JSON): at horizon 4,096 with all 21 levels, the target and 6 co-targets; larger asks are refused before the model runs",
+  "A request body is at most 1 MiB of JSON over HTTP and MCP (about 100,000 numbers in all), so the 32,768-step context fits for one or two series, not for 32",
+  "Returns only the 21 trained quantile levels; no interpolation between them",
+  "Matches the maker's code on fixed inputs on the Apple GPU in FP16 (see log); the maker's benchmark figures are not reproduced here",
+  "Reads and writes no language, so the Polish question does not apply",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/mistralai/Timestral-209M"
+
+[licence]
+spdx = "LicenseRef-Mistral-Modified-MIT"
+name = "Modified MIT License (Mistral AI)"
+commercial = false
+conditions = "No rights under the licence for a company whose global consolidated monthly revenue (or its employer's) exceeded US$20 million in the preceding month, for the model and any derivative; Mistral AI sells a commercial licence. Copies must keep the attribution notice \"2026 - Mistral AI\" and the licence. See the pinned LICENSE."
+url = "https://huggingface.co/mistralai/Timestral-209M/blob/9874d252ab0aae16f7f7c999f98f98d6ad7d8365/LICENSE"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[weights]
+repo = "mistralai/Timestral-209M"
+revision = "9874d252ab0aae16f7f7c999f98f98d6ad7d8365"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "1456effb9927e3daa8c7234f10497e3424233869245a9c72b8ecebaf7ad2b7fa"
+"config.json" = "1764139bb6d37ee5ff543f470495c086cfa6c373f7134fc61c7e3d844538bfd8"
+
+[weights.bytes]
+"model.safetensors" = 837271648
+"config.json" = 1130
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-timestral-209m"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "forecast"
+title = "Forecast"
+input = "ops/forecast.input.json"
+output = "json"
+output_schema = "ops/forecast.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

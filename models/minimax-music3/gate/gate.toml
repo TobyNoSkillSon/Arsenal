@@ -1,0 +1,8 @@
+schema = 1
+id = "minimax-music3-native-v1"
+kind = "sound"
+reference_runner = "pinned-vendor-diffusers-mps-bf16-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Prompt assembly, lyric normalisation and the Euler schedule equal the maker's diffusers functions on the weight-free contract fixture", "Every checkpoint tensor of the five components maps to the port with its exact shape", "Component parity on fixed inputs against the maker's diffusers modules on PyTorch MPS at half precision: language-model prefill, teacher-forced frames, fusion encoder, flow transformer, one full window and the vocoder", "FP16 activations stay within range on the maker's own maxima; the global language model computes in BF16 because its residual stream reaches 65,024 on the maker's example prompt", "Window splicing with overlap carry and cropped stitching on the maker's own blocks and noise, and the vocoder against the maker's FP16 vocoder with a float32 snake (relative L2 at most 0.05)"]
+evidence = "gate/golden/golden.json"

@@ -1,0 +1,35 @@
+{
+ "date": "2026-10-22",
+ "chip": "M5 Max",
+ "reference": "audiosr 0.0.7 super_resolution (seed 42, 50 DDIM steps, guidance 3.5), torch 2.14.1 MPS under float16 autocast; DSP in SciPy 1.17.1 / librosa 0.9.2",
+ "candidate": "Arsenal audio worker, FP16 snapshot from cast:audio-audiosr-v1",
+ "fixture": "5.12 s of a 1916 record (16 kHz source) as 48 kHz mono; detected cutoff 7125 Hz, elliptic low-pass",
+ "components_relative_l2_on_reference_inputs": {
+  "low_band_replacement": 3.96e-07,
+  "lowpass": 7.54e-11,
+  "lowpass_mel": 9.47e-05,
+  "unet": 0.00128,
+  "vae_decode": 0.00103,
+  "vae_encode_mean": 0.0126,
+  "vae_encode_std": 0.0181,
+  "vocoder": 0.00188
+ },
+ "end_to_end_replaying_reference_noise": {
+  "wave_relative_l2": 0.0218,
+  "logmel_relative_l2": 0.0057
+ },
+ "seed_variation": {
+  "note": "share of STFT energy above 8 kHz; the reference itself varies with the seed",
+  "reference_seed_42": 0.0376,
+  "reference_seed_43": 0.5478,
+  "port_replaying_seed_42_noise": 0.0372,
+  "port_own_noise_seed_42": 0.1503
+ },
+ "run": {
+  "served_seconds_warm": 3.47,
+  "served_mlx_peak_gb": 3.26,
+  "note": "quick check, machine in use",
+  "clip_60s_seconds_warm": 36.7,
+  "clip_60s_mlx_peak_gb": 12.7
+ }
+}

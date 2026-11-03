@@ -1,0 +1,10 @@
+{
+  "repo": "datalab-to/chandra-ocr-2",
+  "revision": "af93b47dba1b47b6640c86ccf487ed2260ab9a09",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 739,
+  "header_bytes": 91512,
+  "errors": []
+}

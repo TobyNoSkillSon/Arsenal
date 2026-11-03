@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "image"
+  ],
+  "properties": {
+    "image": {
+      "type": "object",
+      "description": "A photo of a curved, folded or tilted page.",
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg",
+          "image/heic"
+        ]
+      },
+      "x-arsenal-control": "image-picker",
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    }
+  }
+}

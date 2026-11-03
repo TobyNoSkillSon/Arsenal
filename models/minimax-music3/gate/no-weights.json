@@ -1,0 +1,32 @@
+{
+  "config": {
+    "model_type": "minimax_music3"
+  },
+  "files": {},
+  "operations": [
+    {
+      "operation": "generate_music",
+      "input": {
+        "prompt": "warm acoustic pop, soft female vocal",
+        "lyrics": "[verse]\nMorning light\n[chorus]\nSing with me",
+        "duration": 0.2,
+        "seed": 7,
+        "steps": 2
+      }
+    },
+    {
+      "operation": "generate_music",
+      "input": {
+        "prompt": "ambient piano",
+        "instrumental": true,
+        "duration": 0.12,
+        "seed": 1,
+        "steps": 1,
+        "guidance": 1,
+        "format": "flac",
+        "sample_rate": 32000,
+        "include_metadata": true
+      }
+    }
+  ]
+}

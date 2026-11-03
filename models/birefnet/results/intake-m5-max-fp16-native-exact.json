@@ -1,0 +1,64 @@
+{
+  "mode" : "exact",
+  "model" : "birefnet",
+  "schema" : 2,
+  "stats" : {
+    "availability" : {
+      "provenance" : {
+        "baseline" : "Pinned FP16 served BiRefNet; independent vendor qualification remains open",
+        "chip" : "m5-max",
+        "date" : "2026-10-16T23:53:05Z",
+        "defaultWorkload" : true,
+        "gpuCores" : 40,
+        "method" : "Warm served remove_background ABBA BAAB, first fixed 512x384 image, default 1024x1024 preprocessing. Fresh ordinary Load\/operation workers; no component captures. Busy Mac; quick check.",
+        "revision" : "e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4",
+        "run" : "intake-2026-10-16T23-52-35Z-65cc1d38-ea08-4798-8f04-057cfdf38c09-fp16",
+        "source" : "results\/intake\/intake-2026-10-16T23-52-35Z-65cc1d38-ea08-4798-8f04-057cfdf38c09.json; bounds SHA256 38584274c276420e435a289e5ade453d1d6a673f549d1ec335765ecfc18118c3"
+      },
+      "state" : "quickCheck"
+    },
+    "dtype" : "fp16",
+    "kind" : "images",
+    "metrics" : {
+      "batteryPercentPer100Images" : {
+        "state" : "notMeasured"
+      },
+      "peakMemoryGB" : {
+        "provenance" : {
+          "baseline" : "Pinned FP16 served BiRefNet; independent vendor qualification remains open",
+          "chip" : "m5-max",
+          "date" : "2026-10-16T23:53:05Z",
+          "defaultWorkload" : true,
+          "gpuCores" : 40,
+          "method" : "Warm served remove_background ABBA BAAB, first fixed 512x384 image, default 1024x1024 preprocessing. Fresh ordinary Load\/operation workers; no component captures. Busy Mac; quick check.",
+          "revision" : "e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4",
+          "run" : "intake-2026-10-16T23-52-35Z-65cc1d38-ea08-4798-8f04-057cfdf38c09-fp16",
+          "source" : "results\/intake\/intake-2026-10-16T23-52-35Z-65cc1d38-ea08-4798-8f04-057cfdf38c09.json; bounds SHA256 38584274c276420e435a289e5ade453d1d6a673f549d1ec335765ecfc18118c3"
+        },
+        "state" : "quickCheck",
+        "value" : 5.761042088
+      },
+      "psnrDB" : {
+        "state" : "notMeasured"
+      },
+      "secondsPerImage" : {
+        "provenance" : {
+          "baseline" : "Pinned FP16 served BiRefNet; independent vendor qualification remains open",
+          "chip" : "m5-max",
+          "date" : "2026-10-16T23:53:05Z",
+          "defaultWorkload" : true,
+          "gpuCores" : 40,
+          "method" : "Warm served remove_background ABBA BAAB, first fixed 512x384 image, default 1024x1024 preprocessing. Fresh ordinary Load\/operation workers; no component captures. Busy Mac; quick check.",
+          "revision" : "e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4",
+          "run" : "intake-2026-10-16T23-52-35Z-65cc1d38-ea08-4798-8f04-057cfdf38c09-fp16",
+          "source" : "results\/intake\/intake-2026-10-16T23-52-35Z-65cc1d38-ea08-4798-8f04-057cfdf38c09.json; bounds SHA256 38584274c276420e435a289e5ade453d1d6a673f549d1ec335765ecfc18118c3"
+        },
+        "state" : "quickCheck",
+        "value" : 0.44773095834534615
+      }
+    },
+    "qualityCheckPassed" : true,
+    "qualityIdentity" : "02714934fb8e483f41dbf758b8fb31eb042b7b69048c45db12a79ffa4601a9c4",
+    "runner" : "native"
+  }
+}

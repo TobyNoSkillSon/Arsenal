@@ -1,0 +1,25 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "vitpose-base-simple",
+  "revision": "a93ac0c67e0b7e2c55287d21d4c460c8f3c54d45",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-11-01T02:07:46Z",
+      "machine": "test night 1 Nov 2026: quiet Mac (idle check before each reading)",
+      "ops": {
+        "estimate_pose": {
+          "seconds_warm": 0.073,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 368.6,
+      "precision": "fp16"
+    }
+  ],
+  "run": "test-night-2026-11-01",
+  "schema": "quick-check-1",
+  "source": "lab/test-night-1101/table-import.jsonl"
+}

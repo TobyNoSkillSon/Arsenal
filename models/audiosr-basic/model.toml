@@ -1,0 +1,59 @@
+schema = 3
+architecture = "audiosr"
+id = "audiosr-basic"
+name = "AudioSR (basic)"
+kind = "enhancement"
+params = "672M"
+publisher = "Haohe Liu"
+released = 2023
+suggested = false
+summary = "Rebuild missing high frequencies of band-limited audio at 48 kHz using a native Swift MLX worker."
+purpose = "Restore missing treble at 48 kHz"
+good_for = ["Old recordings, phone or low-rate audio whose top end is missing", "Speech, music and effects alike"]
+limits = ["Mono 48 kHz output; stereo input is mixed down.", "Up to 60 seconds per clip, processed whole as the reference does (about 13 GB of GPU memory at 60 s).", "Measured on a 1916 record: it adds a noise-like band above about 10 kHz, so listen before keeping the result.", "A diffusion model: each seed gives a different high band."]
+languages = ["und"]
+tasks = ["audio-to-audio", "audio-super-resolution"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/haoheliu/audiosr_basic/blob/74a47f49061a1e788e968cc43ad45c0b6243f37d/README.md"
+[weights]
+repo = "haoheliu/audiosr_basic"
+revision = "74a47f49061a1e788e968cc43ad45c0b6243f37d"
+dtype = "fp32"
+files = ["pytorch_model.bin"]
+[weights.sha256]
+"pytorch_model.bin" = "8a3506b9619ed32435ce2c115604750c7bddb5ad8502be7b1a3131bde878aa01"
+[weights.bytes]
+"pytorch_model.bin" = 6178189563
+[derive]
+fp16 = "cast:audio-audiosr-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "enhance"
+title = "Restore treble"
+input = "ops/enhance.input.json"
+output_schema = "ops/enhance.output.json"
+output = "file"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

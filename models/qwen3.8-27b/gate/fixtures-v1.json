@@ -1,0 +1,5 @@
+[
+  {"id":"arithmetic","prompt":"What is 17 plus 25? Reply with only the number.","expected":"42"},
+  {"id":"instruction","prompt":"Return exactly the word blueberry and nothing else.","expected":"blueberry"},
+  {"id":"reasoning","prompt":"All roses are flowers. Some flowers fade quickly. Does it follow that all roses fade quickly? Reply yes or no.","expected":"no"}
+]

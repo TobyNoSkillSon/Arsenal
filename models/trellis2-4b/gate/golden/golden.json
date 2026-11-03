@@ -1,0 +1,97 @@
+{
+ "commit": "f79117da672ce0a7624bb671504764aeab75bcc1",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [
+   {
+    "bytes": 2103821,
+    "file": "photo.png",
+    "sha256": "ee3b3cb5755431da4917c3be528b7c96e4805ca06581eb63a6852b16f94ffec7"
+   }
+  ],
+  "request": [
+   {
+    "body": {
+     "image": {
+      "path": "photo.png"
+     }
+    },
+    "op": "image_to_3d"
+   }
+  ]
+ },
+ "maker_reference": {
+  "none": "No maker capture: Microsoft's TRELLIS.2 code needs CUDA kernels (spconv/flex-gemm) and was not run. Drift check: at the default seed 0 the mesh extents (0.316 x 1.006 x 0.568) match Arsenal's 22 Oct 2026 mesh (0.315 x 1.007 x 0.567) and the preview shows the same frontal figure. Seed 1 turns the figure about 45 degrees and leaves fragments of the photo's crack line beside the face (model sampling; same code)."
+ },
+ "model": "trellis2-4b",
+ "note": "Default settings (resolution 1024, texture 1024, 120,000 target faces, 12 steps), seed 0; BiRefNet removed the background first.",
+ "output": [
+  {
+   "file_count": 2,
+   "files": [
+    {
+     "bytes": 5716360,
+     "faces": 108268,
+     "images": 2,
+     "materials": 1,
+     "meshes": 1,
+     "position_min": [
+      [
+       -0.15806540846824646,
+       -0.5039628744125366,
+       -0.2846009433269501
+      ]
+     ],
+     "primitives": 1,
+     "sha256": "da0b24fb35c23d4da4b87d50a9de20649b68f5f0f5f041d76b16a08ba85d9e25",
+     "type": "glb",
+     "vertices": 75779
+    },
+    {
+     "bytes": 114262,
+     "height": 512,
+     "sha256": "f083e475fe433a511a13432a597b7fd532408351697f26d544948aea33149b0a",
+     "type": "png",
+     "width": 512
+    }
+   ],
+   "op": "image_to_3d",
+   "reply": {},
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "fp16",
+ "schema": "golden-1",
+ "tolerance": {
+  "file_count": 2,
+  "mesh_extent_abs": 0.01,
+  "preview_size": [
+   512,
+   512
+  ],
+  "vertices_rel": 0.1
+ },
+ "weights": {
+  "repo": "microsoft/TRELLIS.2-4B",
+  "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+  "sha256": {
+   "ckpts/shape_dec_next_dc_f16c32_fp16.json": "5f1b856dffce79466fb18f5f0eefc08f08c673b24b3c05b20359c0b6d318a209",
+   "ckpts/shape_dec_next_dc_f16c32_fp16.safetensors": "e3b718d3e43e4f8780e9a24ac6fff231811a67e3b058e336e10fe654c911d581",
+   "ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.json": "7ebd6d367393f52fee9e92c2b3d727a9026a338549c6a6fa84c7ea122140ffdd",
+   "ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.safetensors": "07cd0596f634c5adc1890023d16023afc5eed02fb84b22bb23aff5bf0030fbbd",
+   "ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.json": "ddbd7a1d34ce9a8e7af2f6ef9ae686d9ab49f69e62dacb98d8409b511cdbd5e2",
+   "ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.safetensors": "ec5e0917ef9b7e25ad51dffc7d19687a42019871f94239f2fa7f86264c55b70f",
+   "ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.json": "31f4fdad9974930e5e9324ac9dfb6ef7de6b30cea51854ba515ef827a8d353b2",
+   "ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.safetensors": "580401269059a339b8318ab9ced459a13ba63391721c83a6c383198c29e77686",
+   "ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.json": "3093796257a62f838d2e5578ac4580ca3b7d88d10b87d348065d3fdfcc4c2077",
+   "ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.safetensors": "8371aa1c5d13be79dcd5ddfd2cf3835e902e204dc34427169a1c702828e1a94d",
+   "ckpts/ss_flow_img_dit_1_3B_64_bf16.json": "6cdfb636854f60ffcadd8c49244169cd449f34c5ccdb55b5ff7c04678f9c399e",
+   "ckpts/ss_flow_img_dit_1_3B_64_bf16.safetensors": "ca01377c485bec418076d38ee80166d32dc776d744f2553b835cba1e97a7abf6",
+   "ckpts/tex_dec_next_dc_f16c32_fp16.json": "22074e4ab5b28e2b72d33a3fe61bf416134b89e12d0fc5c729f37da75da0c4d1",
+   "ckpts/tex_dec_next_dc_f16c32_fp16.safetensors": "97ea69addea2ecd9312910f5f548234665eef51c088386180b7cd5b258645e3c",
+   "pipeline.json": "222c359ab1ed9bc6735a640a34f95d47f8681b9bc4aaa101bfb80274676253c6"
+  }
+ }
+}

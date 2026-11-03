@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "description": "Four predicted human ratings of the clip, each on a scale of about 1 to 10 (higher is more), averaged over 10-second windows by their length.",
+  "required": ["CE", "CU", "PC", "PQ", "seconds"],
+  "properties": {
+    "CE": {"type": "number", "description": "Content Enjoyment: how enjoyable the content is."},
+    "CU": {"type": "number", "description": "Content Usefulness: how useful the clip would be as source material for making content."},
+    "PC": {"type": "number", "description": "Production Complexity: how many sound sources and layers it has (1 is a single plain source)."},
+    "PQ": {"type": "number", "description": "Production Quality: technical quality, such as clarity, noise, dynamics and frequency balance."},
+    "seconds": {"type": "number", "description": "Length of the clip in seconds."}
+  }
+}

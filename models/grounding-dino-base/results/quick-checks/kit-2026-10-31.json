@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of detect through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "grounding-dino-base",
+  "revision": "12bdfa3120f3e7ec7b434d90674b3396eccf88eb",
+  "rows": [
+    {
+      "date": "2026-10-31T01:30:44Z",
+      "load_seconds": 0.468,
+      "ops": {
+        "detect": {
+          "seconds_first": 0.278,
+          "seconds_warm": 0.263,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 4238.9,
+      "precision": "fp16",
+      "runner_sha256": "b1ebfd00fa38cfa5251f1c34fd2af63503564b55709ca568c77c72da6aeb47fc",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

@@ -1,0 +1,92 @@
+#!/usr/bin/env python3
+"""Arsenal wrapper around Vella's lab lock tools. The only sanctioned way to build or touch the GPU.
+
+  scripts/mlock work    <label> -- cmd...    builds, swift test, CPU-heavy scripts. Runs the command directly by day, so
+                                             Dictation never stalls the team; goes through Vella's `work` wrapper
+                                             while Vella's window is open; when a Vella `measure` job is running/waiting it
+                                             first yields to it for up to 10 minutes, then runs.
+  scripts/mlock gpulock <label> -- cmd...    GPU smokes/correctness runs (exclusive GPU lock). Its timings are never results.
+  scripts/mlock measure <label> -- cmd...    benchmark harness runs (exclusive quiet lock + idle check)
+
+GPU modes refuse to start, and kill the running command within ~10 s, when
+  - <project>/.gpu-hold exists (the coordinator closes the gate), or
+  - Vella's measurement window is open: lab/bench/full-measure.STOP is absent AND full-measure.py is running.
+Exit 75 = gate closed (not a failure of your code). Keep GPU commands short (minutes, not hours).
+"""
+import os, subprocess, sys, time, signal, fcntl
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Worktrees and clean release clones under .build share the real project's hold and Vella locks.
+try:
+    common = subprocess.check_output(['git', '-C', ROOT, 'rev-parse', '--path-format=absolute', '--git-common-dir'], text=True).strip()
+    MAIN = os.path.dirname(common)
+except subprocess.CalledProcessError:
+    MAIN = ROOT.split('/.worktrees/')[0].split('/.build/')[0]
+VELLA = os.path.join(os.path.dirname(MAIN), 'Vella')
+STOP = os.path.join(VELLA, 'lab/bench/full-measure.STOP')
+HOLD = os.path.join(MAIN, '.gpu-hold')
+YIELD_SECONDS = 600
+
+def vella_window_open():
+    return not os.path.exists(STOP) and subprocess.run(['pgrep', '-f', 'full-measure.py'], capture_output=True).returncode == 0
+
+def vella_measure_pending():
+    """A Vella `measure` job is running or waiting: it needs a quiet machine, so our builds go through Vella's `work`
+    wrapper, which yields to it (measures are short, minutes). Without this, our CPU keeps its idle check failing while
+    our GPU jobs queue behind it."""
+    return subprocess.run(['pgrep', '-f', 'Vella/lab/bin/measure'], capture_output=True).returncode == 0
+
+def gate_closed():
+    if os.path.exists(HOLD):
+        return 'coordinator hold: ' + open(HOLD).read().strip()[:200]
+    if not os.path.exists(STOP) and subprocess.run(['pgrep', '-f', 'full-measure.py'], capture_output=True).returncode == 0:
+        return "Vella's measurement window is open"
+    return None
+
+def main():
+    a = sys.argv[1:]
+    if len(a) < 4 or a[0] not in ('work', 'gpulock', 'measure') or a[2] != '--':
+        sys.exit(__doc__)
+    mode, label, cmd = a[0], a[1], a[3:]
+    if mode == 'work' and os.environ.get('ARSENAL_WORK_LOCKED_ROOT') != ROOT:
+        os.makedirs(os.path.join(ROOT, '.build'), exist_ok=True)
+        work_lock = os.open(os.path.join(ROOT, '.build/arsenal-work.lock'), os.O_CREAT | os.O_RDWR, 0o600)
+        # The descriptor holds the lock across exec until this command exits.
+        os.set_inheritable(work_lock, True)
+        try:
+            fcntl.flock(work_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            # Another build or test run owns this worktree: wait for it rather than share its .build.
+            print(f'mlock: another run holds {ROOT}/.build/arsenal-work.lock; waiting', file=sys.stderr, flush=True)
+            fcntl.flock(work_lock, fcntl.LOCK_EX)
+        os.environ['ARSENAL_WORK_LOCKED_ROOT'] = ROOT
+    tool = os.path.join(VELLA, 'lab/bin', mode)
+    if mode == 'work' and not vella_window_open():
+        # Yield to a pending Vella measurement, but only for a bounded time: if the Mac never gets quiet for reasons
+        # outside Arsenal (browser, other agents), waiting forever would stall the whole team for nothing.
+        waited = 0
+        while vella_measure_pending() and waited < YIELD_SECONDS:
+            if waited == 0: print(f'mlock: yielding to a Vella measurement (up to {YIELD_SECONDS // 60} min)', file=sys.stderr)
+            time.sleep(10); waited += 10
+        os.execvp(cmd[0], cmd)
+    if mode != 'work':
+        why = gate_closed()
+        if why:
+            print(f'mlock: GPU gate closed ({why}); not started', file=sys.stderr); sys.exit(75)
+    p = subprocess.Popen([tool, '--label', f'arsenal-{label}', '--'] + cmd, start_new_session=True)
+    try:
+        while True:
+            try:
+                sys.exit(p.wait(timeout=10))
+            except subprocess.TimeoutExpired:
+                if mode != 'work':
+                    why = gate_closed()
+                    if why:
+                        print(f'mlock: GPU gate closed mid-run ({why}); stopping', file=sys.stderr)
+                        os.killpg(p.pid, signal.SIGTERM); time.sleep(5)
+                        try: os.killpg(p.pid, signal.SIGKILL)
+                        except ProcessLookupError: pass
+                        sys.exit(75)
+    except KeyboardInterrupt:
+        os.killpg(p.pid, signal.SIGTERM); raise
+
+main()

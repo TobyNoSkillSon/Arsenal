@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "predictions",
+    "predicting",
+    "entities",
+    "relations",
+    "triples"
+  ],
+  "properties": {
+    "predictions": {
+      "type": "array",
+      "description": "Candidate entities for the missing end, best first.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "entity",
+          "score",
+          "probability",
+          "known"
+        ],
+        "properties": {
+          "entity": {
+            "type": "string",
+            "description": "The candidate entity's name."
+          },
+          "score": {
+            "type": "number",
+            "description": "The model's logit for this link; higher is more likely."
+          },
+          "probability": {
+            "type": "number",
+            "description": "Sigmoid of the score: the model's probability that the link holds."
+          },
+          "known": {
+            "type": "boolean",
+            "description": "Whether this link is already one of the given triples."
+          }
+        }
+      }
+    },
+    "predicting": {
+      "type": "string",
+      "description": "Which end was predicted: tail (head given) or head (tail given).",
+      "enum": [
+        "tail",
+        "head"
+      ]
+    },
+    "entities": {
+      "type": "integer",
+      "description": "Number of distinct entities in the graph."
+    },
+    "relations": {
+      "type": "integer",
+      "description": "Number of distinct relations in the graph (inverses not counted)."
+    },
+    "triples": {
+      "type": "integer",
+      "description": "Number of distinct triples read."
+    }
+  }
+}

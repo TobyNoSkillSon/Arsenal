@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "real-esrgan-x4plus",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T03:27:16Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Upscale image at fp16: one ordinary Load, then two Upscale image requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "5fd49b7b278836f48af63ecd314d0f98ab336105",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "restoration",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Upscale image requests on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:27:16Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Upscale image requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "5fd49b7b278836f48af63ecd314d0f98ab336105",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 2.7917287424
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Upscale image request on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:27:16Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Upscale image request, one sample, after one ordinary Load, then two Upscale image requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "5fd49b7b278836f48af63ecd314d0f98ab336105",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.363
+      }
+    },
+    "runner": "kit"
+  }
+}

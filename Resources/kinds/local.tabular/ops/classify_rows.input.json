@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "train_rows",
+    "train_labels",
+    "rows"
+  ],
+  "properties": {
+    "train_rows": {
+      "type": "array",
+      "description": "Rows with a known label: one list of numbers per row, every row with the same columns in the same order.",
+      "minItems": 2,
+      "maxItems": 2048,
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 100,
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "train_labels": {
+      "type": "array",
+      "description": "The label of each row in train_rows, as text (e.g. \"spam\" or \"3\"); at least two different labels.",
+      "minItems": 2,
+      "maxItems": 2048,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "rows": {
+      "type": "array",
+      "description": "Rows to label, with the same columns as train_rows.",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 100,
+        "items": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

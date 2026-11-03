@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "video": {
+      "type": "object",
+      "description": "The clip (any format AVFoundation reads: mp4, mov, m4v). Give video, frames or image.",
+      "x-arsenal-file": {
+        "accept": [
+          "video/mp4",
+          "video/quicktime",
+          "video/x-m4v"
+        ]
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    },
+    "frames": {
+      "type": "array",
+      "description": "Instead of a video: the clip as image files in time order (1-64).",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "description": "One frame.",
+        "x-arsenal-file": {
+          "accept": [
+            "image/png",
+            "image/jpeg",
+            "image/heic"
+          ]
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "description": "Instead of a video: one picture, embedded as a still clip of num_frames copies (the card's image example).",
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg",
+          "image/heic"
+        ]
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    },
+    "num_frames": {
+      "type": "integer",
+      "description": "Frames taken from the video, evenly spaced over the clip or the start-end window (an odd count gets its last frame repeated); also the copies of an image. The card samples 64 frames for this model; fewer is lighter.",
+      "minimum": 1,
+      "maximum": 64,
+      "default": 64
+    },
+    "start": {
+      "type": "number",
+      "description": "Start of the window in the video, in seconds.",
+      "minimum": 0,
+      "default": 0
+    },
+    "end": {
+      "type": "number",
+      "description": "End of the window in the video, in seconds (default: the end of the clip).",
+      "minimum": 0
+    },
+    "per_step": {
+      "type": "boolean",
+      "description": "Also return one embedding per pair of frames (the model's time step).",
+      "default": false
+    }
+  }
+}

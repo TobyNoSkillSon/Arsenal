@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "text"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100000,
+      "description": "Plain text, generated in chunks of about 300 bytes. Delivery cues go inline in brackets, e.g. [whispers]; speakers as <|speaker:0|> to <|speaker:15|>."
+    },
+    "voice": {
+      "type": "string",
+      "pattern": "^(voice-[0-9a-f-]+)?$",
+      "description": "Saved voice ID from the voices operation; Drama 3 has no preset voices."
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "path",
+        "text"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false,
+      "description": "Your own clip of the voice to clone (up to 30 seconds) and its exact transcript."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "stream": {
+      "type": "boolean"
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4096,
+      "description": "Frame cap per chunk (21.5 frames per second); default 1024."
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2,
+      "default": 0.7
+    },
+    "top_p": {
+      "type": "number",
+      "minimum": 1e-06,
+      "maximum": 1,
+      "default": 0.7
+    },
+    "top_k": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4096,
+      "default": 30
+    }
+  },
+  "additionalProperties": false
+}

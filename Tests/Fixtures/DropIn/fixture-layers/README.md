@@ -1,0 +1,4 @@
+# Fixture layers
+Deterministic protocol fixture. No AI quality or parity claim. separate returns N ordered 1×1 RGBA PNGs.
+
+The checked-in default is the Python stdlib protocol stand-in for Python helper tests. The Swift version is `runners/swift/Package.swift` plus Sources; it has no model/MLX dependencies. The agent-only build.sh uses the app's CLT toolchain and weak-borrow fix, builds outside the folder, and puts an ad-hoc-signed arm64 executable in bin/. Generated binaries/build trees are not checked into Git. DropInFlowTests builds this package in an isolated profile, selects its Swift entry, and exercises the production artifact launcher through Get, Load, HTTP/MCP, idle revision swap and rollback. The hardened Swift fixture test packages the checker in an isolated hardened .app and retains launch evidence, including quarantine. No fixture result establishes AI quality or model speed.

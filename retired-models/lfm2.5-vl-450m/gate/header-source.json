@@ -1,0 +1,10 @@
+{
+  "repo": "LiquidAI/LFM2.5-VL-450M-MLX-bf16",
+  "revision": "ed71acdae0799c98cb450787d049d1343b65cd52",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 351,
+  "header_bytes": 43240,
+  "errors": []
+}

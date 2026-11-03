@@ -1,0 +1,25 @@
+{
+  "config": {},
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABgAAAAUCAIAAAAY12rUAAAAjElEQVQ4Ea3BixWBABiGYZ83zr8IuSxCYhNyWYTEJsQmJGYxgXRO//OorRYeFE0neFB62ONBxfNBJQPM+Edhv4cHJaslHpRfLzRmhgLaeFA8i/Cg7JjiQeWroJKZUYOGgxAP2qwTPOh+y2nGADN1OwEetJjHeND5lOFBn3fJb2aAUYPGoyEetNtu8PAFQgwpxfaS0uEAAAAASUVORK5CYII="
+  },
+  "operations": [
+    {
+      "operation": "colorize",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        }
+      }
+    },
+    {
+      "operation": "colorize",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "input_size": 256
+      }
+    }
+  ]
+}

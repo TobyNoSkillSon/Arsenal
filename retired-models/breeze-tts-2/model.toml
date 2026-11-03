@@ -1,0 +1,159 @@
+tools = ["voice", "sound"]
+id = "breeze-tts-2"
+kind = "voices"
+languages = ["en", "zh"]
+name = "Breeze TTS 2"
+params = "3B"
+publisher = "BreezeBlue"
+released = 2026
+schema = 2
+suggested = false
+summary = "Bilingual English and Chinese speech with voice cloning and voice design."
+purpose = "Bilingual speech, cloning and design"
+tasks = ["text-to-speech"]
+
+[bench]
+recipe = "bench/bench.toml"
+
+[derive]
+bf16 = "cast:breeze-tts-2"
+int4 = "intake-v3:breeze-tts-2:all"
+int8 = "intake-v3:breeze-tts-2:matrix@audio_tokenizer/model.safetensors:decoder.pre_transformer.input_proj.weight,matrix@audio_tokenizer/model.safetensors:decoder.pre_transformer.layers.4.mlp.up_proj.weight,matrix@model-00001-of-00002.safetensors:depth_decoder.model.layers.3.self_attn.v_proj.weight"
+
+[gate]
+recipe = "gate/gate.toml"
+
+[licence]
+commercial = false
+name = "BreezeBlue Research & Non-Commercial 1.1"
+spdx = "LicenseRef-BreezeBlue-RNC-1.1"
+url = "https://huggingface.co/mlx-community/Breeze-TTS-2-mlx/blob/3c8829fb7fd335818f085cd2ef49b4100c0e46c8/LICENSE"
+
+[[menu]]
+id = "speak-clipboard"
+input = "clipboard"
+op = "speak"
+title = "Speak Clipboard"
+
+
+[[runner]]
+chips = ["*"]
+fast_exact = true
+language = "swift"
+min_macos = "26.0"
+name = "native"
+protocol = 1
+worker = "voices"
+
+[weights]
+dtype = "bf16"
+files = ["audio_tokenizer/config.json", "audio_tokenizer/configuration.json", "audio_tokenizer/model.safetensors", "audio_tokenizer/preprocessor_config.json", "config.json", "generation_config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "model.safetensors.index.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json"]
+repo = "mlx-community/Breeze-TTS-2-mlx"
+revision = "3c8829fb7fd335818f085cd2ef49b4100c0e46c8"
+
+[weights.bytes]
+"audio_tokenizer/config.json" = 2336
+"audio_tokenizer/configuration.json" = 76
+"audio_tokenizer/model.safetensors" = 682293092
+"audio_tokenizer/preprocessor_config.json" = 234
+"config.json" = 12176
+"generation_config.json" = 251
+"model-00001-of-00002.safetensors" = 4904052381
+"model-00002-of-00002.safetensors" = 2004566801
+"model.safetensors.index.json" = 73409
+"special_tokens_map.json" = 886
+"tokenizer.json" = 33386945
+"tokenizer_config.json" = 1157960
+
+[weights.sha256]
+"audio_tokenizer/config.json" = "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167"
+"audio_tokenizer/configuration.json" = "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd"
+"audio_tokenizer/model.safetensors" = "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+"audio_tokenizer/preprocessor_config.json" = "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb"
+"config.json" = "11f40bae4cb68c87638d3998c78926f7b5143c4ca7aa782e50c02209dbb072c0"
+"generation_config.json" = "2ef3f2c0ab8d9ad241059138a795433c5410fd9954efb9625674ecd2a9529434"
+"model-00001-of-00002.safetensors" = "06c0acb9057e13659aa297a889001dcf86f181d1355ef84c1134ba8b72313572"
+"model-00002-of-00002.safetensors" = "83e7d3a903b70a0be2a1f3dc1b37c4605678536efe9e1a45b86fd70599f5bf77"
+"model.safetensors.index.json" = "b2b8ad998777f80440a51b8504d22c44575623e8bae3a76a925bccc59725ad02"
+"special_tokens_map.json" = "194f265bb588d142a16f27d9576104eb3dab3d7ba9961541d2d6e3d5e77e6470"
+"tokenizer.json" = "d3ec9ac3eb2392389b9f5112e85d8b43316494addb587ba7b7a9d61eac23af96"
+"tokenizer_config.json" = "2c084fd6725c2284e8aa6da095a8d036d48fe79665595bfcd50371821b620e44"
+
+[facets]
+modalities_in = ["text", "audio"]
+modalities_out = ["audio"]
+
+[selection]
+default = "native"
+chips = { m5 = "native" }
+
+[[setting]]
+id = "voice"
+title = "Voice"
+type = "voice"
+default = ""
+applies = "request"
+maps_to = "request.voice"
+help = "Choose a saved voice; leave empty to use the description or reference inputs."
+
+
+[[setting]]
+id = "instructions"
+excludes = ["description", "reference", "voice"]
+title = "Voice description"
+type = "text"
+default = "A warm adult narrator with a clear, relaxed conversational voice."
+applies = "request"
+maps_to = "request.instructions"
+help = "Describe the voice and delivery for the next request."
+
+[[setting]]
+id = "reference_path"
+title = "Reference clip"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.path"
+help = "Local reference WAV used for voice cloning."
+
+[[setting]]
+id = "reference_text"
+title = "Reference transcript"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.text"
+help = "Exact words spoken in the reference clip."
+
+[[op]]
+name = "speak"
+title = "Speak"
+input = "ops/speak.input.json"
+output = "audio"
+stream = true
+
+[[op]]
+name = "voices"
+title = "Voices"
+input = "ops/voices.input.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "design_voice"
+title = "Design Voice"
+input = "ops/design_voice.input.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "clone_voice"
+title = "Clone Voice"
+input = "ops/clone_voice.input.json"
+output = "json"
+stream = false
+
+[popularity]
+hf_downloads = 1102
+hf_likes = 6
+as_of = "2026-10-03"

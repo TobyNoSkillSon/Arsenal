@@ -1,0 +1,23 @@
+{
+  "eligible_rule": "Linear/Embedding .weight matrices with input dimension divisible by group 64; spatial kernels and norms stay FP16",
+  "random_graph_parameters": 327,
+  "random_graph_eligible_matrices": 22,
+  "tiers": {
+    "int8": {
+      "packed_matrices": 22,
+      "eligible_coverage": 1.0,
+      "companion_shapes_and_dtype": "pass",
+      "noneligible_half_parameters": "pass"
+    },
+    "int4": {
+      "packed_matrices": 22,
+      "eligible_coverage": 1.0,
+      "companion_shapes_and_dtype": "pass",
+      "noneligible_half_parameters": "pass"
+    }
+  },
+  "trained_quantization_quality": "not-run-no-weights",
+  "full_graph_eligible_matrices": 108,
+  "full_graph_eligible_parameters": 305220608,
+  "full_graph_total_parameters": 370284399
+}

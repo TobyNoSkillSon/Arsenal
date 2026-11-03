@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "text"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100000,
+      "description": "Arsenal request cap; models tokenize/chunk separately. Not a vendor quality or context-length guarantee."
+    },
+    "voice": {
+      "type": "string",
+      "description": "Saved voice ID from the voices operation; these checkpoints have no built-in speaker presets.",
+      "pattern": "^(voice-[0-9a-f-]+)?$"
+    },
+    "instructions": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "stream": {
+      "type": "boolean"
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "path",
+        "text"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "guidance": {
+      "type": "number",
+      "maximum": 20,
+      "default": 4,
+      "minimum": 1e-06
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 750
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "top_p": {
+      "type": "number",
+      "maximum": 1,
+      "minimum": 1e-06
+    },
+    "top_k": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4096
+    },
+    "repetition_penalty": {
+      "type": "number",
+      "maximum": 2,
+      "minimum": 0.01
+    }
+  },
+  "additionalProperties": false
+}

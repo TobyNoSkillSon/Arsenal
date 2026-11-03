@@ -1,0 +1,65 @@
+{
+ "commit": "ad806a578f83862d06ef9f4e4a9d21e376bc4c7c",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [
+   {
+    "bytes": 573378,
+    "file": "speech-music.wav",
+    "sha256": "03b3b3bff564ed034d71041ff67b12419f2dfb8ca0e0cc33a4f27adfb19eb08c"
+   }
+  ],
+  "request": [
+   {
+    "body": {
+     "audio": {
+      "path": "speech-music.wav"
+     }
+    },
+    "op": "diarize"
+   }
+  ]
+ },
+ "maker_reference": {
+  "none": "No maker capture: NVIDIA's reference is NeMo (Nemotron-3-Diarization.nemo), not run on this Mac. The reply equals Arsenal's 22 Oct 2026 output for the same file (one speaker, 0.22 to 2.83 s), a drift check only."
+ },
+ "model": "nemotron-3-diarization",
+ "note": "Fixture: 3.25 s, 44.1 kHz stereo speech over music (one speaker).",
+ "output": [
+  {
+   "file_count": 0,
+   "files": [],
+   "op": "diarize",
+   "reply": {
+    "segments": [
+     {
+      "end": 2.83,
+      "speaker": "speaker-0",
+      "start": 0.22
+     }
+    ],
+    "speakers": [
+     "speaker-0"
+    ]
+   },
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "fp16",
+ "schema": "golden-1",
+ "tolerance": {
+  "boundary_seconds": 0.08,
+  "segments_exact": true,
+  "speakers_exact": true
+ },
+ "weights": {
+  "repo": "mlx-community/Nemotron-3-Diarization",
+  "revision": "59ed2dbfc1346dcea9d423c71306a3a2499c568f",
+  "sha256": {
+   "config.json": "f215091252bc54f8dcc7d682962a659e03a6bcb26d1c86e4728b8c6730130eb4",
+   "model.safetensors": "21e8427d1795c9c46c5800f56b16061734ffd0dcadd71d9bcf0b4d6ef7261da5"
+  }
+ }
+}

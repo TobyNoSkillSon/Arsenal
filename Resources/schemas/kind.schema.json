@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arsenal kind declaration",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "order",
+    "columns",
+    "api"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title_singular": {
+      "type": "string",
+      "minLength": 1
+    },
+    "icon": {
+      "type": "string",
+      "minLength": 1
+    },
+    "order": {
+      "type": "integer"
+    },
+    "suite": {
+      "type": "string",
+      "minLength": 1
+    },
+    "columns": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "unit"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "api": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "op": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/op"
+      }
+    },
+    "facets": {
+      "$ref": "#/$defs/facets"
+    },
+    "primary_operation": {
+      "type": "string"
+    },
+    "comparison_metric": {
+      "type": "string"
+    },
+    "comparison_direction": {
+      "enum": [
+        "higher",
+        "lower"
+      ]
+    }
+  },
+  "$defs": {
+    "op": {
+      "type": "object",
+      "required": [
+        "name",
+        "title",
+        "input",
+        "output",
+        "stream"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input": {
+          "type": "string",
+          "minLength": 1
+        },
+        "output": {
+          "enum": [
+            "json",
+            "audio",
+            "image",
+            "text-stream",
+            "file"
+          ]
+        },
+        "output_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stream": {
+          "type": "boolean"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "timeout_s": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "first_response_timeout_s": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "annotations": {
+          "type": "object"
+        }
+      }
+    },
+    "facets": {
+      "type": "object",
+      "required": [
+        "modalities_in",
+        "modalities_out"
+      ],
+      "properties": {
+        "modalities_in": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "text",
+              "audio",
+              "image",
+              "video"
+            ]
+          }
+        },
+        "modalities_out": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "text",
+              "audio",
+              "image",
+              "video"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          {
+            "required": [
+              "op"
+            ]
+          },
+          {
+            "required": [
+              "facets"
+            ]
+          }
+        ]
+      },
+      "then": {
+        "required": [
+          "icon",
+          "title_singular"
+        ]
+      }
+    }
+  ]
+}

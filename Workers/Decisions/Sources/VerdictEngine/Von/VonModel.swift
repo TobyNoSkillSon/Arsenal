@@ -1,0 +1,576 @@
+// Port of von-sdk 1.1.1 / 1.2.2 OptionMarkerBackend, no Python at runtime.
+import Foundation
+import Hub
+import Tokenizers
+import CoreFoundation
+import MLX
+import ModelPrecision
+
+public enum VonLoader: ModelLoader {
+    public static func load(id: String, snapshot: URL, bits: Int, recipe: KernelRecipe) throws -> any DecisionModel {
+        try VonModel(id: id, snapshot: snapshot, bits: bits, recipe: recipe)
+    }
+}
+
+public struct VonPreparedRow: Sendable {
+    public let ids: [Int]
+    public let markers: [Int]
+    public init(ids: [Int], markers: [Int]) { self.ids = ids; self.markers = markers }
+}
+
+public final class VonModel: DecisionModel, KernelPathReporting, InferencePathSwitching {
+    public let id: String
+    /// Tokens per row: the checkpoint's max_position_embeddings (Von 1.1: 2048, Von 1.2: 8192), at most 8192. The
+    /// von-sdk overrides the config to 8192 and runs longer rows unchecked; Von 1.1 was not configured for them.
+    public let contextLimit: Int
+    public var residentBytes: Int { network.residentBytes }
+    public var kernelPath: String { network.kernelPath }
+    private var tokenizer: (any Tokenizer)?
+    /// Stock path: the swift-transformers tokenizer even when the fast one validated (after an optimized-path failure).
+    private var stockTokenizer = false
+    private let configData: Data, tokenData: Data
+    /// FastByteBPE when Von's tokenizer.json has the validated ModernBERT shape (zero mismatches vs the SDK's
+    /// transformers tokenizer on 141k texts in a differential test); swift-transformers otherwise.
+    private let fastEncode: ((String, Bool) -> [Int])?
+    private let maskID: Int
+    private let maskToken: String
+    private let sepToken: String
+    private let calibration: [String: Double]
+    private let temperature: Double
+    private let prior: [String: Double]?
+    private let network: VonNetwork
+    /// Per question, across requests (agents repeat questions): option keys/texts, the validated zero-shot Noul null
+    /// row and its logit bias, which depend only on the question. Keyed by the question JSON as exact UTF-8 bytes.
+    private struct QuestionInfo { let keys: [String]; let texts: [String]; let nullRow: VonPreparedRow?; var null: Float? }
+    private var questionCache: [Data: QuestionInfo] = [:]
+
+    // A/B switches for performance experiments; defaults are the measured best.
+    static let env = ProcessInfo.processInfo.environment
+    /// Zero selects the stored half tier; FP32 is never executable.
+    public static let precisions: Set<Int> = [0, 16, 8, 4]
+    public static let precisionMessage = "Von precision must be 16, 8 or 4 bits (0 selects half)"
+    static let sortByLength = env["VERDICT_VON_ARRIVAL_ORDER"] != "1"
+    static let tokenBudget = Int(env["VERDICT_VON_TOKEN_BUDGET"] ?? "") ?? 8192
+    static let rowCap = max(1, Int(env["VERDICT_VON_ROWS"] ?? "") ?? 64)
+    /// Length bucket for chunks of > 8 rows. f32 is compute-bound (non-NAX GEMMs): exact lengths, jobs +7.6% vs
+    /// 8-token buckets (2 A/B repeats); half precision keeps Laya's 8 (shape reuse).
+    static let bucketOverride = Int(env["VERDICT_VON_BUCKET"] ?? "")
+    private var bucketAll: Int { Self.bucketOverride ?? (network.dtype == .float32 ? 1 : 8) }
+    static let padMultiple = Int(env["VERDICT_VON_PAD_MULTIPLE"] ?? "") ?? 16
+    static let exactSingle = Int(env["VERDICT_VON_EXACT_SINGLE"] ?? "") ?? 512
+    static let cacheNull = env["VERDICT_VON_NULL_CACHE"] != "0"
+    static let doubleBuffer = env["VERDICT_VON_DOUBLE_BUFFER"] != "0"
+    static let libraryTokenizer = env["VERDICT_VON_TOKENIZER"] == "library"
+    static let profile = env["VERDICT_PROFILE"] == "1"
+    static let trace = env["VERDICT_VON_PARITY_TRACE"] == "1"
+
+    public init(id: String, snapshot: URL, bits: Int = 0, recipe: KernelRecipe = .fast) throws {
+        guard ["von-1.1","von-1.2"].contains(id) else { throw VonError.invalid("Unknown Von model '\(id)'") }
+        // Get casts the FP32-only source before execution; lower tiers pack from that selected half.
+        guard Self.precisions.contains(bits) else { throw VonError.invalid(Self.precisionMessage) }
+        self.id = id
+        let configData = try Data(contentsOf: snapshot.appendingPathComponent("tokenizer_config.json"))
+        let tokenData = try Data(contentsOf: snapshot.appendingPathComponent("tokenizer.json"))
+        self.configData = configData; self.tokenData = tokenData
+        let config = try JSONSerialization.jsonObject(with: configData) as? [String: Any] ?? [:]
+        guard let mask = config["mask_token"] as? String, let sep = config["sep_token"] as? String else { throw VonError.invalid("Von tokenizer is missing MASK/SEP") }
+        if !Self.libraryTokenizer, mask.utf8.elementsEqual("[MASK]".utf8), sep.utf8.elementsEqual("[SEP]".utf8),
+           let fast = FastByteBPE(data: tokenData, ignoringTruncationAndPadding: true), let id = fast.tokenID(mask) {
+            tokenizer = nil
+            fastEncode = { fast.encode($0, addSpecialTokens: $1) }
+            maskID = id
+        } else {
+            let loaded = try Self.library(configData, tokenData)
+            guard let id = loaded.convertTokenToId(mask) else { throw VonError.invalid("Von tokenizer is missing MASK/SEP") }
+            tokenizer = loaded; fastEncode = nil; maskID = id
+        }
+        maskToken = mask; sepToken = sep
+        let cdata = try JSONSerialization.jsonObject(with: Data(contentsOf: snapshot.appendingPathComponent("marker_calibration.json"))) as? [String: Any] ?? [:]
+        guard let t = cdata["temperature"] as? Double, t > 0, t.isFinite,
+              let map = cdata["calibration_map"] as? [String: Double],
+              ["bias","entropy","log_tokens","n_options","lo","hi"].allSatisfy({ map[$0]?.isFinite == true }) else {
+            throw VonError.invalid("Invalid Von calibration")
+        }
+        temperature = t; calibration = map
+        prior = cdata["noul_zero_shot_prior"] as? [String: Double]
+        guard (cdata["independent_options"] as? Bool ?? false) == (id == "von-1.2") else { throw VonError.invalid("Von independent-options flag disagrees with catalog version") }
+        network = try VonNetwork(snapshot: snapshot, id: id, bits: bits)
+        contextLimit = Swift.min(8192, network.config.max_position_embeddings ?? 8192)
+        network.standardSelected = recipe == .standard
+        network.qualifySmallM(model: id, bits: bits, allowed: recipe == .fast, modelCheck: smallMCheck)
+    }
+    /// The small-M gate's model stage (as LayaModel.smallMCheck, same built-in items): marker logits with the kernel
+    /// off and on; pass when finite, relative RMS ≤ SmallMGate.logitsBound and no chosen option changes outside
+    /// near-ties.
+    private func smallMCheck() -> (pass: Bool, detail: String) {
+        var diff2: Double = 0, ref2: Double = 0, rows = 0, changed = 0, ties = 0
+        do {
+            for (text, questions) in LayaModel.gateItems {
+                let prepared = try questions.map { try prepare(Item(text: text), $0) }
+                let stock = try network.withSmallM(false) { try logits(prepared) }
+                let fast = try network.withSmallM(true) { try logits(prepared) }
+                for (a, b) in zip(stock, fast) where a.count >= 2 && a.count == b.count {
+                    for (x, y) in zip(a, b) { diff2 += Double(y - x) * Double(y - x); ref2 += Double(x) * Double(x) }
+                    let order = a.indices.sorted { a[$0] > a[$1] }
+                    rows += 1
+                    if a[order[0]] - a[order[1]] < SmallMGate.tieMargin { ties += 1; continue }
+                    if b.indices.max(by: { b[$0] < b[$1] }) != order[0] { changed += 1 }
+                }
+            }
+        } catch { return (false, "\(error)".prefix(120).description) }
+        let rel = ref2 > 0 ? Float((diff2 / ref2).squareRoot()) : .infinity
+        let detail = String(format: "logits rel %.1e, %d/%d answers unchanged, %d near-ties", rel, rows - ties - changed, rows - ties, ties)
+        return (rel.isFinite && rel <= SmallMGate.logitsBound && changed == 0, detail)
+    }
+    private static func library(_ configData: Data, _ tokenData: Data) throws -> any Tokenizer {
+        let decoder = JSONDecoder()
+        return try AutoTokenizer.from(tokenizerConfig: decoder.decode(Config.self, from: configData), tokenizerData: decoder.decode(Config.self, from: tokenData))
+    }
+    /// The fast tokenizer serves requests (validated at load and not switched off).
+    var hasFastTokenizer: Bool { fastEncode != nil && !stockTokenizer }
+    public var optimizedPathActive: Bool { hasFastTokenizer || network.windowedActive || network.smallMActive }
+    /// Stock path: library tokenizer (loaded on first use; must resolve the same mask id) and stock attention.
+    public func useStockPath(_ stock: Bool) throws {
+        if stock && tokenizer == nil {
+            let loaded = try Self.library(configData, tokenData)
+            guard loaded.convertTokenToId(maskToken) == maskID else { throw VonError.invalid("Library tokenizer disagrees with the fast tokenizer's mask id") }
+            tokenizer = loaded
+        }
+        stockTokenizer = stock
+        network.useStockAttention(stock)
+        questionCache.removeAll()   // cached null rows hold token ids from the previous tokenizer
+    }
+    public func encode(_ text: String, addSpecialTokens: Bool = true) -> [Int] {
+        if !stockTokenizer, let fastEncode { return fastEncode(text, addSpecialTokens) }
+        return tokenizer!.encode(text: text, addSpecialTokens: addSpecialTokens)
+    }
+    private func state(_ item: Item) -> String {
+        // SDK _format_state: a str is used as is (even when it looks like JSON); a dict enumerates its
+        // insertion-order top-level fields as `key: str(value)` lines (the helper preserves an ordered JSON
+        // rendering); anything else is str(state).
+        switch item.kind {
+        case .text: return item.text
+        case .object:
+            guard let pairs = VonJSON.topLevel(item.text) else { return item.text }
+            return pairs.map { "\($0.0): \(VonJSON.pythonValue($0.1))" }.joined(separator: "\n")
+        case .value: return VonJSON.pythonValue(item.text)
+        }
+    }
+    private func descriptions(_ question: Question) -> ([String],[String]) {
+        switch question.kind {
+        case .choice:
+            return (question.criteria.map(\.0), question.criteria.map { ($0.1.isEmpty ? $0.0 : $0.1).trimmingCharacters(in: .whitespacesAndNewlines) })
+        case .score:
+            return (question.criteria.indices.map(String.init), question.criteria.map { $0.1.trimmingCharacters(in: .whitespacesAndNewlines) })
+        case .noul:
+            let pos = question.criteria.first { $0.0 == "true" }?.1 ?? ""
+            let neg = question.criteria.first { $0.0 == "false" }?.1 ?? ""
+            return (["true","false"],[pos.isEmpty ? "Yes, condition holds true." : pos, neg.isEmpty ? "No, condition is false." : neg])
+        }
+    }
+    private func pack(_ state: String, _ instructions: String, _ options: [String]) -> String {
+        let prefix = instructions.isEmpty ? state.trimmingCharacters(in: .whitespacesAndNewlines) : (instructions + " " + state).trimmingCharacters(in: .whitespacesAndNewlines)
+        return "\(prefix) \(sepToken) \(options.map { "\(maskToken) \($0.trimmingCharacters(in: .whitespacesAndNewlines))" }.joined(separator: " "))"
+    }
+    public func prepare(_ item: Item, _ question: Question) throws -> VonPreparedRow {
+        let texts = try validated(question).1, prepared = row(pack(state(item), question.instructions, texts))
+        guard prepared.markers.count == texts.count else { throw VonError.invalid(markerMessage) }
+        return prepared
+    }
+    private func row(_ packed: String) -> VonPreparedRow {
+        let ids = encode(packed)
+        return VonPreparedRow(ids: ids, markers: ids.indices.filter { ids[$0] == maskID })
+    }
+    /// The SDK packs a literal mask token in user text as one more marker (it then scores K + extra markers and
+    /// zips the first K probabilities with the labels: an invalid distribution). Von refuses it instead.
+    private var markerMessage: String {
+        "Item contains the literal mask token '\(maskToken)', which Von reserves for option markers; remove or replace it."
+    }
+    /// Request-level checks before any tokenization or GPU work: nonempty options and labels distinct as exact
+    /// bytes (as JSON object keys are; list criteria may repeat a label). Returns option keys and texts.
+    private func validated(_ question: Question) throws -> ([String], [String]) {
+        switch question.kind {
+        case .choice:
+            guard !question.criteria.isEmpty else { throw VonError.invalid("Choice criteria must be a nonempty dictionary or list") }
+            guard Probabilities.distinct(question.criteria.map(\.0)) else { throw VonError.invalid("Choice labels must be unique") }
+        case .score:
+            guard !question.criteria.isEmpty else { throw VonError.invalid("Score criteria must be a nonempty list") }
+        case .noul: break
+        }
+        return descriptions(question)
+    }
+    /// Raw logits for prepared rows (parity tests), as one chunk.
+    public func logits(_ rows: [VonPreparedRow]) throws -> [[Float]] {
+        guard !rows.isEmpty, rows.count <= Self.rowCap else { throw VonError.invalid("Expected 1...\(Self.rowCap) Von rows") }
+        guard let long = rows.map(\.ids.count).max(), long <= contextLimit else {
+            throw VonError.invalid("Row needs \(rows.map(\.ids.count).max() ?? 0) tokens; Von accepts \(contextLimit).")
+        }
+        guard rows.allSatisfy({ !$0.markers.isEmpty }) else { throw VonError.invalid("Von rows need option markers") }
+        let values = network.collect(network.launch(rows.map(\.ids), rows.map(\.markers), length: paddedLength(rows)), markers: rows.map(\.markers))
+        guard values.allSatisfy({ $0.allSatisfy(\.isFinite) }) else { throw VonError.invalid("Non-finite model outputs") }
+        if Self.trace { log(rows, values) }
+        return values
+    }
+    public func intakeComponents(fixture: URL, output: URL, capture: Bool, states: [String]? = nil) throws {
+        let states = states ?? LayaModel.intakeStates
+        guard states.count == 2, states.allSatisfy({ !$0.isEmpty }) else { throw VonError.invalid("Intake needs two English states") }
+        let archive = fixture.appendingPathComponent("inputs.safetensors")
+        let session = VonIntakeSession(inputs: capture ? [:] : try TensorArchive(archive).arrays(), capture: capture)
+        for (i, state) in states.enumerated() {
+            let row = try prepare(Item(text: state), LayaModel.intakeQuestions[i])
+            network.intake = session; network.intakePrefix = "case-\(i)/"
+            _ = network.collect(network.launch([row.ids], [row.markers], length: row.ids.count), markers: [row.markers])
+            network.intake = nil; network.intakePrefix = ""
+        }
+        let expected = Set((0..<2).flatMap { c in ["case-\(c)/embedding", "case-\(c)/scorer"] + (0..<network.config.num_hidden_layers).map { "case-\(c)/layer-\($0)" } })
+        guard session.valid, Set(session.inputs.keys) == session.used, Set(session.outputs.keys) == expected else { throw VonError.invalid("Von component keys, shapes or layouts differ") }
+        if capture {
+            guard !FileManager.default.fileExists(atPath: fixture.path) else { throw VonError.invalid("Fixture already exists") }
+            try FileManager.default.createDirectory(at: fixture, withIntermediateDirectories: true)
+            try save(arrays: session.inputs, url: archive)
+            try FileManager.default.setAttributes([.posixPermissions: 0o444], ofItemAtPath: archive.path)
+        }
+        try session.recorder.write(session.outputs, to: output)
+        var probabilities: [String: MLXArray] = [:]
+        for (i, state) in states.enumerated() {
+            let questions = i == 0 ? [LayaModel.intakeQuestions[0]] : LayaModel.intakeQuestions
+            for (j, question) in questions.enumerated() {
+                let row = try prepare(Item(text: state), question), info = try cachedQuestion(question)
+                let null = try nullBias(question, info)
+                let logits = try self.logits([row])[0]
+                _ = answer(logits, stateTokens: Swift.max(1, encode(self.state(Item(text: state)), addSpecialTokens: false).count), question: question, keys: info.keys, null: null) {
+                    probabilities["case-\(i)/question-\(j)"] = MLXArray($0.map(Float.init))
+                }
+            }
+        }
+        try save(arrays: probabilities, url: output.appendingPathComponent("probabilities.safetensors"))
+    }
+
+    private func log(_ rows: [VonPreparedRow], _ values: [[Float]]) {
+        // Explicit local test hook only: never log private inputs in normal use.
+        for (row,logits) in zip(rows,values) {
+            let record: [String: Any] = ["ids":row.ids,"markers":row.markers,"logits":logits,
+                                         "batch_size":rows.count,"sequence_length":rows.map { $0.ids.count }.max()!]
+            if let data = try? JSONSerialization.data(withJSONObject: record,options:[.fragmentsAllowed]),
+               let text = String(data:data,encoding:.utf8) {
+                fputs("VON_PARITY_TRACE \(text)\n",stderr)
+            }
+        }
+    }
+    /// Sequence length a chunk is padded to: 16-token buckets for chunks of <= 8 rows, 8 above (fewer distinct
+    /// shapes for MLX's kernel/buffer reuse); a long row alone keeps its exact length (no padding, no key mask).
+    /// Arrival order (VERDICT_VON_ARRIVAL_ORDER=1) keeps the previous exact lengths.
+    private func paddedLength(_ rows: [VonPreparedRow]) -> Int {
+        let length = rows.map { $0.ids.count }.max() ?? 0
+        guard Self.sortByLength, !(rows.count == 1 && length >= Self.exactSingle) else { return length }
+        let step = rows.count <= 8 ? Self.padMultiple : bucketAll
+        return step > 1 ? (length + step - 1) / step * step : length
+    }
+    public func tokenCount(_ item: Item, _ questions: [Question]) throws -> Int {
+        let s = state(item)
+        return questions.map { encode(pack(s, $0.instructions, descriptions($0).1)).count }.max() ?? 0
+    }
+    private func rounded(_ value: Double, digits: Double = 10000) -> Double { (value * digits).rounded(.toNearestOrEven) / digits }
+    private func answer(_ logits: [Float], stateTokens tokens: Int, question: Question, keys: [String], null: Float?, probabilitySink: (([Double]) -> Void)? = nil) -> Answer {
+        var values = logits
+        if let null { values[0] -= null }
+        let k = values.count
+        let maxLogit = values.max()!
+        let baseline = values.map { expf($0 - maxLogit) }
+        let baselineSum = baseline.reduce(Float(0),+)
+        let raw = baseline.map { $0 / baselineSum }
+        // Explicit Swift.min/max and typed steps: MLX's array overloads of min/max/log make this untypeable.
+        let rawEntropy: Float = -raw.reduce(Float(0)) { $0 + $1 * logf(Swift.max(1e-12, $1)) }
+        let entropy: Double = k < 2 ? 0 : Double(rawEntropy) / Foundation.log(Double(k))
+        let c = calibration
+        let linear: Double = c["bias"]! + c["entropy"]! * entropy + c["log_tokens"]! * Foundation.log10(Double(tokens)) / 4 + c["n_options"]! * Double(k) / 8
+        let temp: Double = Swift.min(c["hi"]!, Swift.max(c["lo"]!, linear))
+        let divisor = Float(Swift.max(temp, 1e-4))
+        let scaled = values.map { $0 / divisor }
+        let biggest = scaled.max()!, exponent = scaled.map { expf($0 - biggest) }, total = exponent.reduce(Float(0), +)
+        let p: [Double] = exponent.map { Double($0 / total) }
+        probabilitySink?(p)
+        let sorted = p.sorted(by: >)
+        let top: Double = sorted[0], second: Double = sorted.count > 1 ? sorted[1] : 0
+        let confidence: Double = id == "von-1.1" ? top - second : (k <= 1 ? 1 : (Double(k) * top - 1) / Double(k - 1))
+        let bounded: Double = Swift.max(0, Swift.min(1, confidence))
+        var a = Answer()
+        switch question.kind {
+        case .noul:
+            a.noul = rounded(Swift.min(1, Swift.max(0, p[0])))
+            a.confidence = rounded(Swift.max(p[0], 1 - p[0]))
+        case .choice:
+            a.choice = keys[values.firstIndex(of: values.max()!)!]
+            a.probabilities = Probabilities(labels: keys, values: p.map { rounded($0) })
+            a.confidence = rounded(bounded, digits: 1000)
+        case .score:
+            a.probabilities = Probabilities(labels: keys, values: p.map { rounded($0) })
+            a.score = rounded(p.enumerated().reduce(Double(0)) { $0 + Double($1.offset) * $1.element }, digits: 100)
+            a.confidence = rounded(bounded, digits: 1000)
+        }
+        return a
+    }
+    private func questionKey(_ question: Question) -> Data { Data((question.sourceJSON ?? LayaModel.questionJSON(question)).utf8) }
+    /// Validated question info; tokenizer work only, never a forward pass (the null pass is `nullBias`).
+    private func cachedQuestion(_ question: Question) throws -> QuestionInfo {
+        let key = questionKey(question)
+        if let hit = questionCache[key] { return hit }
+        let (keys, texts) = try validated(question)
+        // The question without any item: its markers must be exactly the options' (a literal mask token in the
+        // instructions or an option would add one), and it is the zero-shot Noul null row.
+        let bare = row(pack("", question.instructions, texts))
+        guard bare.markers.count == texts.count else {
+            throw VonError.invalid("Question '\(question.id)' contains the literal mask token '\(maskToken)', which Von reserves for option markers; remove or replace it.")
+        }
+        let info = QuestionInfo(keys: keys, texts: texts, nullRow: needsNull(question) ? bare : nil, null: nil)
+        if Self.cacheNull { remember(key, info) }
+        return info
+    }
+    private func remember(_ key: Data, _ info: QuestionInfo) {
+        if questionCache[key] == nil && questionCache.count >= 512 { questionCache.removeAll(keepingCapacity: true) }
+        questionCache[key] = info
+    }
+    /// Zero-shot Noul: the SDK's null pass (empty state) for this question, one row alone. Run only once some item
+    /// of the request fits the context, and never for an over-context null row.
+    private func nullBias(_ question: Question, _ info: QuestionInfo) throws -> Float? {
+        guard let nullRow = info.nullRow else { return nil }
+        if let null = info.null { return null }
+        guard nullRow.ids.count <= contextLimit else {
+            throw VonError.invalid("Question '\(question.id)' needs about \(nullRow.ids.count) tokens; Von accepts \(contextLimit).")
+        }
+        let lg = try logits([nullRow])[0]
+        let bias = lg[0] - lg[1]
+        let null = prior.map { Float($0["a"] ?? 0)*bias + Float($0["b"] ?? 0) } ?? 0.7*bias
+        if Self.cacheNull { var cached = info; cached.null = null; remember(questionKey(question), cached) }
+        return null
+    }
+    private func needsNull(_ q: Question) -> Bool { q.kind == .noul && q.criteria.allSatisfy { $0.1.isEmpty } }
+
+    public func predict(_ items: [Item], _ questions: [Question]) throws -> [ItemResult] {
+        try predict(groups: [RequestGroup(items: items, questions: questions)])[0].results
+    }
+
+    /// Every group's rows in one sorted, chunked pass; one group is exactly the single-request pass.
+    public func predict(groups: [RequestGroup]) throws -> [GroupResult] {
+        do { return try predictPass(groups) } catch let error as VonError where network.smallMActive && error.nonFinite {
+            // Runtime fallback for the small-M kernel alone: rerun without it and keep it off until reload.
+            network.disableSmallM()
+            questionCache.removeAll()   // null biases computed with the kernel
+            FileHandle.standardError.write(Data("{\"smallm_fallback\":\"\(id)\",\"reason\":\"non-finite output\"}\n".utf8))
+            return try predictPass(groups)
+        }
+    }
+
+    private func predictPass(_ groups: [RequestGroup]) throws -> [GroupResult] {
+        guard groups.allSatisfy({ !$0.questions.isEmpty }) else { throw VonError.invalid("Questions must be nonempty") }
+        try OptimizedPathFault.check(optimized: optimizedPathActive)
+        let clock = ContinuousClock(), t0 = clock.now
+        var results = groups.map { [Answers](repeating: Answers(), count: $0.items.count) }
+        var errors = groups.map { _ in [Int: String]() }
+        var tokens = groups.map { [Int](repeating: 0, count: $0.items.count) }
+        var rows: [VonPreparedRow] = [], meta: [(group: Int, item: Int, question: Int)] = []
+        // Validation and tokenization first: no forward pass (not even the cached null pass) runs before every
+        // row is known to fit the context and carry exactly its options' markers.
+        var infos = try groups.map { try $0.questions.map(cachedQuestion) }
+        var stateTokens = groups.map { [Int](repeating: 1, count: $0.items.count) }
+        var groupHasRows = [Bool](repeating: false, count: groups.count)
+        for (g, group) in groups.enumerated() {
+            for (i, item) in group.items.enumerated() {
+                let s = state(item)
+                let prepared = zip(group.questions, infos[g]).map { row(pack(s, $0.instructions, $1.texts)) }
+                let count = prepared.map { $0.ids.count }.max() ?? 0
+                if count > contextLimit { errors[g][i] = "Item needs about \(count) tokens; Von accepts \(contextLimit)."; continue }
+                if zip(prepared, infos[g]).contains(where: { $0.markers.count != $1.texts.count }) { errors[g][i] = markerMessage; continue }
+                // Calibration input: the state's own token count, once per item (was once per row).
+                stateTokens[g][i] = max(1, encode(s, addSpecialTokens: false).count)
+                for (q, r) in prepared.enumerated() { rows.append(r); meta.append((g, i, q)); tokens[g][i] += r.ids.count }
+                groupHasRows[g] = true
+            }
+        }
+        let tn = clock.now
+        for g in groups.indices where groupHasRows[g] {
+            for q in infos[g].indices { infos[g][q].null = try nullBias(groups[g].questions[q], infos[g][q]) }
+        }
+        let t1 = clock.now
+        // Rows in length order, chunks of <= 64 rows under the token budget (as Laya fp16): less padding and bounded
+        // activation memory; results are scattered back by `meta`, so answers stay in input order.
+        let order = Self.sortByLength ? rows.indices.sorted { (rows[$0].ids.count, $0) < (rows[$1].ids.count, $1) } : Array(rows.indices)
+        var chunks: [[Int]] = [], current: [Int] = []
+        for slot in order {
+            let length = rows[slot].ids.count
+            let over = Self.sortByLength && (current.count + 1) * max(length, current.map { rows[$0].ids.count }.max() ?? 0) > Self.tokenBudget
+            if !current.isEmpty && (current.count == Self.rowCap || over) { chunks.append(current); current = [] }
+            current.append(slot)
+        }
+        if !current.isEmpty { chunks.append(current) }
+        var padded = 0
+        var nonFinite = false
+        let poison = OptimizedPathFault.poisons(optimized: optimizedPathActive) || (SmallMRoute.injectNaN && network.smallMActive)
+        func finish(_ slots: [Int], _ output: MLXArray) {
+            let chunk = slots.map { rows[$0] }
+            var values = network.collect(output, markers: chunk.map(\.markers))
+            if poison, !values.isEmpty, !values[0].isEmpty { values[0][0] = .nan }
+            // Non-finite logits fail the request (as Laya), never become NaN probabilities.
+            if !values.allSatisfy({ $0.allSatisfy(\.isFinite) }) { nonFinite = true; return }
+            if Self.trace { log(chunk, values) }
+            for (r,lg) in values.enumerated() {
+                let (g,i,q) = meta[slots[r]]
+                let info = infos[g][q], question = groups[g].questions[q]
+                // Validated above; never map a different number of logits onto the labels.
+                guard lg.count == info.keys.count else { errors[g][i] = markerMessage; continue }
+                results[g][i][question.id] = answer(lg, stateTokens: stateTokens[g][i], question: question, keys: info.keys, null: info.null)
+            }
+        }
+        // Double-buffered: queue chunk k+1 before reading chunk k (at most two chunks in flight).
+        var inflight: ([Int], MLXArray)? = nil
+        for slots in chunks {
+            let chunk = slots.map { rows[$0] }
+            let length = paddedLength(chunk)
+            padded += chunk.count * length
+            let output = network.launch(chunk.map(\.ids), chunk.map(\.markers), length: length)
+            if let (previous, previousOutput) = inflight { finish(previous, previousOutput) }
+            inflight = Self.doubleBuffer ? (slots, output) : nil
+            if !Self.doubleBuffer { finish(slots, output) }
+        }
+        if let (previous, previousOutput) = inflight { finish(previous, previousOutput) }
+        if nonFinite { throw VonError.invalid("Non-finite model outputs") }
+        if Self.profile {
+            let t2 = clock.now, real = rows.reduce(0) { $0 + $1.ids.count }
+            func ms(_ d: Duration) -> String { String(format: "%.1f", Double(d.components.attoseconds) / 1e15 + Double(d.components.seconds) * 1000) }
+            let itemCount = groups.reduce(0) { $0 + $1.items.count }
+            FileHandle.standardError.write(Data("profile \(id) items=\(itemCount) rows=\(rows.count) chunks=\(chunks.count) tokens=\(real) padded=\(padded) prepare=\(ms(tn - t0))ms null=\(ms(t1 - tn))ms forward+post=\(ms(t2 - t1))ms groups=\(groups.count)\n".utf8))
+        }
+        return groups.indices.map { g in
+            GroupResult(results: groups[g].items.indices.map { i in errors[g][i].map(ItemResult.error) ?? .answers(results[g][i]) },
+                        inputTokens: groups[g].items.indices.map { errors[g][$0] == nil ? tokens[g][$0] : 0 })
+        }
+    }
+}
+
+extension VonModel: TokenizerPathReporting { public var tokenizerPath: String { hasFastTokenizer ? "fast" : "library" } }
+
+/// Bounded, order-preserving JSON text handling for SDK's dict-state rendering.
+private enum VonJSON {
+    static func topLevel(_ text: String) -> [(String,String)]? {
+        let b = Array(text.utf8)
+        guard b.first == 123, b.last == 125 else { return nil }
+        var i = 1, pairs: [(String,String)] = []
+        func white() { while i < b.count && [UInt8(32),10,13,9].contains(b[i]) { i += 1 } }
+        func string() -> String? {
+            guard i < b.count, b[i] == 34 else { return nil }
+            let start = i; i += 1
+            while i < b.count {
+                if b[i] == 92 { i += 2; continue }
+                if b[i] == 34 { i += 1; break }
+                i += 1
+            }
+            guard i <= b.count, let value = try? JSONSerialization.jsonObject(with: Data(b[start..<i]),options:[.fragmentsAllowed]) as? String else { return nil }
+            return value
+        }
+        white()
+        while i < b.count-1 {
+            guard let key = string() else { return nil }; white()
+            guard i < b.count,b[i] == 58 else { return nil }; i += 1;white()
+            let start = i;var depth = 0, quoted = false, escaped = false
+            while i < b.count {
+                let c = b[i]
+                if quoted {
+                    if escaped { escaped = false } else if c == 92 { escaped = true } else if c == 34 { quoted = false }
+                } else {
+                    if c == 34 { quoted = true }
+                    if c == 91 || c == 123 { depth += 1 }
+                    if c == 93 || c == 125 { if depth == 0 { break };depth -= 1 }
+                    if c == 44 && depth == 0 { break }
+                }
+                i += 1
+            }
+            pairs.append((key,String(decoding:b[start..<i],as:UTF8.self).trimmingCharacters(in:.whitespacesAndNewlines)))
+            white(); if i < b.count,b[i] == 44 { i += 1;white() }
+        }
+        return pairs
+    }
+    /// A JSON number literal as Python's repr prints it. The helper renders items with Python's json.dumps, whose
+    /// number literals are float/int repr ("117188.0", "1e+100"); re-parsing through NSNumber dropped ".0".
+    static func numberLiteral(_ json: String) -> String? {
+        switch json {
+        case "NaN": return "nan"
+        case "Infinity": return "inf"
+        case "-Infinity": return "-inf"
+        default:
+            guard let c = json.utf8.first, c == 45 || (48...57).contains(c),
+                  json.utf8.allSatisfy({ (48...57).contains($0) || [45, 43, 46, 101, 69].contains($0) }) else { return nil }
+            return json
+        }
+    }
+    static func pythonValue(_ json: String) -> String {
+        if let number = numberLiteral(json) { return number }
+        guard let obj = try? JSONSerialization.jsonObject(with: Data(json.utf8),options:[.fragmentsAllowed]) else { return json }
+        if let s = obj as? String { return s }
+        if obj is NSNull { return "None" }
+        if let number = obj as? NSNumber {
+            if CFGetTypeID(number) == CFBooleanGetTypeID() { return number.boolValue ? "True" : "False" }
+            return number.description
+        }
+        if obj is [Any] { return pythonReprJSON(json) }
+        if let fields = topLevel(json) {
+            return "{" + fields.map { "\(pythonRepr($0.0)): \(pythonReprJSON($0.1))" }.joined(separator:", ") + "}"
+        }
+        return json
+    }
+    private static func pythonReprJSON(_ json: String) -> String {
+        if let number = numberLiteral(json) { return number }
+        if let values = arrayItems(json) { return "[" + values.map(pythonReprJSON).joined(separator:", ") + "]" }
+        if let fields = topLevel(json) {
+            return "{" + fields.map { "\(pythonRepr($0.0)): \(pythonReprJSON($0.1))" }.joined(separator:", ") + "}"
+        }
+        if let obj = try? JSONSerialization.jsonObject(with:Data(json.utf8),options:[.fragmentsAllowed]) {
+            return pythonRepr(obj)
+        }
+        return json
+    }
+    private static func arrayItems(_ text: String) -> [String]? {
+        let b = Array(text.utf8)
+        guard b.first == 91, b.last == 93 else { return nil }
+        var values: [String] = [], start = 1, depth = 0, quoted = false, escaped = false
+        for i in 1..<(b.count-1) {
+            let c = b[i]
+            if quoted {
+                if escaped { escaped = false } else if c == 92 { escaped = true } else if c == 34 { quoted = false }
+            } else {
+                if c == 34 { quoted = true }
+                if c == 91 || c == 123 { depth += 1 }
+                if c == 93 || c == 125 { depth -= 1 }
+                if c == 44 && depth == 0 {
+                    values.append(String(decoding:b[start..<i],as:UTF8.self).trimmingCharacters(in:.whitespacesAndNewlines))
+                    start = i+1
+                }
+            }
+        }
+        let last = String(decoding:b[start..<(b.count-1)],as:UTF8.self).trimmingCharacters(in:.whitespacesAndNewlines)
+        if !last.isEmpty { values.append(last) }
+        return values
+    }
+    private static func pythonRepr(_ obj: Any) -> String {
+        if let s = obj as? String {
+            let quote = s.contains("'") && !s.contains("\"") ? "\"" : "'"
+            let escaped = s.replacingOccurrences(of:"\\",with:"\\\\")
+                .replacingOccurrences(of:quote,with:"\\"+quote)
+                .replacingOccurrences(of:"\n",with:"\\n")
+                .replacingOccurrences(of:"\r",with:"\\r")
+                .replacingOccurrences(of:"\t",with:"\\t")
+            return quote+escaped+quote
+        }
+        if obj is NSNull { return "None" }
+        if let n = obj as? NSNumber { return CFGetTypeID(n) == CFBooleanGetTypeID() ? (n.boolValue ? "True" : "False") : n.description }
+        if let a = obj as? [Any] { return "["+a.map(pythonRepr).joined(separator:", ")+"]" }
+        if let fields = topLevel(String(describing:obj)) { return "{" + fields.map { "\(pythonRepr($0.0)): \(pythonReprJSON($0.1))" }.joined(separator:", ") + "}" }
+        return String(describing:obj)
+    }
+}
+
+extension VonModel: SmallMReporting { public var smallMPath: String { network.smallMPath } }
+
+extension VonError {
+    /// NaN/Inf logits (the small-M runtime fallback reruns only these).
+    var nonFinite: Bool { if case .invalid(let message) = self { return message.hasPrefix("Non-finite") }; return false }
+}

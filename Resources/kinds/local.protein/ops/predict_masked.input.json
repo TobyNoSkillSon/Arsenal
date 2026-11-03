@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [],
+  "properties": {
+    "sequence": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100000,
+      "description": "Amino acids in uppercase one-letter codes; _ marks a masked residue to fill in. Whitespace is ignored. At most 1,024 residues. Multi-chain complexes (| chain breaks) are not covered."
+    },
+    "length": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1024,
+      "description": "Protein length, when no sequence is given (all residues masked)."
+    },
+    "structure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "x-arsenal-file": {
+        "accept": [
+          "chemical/x-pdb",
+          "text/plain",
+          "application/octet-stream"
+        ]
+      },
+      "description": "A protein structure as a PDB file. The first model is read: ATOM records of amino acids (HETATM ignored), one chain, the first alternate location of each atom. N, CA and C are used (at least one residue needs all three). Plain text, UTF-8 or Latin-1; a gzip file is refused."
+    },
+    "chain": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "Chain to read from the PDB file (default: the first)."
+    },
+    "structure_residues": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "[first, last] residues of the file's chain to use (1-indexed, default: all)."
+    },
+    "structure_at": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Prompt position where that structure segment starts (default 1): place a motif inside a longer protein."
+    },
+    "secondary_structure": {
+      "type": "string",
+      "maxLength": 1024,
+      "description": "Eight-class DSSP secondary structure, one letter per residue (G H I T E B S C); _ for unknown."
+    },
+    "sasa": {
+      "type": "array",
+      "maxItems": 1024,
+      "items": {
+        "type": [
+          "number",
+          "null"
+        ],
+        "minimum": 0
+      },
+      "description": "Solvent-accessible surface area per residue in square angstrom; null for unknown."
+    },
+    "function": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200,
+            "description": "A function keyword from the model's keyword vocabulary (e.g. peptidase), an InterPro id the model knows (e.g. IPR001314), or a residue annotation label (accepted, but the maker's tokenizer leaves that track empty)."
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "First residue, 1-indexed."
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Last residue, inclusive."
+          }
+        }
+      },
+      "description": "Function annotations over residue ranges."
+    },
+    "top_k": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 20,
+      "description": "Candidates listed per masked residue (default 5).",
+      "default": 5
+    },
+    "return_logits": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "sequence",
+          "structure",
+          "secondary_structure",
+          "sasa",
+          "function",
+          "residue_annotations"
+        ]
+      },
+      "uniqueItems": true,
+      "description": "Also return per-residue logits of these tracks (at most 640,000 numbers in all, so the reply stays under 16 MB: per residue, structure is 4,096 numbers, function 2,080, residue_annotations 1,478, sasa 19, secondary_structure 11, sequence 64)."
+    },
+    "structure_sequence": {
+      "type": "boolean",
+      "default": true,
+      "description": "With a structure file and no sequence, take the residues of the placed segment from the file (the maker's ESMProtein.from_protein_chain); false leaves them masked."
+    }
+  }
+}

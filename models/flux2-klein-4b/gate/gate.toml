@@ -1,0 +1,27 @@
+schema = 1
+id = "flux2-klein-4b-gate-v2-bf16"
+reference_runner = "mflux-0.20.0-bf16-constrained"
+fixtures = "../../../bench/kinds/images/fixtures-v1.json"
+width = 512
+height = 512
+steps = 4
+guidance = 1.0
+precision = "bf16"
+reference_deviation = "Constrained bf16 component captures in evidence; stock mflux parity remains unqualified. See log/006-swift-fp16.md."
+human_checks = ["Photo contains a red ceramic teapot on a wooden table.", "Sign reads ARSENAL exactly."]
+passing_requires = ["all files decode as RGB PNG at requested dimensions", "both human checks pass", "all component regression bounds pass", "stock reference fidelity qualified", "image quality tolerance qualified"]
+stock_reference_qualified = false
+image_quality_qualified = false
+threshold_basis = "Single captured Swift bf16 vs constrained mflux floor, 8 Oct 2026: 25% relative-L2 margin rounded upward. Regression bounds, not a measured seed-noise allowance."
+
+[component_max_rel_l2]
+embeds = 0.015
+short-embeds = 0.001
+block-out-x = 0.000000125
+tiny-velocity = 0.009
+vae-small = 0.003
+
+[image_regression]
+max_latents_rel_l2 = 0.27
+max_image_rel_l2 = 0.17
+min_psnr_db = 26.0

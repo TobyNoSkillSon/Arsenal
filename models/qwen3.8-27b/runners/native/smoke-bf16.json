@@ -1,0 +1,67 @@
+{
+  "after_answer": {
+    "context": 8192,
+    "dtype": "bf16",
+    "id": 3,
+    "loaded": true,
+    "memory": {
+      "footprint_mb": 51839.89700317383,
+      "mlx_active_mb": 51308.02369308472,
+      "mlx_cache_mb": 239.0927448272705,
+      "mlx_peak_mb": 51529.270668029785,
+      "peak_mb": 51839.89700317383
+    },
+    "ok": true
+  },
+  "after_cancel": {
+    "context": 8192,
+    "dtype": "bf16",
+    "id": 6,
+    "loaded": true,
+    "memory": {
+      "footprint_mb": 51868.53762817383,
+      "mlx_active_mb": 51308.30914115906,
+      "mlx_cache_mb": 256.9634494781494,
+      "mlx_peak_mb": 51529.270668029785,
+      "peak_mb": 51868.69387817383
+    },
+    "ok": true
+  },
+  "answer": {
+    "finish_reason": "stop",
+    "id": 2,
+    "ok": true,
+    "text": "17 plus 25 equals 42.",
+    "tokens_per_s": 7.9599603362553335,
+    "ttft_s": 8.52495149988681,
+    "usage": {
+      "completion_tokens": 11,
+      "prompt_tokens": 28
+    }
+  },
+  "cancel_settled_s": 0.12332304194569588,
+  "controlled_benchmark": false,
+  "dtype": "bf16",
+  "load": {
+    "context": 8192,
+    "engine": "mlx-swift",
+    "engine_reason": "Fast/Exact is unavailable; this runner uses the pinned upstream kernels.",
+    "id": 1,
+    "load_s": 7.037020083516836,
+    "memory": {
+      "footprint_mb": 51453.381172180176,
+      "mlx_active_mb": 51300.045906066895,
+      "mlx_cache_mb": 0.0107421875,
+      "mlx_peak_mb": 51300.0459728241,
+      "peak_mb": 51453.381172180176
+    },
+    "ok": true
+  },
+  "mode": "smoke",
+  "model": "qwen3.8-27b",
+  "pid": 955,
+  "process_gone": true,
+  "runner": "native",
+  "stream_events": 11,
+  "stream_span_s": 1.2508605411276221
+}

@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: MIT
+# Vella's layout/rule split; swift-format owns layout. All first-party Swift is linted.
+included:
+  - Package.swift
+  - Sources
+  - Tests
+  - Packages
+  - Workers
+  - Tests/Fixtures/Templates/runners/swift
+  - models/d1-3b/runners/swift
+  - models/flux2-klein-4b/runners/swift
+  - scripts/icon.swift
+excluded:
+  - Packages/swift-sdk # Official SDK source with bounded transport patch; upstream layout.
+  - .build # Generated dependencies and build products.
+  - docs # Archived prototype renders and baseline evidence, not maintained runtime code.
+  - Workers/Voices/Sources/MLXAudioCore # Ported mlx-audio-swift engine (Workers/Voices/PORTED-FROM.md).
+  - Workers/Voices/Sources/MLXAudioTTS # Ported mlx-audio-swift/Vireo numerical engines.
+  - Workers/Voices/Sources/MLXAudioCodecs # Ported mlx-audio-swift codecs.
+  - Workers/Voices/Sources/FishS1Codec # Ported mlx-audio-swift Fish S1 DAC plus mlx-audio streaming decode (Workers/Voices/PORTED-FROM.md).
+  - Workers/Voices/Sources/VireoCore # Ported Vireo engine support.
+  - Workers/Voices/Sources/VireoEngine # Ported Vireo engine; wire adapters remain included.
+  - Workers/Voices/Sources/SmallMGEMM # Ported Vireo kernel implementation.
+  - Workers/Decisions/Sources/VerdictCore # Ported Verdict engine support.
+  - Workers/Decisions/Sources/VerdictEngine # Ported Verdict numerical engines.
+  - Workers/Decisions/Sources/VerdictSmallMGEMM # Ported Verdict affine/matmul kernels (Workers/Decisions/PORTED-FROM.md).
+  - Workers/Decisions/Sources/DecisionsProtocol # Ported Verdict System One helper contract.
+  - Workers/Sound/Sources/StableAudio3 # Ported speech-swift Stable Audio engine.
+  - Workers/Sound/Sources/SoundEngine # Ported Vireo sound/RE-USE engines; wire adapters remain included.
+  - Workers/Audio/Sources/VellaSTT # Ported Vella dictation engines (Workers/Audio/Sources/VellaSTT/PROVENANCE.md); adapters remain included.
+  - models/birefnet/runners/swift/Sources/MLXBiRefNet # Vendored MIT engine; PORTED-FROM.md records local adaptations.
+  - Workers/Kit/Sources # Kit model runners, kept byte-identical with their folder runners (Workers/Kit/PORTED-FROM.md).
+disabled_rules:
+  - opening_brace                   # swift-format puts `{` on its own line after a wrapped condition
+  - optional_data_string_conversion # String(decoding:as:) repairs invalid UTF-8; switching to the failable form changes behaviour
+line_length:
+  warning: 180
+  error: 250
+  ignores_urls: true
+  ignores_comments: true
+  ignores_interpolated_strings: true
+  ignores_multiline_strings: true
+  excluded_lines_patterns: ['^\s*#*"']  # a line that is a string literal (tooltips, JSON fixtures)
+identifier_name:
+  min_length: 1                     # i, n, x, id: short names in short scopes
+  max_length: 60
+  allowed_symbols: ["_"]
+type_name:
+  min_length: 1                     # single-letter nested helpers (layout constants, test doubles)
+nesting:
+  type_level: 3
+large_tuple:
+  warning: 7
+  error: 8
+# Arsenal audit (docs/notes/mb-v22-fix-l.md): measured maxima plus ~10% room, rounded up.
+# Layout/rules remain Vella-compatible; these size limits are Arsenal-specific.
+cyclomatic_complexity: {warning: 49, error: 50, ignores_case_statements: true}
+function_body_length: {warning: 159, error: 160}
+type_body_length: {warning: 799, error: 800}
+file_length: {warning: 1499, error: 1500, ignore_comment_only_lines: true}
+function_parameter_count: {warning: 10, error: 11}
+custom_rules:
+  # `x[k]?.y = await f()` starts the dictionary's modify access before the await (the optional chain must check for nil
+  # first) and holds the moved-out value across the suspension; on an actor the calls that interleave there over-release it.
+  await_inside_optional_chain_assignment:
+    name: "Await inside an optional-chained assignment"
+    regex: '\?\.[A-Za-z_][A-Za-z0-9_.]*(\[[^\]\n]*\])?\s*(=|\+=|-=)\s*(try[?!]?\s+)?await\b'
+    message: "Await into a local first, then assign: the optional chain holds the value moved out across the suspension."
+    excluded_match_kinds: [comment, doccomment, string]
+    severity: error

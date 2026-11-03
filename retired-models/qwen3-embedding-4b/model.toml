@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "qwen3-embedding-4b"
+name = "Qwen3-Embedding-4B"
+kind = "embeddings"
+params = "4.02B"
+publisher = "Qwen"
+released = 2025
+suggested = false
+summary = "Turn text into vectors for semantic search and similarity."
+purpose = "Create text search embeddings"
+good_for = ["semantic search", "similarity", "clustering", "classification"]
+limits = ["Trained output and precision quality await an approved real-weight trial."]
+tasks = ["feature-extraction"]
+languages = ["mul"]
+tools = ["operation"]
+context = 32768
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/Qwen/Qwen3-Embedding-4B/tree/5cf2132abc99cad020ac570b19d031efec650f2b"
+[weights]
+repo = "Qwen/Qwen3-Embedding-4B"
+revision = "5cf2132abc99cad020ac570b19d031efec650f2b"
+dtype = "bf16"
+files = ["config.json", "model-00001-of-00002.safetensors", "model-00002-of-00002.safetensors", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "78d2861cbbfd80eee05839200c5a3b7ed64c789f6c1cab4fbb84cc4eae33eaf5"
+"model-00001-of-00002.safetensors" = "e70bfe3c970523fb7ef4eddffed2254ce3f1e7150c3de2af4342de129dd756f8"
+"model-00002-of-00002.safetensors" = "ed1b87c8e9eb7e535a1a155e4fd00d9f4dba80e58a6db48a4c9f82cede7079c1"
+"tokenizer.json" = "83cdf8c3a34f68862319cb1810ee7b1e2c0a44e0864ae930194ddb76bb7feb8d"
+"tokenizer_config.json" = "2f58f4bbd7bbce15d683f525954ef3a92cd82f5e06415a9c513859bf8ab72436"
+[weights.bytes]
+"config.json" = 727
+"model-00001-of-00002.safetensors" = 4965826464
+"model-00002-of-00002.safetensors" = 3077765624
+"tokenizer.json" = 11422947
+"tokenizer_config.json" = 7256
+[derive]
+fp16 = "cast:embed-qwen3-v2"
+int8 = "cast:embed-qwen3-v2"
+int4 = "cast:embed-qwen3-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "embed"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "embed"
+title = "Embed inputs"
+input = "ops/embed.input.json"
+output_schema = "ops/embed.output.json"
+output = "json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

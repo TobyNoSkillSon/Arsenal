@@ -1,0 +1,204 @@
+tools = ["voice", "sound"]
+assets = ["kokoro-english-g2p", "kokoro-british-lexicon"]
+id = "kokoro-82m"
+kind = "voices"
+languages = ["en"]
+name = "Kokoro 82M"
+params = "82M"
+publisher = "Hexgrad"
+released = 2025
+schema = 2
+suggested = true
+summary = "Fast preset-voice reader; the default for spoken replies. No cloning or voice design."
+purpose = "Fast English speech"
+tasks = ["text-to-speech"]
+
+[[asset]]
+files = ["us_bart.safetensors", "us_bart_config.json", "us_gold.json", "us_silver.json"]
+id = "kokoro-english-g2p"
+licence = "MIT"
+repo = "beshkenadze/kitten-tts-g2p"
+repo_type = "model"
+revision = "9c692b92682d959d9013a9cfe6a49541997add18"
+
+[asset.bytes]
+"us_bart.safetensors" = 3011692
+"us_bart_config.json" = 1257
+"us_gold.json" = 3001196
+"us_silver.json" = 3105352
+
+[asset.sha256]
+"us_bart.safetensors" = "dc4a02e62d4fcb4bb4097ecf00db89b8e1a12a549a52ab6adfbba220b80a55c5"
+"us_bart_config.json" = "8deb3537fb29c63cd9f20d75515ae06e4c92f1b6db0703a2d45bca95b33a53a4"
+"us_gold.json" = "8507f89840f0813b10cf584740942f58e9cc9ad3660e24088b442ab0a6b126be"
+"us_silver.json" = "ea0e1abca0c9b18fb0d3402034633a337154a3153e9a9f49f97d668c908e140c"
+
+[[asset]]
+files = ["gb_gold.json", "gb_silver.json"]
+id = "kokoro-british-lexicon"
+licence = "Apache-2.0"
+repo = "hexgrad/misaki"
+repo_type = "dataset"
+revision = "7a6093fd11124188077f2dc16397cc465466d59a"
+
+[asset.bytes]
+"gb_gold.json" = 2841062
+"gb_silver.json" = 3677750
+
+[asset.sha256]
+"gb_gold.json" = "090cdecbe6bda9516a2cdc21563d62def0b91f5b55ea74fe6ef729eef682785f"
+"gb_silver.json" = "cb8655f5e614e6306146e0da1bf93522ac542ebd39dcd9892afcf51c9aa52e1a"
+
+[bench]
+recipe = "bench/bench.toml"
+
+[derive]
+fp16 = "cast:kokoro-82m"
+
+[gate]
+recipe = "gate/gate.toml"
+
+[licence]
+commercial = true
+spdx = "Apache-2.0"
+url = "https://huggingface.co/mlx-community/Kokoro-82M-bf16/blob/a71e4d38b236d968966a2002c4c895dbd12b1c3c/README.md"
+
+[[menu]]
+id = "speak-clipboard"
+input = "clipboard"
+op = "speak"
+title = "Speak Clipboard"
+
+
+[[runner]]
+chips = ["*"]
+fast_exact = true
+language = "swift"
+min_macos = "26.0"
+name = "native"
+protocol = 1
+worker = "voices"
+
+[weights]
+dtype = "fp32"
+files = ["config.json", "kokoro-v1_0.safetensors", "voices/af_alloy.safetensors", "voices/af_aoede.safetensors", "voices/af_bella.safetensors", "voices/af_heart.safetensors", "voices/af_jessica.safetensors", "voices/af_kore.safetensors", "voices/af_nicole.safetensors", "voices/af_nova.safetensors", "voices/af_river.safetensors", "voices/af_sarah.safetensors", "voices/af_sky.safetensors", "voices/am_adam.safetensors", "voices/am_echo.safetensors", "voices/am_eric.safetensors", "voices/am_fenrir.safetensors", "voices/am_liam.safetensors", "voices/am_michael.safetensors", "voices/am_onyx.safetensors", "voices/am_puck.safetensors", "voices/am_santa.safetensors", "voices/bf_alice.safetensors", "voices/bf_emma.safetensors", "voices/bf_isabella.safetensors", "voices/bf_lily.safetensors", "voices/bm_daniel.safetensors", "voices/bm_fable.safetensors", "voices/bm_george.safetensors", "voices/bm_lewis.safetensors"]
+repo = "mlx-community/Kokoro-82M-bf16"
+revision = "a71e4d38b236d968966a2002c4c895dbd12b1c3c"
+
+[weights.bytes]
+"config.json" = 2351
+"kokoro-v1_0.safetensors" = 327115152
+"voices/af_alloy.safetensors" = 522320
+"voices/af_aoede.safetensors" = 522320
+"voices/af_bella.safetensors" = 522320
+"voices/af_heart.safetensors" = 522320
+"voices/af_jessica.safetensors" = 522320
+"voices/af_kore.safetensors" = 522320
+"voices/af_nicole.safetensors" = 522320
+"voices/af_nova.safetensors" = 522320
+"voices/af_river.safetensors" = 522320
+"voices/af_sarah.safetensors" = 522320
+"voices/af_sky.safetensors" = 522320
+"voices/am_adam.safetensors" = 522320
+"voices/am_echo.safetensors" = 522320
+"voices/am_eric.safetensors" = 522320
+"voices/am_fenrir.safetensors" = 522320
+"voices/am_liam.safetensors" = 522320
+"voices/am_michael.safetensors" = 522320
+"voices/am_onyx.safetensors" = 522320
+"voices/am_puck.safetensors" = 522320
+"voices/am_santa.safetensors" = 522320
+"voices/bf_alice.safetensors" = 522320
+"voices/bf_emma.safetensors" = 522320
+"voices/bf_isabella.safetensors" = 522320
+"voices/bf_lily.safetensors" = 522320
+"voices/bm_daniel.safetensors" = 522320
+"voices/bm_fable.safetensors" = 522320
+"voices/bm_george.safetensors" = 522320
+"voices/bm_lewis.safetensors" = 522320
+
+[weights.sha256]
+"config.json" = "5abb01e2403b072bf03d04fde160443e209d7a0dad49a423be15196b9b43c17f"
+"kokoro-v1_0.safetensors" = "4e9ecdf03b8b6cf906070390237feda473dc13327cb8d56a43deaa374c02acd8"
+"voices/af_alloy.safetensors" = "5bb848d02ade7e37981809acad52a1761ef7a586ff9f30d02d65fd71c4af95f9"
+"voices/af_aoede.safetensors" = "23809148777f2a2378983dd856bc14b9c261018279f916f98c23d86e844409a5"
+"voices/af_bella.safetensors" = "112d310468cbb3cf23404d3d0b50ad3adf017b87bf38bf9edd15f4ad572df6a3"
+"voices/af_heart.safetensors" = "2c1c733b0e6576c810e268d3e440c21dea4e0f0131a3ba4cfc98d7fe6136d094"
+"voices/af_jessica.safetensors" = "c358448e4277b79e8b13b92033711660a1a2205c3940c2dfb16698b99fed58a8"
+"voices/af_kore.safetensors" = "c491174280cb1ad25210a842f2f34b46a9ef904ec6f6a8e784839531795fa278"
+"voices/af_nicole.safetensors" = "574656386022c81a029e9a72558191925f44c3de2dad2fa2e45751938557d062"
+"voices/af_nova.safetensors" = "242b9a0a01eac1ac2865c69fc617a756b20d86df82d5fae3970533e2312ca50e"
+"voices/af_river.safetensors" = "82c866b0b976d50e82cbd781ac7bc771471ce5bd21decf05ab92812a08fb1c04"
+"voices/af_sarah.safetensors" = "4940072182542f54c1035d1daf4c1cf3136ca9baa9ac57c8e006b4befcc50be6"
+"voices/af_sky.safetensors" = "957af332330db8e9bd7f9dc449475a946cb0d7d689afef64b91007bbbf20eaa0"
+"voices/am_adam.safetensors" = "a4f60a3b9c20353c2604a17485ba53260502a758681a84d41e8af53cc559d929"
+"voices/am_echo.safetensors" = "031fc608a900332c4e1a29bd0884f5d0e84bd0348261fa79981e5cbd138c950d"
+"voices/am_eric.safetensors" = "1fb4a61dcee1f114f90886ecf29bc2feed05e29eed9caa6ddb109f1934d73274"
+"voices/am_fenrir.safetensors" = "9abed964b906c4cae6f404d9849e76260689aea862bc6ca85fc3f5207ba96538"
+"voices/am_liam.safetensors" = "66b65a96e16c3d91035a6e9019d9986ed524d27ce35b487270cdf61c99e3ebad"
+"voices/am_michael.safetensors" = "3940147ded35deba0bb52e8132f89b719298e0520258c34584358aa5a24da2ea"
+"voices/am_onyx.safetensors" = "b5d6132a5747648d98c82c9c4aaa9cf52d7230e63e403c1cb9c12858446ca5f5"
+"voices/am_puck.safetensors" = "9a8c2e56413bd2063f814cb4c3885fc425876157369117c3f8258d03c8a9ad89"
+"voices/am_santa.safetensors" = "d1f433b57ffccf105ea9e434ea19af6c2a8a7916ba6d1a73c34f0046bd226084"
+"voices/bf_alice.safetensors" = "9c77e390d93d9db7c4a7526c3b1f393290a2be46f233b89a00b8188e850c20a8"
+"voices/bf_emma.safetensors" = "8878a75a6661305849eeb1d6293a7177250193616e161b4c3100636434dfe69f"
+"voices/bf_isabella.safetensors" = "f7b6076f025649699fcfed1a6debf13049a87afdc7aafc8c72b7d81246db6ead"
+"voices/bf_lily.safetensors" = "ee77a419046a765420ac82cb46e8b8cf5754a0b9d20c340fece1d4b18be7ecdb"
+"voices/bm_daniel.safetensors" = "b195dec592ee024f57ddc5bf481464596082ba60998a2a295eba90bfc1064f4b"
+"voices/bm_fable.safetensors" = "9fa80184e96d016a744bc13b0b2e7695e55d6b855556fa003325cb1e5ebf2c2b"
+"voices/bm_george.safetensors" = "a3d9b8995cbbe5536f954b6be2a0f1f312f077118ba0d4d2178fc41dc8306672"
+"voices/bm_lewis.safetensors" = "e1e68013c21a141efe527aaec561e1174c2f5a6951b3bcecc8396adab315b247"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["audio"]
+
+[selection]
+default = "native"
+chips = { m5 = "native" }
+
+[[setting]]
+id = "voice"
+title = "Voice"
+type = "voice"
+default = "af_heart"
+applies = "request"
+maps_to = "request.voice"
+help = "Default preset voice for speech requests."
+
+[[setting]]
+id = "speed"
+title = "Speed"
+type = "slider"
+default = 1.0
+applies = "request"
+maps_to = "request.speed"
+min = 0.25
+max = 4.0
+step = 0.05
+help = "Speech speed relative to the preset voice."
+
+[[op]]
+name = "speak"
+title = "Speak"
+input = "ops/speak.input.json"
+output = "audio"
+stream = true
+
+[[op]]
+name = "voices"
+title = "Voices"
+input = "ops/voices.input.json"
+output = "json"
+stream = false
+
+[popularity]
+hf_downloads = 31425
+hf_likes = 67
+as_of = "2026-10-03"
+
+[memory]
+basis = "Pinned Kokoro FP16 and affine-g64 int8 checkpoint tensor payloads from the existing Vireo derivation (87 selected Linear/embedding layers). Convolution, LSTM, norms and vocoder tensors stay FP16. Unchanged voice/G2P assets remain in the measured nonweight residual. Assumes unchanged loading overlap."
+
+[memory.resident_bytes]
+fp16 = 163526820

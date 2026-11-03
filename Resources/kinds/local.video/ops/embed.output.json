@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "embedding",
+    "dimensions",
+    "frames",
+    "tokens"
+  ],
+  "properties": {
+    "embedding": {
+      "type": "array",
+      "description": "The clip embedding: the encoder's final patch features averaged over every token (1,024 numbers).",
+      "items": {
+        "type": "number"
+      }
+    },
+    "dimensions": {
+      "type": "integer",
+      "description": "Length of the embedding."
+    },
+    "frames": {
+      "type": "integer",
+      "description": "Frames the encoder read."
+    },
+    "tokens": {
+      "type": "integer",
+      "description": "Patch tokens encoded: frames / 2 x 16 x 16."
+    },
+    "frame_times": {
+      "type": "array",
+      "description": "For a video: the time of each decoded frame, in seconds.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "per_step": {
+      "type": "array",
+      "description": "One embedding per pair of frames, in time order (only when per_step is true).",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}

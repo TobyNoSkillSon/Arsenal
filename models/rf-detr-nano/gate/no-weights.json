@@ -1,0 +1,23 @@
+{
+  "config": {
+    "model_type": "rf_detr"
+  },
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVR4nGMIqFjwnxLMMGrAqAGjBgwXAwBqsGcfY7qOyAAAAABJRU5ErkJggg=="
+  },
+  "operations": [
+    {
+      "operation": "detect",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "car",
+          "person"
+        ],
+        "threshold": 0
+      }
+    }
+  ]
+}

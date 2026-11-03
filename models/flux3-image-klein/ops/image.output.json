@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "files",
+    "seed",
+    "seconds"
+  ],
+  "properties": {
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "mime",
+          "width",
+          "height",
+          "bytes",
+          "sha256"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string"
+          },
+          "mime": {
+            "const": "image/png"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-fA-F0-9]{64}$"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "seconds": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "source_repo": "inclusionAI/UI-Venus-2-9B",
+  "source_revision": "90d6dfe13ece735f82793635b69bcc10c710e2ab",
+  "source_dtypes": [
+    "BF16"
+  ],
+  "port_repo": "https://github.com/ml-explore/mlx-swift-lm",
+  "port_revision": "bd4b7434e6bdb588c7ef55706ff8904cb7fd4c57",
+  "qualification": "pending trained weights",
+  "tokenizer_check": "Offline ASCII round-trip and native text/image chat-template execution passed; independent token-ID parity with the vendor remains unqualified.",
+  "prompt_reference": {
+    "repo": "inclusionAI/UI-Venus",
+    "revision": "1ffbaf653fb3d5d08e9ea14b013865496d68408e"
+  },
+  "source_parameters_derived": 9409813744,
+  "runtime_graph_parameters_derived": 9409813744,
+  "runtime_graph_matches_checkpoint": true,
+  "get_half_recipe": "cast:native-half-v1",
+  "tier_recipe": "cast:language-half-g64-v2"
+}

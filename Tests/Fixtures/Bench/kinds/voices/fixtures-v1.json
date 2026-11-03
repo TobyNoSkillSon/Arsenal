@@ -1,0 +1,22 @@
+[
+  {
+    "id": "short",
+    "op": "speak",
+    "params": {
+      "text": "The quick brown fox jumps over the lazy dog.",
+      "voice": "af_heart",
+      "speed": 1,
+      "stream": true
+    }
+  },
+  {
+    "id": "long",
+    "op": "speak",
+    "params": {
+      "text": "At the edge of the harbour, a small research boat waited for the morning tide. The crew checked their instruments, packed fresh water, and reviewed the route. Clear weather gave them time to collect samples before returning home. Each measurement was recorded carefully so another team could repeat the work.",
+      "voice": "af_heart",
+      "speed": 1,
+      "stream": true
+    }
+  }
+]

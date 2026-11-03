@@ -1,0 +1,142 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "values",
+  "horizon"
+ ],
+ "properties": {
+  "values": {
+   "type": "array",
+   "description": "The past observations of the target series, oldest first; null marks a missing observation. At most 32768 (the trained context), with at least one number.",
+   "minItems": 1,
+   "maxItems": 32768,
+   "items": {
+    "type": [
+     "number",
+     "null"
+    ]
+   }
+  },
+  "horizon": {
+   "type": "integer",
+   "description": "How many future steps to forecast, from 1 to 4096. Up to 1024 steps come from one pass; longer horizons are forecast in blocks of 1024, each block's median appended to the context, as the maker does.",
+   "minimum": 1,
+   "maximum": 4096
+  },
+  "quantile_levels": {
+   "type": "array",
+   "description": "Which of the 21 trained quantile levels to return, unique, in any order (the reply lists them ascending). Defaults to all 21.",
+   "minItems": 1,
+   "maxItems": 21,
+   "uniqueItems": true,
+   "items": {
+    "type": "number",
+    "enum": [
+     0.01,
+     0.05,
+     0.1,
+     0.15,
+     0.2,
+     0.25,
+     0.3,
+     0.35,
+     0.4,
+     0.45,
+     0.5,
+     0.55,
+     0.6,
+     0.65,
+     0.7,
+     0.75,
+     0.8,
+     0.85,
+     0.9,
+     0.95,
+     0.99
+    ]
+   }
+  },
+  "co_targets": {
+   "type": "array",
+   "description": "Further target series over the same past steps as values (same length, null for missing), forecast jointly with it: the maker's multivariate forecasting. Their forecasts come back in co_target_forecasts. The reply holds at most 640,000 forecast numbers: (1 + co_targets) x horizon x (levels + 1).",
+   "maxItems": 31,
+   "items": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "past_covariates": {
+   "type": "array",
+   "description": "Numeric covariates known only over the past (same length as values, null for missing). The model reads them but does not forecast them. A value beyond the float32 range counts as missing.",
+   "maxItems": 31,
+   "items": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "covariates": {
+   "type": "array",
+   "description": "Numeric known-future covariates (calendar features, planned events, prices, weather forecasts): each spans the past and the horizon, len(values) + horizon steps, null for missing. A value beyond the float32 range counts as missing.",
+   "maxItems": 31,
+   "items": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "categorical_past_covariates": {
+   "type": "array",
+   "description": "Categorical covariates known only over the past, as category codes (any numbers; null is its own category), same length as values. They are target-encoded against the target's history, as the maker does; with co_targets the codes are used as they are.",
+   "maxItems": 31,
+   "items": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "categorical_covariates": {
+   "type": "array",
+   "description": "Categorical known-future covariates as category codes over len(values) + horizon steps. A code first seen in the horizon resolves to the series mean.",
+   "maxItems": 31,
+   "items": {
+    "type": "array",
+    "items": {
+     "type": [
+      "number",
+      "null"
+     ]
+    }
+   }
+  },
+  "symmetric_averaging": {
+   "type": "boolean",
+   "description": "Average with the mirrored forecast of the negated series and covariates (runs the model twice), the maker's default. Default true.",
+   "default": true
+  },
+  "clip_nonnegative": {
+   "type": "boolean",
+   "description": "Clip a forecast at zero when that series' observed history is non-negative, the maker's default. Default true.",
+   "default": true
+  }
+ }
+}

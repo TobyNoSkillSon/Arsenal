@@ -1,0 +1,24 @@
+{
+  "status": "passed-with-planned-casts",
+  "checked": "2026-10-19",
+  "method": "Exact HTTP Range reads of the pinned safetensors header (8-byte length, then the JSON header); no tensor payload read",
+  "source": "https://huggingface.co/mlx-community/Qwen3-ASR-1.7B-bf16/resolve/e1f6c266914abc5a46e8756e02580f834a6cf8a7/model.safetensors",
+  "checkpoint_tensors": 707,
+  "mapped_tensors": 707,
+  "renamed_tensors": 0,
+  "ignored_tensors": 0,
+  "module_parameters": 707,
+  "graph_inventory": "full-config parameter inventory of the built audio worker (scripts/model-check.py smoke --inventory on the real config.json at fp16)",
+  "shape_errors": [],
+  "errors": [],
+  "planned_BF16_to_F16_casts": 707,
+  "cast_quality": "not-run-no-weights",
+  "weights_downloaded": 0,
+  "range_validation": {
+    "status": "passed",
+    "bytes_read": 81693,
+    "tensor_count": 707,
+    "tensor_payload_bytes_read": 0,
+    "revision": "e1f6c266914abc5a46e8756e02580f834a6cf8a7"
+  }
+}

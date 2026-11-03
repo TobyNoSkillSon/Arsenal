@@ -1,0 +1,46 @@
+id = "audio"
+title = "Audio"
+title_singular = "Audio"
+icon = "waveform"
+order = 6
+suite = "bench/kinds/audio/suite-v1.toml"
+[api]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text", "audio"]
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+
+[[op]]
+name = "transcribe"
+title = "Transcribe"
+input = "ops/transcribe.input.json"
+output_schema = "ops/transcribe.output.json"
+output = "json"
+stream = true
+
+[[op]]
+name = "diarize"
+title = "Who spoke when"
+input = "ops/diarize.input.json"
+output_schema = "ops/diarize.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "end_of_turn"
+title = "End of turn"
+input = "ops/end_of_turn.input.json"
+output_schema = "ops/end_of_turn.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "separate_audio"
+title = "Separate audio"
+input = "ops/separate_audio.input.json"
+output_schema = "ops/separate_audio.output.json"
+output = "file"
+stream = true

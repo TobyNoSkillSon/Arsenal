@@ -1,0 +1,161 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "qwen-image-2.1"
+name = "Qwen-Image-2.1"
+kind = "images"
+tools = ["image"]
+architecture = "qwen-image-2.1"
+params = "7B"
+publisher = "Qwen"
+released = 2026
+suggested = true
+purpose = "Image generation and editing"
+summary = "Top-ranked open image model: legible text, transparent RGBA images, and edits from up to 10 reference images."
+tasks = ["text-to-image", "image-to-image"]
+languages = ["en"]
+good_for = ["Website hero art, backgrounds, banners and illustrations up to 2K (2048 × 2048, 2752 × 1536)", "Legible text and typography: posters, signs, UI and infographics", "Transparent RGBA images such as stickers, icons and cut-out objects", "Editing a photo or design, and composing up to 10 reference images: people, products, masks, circled or painted notes"]
+limits = ["Qwen Research License: non-commercial use only; client and commercial work need a separate licence from Alibaba", "Tuned for 40 steps; Qwen-Image-2.1-Turbo makes the same images in 8", "Every reference image adds about 4,000 cached tokens and 2 GB of memory at 16-bit", "Prompts in languages other than English are untested in Arsenal"]
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["image"]
+[licence]
+spdx = "LicenseRef-Qwen-Research"
+name = "Qwen Research License Agreement"
+commercial = false
+url = "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/d26bb61231c349cf6b7896fa83353113880e1ba3/LICENSE"
+[precision]
+dtype = "bf16"
+reason = "The text encoder's last-layer activations and the transformer's residual stream leave FP16's range (log/002-format.md)."
+evidence = "log/002-format.md"
+[weights]
+repo = "Qwen/Qwen-Image-2.1"
+revision = "d26bb61231c349cf6b7896fa83353113880e1ba3"
+dtype = "bf16"
+files = ["LICENSE", "model_index.json", "processor/tokenizer.json", "processor/tokenizer_config.json", "scheduler/scheduler_config.json", "text_encoder/config.json", "text_encoder/generation_config.json", "text_encoder/model-00001-of-00004.safetensors", "text_encoder/model-00002-of-00004.safetensors", "text_encoder/model-00003-of-00004.safetensors", "text_encoder/model-00004-of-00004.safetensors", "text_encoder/model.safetensors.index.json", "transformer/config.json", "transformer/diffusion_pytorch_model-00001-of-00002.safetensors", "transformer/diffusion_pytorch_model-00002-of-00002.safetensors", "transformer/diffusion_pytorch_model.safetensors.index.json", "vae/config.json", "vae/diffusion_pytorch_model.safetensors"]
+
+[weights.sha256]
+"LICENSE" = "8dc973f024ff95966bea25866efa443fd16776dcb1001e681e3d467ea572b28d"
+"model_index.json" = "cf1ecd104ea090855d60d8cec0895c1e9d6ee41b2f87e231b678beecd1cf7809"
+"processor/tokenizer.json" = "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+"processor/tokenizer_config.json" = "81ec7bb9530159b326c0bef1d0b6c33d392090524014ea3f0123a3c1eb9c2af5"
+"scheduler/scheduler_config.json" = "5895f3a167c14a967fe9ac70c64924ae5acc79799e0679fd12907e594a713cd1"
+"text_encoder/config.json" = "6001331949f7f86ab6d791a80b12246d4f8da5159fa08c3e62368a39f36d63a9"
+"text_encoder/generation_config.json" = "4d9818c3d27895c0058828a5f68bc7a4de80c3ae1bcdac90936ce24178063f59"
+"text_encoder/model-00001-of-00004.safetensors" = "dde00291b5f7fb92013895310a3da0ddba78674df9f10d505d375243dc01fc6f"
+"text_encoder/model-00002-of-00004.safetensors" = "9047faccc0a6d98496a52d55f27be1c94a9c259d1e283fbea0128d054a948d42"
+"text_encoder/model-00003-of-00004.safetensors" = "8c54187654c0176b73ae73785bf791dc9a14c9df7fb4310083a09d42048cb57e"
+"text_encoder/model-00004-of-00004.safetensors" = "5311532aaaeae3259eb6a7b2c600636be1159adf7ded35f53579f7d0e7d43cdd"
+"text_encoder/model.safetensors.index.json" = "859146bff8db1d617fca8b457a5223edff963bb70076b3645f2189fe0540a147"
+"transformer/config.json" = "56ae3281c4e6c2d1aa3658252d187488071815fd79bef15808bb0205fc1a2241"
+"transformer/diffusion_pytorch_model-00001-of-00002.safetensors" = "9e6bc2d641e67bf277895ea8777141044a38f3edb7101bc469b2961dd7c36b4b"
+"transformer/diffusion_pytorch_model-00002-of-00002.safetensors" = "3aaf234dcbe128530479735854a346b5e3e66283b7c11db56f836bbd1c13ebaa"
+"transformer/diffusion_pytorch_model.safetensors.index.json" = "17987f6623b1c814d0ef55a137d99142b7b3b040eb1bf241b5575dd35af803a2"
+"vae/config.json" = "9785d527b278cb8b210e9f48a8028d92a4190968ce7e24c8fc85d9d1b82f6ba2"
+"vae/diffusion_pytorch_model.safetensors" = "a07a1b7c4ee2966a1b3bdc37de9b4f983d56937e46619f709a80b6e490675417"
+
+[weights.bytes]
+"LICENSE" = 7831
+"model_index.json" = 447
+"processor/tokenizer.json" = 11422654
+"processor/tokenizer_config.json" = 5445
+"scheduler/scheduler_config.json" = 485
+"text_encoder/config.json" = 1517
+"text_encoder/generation_config.json" = 213
+"text_encoder/model-00001-of-00004.safetensors" = 4998056552
+"text_encoder/model-00002-of-00004.safetensors" = 4915962464
+"text_encoder/model-00003-of-00004.safetensors" = 4915962496
+"text_encoder/model-00004-of-00004.safetensors" = 2704357976
+"text_encoder/model.safetensors.index.json" = 67795
+"transformer/config.json" = 370
+"transformer/diffusion_pytorch_model-00001-of-00002.safetensors" = 9968332504
+"transformer/diffusion_pytorch_model-00002-of-00002.safetensors" = 4261951904
+"transformer/diffusion_pytorch_model.safetensors.index.json" = 30283
+"vae/config.json" = 2079
+"vae/diffusion_pytorch_model.safetensors" = 1350989512
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "qwenimage"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "generate"
+title = "Generate"
+input = "ops/generate.input.json"
+output_schema = "ops/image.output.json"
+output = "image"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 900
+[[op]]
+name = "edit"
+title = "Edit"
+input = "ops/edit.input.json"
+output_schema = "ops/image.output.json"
+output = "image"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 900
+[[setting]]
+id = "width"
+title = "Width"
+type = "number"
+default = 1024
+min = 256
+max = 2752
+step = 32
+applies = "request"
+maps_to = "request.width"
+help = "Image width in pixels, a multiple of 32; native up to 2K."
+[[setting]]
+id = "height"
+title = "Height"
+type = "number"
+default = 1024
+min = 256
+max = 2752
+step = 32
+applies = "request"
+maps_to = "request.height"
+help = "Image height in pixels, a multiple of 32; native up to 2K."
+[[setting]]
+id = "steps"
+title = "Steps"
+type = "number"
+default = 40
+min = 1
+max = 100
+step = 1
+applies = "request"
+maps_to = "request.steps"
+help = "Denoising passes per image: more is slower and can add detail; this model is tuned for 40."
+[[setting]]
+id = "guidance"
+title = "Guidance"
+type = "slider"
+default = 1
+min = 1
+max = 10
+step = 0.5
+applies = "request"
+maps_to = "request.guidance"
+help = "True classifier-free guidance with the negative prompt; 1 (the maker's default) is off, higher doubles the time per step."
+[[setting]]
+id = "seed"
+title = "Seed"
+type = "number"
+min = 0
+max = 4294967295
+step = 1
+applies = "request"
+maps_to = "request.seed"
+help = "Starting noise: empty is a new random seed each request; the same seed and prompt give the same image."
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

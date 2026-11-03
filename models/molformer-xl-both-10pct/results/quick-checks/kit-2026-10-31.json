@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of embed_molecule through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "molformer-xl-both-10pct",
+  "revision": "361063d0ad524ef77cf39b08469f6be770dc550f",
+  "rows": [
+    {
+      "date": "2026-10-31T01:29:50Z",
+      "load_seconds": 0.112,
+      "ops": {
+        "embed_molecule": {
+          "seconds_first": 0.998,
+          "seconds_warm": 0.006,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 427.8,
+      "precision": "fp16",
+      "runner_sha256": "41fb00dc5d923278b85b4585ff282d8d4f73f34712f046c96f1134e325b6d26b",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

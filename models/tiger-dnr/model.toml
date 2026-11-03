@@ -1,0 +1,85 @@
+schema = 3
+id = "tiger-dnr"
+name = "TIGER DnR"
+kind = "audio"
+summary = "Splits a film or video soundtrack into dialogue, music and sound effects."
+description = "TIGER DnR is the cinematic version of TIGER (Time-frequency Interleaved Gain Extraction and Reconstruction) from Mohan Xu, Kai Li, Guo Chen and Xiaolin Hu at Tsinghua University (ICLR 2025): three 1.4M-parameter TIGER networks, one each for dialogue, effects and music, working on 44.1 kHz audio in 57 frequency bands. It was trained for the Divide and Remaster (DnR) task, and the makers' paper compares it favourably with other cinematic sound separation models on the DnR benchmark."
+purpose = "Split dialogue, music and effects"
+publisher = "JusperLee"
+released = 2025
+params = "4.2M"
+tasks = ["audio-to-audio"]
+languages = ["mul"]
+good_for = [
+  "Pulling the dialogue out of a film, TV or game clip for transcription or dubbing",
+  "Removing the music or the effects from a soundtrack",
+  "Isolating background music from a video",
+]
+limits = [
+  "Three fixed stems: dialog, effects and music.",
+  "Works at 44.1 kHz mono: other rates are resampled and stereo is mixed to mono before separation; the stems come back as 44.1 kHz mono.",
+  "Runs the makers' long-audio path (12-second windows every 4 seconds, averaged), so every second of audio is processed three times by each requested stem's network; input is limited to 5 minutes.",
+  "Sung vocals in music can be split between the dialog and music stems.",
+  "It does not read or write language; the training data is English-language film audio and other languages, Polish included, were not tested.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/JusperLee/TIGER-DnR"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/JusperLee/TIGER-DnR/blob/b7a59560bbca10febbcd46fb01600f868e587f57/README.md"
+
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "JusperLee/TIGER-DnR"
+revision = "b7a59560bbca10febbcd46fb01600f868e587f57"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "dd1c696e72f6adea0085ef1af640882a8260519ad666422835e387a5b4abdd2a"
+"config.json" = "ba9d2f833bf2f3a5855a35d0ccd11c786f6b92f1a482d84404bc4673edb29b54"
+
+[weights.bytes]
+"model.safetensors" = 17130568
+"config.json" = 250
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-tiger-dnr"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "separate_audio"
+title = "Separate audio"
+input = "ops/separate_audio.input.json"
+output = "file"
+output_schema = "ops/separate_audio.output.json"
+stream = false
+timeout_s = 900
+first_response_timeout_s = 900
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

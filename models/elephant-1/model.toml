@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "elephant-1"
+name = "elephant-1"
+kind = "decisions"
+params = "9.41B"
+publisher = "Baseten"
+released = 2026
+suggested = false
+summary = "Calibrated yes/no, choice and score decisions on text, JSON, pictures and short videos, every question from one shared prefill."
+description = "elephant-1, Base Labs at Baseten's 9B decision model: a full fine-tune of Qwen3.5-9B (an 8.95B text decoder and a 0.46B vision encoder, frozen during the fine-tune) on 6.21M decision examples with a Brier calibration term, served with a block-bidirectional mask on its full-attention layers and a softmax over the answer-slot letters. The makers report 62.65 on the Jev Decision Index 0.4, the best model under 15B, and 65.2 on their replica of the Artificial Analysis Decision Index."
+purpose = "Text, image and video decisions"
+good_for = ["routing and triage with calibrated probabilities", "questions about screenshots, photos and scans next to their text", "what happens across a short clip given as frames", "yes/no checks, one-of-many choices and graded scores on the same state", "many questions about one document from a single prefill", "guardrail and policy decisions on structured JSON"]
+limits = ["Pictures (PNG or JPEG, up to 64 megapixels) and videos as frame lists (2 to 768 stills of one size, with an fps) go in media and are placed by <image:N> / <video:N> in the state; video files themselves are not decoded, send their frames. A picture costs 64 to 16,384 tokens, a video up to 768 per pair of frames (960 for a 5-frame list). JPEGs are decoded by macOS, not PIL, and can differ slightly.", "Trained and evaluated in English; one Polish request answered correctly in a quick check, not measured.", "Trained on sequences up to 16,384 tokens; up to 32,768 for the state plus one question (65,536 per request, the makers' serving limits) is accepted but unverified beyond one long-input check. Longer requests are refused, not truncated.", "No calibration file ships with the checkpoint, so probabilities are its raw softmax."]
+tasks = ["yes-no", "choice", "score", "visual-inspection"]
+languages = ["en"]
+tools = []
+context = 32768
+native_context = 32768
+[facets]
+modalities_in = ["text", "image", "video"]
+modalities_out = ["text"]
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/baselabs/elephant-1/blob/b3f8a93462fb1051a9de031e94a7ff380e254072/README.md"
+[weights]
+repo = "baselabs/elephant-1"
+revision = "b3f8a93462fb1051a9de031e94a7ff380e254072"
+dtype = "bf16"
+files = ["config.json", "model.safetensors", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "f26324589d15932e2742dbb13dbc7c561865ce4f80990af3b7dff05efe4dadab"
+"model.safetensors" = "682f02348dfe4617dd21bba2915c12e805de8cf16327a61e895a831ea681d0ba"
+"processor_config.json" = "bfbc24af59a3e73a9cd0653b8d4ae758dfaec4e3e6c15dfb1c6c8ee8d5683c85"
+"tokenizer.json" = "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f"
+"tokenizer_config.json" = "2984c03425a28d242744e234a5003786fd289b3713db79fe0958c65eb59d85b2"
+[weights.bytes]
+"config.json" = 3146
+"model.safetensors" = 18819722392
+"processor_config.json" = 1220
+"tokenizer.json" = 19989339
+"tokenizer_config.json" = 1505
+[derive]
+fp16 = "cast:elephant-1-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "elephant"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "decide"
+title = "Decide"
+input = "ops/decide.input.json"
+output = "json"
+output_schema = "kinds/decisions/ops/decide.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+[[op]]
+name = "judge"
+title = "Judge"
+input = "ops/judge.input.json"
+output = "json"
+output_schema = "kinds/decisions/ops/judge.output.json"
+stream = false
+timeout_s = 600
+first_response_timeout_s = 600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

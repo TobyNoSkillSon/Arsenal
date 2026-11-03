@@ -1,0 +1,10 @@
+{
+  "repo": "PaddlePaddle/PaddleOCR-VL-1.6",
+  "revision": "c5630abae1d940eafe0697512a0325494b02ab42",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 620,
+  "header_bytes": 78496,
+  "errors": []
+}

@@ -1,0 +1,480 @@
+{
+ "commit": "312ceee65a325a6092e3ce6b0aa1f3df5e74bb19",
+ "date": "2026-11-02",
+ "input": {
+  "caption": "Genre: acoustic pop. BPM: 96. Key: C major. Warm and intimate, building gently into the chorus. Vocals: soft female lead, close and breathy.",
+  "fixtures": {
+   "chunks.safetensors": "c86d8596d506a1a0220311945bca175b20495bc6c32a986ca3e98f98cafde41a",
+   "fixture_sha256": "6bd32e1de6c4261a4c3d7b1498bbd554b7b98a80d1f3746b11dd186ecec6518d",
+   "reference.safetensors": "866ab3693ab4d47b400a192388a16bf7b080e0f707f55980f98fcef9b97aa3d2",
+   "vocoder-fp16fix.safetensors": "d2906ca28785b69604295a50d06936c669394f218fdb4f656b0ed6a4323b0fab"
+  },
+  "forced_codes": [
+   [
+    5483,
+    996,
+    1019,
+    777,
+    845,
+    561,
+    975,
+    691
+   ],
+   [
+    5968,
+    891,
+    652,
+    487,
+    313,
+    970,
+    756,
+    370
+   ],
+   [
+    5483,
+    708,
+    885,
+    781,
+    127,
+    95,
+    155,
+    924
+   ],
+   [
+    13991,
+    576,
+    885,
+    781,
+    114,
+    222,
+    883,
+    924
+   ],
+   [
+    7622,
+    637,
+    210,
+    945,
+    146,
+    898,
+    786,
+    88
+   ],
+   [
+    15076,
+    712,
+    210,
+    639,
+    294,
+    516,
+    156,
+    254
+   ]
+  ],
+  "lyrics": "[verse]\nMorning light filtering through the pine\n[chorus]\nSoftly the world begins to breathe",
+  "prompt_tokens": 68,
+  "request": [
+   {
+    "body": {
+     "duration": 20,
+     "include_metadata": true,
+     "lyrics": "[verse]\nMorning light upon the river\nGolden waves are rolling slow\n[chorus]\nSing with me the morning song\nHold the light and carry on",
+     "prompt": "Genre: acoustic pop. BPM: 96. Key: C major. Warm and intimate. Vocals: clear female lead vocal, close and bright, every word sung clearly. Arrangement: fingerpicked acoustic guitar and soft piano, light brushed drums.",
+     "seed": 7
+    },
+    "op": "generate_music"
+   },
+   {
+    "body": {
+     "duration": 60,
+     "include_metadata": true,
+     "lyrics": "[verse]\nMorning light upon the river\nGolden waves are rolling slow\n[chorus]\nSing with me the morning song\nHold the light and carry on",
+     "prompt": "Genre: acoustic pop. BPM: 96. Key: C major. Warm and intimate. Vocals: clear female lead vocal, close and bright, every word sung clearly. Arrangement: fingerpicked acoustic guitar and soft piano, light brushed drums.",
+     "seed": 7
+    },
+    "op": "generate_music"
+   },
+   {
+    "body": {
+     "duration": 15,
+     "include_metadata": true,
+     "instrumental": true,
+     "prompt": "Genre: ambient. BPM: 70. Key: D minor. Calm and spacious. Arrangement: soft piano, warm string pads and gentle synth textures, no vocals.",
+     "seed": 11
+    },
+    "op": "generate_music"
+   }
+  ],
+  "window_frames": [
+   200,
+   175
+  ],
+  "window_steps": 8
+ },
+ "maker_reference": {
+  "code": "huggingface/diffusers@2da7040be1a2e5f2fcbc8b985083342a308f5a86 (MiniMax Music 3 modules and modular blocks) + transformers Qwen3ForCausalLM",
+  "device": "PyTorch 2.15.0 MPS",
+  "dit_residual_maxabs_bf16": 9472.0,
+  "dtypes": [
+   "bf16",
+   "fp16"
+  ],
+  "lm_residual_maxabs": {
+   "maker_example_1380_tokens_bf16": 65024.0,
+   "short_prompt_bf16": 55040.0
+  },
+  "top_semantic_code": 13991,
+  "vocoder_fp16": "NaN in every block (snake 1e-9 guard lost in FP16)"
+ },
+ "model": "minimax-music3",
+ "output": [
+  {
+   "asr": {
+    "lyric_words": 22,
+    "lyric_words_heard": 0.5,
+    "model": "parakeet-v3-ultra (audio worker, isolated)",
+    "transcript": "Morning light upon river. Golden waves are rolling slow.",
+    "wer": 0.591
+   },
+   "file_count": 2,
+   "files": [
+    {
+     "bits": 16,
+     "channels": 2,
+     "finite": true,
+     "peak": 0.9629,
+     "rms": [
+      0.1302,
+      0.1211
+     ],
+     "sample_rate": 44100,
+     "seconds": 20.0156,
+     "sha256": "8780eb7fb69a04fad4660c42100a7f7bbeb0ad311815fdd349e5265bd168a52e",
+     "type": "wav"
+    }
+   ],
+   "metadata": {
+    "duration_limit": 20,
+    "ended_by_model": false,
+    "frames": 500,
+    "guidance": 1.7000000476837158,
+    "prompt_tokens": 93,
+    "sample_rate": 44100,
+    "seconds": 20.01560090702948,
+    "seed": 7,
+    "steps": 30
+   },
+   "op": "generate_music",
+   "status": 200
+  },
+  {
+   "asr": {
+    "given_lines_heard": 4,
+    "lyric_words_heard": 1.0,
+    "transcript": "Morning light upon river. Golden waves are rolling slow. Sing with me the morning song, hold the light and carry on. Sing with me the morning song, hold the light and carry on. Let the dearest songs come as set. Whatever dance with me with me then. Or dance with me with me then. That's what they would make."
+   },
+   "commit": "279cb510",
+   "file_count": 2,
+   "files": [
+    {
+     "bits": 16,
+     "channels": 2,
+     "finite": true,
+     "full_scale_samples": 13,
+     "peak": 1.0,
+     "rms": [
+      0.1455,
+      0.1365
+     ],
+     "sample_rate": 44100,
+     "seconds": 60.07,
+     "sha256_prefix": "9447476215446b68",
+     "type": "wav"
+    }
+   ],
+   "joins": {
+    "count": 13,
+    "max_percentile": [
+     94.3,
+     70.8,
+     98.6
+    ],
+    "measures": [
+     "level change dB",
+     "log-spectrum distance",
+     "sample step / local median"
+    ],
+    "median_percentile": [
+     48.2,
+     46.4,
+     49.8
+    ]
+   },
+   "metadata": {
+    "ended_by_model": false,
+    "frames": 1500,
+    "seed": 7
+   },
+   "op": "generate_music",
+   "status": 200
+  },
+  {
+   "asr": {
+    "transcript": "",
+    "words": 0
+   },
+   "commit": "279cb510",
+   "file_count": 2,
+   "files": [
+    {
+     "bits": 16,
+     "channels": 2,
+     "finite": true,
+     "peak": 0.8252,
+     "rms": [
+      0.0819,
+      0.1019
+     ],
+     "sample_rate": 44100,
+     "seconds": 15.0001,
+     "sha256_prefix": "e646b3c0f740a942",
+     "type": "wav"
+    }
+   ],
+   "metadata": {
+    "ended_by_model": false,
+    "frames": 375,
+    "seed": 11
+   },
+   "op": "generate_music",
+   "status": 200
+  }
+ ],
+ "parity": {
+  "components": {
+   "condition": {
+    "bound": 0.008601,
+    "cosineBf16": 0.999996,
+    "count": 40960,
+    "finite": true,
+    "floor": 0.0038,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.003833,
+    "relL2Fp16": 0.000589
+   },
+   "depth_guided_logits": {
+    "bound": 0.035811,
+    "cosineBf16": 0.999895,
+    "count": 43008,
+    "finite": true,
+    "floor": 0.017406,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.014557,
+    "relL2Fp16": 0.017789
+   },
+   "frame_hiddens": {
+    "bound": 0.022813,
+    "cosineBf16": 0.99995,
+    "count": 196608,
+    "finite": true,
+    "floor": 0.010907,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.010048,
+    "relL2Fp16": 0.009709
+   },
+   "prefill_audio_logits": {
+    "bound": 0.019173,
+    "cosineBf16": 0.999975,
+    "count": 32770,
+    "finite": true,
+    "floor": 0.009086,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.007339,
+    "relL2Fp16": 0.007413
+   },
+   "prefill_hidden_tail": {
+    "bound": 0.045369,
+    "cosineBf16": 0.999731,
+    "count": 65536,
+    "finite": true,
+    "floor": 0.022184,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.023416,
+    "relL2Fp16": 0.019952
+   },
+   "prefill_last_hidden": {
+    "bound": 0.022955,
+    "cosineBf16": 0.999946,
+    "count": 8192,
+    "finite": true,
+    "floor": 0.010978,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.010469,
+    "relL2Fp16": 0.009752
+   },
+   "velocity_t0.0": {
+    "bound": 0.028661,
+    "cosineBf16": 0.999904,
+    "count": 2560,
+    "finite": true,
+    "floor": 0.01383,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.013839,
+    "relL2Fp16": 0.001439
+   },
+   "velocity_t0.5": {
+    "bound": 0.066829,
+    "cosineBf16": 0.999465,
+    "count": 2560,
+    "finite": true,
+    "floor": 0.032915,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.032778,
+    "relL2Fp16": 0.003528
+   },
+   "velocity_t0.9": {
+    "bound": 0.050531,
+    "cosineBf16": 0.99969,
+    "count": 2560,
+    "finite": true,
+    "floor": 0.024765,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.02506,
+    "relL2Fp16": 0.003008
+   },
+   "velocity_uncond_t0.0": {
+    "bound": 0.039019,
+    "cosineBf16": 0.999819,
+    "count": 2560,
+    "finite": true,
+    "floor": 0.019009,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.019012,
+    "relL2Fp16": 0.001851
+   },
+   "velocity_uncond_t0.5": {
+    "bound": 0.06557,
+    "cosineBf16": 0.999484,
+    "count": 2560,
+    "finite": true,
+    "floor": 0.032285,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.032191,
+    "relL2Fp16": 0.003391
+   },
+   "velocity_uncond_t0.9": {
+    "bound": 0.047132,
+    "cosineBf16": 0.999731,
+    "count": 2560,
+    "finite": true,
+    "floor": 0.023066,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.023206,
+    "relL2Fp16": 0.002941
+   },
+   "waveform": {
+    "bound": 0.982937,
+    "cosineBf16": 0.940779,
+    "count": 20480,
+    "finite": true,
+    "floor": 0.490969,
+    "floorSource": "maker bf16 truncation",
+    "relL2Bf16": 0.385485
+   },
+   "window_latents": {
+    "bound": 0.041416,
+    "cosineBf16": 0.999807,
+    "count": 2560,
+    "finite": true,
+    "floor": 0.020208,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.019985,
+    "relL2Fp16": 0.001102
+   }
+  },
+  "top50_overlap": 49,
+  "top_code": [
+   13991,
+   13991
+  ],
+  "vocoder_fold": {
+   "all_pass": true,
+   "kernels": 30,
+   "max_single_rounding": 0.00021,
+   "max_stored_rel_l2": 0.00038
+  },
+  "vocoder_probe": {
+   "bound": 0.05,
+   "cosine": 0.999924,
+   "relL2": 0.013122
+  },
+  "windows": {
+   "chunk_0": {
+    "bound": 0.025508,
+    "cosineBf16": 0.999927,
+    "count": 88192,
+    "finite": true,
+    "floor": 0.012254,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.01212,
+    "relL2Fp16": 0.001068
+   },
+   "chunk_1": {
+    "bound": 0.025409,
+    "cosineBf16": 0.999929,
+    "count": 77056,
+    "finite": true,
+    "floor": 0.012205,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.011888,
+    "relL2Fp16": 0.001304
+   },
+   "condition_64": {
+    "bound": 0.008984,
+    "cosineBf16": 0.999996,
+    "count": 450560,
+    "finite": true,
+    "floor": 0.003992,
+    "floorSource": "maker fp16",
+    "relL2Bf16": 0.00402,
+    "relL2Fp16": 0.000585
+   },
+   "stitched_audio": {
+    "bound": 0.764731,
+    "cosineBf16": 0.965718,
+    "count": 969728,
+    "finite": true,
+    "floor": 0.381866,
+    "floorSource": "maker bf16 truncation",
+    "relL2Bf16": 0.259909
+   }
+  }
+ },
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "policy": "relL2(arsenal fp16, maker bf16) <= 2*relL2(maker fp16, maker bf16) + 0.001; finite; top code kept, top-50 overlap >= 45; vocoder floor where the maker's FP16 is not finite: BF16 nearest vs BF16 truncation; vocoder probe against the maker's FP16 vocoder with a float32 snake: relL2 <= 0.05; Get's vocoder kernels within 2x one FP16 rounding of a float32 fold",
+ "precision": "fp16 (global language model computes in bf16)",
+ "schema": "golden-1",
+ "tolerance": {
+  "channels": 2,
+  "file_count": 2,
+  "note": "sampled generation; values differ between builds, so only counts, length and level are compared; each request's length matches its duration within one 25 Hz frame",
+  "rms_min": 0.01,
+  "sample_rate": 44100,
+  "seconds_max": 20.04
+ },
+ "weights": {
+  "repo": "MiniMaxAI/MiniMax-Music3",
+  "revision": "1b525ccb685ae809f33027c51c351eeb5833cf72",
+  "sha256": {
+   "condition_encoder/diffusion_pytorch_model.safetensors": "83179c5eaa9a68a370affe0c1b96c2179f659ea4175666b31071490a202c2a4d",
+   "language_model/model-00001-of-00004.safetensors": "1e95924a158b45b67cfad04fa0f0a352e5a263e69338734d7c1d558be776cc98",
+   "language_model/model-00002-of-00004.safetensors": "fde2d335eef7eafa268d35e53d4b040ee51d2f3fa727f9855b4c97d88a2892da",
+   "language_model/model-00003-of-00004.safetensors": "6549a831637ab678a573047e7fa8fdf966998c4f45330e6eb7573d67f7b9b4c6",
+   "language_model/model-00004-of-00004.safetensors": "a1c9865f357b64d3ae9f428fb98a844831e5a0aee9ed17b19bd7f7be32b964a9",
+   "rvq_depth_decoder/diffusion_pytorch_model.safetensors": "80e86ab006bb5c8d4f223205045035a1c77b2bb9c3be9a86d7e740bbafe5ddf0",
+   "transformer/diffusion_pytorch_model-00001-of-00002.safetensors": "1943baebe93b5d5a57e9e1f603d9cef51a73a55e7a42f52913932dc06dcf10f0",
+   "transformer/diffusion_pytorch_model-00002-of-00002.safetensors": "b2f9e29d241e107e5a281f8b369d6db48eee983917df966c56d7b8dd0bd482c2",
+   "vocoder/diffusion_pytorch_model.safetensors": "daf0bf0560ea978ce7b5ec3e82f420a44429efef18bdfbe3c714d55ceffbe934"
+  }
+ }
+}

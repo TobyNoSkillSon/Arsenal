@@ -1,0 +1,105 @@
+tools = ["sound"]
+# SPDX-License-Identifier: MIT
+schema = 2
+id = "stable-audio-3-medium"
+name = "Stable Audio 3 Medium"
+kind = "sound"
+params = "1.45B"
+publisher = "Stability AI"
+released = 2026
+suggested = false
+summary = "Prompted stereo sound effects and instrumental music."
+purpose = "Sound and music generation"
+tasks = ["text-to-audio"]
+languages = ["en"]
+[facets]
+modalities_in = ["text"]
+modalities_out = ["audio"]
+[licence]
+spdx = "LicenseRef-Stability-AI-Community"
+name = "Stability AI Community"
+# Not plainly commercial: free commercial use needs registration and stops above US$1M annual revenue.
+commercial = false
+conditions = "Commercial use only after registering with Stability AI and while you and your affiliates earn under US$1M a year; above that an enterprise licence is needed."
+url = "https://huggingface.co/stabilityai/stable-audio-3-optimized/blob/da6edc54ddba10bfd79a077102ded687f80e882b/LICENSE.md"
+[weights]
+repo = "stabilityai/stable-audio-3-optimized"
+revision = "da6edc54ddba10bfd79a077102ded687f80e882b"
+dtype = "fp16"
+files = ["MLX/dit_medium_f16.npz", "MLX/same_l_decoder_f32.npz", "MLX/t5gemma_f16.npz", "LICENSE.md", "LICENSE_GEMMA.md", "NOTICE"]
+[weights.sha256]
+"MLX/dit_medium_f16.npz" = "f9e5647ea3225818657d47d47ae4b34afa29c0568206ca89566c1a758944a38e"
+"MLX/same_l_decoder_f32.npz" = "84924be2122d3a20fce443f40b782d9cd88e8e73707476326003ac47659a2287"
+"MLX/t5gemma_f16.npz" = "8deb20489f36d9aec539f26c9c67321f99bc5fe300d470435ed6e76be4f16bbd"
+"LICENSE.md" = "d6f6b1a4dce5c852bd6d7d9482d002baf0ccdb71e662250b73be9eec8764ee8d"
+"LICENSE_GEMMA.md" = "e77acc0d3163bb7534675045c584b4d04b387b529239fc4b3647da0a01ba4745"
+"NOTICE" = "66f856d7da72797f528fca46b7c80634ab481f917bfe020960e123d84b19f75f"
+[weights.bytes]
+"MLX/dit_medium_f16.npz" = 2907300946
+"MLX/same_l_decoder_f32.npz" = 1704311976
+"MLX/t5gemma_f16.npz" = 567443068
+"LICENSE.md" = 11852
+"LICENSE_GEMMA.md" = 10541
+"NOTICE" = 97
+[derive]
+fp16 = "cast:stable-audio-3-medium"
+int8 = "intake-v1:stable-audio-3-medium"
+int4 = "intake-v1:stable-audio-3-medium"
+[selection]
+default = "native"
+chips = { m5 = "native" }
+[[runner]]
+name = "native"
+language = "swift"
+worker = "sound"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = true
+[[op]]
+name = "generate_sound"
+title = "Generate Sound"
+input = "ops/generate_sound.input.json"
+output = "audio"
+stream = true
+[[op]]
+name = "generate_music"
+title = "Generate Music"
+input = "ops/generate_music.input.json"
+output = "audio"
+stream = true
+[[setting]]
+id = "duration"
+help = "Length of the generated audio, in seconds."
+title = "Duration"
+type = "number"
+default = 5
+min = 0.1
+max = 380
+applies = "request"
+maps_to = "request.duration"
+[[setting]]
+id = "steps"
+help = "Sampler passes per clip: more is slower; this model is tuned for 8."
+title = "Steps"
+type = "number"
+default = 8
+min = 1
+max = 100
+step = 1
+applies = "request"
+maps_to = "request.steps"
+[[setting]]
+id = "guidance"
+help = "How strictly the audio follows the prompt; this model is tuned for 1."
+title = "Guidance"
+type = "number"
+default = 1
+min = 0
+max = 20
+applies = "request"
+maps_to = "request.guidance"
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,60 @@
+schema = 3
+id = "smart-turn-v3"
+name = "Smart Turn v3"
+kind = "audio"
+params = "8M"
+publisher = "Pipecat"
+released = 2026
+suggested = false
+summary = "Detect the end of a spoken turn using a native Swift MLX worker."
+purpose = "Detect the end of a spoken turn"
+good_for = ["Detect the end of a spoken turn"]
+limits = ["Uses the final eight seconds of audio.", "Checked live at FP16 on 19 Oct: end-of-turn probability 0.98 for a complete sentence, 0.02 for a sentence cut mid-word, and 0.97 for a phrase cut after a whole word"]
+languages = ["und"]
+tasks = ["end_of_turn"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "BSD-2-Clause"
+name = "BSD-2-Clause"
+commercial = true
+url = "https://huggingface.co/mlx-community/smart-turn-v3/tree/74af1538ebace37b0fcc667a6a8a3d902d73eee0"
+[weights]
+repo = "mlx-community/smart-turn-v3"
+revision = "74af1538ebace37b0fcc667a6a8a3d902d73eee0"
+dtype = "fp32"
+files = ["config.json", "model.safetensors"]
+[weights.sha256]
+"config.json" = "44492cae08ddac368d225a153db31e570af46e0d62b7aff459ae2b19b01caed7"
+"model.safetensors" = "12d072e170f17145340ffcc4318530249faca9704748d16130a325ddb7ac2cd6"
+[weights.bytes]
+"config.json" = 351
+"model.safetensors" = 32010016
+[derive]
+fp16 = "cast:audio-smart-turn-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "end_of_turn"
+title = "End Of Turn"
+input = "ops/end_of_turn.input.json"
+output_schema = "ops/end_of_turn.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

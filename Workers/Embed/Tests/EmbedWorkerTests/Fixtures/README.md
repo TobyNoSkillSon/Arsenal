@@ -1,0 +1,19 @@
+# Ovis regression reference
+
+`ovis-reference.json` was captured once from Transformers **v5.12.1**, the version named by the pinned Ovis configuration, using PyTorch 2.14.0 on CPU. No model weights were loaded. It records source SHA256s, the actual Qwen3.5 vision MLP on fixed 2×4 inputs and fixed linear weights, Qwen3-VL video replacement and 3-axis position functions, video resize/sampling functions, and separate-segment PyTorch SDPA outputs.
+
+The framing fixture tokenizer assigns the four special tokens IDs 10–13 and ASCII characters `1000 + codepoint`. This deliberately tests exact expansion and position IDs independently of a tokenizer package; serving expands the native checkpoint template and tokenizes the entire resulting prompt with its supplied tokenizer. The mixed fixture has an image, a video with an odd number of sampled frames, and another image. A second fixture covers a single temporal group.
+
+`capture.py` is the optional reproduction script, run from the repository root in an existing environment containing torch and numpy. It fetches only the exact version's source files and checks their saved hashes before executing those reference methods; no dependency installation or weight download. Swift tests read the captured JSON without Python or network access. The two tiny model configs come from the model folders' no-weight specifications.
+
+`four-frame.mp4` is the existing synthetic no-weight smoke clip. Its compressed AVFoundation stream includes zero-sample edit/format marker buffers; the metadata test verifies four actual frames at 2 fps rather than counting those markers as frames.
+
+# LCO-Embedding Omni regression reference
+
+`lco-reference.json` was captured once on 2 Nov 2026 by `lco_capture.py` from Transformers **v5.22.1** and qwen-omni-utils, with no model weights: the snapshot's WhisperFeatureExtractor settings on a fixed 1.37 s chirp (every seventh frame of the 128-bin log-mel and the filter-bank column sums), `get_rope_index` on a text/image/audio/video sequence with tiny token ids, `get_vision_window_index` on four grids, `smart_resize` and `smart_nframes` cases, the per-frame video pixel budget, and the sentence-transformers chat template rendered for seven part layouts. `LCOParityTests` needs the pinned weights and a maker capture and runs only when its environment variables are set.
+
+`lco-media-reference.json` (2 Nov 2026, `lco_media_capture.py`, no weights) holds every 997th value of the makers' processor `pixel_values` (qwen-omni-utils `fetch_image`/`fetch_video` with `Qwen2_5OmniProcessor`) for `lco-resize-1000x750.png` (resized to 1008×756), `lco-alpha-336x252.png` (RGBA, composited onto white), `lco-video-392x308.mp4` (untagged H.264, BT.601) and `lco-video-640x360.mp4` (resized to 644×364). Video frames were decoded with PyAV, the decoder torchvision's removed `read_video` used.
+
+# EmbeddingGemma 2 regression reference
+
+`eg2-reference.json` and `eg2-picture.png` were captured once on 2 Nov 2026 by `eg2_capture.py` from Transformers **5.22.1** with no model weights: the snapshot's chat template for twelve part layouts (with and without a task prefix and manual placeholders), aspect-preserving sizes at the 280- and 140-token budgets, the image and video processors' resized patches of the fixed 97×61 picture (as 8-bit levels and their SHA256), Pillow's `exif_transpose` for orientations 2–8, `sample_frames` at 1 fps with the 32-frame cap, the Gemma 4 log-mel of a fixed 1.37 s chirp and the processor's audio token counts, the audio tower's blocked key mask and `_rel_shift` from the maker's modules (random init), and the vision tower's axial RoPE table and position-ordered pooling. `EmbeddingGemma2ParityTests` needs the pinned weights and a maker capture and runs only when its environment variables are set.

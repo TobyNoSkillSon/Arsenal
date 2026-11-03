@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "length",
+    "sequence",
+    "generated",
+    "seed",
+    "steps"
+  ],
+  "properties": {
+    "length": {
+      "type": "integer"
+    },
+    "sequence": {
+      "type": "string"
+    },
+    "secondary_structure": {
+      "type": "string"
+    },
+    "sasa": {
+      "type": "array",
+      "items": {
+        "type": [
+          "number",
+          "null"
+        ]
+      }
+    },
+    "function": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "label",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "start": {
+            "type": "integer"
+          },
+          "end": {
+            "type": "integer"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "keyword",
+              "interpro"
+            ]
+          },
+          "interpro": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "structure_tokens": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "pdb": {
+      "type": "string",
+      "description": "PDB text of the backbone (N, CA, C, inferred O; B-factor = pLDDT x 100) when the structure is known."
+    },
+    "plddt": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "mean_plddt": {
+      "type": "number"
+    },
+    "ptm": {
+      "type": "number"
+    },
+    "predicted_aligned_error": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "generated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

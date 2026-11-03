@@ -1,0 +1,44 @@
+{
+  "architectures": [
+    "Qwen3TTSTokenizerV2Model"
+  ],
+  "model_type": "qwen3_tts_tokenizer_12hz",
+  "encoder_valid_num_quantizers": 16,
+  "input_sample_rate": 24000,
+  "output_sample_rate": 24000,
+  "decode_upsample_rate": 16,
+  "encode_downsample_rate": 16,
+  "decoder_config": {
+    "attention_bias": false,
+    "attention_dropout": 0.0,
+    "latent_dim": 256,
+    "codebook_dim": 256,
+    "codebook_size": 2048,
+    "decoder_dim": 512,
+    "hidden_act": "silu",
+    "hidden_size": 128,
+    "intermediate_size": 256,
+    "layer_scale_initial_scale": 0.01,
+    "max_position_embeddings": 8000,
+    "head_dim": 64,
+    "num_attention_heads": 2,
+    "num_hidden_layers": 1,
+    "num_key_value_heads": 2,
+    "num_quantizers": 16,
+    "num_semantic_quantizers": 1,
+    "rms_norm_eps": 1e-05,
+    "rope_theta": 10000,
+    "semantic_codebook_size": 4096,
+    "sliding_window": 72,
+    "upsample_rates": [
+      2,
+      2
+    ],
+    "upsampling_ratios": [
+      2,
+      2
+    ],
+    "vector_quantization_hidden_dimension": 256
+  },
+  "transformers_version": "4.57.3"
+}

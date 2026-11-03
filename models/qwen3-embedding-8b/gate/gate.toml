@@ -1,0 +1,6 @@
+schema = 1
+id = "qwen3-embedding-8b-native-v1"
+reference_runner = "pinned-vendor-reference-pending"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Exact checkpoint inventory", "Every declared operation on synthetic weights", "Trained-weight reference and precision qualification pending"]

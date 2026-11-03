@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "values",
+    "horizon"
+  ],
+  "properties": {
+    "values": {
+      "type": "array",
+      "description": "The past observations of one series, oldest first; null marks a missing observation. At most 8192, with at least one number, each inside the float32 range (about 3.4e38).",
+      "minItems": 1,
+      "maxItems": 8192,
+      "items": {
+        "type": ["number", "null"]
+      }
+    },
+    "horizon": {
+      "type": "integer",
+      "description": "How many future steps to forecast, from 1 to 1024, decoded in one pass.",
+      "minimum": 1,
+      "maximum": 1024
+    },
+    "quantile_levels": {
+      "type": "array",
+      "description": "Quantile levels to return, ascending and unique, each between 0 and 1. Levels between the 21 trained ones (0.01, 0.05 to 0.95 in steps of 0.05, 0.99) are interpolated; levels beyond them follow exponential tails. Defaults to the 21 trained levels. A level must not round to 0 or 1 in float32 (1e-7 to 0.9999999 is safe), and series x horizon x (levels + 1) must stay within 640,000 numbers.",
+      "minItems": 1,
+      "maxItems": 99,
+      "items": {
+        "type": "number",
+        "exclusiveMinimum": 0,
+        "exclusiveMaximum": 1
+      }
+    },
+    "covariates": {
+      "type": "array",
+      "description": "Known-future covariates (calendar features, planned events, prices, weather forecasts): each series spans the past and the horizon, len(values) + horizon steps, null for missing. The model conditions on them but does not forecast them.",
+      "maxItems": 31,
+      "items": {
+        "type": "array",
+        "items": {
+          "type": ["number", "null"]
+        }
+      }
+    },
+    "past_covariates": {
+      "type": "array",
+      "description": "Other series observed over the same past steps as values (same length, null for missing). They attend to the target and are forecast jointly with it; their forecasts come back in past_covariate_forecasts.",
+      "maxItems": 31,
+      "items": {
+        "type": "array",
+        "items": {
+          "type": ["number", "null"]
+        }
+      }
+    },
+    "symmetric_averaging": {
+      "type": "boolean",
+      "description": "Average the forecast with the mirrored forecast of the negated series (runs the model twice). Skipped for a series whose observed minimum is exactly zero. Default false.",
+      "default": false
+    },
+    "clip_nonnegative": {
+      "type": "boolean",
+      "description": "Clip the forecast at zero when the observed history is non-negative. Default false.",
+      "default": false
+    },
+    "snap_integers": {
+      "type": "boolean",
+      "description": "Round the forecast to integers when the observed history is integer-valued. Default false.",
+      "default": false
+    }
+  }
+}

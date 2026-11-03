@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "document": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "application/pdf",
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "document-picker"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 10000
+      },
+      "minItems": 1,
+      "maxItems": 10000,
+      "description": "Zero-based page indices to read (the first page is 0); omit to read every page. Images have one page, index 0."
+    },
+    "include_image_base64": {
+      "type": "boolean"
+    },
+    "table_format": {
+      "type": "string",
+      "enum": [
+        "markdown",
+        "html"
+      ]
+    },
+    "document_annotation_format": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "document"
+  ],
+  "additionalProperties": false
+}

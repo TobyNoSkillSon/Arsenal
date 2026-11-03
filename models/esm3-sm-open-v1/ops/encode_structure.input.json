@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "structure"
+  ],
+  "properties": {
+    "structure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "x-arsenal-file": {
+        "accept": [
+          "chemical/x-pdb",
+          "text/plain",
+          "application/octet-stream"
+        ]
+      },
+      "description": "A protein structure as a PDB file. The first model is read: ATOM records of amino acids (HETATM ignored), one chain, the first alternate location of each atom. N, CA and C are used (at least one residue needs all three). Plain text, UTF-8 or Latin-1; a gzip file is refused."
+    },
+    "chain": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "Chain to read from the PDB file (default: the first)."
+    },
+    "decode": {
+      "type": "boolean",
+      "description": "Also decode the tokens back to a backbone (round trip), with pLDDT and pTM.",
+      "default": false
+    }
+  }
+}

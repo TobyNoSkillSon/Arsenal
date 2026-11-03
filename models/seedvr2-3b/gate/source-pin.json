@@ -1,0 +1,38 @@
+{
+  "repo": "mlx-community/SeedVR2-3B-mlx",
+  "revision": "46f851fe23b2a9fbefee6419b94e4fdf07b92965",
+  "files": [
+    {
+      "rfilename": "config.json",
+      "size": 289
+    },
+    {
+      "rfilename": "pos_emb.safetensors",
+      "size": 594008,
+      "lfs": {
+        "sha256": "d2e06cadb10f1f149b5aa781185b250eb60f0e64327f12efd17886cecc9c2984",
+        "size": 594008,
+        "pointerSize": 131
+      }
+    },
+    {
+      "rfilename": "transformer.safetensors",
+      "size": 7936589830,
+      "lfs": {
+        "sha256": "f4b96e02638210c807b2e3748665a6d71a47330cdbb112ffaf238f6b05cd55ab",
+        "size": 7936589830,
+        "pointerSize": 135
+      }
+    },
+    {
+      "rfilename": "vae.safetensors",
+      "size": 501324772,
+      "lfs": {
+        "sha256": "a2efbfb38a82a99a9cd16432ca5d564510678d228ce6209692d528aa32285cfb",
+        "size": 501324772,
+        "pointerSize": 134
+      }
+    }
+  ],
+  "weights_downloaded": false
+}

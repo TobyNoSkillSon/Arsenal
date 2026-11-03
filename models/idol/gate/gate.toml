@@ -1,0 +1,6 @@
+schema = 1
+id = "idol-native-v1"
+reference_runner = "pinned-vendor-cpu"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Per-module parity with speridlabs/idol-sdk on captured tensors", "Half learned parameters", "Random-weight operation through the worker", "Trained end-to-end run on real cutouts (results/end-to-end-2026-11-02.md)"]

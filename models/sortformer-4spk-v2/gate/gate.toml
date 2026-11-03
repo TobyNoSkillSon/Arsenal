@@ -1,0 +1,7 @@
+schema = 1
+id = "sortformer-4spk-v2-native-v1"
+reference_runner = "pinned-vendor-nemo-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Get converts all 973 learned tensors of the pinned .nemo (FP32) to FP16 and checks the mel filterbank and window against the Swift frontend", "frontend, pre-encode, Fast-Conformer, Transformer + speaker head and one speaker-cache update step against NeMo 3.0.0 on MPS (FP16 network), on NeMo's own inputs", "whole streams at three geometries (card Quick Start, card low latency, a 32-frame-cache stress geometry) with segments equal to NeMo's", "live session result equal to offline diarize at the same geometry"]
+evidence = "gate/golden/golden.json"

@@ -1,0 +1,8 @@
+schema = 1
+suite = "big-lama-native-v1"
+version = 1
+precision = "fp16"
+runner = "native"
+fast_exact = false
+status = "deferred-by-user"
+metrics = ["seconds_per_output", "peak_ram_mb"]

@@ -1,0 +1,111 @@
+{
+  "status": "passed",
+  "worker": "mobius-worker-restoration",
+  "random_config": {
+    "model_type": "seedvr2",
+    "small": true,
+    "transformer_hidden": 128,
+    "transformer_blocks": 2,
+    "vae_channels": [
+      64,
+      64,
+      64,
+      64
+    ]
+  },
+  "operation_smokes": [
+    {
+      "status": "passed",
+      "operations": [
+        "upscale_image",
+        "upscale_video"
+      ],
+      "parameters": 307,
+      "precision": "fp16",
+      "weights_downloaded": 0
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "upscale_image",
+        "upscale_video"
+      ],
+      "parameters": 367,
+      "precision": "int8",
+      "weights_downloaded": 0
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "upscale_image",
+        "upscale_video"
+      ],
+      "parameters": 367,
+      "precision": "int4",
+      "weights_downloaded": 0
+    }
+  ],
+  "lifecycle": [
+    {
+      "architecture": "seedvr2",
+      "case": "malformed",
+      "operation": "upscale_image",
+      "error": "{'code': 'invalid_request', 'message': 'Image is invalid or exceeds the pixel bound.'}"
+    },
+    {
+      "architecture": "seedvr2",
+      "case": "malformed",
+      "operation": "upscale_image",
+      "error": "{'code': 'invalid_request', 'message': 'Invalid SeedVR2 batch or scale.'}"
+    },
+    {
+      "architecture": "seedvr2",
+      "case": "malformed",
+      "operation": "upscale_video",
+      "error": "{'code': 'runner', 'message': 'The operation could not be completed'}"
+    },
+    {
+      "architecture": "seedvr2",
+      "case": "cancel-after-first-progress",
+      "error": "cancelled",
+      "cancel_ack": true,
+      "unload_exit": 0,
+      "partial_mp4_removed": true
+    }
+  ],
+  "stored_tier_test": {
+    "status": "passed",
+    "components": [
+      "transformer",
+      "vae"
+    ],
+    "tiers": [
+      "fp16",
+      "int8",
+      "int4"
+    ],
+    "checks": [
+      "complete eligible-matrix conversion and direct stored reload",
+      "nontrivial linear bias preservation",
+      "half-or-packed learned parameters"
+    ]
+  },
+  "full_graph_eligible_matrices": 267,
+  "full_graph_eligible_parameters": 3969155072,
+  "full_graph_parameters": 4219200387,
+  "weight_payload_bytes_read": 0,
+  "trained_weight_quality": "not-tested",
+  "performance": "not-measured",
+  "release_family_tests": {
+    "suites": 2,
+    "tests": 2,
+    "passed": 2
+  },
+  "standalone_helper": {
+    "configuration": "release",
+    "stripped_bytes": 18024336,
+    "includes_shared_mlx": true,
+    "combined_app_increment_bytes": null,
+    "symbols": "No undefined swift_initBorrow or swift_endBorrow symbols"
+  }
+}

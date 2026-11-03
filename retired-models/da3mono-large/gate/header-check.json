@@ -1,0 +1,19 @@
+{
+  "status": "passed-with-planned-casts",
+  "checkpoint_tensors": 406,
+  "mapped_tensors": 406,
+  "ignored_tensors": 0,
+  "module_parameters": 406,
+  "shape_errors": [],
+  "dtype_mismatches": 0,
+  "planned_F32_to_F16_casts": 406,
+  "cast_quality": "not-run-no-weights",
+  "weights_downloaded": 0,
+  "range_validation": {
+    "status": "passed",
+    "bytes_read": 48872,
+    "tensor_count": 406,
+    "tensor_payload_bytes_read": 0,
+    "revision": "f465978e618db8cc79c83b8bbf24964857db1875"
+  }
+}

@@ -1,0 +1,995 @@
+{
+  "ignore": [
+    "decoder.block.0.layer.0.SelfAttention.k.weight",
+    "decoder.block.0.layer.0.SelfAttention.o.weight",
+    "decoder.block.0.layer.0.SelfAttention.q.weight",
+    "decoder.block.0.layer.0.SelfAttention.relative_attention_bias.weight",
+    "decoder.block.0.layer.0.SelfAttention.v.weight",
+    "decoder.block.0.layer.0.layer_norm.weight",
+    "decoder.block.0.layer.1.EncDecAttention.k.weight",
+    "decoder.block.0.layer.1.EncDecAttention.o.weight",
+    "decoder.block.0.layer.1.EncDecAttention.q.weight",
+    "decoder.block.0.layer.1.EncDecAttention.relative_attention_bias.weight",
+    "decoder.block.0.layer.1.EncDecAttention.v.weight",
+    "decoder.block.0.layer.1.layer_norm.weight",
+    "decoder.block.0.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.0.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.0.layer.2.layer_norm.weight",
+    "decoder.block.1.layer.0.SelfAttention.k.weight",
+    "decoder.block.1.layer.0.SelfAttention.o.weight",
+    "decoder.block.1.layer.0.SelfAttention.q.weight",
+    "decoder.block.1.layer.0.SelfAttention.v.weight",
+    "decoder.block.1.layer.0.layer_norm.weight",
+    "decoder.block.1.layer.1.EncDecAttention.k.weight",
+    "decoder.block.1.layer.1.EncDecAttention.o.weight",
+    "decoder.block.1.layer.1.EncDecAttention.q.weight",
+    "decoder.block.1.layer.1.EncDecAttention.v.weight",
+    "decoder.block.1.layer.1.layer_norm.weight",
+    "decoder.block.1.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.1.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.1.layer.2.layer_norm.weight",
+    "decoder.block.10.layer.0.SelfAttention.k.weight",
+    "decoder.block.10.layer.0.SelfAttention.o.weight",
+    "decoder.block.10.layer.0.SelfAttention.q.weight",
+    "decoder.block.10.layer.0.SelfAttention.v.weight",
+    "decoder.block.10.layer.0.layer_norm.weight",
+    "decoder.block.10.layer.1.EncDecAttention.k.weight",
+    "decoder.block.10.layer.1.EncDecAttention.o.weight",
+    "decoder.block.10.layer.1.EncDecAttention.q.weight",
+    "decoder.block.10.layer.1.EncDecAttention.v.weight",
+    "decoder.block.10.layer.1.layer_norm.weight",
+    "decoder.block.10.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.10.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.10.layer.2.layer_norm.weight",
+    "decoder.block.11.layer.0.SelfAttention.k.weight",
+    "decoder.block.11.layer.0.SelfAttention.o.weight",
+    "decoder.block.11.layer.0.SelfAttention.q.weight",
+    "decoder.block.11.layer.0.SelfAttention.v.weight",
+    "decoder.block.11.layer.0.layer_norm.weight",
+    "decoder.block.11.layer.1.EncDecAttention.k.weight",
+    "decoder.block.11.layer.1.EncDecAttention.o.weight",
+    "decoder.block.11.layer.1.EncDecAttention.q.weight",
+    "decoder.block.11.layer.1.EncDecAttention.v.weight",
+    "decoder.block.11.layer.1.layer_norm.weight",
+    "decoder.block.11.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.11.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.11.layer.2.layer_norm.weight",
+    "decoder.block.2.layer.0.SelfAttention.k.weight",
+    "decoder.block.2.layer.0.SelfAttention.o.weight",
+    "decoder.block.2.layer.0.SelfAttention.q.weight",
+    "decoder.block.2.layer.0.SelfAttention.v.weight",
+    "decoder.block.2.layer.0.layer_norm.weight",
+    "decoder.block.2.layer.1.EncDecAttention.k.weight",
+    "decoder.block.2.layer.1.EncDecAttention.o.weight",
+    "decoder.block.2.layer.1.EncDecAttention.q.weight",
+    "decoder.block.2.layer.1.EncDecAttention.v.weight",
+    "decoder.block.2.layer.1.layer_norm.weight",
+    "decoder.block.2.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.2.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.2.layer.2.layer_norm.weight",
+    "decoder.block.3.layer.0.SelfAttention.k.weight",
+    "decoder.block.3.layer.0.SelfAttention.o.weight",
+    "decoder.block.3.layer.0.SelfAttention.q.weight",
+    "decoder.block.3.layer.0.SelfAttention.v.weight",
+    "decoder.block.3.layer.0.layer_norm.weight",
+    "decoder.block.3.layer.1.EncDecAttention.k.weight",
+    "decoder.block.3.layer.1.EncDecAttention.o.weight",
+    "decoder.block.3.layer.1.EncDecAttention.q.weight",
+    "decoder.block.3.layer.1.EncDecAttention.v.weight",
+    "decoder.block.3.layer.1.layer_norm.weight",
+    "decoder.block.3.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.3.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.3.layer.2.layer_norm.weight",
+    "decoder.block.4.layer.0.SelfAttention.k.weight",
+    "decoder.block.4.layer.0.SelfAttention.o.weight",
+    "decoder.block.4.layer.0.SelfAttention.q.weight",
+    "decoder.block.4.layer.0.SelfAttention.v.weight",
+    "decoder.block.4.layer.0.layer_norm.weight",
+    "decoder.block.4.layer.1.EncDecAttention.k.weight",
+    "decoder.block.4.layer.1.EncDecAttention.o.weight",
+    "decoder.block.4.layer.1.EncDecAttention.q.weight",
+    "decoder.block.4.layer.1.EncDecAttention.v.weight",
+    "decoder.block.4.layer.1.layer_norm.weight",
+    "decoder.block.4.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.4.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.4.layer.2.layer_norm.weight",
+    "decoder.block.5.layer.0.SelfAttention.k.weight",
+    "decoder.block.5.layer.0.SelfAttention.o.weight",
+    "decoder.block.5.layer.0.SelfAttention.q.weight",
+    "decoder.block.5.layer.0.SelfAttention.v.weight",
+    "decoder.block.5.layer.0.layer_norm.weight",
+    "decoder.block.5.layer.1.EncDecAttention.k.weight",
+    "decoder.block.5.layer.1.EncDecAttention.o.weight",
+    "decoder.block.5.layer.1.EncDecAttention.q.weight",
+    "decoder.block.5.layer.1.EncDecAttention.v.weight",
+    "decoder.block.5.layer.1.layer_norm.weight",
+    "decoder.block.5.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.5.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.5.layer.2.layer_norm.weight",
+    "decoder.block.6.layer.0.SelfAttention.k.weight",
+    "decoder.block.6.layer.0.SelfAttention.o.weight",
+    "decoder.block.6.layer.0.SelfAttention.q.weight",
+    "decoder.block.6.layer.0.SelfAttention.v.weight",
+    "decoder.block.6.layer.0.layer_norm.weight",
+    "decoder.block.6.layer.1.EncDecAttention.k.weight",
+    "decoder.block.6.layer.1.EncDecAttention.o.weight",
+    "decoder.block.6.layer.1.EncDecAttention.q.weight",
+    "decoder.block.6.layer.1.EncDecAttention.v.weight",
+    "decoder.block.6.layer.1.layer_norm.weight",
+    "decoder.block.6.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.6.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.6.layer.2.layer_norm.weight",
+    "decoder.block.7.layer.0.SelfAttention.k.weight",
+    "decoder.block.7.layer.0.SelfAttention.o.weight",
+    "decoder.block.7.layer.0.SelfAttention.q.weight",
+    "decoder.block.7.layer.0.SelfAttention.v.weight",
+    "decoder.block.7.layer.0.layer_norm.weight",
+    "decoder.block.7.layer.1.EncDecAttention.k.weight",
+    "decoder.block.7.layer.1.EncDecAttention.o.weight",
+    "decoder.block.7.layer.1.EncDecAttention.q.weight",
+    "decoder.block.7.layer.1.EncDecAttention.v.weight",
+    "decoder.block.7.layer.1.layer_norm.weight",
+    "decoder.block.7.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.7.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.7.layer.2.layer_norm.weight",
+    "decoder.block.8.layer.0.SelfAttention.k.weight",
+    "decoder.block.8.layer.0.SelfAttention.o.weight",
+    "decoder.block.8.layer.0.SelfAttention.q.weight",
+    "decoder.block.8.layer.0.SelfAttention.v.weight",
+    "decoder.block.8.layer.0.layer_norm.weight",
+    "decoder.block.8.layer.1.EncDecAttention.k.weight",
+    "decoder.block.8.layer.1.EncDecAttention.o.weight",
+    "decoder.block.8.layer.1.EncDecAttention.q.weight",
+    "decoder.block.8.layer.1.EncDecAttention.v.weight",
+    "decoder.block.8.layer.1.layer_norm.weight",
+    "decoder.block.8.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.8.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.8.layer.2.layer_norm.weight",
+    "decoder.block.9.layer.0.SelfAttention.k.weight",
+    "decoder.block.9.layer.0.SelfAttention.o.weight",
+    "decoder.block.9.layer.0.SelfAttention.q.weight",
+    "decoder.block.9.layer.0.SelfAttention.v.weight",
+    "decoder.block.9.layer.0.layer_norm.weight",
+    "decoder.block.9.layer.1.EncDecAttention.k.weight",
+    "decoder.block.9.layer.1.EncDecAttention.o.weight",
+    "decoder.block.9.layer.1.EncDecAttention.q.weight",
+    "decoder.block.9.layer.1.EncDecAttention.v.weight",
+    "decoder.block.9.layer.1.layer_norm.weight",
+    "decoder.block.9.layer.2.DenseReluDense.wi.weight",
+    "decoder.block.9.layer.2.DenseReluDense.wo.weight",
+    "decoder.block.9.layer.2.layer_norm.weight",
+    "decoder.final_layer_norm.weight"
+  ],
+  "tensors": {
+    "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.0.Wh": {
+      "name": "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.0.h_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.0.Wx": {
+      "name": "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.0.x_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.0.bias": {
+      "name": "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.0.x_proj.bias"
+    },
+    "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.1.Wh": {
+      "name": "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.1.h_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.1.Wx": {
+      "name": "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.1.x_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.1.bias": {
+      "name": "audio_codec.decoder.wm_model.decoder_block.pre_1.lstm.layers.1.x_proj.bias"
+    },
+    "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.0.Wh": {
+      "name": "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.0.h_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.0.Wx": {
+      "name": "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.0.x_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.0.bias": {
+      "name": "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.0.x_proj.bias"
+    },
+    "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.1.Wh": {
+      "name": "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.1.h_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.1.Wx": {
+      "name": "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.1.x_proj.weight"
+    },
+    "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.1.bias": {
+      "name": "audio_codec.decoder.wm_model.encoder_block.post_0.lstm.layers.1.x_proj.bias"
+    },
+    "encoder.block.0.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.0.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.0.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.0.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.0.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.0.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.0.layer.0.SelfAttention.relative_attention_bias.weight": {
+      "name": "text_encoder.encoder.block.0.self_attention.SelfAttention.relative_attention_bias.weight"
+    },
+    "encoder.block.0.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.0.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.0.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.0.self_attention.layer_norm.weight"
+    },
+    "encoder.block.0.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.0.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.0.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.0.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.0.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.0.ff.layer_norm.weight"
+    },
+    "encoder.block.1.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.1.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.1.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.1.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.1.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.1.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.1.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.1.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.1.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.1.self_attention.layer_norm.weight"
+    },
+    "encoder.block.1.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.1.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.1.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.1.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.1.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.1.ff.layer_norm.weight"
+    },
+    "encoder.block.10.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.10.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.10.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.10.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.10.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.10.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.10.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.10.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.10.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.10.self_attention.layer_norm.weight"
+    },
+    "encoder.block.10.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.10.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.10.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.10.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.10.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.10.ff.layer_norm.weight"
+    },
+    "encoder.block.11.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.11.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.11.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.11.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.11.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.11.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.11.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.11.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.11.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.11.self_attention.layer_norm.weight"
+    },
+    "encoder.block.11.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.11.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.11.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.11.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.11.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.11.ff.layer_norm.weight"
+    },
+    "encoder.block.2.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.2.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.2.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.2.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.2.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.2.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.2.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.2.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.2.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.2.self_attention.layer_norm.weight"
+    },
+    "encoder.block.2.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.2.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.2.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.2.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.2.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.2.ff.layer_norm.weight"
+    },
+    "encoder.block.3.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.3.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.3.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.3.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.3.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.3.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.3.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.3.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.3.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.3.self_attention.layer_norm.weight"
+    },
+    "encoder.block.3.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.3.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.3.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.3.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.3.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.3.ff.layer_norm.weight"
+    },
+    "encoder.block.4.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.4.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.4.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.4.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.4.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.4.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.4.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.4.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.4.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.4.self_attention.layer_norm.weight"
+    },
+    "encoder.block.4.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.4.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.4.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.4.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.4.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.4.ff.layer_norm.weight"
+    },
+    "encoder.block.5.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.5.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.5.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.5.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.5.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.5.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.5.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.5.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.5.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.5.self_attention.layer_norm.weight"
+    },
+    "encoder.block.5.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.5.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.5.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.5.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.5.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.5.ff.layer_norm.weight"
+    },
+    "encoder.block.6.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.6.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.6.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.6.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.6.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.6.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.6.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.6.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.6.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.6.self_attention.layer_norm.weight"
+    },
+    "encoder.block.6.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.6.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.6.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.6.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.6.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.6.ff.layer_norm.weight"
+    },
+    "encoder.block.7.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.7.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.7.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.7.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.7.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.7.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.7.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.7.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.7.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.7.self_attention.layer_norm.weight"
+    },
+    "encoder.block.7.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.7.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.7.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.7.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.7.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.7.ff.layer_norm.weight"
+    },
+    "encoder.block.8.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.8.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.8.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.8.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.8.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.8.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.8.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.8.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.8.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.8.self_attention.layer_norm.weight"
+    },
+    "encoder.block.8.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.8.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.8.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.8.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.8.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.8.ff.layer_norm.weight"
+    },
+    "encoder.block.9.layer.0.SelfAttention.k.weight": {
+      "name": "text_encoder.encoder.block.9.self_attention.SelfAttention.k.weight"
+    },
+    "encoder.block.9.layer.0.SelfAttention.o.weight": {
+      "name": "text_encoder.encoder.block.9.self_attention.SelfAttention.o.weight"
+    },
+    "encoder.block.9.layer.0.SelfAttention.q.weight": {
+      "name": "text_encoder.encoder.block.9.self_attention.SelfAttention.q.weight"
+    },
+    "encoder.block.9.layer.0.SelfAttention.v.weight": {
+      "name": "text_encoder.encoder.block.9.self_attention.SelfAttention.v.weight"
+    },
+    "encoder.block.9.layer.0.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.9.self_attention.layer_norm.weight"
+    },
+    "encoder.block.9.layer.1.DenseReluDense.wi.weight": {
+      "name": "text_encoder.encoder.block.9.ff.DenseReluDense.wi.weight"
+    },
+    "encoder.block.9.layer.1.DenseReluDense.wo.weight": {
+      "name": "text_encoder.encoder.block.9.ff.DenseReluDense.wo.weight"
+    },
+    "encoder.block.9.layer.1.layer_norm.weight": {
+      "name": "text_encoder.encoder.block.9.ff.layer_norm.weight"
+    },
+    "encoder.final_layer_norm.weight": {
+      "name": "text_encoder.encoder.final_layer_norm.weight"
+    },
+    "shared.weight": {
+      "name": "text_encoder.shared.weight"
+    }
+  },
+  "casts": {
+    "encoder.block.0.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.0.SelfAttention.relative_attention_bias.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.0.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.1.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.10.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.11.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.2.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.3.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.4.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.5.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.6.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.7.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.8.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.0.SelfAttention.k.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.0.SelfAttention.o.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.0.SelfAttention.q.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.0.SelfAttention.v.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.0.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.1.DenseReluDense.wi.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.1.DenseReluDense.wo.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.block.9.layer.1.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.final_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "shared.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    }
+  }
+}

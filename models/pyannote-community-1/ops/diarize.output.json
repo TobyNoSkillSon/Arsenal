@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "speaker": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "speaker"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 100000,
+      "description": "Regular diarization: overlapping speech has several speakers."
+    },
+    "exclusive_segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "speaker": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "speaker"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 100000,
+      "description": "Exclusive diarization: at most one speaker at a time."
+    },
+    "speakers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 1024
+    },
+    "rttm": {
+      "type": "string",
+      "description": "Regular diarization in RTTM format."
+    },
+    "speaker_embeddings": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "array",
+            "items": {
+              "type": "number"
+            },
+            "minItems": 256,
+            "maxItems": 256
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "maxItems": 1024,
+      "description": "One 256-d centroid per entry of speakers; null when no speech segment was long enough to embed."
+    }
+  },
+  "required": [
+    "segments",
+    "exclusive_segments",
+    "speakers",
+    "rttm",
+    "speaker_embeddings"
+  ],
+  "additionalProperties": false
+}

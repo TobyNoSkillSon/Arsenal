@@ -1,0 +1,18 @@
+id = "local.document"
+title = "Documents"
+title_singular = "Document model"
+icon = "doc.text.viewfinder"
+order = 20
+suite = "bench/kinds/local.document/suite-v1.toml"
+primary_operation = "read"
+
+[[op]]
+name = "read"
+title = "Read"
+input = "ops/read.input.json"
+output = "json"
+output_schema = "ops/read.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

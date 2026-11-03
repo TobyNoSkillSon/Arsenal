@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "rf-detr-nano",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T02:48:34Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Detect at fp16: one ordinary Load, then two Detect requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "9f201577d9415f0378084748d27e68586e6b3600",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "perception",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Detect requests on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:48:34Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Detect requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "9f201577d9415f0378084748d27e68586e6b3600",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.3865051136
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Detect request on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:48:34Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Detect request, one sample, after one ordinary Load, then two Detect requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "9f201577d9415f0378084748d27e68586e6b3600",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.111
+      }
+    },
+    "runner": "native"
+  }
+}

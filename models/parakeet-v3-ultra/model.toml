@@ -1,0 +1,59 @@
+schema = 3
+id = "parakeet-v3-ultra"
+name = "Parakeet v3 Ultra"
+kind = "audio"
+architecture = "parakeet_tdt"
+params = "627M"
+publisher = "Moondream"
+released = 2026
+suggested = false
+summary = "Fast transcription in 25 European languages, with word timings"
+purpose = "Speech transcription, 25 languages"
+good_for = ["Fast dictation and transcription in 25 European languages", "Sentence and word timestamps"]
+limits = ["Only the 25 European languages it was trained on.", "Detects the spoken language and cannot be told which one to expect.", "Ten minutes per recording, decoded in 30-second windows with 2 seconds of overlap.", "Checked live at FP16 on 20 Oct: an English test sentence transcribed exactly."]
+languages = ["bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu", "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "ru", "uk"]
+tasks = ["transcribe"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "CC-BY-4.0"
+name = "CC-BY-4.0"
+commercial = true
+url = "https://huggingface.co/selcukkubur/parakeet-ultra-mlx/tree/b554592c50b2a48471add2daa3d46fa9f00fef5e"
+[weights]
+repo = "selcukkubur/parakeet-ultra-mlx"
+revision = "b554592c50b2a48471add2daa3d46fa9f00fef5e"
+dtype = "bf16"
+files = ["config.json", "model.safetensors"]
+[weights.sha256]
+"config.json" = "f320f1292511f34ec47f513755fe20fd01dbfc09a925d42730e66059a6e1ef4c"
+"model.safetensors" = "ee62d5a5f62f931b73ab000f07d864ee00b1e773205b1e666ff7990680c328b4"
+[weights.bytes]
+"config.json" = 244093
+"model.safetensors" = 1254184462
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "transcribe"
+title = "Transcribe"
+input = "ops/transcribe.input.json"
+output_schema = "ops/transcribe.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

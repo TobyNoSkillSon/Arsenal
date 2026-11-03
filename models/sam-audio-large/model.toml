@@ -1,0 +1,86 @@
+schema = 3
+architecture = "sam_audio"
+id = "sam-audio-large"
+name = "SAM Audio Large"
+kind = "audio"
+params = "3151M"
+publisher = "Meta"
+released = 2026
+suggested = false
+summary = "Isolate a sound by description using a native Swift MLX worker."
+purpose = "Isolate a sound by description"
+good_for = ["Isolate a sound by description"]
+limits = ["Text and time prompts; no visual encoder in this port.", "Anchors support ten-second clips; unanchored audio uses overlapping windows.", "Checked live on 20 Oct at FP16, int8 and int4 (on the FP16 re-upload): speech isolated cleanly from a mix with a beep.", "Get downloads Meta's 14.9 GB original checkpoint and converts it to about 6.3 GB at FP16 (with the T5 text encoder), then deletes the original. Get needs about 45 GB free when it starts."]
+languages = ["en"]
+tasks = ["separate_audio"]
+tools = ["operation"]
+assets = ["sam-t5-base"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "LicenseRef-SAM"
+name = "SAM License"
+commercial = false
+conditions = "Meta's SAM License: you accept it on Hugging Face and Meta approves each request; Arsenal then downloads from facebook/sam-audio-large with your Hugging Face token. No ITAR or other trade-controlled uses; anything redistributed carries the same licence; published research credits SAM."
+url = "https://huggingface.co/facebook/sam-audio-large/blob/5f2cd3a9471a08c7282c06036be6893e18de8b70/LICENSE"
+[weights]
+repo = "facebook/sam-audio-large"
+revision = "5f2cd3a9471a08c7282c06036be6893e18de8b70"
+dtype = "fp32"
+files = ["checkpoint.pt", "config.json"]
+[weights.sha256]
+"checkpoint.pt" = "ca55418b1d23e8c8a4dcc55f259d9801c8f79da0131a66e525d862c1289e3c4f"
+"config.json" = "b768c3b04e107a7afb3865d9126c6159d4b604b4d3279f99446f4f50b9f2c26d"
+[weights.bytes]
+"checkpoint.pt" = 14861356211
+"config.json" = 2251
+[precision]
+dtype = "fp16"
+source = "raw"
+reason = "Meta's checkpoint.pt is an FP32 torch.save archive that the shared per-file normalization cannot convert. Get hands it to the model's own cast, which reads it tensor by tensor, drops the vision encoder, sums the LSTM bias pairs in FP32 and stores FP16."
+evidence = "results/official-checkpoint-2026-11-02.md"
+[derive]
+fp16 = "cast:audio-sam-v2"
+int8 = "native:audio-sam-v1"
+int4 = "native:audio-sam-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "separate_audio"
+title = "Separate Audio"
+input = "ops/separate_audio.input.json"
+output_schema = "ops/separate_audio.output.json"
+output = "file"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"
+[[asset]]
+id = "sam-t5-base"
+repo = "google-t5/t5-base"
+repo_type = "model"
+into = "text_encoder"
+revision = "a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1"
+licence = "Apache-2.0"
+files = ["config.json", "model.safetensors", "tokenizer.json"]
+[asset.bytes]
+"config.json" = 1208
+"model.safetensors" = 891646390
+"tokenizer.json" = 1389353
+[asset.sha256]
+"config.json" = "46dd7cb62d29c81fb551e0ef1ea274c24a46ba441eeb948897706252933df033"
+"model.safetensors" = "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+"tokenizer.json" = "d2acde0d8d71dd30a711834b07781b9c89feaac33fd332f60507699282740066"

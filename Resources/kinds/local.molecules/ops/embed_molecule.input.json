@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "smiles"
+  ],
+  "properties": {
+    "smiles": {
+      "type": "string",
+      "description": "One molecule as a SMILES string (e.g. CC(=O)Oc1ccccc1C(=O)O for aspirin). Canonical SMILES without stereo marks match training best; at most 200 tokens (roughly 200 atoms and bonds).",
+      "minLength": 1,
+      "maxLength": 10000
+    }
+  }
+}

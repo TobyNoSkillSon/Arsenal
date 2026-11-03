@@ -1,0 +1,25 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of classify through the kit runner outside the app, FP16; peak_footprint_mb is the runner's phys_footprint (MB) after each reply; Arsenal build 1433.",
+  "model": "voice-gender-ecapa",
+  "revision": "db1222153bd60337e900be22add7af180452adc0",
+  "rows": [
+    {
+      "date": "2026-10-26T21:08:38Z",
+      "load_seconds": 0.041,
+      "ops": {
+        "classify": {
+          "seconds_first": 0.016,
+          "seconds_warm": 0.01,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 288.9,
+      "precision": "fp16",
+      "swap": "total = 2048.00M  used = 836.00M  free = 1212.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-26",
+  "schema": "quick-check-1"
+}

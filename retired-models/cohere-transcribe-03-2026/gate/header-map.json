@@ -1,0 +1,1125 @@
+{
+  "ignore": [
+    "encoder.layers.0.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.1.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.10.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.11.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.12.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.13.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.14.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.15.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.16.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.17.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.18.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.19.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.2.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.20.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.21.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.22.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.23.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.24.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.25.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.26.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.27.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.28.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.29.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.3.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.30.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.31.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.32.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.33.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.34.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.35.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.36.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.37.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.38.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.39.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.4.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.40.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.41.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.42.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.43.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.44.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.45.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.46.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.47.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.5.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.6.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.7.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.8.conv.batch_norm.num_batches_tracked",
+    "encoder.layers.9.conv.batch_norm.num_batches_tracked",
+    "decoder.embedding.position_embedding.pos_enc",
+    "preprocessor.featurizer.fb",
+    "preprocessor.featurizer.window"
+  ],
+  "tensors": {
+    "encoder.layers.0.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.0.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.0.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.1.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.1.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.1.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.10.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.10.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.10.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.11.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.11.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.11.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.12.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.12.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.12.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.13.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.13.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.13.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.14.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.14.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.14.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.15.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.15.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.15.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.16.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.16.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.16.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.17.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.17.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.17.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.18.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.18.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.18.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.19.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.19.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.19.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.2.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.2.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.2.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.20.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.20.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.20.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.21.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.21.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.21.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.22.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.22.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.22.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.23.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.23.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.23.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.24.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.24.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.24.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.25.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.25.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.25.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.26.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.26.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.26.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.27.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.27.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.27.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.28.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.28.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.28.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.29.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.29.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.29.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.3.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.3.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.3.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.30.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.30.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.30.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.31.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.31.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.31.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.32.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.32.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.32.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.33.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.33.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.33.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.34.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.34.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.34.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.35.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.35.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.35.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.36.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.36.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.36.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.37.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.37.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.37.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.38.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.38.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.38.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.39.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.39.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.39.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.4.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.4.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.4.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.40.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.40.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.40.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.41.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.41.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.41.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.42.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.42.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.42.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.43.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.43.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.43.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.44.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.44.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.44.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.45.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.45.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.45.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.46.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.46.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.46.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.47.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.47.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.47.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.5.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.5.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.5.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.6.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.6.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.6.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.7.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.7.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.7.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.8.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.8.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.8.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.9.conv.depthwise_conv.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.9.conv.pointwise_conv1.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.layers.9.conv.pointwise_conv2.weight": {
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "encoder.subsampling.conv.0.bias": {
+      "name": "encoder.subsampling.conv0.bias"
+    },
+    "encoder.subsampling.conv.0.weight": {
+      "name": "encoder.subsampling.conv0.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "encoder.subsampling.conv.2.bias": {
+      "name": "encoder.subsampling.conv2.bias"
+    },
+    "encoder.subsampling.conv.2.weight": {
+      "name": "encoder.subsampling.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "encoder.subsampling.conv.3.bias": {
+      "name": "encoder.subsampling.conv3.bias"
+    },
+    "encoder.subsampling.conv.3.weight": {
+      "name": "encoder.subsampling.conv3.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "encoder.subsampling.conv.5.bias": {
+      "name": "encoder.subsampling.conv5.bias"
+    },
+    "encoder.subsampling.conv.5.weight": {
+      "name": "encoder.subsampling.conv5.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "encoder.subsampling.conv.6.bias": {
+      "name": "encoder.subsampling.conv6.bias"
+    },
+    "encoder.subsampling.conv.6.weight": {
+      "name": "encoder.subsampling.conv6.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    }
+  }
+}

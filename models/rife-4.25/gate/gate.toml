@@ -1,0 +1,7 @@
+schema = 1
+id = "rife-4.25-native-v1"
+reference_runner = "pinned-upstream-mlx"
+precision = "fp16"
+independent_vendor_qualified = false
+status = "pending-trained-weights"
+passing_requires = ["Exact checkpoint names and shapes", "Finite component outputs", "Trained-output and precision qualification after approval"]

@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "results": [
+    {
+      "precision": "fp16",
+      "eligible_matrices": 17,
+      "packed_matrices": 0,
+      "packed_layout_companions": "not applicable",
+      "malformed_input": "rejected",
+      "cancellation": "one cancelled terminal reply",
+      "unload_exit": 0
+    },
+    {
+      "precision": "int8",
+      "eligible_matrices": 17,
+      "packed_matrices": 17,
+      "packed_layout_companions": "passed",
+      "malformed_input": "rejected",
+      "cancellation": "one cancelled terminal reply",
+      "unload_exit": 0
+    },
+    {
+      "precision": "int4",
+      "eligible_matrices": 17,
+      "packed_matrices": 17,
+      "packed_layout_companions": "passed",
+      "malformed_input": "rejected",
+      "cancellation": "one cancelled terminal reply",
+      "unload_exit": 0
+    }
+  ],
+  "quality": "unqualified random graph only"
+}

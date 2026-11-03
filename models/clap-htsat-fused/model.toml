@@ -1,0 +1,87 @@
+schema = 3
+id = "clap-htsat-fused"
+name = "CLAP HTSAT Fused"
+kind = "local.audio-labels"
+summary = "Labels a sound or music clip with whichever of your own text descriptions fits it best, with no training."
+description = "CLAP HTSAT Fused is LAION's contrastive language-audio model (Wu et al., 2022): an HTSAT Swin audio encoder with feature fusion for clips of any length and a RoBERTa text encoder, mapped into one shared 512-number space (153.6M parameters). It was trained on LAION-Audio-630K, 633,526 audio-text pairs. Its paper reports state-of-the-art zero-shot audio classification and strong text-to-audio retrieval."
+purpose = "Label sounds from your own words"
+publisher = "laion"
+released = 2023
+params = "153.6M"
+tasks = ["audio-classification"]
+languages = ["en"]
+good_for = [
+  "Zero-shot labelling of sound effects, environmental sounds and music against any list of descriptions",
+  "Sorting or searching a sample library by describing the sound (with return_embedding)",
+  "Telling speech from music from noise before choosing a heavier model",
+]
+limits = [
+  "Labels are scored against each other: the probabilities always sum to 1 over the labels you give, so add a catch-all label when none might fit.",
+  "Very short clips are repeated to fill 10 seconds and get weaker, less certain labels (0.3 s of a chime came out as music, not a bell).",
+  "Clips over 10 seconds are summarised from a shrunken whole plus three fixed 10-second crops (start, middle and end thirds); the maker picks those crops at random.",
+  "English labels only: the text encoder is English RoBERTa, so Polish or other-language labels score poorly. It does not transcribe speech.",
+  "Files not at 48 kHz are resampled with macOS's converter; the card leaves resampling to the user.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/laion/clap-htsat-fused"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/laion/clap-htsat-fused/blob/365dea6ef167def6676140ed93bbc43f84dabb28/README.md"
+
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "laion/clap-htsat-fused"
+revision = "365dea6ef167def6676140ed93bbc43f84dabb28"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "merges.txt", "preprocessor_config.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json", "vocab.json"]
+
+[weights.sha256]
+"model.safetensors" = "3f648de6d030e17494be455d323b8d191233fbae0c7ce0ba745fd21a926a63a6"
+"config.json" = "b1d63489dc5061da229c23d2b11e9ca731639574449f82319fabb01da7fcf480"
+"merges.txt" = "fe36cab26d4f4421ed725e10a2e9ddb7f799449c603a96e7f29b5a3c82a95862"
+"preprocessor_config.json" = "072bdd9ba771b6d213c56f15c0f765e33192b92e481581b52271cf16c9013684"
+"special_tokens_map.json" = "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f"
+"tokenizer.json" = "77ef92283d67f0d97e1454909a964afcbfa2019f0fb9f18f8e88d5c25c3ba729"
+"tokenizer_config.json" = "377f91458f7729a4574a84c77bdce67dbc3c58c1a345a29bbf8c4eb1307948a3"
+"vocab.json" = "ed19656ea1707df69134c4af35c8ceda2cc9860bf2c3495026153a133670ab5e"
+
+[weights.bytes]
+"model.safetensors" = 614496152
+"config.json" = 5422
+"merges.txt" = 456356
+"preprocessor_config.json" = 537
+"special_tokens_map.json" = 280
+"tokenizer.json" = 2108746
+"tokenizer_config.json" = 384
+"vocab.json" = 798293
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-clap-htsat-fused"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

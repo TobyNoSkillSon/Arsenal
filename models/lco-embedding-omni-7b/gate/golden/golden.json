@@ -1,0 +1,585 @@
+{
+ "schema": "golden-1",
+ "model": "lco-embedding-omni-7b",
+ "date": "2026-11-02",
+ "commit": "d2a5d20c6c54f8834b1317b7dd57a5ec17ac6a71",
+ "precision": "fp16",
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "weights": {
+  "repo": "LCO-Embedding/LCO-Embedding-Omni-7B",
+  "revision": "108f6f1a5de3b2eedd1d1c7b7005aaca6ed3802c",
+  "sha256": {
+   "config.json": "fa9c367db750538e4e998d9d45702d3b8d370dc1cb7514ff72b90ad071086e48",
+   "model-00001-of-00004.safetensors": "3081f51bea7183109e3a3d9d8d85c2f0de8ee74c4760d7881f84fe5e8b6f19fa",
+   "model-00002-of-00004.safetensors": "80f511cc48f3435b11d245d7828dc455a55350dbf9da897136097617d40e930b",
+   "model-00003-of-00004.safetensors": "b4c4c9cfb39cbc06a1a1fd499c962ff32bd50cbb5a17aa139c59d280a8de1047",
+   "model-00004-of-00004.safetensors": "8c30926072397c39ed68e3ac30616388e2f3d44555e15263b36392c1bb3f1655",
+   "tokenizer.json": "8441917e39ae0244e06d704b95b3124795cec478e297f9afac39ba670d7e9d99",
+   "tokenizer_config.json": "569aa7a9171e36dfff80f0a7550ab0c9c09e46ac840fea5030641417394fb0d2"
+  }
+ },
+ "input": {
+  "fixtures": [
+   {
+    "file": "image.png",
+    "sha256": "1d0056b302375a8abccec97d508932796ab4c275334a8ce77624849b7edae5ce",
+    "bytes": 1530
+   },
+   {
+    "file": "audio.wav",
+    "sha256": "08010e55c0027682cd50c41e99107fc3920caf6e928376d8d950b39338b3a4e9",
+    "bytes": 102444
+   },
+   {
+    "file": "video.mp4",
+    "sha256": "7cb11f92939b01fe56666f1f8ce2464b90b0799b5b9fe4c9677d74cb1129845d",
+    "bytes": 5438
+   },
+   {
+    "file": "image.png",
+    "sha256": "1d0056b302375a8abccec97d508932796ab4c275334a8ce77624849b7edae5ce",
+    "bytes": 1530
+   }
+  ],
+  "request": [
+   {
+    "op": "embed",
+    "body": {
+     "input": [
+      "What is the tallest mountain in the world?",
+      "Mount Everest is Earth's highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. Its elevation of 8,848.86 metres was established by a joint Chinese-Nepali survey in 2020.",
+      "K2, at 8,611 metres above sea level, is the second-highest mountain on Earth, after Mount Everest. It lies in the Karakoram range on the China-Pakistan border.",
+      "Mount Kilimanjaro is a dormant volcano in Tanzania. It is the highest mountain in Africa, with its summit about 5,895 metres above sea level."
+     ],
+     "task": "document"
+    }
+   },
+   {
+    "op": "embed",
+    "body": {
+     "input": [
+      {
+       "type": "image",
+       "image": {
+        "path": "image.png"
+       }
+      },
+      {
+       "type": "audio",
+       "audio": {
+        "path": "audio.wav"
+       }
+      },
+      {
+       "type": "video",
+       "video": {
+        "path": "video.mp4"
+       }
+      }
+     ]
+    }
+   },
+   {
+    "op": "embed",
+    "body": {
+     "input": [
+      {
+       "type": "content",
+       "content": [
+        "A yellow sun and a red box",
+        {
+         "type": "image",
+         "image": {
+          "path": "image.png"
+         }
+        }
+       ]
+      }
+     ]
+    }
+   }
+  ]
+ },
+ "output": [
+  {
+   "op": "embed",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "embeddings": [
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       0.00027,
+       0.00243,
+       0.01458,
+       -0.00342,
+       -0.00572,
+       0.01527,
+       0.00303,
+       0.01163
+      ],
+      "sha256_rounded4": "30fd4e456087a0d015e8a4138831ed30293ef9c47df07bb37a5ff876af279485"
+     },
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       0.00604,
+       0.01811,
+       0.01107,
+       -0.01622,
+       0.00181,
+       0.02268,
+       0.00383,
+       0.00486
+      ],
+      "sha256_rounded4": "cbf91dace329deecd0a97cf92fa220a0102d8a2c6f41d586e64229a4943975a7"
+     },
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       0.02275,
+       0.00121,
+       0.00089,
+       -0.03076,
+       0.00775,
+       0.01829,
+       0.00431,
+       0.0134
+      ],
+      "sha256_rounded4": "2ea6a55bb0253eb44a3498804922b049d7b00cd34559d2e76ced927cf6f9eebf"
+     },
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       0.00627,
+       -0.00826,
+       0.02744,
+       -0.01447,
+       -0.00776,
+       -0.00563,
+       0.0137,
+       -0.00653
+      ],
+      "sha256_rounded4": "e772409e3d2ca8a4dcb55a06ca7bd172d74e4b495692925b8f0c722221954f96"
+     }
+    ],
+    "input_tokens": 259
+   }
+  },
+  {
+   "op": "embed",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "embeddings": [
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       -0.01531,
+       -0.0211,
+       0.01075,
+       0.01109,
+       -0.02321,
+       0.00709,
+       -0.01351,
+       -0.01748
+      ],
+      "sha256_rounded4": "f645e73dce3e7f2455abc9634cc4149ee098de1741db7ae8a361a53678233324"
+     },
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       -0.00761,
+       0.01029,
+       -0.02152,
+       -0.00215,
+       -0.00303,
+       -0.00445,
+       -0.00376,
+       -0.01996
+      ],
+      "sha256_rounded4": "1f86f176045103152e9626cf5f30b9e0f89bf9927fed9574cee883d64369099a"
+     },
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       -0.00229,
+       -0.01195,
+       -0.00113,
+       0.00259,
+       0.01637,
+       -0.00812,
+       -0.00405,
+       0.01532
+      ],
+      "sha256_rounded4": "b5e077469b7fd0059ec862dcc7c282c058bb418e490c9c0db22c472129ef6736"
+     }
+    ],
+    "input_tokens": 592
+   }
+  },
+  {
+   "op": "embed",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "embeddings": [
+     {
+      "length": 3584,
+      "l2_norm": 1.0,
+      "first8": [
+       -0.01961,
+       -0.02186,
+       0.00957,
+       0.01923,
+       -0.01851,
+       -0.00273,
+       -0.01665,
+       -0.01154
+      ],
+      "sha256_rounded4": "742466df6e52b2b5ef588dd0d621d4184168782342d6c4df065052ef69dcad63"
+     }
+    ],
+    "input_tokens": 147
+   }
+  }
+ ],
+ "maker_reference": {
+  "after_review_fix": {
+   "end_to_end_cosine": {
+    "audio": 0.99981,
+    "everest": 0.999994,
+    "image": 0.99995,
+    "k2": 0.999997,
+    "kilimanjaro": 0.999997,
+    "query": 0.999997,
+    "video": 0.999155
+   },
+   "source": "heavy parity test, adapter embed path, FP16, vs makers FP16",
+   "video_pixels": {
+    "cosine": 0.999982,
+    "finite": 1,
+    "max_abs": 0.030016,
+    "rel_l2": 0.011548
+   }
+  },
+  "card_text_check": {
+   "arsenal_served": [
+    0.6448,
+    0.4323,
+    0.4789
+   ],
+   "card": [
+    0.6456,
+    0.4331,
+    0.4788
+   ],
+   "maker_bf16": [
+    0.6481,
+    0.4346,
+    0.4797
+   ],
+   "maker_fp16": [
+    0.6457,
+    0.4325,
+    0.479
+   ]
+  },
+  "code": "Model card Transformers path: Qwen2_5OmniProcessor + qwen_omni_utils.process_mm_info + Qwen2_5OmniThinkerForConditionalGeneration, hidden_states[-1][:, -1], L2-normalized",
+  "component_parity_fp16_vs_maker_fp16": {
+   "audio.language": {
+    "cosine": 0.999997,
+    "finite": 1,
+    "max_abs": 0.115234,
+    "rel_l2": 0.002219
+   },
+   "audio.mel": {
+    "cosine": 1,
+    "finite": 1,
+    "max_abs": 6.9e-05,
+    "rel_l2": 5e-06
+   },
+   "audio.tower": {
+    "cosine": 0.995883,
+    "finite": 1,
+    "max_abs": 4.078125,
+    "rel_l2": 0.0908
+   },
+   "everest.language": {
+    "cosine": 0.999994,
+    "finite": 1,
+    "max_abs": 0.091797,
+    "rel_l2": 0.003485
+   },
+   "image.language": {
+    "cosine": 0.999997,
+    "finite": 1,
+    "max_abs": 0.101562,
+    "rel_l2": 0.002465
+   },
+   "image.pixels": {
+    "cosine": 1,
+    "finite": 1,
+    "max_abs": 0.0,
+    "rel_l2": 0.0
+   },
+   "image.vision": {
+    "cosine": 0.999895,
+    "finite": 1,
+    "max_abs": 0.486908,
+    "rel_l2": 0.014489
+   },
+   "query.language": {
+    "cosine": 0.999997,
+    "finite": 1,
+    "max_abs": 0.101562,
+    "rel_l2": 0.002528
+   },
+   "video.language": {
+    "cosine": 0.999996,
+    "finite": 1,
+    "max_abs": 0.148438,
+    "rel_l2": 0.002978
+   },
+   "video.pixels": {
+    "cosine": 0.998488,
+    "finite": 1,
+    "max_abs": 0.983383,
+    "rel_l2": 0.058544
+   },
+   "video.vision": {
+    "cosine": 0.999956,
+    "finite": 1,
+    "max_abs": 0.28125,
+    "rel_l2": 0.009425
+   }
+  },
+  "environment": {
+   "device": "mps",
+   "dtypes": [
+    "fp16",
+    "bf16"
+   ],
+   "torch": "2.15.0",
+   "transformers": "5.22.1"
+  },
+  "evidence": "lab/evidence/lco-embedding-omni-7b/maker-2026-11-02-fp16 and maker-2026-11-02-bf16",
+  "fp16_max_abs_hidden": 7184,
+  "input_tokens": {
+   "audio": 112,
+   "everest": 85,
+   "image": 140,
+   "k2": 72,
+   "kilimanjaro": 64,
+   "query": 38,
+   "video": 340
+  },
+  "maker_bf16_vs_fp16_floor": {
+   "audio.audio": {
+    "cosine": 0.994931,
+    "max_abs": 3.125,
+    "rel_l2": 0.10056
+   },
+   "audio.hidden": {
+    "cosine": 0.999667,
+    "max_abs": 0.6406,
+    "rel_l2": 0.02599
+   },
+   "audio.mel": {
+    "cosine": 1.0,
+    "max_abs": 0.0,
+    "rel_l2": 0.0
+   },
+   "everest.hidden": {
+    "cosine": 0.999892,
+    "max_abs": 0.6797,
+    "rel_l2": 0.01474
+   },
+   "image.hidden": {
+    "cosine": 0.999427,
+    "max_abs": 0.8203,
+    "rel_l2": 0.03387
+   },
+   "image.pixels": {
+    "cosine": 1.0,
+    "max_abs": 0.0,
+    "rel_l2": 0.0
+   },
+   "image.vision": {
+    "cosine": 0.997402,
+    "max_abs": 1.375,
+    "rel_l2": 0.07206
+   },
+   "k2.hidden": {
+    "cosine": 0.99991,
+    "max_abs": 0.3654,
+    "rel_l2": 0.0135
+   },
+   "kilimanjaro.hidden": {
+    "cosine": 0.999919,
+    "max_abs": 0.2344,
+    "rel_l2": 0.01284
+   },
+   "query.hidden": {
+    "cosine": 0.999855,
+    "max_abs": 0.5,
+    "rel_l2": 0.01714
+   },
+   "video.hidden": {
+    "cosine": 0.998854,
+    "max_abs": 1.1016,
+    "rel_l2": 0.04788
+   },
+   "video.pixels": {
+    "cosine": 1.0,
+    "max_abs": 0.0,
+    "rel_l2": 0.0
+   },
+   "video.vision": {
+    "cosine": 0.994701,
+    "max_abs": 3.6992,
+    "rel_l2": 0.10293
+   }
+  },
+  "maker_fp16_first8": {
+   "audio": [
+    -0.00692,
+    0.01036,
+    -0.02106,
+    -0.00187,
+    -0.00301,
+    -0.00414,
+    -0.00439,
+    -0.01994
+   ],
+   "everest": [
+    0.00609,
+    0.01807,
+    0.01106,
+    -0.01626,
+    0.0018,
+    0.02274,
+    0.00389,
+    0.00486
+   ],
+   "image": [
+    -0.01519,
+    -0.02112,
+    0.01058,
+    0.01142,
+    -0.02286,
+    0.00734,
+    -0.01345,
+    -0.01763
+   ],
+   "k2": [
+    0.02278,
+    0.0012,
+    0.00089,
+    -0.03076,
+    0.00776,
+    0.01831,
+    0.00429,
+    0.01342
+   ],
+   "kilimanjaro": [
+    0.00627,
+    -0.00829,
+    0.0275,
+    -0.01446,
+    -0.00782,
+    -0.00569,
+    0.01373,
+    -0.00654
+   ],
+   "query": [
+    0.00023,
+    0.00244,
+    0.01457,
+    -0.00338,
+    -0.00576,
+    0.01531,
+    0.00308,
+    0.01164
+   ],
+   "video": [
+    -0.00248,
+    -0.01161,
+    -0.00082,
+    0.00227,
+    0.01655,
+    -0.00695,
+    -0.00428,
+    0.01432
+   ]
+  },
+  "note": "Served vectors are from the real Get/Load path on the final code (LCO code as of ad27d8f3, after the review fixes). The first served run, before the video decoder fix, measured video 0.983 and was superseded. after_review_fix holds the heavy parity test on the same embed path; it matches the served vectors. Audio tower differences sit on tokens where the makers own BF16 and FP16 runs also disagree.",
+  "served_vs_maker": {
+   "query": {
+    "cosine_vs_maker_fp16": 0.999997,
+    "max_abs_vs_maker_fp16": 0.00043,
+    "cosine_vs_maker_bf16": 0.999852,
+    "max_abs_vs_maker_bf16": 0.00213
+   },
+   "everest": {
+    "cosine_vs_maker_fp16": 0.999994,
+    "max_abs_vs_maker_fp16": 0.00039,
+    "cosine_vs_maker_bf16": 0.99989,
+    "max_abs_vs_maker_bf16": 0.0025
+   },
+   "k2": {
+    "cosine_vs_maker_fp16": 0.999997,
+    "max_abs_vs_maker_fp16": 0.00023,
+    "cosine_vs_maker_bf16": 0.999905,
+    "max_abs_vs_maker_bf16": 0.00166
+   },
+   "kilimanjaro": {
+    "cosine_vs_maker_fp16": 0.999997,
+    "max_abs_vs_maker_fp16": 0.00031,
+    "cosine_vs_maker_bf16": 0.999919,
+    "max_abs_vs_maker_bf16": 0.00099
+   },
+   "image": {
+    "cosine_vs_maker_fp16": 0.99995,
+    "max_abs_vs_maker_fp16": 0.00081,
+    "cosine_vs_maker_bf16": 0.999387,
+    "max_abs_vs_maker_bf16": 0.00356
+   },
+   "audio": {
+    "cosine_vs_maker_fp16": 0.99981,
+    "max_abs_vs_maker_fp16": 0.0014,
+    "cosine_vs_maker_bf16": 0.99958,
+    "max_abs_vs_maker_bf16": 0.00259
+   },
+   "video": {
+    "cosine_vs_maker_fp16": 0.999155,
+    "max_abs_vs_maker_fp16": 0.00302,
+    "cosine_vs_maker_bf16": 0.998504,
+    "max_abs_vs_maker_bf16": 0.00557
+   }
+  }
+ },
+ "tolerance": {
+  "audio_cosine_min": 0.999,
+  "basis": "cosine of served FP16 vectors against the makers FP16 vectors; video end to end includes decoder colour conversion",
+  "image_cosine_min": 0.9995,
+  "text_cosine_min": 0.9999,
+  "video_cosine_min_end_to_end": 0.999,
+  "video_pixels_max_levels": 2
+ },
+ "note": "Four model-card texts (query and three mountains); a 336x252 image, a 3.2 s 16 kHz tone and a 2 s 4-fps video in one request; one combined text+image item."
+}

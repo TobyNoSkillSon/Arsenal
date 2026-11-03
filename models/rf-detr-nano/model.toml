@@ -1,0 +1,61 @@
+schema = 3
+architecture = "rf_detr"
+id = "rf-detr-nano"
+name = "RF-DETR Nano"
+kind = "perception"
+params = "30.5M"
+publisher = "Roboflow"
+released = 2026
+suggested = false
+summary = "Find 80 types of objects. Native MLX inference in FP16."
+purpose = "Find 80 types of objects"
+good_for = ["Fixed COCO object detection"]
+limits = ["Only 80 COCO classes; no open-vocabulary detection", "Checked live at FP16 on 19 Oct: found both cats and both remotes in the COCO two-cats photo"]
+languages = ["en"]
+tasks = ["object-detection"]
+tools = ["operation"]
+[facets]
+modalities_in = ["image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/Roboflow/rf-detr-nano/blob/9f201577d9415f0378084748d27e68586e6b3600/README.md"
+[weights]
+repo = "Roboflow/rf-detr-nano"
+revision = "9f201577d9415f0378084748d27e68586e6b3600"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+[weights.sha256]
+"model.safetensors" = "497b1dbcc8f9d115b806fb82d140d7e22e5b5c3fba45abefef39dd4f99c1f737"
+"config.json" = "bee6f42c3ab26f9c11064a72080d87c6298d7b7fa0b49c0403ddb4db22020071"
+[weights.bytes]
+"model.safetensors" = 121926336
+"config.json" = 5771
+[derive]
+fp16 = "cast:rf-detr-nano-affine-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "perception"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "detect"
+title = "Detect"
+input = "ops/detect.input.json"
+output = "json"
+output_schema = "ops/detect.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,150 @@
+{
+ "model": "rf-detr-large",
+ "reference": "transformers 5.22.1 RfDetrForObjectDetection (the model card's route) on Roboflow/rf-detr-large @f62f7dd5, model.half() on MPS, torch 2.15.0; pixels from the checkpoint's own RfDetrImageProcessor. Captured 2 Nov 2026; six repeats gave the same selection and detections (A/A floor 0).",
+ "fixture": {
+  "file": "lab/evidence/rf-detr-large/fixture-cats.jpg",
+  "source": "http://images.cocodataset.org/val2017/000000039769.jpg (the model card's example)",
+  "sha256": "dea9e7ef97386345f7cff32f9055da4982da5471c48d575146c796ab4563b04e",
+  "pixels": "maker processor output, 1x3x704x704 FP16, stored in reference.safetensors"
+ },
+ "maker": {
+  "detections": [
+   {
+    "label": "cat",
+    "score": 0.9494,
+    "box": [
+     0.0211,
+     0.114,
+     0.4945,
+     0.9856
+    ]
+   },
+   {
+    "label": "remote",
+    "score": 0.942,
+    "box": [
+     0.0635,
+     0.1528,
+     0.2744,
+     0.2459
+    ]
+   },
+   {
+    "label": "cat",
+    "score": 0.941,
+    "box": [
+     0.5439,
+     0.051,
+     1.0,
+     0.7791
+    ]
+   },
+   {
+    "label": "remote",
+    "score": 0.8335,
+    "box": [
+     0.5225,
+     0.1596,
+     0.5791,
+     0.3902
+    ]
+   },
+   {
+    "label": "couch",
+    "score": 0.6056,
+    "box": [
+     0.0024,
+     0.002,
+     0.9995,
+     0.9893
+    ]
+   }
+  ],
+  "coordinates": "xmin, ymin, xmax, ymax as fractions of the image"
+ },
+ "arsenal": {
+  "detections": [
+   {
+    "label": "cat",
+    "score": 0.9494
+   },
+   {
+    "label": "remote",
+    "score": 0.9426
+   },
+   {
+    "label": "cat",
+    "score": 0.9416
+   },
+   {
+    "label": "remote",
+    "score": 0.8338
+   },
+   {
+    "label": "couch",
+    "score": 0.6102
+   }
+  ],
+  "path": "NativeRFDETR FP16 (plain cast of the pinned FP32 checkpoint), Apple M5 Max GPU, 2 Nov 2026"
+ },
+ "components_relative_l2": {
+  "backbone.0": 0.00138,
+  "backbone.1": 0.00154,
+  "backbone.2": 0.00196,
+  "backbone.3": 0.00228,
+  "projector": 0.00089,
+  "encoder.scores": 0.00022,
+  "decoder.logits (maker selection)": 0.00518,
+  "decoder.boxes_confident (maker score >= 0.1)": 0.0002,
+  "decoder.boxes_all (300 queries)": 0.03043
+ },
+ "end_to_end": {
+  "same_labels": true,
+  "max_score_abs": 0.0046,
+  "max_box_abs": 0.00023,
+  "selection_same_set": 300,
+  "selection_same_rank": 272
+ },
+ "tolerance": {
+  "component_relative_l2": {
+   "default": 0.03,
+   "decoder.boxes_all": 0.1
+  },
+  "score_abs": 0.02,
+  "box_abs": 0.01
+ },
+ "tolerance_history": "First frozen bound was 0.03 relative L2 on every component, before any run. The all-query decoder box comparison measured 0.0327 and was moved to 0.1 afterwards: the error sits in background queries (maker score < 0.02) and the maker's own BF16 run differs from its FP16 run there by 0.26 with the same selection. Confident boxes stay at 0.03. Index-by-index end-to-end comparison was replaced by order-free matching because one-ULP FP16 score differences reorder exact ties in the top-300 selection, and each rank carries its own learned query.",
+ "fixed_bugs": [
+  "Runner hard-coded Nano's 384 px and two decoder layers; it now reads image_size, decoder_layers and backbone sizes from config.json (RFDETRLargeTests.shapeFollowsEachPinnedConfig).",
+  "Two-stage top-300 selection used argPartition + argSort, which does not keep torch.topk's tie order; 104 of the photo's 299 adjacent top-300 pairs are exact FP16 ties. Selection now runs as torch.topk does (RFDETRLargeTests.topKSelectionBreaksTiesByPositionLikeTorch). Applies to Nano too."
+ ],
+ "heavy_test": "ARSENAL_RFDETR_LARGE_EVIDENCE=<worktree>/lab/evidence/rf-detr-large scripts/test.sh --heavy --filter RFDETRLargeTests",
+ "real_run": {
+  "date": "2026-11-02",
+  "path": "arsenal-testserver --real at 38fa0d61, isolated profile, Get from the local HF cache (0 bytes downloaded), FP16, maker-matching preprocessing",
+  "detections": [
+   [
+    "cat",
+    0.9482
+   ],
+   [
+    "remote",
+    0.9413
+   ],
+   [
+    "cat",
+    0.9389
+   ],
+   [
+    "remote",
+    0.8341
+   ],
+   [
+    "couch",
+    0.6048
+   ]
+  ],
+  "against_maker": "same labels; scores within 0.0021, boxes within 0.0005. Before the preprocessing fix the gap was 0.062 (CoreGraphics resize)."
+ },
+ "rerun": "2 Nov 2026 after the review fixes (keypoint selection pass-through, batched host selection, tie-tolerant set check); the heavy test now casts the pinned FP32 file to FP16 itself with MLX. Encoder and confident-box figures unchanged; decoder logits 0.00539 -> 0.00518, all-query boxes 0.03268 -> 0.03043."
+}

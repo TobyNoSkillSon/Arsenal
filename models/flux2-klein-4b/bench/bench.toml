@@ -1,0 +1,12 @@
+schema = 1
+suite = "arsenal-images-suite-v1"
+version = 1
+recipe = "../../../bench/kinds/images/suite-v1.toml"
+fixtures = "../../../bench/kinds/images/fixtures-v1.json"
+precision = "bf16"
+runner = "native"
+fast_exact = false
+width = 512
+height = 512
+steps = 4
+metrics = ["seconds_per_image", "peak_ram_mb"]

@@ -1,0 +1,20 @@
+{
+  "source_repo": "IndexTeam/Index-Translate-2B",
+  "source_revision": "9bc08445315723eb9b77d1b93505915eb03c3f01",
+  "source_dtypes": [
+    "BF16"
+  ],
+  "port_repo": "https://github.com/ml-explore/mlx-swift-lm",
+  "port_revision": "bd4b7434e6bdb588c7ef55706ff8904cb7fd4c57",
+  "qualification": "pending trained weights",
+  "tokenizer_check": "Offline ASCII round-trip and native text/image chat-template execution passed; independent token-ID parity with the vendor remains unqualified.",
+  "prompt_reference": {
+    "repo": "bilibili/Index-Translate",
+    "revision": "9aff74ca50c60873916f99269b10cd0d79237b4a"
+  },
+  "source_parameters_derived": 2274069824,
+  "runtime_graph_parameters_derived": 2213241664,
+  "runtime_graph_matches_checkpoint": true,
+  "get_half_recipe": "cast:native-half-v1",
+  "tier_recipe": "cast:language-half-g64-v3"
+}

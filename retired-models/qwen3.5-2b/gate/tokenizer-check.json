@@ -1,0 +1,10 @@
+{
+  "model": "qwen3.5-2b",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 16,
+    "plain_tokens": 13,
+    "roundtrip": "Hello"
+  }
+}

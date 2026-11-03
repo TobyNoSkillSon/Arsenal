@@ -1,0 +1,201 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "application/pdf",
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "document-picker"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 10000
+      },
+      "minItems": 1,
+      "maxItems": 99
+    },
+    "template": {
+      "type": "object",
+      "x-arsenal-control": "json-schema",
+      "x-arsenal-ordered": true
+    },
+    "instructions": {
+      "type": "string"
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32768,
+      "default": 4096
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "structured",
+        "template-generation"
+      ],
+      "default": "structured"
+    },
+    "thinking": {
+      "type": "boolean",
+      "default": false
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "examples": {
+      "type": "array",
+      "maxItems": 16,
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "image": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "additionalProperties": false,
+            "x-arsenal-file": {
+              "accept": [
+                "image/png",
+                "image/jpeg"
+              ]
+            },
+            "x-arsenal-control": "image-picker"
+          },
+          "output": {}
+        },
+        "required": [
+          "output"
+        ],
+        "anyOf": [
+          {
+            "required": [
+              "text"
+            ]
+          },
+          {
+            "required": [
+              "image"
+            ]
+          }
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "text"
+      ]
+    },
+    {
+      "required": [
+        "image"
+      ]
+    },
+    {
+      "required": [
+        "document"
+      ]
+    }
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "structured"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "template"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "mode": {
+            "const": "template-generation"
+          }
+        },
+        "required": [
+          "mode"
+        ]
+      },
+      "then": {
+        "properties": {
+          "thinking": {
+            "const": false
+          }
+        }
+      }
+    }
+  ],
+  "not": {
+    "required": [
+      "image",
+      "document"
+    ]
+  }
+}

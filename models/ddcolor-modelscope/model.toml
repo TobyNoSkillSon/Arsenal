@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "ddcolor-modelscope"
+name = "DDColor ModelScope"
+kind = "restoration"
+params = "0.23B"
+publisher = "piddnad (DAMO Academy)"
+released = 2023
+suggested = false
+purpose = "Photo colorization"
+summary = "Colour a black-and-white photo, keeping its own detail and brightness."
+tasks = ["colorize"]
+languages = ["und"]
+good_for = ["Black-and-white photos and film frames", "Old portraits and street scenes"]
+limits = ["Colour comes from a learned prior: skin, clothing and paint colours are plausible, not recovered", "16 megapixels per photo"]
+architecture = "ddcolor"
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://github.com/piddnad/DDColor/blob/2adb63f2656ac41cbdf7b894cddd94121a3faf13/LICENSE"
+[weights]
+repo = "mlx-community/DDColor-modelscope-fp16"
+revision = "479a36712efde407b455a2088e69993f02340f30"
+dtype = "fp16"
+files = ["model.safetensors"]
+[weights.sha256]
+"model.safetensors" = "cc7f1d80e86df18b0017b46642af1bb97647e4fc9b3a91dbf94757357cc1c874"
+[weights.bytes]
+"model.safetensors" = 455830765
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "restoration"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "colorize"
+title = "Colorize"
+input = "kinds/restoration/ops/colorize.input.json"
+output_schema = "kinds/restoration/ops/colorize.output.json"
+output = "file"
+stream = false
+timeout_s = 600
+first_response_timeout_s = 600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "embeddinggemma-2"
+name = "EmbeddingGemma 2"
+kind = "embeddings"
+params = "744M"
+publisher = "google"
+released = 2026
+suggested = false
+summary = "Find text, photos, audio and video by meaning in one small 768-number space."
+description = "EmbeddingGemma 2 by Google DeepMind: a 270M-parameter bidirectional Gemma 4 text encoder (24 layers, width 512, per-layer embeddings, 512-to-768 projection) with Gemma 4's 170M vision tower and 300M conformer audio tower, 744M parameters in all. Text in 100+ languages, code, images, video and audio, alone or interleaved, map to one 768-dimension vector that can be cut to 512, 256 or 128 numbers (Matryoshka). Google reports 61.4 on multilingual MTEB v2, 78.7 on MTEB code, 65.7 on MIEB-lite and 69.5 MRR@10 on MSEB retrieval."
+purpose = "Search text, images, audio and video"
+good_for = ["semantic search across text, code, photos, PDF pages, sound and video in one small index", "task-tuned vectors for search, question answering, fact checking, code search, classification, clustering and similarity", "short vectors (512, 256 or 128 numbers) to cut storage", "interleaved inputs, such as a caption with its photos and a clip, as one vector"]
+limits = ["8,192 tokens per input: an image takes up to 280, a video frame up to 140 (one frame a second, at most 32 frames), a second of audio 25.", "Audio past 30 seconds is refused unless truncate is set; then its first 30 seconds are used, as the maker's processor does.", "Video soundtracks are not used; embed the audio as a separate part.", "Google states 100+ languages without listing them; a Polish probe here scored a Polish aurora text above every unrelated item for an English aurora query (0.68 against 0.55 for a pasta text), but Polish retrieval quality was not measured."]
+tasks = ["feature-extraction"]
+languages = ["mul"]
+tools = ["operation"]
+context = 8192
+[facets]
+modalities_in = ["text", "image", "audio", "video"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+conditions = "Use must also follow Google's Gemma Prohibited Use Policy."
+url = "https://huggingface.co/google/embeddinggemma-2/blob/f9972ac22e696a105c482202646979e33e4b5a1e/README.md"
+[weights]
+repo = "google/embeddinggemma-2"
+revision = "f9972ac22e696a105c482202646979e33e4b5a1e"
+dtype = "bf16"
+files = ["config.json", "model.safetensors", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "b8f1e9931b57fbc054acdb445c41765d55b0074c58d145fa82839941ad1b5bb3"
+"model.safetensors" = "197a32965d4b1105faf060417baa899e193fb73cd401f42ec9295234d5553d79"
+"tokenizer.json" = "4d777ef5bdc1aa36227abdfb77c3e49e7b9c892d16e1b6bda41c393504828be4"
+"tokenizer_config.json" = "17bd5d6e9364ca49a534e1502076593317c298d4a663623091ed45388f004874"
+[weights.bytes]
+"config.json" = 4455
+"model.safetensors" = 1488915288
+"tokenizer.json" = 32170510
+"tokenizer_config.json" = 1599
+[derive]
+fp16 = "cast:embed-gemma2-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "embed"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "embed"
+title = "Embed inputs"
+input = "ops/embed.input.json"
+output_schema = "ops/embed.output.json"
+output = "json"
+stream = false
+timeout_s = 600
+first_response_timeout_s = 600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

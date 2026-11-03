@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "embedding",
+    "mean_embedding",
+    "dimensions",
+    "genes_used",
+    "genes_skipped",
+    "genes_truncated"
+  ],
+  "properties": {
+    "embedding": {
+      "type": "array",
+      "description": "The cell embedding: the <cls> token's embedding (the maker's default emb_mode cls).",
+      "items": {
+        "type": "number"
+      }
+    },
+    "mean_embedding": {
+      "type": "array",
+      "description": "The gene-token embeddings averaged over the cell's genes (the maker's emb_mode cell), from the same layer.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "dimensions": {
+      "type": "integer",
+      "description": "Length of each embedding."
+    },
+    "genes_used": {
+      "type": "integer",
+      "description": "Number of genes the model read."
+    },
+    "genes_skipped": {
+      "type": "integer",
+      "description": "Number of given gene IDs missing from the model's dictionary."
+    },
+    "genes_truncated": {
+      "type": "integer",
+      "description": "Number of lowest-ranked genes dropped beyond the 4,094-gene limit."
+    }
+  }
+}

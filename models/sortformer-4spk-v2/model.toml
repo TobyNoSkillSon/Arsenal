@@ -1,0 +1,69 @@
+schema = 3
+architecture = "sortformer_streaming"
+id = "sortformer-4spk-v2"
+name = "Streaming Sortformer Diarizer 4spk v2"
+kind = "audio"
+params = "117M"
+publisher = "NVIDIA"
+released = 2025
+suggested = false
+summary = "Find who spoke when, live or on a recording, for up to four speakers, using a native Swift MLX worker."
+description = "NVIDIA's streaming Sortformer: a 17-layer Fast-Conformer (NEST) encoder and an 18-layer Transformer that output each of four speakers' activity every 80 ms, numbering speakers in the order they first speak. An arrival-order speaker cache keeps identities stable across chunks, so it can diarize a live stream or hours of audio. Trained on about 2,450 hours of real conversations and 5,150 hours of simulated mixtures; the card reports 13.24% DER on DIHARD III (up to four speakers) and 6.57% on two-speaker CALLHOME at 1.04 s latency."
+purpose = "Who spoke when, live, up to 4"
+good_for = ["Meetings, calls and interviews with up to four speakers", "Live diarization sessions with latency from 0.32 s to 30 s", "Long recordings without clustering", "Overlapping speech (each speaker has its own activity track)", "Per-speaker activity probabilities every 80 ms"]
+limits = ["At most four speakers; accuracy drops with five or more.", "Trained mostly on English; other languages, including Polish, are untested here.", "Speakers are numbered by arrival, not identified; no speaker embeddings.", "Up to one hour per recording, ten minutes per live session.", "Noisy or out-of-domain audio degrades accuracy."]
+languages = ["en"]
+tasks = ["diarize"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "CC-BY-4.0"
+name = "Creative Commons Attribution 4.0"
+commercial = true
+url = "https://huggingface.co/nvidia/diar_streaming_sortformer_4spk-v2/blob/84edd514b8ef68004c10086918cd62f2148cbd59/README.md"
+[weights]
+repo = "nvidia/diar_streaming_sortformer_4spk-v2"
+revision = "84edd514b8ef68004c10086918cd62f2148cbd59"
+dtype = "fp32"
+files = ["diar_streaming_sortformer_4spk-v2.nemo"]
+[weights.sha256]
+"diar_streaming_sortformer_4spk-v2.nemo" = "b371afce2c4958186469df33d939936b9746c89f38b10a69cfd2c61254e83329"
+[weights.bytes]
+"diar_streaming_sortformer_4spk-v2.nemo" = 471367680
+[derive]
+fp16 = "cast:audio-sortformer-v2-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "diarize"
+title = "Who spoke when"
+input = "ops/diarize.input.json"
+output_schema = "ops/diarize.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[[op]]
+name = "diarize_session"
+title = "Live speaker diarization"
+input = "ops/diarize_session.input.json"
+output_schema = "ops/diarize_session.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

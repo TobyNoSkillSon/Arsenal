@@ -1,0 +1,342 @@
+{
+ "model": "gimm-vfi-r",
+ "reference": "GSeanCDAT/GIMM-VFI @dbc56449 (gimmvfi_r.py, configs/gimmvfi/gimmvfi_r_arb.yaml), checkpoint GSean/GIMM-VFI gimmvfi_r_arb.pt @ab7735cd, torch 2.14.1 on MPS: model.half() weights under torch.autocast(mps, float16), the maker's autocast mixed-precision mode. The CuPy softsplat forward is replaced by a PyTorch scatter-add in float32 (the makers cast its inputs to float32), proved against a literal transcription of the CUDA kernel on three small tensors with out-of-range, inf, NaN and exact-integer targets (max |difference| 2.4e-7). Geometry as video_Nx.py: InputPadder(32), ds_factor 1. Captured once, 2 Nov 2026, by lab/evidence/gimm-vfi-r/reference.py.",
+ "fixture": {
+  "files": [
+   "lab/evidence/gimm-vfi-r/fixture-0.png",
+   "lab/evidence/gimm-vfi-r/fixture-1.png"
+  ],
+  "sha256": [
+   "922f5b46e210d4b7fcffe82906d371852063cbffdcf053de49d3cec5b3238b4d",
+   "1bcf557593902c7bc5a47ce667495d7b528829a2c1e55bc2f426c25a17fb0c88"
+  ],
+  "content": "Frames 00020 and 00028 of the makers' demo/input_frames (a dog leaping from a pool with a ball), resized to 281x240 with PIL bicubic; padded to 288x256 (left 3, right 4, top 8, bottom 8)",
+  "t": [
+   0.25,
+   0.5,
+   0.75
+  ]
+ },
+ "softsplat_proof": {
+  "device": "mps",
+  "dtype": "float32",
+  "cases": [
+   {
+    "shape": [
+     2,
+     3,
+     7,
+     9
+    ],
+    "flow_scale": 3.0,
+    "max_abs": 2.384185791015625e-07,
+    "ref_abs_sum": 105.52632141113281
+   },
+   {
+    "shape": [
+     1,
+     4,
+     12,
+     10
+    ],
+    "flow_scale": 6.0,
+    "max_abs": 2.384185791015625e-07,
+    "ref_abs_sum": 134.72796630859375
+   },
+   {
+    "shape": [
+     1,
+     2,
+     5,
+     5
+    ],
+    "flow_scale": 0.6,
+    "max_abs": 5.960464477539063e-08,
+    "ref_abs_sum": 22.069074630737305
+   }
+  ],
+  "pass_max_abs_lt_1e-5": true
+ },
+ "maker_reference": {
+  "raft_flow01_mean_px": [
+   2.4825620651245117,
+   -0.19011899828910828
+  ],
+  "raft_flow01_max_abs_px": 30.910125732421875,
+  "flow_scaler": 31.83243751525879,
+  "frames": {
+   "0.25": {
+    "sha256_png": "75adaff7efe40ec4ea878098ba09cfa8b18555175c23b1b79c4a8e734e17df3b",
+    "mean_rgb": [
+     0.55606,
+     0.47742,
+     0.3927
+    ],
+    "pixels_yx_rgb": [
+     [
+      40,
+      60,
+      [
+       0.1991,
+       0.1767,
+       0.1975
+      ]
+     ],
+     [
+      120,
+      140,
+      [
+       0.8324,
+       0.6663,
+       0.451
+      ]
+     ],
+     [
+      200,
+      230,
+      [
+       0.8946,
+       0.8082,
+       0.6745
+      ]
+     ],
+     [
+      30,
+      250,
+      [
+       0.1097,
+       0.0904,
+       0.0834
+      ]
+     ]
+    ]
+   },
+   "0.5": {
+    "sha256_png": "b39d747b649304ec9b6b890f6fa11d0b8beaa707770ba7bea146cf71036c1050",
+    "mean_rgb": [
+     0.55256,
+     0.47365,
+     0.38891
+    ],
+    "pixels_yx_rgb": [
+     [
+      40,
+      60,
+      [
+       0.1991,
+       0.176,
+       0.1986
+      ]
+     ],
+     [
+      120,
+      140,
+      [
+       0.83,
+       0.6408,
+       0.4143
+      ]
+     ],
+     [
+      200,
+      230,
+      [
+       0.8944,
+       0.8078,
+       0.6744
+      ]
+     ],
+     [
+      30,
+      250,
+      [
+       0.1098,
+       0.0906,
+       0.0821
+      ]
+     ]
+    ]
+   },
+   "0.75": {
+    "sha256_png": "f3ff98455505d2845933d9ea40a683e741301bae4de39083a501110a120f756b",
+    "mean_rgb": [
+     0.54858,
+     0.46928,
+     0.38435
+    ],
+    "pixels_yx_rgb": [
+     [
+      40,
+      60,
+      [
+       0.1962,
+       0.1732,
+       0.1949
+      ]
+     ],
+     [
+      120,
+      140,
+      [
+       0.6224,
+       0.4447,
+       0.271
+      ]
+     ],
+     [
+      200,
+      230,
+      [
+       0.8847,
+       0.8018,
+       0.6671
+      ]
+     ],
+     [
+      30,
+      250,
+      [
+       0.11,
+       0.0907,
+       0.081
+      ]
+     ]
+    ]
+   }
+  }
+ },
+ "arsenal": {
+  "components_on_reference_inputs": {
+   "cnn_encoder_rel": 0.0006391,
+   "corr_lookup_rel": 6e-07,
+   "corrT_lookup_rel": 6e-07,
+   "hyponet0_rel": 0.0010178,
+   "hyponet1_rel": 0.0010184,
+   "hyponet2_rel": 0.0010381,
+   "raft_feat_eighth_rel": 0.0008356,
+   "raft_feat_quarter_rel": 0.000799,
+   "raft_flow01_max_abs_px": 0.0607529,
+   "raft_flow01_rel": 0.0004634,
+   "raft_flow10_rel": 0.000468,
+   "raft_fmap_rel": 0.0013789,
+   "res_conv_rel": 0.0004866,
+   "splat0_rel": 0.0,
+   "splat1_rel": 0.0,
+   "synth0_flowt0_full_rel": 0.0008443,
+   "synth0_flowt0_quarter_rel": 0.0003813,
+   "synth0_image_max_abs": 0.0015434,
+   "synth0_image_psnr": 84.7067261,
+   "synth1_flowt0_full_rel": 0.0005764,
+   "synth1_flowt0_quarter_rel": 0.000275,
+   "synth1_image_max_abs": 0.0014098,
+   "synth1_image_psnr": 83.135231,
+   "synth2_flowt0_full_rel": 0.0004199,
+   "synth2_flowt0_quarter_rel": 0.0002237,
+   "synth2_image_max_abs": 0.0019613,
+   "synth2_image_psnr": 82.1181564,
+   "weights1_rel": 0.0009094,
+   "weights2_rel": 0.0009516
+  },
+  "end_to_end_from_padded_frames": {
+   "raft_flow01_rel": 0.000463,
+   "t0_flow_rel": 0.006438,
+   "t0_max_abs": 0.012774,
+   "t0_mean_abs": 0.00013,
+   "t0_psnr": 69.68383,
+   "t1_flow_rel": 0.005324,
+   "t1_max_abs": 0.009276,
+   "t1_mean_abs": 0.000136,
+   "t1_psnr": 69.830803,
+   "t2_flow_rel": 0.005355,
+   "t2_max_abs": 0.031747,
+   "t2_mean_abs": 0.000147,
+   "t2_psnr": 67.508125
+  },
+  "worker_png_vs_maker_png": {
+   "0.25": {
+    "psnr_db": 62.75,
+    "max_abs_levels": 3.0,
+    "mean_abs_levels": 0.0337,
+    "sha256_png": "48232915e726f08fd7aa12744c0eabe63d675b910f47c7ab26a53a8d05d94a6b",
+    "mean_rgb": [
+     0.55605,
+     0.47742,
+     0.39271
+    ]
+   },
+   "0.5": {
+    "psnr_db": 62.71,
+    "max_abs_levels": 3.0,
+    "mean_abs_levels": 0.0342,
+    "sha256_png": "1b84d19e0757e6016de1adc422547b6f197a4a23ad8b8f27f7835b52c3dcfb50",
+    "mean_rgb": [
+     0.55256,
+     0.47365,
+     0.38891
+    ]
+   },
+   "0.75": {
+    "psnr_db": 61.82,
+    "max_abs_levels": 9.0,
+    "mean_abs_levels": 0.0379,
+    "sha256_png": "69d01718a9ee453b5a305f9a3331e17b71fc531e266868047d5fc5ab771c2d0a",
+    "mean_rgb": [
+     0.54857,
+     0.46928,
+     0.38434
+    ]
+   }
+  },
+  "note": "Flow-deviation term in float32 (an accumulator) since the 2 Nov review; the reference computed it in FP16 under autocast."
+ },
+ "tolerance": {
+  "policy": "components frozen before the first comparison; end-to-end bounds tightened on 2 Nov to just under the worst measured values so a regression fails",
+  "component_relative_l2": 0.01,
+  "raft_flow_relative_l2": 0.02,
+  "synthesis_image_max_abs": 0.02,
+  "end_to_end_psnr_db": 67,
+  "downscaled_psnr_db": 62
+ },
+ "downscaled_flow_path": {
+  "fixture": {
+   "files": [
+    "lab/evidence/gimm-vfi-r/fixture-large-0.png",
+    "lab/evidence/gimm-vfi-r/fixture-large-1.png"
+   ],
+   "sha256": [
+    "10d763d26ae871a2def0d1fe1c7778aa968ac736bffc1a32fe50b2eedf8b32a2",
+    "7c8ea7959f425be13d23ab9b4b4adc27dc2b5246e49c033d648865bd3d18751e"
+   ],
+   "content": "The makers' demo frames 00020 and 00028 at their own 844x720, padded to 864x736; t = 0.5",
+   "reference": "lab/evidence/gimm-vfi-r/reference_ds.py: the makers' code with ds_factor 0.5 and 0.25 (flows at half or a quarter of the frame, synthesis at full size), same precision as the main reference"
+  },
+  "0.5": {
+   "maker_mean_rgb": [
+    0.55216,
+    0.47329,
+    0.38856
+   ],
+   "maker_png_sha256": "13b880d2db7bbf0274ddfb7d82b891e1e46839e9954cb3d2056b3cdbb56a38d0",
+   "arsenal": {
+    "flow_rel": 0.013359,
+    "max_abs": 0.055927,
+    "psnr": 62.282581,
+    "raft_flow01_rel": 0.002943
+   }
+  },
+  "0.25": {
+   "maker_mean_rgb": [
+    0.55289,
+    0.4739,
+    0.38909
+   ],
+   "maker_png_sha256": "04c4d5d3f5c7eb340806da44f36ccd81b73c7a25ec26624a04841ccf589be98b",
+   "arsenal": {
+    "flow_rel": 0.008317,
+    "max_abs": 0.036294,
+    "psnr": 64.355186,
+    "raft_flow01_rel": 0.000591
+   }
+  }
+ }
+}

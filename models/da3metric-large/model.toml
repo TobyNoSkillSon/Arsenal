@@ -1,0 +1,75 @@
+schema = 3
+id = "da3metric-large"
+name = "Depth Anything 3 Metric Large"
+kind = "perception"
+summary = "Estimates how far everything in one photo is, in metres when the focal length is known."
+description = "DA3 Metric Large is the monocular metric member of ByteDance Seed's Depth Anything 3 family: a DINOv2 ViT-L backbone with a DPT head and a sky head. It predicts a canonical depth that becomes metres when multiplied by the camera's focal length in pixels and divided by 300. It is meant for single photos where real-world scale matters."
+purpose = "Metric depth from one photo"
+publisher = "depth-anything"
+released = 2025
+params = "334.2M"
+tasks = ["depth-estimation"]
+languages = ["mul"]
+good_for = ["Distances in metres from one photo with a known focal length or EXIF", "Sky-aware depth for outdoor photos", "Relative depth when no focal length is known"]
+limits = ["Metres need a focal length: focal_length in the photo's pixels, or EXIF 35 mm equivalent; otherwise the map is relative", "One photo per request; no camera poses, intrinsics or points", "The depth map comes at the processed size (504 pixels on the long side), not the photo's size", "Sky pixels take the 99th percentile of the other depths over every pixel; the maker samples randomly, so sky values can differ by a few percent", "Parity with the maker's code on MPS FP16: depth cosine 0.99968 or better on two photos"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/depth-anything/DA3METRIC-LARGE"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/depth-anything/DA3METRIC-LARGE/blob/4010e39f3634a45bc60553321fb49fb760bd594e/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "depth-anything/DA3METRIC-LARGE"
+revision = "4010e39f3634a45bc60553321fb49fb760bd594e"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "bbea5b0b3ee389849cffa7ddae89de064a90abd2b055fc5aa99aac68db324776"
+"config.json" = "a336f3e76fe375aaae17a9aed9130c9f2aa061535d317ec57dcb2f1f02e1dd53"
+
+[weights.bytes]
+"model.safetensors" = 1336734448
+"config.json" = 847
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-da3metric-large"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "estimate_depth"
+title = "Estimate depth"
+input = "ops/estimate_depth.input.json"
+output = "json"
+output_schema = "ops/estimate_depth.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

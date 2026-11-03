@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of segment through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "sam2.1-hiera-tiny",
+  "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+  "rows": [
+    {
+      "date": "2026-10-31T01:31:27Z",
+      "load_seconds": 0.169,
+      "ops": {
+        "segment": {
+          "seconds_first": 0.109,
+          "seconds_warm": 0.098,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 1444.6,
+      "precision": "fp16",
+      "runner_sha256": "ee4886f788f49556cf01a12987f3b0fdbcccff6832901c165aca725a2aa96c91",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

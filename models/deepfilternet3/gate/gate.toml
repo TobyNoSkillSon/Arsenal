@@ -1,0 +1,8 @@
+schema = 1
+id = "deepfilternet3-native-v1"
+kind = "enhancement"
+reference_runner = "pinned-vendor-pytorch-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["pinned mlx-community v3/model.safetensors byte-identical to the maker's GitHub checkpoint, tensor by tensor (118 of 118, max abs difference 0)", "libdf STFT, ERB and complex features (1 s and 120 s), synthesis and the deep filter match the maker on the golden fixture without weights (relative L2 at most 1e-4)", "component parity on the maker's own FP16 inputs, captured once from DeepFilterNet 0.5.6 on PyTorch MPS: encoder outputs, ERB mask, DF coefficients, enhanced spectrum, and the waveform plain, with post filter and with a 12 dB attenuation limit", "GRU recurrences and running normalisation run on the GPU as Metal kernels; nothing runs on the CPU"]
+evidence = "gate/golden/golden.json"

@@ -1,0 +1,20 @@
+# Perception worker
+
+The family vendors four independent Swift/MLX source closures on Arsenal’s common MLX pin `901941965d82e4a216d4d117231d847d194c563d`. It does not import their apps, CLIs or download managers. Optional typed branches required by the shared RF-DETR class are retained without exposing unrelated operations. `LICENSE-upstream` contains every imported source licence and the RF-DETR notice, and is collected by the existing bundle assembler.
+
+| Closure | Repository | Immutable revision |
+|---|---|---|
+| SAM 3.1 image/text detector and Object Multiplex tracker | thesepehrm/sam31-swift | ce4ce6e733566cc52dec14e60c894867e1e434a3 |
+| RF-DETR Nano detection backbone/projector/decoder | mnmly/mlx-swift-rf-detr | 83941f0461313cdd1991d6873e205f613ff1be31 |
+| LocateAnything vision, connector, language, PBD and processor | mnmly/mlx-swift-LocateAnything | 5245a70e736fcc46ae1d0a8baf0732854b5ce577 |
+| TIPSv2 B/14 and L/14 image/text towers | mnmly/mlx-swift-tips | 222f5fa5133b6ee9272f2878fd84b7ec3cff8a17 |
+
+Each `licenses/<target>/PORTED-FROM.md` gives the imported file list, local adaptations and asset provenance. Each model folder records checkpoint pins, SHA256s, exact bytes, header mapping and operation schemas. Native adapters and PerceptionSupport are Arsenal code.
+
+FP16 is the serving default; spatial/norm tensors remain half while every eligible Linear/Embedding is affine group-64 int8/int4. SAM’s lookup tables are read through Embedding so stored affine packs never leak into activation arithmetic. Nano has two decoder layers, no learned register-token placeholder, and a checkpoint-compatible fused decoder QKV projection. LocateAnything is adapted to the existing tokenizer/cache API, synthesizes tokenizer JSON only in a private temporary directory, and checks cancellation between decode blocks. TIPS’s native SentencePiece reader reuses the already-vendored MLXAudioCore implementation (source licence/provenance retained); exact unusual-Unicode tokenizer parity remains unqualified.
+
+`Tests/native_conformance.py` exercises every declared operation at every tier with shrunk production graphs (LocateAnything random malformed/capped output is an expected rejection, not a successful detection), checks full eligible-matrix packing, production schema/artifact validation, malformed input, cancellation, sessions and exit-0 unload. Family Swift tests additionally exercise F32-source conversion, independent stored-tier loading, OIHW mapping, fused projection names/biases, SAM packed lookup tables and LocateAnything coordinate parsing. Set `ARSENAL_TEST_METALLIB` to the built pinned no-fast-math MLX library for tensor tests. All checks use private support/cache directories and no trained weights. Serving tiers come from the shared checker. The family harness additionally checks complete matrix packing and lifecycle behavior and uses the production validator for both inputs and outputs; its Python environment has no jsonschema package. Four FP32 source headers pass the shared checker with explicit Get cast maps; LocateAnything’s BF16→FP16 comparison stays unqualified.
+
+The standalone stripped release helper is 23,213,832 bytes (22.138 MiB), including shared MLX/runtime code, plus 7,383,085 bytes of non-weight tokenizer resources (7.041 MiB). This is not an incremental combined-native size or an app-budget pass. Keep dead stripping; removing tokenizer copies used only for no-download fixtures from production resource bundles is the first source/resource reduction option. The 45 MiB app budget is unchanged.
+
+Review corrections: targeted SAM mask reconditioning and direct corrected-frame emission; RF-DETR window placement read independently from feature extraction and sine embedding order corrected to y,x,w,h; LocateAnything task templates take priority for screen/point requests, and complete terminated output grammar is required. Six regressions cover these changes, including fixed scalar reference attention and positional embeddings. The pinned Nano config fixture is copied without weight payloads.

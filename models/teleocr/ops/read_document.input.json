@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "document": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "application/pdf",
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "document-picker"
+    },
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 10000
+      },
+      "minItems": 1,
+      "maxItems": 10000
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "ocr",
+        "table",
+        "formula",
+        "code",
+        "layout",
+        "distorted_layout",
+        "scientific_figure",
+        "document",
+        "distorted_document",
+        "text",
+        "seal"
+      ],
+      "default": "ocr"
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32768,
+      "default": 4096
+    }
+  },
+  "required": [
+    "document"
+  ],
+  "additionalProperties": false
+}

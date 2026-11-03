@@ -1,0 +1,4 @@
+schema = 1
+id = "hy-mt2-7b-gate-v1"
+reject_crash = true
+reject_empty = true

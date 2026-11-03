@@ -1,0 +1,65 @@
+schema = 3
+id = "chronos-bolt-small"
+name = "Chronos-Bolt Small"
+kind = "local.forecast"
+summary = "Forecasts the next values of one numeric series as a range of likely outcomes."
+description = "Chronos-Bolt Small is Amazon's 48M-parameter zero-shot forecaster built on the T5 encoder-decoder (t5-efficient-small). It reads the history in patches of 16 values and returns nine quantiles for the next 64 steps in one pass; it was trained on nearly 100 billion time-series observations. Amazon reports it up to 250 times faster and 20 times more memory-efficient than the original Chronos of the same size, and more accurate on its 27-dataset zero-shot benchmark (the maker's figures, not reproduced here)."
+purpose = "Forecast numeric time series"
+publisher = "amazon"
+released = 2024
+params = "47.7M"
+tasks = ["time-series-forecasting"]
+languages = ["und"]
+good_for = ["Probabilistic zero-shot forecasts of one numeric series, such as sales, load or counts, 64 steps in one pass", "Long histories: it reads up to the last 2048 values", "Seasonal series: on monthly airline passengers it continues the summer peak and winter dip"]
+limits = ["Univariate here: one series in; covariates are an AutoGluon feature and are not ported", "Past 64 steps it uses the maker's rollout heuristic (each quantile fed back, 81 forecasts reduced to 9), which the maker says may degrade quality; horizon at most 1024", "Uses only the last 2048 values", "Returns only the trained quantile levels 0.1 to 0.9 in steps of 0.1", "Amazon now points to Chronos-2 as the newer model", "Reads and writes no language, so the Polish question does not apply", "Parity with the maker code (chronos-forecasting, MPS fp16): cosine 1.0000000, max abs diff 0.47 on forecasts up to 742 (airline series, 24 steps) and 0.81 on a 100-step rollout"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/amazon/chronos-bolt-small"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/amazon/chronos-bolt-small/blob/772f3d25d38aec6d914c8949dab4462e2d46f5d8/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "amazon/chronos-bolt-small"
+revision = "772f3d25d38aec6d914c8949dab4462e2d46f5d8"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "06a6a19bbe74bc10a9cd193bd4bf2bf638ae07f7e0d51653ae7ab8ea968a21dd"
+"config.json" = "9ca0ebbe049ccebacb0546361e8aa728f0cf104cd18d1838d78d296aa317bd21"
+
+[weights.bytes]
+"model.safetensors" = 190888824
+"config.json" = 1121
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-chronos-bolt-small"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

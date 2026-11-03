@@ -1,0 +1,18 @@
+id = "local.video"
+title = "Video"
+title_singular = "Video model"
+icon = "sparkles"
+order = 20
+suite = "bench/kinds/local.video/suite-v1.toml"
+primary_operation = "embed"
+
+[[op]]
+name = "embed"
+title = "Embed video"
+input = "ops/embed.input.json"
+output = "json"
+output_schema = "ops/embed.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

@@ -1,0 +1,20 @@
+{
+  "repo": "mlx-community/RIFE-4.25",
+  "revision": "6b650eaa5664aab280119511fe944861491aa15e",
+  "files": [
+    {
+      "rfilename": "config.json",
+      "size": 403
+    },
+    {
+      "rfilename": "model.safetensors",
+      "size": 22674262,
+      "lfs": {
+        "sha256": "40bd5bdc9b41d22ad2fad79da325dcd68988a90d8b8e8fb7b67ed5eedebccf5f",
+        "size": 22674262,
+        "pointerSize": 133
+      }
+    }
+  ],
+  "weights_downloaded": false
+}

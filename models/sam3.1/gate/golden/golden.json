@@ -1,0 +1,71 @@
+{
+ "commit": "c3d0de6ff4e1af222e393593982c56c1cae375f7",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [
+   {
+    "bytes": 2103821,
+    "file": "photo.png",
+    "sha256": "ee3b3cb5755431da4917c3be528b7c96e4805ca06581eb63a6852b16f94ffec7"
+   }
+  ],
+  "request": [
+   {
+    "body": {
+     "image": {
+      "path": "photo.png"
+     },
+     "text": "person"
+    },
+    "op": "segment"
+   }
+  ]
+ },
+ "maker_reference": {
+  "none": "No maker capture: Meta's repository facebook/sam3.1 is gated and this Mac's Hugging Face account has not accepted it, so Meta's code and weights were not run. The mask was checked by eye against the photo (the man's whole figure, one mask)."
+ },
+ "model": "sam3.1",
+ "note": "Text prompt 'person' on a 1024x1280 photo of a man on a pier.",
+ "output": [
+  {
+   "file_count": 1,
+   "files": [
+    {
+     "bytes": 12908,
+     "height": 1280,
+     "sha256": "ec7e7c1d5fe9a2a89cb6dacce36d6dad746e1f8704a67cd5404686677737ea7d",
+     "type": "png",
+     "width": 1024
+    }
+   ],
+   "op": "segment",
+   "reply": {
+    "scores": [
+     0.97592
+    ]
+   },
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "fp16",
+ "schema": "golden-1",
+ "tolerance": {
+  "mask_count": 1,
+  "mask_iou_vs_golden_min": 0.95,
+  "mask_size": [
+   1024,
+   1280
+  ],
+  "score_min": 0.9
+ },
+ "weights": {
+  "repo": "mlx-community/sam3.1-bf16",
+  "revision": "a992e302ea9b0f03f41dfd93414a4fd0e818f65b",
+  "sha256": {
+   "config.json": "898d892490cdbaefc9a7a6ba2ae5ce5b7f93915a2aa8d6d0d5601417ca0b4b03",
+   "model.safetensors": "a1b1c19dcc9bdd68438bcd74433fadc90740e73c37a1f386872672d134879c42"
+  }
+ }
+}

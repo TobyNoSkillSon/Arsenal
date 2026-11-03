@@ -1,0 +1,7 @@
+schema = 1
+id = "timestral-209m-kit-v1"
+reference_runner = "pinned-vendor-pytorch-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["209,312,256 checkpoint parameters load by exact name and shape (the maker's `_gate` weights load as `gate`)", "host-side maths (causal statistics, asinh transform, monotone quantiles, target encoding, refine frame, covariate statistics) equal the maker's functions on fixed inputs (Tests/KitModels/timestral-209m)", "per-component parity (patch embedding, each of 24 layers, output norm, quantile head) on six fixed requests against timestral a534bdbd captured once on MPS in FP16: relative L2 below 0.01", "final quantiles: cosine at least 0.9999, relative L2 at most 0.005, largest gap at most 0.5% of the largest reference value", "one isolated end-to-end run: FP16 cast with the runner's convert op (no tensor beyond FP16 range), load from the cast copy, three forecasts and three refused inputs"]
+evidence = "gate/golden/golden.json"

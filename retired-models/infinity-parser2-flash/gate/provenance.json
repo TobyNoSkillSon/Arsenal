@@ -1,0 +1,20 @@
+{
+  "source_repo": "infly/Infinity-Parser2-Flash",
+  "source_revision": "cfddc4106b0abc4706f05575a164f7dd35d09c46",
+  "source_dtypes": [
+    "BF16"
+  ],
+  "port_repo": "https://github.com/ml-explore/mlx-swift-lm",
+  "port_revision": "bd4b7434e6bdb588c7ef55706ff8904cb7fd4c57",
+  "qualification": "pending trained weights",
+  "tokenizer_check": "Offline ASCII round-trip and native text/image chat-template execution passed; independent token-ID parity with the vendor remains unqualified.",
+  "prompt_reference": {
+    "repo": "infly-ai/INF-MLLM",
+    "revision": "011866e93026290ba39f05b796c92d58dd0ce40c"
+  },
+  "source_parameters_derived": 2213241664,
+  "runtime_graph_parameters_derived": 2213241664,
+  "runtime_graph_matches_checkpoint": true,
+  "get_half_recipe": "cast:native-half-v1",
+  "tier_recipe": "cast:language-half-g64-v2"
+}

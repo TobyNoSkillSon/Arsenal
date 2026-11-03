@@ -1,0 +1,8 @@
+schema = 1
+suite = "arsenal-chat-suite-v1"
+recipe = "bench/kinds/chat/suite-v1.toml"
+profile = "quick"
+max_tokens = 64
+temperature = 0.0
+seed = 24301
+metrics = ["tokens_per_s", "ttft_s", "context", "peak_ram_mb"]

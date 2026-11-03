@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of forecast through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "granite-ttm-r3",
+  "revision": "ea17cfd2e3edcaea21eb8dcecd18bf88971482fa",
+  "rows": [
+    {
+      "date": "2026-10-30T07:39:17Z",
+      "load_seconds": 0.03,
+      "ops": {
+        "forecast": {
+          "seconds_first": 3.74,
+          "seconds_warm": 0.007,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 159.5,
+      "precision": "fp16",
+      "runner_sha256": "ade0baec96f4be0111060313be8901774f1d95450982f78a0e31c7393ffa8769",
+      "swap": "total = 3072.00M  used = 1364.00M  free = 1708.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-30",
+  "schema": "quick-check-1"
+}

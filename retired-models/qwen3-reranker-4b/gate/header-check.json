@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "remote_tensors": 398,
+  "served_parameters": 398,
+  "ignored_unported_tower_tensors": 0,
+  "source_dtype": "BF16",
+  "runtime_dtype": "FP16",
+  "cast_quality": "pending trained-weight reference",
+  "tensor_payload_bytes_read": 0,
+  "errors": [],
+  "comparison_basis": "Rechecked cached exact checkpoint names/shapes and BF16 source dtype against rebuilt graph inventory. Default FP16 is a Get-time cast; its trained numerical quality is pending.",
+  "strict_runtime_dtype_match": false,
+  "raw_source_to_runtime_dtype_mismatches": 398,
+  "bytes_read": 45808,
+  "header_reused": true,
+  "header_sha256": "5430635e9ff2c9cebbf7985865f54c5961759a045c12c47e7103b02dd8508138"
+}

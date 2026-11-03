@@ -1,0 +1,5 @@
+schema = 1
+model = "d1-3b"
+command = "python3 models/d1-3b/gate/parity.py --weights <verified snapshot> --pictures <scratch> --probe <probe folder> --evidence <json> -- <runner argv>"
+[criteria]
+reference = "Pinned vendor system_one and system_one_batch from the checkpoint folder, float32 on the CPU, saved once in gate/reference-fp32.json (gate/reference.py) before any candidate ran; the runner is driven over ArsenalWire. Every argmax unchanged and max absolute probability difference <= 0.05 on the fixed Noul, Choice, Score, batch, packed and image inputs (24 questions); picture, prompt-edge and Polish-probe cases reported alongside."

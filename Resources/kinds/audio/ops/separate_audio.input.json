@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "audio/*"
+        ]
+      },
+      "x-arsenal-control": "audio-picker"
+    },
+    "prompt": {
+      "type": "string",
+      "maxLength": 10000
+    },
+    "stems": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "maxItems": 16
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "extract",
+        "remove"
+      ],
+      "default": "extract"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    }
+  },
+  "required": [
+    "audio"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "rife-4.25",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T02:51:14Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Interpolate frames at fp16: one ordinary Load, then two Interpolate frames requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "6b650eaa5664aab280119511fe944861491aa15e",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "restoration",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Interpolate frames requests on a 2 s 640×360 video clip.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:51:14Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Interpolate frames requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "6b650eaa5664aab280119511fe944861491aa15e",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.6012534784
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Interpolate frames request on a 2 s 640×360 video clip.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:51:14Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Interpolate frames request, one sample, after one ordinary Load, then two Interpolate frames requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "6b650eaa5664aab280119511fe944861491aa15e",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.952
+      }
+    },
+    "runner": "native"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "scope": "isolated random-weight native worker, explicitly shrunk graph; trained output unqualified",
+  "serving_tiers": [
+    "fp16",
+    "int8",
+    "int4"
+  ],
+  "operation": "estimate_depth",
+  "operations_per_tier": 1,
+  "production_artifact_validation": "passed",
+  "malformed_inputs": 4,
+  "cancellation": "cancelled terminal reply and responsive cancel acknowledgement",
+  "unload_exit_code": 0,
+  "weights_downloaded": 0,
+  "checker_accommodations": [
+    "The current smoke checker treats source dtype fp32 as a serving tier; a lab-only folder copy enumerated fp16/int8/int4 without changing tracked source metadata.",
+    "25 ms between sequential requests avoids an observed shared NativeFamilyWorker busy-flag race. Raw failing evidence retained in lab/g6/foundation-busy-evidence.log."
+  ],
+  "eligible_matrix_coverage": {
+    "int8": {
+      "packed_matrices": 16,
+      "eligible_coverage": 1.0,
+      "companion_shapes_and_dtype": "pass",
+      "noneligible_half_parameters": "pass"
+    },
+    "int4": {
+      "packed_matrices": 16,
+      "eligible_coverage": 1.0,
+      "companion_shapes_and_dtype": "pass",
+      "noneligible_half_parameters": "pass"
+    }
+  },
+  "family_tests": {
+    "passed": 5,
+    "gpu_checks": [
+      "Fixed transposed-convolution orientation and bias",
+      "Half bicubic interpolation",
+      "Get conversion to stored int8/int4 packs followed by independently loaded packs, complete companions and nontrivial bias reference"
+    ]
+  },
+  "release_helper_smoke": "passed all declared serving tiers through production artifact validation"
+}

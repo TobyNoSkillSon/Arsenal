@@ -1,0 +1,56 @@
+{
+  "config": {
+    "model_type": "qwen-image-2.1",
+    "small": true
+  },
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABc0lEQVR4nBXQUbGFERiGURF2BBFEEEEEEUQQQQQRRBBBBBE0OGf9F2uemffiGyOE0MMv9L9IIlNsVRudwbQt3RwuzxbCr//9iCTyr4eilUZn2KYuNodrexpCdIBIij1kLVQa3TZ0stgc29UXvwPJAWLqIWmmUGm2roPJYtuOXl76DmQHcg9RE5lCtTXtDCbLtvVwefk7UHxi8QISmWKr2ugMpm3p5nB55fvE6gVEErn6RK00OsM2dbE5XNur3wuaA0RS84laqDS6behksTm2q699B7oDxO4TNVOoNFvXwWSxbUcvr38HhgPDJ2oiU6i2pp3BZNm2Hi5vfAemT5xeQCJTbFUbncG0Ld0cLm9+n7i8gEgiL5+olUZn2KYuNodre+t7wXaASNo+UQuVRrcNnSw2x3b17e/AcYB4fKJmCpVm6zqYLLbt6OWd78B14PpETWQK1da0M5gs29bD5d3vwPOJzwtIZIqtaqMzmLalm8Pl2f4BX3Y7U+E47Z0AAAAASUVORK5CYII="
+  },
+  "operations": [
+    {
+      "operation": "generate",
+      "input": {
+        "prompt": "This is an RGBA image with transparency. A red apple. The image has alpha channel and the background is transparent.",
+        "width": 256,
+        "height": 256,
+        "seed": 7,
+        "steps": 2
+      }
+    },
+    {
+      "operation": "edit",
+      "input": {
+        "prompt": "Make the background a sunset beach",
+        "images": [
+          {
+            "path": "$INBOX/fixture.png"
+          }
+        ],
+        "width": 256,
+        "height": 256,
+        "seed": 7,
+        "steps": 2
+      }
+    },
+    {
+      "operation": "edit",
+      "input": {
+        "prompt": "Put image 1 on a poster",
+        "images": [
+          {
+            "path": "$INBOX/fixture.png"
+          },
+          {
+            "path": "$INBOX/fixture.png"
+          }
+        ],
+        "width": 256,
+        "height": 256,
+        "steps": 1,
+        "seed": 3,
+        "guidance": 2,
+        "negative_prompt": "blurry"
+      }
+    }
+  ]
+}

@@ -1,0 +1,977 @@
+{
+ "source": "Projects/Verdict/lab/fixtures/laya-typed-decisions-0bit.json.gz",
+ "model": "laya-typed-decisions",
+ "dtype": "fp16",
+ "cases": [
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": {
+     "text": "Please refund my invoice, order 000.",
+     "reference": {
+      "id": 0,
+      "priority": 0
+     },
+     "notes": [
+      "first",
+      "second"
+     ]
+    },
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "refund",
+      "confidence": 0.3603,
+      "probabilities": {
+       "help": 0.1477,
+       "other": 0.0884,
+       "refund": 0.7638
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.5708,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.1558,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.4101,
+       "1": 0.3925,
+       "2": 0.1418,
+       "3": 0.0556
+      },
+      "score": 0.843,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 200,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "I need help resetting my account, ticket 001.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "help",
+      "confidence": 0.1188,
+      "probabilities": {
+       "help": 0.5433,
+       "other": 0.3201,
+       "refund": 0.1367
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.1421,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.169,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.0785,
+       "1": 0.1944,
+       "2": 0.5514,
+       "3": 0.1758
+      },
+      "score": 1.8244,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 131,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "The package arrived and everything works, reference 002.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "other",
+      "confidence": 0.2151,
+      "probabilities": {
+       "help": 0.3686,
+       "other": 0.5688,
+       "refund": 0.0626
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.0557,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.2552,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.2944,
+       "1": 0.5733,
+       "2": 0.0853,
+       "3": 0.047
+      },
+      "score": 0.8848,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 128,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Proszę zwrócić pieniądze za zamówienie 003.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "help",
+      "confidence": 0.1213,
+      "probabilities": {
+       "help": 0.5279,
+       "other": 0.3463,
+       "refund": 0.1259
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.1468,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.1156,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.1344,
+       "1": 0.4626,
+       "2": 0.2958,
+       "3": 0.1072
+      },
+      "score": 1.3758,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 164,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Potrzebuję pomocy z kontem, zgłoszenie 004.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "help",
+      "confidence": 0.2955,
+      "probabilities": {
+       "help": 0.7078,
+       "other": 0.2139,
+       "refund": 0.0784
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.1348,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.154,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.1143,
+       "1": 0.3489,
+       "2": 0.4581,
+       "3": 0.0786
+      },
+      "score": 1.501,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 155,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Bitte erstatten Sie die Rechnung Nummer 005.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "help",
+      "confidence": 0.0389,
+      "probabilities": {
+       "help": 0.4394,
+       "other": 0.3518,
+       "refund": 0.2088
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.3861,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.0534,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.118,
+       "1": 0.2907,
+       "2": 0.3715,
+       "3": 0.2198
+      },
+      "score": 1.693,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 140,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Ich brauche Hilfe beim Zugang, Fall 006.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "help",
+      "confidence": 0.5232,
+      "probabilities": {
+       "help": 0.8406,
+       "other": 0.1235,
+       "refund": 0.0359
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.0761,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.0558,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.1193,
+       "1": 0.2929,
+       "2": 0.3775,
+       "3": 0.2103
+      },
+      "score": 1.6787,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 143,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Por favor devuélveme el dinero por el pedido 007.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "refund",
+      "confidence": 0.1622,
+      "probabilities": {
+       "help": 0.2507,
+       "other": 0.1376,
+       "refund": 0.6117
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.4008,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.1928,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.0681,
+       "1": 0.1846,
+       "2": 0.5725,
+       "3": 0.1748
+      },
+      "score": 1.854,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 146,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Necesito ayuda con mi cuenta, caso 008.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "help",
+      "confidence": 0.3971,
+      "probabilities": {
+       "help": 0.7697,
+       "other": 0.1785,
+       "refund": 0.0518
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.1582,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.1397,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.2178,
+       "1": 0.4861,
+       "2": 0.2359,
+       "3": 0.0602
+      },
+      "score": 1.1385,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 137,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "注文の返金をお願いします。番号 009.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "help",
+      "confidence": 0.0013,
+      "probabilities": {
+       "help": 0.3567,
+       "other": 0.3302,
+       "refund": 0.3131
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.4639,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.0871,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.2376,
+       "1": 0.4038,
+       "2": 0.2787,
+       "3": 0.0798
+      },
+      "score": 1.2008,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 149,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "أحتاج إلى المساعدة في حسابي رقم 010.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "other",
+      "confidence": 0.0474,
+      "probabilities": {
+       "help": 0.3551,
+       "other": 0.449,
+       "refund": 0.1958
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.2792,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.0511,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.1329,
+       "1": 0.288,
+       "2": 0.3805,
+       "3": 0.1987
+      },
+      "score": 1.6448,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 167,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Emergency: dangerous smoke in the office, incident 011.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 200,
+   "response": {
+    "model": "laya-typed-decisions",
+    "answers": {
+     "choice": {
+      "choice": "other",
+      "confidence": 0.2939,
+      "probabilities": {
+       "help": 0.1902,
+       "other": 0.7165,
+       "refund": 0.0932
+      },
+      "type": "choice"
+     },
+     "noul": {
+      "noul": 0.0244,
+      "type": "noul"
+     },
+     "score": {
+      "confidence": 0.3234,
+      "legend": {
+       "0": "not urgent",
+       "1": "routine",
+       "2": "urgent",
+       "3": "immediate danger"
+      },
+      "probabilities": {
+       "0": 0.0183,
+       "1": 0.0517,
+       "2": 0.481,
+       "3": 0.449
+      },
+      "score": 2.3607,
+      "type": "score"
+     }
+    },
+    "usage": {
+     "input_tokens": 134,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "request": {
+    "model": "laya-typed-decisions",
+    "state": "Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice Please check the invoice reference 3.",
+    "questions": {
+     "choice": {
+      "type": "choice",
+      "instructions": "What action best fits this message?",
+      "criteria": {
+       "refund": "asks for money back",
+       "help": "asks for assistance",
+       "other": "neither"
+      }
+     },
+     "noul": {
+      "type": "noul",
+      "instructions": "Does this message ask for a refund?",
+      "criteria": {
+       "false": "not a refund request",
+       "true": "requests money back"
+      }
+     },
+     "score": {
+      "type": "score",
+      "instructions": "How urgent is this message?",
+      "criteria": [
+       "not urgent",
+       "routine",
+       "urgent",
+       "immediate danger"
+      ]
+     }
+    }
+   },
+   "status": 422,
+   "response": {
+    "detail": [
+     {
+      "loc": [
+       "body",
+       "state"
+      ],
+      "msg": "Value error, State needs about 9663 tokens; laya-typed-decisions accepts 8192. Shorten it or split it.",
+      "type": "value_error"
+     }
+    ]
+   }
+  }
+ ]
+}

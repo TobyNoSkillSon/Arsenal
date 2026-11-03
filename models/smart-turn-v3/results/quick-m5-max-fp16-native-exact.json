@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "smart-turn-v3",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T01:41:30Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered End Of Turn at fp16: one ordinary Load, then two End Of Turn requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "74af1538ebace37b0fcc667a6a8a3d902d73eee0",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "audio",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two End Of Turn requests on a 3.3 s speech-and-music clip.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T01:41:30Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two End Of Turn requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "74af1538ebace37b0fcc667a6a8a3d902d73eee0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.2147483648
+      },
+      "secondsPerRequest": {
+        "basis": "One warm End Of Turn request on a 3.3 s speech-and-music clip.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T01:41:30Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) End Of Turn request, one sample, after one ordinary Load, then two End Of Turn requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "74af1538ebace37b0fcc667a6a8a3d902d73eee0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.054
+      }
+    },
+    "runner": "native"
+  }
+}

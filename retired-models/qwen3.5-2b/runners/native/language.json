@@ -1,0 +1,47 @@
+{
+  "operations": [
+    "chat",
+    "count_tokens",
+    "describe",
+    "tag"
+  ],
+  "processor": "Qwen3VLProcessor",
+  "prompts": {
+    "ocr": "OCR:"
+  },
+  "processor_config": {
+    "size": {
+      "longest_edge": 16777216,
+      "shortest_edge": 65536
+    },
+    "patch_size": 16,
+    "temporal_patch_size": 2,
+    "merge_size": 2,
+    "image_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "image_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "processor_class": "Qwen3VLProcessor",
+    "image_processor_type": "Qwen2VLImageProcessorFast"
+  },
+  "operation_max_pixels": {
+    "describe": 1048576,
+    "tag": 1048576
+  },
+  "sampling": {
+    "temperature": 0.7,
+    "top_p": 0.8,
+    "top_k": 20,
+    "presence_penalty": 1.5,
+    "thinking": {
+      "temperature": 1.0,
+      "top_p": 0.95
+    }
+  }
+}

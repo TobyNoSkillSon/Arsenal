@@ -1,0 +1,437 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "video": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "video/*"
+        ]
+      },
+      "x-arsenal-control": "video-picker"
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "label": {
+            "type": "string",
+            "enum": [
+              "foreground",
+              "background"
+            ],
+            "default": "foreground"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 256,
+      "x-arsenal-control": "image-points",
+      "x-arsenal-image": "video"
+    },
+    "boxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "xmin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "xmax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "xmin",
+          "ymin",
+          "xmax",
+          "ymax"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "text": {
+      "type": "string",
+      "maxLength": 10000
+    },
+    "start_frame": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "end_frame": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000000
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt_updates": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2048,
+      "items": {
+        "type": "object",
+        "properties": {
+          "frame_index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+          },
+          "object_id": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "add",
+              "update",
+              "remove"
+            ]
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "x": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "y": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "label": {
+                  "type": "string",
+                  "enum": [
+                    "foreground",
+                    "background"
+                  ],
+                  "default": "foreground"
+                }
+              },
+              "required": [
+                "x",
+                "y"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 256,
+            "x-arsenal-control": "image-points",
+            "x-arsenal-image": "video"
+          },
+          "boxes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "xmin": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "ymin": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "xmax": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "ymax": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              },
+              "required": [
+                "xmin",
+                "ymin",
+                "xmax",
+                "ymax"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 256
+          },
+          "text": {
+            "type": "string",
+            "maxLength": 10000
+          },
+          "visual_exemplars": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 32,
+            "description": "Visual concept examples. Each box is normalized to its own example image, independent of the target image or video frame.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "image": {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 4096
+                    }
+                  },
+                  "required": [
+                    "path"
+                  ],
+                  "additionalProperties": false,
+                  "x-arsenal-file": {
+                    "accept": [
+                      "image/png",
+                      "image/jpeg"
+                    ]
+                  },
+                  "x-arsenal-control": "image-picker"
+                },
+                "box": {
+                  "type": "object",
+                  "properties": {
+                    "xmin": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "ymin": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "xmax": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    "ymax": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    }
+                  },
+                  "required": [
+                    "xmin",
+                    "ymin",
+                    "xmax",
+                    "ymax"
+                  ],
+                  "additionalProperties": false,
+                  "x-arsenal-control": "image-boxes",
+                  "x-arsenal-image": "image",
+                  "x-arsenal-coordinates": "normalized"
+                },
+                "label": {
+                  "type": "string",
+                  "enum": [
+                    "foreground",
+                    "background"
+                  ],
+                  "default": "foreground"
+                }
+              },
+              "required": [
+                "image",
+                "box"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "frame_index",
+          "object_id",
+          "action"
+        ],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "action": {
+                  "enum": [
+                    "add",
+                    "update"
+                  ]
+                }
+              }
+            },
+            "then": {
+              "anyOf": [
+                {
+                  "required": [
+                    "points"
+                  ]
+                },
+                {
+                  "required": [
+                    "boxes"
+                  ]
+                },
+                {
+                  "required": [
+                    "text"
+                  ]
+                },
+                {
+                  "required": [
+                    "visual_exemplars"
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "visual_exemplars": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "description": "Visual concept examples. Each box is normalized to its own example image, independent of the target image or video frame.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 4096
+              }
+            },
+            "required": [
+              "path"
+            ],
+            "additionalProperties": false,
+            "x-arsenal-file": {
+              "accept": [
+                "image/png",
+                "image/jpeg"
+              ]
+            },
+            "x-arsenal-control": "image-picker"
+          },
+          "box": {
+            "type": "object",
+            "properties": {
+              "xmin": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "ymin": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "xmax": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "ymax": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "required": [
+              "xmin",
+              "ymin",
+              "xmax",
+              "ymax"
+            ],
+            "additionalProperties": false,
+            "x-arsenal-control": "image-boxes",
+            "x-arsenal-image": "image",
+            "x-arsenal-coordinates": "normalized"
+          },
+          "label": {
+            "type": "string",
+            "enum": [
+              "foreground",
+              "background"
+            ],
+            "default": "foreground"
+          }
+        },
+        "required": [
+          "image",
+          "box"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "required": [
+        "video"
+      ]
+    },
+    {
+      "required": [
+        "session_id"
+      ]
+    }
+  ]
+}

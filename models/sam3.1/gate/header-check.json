@@ -1,0 +1,26 @@
+{
+  "status": "passed-with-planned-get-casts",
+  "source_dtype": "fp32",
+  "runtime_dtype": "fp16",
+  "source_tensors": 1961,
+  "runtime_parameters": 1960,
+  "source_repo": "mlx-community/sam3.1-bf16",
+  "source_revision": "a992e302ea9b0f03f41dfd93414a4fd0e818f65b",
+  "port_repo": "thesepehrm/sam31-swift",
+  "port_revision": "ce4ce6e733566cc52dec14e60c894867e1e434a3",
+  "mapping_sha256": "d2fe8e4f18fc75138b250466a84364356e09fc125a5ef63c7658f313a2652fc0",
+  "header_only": true,
+  "tensor_payload_bytes_downloaded": 0,
+  "planned_transform": "cast each read floating tensor to FP16 during Get; detector_model.text_encoder.text_projection.weight (unused in forward, two values of -9.58e18) is left out; trained output parity remains unqualified",
+  "ignored_source_tensors": [
+    "detector_model.text_encoder.text_projection.weight"
+  ],
+  "full_graph_eligible_matrices": 707,
+  "eligible_parameters": 841459200,
+  "learned_parameters": 872660972,
+  "eligibility": "Linear/Embedding weight matrices with group-64-compatible input width; spatial kernels, norms and bare learned query/position tensors remain half",
+  "header_bytes_read": 275512,
+  "dtype_mismatches": 0,
+  "planned_get_casts": 1960,
+  "source_dtype_matches_runtime": false
+}

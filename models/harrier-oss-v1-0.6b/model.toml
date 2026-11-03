@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "harrier-oss-v1-0.6b"
+name = "Harrier OSS v1 0.6B"
+kind = "embeddings"
+params = "596M"
+publisher = "Microsoft"
+released = 2026
+suggested = false
+summary = "Turn text into vectors for semantic search and similarity."
+purpose = "Create text search embeddings"
+good_for = ["semantic search", "similarity", "clustering", "classification"]
+limits = ["Checked live at FP16 on 19 Oct: a cat/kitten pair scored 0.82, unrelated texts 0.40 to 0.42."]
+tasks = ["feature-extraction"]
+languages = ["mul"]
+tools = ["operation"]
+context = 32768
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/microsoft/harrier-oss-v1-0.6b/tree/f9b9dc8d367d443f2479d27aa5d8d2850c0774ee"
+[weights]
+repo = "microsoft/harrier-oss-v1-0.6b"
+revision = "f9b9dc8d367d443f2479d27aa5d8d2850c0774ee"
+dtype = "bf16"
+files = ["config.json", "model.safetensors", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "eb15983a1c7f53ecf3d3f1880e676a56967650b0c3c4ed2387c3851133f2d7ef"
+"model.safetensors" = "6bb124227f33c3dbf7fbbd38119b2afa8be959e93666d3c9be7142b66708b66c"
+"tokenizer.json" = "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a"
+"tokenizer_config.json" = "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0"
+[weights.bytes]
+"config.json" = 1355
+"model.safetensors" = 1192133232
+"tokenizer.json" = 11423705
+"tokenizer_config.json" = 5404
+[derive]
+fp16 = "cast:embed-qwen3-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "embed"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "embed"
+title = "Embed inputs"
+input = "ops/embed.input.json"
+output_schema = "ops/embed.output.json"
+output = "json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

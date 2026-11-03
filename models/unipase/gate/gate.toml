@@ -1,0 +1,8 @@
+schema = 1
+id = "unipase-native-v1"
+kind = "enhancement"
+reference_runner = "pinned-vendor-pytorch-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["torchaudio resampling (7 rate pairs), the encoder padding and packet-loss mask, WavLM relative position buckets, the Vocos ISTFT head, the PostNet's STFT, band split, crossfade and iSTFT, and the long-form segmentation match the maker's code without weights (relative L2 at most 1e-5; mask and buckets exact)", "all 1,037 checkpoint tensors accounted for: 1,033 parameters with exact shapes and FP16 range, weight_g and weight_v folded, the unused encoder LayerNorm and the vocoder Hann window checked and dropped", "component parity on the maker's own FP16 tensors, captured once from Xiaobin-Rong/unipase on PyTorch MPS: WavLM CNN, layers 1, 12 and 24, L1 and L24 with and without PLC, adapter, vocoder, PostNet blocks and output", "end to end on the fixture: STFT magnitude within the maker's own BF16-versus-FP16 spread"]
+evidence = "gate/golden/golden.json"

@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of segment through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "eomt-coco-panoptic-large-640",
+  "revision": "dcd130bed9b1ebda7041fd660fddb16f905b9c3b",
+  "rows": [
+    {
+      "date": "2026-10-31T01:30:32Z",
+      "load_seconds": 0.34,
+      "ops": {
+        "segment": {
+          "seconds_first": 0.101,
+          "seconds_warm": 0.074,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 2314.0,
+      "precision": "fp16",
+      "runner_sha256": "39a6cc60eb6a5b92e6755f697005ec63bcc816771f17c10cf3fce640da25d5f6",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

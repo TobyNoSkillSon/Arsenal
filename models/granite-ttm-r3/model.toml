@@ -1,0 +1,65 @@
+schema = 3
+id = "granite-ttm-r3"
+name = "Granite TimeSeries TTM R3"
+kind = "local.forecast"
+summary = "Forecasts the next 30 values of one numeric series as a range of likely outcomes."
+description = "Granite-TTM-R3 is IBM's third-generation TinyTimeMixer, a 1.4M-parameter forecaster built from gated MLP mixers instead of self-attention. This checkpoint (512-30-dec-90) splits the series into a smooth trend and a residual, forecasts each, and returns nine quantiles for 30 steps. It was pre-trained on GIFT-Eval pretraining data and KernelSynth synthetic series; IBM reports GIFT-Eval MASE 0.727 and CRPS 0.523 zero-shot (the maker's figures, not reproduced here)."
+purpose = "Forecast numeric time series"
+publisher = "ibm-granite"
+released = 2026
+params = "1.4M"
+tasks = ["time-series-forecasting"]
+languages = ["und"]
+good_for = ["Very fast zero-shot forecasts of one numeric series, such as sales, load or counts, up to 30 steps ahead", "Seasonal series: on monthly airline passengers it continues the summer peak and winter dip of the last years", "Short histories: it pads anything under 512 steps and still answers from 3 values"]
+limits = ["Univariate here: one series in; the model's multivariate and exogenous modes are not ported", "Horizon is at most 30 steps (the checkpoint's length; no rollout)", "Uses at most the last 512 values for the trend and the last 90 for the residual; older values only set the scale", "Returns only the trained quantile levels 0.1 to 0.9 in steps of 0.1", "Reads and writes no language, so the Polish question does not apply", "Parity with the maker code (granite-tsfm, MPS, networks fp16): cosine 1.0000000, max abs diff 0.29 passengers on values up to 663 (airline series)"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/ibm-granite/granite-timeseries-ttm-r3"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/ibm-granite/granite-timeseries-ttm-r3/blob/ea17cfd2e3edcaea21eb8dcecd18bf88971482fa/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "ibm-granite/granite-timeseries-ttm-r3"
+revision = "ea17cfd2e3edcaea21eb8dcecd18bf88971482fa"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "8ec0509a18a38f65b02f046fc28298ab3acf5d54eecb0a0df959b9fa001bc9fb"
+"config.json" = "8e62cd4f1e4b1655ecc8c6ef9a9cf802d2ec64846a064a5072a59fd23688f062"
+
+[weights.bytes]
+"model.safetensors" = 5729424
+"config.json" = 2668
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-granite-ttm-r3"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

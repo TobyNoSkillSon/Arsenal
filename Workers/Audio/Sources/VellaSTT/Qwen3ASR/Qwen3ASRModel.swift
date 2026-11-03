@@ -1,0 +1,975 @@
+//
+//  Qwen3ASRModel.swift
+//  MLXAudioSTT
+//
+// Created by Prince Canuma on 06/02/2026.
+//
+
+import Foundation
+import MLX
+import MLXNN
+import MLXLMCommon
+import Tokenizers
+
+extension Qwen3ASRModel: STTGenerationModel {
+    public var defaultGenerationParameters: STTGenerateParameters {
+        STTGenerateParameters(
+            maxTokens: 8192,
+            temperature: 0.0,
+            topP: 0.95,
+            topK: 0,
+            verbose: false,
+            language: nil,
+            chunkDuration: 1200.0,
+            minChunkDuration: 1.0
+        )
+    }
+
+    public func generate(audio: MLXArray, generationParameters: STTGenerateParameters) -> STTOutput {
+        generate(
+            audio: audio,
+            maxTokens: generationParameters.maxTokens,
+            temperature: generationParameters.temperature,
+            context: "",
+            language: generationParameters.language,
+            chunkDuration: generationParameters.chunkDuration,
+            minChunkDuration: generationParameters.minChunkDuration,
+            repetitionPenalty: generationParameters.repetitionPenalty,
+            repetitionContextSize: generationParameters.repetitionContextSize
+        )
+    }
+
+}
+
+private let qwen3ASRLanguageAliases: [String: String] = [
+    "zh": "Chinese",
+    "chinese": "Chinese",
+    "mandarin": "Chinese",
+    "yue": "Cantonese",
+    "cantonese": "Cantonese",
+    "en": "English",
+    "english": "English",
+    "de": "German",
+    "german": "German",
+    "es": "Spanish",
+    "spanish": "Spanish",
+    "fr": "French",
+    "french": "French",
+    "it": "Italian",
+    "italian": "Italian",
+    "pt": "Portuguese",
+    "portuguese": "Portuguese",
+    "ru": "Russian",
+    "russian": "Russian",
+    "ko": "Korean",
+    "korean": "Korean",
+    "ja": "Japanese",
+    "japanese": "Japanese",
+]
+
+// MARK: - Qwen3 ASR Model
+
+public class Qwen3ASRModel: Module {
+    public let config: Qwen3ASRConfig
+
+    @ModuleInfo(key: "audio_tower") var audioTower: Qwen3ASRAudioEncoder
+    @ModuleInfo(key: "model") var model: Qwen3ASRTextModel
+    @ModuleInfo(key: "lm_head") var lmHead: Linear?
+
+    public var tokenizer: Tokenizers.Tokenizer?
+
+    /// Sample rate expected by the model (16kHz).
+    public let sampleRate: Int = 16000
+
+    public init(_ config: Qwen3ASRConfig) {
+        self.config = config
+
+        self._audioTower.wrappedValue = Qwen3ASRAudioEncoder(config.audioConfig)
+        self._model.wrappedValue = Qwen3ASRTextModel(config.textConfig)
+
+        if config.textConfig.tieWordEmbeddings {
+            self._lmHead.wrappedValue = nil
+        } else {
+            self._lmHead.wrappedValue = Linear(
+                config.textConfig.hiddenSize,
+                config.textConfig.vocabSize,
+                bias: false
+            )
+        }
+    }
+
+    // MARK: - Audio Features
+
+    public func getAudioFeatures(
+        _ inputFeatures: MLXArray,
+        featureAttentionMask: MLXArray? = nil
+    ) -> MLXArray {
+        return audioTower(inputFeatures, featureAttentionMask: featureAttentionMask)
+    }
+
+    // MARK: - Forward Pass
+
+    public func callAsFunction(
+        inputIds: MLXArray,
+        inputEmbeddings: MLXArray? = nil,
+        inputFeatures: MLXArray? = nil,
+        featureAttentionMask: MLXArray? = nil,
+        cache: [KVCache]? = nil
+    ) -> MLXArray {
+        var inputsEmbeds: MLXArray
+        if let embeddings = inputEmbeddings {
+            inputsEmbeds = embeddings
+        } else {
+            inputsEmbeds = model.embedTokens(inputIds)
+        }
+
+        // Encode and merge audio features on first pass
+        if let features = inputFeatures,
+           cache == nil || cache?.first == nil || (cache?.first as? KVCacheSimple)?.offset == 0 {
+            let audioFeatures = getAudioFeatures(features, featureAttentionMask: featureAttentionMask)
+                .asType(inputsEmbeds.dtype)
+
+            inputsEmbeds = mergeAudioFeatures(
+                inputsEmbeds: inputsEmbeds,
+                audioFeatures: audioFeatures,
+                inputIds: inputIds
+            )
+        }
+
+        let hiddenStates = model(inputsEmbeds: inputsEmbeds, cache: cache)
+
+        if let lmHead = lmHead {
+            return lmHead(hiddenStates)
+        } else {
+            return model.embedTokens.asLinear(hiddenStates)
+        }
+    }
+
+    // MARK: - Audio-Text Merging
+
+    public func mergeAudioFeatures(
+        inputsEmbeds: MLXArray,
+        audioFeatures: MLXArray,
+        inputIds: MLXArray
+    ) -> MLXArray {
+        let flatMask = (inputIds .== MLXArray(Int32(config.audioTokenId))).reshaped(-1)
+        let batchSize = inputsEmbeds.dim(0)
+        let seqLen = inputsEmbeds.dim(1)
+        let hiddenDim = inputsEmbeds.dim(2)
+
+        let numAudioTokens = Int(flatMask.asType(.int32).sum().item(Int32.self))
+        guard numAudioTokens > 0 && audioFeatures.dim(0) > 0 else {
+            return inputsEmbeds
+        }
+
+        let numToReplace = min(numAudioTokens, audioFeatures.dim(0))
+        let flatEmbeds = inputsEmbeds.reshaped(-1, hiddenDim)
+        let totalLen = flatEmbeds.dim(0)
+
+        // Audio tokens are contiguous in the prompt — find start and splice directly
+        let maskValues = flatMask.asType(.int32).asArray(Int32.self)
+        var firstAudioPos = -1
+        for (i, v) in maskValues.enumerated() {
+            if v != 0 { firstAudioPos = i; break }
+        }
+        guard firstAudioPos >= 0 else { return inputsEmbeds }
+
+        let endAudioPos = firstAudioPos + numToReplace
+        var parts: [MLXArray] = []
+        if firstAudioPos > 0 {
+            parts.append(flatEmbeds[0..<firstAudioPos])
+        }
+        parts.append(audioFeatures[0..<numToReplace])
+        if endAudioPos < totalLen {
+            parts.append(flatEmbeds[endAudioPos..<totalLen])
+        }
+
+        return MLX.concatenated(parts, axis: 0).reshaped(batchSize, seqLen, hiddenDim)
+    }
+
+    // MARK: - Audio Preprocessing
+
+    public func preprocessAudio(_ audio: MLXArray) -> (MLXArray, MLXArray, Int) {
+        // Compute mel spectrogram (must match transformers' WhisperFeatureExtractor:
+        // slaney mel scale + periodic hann window)
+        let melSpec = computeMelSpectrogram(
+            audio: audio,
+            sampleRate: 16000,
+            nFft: 400,
+            hopLength: 160,
+            nMels: config.audioConfig.numMelBins,
+            melScale: .slaney,
+            hannPeriodic: true
+        )
+
+        // melSpec shape: [numFrames, nMels] -> need [1, nMels, numFrames]
+        let transposed = melSpec.transposed(1, 0)
+        let inputFeatures = transposed.expandedDimensions(axis: 0)
+
+        // Create attention mask (all ones for single audio)
+        let numFrames = melSpec.dim(0)
+        let featureAttentionMask = MLX.ones([1, numFrames]).asType(.int32)
+
+        // Compute number of audio tokens after CNN
+        let audioLengths = featureAttentionMask.sum(axis: -1).asType(.int32)
+        let aftercnnLens = getFeatExtractOutputLengths(audioLengths)
+        let numAudioTokens = Int(aftercnnLens[0].item(Int32.self))
+
+        return (inputFeatures, featureAttentionMask, numAudioTokens)
+    }
+
+    // MARK: - Prompt Building
+
+    private func extractLanguage(from text: String) -> (language: String?, text: String) {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let prefix = "language "
+        let marker = "<asr_text>"
+
+        guard trimmed.hasPrefix(prefix), let markerRange = trimmed.range(of: marker) else {
+            return (nil, trimmed)
+        }
+
+        let languageStart = trimmed.index(trimmed.startIndex, offsetBy: prefix.count)
+        let detectedLanguage = trimmed[languageStart..<markerRange.lowerBound]
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let transcript = trimmed[markerRange.upperBound...]
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        return (detectedLanguage.isEmpty ? nil : detectedLanguage, transcript)
+    }
+
+    func normalizeLanguageName(_ language: String?) -> String? {
+        guard let rawLanguage = language?.trimmingCharacters(in: .whitespacesAndNewlines),
+              !rawLanguage.isEmpty else {
+            return nil
+        }
+
+        let supported = Dictionary(
+            uniqueKeysWithValues: config.supportLanguages.map { ($0.lowercased(), $0) }
+        )
+        let lowercased = rawLanguage.lowercased()
+
+        if let supportedName = supported[lowercased] {
+            return supportedName
+        }
+
+        if let aliasName = qwen3ASRLanguageAliases[lowercased] {
+            if supported.isEmpty {
+                return aliasName
+            }
+            if let supportedName = supported[aliasName.lowercased()] {
+                return supportedName
+            }
+        }
+
+        return rawLanguage
+    }
+
+    func parseGeneratedChunk(_ decodedText: String, forcedLanguage: String?) -> (language: String?, text: String) {
+        let normalizedForcedLanguage = normalizeLanguageName(forcedLanguage)
+        let trimmed = decodedText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if let normalizedForcedLanguage {
+            return (normalizedForcedLanguage, trimmed)
+        }
+
+        let parsed = extractLanguage(from: decodedText)
+        if let detectedLanguage = normalizeLanguageName(parsed.language) {
+            return (detectedLanguage, parsed.text)
+        }
+
+        guard !trimmed.isEmpty else {
+            return (nil, "")
+        }
+
+        return ("English", trimmed)
+    }
+
+    static func mergeLanguages(_ languages: [String?]) -> String? {
+        var seen: Set<String> = []
+        var merged: [String] = []
+
+        for language in languages {
+            guard let language = language?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  !language.isEmpty else {
+                continue
+            }
+
+            if seen.insert(language).inserted {
+                merged.append(language)
+            }
+        }
+
+        return merged.isEmpty ? nil : merged.joined(separator: ",")
+    }
+
+    func buildPromptText(
+        numAudioTokens: Int,
+        context: String = "",
+        language: String? = nil
+    ) -> String {
+        let systemContext = context.isEmpty ? "" : context
+
+        let assistantPrefix: String
+        if let langName = normalizeLanguageName(language) {
+            assistantPrefix = "language \(langName)<asr_text>"
+        } else {
+            assistantPrefix = ""
+        }
+
+        return "<|im_start|>system\n\(systemContext)<|im_end|>\n"
+            + "<|im_start|>user\n<|audio_start|>"
+            + String(repeating: "<|audio_pad|>", count: numAudioTokens)
+            + "<|audio_end|><|im_end|>\n"
+            + "<|im_start|>assistant\n"
+            + assistantPrefix
+    }
+
+    public func buildPrompt(
+        numAudioTokens: Int,
+        context: String = "",
+        language: String? = nil
+    ) -> MLXArray {
+        guard let tokenizer = tokenizer else {
+            fatalError("Tokenizer not loaded")
+        }
+
+        let prompt = buildPromptText(
+            numAudioTokens: numAudioTokens,
+            context: context,
+            language: language
+        )
+        let tokenIds = tokenizer.encode(text: prompt)
+        return MLXArray(tokenIds.map { Int32($0) }).expandedDimensions(axis: 0)
+    }
+
+    // MARK: - Cache Creation
+
+    public func makeCache() -> [KVCache] {
+        return (0..<config.textConfig.numHiddenLayers).map { _ in
+            KVCacheSimple()
+        }
+    }
+
+    // MARK: - Profiling (opt-in, VELLA_QWEN_PROFILE=1; adds syncs at phase boundaries)
+
+    public struct Profile {
+        public var mel = 0.0, encoder = 0.0, prefill = 0.0, decode = 0.0, decodeWait = 0.0
+        public var prompt = 0.0, conv = 0.0, layers = 0.0
+        public var promptTokens = 0, decodeSteps = 0
+        public init() {}
+    }
+    public static let profiling = ProcessInfo.processInfo.environment["VELLA_QWEN_PROFILE"] == "1"
+    public var profile = Profile()
+    nonisolated(unsafe) static var encoderClock: (conv: Double, layers: Double) = (0, 0)
+    /// Optimized path (FastPathCapable, off after load; the worker enables it once the gate qualified it).
+    /// decoder: pipelined greedy decode, the prefill without the discarded vocabulary projection. encoder: the audio
+    /// tower held in f32 (the stock numerics without per-call weight casts) with host-side conv lengths.
+    public private(set) var fastDecode = false
+    public private(set) var fastEncoder = false
+    private var towerCheckpointDType: DType?
+    var lastEncoderFinite = true
+    /// Every consumed optimized-decoder step had finite logits, over the whole last `generate` call.
+    var lastDecoderFinite = true
+    /// Test hook (reported in worker status, never inherited by the gate's self-test child): make the optimized
+    /// decoder's logits non-finite from this step on, after a finite encoder result, to prove the stock fallback.
+    static let testDecoderFaultStep: Int? = ProcessInfo.processInfo.environment["VELLA_TEST_DECODER_NONFINITE"].flatMap(Int.init)
+    /// Generated token IDs of the most recent chunk (EOS excluded), for parity and self-tests.
+    public private(set) var lastTokens: [Int] = []
+
+    // MARK: - Single Chunk Generation (internal)
+
+    private func generateSingleChunk(
+        audio: MLXArray,
+        maxTokens: Int,
+        temperature: Float,
+        context: String,
+        language: String?,
+        repetitionPenalty: Float = 1.0,
+        repetitionContextSize: Int = 32
+    ) -> (text: String, language: String?, promptTokens: Int, generationTokens: Int) {
+        guard let tokenizer = tokenizer else {
+            fatalError("Tokenizer not loaded")
+        }
+
+        let eosTokenIds = [151645, 151643]
+        let prefillStepSize = 2048
+
+        let profiling = Qwen3ASRModel.profiling
+        func now() -> Double { ProcessInfo.processInfo.systemUptime }
+        var mark = now()
+        let (inputFeatures, featureAttentionMask, numAudioTokens) = preprocessAudio(audio)
+        if profiling { eval(inputFeatures); let t = now(); profile.mel += t - mark; mark = t }
+        let inputIds = buildPrompt(
+            numAudioTokens: numAudioTokens,
+            context: context,
+            language: language
+        )
+        let promptTokenCount = inputIds.dim(1)
+        if profiling { eval(inputIds); let t = now(); profile.prompt += t - mark; mark = t; Qwen3ASRModel.encoderClock = (0, 0) }
+
+        let audioFeatures = getAudioFeatures(inputFeatures, featureAttentionMask: featureAttentionMask)
+        eval(audioFeatures)
+        if fastEncoder { lastEncoderFinite = lastEncoderFinite && !logicalOr(MLX.isNaN(audioFeatures), MLX.isInf(audioFeatures)).any().item(Bool.self) }
+        if profiling { profile.conv += Qwen3ASRModel.encoderClock.conv; profile.layers += Qwen3ASRModel.encoderClock.layers }
+        if profiling { let t = now(); profile.encoder += t - mark; mark = t; profile.promptTokens += promptTokenCount }
+
+        let embeds = model.embedTokens(inputIds)
+        let inputsEmbeds = mergeAudioFeatures(
+            inputsEmbeds: embeds,
+            audioFeatures: audioFeatures.asType(embeds.dtype),
+            inputIds: inputIds
+        )
+
+        let cache = makeCache()
+
+        // Chunked prefill (mlx-lm.generate_step pattern): keeps lazy graph small,
+        // materializes cache state between chunks, frees intermediate buffers.
+        let totalTokens = inputIds.dim(1)
+        var processedTokens = 0
+        while totalTokens - processedTokens > 1 {
+            let remaining = (totalTokens - processedTokens) - 1
+            let n = min(prefillStepSize, remaining)
+            let chunkIds = inputIds[0..., processedTokens..<(processedTokens + n)]
+            let chunkEmbeds = inputsEmbeds[0..., processedTokens..<(processedTokens + n), 0...]
+            if fastDecode {
+                // Only the cache matters for these positions: skip the vocabulary projection whose logits stock
+                // computes and discards (the cache is the same graph either way; 0.6B: ~80-100 MB less MLX peak).
+                eval(model(inputsEmbeds: chunkEmbeds, cache: cache))
+            } else {
+                let chunkLogits = callAsFunction(
+                    inputIds: chunkIds,
+                    inputEmbeddings: chunkEmbeds,
+                    cache: cache
+                )
+                eval(chunkLogits)
+            }
+            Memory.clearCache()
+            processedTokens += n
+        }
+
+        let lastIds = inputIds[0..., processedTokens..<totalTokens]
+        let lastEmbeds = inputsEmbeds[0..., processedTokens..<totalTokens, 0...]
+        let firstLogits = callAsFunction(
+            inputIds: lastIds,
+            inputEmbeddings: lastEmbeds,
+            cache: cache
+        )
+
+        var firstLast = firstLogits[0..., -1, 0...]
+        if temperature > 0 {
+            firstLast = firstLast / temperature
+        }
+        var prevTokenArr = firstLast.argMax(axis: -1)
+        // Optimized decoder numerics: per step, one scalar (`decoderFiniteProbe`) that is finite iff every logit is,
+        // evaluated together with its token and read once after the loop, only for the steps whose tokens were
+        // consumed: no extra host sync per step.
+        let checksDecoder = fastDecode && repetitionPenalty == 1.0
+        var consumedSums: [MLXArray] = []
+        if checksDecoder {
+            let firstSum = Qwen3ASRModel.decoderFiniteProbe(firstLast)
+            consumedSums.append(firstSum)
+            asyncEval(prevTokenArr, firstSum)
+        } else {
+            asyncEval(prevTokenArr)
+        }
+
+        var generatedTokens: [Int] = []
+
+        // AR loop with asyncEval pipelining: while CPU is consuming token N
+        // (item() blocks briefly), GPU computes token N+1 in the background.
+        defer {
+            lastTokens = generatedTokens
+            if profiling { profile.decode += now() - mark; profile.decodeSteps += generatedTokens.count }
+        }
+        // Pipelined greedy decode: step N+1 is built from the still-lazy token N and
+        // queued before the host reads token N, so graph construction and Metal
+        // encoding overlap GPU compute instead of alternating with it. Same ops and
+        // shapes as the loop below (token-exact); one extra step is computed after EOS.
+        if checksDecoder {
+            var stepIndex = 0
+            func step(_ token: MLXArray) -> (token: MLXArray, sum: MLXArray) {
+                stepIndex += 1
+                var logits = callAsFunction(inputIds: token.reshaped(1, 1).asType(.int32), cache: cache)[0..., -1, 0...]
+                if let fault = Qwen3ASRModel.testDecoderFaultStep, stepIndex >= fault { logits = logits + MLXArray(Float.nan) }
+                return (logits.argMax(axis: -1), Qwen3ASRModel.decoderFiniteProbe(logits))
+            }
+            var queued: (token: MLXArray, sum: MLXArray)? = maxTokens > 1 ? step(prevTokenArr) : nil
+            if let queued { asyncEval(queued.token, queued.sum) }
+            defer {
+                if !consumedSums.isEmpty {
+                    let sums = stacked(consumedSums)
+                    lastDecoderFinite = lastDecoderFinite && !logicalOr(MLX.isNaN(sums), MLX.isInf(sums)).any().item(Bool.self)
+                }
+            }
+            for tokenIndex in 0..<maxTokens {
+                let waitStart = profiling ? now() : 0
+                let token = prevTokenArr.item(Int.self)
+                if profiling {
+                    let t = now()
+                    if tokenIndex == 0 { profile.prefill += t - mark; mark = t } else { profile.decodeWait += t - waitStart }
+                }
+                if eosTokenIds.contains(token) { break }
+                generatedTokens.append(token)
+                if generatedTokens.count >= 24 && Set(generatedTokens.suffix(24)).count <= 3 { break }
+                guard tokenIndex < maxTokens - 1, let next = queued else { break }
+                prevTokenArr = next.token
+                consumedSums.append(next.sum) // read in the next iteration: a consumed step
+                queued = tokenIndex + 1 < maxTokens - 1 ? step(next.token) : nil
+                if let queued { asyncEval(queued.token, queued.sum) }
+                if tokenIndex > 0 && tokenIndex % 256 == 0 { Memory.clearCache() }
+            }
+            let decodedText = tokenizer.decode(tokens: generatedTokens)
+            let parsed = parseGeneratedChunk(decodedText, forcedLanguage: language)
+            return (parsed.text, parsed.language, promptTokenCount, generatedTokens.count)
+        }
+        for tokenIndex in 0..<maxTokens {
+            let waitStart = profiling ? now() : 0
+            let prevTokenInt = prevTokenArr.item(Int.self)
+            if profiling {
+                let t = now()
+                if tokenIndex == 0 { profile.prefill += t - mark; mark = t } else { profile.decodeWait += t - waitStart }
+            }
+
+            if eosTokenIds.contains(prevTokenInt) {
+                break
+            }
+            generatedTokens.append(prevTokenInt)
+
+            // Backstop for greedy callers (penalty == 1.0): if last 24 tokens have
+            // <=3 unique IDs, force-stop to prevent multi-GB KV cache growth and
+            // minutes-long stalls. Disabled when caller opts into repetitionPenalty
+            // (the proper fix) to avoid truncating legitimately repetitive speech.
+            if repetitionPenalty == 1.0 && generatedTokens.count >= 24 {
+                let tail = generatedTokens.suffix(24)
+                if Set(tail).count <= 3 {
+                    break
+                }
+            }
+
+            if tokenIndex == maxTokens - 1 {
+                break
+            }
+
+            let nextInArr = MLXArray([Int32(prevTokenInt)]).expandedDimensions(axis: 0)
+            let nextLogits = callAsFunction(inputIds: nextInArr, cache: cache)
+            var nextLast = nextLogits[0..., -1, 0...]
+            if temperature > 0 {
+                nextLast = nextLast / temperature
+            }
+            // Sign-aware repetition penalty (mlx-lm style): downweight recently-seen
+            // tokens so the model can escape greedy local minima.
+            if repetitionPenalty != 1.0 && !generatedTokens.isEmpty {
+                let contextSize = max(1, repetitionContextSize)
+                let recent = Array(generatedTokens.suffix(contextSize)).map { Int32($0) }
+                let recentArr = MLXArray(recent)
+                let logitsForRecent = nextLast[0..., recentArr]
+                let penalty = MLXArray(repetitionPenalty)
+                let penalized = MLX.where(
+                    logitsForRecent .> 0,
+                    logitsForRecent / penalty,
+                    logitsForRecent * penalty
+                )
+                nextLast[0..., recentArr] = penalized
+            }
+            let nextTokenArr = nextLast.argMax(axis: -1)
+            asyncEval(nextTokenArr)
+
+            prevTokenArr = nextTokenArr
+
+            if tokenIndex > 0 && tokenIndex % 256 == 0 {
+                Memory.clearCache()
+            }
+        }
+
+        let decodedText = tokenizer.decode(tokens: generatedTokens)
+        let parsed = parseGeneratedChunk(decodedText, forcedLanguage: language)
+
+        return (parsed.text, parsed.language, promptTokenCount, generatedTokens.count)
+    }
+
+    // MARK: - Generation
+
+    /// Generate transcription from audio, automatically chunking long audio at low-energy boundaries.
+    public func generate(
+        audio: MLXArray,
+        maxTokens: Int = 8192,
+        temperature: Float = 0.0,
+        context: String = "",
+        language: String? = nil,
+        chunkDuration: Float = 1200.0,
+        minChunkDuration: Float = 1.0,
+        repetitionPenalty: Float = 1.0,
+        repetitionContextSize: Int = 32
+    ) -> STTOutput {
+        let startTime = Date()
+        let forcedLanguage = normalizeLanguageName(language)
+        // Finiteness covers every chunk of this call (a long segment is several chunks).
+        lastEncoderFinite = true; lastDecoderFinite = true
+
+        // Split audio into chunks
+        let chunks = splitAudioIntoChunks(
+            audio,
+            sampleRate: sampleRate,
+            chunkDuration: chunkDuration,
+            minChunkDuration: minChunkDuration
+        )
+
+        var allTexts: [String] = []
+        var segments: [[String: Any]] = []
+        var totalPromptTokens = 0
+        var totalGenerationTokens = 0
+        var remainingTokens = maxTokens
+        var chunkLanguages: [String?] = []
+
+        for (chunkAudio, offsetSec) in chunks {
+            if remainingTokens <= 0 { break }
+
+            let actualChunkDuration = Float(chunkAudio.dim(0)) / Float(sampleRate)
+
+            let result = generateSingleChunk(
+                audio: chunkAudio,
+                maxTokens: remainingTokens,
+                temperature: temperature,
+                context: context,
+                language: forcedLanguage,
+                repetitionPenalty: repetitionPenalty,
+                repetitionContextSize: repetitionContextSize
+            )
+
+            allTexts.append(result.text)
+            chunkLanguages.append(result.language)
+            totalPromptTokens += result.promptTokens
+            totalGenerationTokens += result.generationTokens
+            remainingTokens -= result.generationTokens
+
+            var segment: [String: Any] = [
+                "text": result.text,
+                "start": Double(offsetSec),
+                "end": Double(offsetSec + actualChunkDuration),
+            ]
+            if let language = result.language {
+                segment["language"] = language
+            }
+            segments.append(segment)
+
+            Memory.clearCache()
+        }
+
+        let endTime = Date()
+        let totalTime = endTime.timeIntervalSince(startTime)
+        let fullText = allTexts.joined(separator: " ")
+        let mergedLanguage = Qwen3ASRModel.mergeLanguages(chunkLanguages)
+
+        return STTOutput(
+            text: fullText.trimmingCharacters(in: .whitespacesAndNewlines),
+            segments: segments,
+            language: mergedLanguage,
+            promptTokens: totalPromptTokens,
+            generationTokens: totalGenerationTokens,
+            totalTokens: totalPromptTokens + totalGenerationTokens,
+            promptTps: totalTime > 0 ? Double(totalPromptTokens) / totalTime : 0,
+            generationTps: totalTime > 0 ? Double(totalGenerationTokens) / totalTime : 0,
+            totalTime: totalTime,
+            peakMemoryUsage: Double(Memory.peakMemory) / 1e9
+        )
+    }
+
+    // MARK: - Weight Sanitization
+
+    public static func sanitize(weights: [String: MLXArray], skipLmHead: Bool = true) -> [String: MLXArray] {
+        var sanitized: [String: MLXArray] = [:]
+        let isFormatted = !weights.keys.contains { $0.hasPrefix("thinker.") }
+
+        for (key, var value) in weights {
+            var newKey = key
+
+            // Strip thinker prefix
+            if newKey.hasPrefix("thinker.") {
+                newKey = String(newKey.dropFirst("thinker.".count))
+            }
+
+            // Skip lm_head for ASR (tied to embeddings)
+            if skipLmHead && newKey == "lm_head.weight" {
+                continue
+            }
+
+            // Transpose Conv2d weights from PyTorch format
+            if !isFormatted && newKey.contains("conv2d") && newKey.contains("weight") && value.ndim == 4 {
+                value = value.transposed(0, 2, 3, 1)
+            }
+
+            sanitized[newKey] = value
+        }
+
+        return sanitized
+    }
+
+    // MARK: - Tokenizer JSON Generation
+
+    /// Generate `tokenizer.json` from `vocab.json` + `merges.txt` + `tokenizer_config.json`
+
+
+    static func generateTokenizerJSONIfMissing(in modelDir: URL) throws {
+        let tokenizerJSONPath = modelDir.appendingPathComponent("tokenizer.json")
+        guard !FileManager.default.fileExists(atPath: tokenizerJSONPath.path) else { return }
+
+        let vocabURL = modelDir.appendingPathComponent("vocab.json")
+        let mergesURL = modelDir.appendingPathComponent("merges.txt")
+        let tokenizerConfigURL = modelDir.appendingPathComponent("tokenizer_config.json")
+
+        guard FileManager.default.fileExists(atPath: vocabURL.path),
+              FileManager.default.fileExists(atPath: mergesURL.path) else {
+            return  // Can't generate without vocab + merges
+        }
+
+        // Read vocab.json as raw JSON
+        let vocabData = try Data(contentsOf: vocabURL)
+
+        // Read merges.txt, skip header line
+        let mergesText = try String(contentsOf: mergesURL, encoding: .utf8)
+        let mergeLines = mergesText.components(separatedBy: "\n")
+            .filter { !$0.hasPrefix("#") && !$0.isEmpty }
+
+        // Build merges JSON array (legacy string format: "token1 token2")
+        let mergesJSON = mergeLines.map { line -> String in
+            let escaped = line
+                .replacingOccurrences(of: "\\", with: "\\\\")
+                .replacingOccurrences(of: "\"", with: "\\\"")
+            return "\"\(escaped)\""
+        }.joined(separator: ",")
+
+        // Read added_tokens_decoder from tokenizer_config.json
+        var addedTokensJSON = "[]"
+        if FileManager.default.fileExists(atPath: tokenizerConfigURL.path) {
+            let configData = try Data(contentsOf: tokenizerConfigURL)
+            if let configDict = try JSONSerialization.jsonObject(with: configData) as? [String: Any],
+               let addedTokensDecoder = configDict["added_tokens_decoder"] as? [String: Any] {
+                var tokens: [(Int, [String: Any])] = []
+                for (idStr, value) in addedTokensDecoder {
+                    if let id = Int(idStr), let tokenDict = value as? [String: Any] {
+                        let entry: [String: Any] = [
+                            "id": id,
+                            "content": tokenDict["content"] ?? "",
+                            "single_word": tokenDict["single_word"] ?? false,
+                            "lstrip": tokenDict["lstrip"] ?? false,
+                            "rstrip": tokenDict["rstrip"] ?? false,
+                            "normalized": tokenDict["normalized"] ?? false,
+                            "special": tokenDict["special"] ?? false,
+                        ]
+                        tokens.append((id, entry))
+                    }
+                }
+                tokens.sort { $0.0 < $1.0 }
+                let tokenData = try JSONSerialization.data(
+                    withJSONObject: tokens.map { $0.1 }, options: [])
+                addedTokensJSON = String(data: tokenData, encoding: .utf8) ?? "[]"
+            }
+        }
+
+        // Qwen2 BPE pre-tokenizer pattern
+        let preTokenizerPattern = "(?i:'s|'t|'re|'ve|'m|'ll|'d)|[^\\r\\n\\p{L}\\p{N}]?\\p{L}+|\\p{N}{1,3}| ?[^\\s\\p{L}\\p{N}]+[\\r\\n]*|\\s*[\\r\\n]+|\\s+(?!\\S)|\\s+"
+
+        // Escape for JSON embedding
+        let escapedPattern = preTokenizerPattern
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "\"", with: "\\\"")
+
+        let vocabString = String(data: vocabData, encoding: .utf8) ?? "{}"
+
+        // Construct tokenizer.json
+        let tokenizerJSON = """
+        {
+          "version": "1.0",
+          "truncation": null,
+          "padding": null,
+          "added_tokens": \(addedTokensJSON),
+          "normalizer": {"type": "NFC"},
+          "pre_tokenizer": {
+            "type": "Sequence",
+            "pretokenizers": [
+              {
+                "type": "Split",
+                "pattern": {"Regex": "\(escapedPattern)"},
+                "behavior": "Isolated",
+                "invert": false
+              },
+              {
+                "type": "ByteLevel",
+                "add_prefix_space": false,
+                "trim_offsets": true,
+                "use_regex": false
+              }
+            ]
+          },
+          "post_processor": null,
+          "decoder": {
+            "type": "ByteLevel",
+            "add_prefix_space": true,
+            "trim_offsets": true,
+            "use_regex": true
+          },
+          "model": {
+            "type": "BPE",
+            "dropout": null,
+            "unk_token": null,
+            "continuing_subword_prefix": "",
+            "end_of_word_suffix": "",
+            "fuse_unk": false,
+            "byte_fallback": false,
+            "vocab": \(vocabString),
+            "merges": [\(mergesJSON)]
+          }
+        }
+        """
+
+        try tokenizerJSON.write(to: tokenizerJSONPath, atomically: true, encoding: .utf8)
+        // Arsenal: no print here; stdout carries the worker protocol frames.
+    }
+
+    // MARK: - Model Loading
+
+
+
+    /// The tokenizer exactly as `fromModelDirectory` builds it (Arsenal loads weights through its own precision tier).
+    public static func loadTokenizer(_ modelDir: URL) async throws -> Tokenizers.Tokenizer {
+        // Generate tokenizer.json if missing (Qwen3 ASR models don't ship it)
+        var temporaryTokenizer: URL?
+        let tokenizerDirectory: URL
+        if FileManager.default.fileExists(atPath: modelDir.appendingPathComponent("tokenizer.json").path) {
+            tokenizerDirectory = modelDir
+        } else {
+            // Never mutate installed weights: synthesize stock tokenizer assets in a private scratch directory.
+            let scratch = FileManager.default.temporaryDirectory.appendingPathComponent("vella-tokenizer-" + UUID().uuidString)
+            try FileManager.default.createDirectory(at: scratch, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
+            temporaryTokenizer = scratch
+            do {
+                for name in ["config.json", "vocab.json", "merges.txt", "tokenizer_config.json"] {
+                    let source = modelDir.appendingPathComponent(name)
+                    if FileManager.default.fileExists(atPath: source.path) {
+                        try FileManager.default.copyItem(at: source, to: scratch.appendingPathComponent(name))
+                    }
+                }
+                try generateTokenizerJSONIfMissing(in: scratch)
+            } catch {
+                try? FileManager.default.removeItem(at: scratch)
+                throw error
+            }
+            tokenizerDirectory = scratch
+        }
+        defer { if let temporaryTokenizer { try? FileManager.default.removeItem(at: temporaryTokenizer) } }
+        return try await AutoTokenizer.from(modelFolder: tokenizerDirectory)
+    }
+
+    /// `derived`: a precision made at load (Vella) from this float checkpoint; `modelDir` is its source.
+    public static func fromModelDirectory(_ modelDir: URL, derived: DerivedPrecision? = nil) async throws -> Qwen3ASRModel {
+        // Load config
+        let configPath = modelDir.appendingPathComponent("config.json")
+        let configData = try Data(contentsOf: configPath)
+        let config = try JSONDecoder().decode(Qwen3ASRConfig.self, from: configData)
+
+        // Get per-layer quantization
+        var perLayerQuantization = config.perLayerQuantization
+
+        // Create model
+        let model = Qwen3ASRModel(config)
+
+        // Load tokenizer
+        model.tokenizer = try await loadTokenizer(modelDir)
+        // Load weights
+        var weights: [String: MLXArray] = [:]
+        let fileManager = FileManager.default
+        let files = try fileManager.contentsOfDirectory(at: modelDir, includingPropertiesForKeys: nil)
+        let safetensorFiles = files.filter { $0.pathExtension == "safetensors" }
+
+        for file in safetensorFiles {
+            let fileWeights = try MLX.loadArrays(url: file)
+            weights.merge(fileWeights) { _, new in new }
+        }
+
+        // Sanitize weights
+        let skipLmHead = config.textConfig.tieWordEmbeddings
+        var sanitizedWeights = Qwen3ASRModel.sanitize(weights: weights, skipLmHead: skipLmHead)
+        weights.removeAll()
+        // A locally derived precision (Vella): quantize the float text model tensor by tensor like the published quants
+        // (the audio tower stays float), then load it the same way.
+        if let derived {
+            guard perLayerQuantization == nil else { throw DerivedPrecision.Invalid.manifest("the source is already quantized") }
+            derived.apply(to: &sanitizedWeights, targets: try derived.quantizationTargets(model, exclude: { $0.hasPrefix("audio_tower") }))
+            perLayerQuantization = derived.quantization
+        }
+
+        // Quantize if needed
+        if perLayerQuantization != nil {
+            try installCheckpointQuantization(model: model, weights: sanitizedWeights) { path, module in
+                // Don't quantize audio tower
+                if path.hasPrefix("audio_tower") {
+                    return nil
+                }
+                // Check if scales exist for this layer in sanitized weights
+                if sanitizedWeights["\(path).scales"] != nil {
+                    return perLayerQuantization?.quantization(layer: path)?.asTuple
+                }
+                return nil
+            }
+        }
+
+        // Load weights into model
+        try model.update(parameters: ModuleParameters.unflattened(sanitizedWeights), verify: .all)
+        eval(model)
+
+        return model
+    }
+
+}
+
+// MARK: - Optimized path
+
+extension Qwen3ASRModel: FastPathCapable {
+    /// r3 (28 Sep): the f32 tower, token-exact against f32 stock; p3: host lengths and the headless prefill.
+    public static var fastPathRevision: String { "qwen3-asr-3-f32-encoder-p3" }
+
+    /// decoder: build step N+1 from the lazy token N before reading it (same kernels, token-exact).
+    /// encoder: the f32 log-mel promotes the audio tower to f32 and MLX re-casts every BF16 weight inside every call;
+    /// holding the tower in f32 is the identical f32 graph without those casts (bit-identical, +2 bytes/param
+    /// resident). Disabling restores the checkpoint dtype exactly.
+    public func configureFastPath(enabled: Bool, component: String) -> Bool {
+        let decoder = component == "both" || component == "decoder"
+        let encoder = component == "both" || component == "encoder"
+        guard decoder || encoder else { return false }
+        if decoder { fastDecode = enabled }
+        if encoder && enabled != fastEncoder {
+            let parameters = audioTower.parameters()
+            if enabled {
+                towerCheckpointDType = parameters.flattened().first { $0.1.dtype.isFloatingPoint }?.1.dtype
+                audioTower.update(parameters: parameters.mapValues {
+                    $0.dtype == .bfloat16 || $0.dtype == .float16 ? $0.asType(.float32) : $0
+                })
+            } else if let original = towerCheckpointDType, original != .float32 {
+                audioTower.update(parameters: parameters.mapValues { $0.dtype == .float32 ? $0.asType(original) : $0 })
+            }
+            eval(audioTower)
+            Memory.clearCache()
+            fastEncoder = enabled
+            audioTower.hostLengths = enabled
+            lastEncoderFinite = true
+        }
+        if decoder { lastDecoderFinite = true }
+        return true
+    }
+
+    public var fastPathFinite: Bool { lastEncoderFinite && lastDecoderFinite }
+
+    /// A scalar that is finite iff every logit is: NaN propagates and ±Inf gives Inf or NaN. Summed in f32, where a
+    /// vocabulary of finite half logits cannot overflow (151,936 × 65,504 ≈ 1e10). A half sum overflows on ordinary
+    /// output: real Qwen3-ASR logits sum to about ±1.5M, past FP16's 65,504, so every FP16 step read as non-finite.
+    static func decoderFiniteProbe(_ logits: MLXArray) -> MLXArray { logits.asType(.float32).sum() }
+
+    public var fastPathComponents: [String: Bool] { ["decoder": fastDecode, "encoder": fastEncoder] }
+
+    /// Greedy token IDs for a self-test clip (<= 30 s, one chunk), exactly as the worker transcribes.
+    public func qualificationTokens(audio: MLXArray) -> [Int] {
+        _ = generate(audio: audio, generationParameters: STTGenerateParameters(maxTokens: 1024, verbose: false, chunkDuration: 30))
+        return lastTokens
+    }
+}

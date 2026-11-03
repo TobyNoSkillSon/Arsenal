@@ -1,0 +1,85 @@
+schema = 3
+id = "t0-gamma"
+name = "T0 Gamma"
+kind = "local.forecast"
+summary = "Forecasts the next values of a numeric series as a range of likely outcomes, optionally using related series and known future inputs."
+description = "t0-gamma is an open-weights time-series forecasting foundation model from The Forecasting Company, the third public release of the t0 family after t0-alpha and t0-beta. It is a decoder-style patch transformer of about 256M parameters that alternates causal time attention with attention across variates, and predicts 21 quantiles for each future step. The maker reports a fev-bench skill score of 49.42, GIFT-Eval CRPS 0.4520 and MASE 0.6608, and TIME CRPS 0.5340; these are the maker's figures, not reproduced here."
+purpose = "Forecast series with covariates"
+publisher = "theforecastingcompany"
+released = 2026
+params = "255.6M"
+tasks = ["time-series-forecasting"]
+languages = ["und"]
+good_for = ["Probabilistic forecasts of one numeric series, such as load, sales or counts, up to 1024 steps ahead in one pass, at any quantile levels", "Forecasts that should use known future inputs (calendar features, holidays, promotions, weather forecasts) given as covariates over the past and the horizon", "Several related series forecast jointly: past covariates attend to the target and get their own forecasts", "Series with gaps: missing observations are sent as null"]
+limits = [
+  "Horizons above 1024 steps need the maker's autoregressive rollout, which this runner does not port",
+  "One target series per request, with up to 31 past and 31 known-future covariates; batching several independent series in one call is not supported",
+  "A reply holds at most 640,000 forecast numbers (series x horizon x levels with the median, 16 MiB as JSON): 99 levels at horizon 1024 allow 6 series; larger asks are refused before the model runs",
+  "A request body is at most 1 MiB of JSON over HTTP and MCP (about 100,000 numbers in all), so the 8192-step context with every covariate only fits with short numbers",
+  "Values must lie inside the float32 range (about 3.4e38); quantile levels must not round to 0 or 1 in float32, nor with symmetric_averaging their mirrors 1 - q (so not below about 3e-8)",
+  "Missing values inside a series are supported; trimming a leading missing stretch (the maker's trim_leading_missing) and explicit padding masks are not",
+  "Historical-only covariates are sent as past_covariates and forecast jointly, as the maker's array API does; the maker's separate HISTORICAL role is not exposed",
+  "Matches the maker's tfc-t0 code on Apple GPU in fp16 on fixed inputs (see log/003-parity.md); the maker's benchmark figures are not reproduced here",
+  "Reads and writes no language, so the Polish question does not apply",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/theforecastingcompany/t0-gamma"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/theforecastingcompany/t0-gamma/blob/e08aee083778f1f32da4974c0a34276776a35c52/LICENSE"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[weights]
+repo = "theforecastingcompany/t0-gamma"
+revision = "e08aee083778f1f32da4974c0a34276776a35c52"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "1603e255629be22ea45518b502f16c55d06821c7090a1a851673e779e9c245a6"
+"config.json" = "8812c71c56ed97c7e765f7381442b98d91a30804a6b8651643d3ff9fde57d942"
+
+[weights.bytes]
+"model.safetensors" = 1022492908
+"config.json" = 544
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-t0-gamma"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "forecast"
+title = "Forecast"
+input = "ops/forecast.input.json"
+output = "json"
+output_schema = "ops/forecast.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,69 @@
+schema = 3
+id = "geneformer-v2-104m"
+name = "Geneformer V2 104M"
+kind = "local.cells"
+summary = "Turns one human cell's single-cell RNA profile, given as its genes in rank order, into a vector of numbers for comparing, clustering or classifying cells."
+description = "Geneformer is the Theodoris lab's foundation model for single-cell transcriptomics: a BERT encoder that reads a cell as a rank value encoding, its genes ordered by expression scaled by each gene's expression across the corpus, and was pretrained by masked gene prediction. V2-104M (12 layers, 768 wide, input up to 4,096 genes) was trained in December 2024 on about 104 million non-cancer human single-cell transcriptomes (Genecorpus-104M). Arsenal returns the maker's default cell embedding (the <cls> token at the second-to-last layer) and the mean gene embedding. The card reports gains in cell type annotation, batch integration and in silico perturbation, with no single benchmark score."
+purpose = "Embed single cells from genes"
+publisher = "ctheodoris"
+released = 2024
+params = "104.4M"
+tasks = ["feature-extraction"]
+languages = ["mul"]
+good_for = ["Comparing cells: cells of the same type get closer embeddings than cells of different types", "Features for a small cell type or cell state classifier trained on top", "Clustering, visualising or batch-integrating single-cell datasets"]
+limits = ["The cell must arrive as human Ensembl gene IDs already in Geneformer's rank order: expression normalised by the cell's total counts and divided by each gene's median across Genecorpus-104M. Arsenal does not rank raw counts; the maker's TranscriptomeTokenizer does that step", "Human protein-coding genes only (about 20,000 in the 104M dictionary); other IDs, gene symbols and other species are skipped and counted in genes_skipped. At most 4,094 genes per cell; lower-ranked genes are dropped", "Non-cancer training data: malignant cells and cell lines are out of domain (the maker's separate cancer-tuned variant is not served)", "Raw <cls> cosines run high even between different cell types (about 0.96 for a T cell vs a hepatocyte marker profile against 0.996 for two T cell profiles), so compare cells relative to each other", "The embedding alone predicts nothing: classification and in silico perturbation need models or code on top; the masked-gene head is not served", "Reads and writes no human language, so the Polish question does not apply", "Parity with transformers BertForMaskedLM (MPS, float16) checked: see log/003-parity.md"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/ctheodoris/Geneformer"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/ctheodoris/Geneformer/blob/1f7fbae4e469a5f4f1af8c111a529cfe1b3829f5/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "ctheodoris/Geneformer"
+revision = "1f7fbae4e469a5f4f1af8c111a529cfe1b3829f5"
+dtype = "fp32"
+files = ["Geneformer-V2-104M/model.safetensors", "Geneformer-V2-104M/config.json", "Geneformer-V2-104M/generation_config.json", "geneformer/token_dictionary_gc104M.pkl"]
+
+[weights.sha256]
+"Geneformer-V2-104M/model.safetensors" = "fff5cba29ddd8792991fa77b4872246fbe548a178cebda3775cdc72b67780e7f"
+"Geneformer-V2-104M/config.json" = "467d4492f0dd53b4d60afffe20812db484ca1cf9fdbeb6a6e060e93564f70859"
+"Geneformer-V2-104M/generation_config.json" = "bf1ba320993168b0d6ee5ff170df2108454d239b28eaac5948d30ee6993cccc1"
+"geneformer/token_dictionary_gc104M.pkl" = "67c445f4385127adfc48dcc072320cd65d6822829bf27dd38070e6e787bc597f"
+
+[weights.bytes]
+"Geneformer-V2-104M/model.safetensors" = 417571156
+"Geneformer-V2-104M/config.json" = 590
+"Geneformer-V2-104M/generation_config.json" = 90
+"geneformer/token_dictionary_gc104M.pkl" = 425590
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-geneformer-v2-104m"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

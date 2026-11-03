@@ -1,0 +1,65 @@
+schema = 3
+id = "mitra-classifier-2"
+name = "Mitra-v2 Classifier"
+kind = "local.tabular"
+summary = "Labels the rows of a numeric table from a few rows you have already labelled, with no training."
+description = "Mitra-v2 Classifier is AutoGluon's (Amazon) 75.7M-parameter tabular foundation model: a 12-layer 2D transformer that attends across rows and across columns and learns a task in context from labelled example rows. It was pre-trained only on synthetic tables drawn from a mix of random classifiers, including a new Hybrid SCM prior, with a 10x longer context and three times as many features as Mitra-v1. The maker reports state-of-the-art accuracy on TabArena and TALENT, level with TabFM and EXAONE Tabular, after 50-step fine-tuning with 8-fold bagging (the maker's figures, not reproduced here)."
+purpose = "Classify table rows in context"
+publisher = "autogluon"
+released = 2026
+params = "75.7M"
+tasks = ["tabular-classification"]
+languages = ["und"]
+good_for = ["Small and medium numeric tables: give labelled rows and get labels and class probabilities for new rows in one call, no training step", "Up to 10 classes, 2048 labelled rows and 100 columns", "The card's wine example: all 36 held-out wines get the right cultivar from 142 labelled ones"]
+limits = ["Zero-shot only: the maker's benchmark results use 50-step fine-tuning and 8-fold bagging, which this runner does not do", "Numbers only: categorical or text columns must be encoded as numbers first, and missing values are not accepted", "At most 10 classes, 2048 labelled rows and 100 columns; columns with one value in the labelled rows are ignored", "One estimator with the maker's random column sign flips and shuffles switched off, so answers are deterministic", "Classification only; the regressor is a separate model (mitra-regressor-2)", "Reads and writes no language, so the Polish question does not apply", "Parity with the maker code (autogluon.tabular 1.6.3, MPS fp16): same labels on all 36 wine rows, probability cosine 0.9999999 and largest gap 0.0016; on a 2048-row stress table 699 of 700 labels match, the other an exact tie in the reference"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/autogluon/mitra-classifier-2"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/autogluon/mitra-classifier-2/blob/edada0d20759c58ada8c8605c25f22f6e98ea5f0/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "autogluon/mitra-classifier-2"
+revision = "edada0d20759c58ada8c8605c25f22f6e98ea5f0"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "5ffab0e2cf52f61c5b7c7eb1e8542996736d1023a0212190cc09abc2119a1e09"
+"config.json" = "2c96c24dd25f64e92753f6f2ba00cc7833b9923459403dcd8504e8700c0995df"
+
+[weights.bytes]
+"model.safetensors" = 302717904
+"config.json" = 86
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-mitra-classifier-2"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

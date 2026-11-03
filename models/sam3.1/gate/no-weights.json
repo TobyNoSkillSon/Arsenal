@@ -1,0 +1,98 @@
+{
+  "config": {
+    "model_type": "sam3.1_video"
+  },
+  "assets": {
+    "clip-bpe": "$PERCEPTION_FIXTURES/tokenizers/clip-bpe"
+  },
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGUlEQVR4nGMIqFjwnxLMMGrAqAGjBgwXAwBqsGcfY7qOyAAAAABJRU5ErkJggg==",
+    "fixture.mp4": "AAAAHGZ0eXBtcDQyAAAAAWlzb21tcDQxbXA0MgAAAAFtZGF0AAAAAAAAAKcAAAA1BgUtR1ZK3FxMQz+U78URPNFDqAEAAAMAAQMAAAMAAQIAAeYACwAAAwAAAwAAXqYMA5ErAYAAAAA4JbggH94I5Uz/gjYm1DGsaMAAqPj+I7zT3tLX0ZO/sYo/EuVHXYkA1oSebsLlmlQAAkxAA3BT/IAAAAAeIeEEX/5ADR0f/8Zf9B21pRiEqufOABIPZKQ8T93AAAACxG1vb3YAAABsbXZoZAAAAADm+o5b5vqOWwAAAlgAAAJYAAEAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAJQdHJhawAAAFx0a2hkAAAAAeb6jlvm+o5bAAAAAQAAAAAAAAJYAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAgAAAAIAAAAAAAJGVkdHMAAAAcZWxzdAAAAAAAAAABAAACWAAAAAAAAQAAAAAByG1kaWEAAAAgbWRoZAAAAADm+o5b5vqOWwAAAlgAAAJYVcQAAAAAADFoZGxyAAAAAAAAAAB2aWRlAAAAAAAAAAAAAAAAQ29yZSBNZWRpYSBWaWRlbwAAAAFvbWluZgAAABR2bWhkAAAAAQAAAAAAAAAAAAAAJGRpbmYAAAAcZHJlZgAAAAAAAAABAAAADHVybCAAAAABAAABL3N0YmwAAAChc3RzZAAAAAAAAAABAAAAkWF2YzEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAIAAgAEgAAABIAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAY//8AAAAnYXZjQwFkAAv/4QAMJ2QAC6xWUMN4FGCFAQAEKO48sP34+AAAAAAKZmllbAEAAAAACmNocm0AAAAAABhzdHRzAAAAAAAAAAEAAAACAAABLAAAABRzdHNzAAAAAAAAAAEAAAABAAAADnNkdHAAAAAAIBAAAAAcc3RzYwAAAAAAAAABAAAAAQAAAAIAAAABAAAAHHN0c3oAAAAAAAAAAAAAAAIAAAB1AAAAIgAAABRzdGNvAAAAAAAAAAEAAAAs"
+  },
+  "operations": [
+    {
+      "operation": "segment",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "points": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ]
+      }
+    },
+    {
+      "operation": "segment_session",
+      "input": {
+        "action": "create",
+        "image": {
+          "path": "$INBOX/fixture.png"
+        }
+      }
+    },
+    {
+      "operation": "video_session",
+      "input": {
+        "action": "create",
+        "video": {
+          "path": "$INBOX/fixture.mp4"
+        }
+      }
+    },
+    {
+      "operation": "track_video",
+      "input": {
+        "video": {
+          "path": "$INBOX/fixture.mp4"
+        },
+        "points": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
+        "max_frames": 2
+      }
+    },
+    {
+      "operation": "segment",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "text": "car",
+        "threshold": 0
+      }
+    },
+    {
+      "operation": "segment",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "boxes": [
+          {
+            "xmin": 0.1,
+            "ymin": 0.1,
+            "xmax": 0.9,
+            "ymax": 0.9
+          }
+        ]
+      }
+    },
+    {
+      "operation": "track_video",
+      "input": {
+        "video": {
+          "path": "$INBOX/fixture.mp4"
+        },
+        "text": "car",
+        "threshold": 0,
+        "max_frames": 2
+      }
+    }
+  ]
+}

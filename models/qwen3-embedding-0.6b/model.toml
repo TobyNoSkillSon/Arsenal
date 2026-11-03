@@ -1,0 +1,77 @@
+id = "qwen3-embedding-0.6b"
+kind = "embeddings"
+languages = ["mul"]
+name = "Qwen3 Embedding 0.6B"
+params = "595M"
+publisher = "Qwen"
+released = 2025
+schema = 3
+suggested = false
+summary = "Turns text into vectors for search by meaning, in over 100 languages."
+description = "Qwen3 Embedding 0.6B is the smallest text embedding model in Alibaba Qwen's Qwen3 Embedding series, built on the Qwen3 0.6B language model. It reads up to 32K tokens and gives a 1024-number vector by taking the last token's hidden state. Its card reports a mean score of 64.33 on the MTEB multilingual benchmark, and it supports over 100 languages and code."
+purpose = "Multilingual text embeddings"
+good_for = ["Search by meaning across many languages, including Polish", "Similarity, clustering and classification of short and long texts", "Queries with a task instruction (task query) against plain documents"]
+limits = ["Vectors match Qwen's own code (cosine 0.99999 on six texts); vectors from Arsenal builds before 1.0 left out the end token and are not interchangeable with these", "Vectors are not interchangeable with other embedding models", "Text only"]
+context = 32768
+tasks = ["feature-extraction"]
+tools = ["operation"]
+
+[bench]
+recipe = "bench/bench.toml"
+
+[derive]
+fp16 = "cast:embed-qwen3-v2"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[licence]
+commercial = true
+name = "apache-2.0"
+spdx = "apache-2.0"
+url = "https://huggingface.co/Qwen/Qwen3-Embedding-0.6B/tree/97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+
+[[op]]
+first_response_timeout_s = 180
+input = "ops/embed.input.json"
+name = "embed"
+output = "json"
+output_schema = "ops/embed.output.json"
+stream = false
+timeout_s = 180
+title = "Embed inputs"
+
+[[runner]]
+chips = ["*"]
+fast_exact = false
+features = ["sequentialOnly"]
+language = "swift"
+min_macos = "26.0"
+name = "native"
+protocol = 1
+worker = "embed"
+
+[selection]
+default = "native"
+
+[weights]
+dtype = "bf16"
+files = ["config.json", "model.safetensors", "tokenizer.json", "tokenizer_config.json"]
+repo = "Qwen/Qwen3-Embedding-0.6B"
+revision = "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+
+[weights.bytes]
+"config.json" = 727
+"model.safetensors" = 1191586416
+"tokenizer.json" = 11423705
+"tokenizer_config.json" = 9706
+
+[weights.sha256]
+"config.json" = "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9"
+"model.safetensors" = "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd"
+"tokenizer.json" = "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a"
+"tokenizer_config.json" = "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"

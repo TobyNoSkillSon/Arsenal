@@ -1,0 +1,129 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "idol"
+name = "IDOL"
+architecture = "idol"
+kind = "geometry"
+params = "0.66B"
+publisher = "speridlabs"
+released = 2026
+suggested = false
+summary = "Turns one picture of an object into a 3D Gaussian splat (PLY)."
+description = "IDOL is Speridlabs' single-image 3D model (2026): a rectified-flow transformer writes an 8,192-token object latent from the picture's DINOv3 and FLUX.2 VAE tokens, an octree decoder places anchor points and a Gaussian decoder turns each into 32 Gaussians, with an estimate of the camera that took the picture. The result is a standard 3D Gaussian Splatting PLY of up to about a million Gaussians."
+purpose = "One picture to a 3D splat"
+tasks = ["image-to-3d"]
+languages = ["und"]
+tools = ["operation"]
+assets = ["idol-dinov3", "idol-flux2-vae"]
+good_for = [
+  "One object on a removed background: products, toys, furniture, food, figurines, renders and generated images",
+  "A splat that opens in any 3D Gaussian Splatting viewer, with the input camera's angle and field of view",
+  "32,768 to 1,048,576 Gaussians per object",
+]
+limits = [
+  "The background is removed first with BiRefNet; give a cutout with a transparent background, or keep BiRefNet on the Mac",
+  "A splat is not a mesh: it has no faces to edit, print or rig, and the Mac's own viewers do not open PLY splats",
+  "The hidden back is invented; one object per picture",
+  "A seed gives a different (equally valid) result than IDOL's PyTorch code with the same seed: the random numbers come from MLX",
+  "Precision: every weight 16-bit (IDOL ships FP32; Get casts its modules to FP16, DINOv3 to BF16 and the VAE to FP16); norms, rotary angles and embeddings compute in float32 as IDOL's do",
+]
+
+[links]
+homepage = "https://speridlabs.com/research/idol"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = false
+conditions = "IDOL itself is Apache-2.0. Its DINOv3 image encoder is under Meta's DINOv3 License, accepted on Hugging Face (Meta approves each request): Arsenal downloads from facebook/dinov3-vith16plus-pretrain-lvd1689m with your token. No ITAR or other trade-controlled uses; anything redistributed carries that licence."
+url = "https://huggingface.co/speridlabs/idol/blob/2731c2291fc65a797c5cb627a5e5526fc1490902/README.md"
+
+[weights]
+repo = "speridlabs/idol"
+revision = "2731c2291fc65a797c5cb627a5e5526fc1490902"
+dtype = "fp32"
+files = ["config.json", "denoiser.safetensors", "decoder.safetensors", "decoder_gs.safetensors"]
+
+[weights.sha256]
+"config.json" = "ddd89dcc6dcf4a5ac8d951b8c59afa1eceafe377615c5912c59f4e1f5ae35b32"
+"denoiser.safetensors" = "ded2cacf671bf3978ebc62729087abdbd318ef4752e6805b4c9fc8ffa51fe716"
+"decoder.safetensors" = "9da4d7676bfcadb1c3fdfbff796e6257dadf82d26ec05be7717c79b2b13a1c4e"
+"decoder_gs.safetensors" = "3087eb8ee5763206a53e4078acf2a1bf382dab5147d407ec13a2cf39c04cc544"
+[weights.bytes]
+"config.json" = 1335
+"denoiser.safetensors" = 1482258308
+"decoder.safetensors" = 203171696
+"decoder_gs.safetensors" = 949083036
+
+[derive]
+fp16 = "cast:geometry-idol-v1"
+
+[[asset]]
+id = "idol-dinov3"
+repo = "facebook/dinov3-vith16plus-pretrain-lvd1689m"
+repo_type = "model"
+into = "components/idol-dinov3"
+revision = "c807c9eeea853df70aec4069e6f56b28ddc82acc"
+files = ["model.safetensors", "preprocessor_config.json"]
+licence = "LicenseRef-DINOv3"
+
+[asset.sha256]
+"model.safetensors" = "3e1d4d18b9bfa9f28fad8e9de6a783f1313532d3460efa4cd0b12521d81d1a4d"
+"preprocessor_config.json" = "960c41d1f3a7778b936365769a2d90550b318a6c0a53a0296957adacfe5e0dd7"
+[asset.bytes]
+"model.safetensors" = 3362432800
+"preprocessor_config.json" = 585
+
+[[asset]]
+id = "idol-flux2-vae"
+repo = "black-forest-labs/FLUX.2-klein-4B"
+repo_type = "model"
+into = "components/idol-flux2-vae"
+revision = "e7b7dc27f91deacad38e78976d1f2b499d76a294"
+files = ["vae/config.json", "vae/diffusion_pytorch_model.safetensors"]
+licence = "Apache-2.0"
+
+[asset.sha256]
+"vae/config.json" = "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948"
+"vae/diffusion_pytorch_model.safetensors" = "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+[asset.bytes]
+"vae/config.json" = 821
+"vae/diffusion_pytorch_model.safetensors" = 168120878
+
+[selection]
+default = "native"
+
+[[runner]]
+name = "native"
+language = "swift"
+worker = "geometry"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "image_to_3d"
+title = "Make a 3D splat"
+input = "ops/image_to_3d.input.json"
+output_schema = "ops/image_to_3d.output.json"
+output = "file"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 3600
+
+[op.prepare_image]
+model = "birefnet"
+operation = "remove_background"
+file_id = "foreground"
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

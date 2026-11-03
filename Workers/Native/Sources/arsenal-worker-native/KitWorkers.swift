@@ -1,0 +1,82 @@
+// SPDX-License-Identifier: MIT
+import KitAstrobert
+import KitAudioboxAesthetics
+import KitChronos2
+import KitChronosBoltSmall
+import KitClapHtsatFused
+import KitDa3metricLarge
+import KitDepthAnythingV2Small
+import KitEdgetam
+import KitEomtCocoPanopticLarge640
+import KitEsm2T33650m
+import KitEsm2T68m
+import KitEsm3SmOpenV1
+import KitFlorence2Base
+import KitFlorence2Large
+import KitGeneformerV2104m
+import KitGlmOcr
+import KitGraniteEmbeddingSmallEnglishR2
+import KitGraniteTtmR3
+import KitGroundingDinoBase
+import KitMangaOcrBase
+import KitMitraClassifier2
+import KitMolformerXlBoth10pct
+import KitOwlv2BasePatch16Ensemble
+import KitRealEsrganX4plus
+import KitSam21HieraLarge
+import KitSam21HieraTiny
+import KitT0Alpha
+import KitT0Gamma
+import KitTigerDnr
+import KitTigerSpeech
+import KitTimesfm25200m
+import KitTimestral209m
+import KitTriposr
+import KitUltra50g
+import KitUvdoc
+import KitVitposeBaseSimple
+import KitVjepa2VitlFpc64256
+import KitVoiceGenderEcapa
+
+/// Kit models (Workers/Kit), one link each: arsenal-worker-kit-<id>, where <id> is the model id and its manifest says
+/// worker = "kit-<id>". Every entry serves the kit runner protocol and never returns.
+let kitWorkers: [String: @Sendable () -> Never] = [
+    "arsenal-worker-kit-astrobert": KitAstrobert.run,
+    "arsenal-worker-kit-audiobox-aesthetics": KitAudioboxAesthetics.run,
+    "arsenal-worker-kit-chronos-2": KitChronos2.run,
+    "arsenal-worker-kit-chronos-bolt-small": KitChronosBoltSmall.run,
+    "arsenal-worker-kit-clap-htsat-fused": KitClapHtsatFused.run,
+    "arsenal-worker-kit-da3metric-large": KitDa3metricLarge.run,
+    "arsenal-worker-kit-depth-anything-v2-small": KitDepthAnythingV2Small.run,
+    "arsenal-worker-kit-edgetam": KitEdgetam.run,
+    "arsenal-worker-kit-eomt-coco-panoptic-large-640": KitEomtCocoPanopticLarge640.run,
+    "arsenal-worker-kit-esm2-t33-650m": KitEsm2T33650m.run,
+    "arsenal-worker-kit-esm2-t6-8m": KitEsm2T68m.run,
+    "arsenal-worker-kit-esm3-sm-open-v1": KitEsm3SmOpenV1.run,
+    "arsenal-worker-kit-florence-2-base": KitFlorence2Base.run,
+    "arsenal-worker-kit-florence-2-large": KitFlorence2Large.run,
+    "arsenal-worker-kit-geneformer-v2-104m": KitGeneformerV2104m.run,
+    "arsenal-worker-kit-glm-ocr": KitGlmOcr.run,
+    "arsenal-worker-kit-granite-embedding-small-english-r2": KitGraniteEmbeddingSmallEnglishR2.run,
+    "arsenal-worker-kit-granite-ttm-r3": KitGraniteTtmR3.run,
+    "arsenal-worker-kit-grounding-dino-base": KitGroundingDinoBase.run,
+    "arsenal-worker-kit-manga-ocr-base": KitMangaOcrBase.run,
+    "arsenal-worker-kit-mitra-classifier-2": KitMitraClassifier2.run,
+    "arsenal-worker-kit-molformer-xl-both-10pct": KitMolformerXlBoth10pct.run,
+    "arsenal-worker-kit-owlv2-base-patch16-ensemble": KitOwlv2BasePatch16Ensemble.run,
+    "arsenal-worker-kit-real-esrgan-x4plus": KitRealEsrganX4plus.run,
+    "arsenal-worker-kit-sam2.1-hiera-large": KitSam21HieraLarge.run,
+    "arsenal-worker-kit-sam2.1-hiera-tiny": KitSam21HieraTiny.run,
+    "arsenal-worker-kit-t0-alpha": KitT0Alpha.run,
+    "arsenal-worker-kit-t0-gamma": KitT0Gamma.run,
+    "arsenal-worker-kit-tiger-dnr": KitTigerDnr.run,
+    "arsenal-worker-kit-tiger-speech": KitTigerSpeech.run,
+    "arsenal-worker-kit-timesfm-2.5-200m": KitTimesfm25200m.run,
+    "arsenal-worker-kit-timestral-209m": KitTimestral209m.run,
+    "arsenal-worker-kit-triposr": KitTriposr.run,
+    "arsenal-worker-kit-ultra-50g": KitUltra50g.run,
+    "arsenal-worker-kit-uvdoc": KitUvdoc.run,
+    "arsenal-worker-kit-vitpose-base-simple": KitVitposeBaseSimple.run,
+    "arsenal-worker-kit-vjepa2-vitl-fpc64-256": KitVjepa2VitlFpc64256.run,
+    "arsenal-worker-kit-voice-gender-ecapa": KitVoiceGenderEcapa.run
+]

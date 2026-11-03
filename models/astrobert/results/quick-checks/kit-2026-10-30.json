@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of embed through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "astrobert",
+  "revision": "6b9c25bb799152c5849a5b263ea71025fce548f0",
+  "rows": [
+    {
+      "date": "2026-10-30T07:39:03Z",
+      "load_seconds": 0.043,
+      "ops": {
+        "embed": {
+          "seconds_first": 0.827,
+          "seconds_warm": 0.011,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 361.9,
+      "precision": "fp16",
+      "runner_sha256": "82cf8ec11ac3dce0491c85e7c2a93e7af765ccb1a2e244aba3e031382256dd57",
+      "swap": "total = 3072.00M  used = 1364.00M  free = 1708.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-30",
+  "schema": "quick-check-1"
+}

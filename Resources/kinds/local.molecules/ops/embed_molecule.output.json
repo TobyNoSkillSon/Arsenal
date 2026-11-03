@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "embedding",
+    "dimensions",
+    "tokens"
+  ],
+  "properties": {
+    "embedding": {
+      "type": "array",
+      "description": "The molecule embedding: the final-layer token embeddings averaged over all tokens, start and end included.",
+      "items": {
+        "type": "number"
+      }
+    },
+    "dimensions": {
+      "type": "integer",
+      "description": "Length of the embedding."
+    },
+    "tokens": {
+      "type": "integer",
+      "description": "Number of SMILES tokens read (atoms, bonds, ring digits, branches), start and end excluded."
+    },
+    "unknown_tokens": {
+      "type": "array",
+      "description": "SMILES tokens missing from the model's vocabulary, read as <unk> (only when there are any).",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

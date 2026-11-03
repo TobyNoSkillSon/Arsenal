@@ -1,0 +1,103 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "sam-audio-large",
+  "note": "Measured on the FP16 re-upload mlx-community/sam-audio-large-fp16@110947e651c2f7837c47d8897cfca1cb22ce9633. Get's conversion of Meta's checkpoint at this revision writes the same tensor set; sampled tensors are bit-identical (results/official-checkpoint-2026-11-02.md). Not re-measured on the converted snapshot.",
+  "revision": "5f2cd3a9471a08c7282c06036be6893e18de8b70",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T04:04:20Z",
+      "load_seconds": 1.84,
+      "mac_peak_in_use_mb": 37467.3,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "separate_audio": {
+          "files": [
+            {
+              "name": "target.wav",
+              "sha256": "f985e53c7bb02a6f9d9075bd2f49f83652ccc34e863f79c4db0144d55b62c105"
+            },
+            {
+              "name": "residual.wav",
+              "sha256": "d3f4cb1f430ca212cbfa24dac6b257102dac38d3b7f75dbcd401a0b1975cd307"
+            }
+          ],
+          "seconds_first": 5.429,
+          "seconds_warm": 5.309,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 10240.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 7649.0,
+      "samples": 44
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T04:19:16Z",
+      "load_seconds": 1.73,
+      "mac_peak_in_use_mb": 36673.9,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "separate_audio": {
+          "files": [
+            {
+              "name": "target.wav",
+              "sha256": "beb69b64631fefc7523d388a3f15b28502ad71e81ec4e1a2a8b470648af2eb38"
+            },
+            {
+              "name": "residual.wav",
+              "sha256": "35b383662c72b379f0c67c67594b105957652418387e4a24ed1636bf2305e4ed"
+            }
+          ],
+          "seconds_first": 2.516,
+          "seconds_warm": 2.192,
+          "status": 200,
+          "vs16": {
+            "files_identical": false
+          }
+        }
+      },
+      "peak_footprint_mb": 6436.0,
+      "precision": "int4",
+      "sampled_peak_mb": 4485.0,
+      "samples": 24
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T04:17:36Z",
+      "load_seconds": 2.04,
+      "mac_peak_in_use_mb": 34979.5,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "separate_audio": {
+          "files": [
+            {
+              "name": "target.wav",
+              "sha256": "9808f0c6469fdcb32e8bad3a2683615f48f7bda862710770d01f6d01fd082989"
+            },
+            {
+              "name": "residual.wav",
+              "sha256": "602fb5830798d956f03f41e4651b0aa48cdb0e4d64eddfbfb8c69d2338756711"
+            }
+          ],
+          "seconds_first": 5.112,
+          "seconds_warm": 2.19,
+          "status": 200,
+          "vs16": {
+            "files_identical": false
+          }
+        }
+      },
+      "peak_footprint_mb": 8041.0,
+      "precision": "int8",
+      "sampled_peak_mb": 5978.0,
+      "samples": 35
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

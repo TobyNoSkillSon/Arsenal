@@ -1,0 +1,20 @@
+id = "local.layers"
+title = "Layers"
+title_singular = "Layer model"
+icon = "square.3.layers.3d"
+order = 8
+primary_operation = "separate"
+[[columns]]
+id = "seconds"
+title = "Time"
+unit = "s"
+[[op]]
+name = "separate"
+title = "Separate layers"
+input = "ops/separate.input.json"
+output = "file"
+output_schema = "ops/separate.output.json"
+stream = true
+default = true
+timeout_s = 10
+first_response_timeout_s = 20

@@ -1,0 +1,66 @@
+# Reference settings for a chat model. Copy the [[setting]] blocks its runner really accepts into model.toml,
+# with that model's defaults, bounds and help; settings.toml beside this file arranges exactly these.
+
+[[setting]]
+id = "context_limit"
+title = "Context"
+type = "choice"
+default = 131072
+choices = [32768, 131072, 262144]
+applies = "load"
+maps_to = "config.context_limit"
+help = "Longest conversation the model holds; memory grows with use."
+
+[[setting]]
+id = "thinking"
+title = "Thinking"
+type = "toggle"
+default = false
+applies = "request"
+maps_to = "request.thinking"
+help = "Lets the model reason before it answers: slower, often better on hard questions."
+
+[[setting]]
+id = "temperature"
+title = "Temperature"
+type = "slider"
+default = 0.7
+min = 0
+max = 2
+step = 0.05
+applies = "request"
+maps_to = "request.temperature"
+help = "Randomness of the answer: lower is steadier, higher is more varied."
+
+[[setting]]
+id = "top_p"
+title = "Top P"
+type = "slider"
+default = 0.95
+min = 0.05
+max = 1
+step = 0.05
+applies = "request"
+maps_to = "request.top_p"
+help = "Samples only from the most likely words that add up to this share."
+
+[[setting]]
+id = "max_tokens"
+title = "Answer limit"
+type = "number"
+default = 2048
+min = 1
+max = 8192
+step = 1
+applies = "request"
+maps_to = "request.max_tokens"
+help = "Longest answer, in tokens."
+
+[[setting]]
+id = "system_prompt"
+title = "System prompt"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.system_prompt"
+help = "Instructions placed before every conversation unless a request brings its own."

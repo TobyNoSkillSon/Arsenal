@@ -1,0 +1,6 @@
+schema = 1
+id = "tipsv2-b14-native-v1"
+reference_runner = "pinned-maker-implementation"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Exact tensor inventory and layout", "Every declared operation on a random graph at each tier", "Trained-weight vendor parity pending approval"]

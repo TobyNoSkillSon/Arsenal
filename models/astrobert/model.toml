@@ -1,0 +1,96 @@
+schema = 3
+id = "astrobert"
+name = "astroBERT"
+kind = "embeddings"
+summary = "Turns astronomy and astrophysics text into 768-number vectors, so similar passages land close together."
+description = "astroBERT is a cased BERT-base language model (12 layers, 768 wide, 110M parameters) built by the NASA Astrophysics Data System team (Grezes et al., ADASS 2021) and pretrained with masked-language and next-sentence objectives on astrophysics papers from the ADS. This port serves the base model's embeddings as the maker's Tutorial 0 describes: the last hidden state, mean-pooled over the tokens. The card gives no benchmark score for the embeddings; the paper reports its gains on astronomy named-entity recognition over plain BERT."
+purpose = "Embed astronomy text"
+publisher = "adsabs"
+released = 2022
+params = "109.7M"
+tasks = ["feature-extraction"]
+languages = ["en"]
+good_for = [
+  "Grouping, clustering or classifying astronomy abstracts and paper passages by topic",
+  "Features for a small downstream classifier on astrophysics text (the maker's own use)",
+]
+limits = [
+  "Not trained for sentence similarity or search: its vectors cluster by topic and vocabulary, so unrelated texts still score around 0.5-0.7 cosine. For question-to-passage search a retrieval embedder does better.",
+  "English astronomy text only; it does not handle Polish or other languages.",
+  "512 tokens per text (about 350 words); longer texts are refused unless truncate is on.",
+  "No instruction, no shorter dimensions; text input only. The masked-word, NER and SciX classifier heads on the card are not served.",
+  "Parity: matches the maker's transformers code on MPS fp16 at cosine 0.99999 (log/003-parity.md).",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/adsabs/astroBERT"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/adsabs/astroBERT/blob/6b9c25bb799152c5849a5b263ea71025fce548f0/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "adsabs/astroBERT"
+revision = "6b9c25bb799152c5849a5b263ea71025fce548f0"
+dtype = "fp32"
+files = ["model.safetensors", "Files/NER_DEAL_id2label.json", "Files/SciX_Categorizer_id2label.json", "config.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json", "vocab.txt"]
+
+[weights.sha256]
+"model.safetensors" = "d4b18bc0a0725aea7aaa4b73492c06050263befae184a5b46fa359a62a3fb203"
+"Files/NER_DEAL_id2label.json" = "7eba8958671c55f20b680f48a30f59b5ca02e0eadefd2adcfb6215cfba5d8704"
+"Files/SciX_Categorizer_id2label.json" = "de61e253024fd2fc6067e1da1b2b4198cffa8f039d57056f81df18c5b87eaf7b"
+"config.json" = "ec54ddf362af5678c3b5f12e4b09d0b821c9e27fa3cc65cfa10eb2bcc06b57b6"
+"special_tokens_map.json" = "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+"tokenizer.json" = "9581a6d2ca1affac28eda4eebe73e6bbc324a264b9163c0481c20f7a53ffcf4d"
+"tokenizer_config.json" = "f2473b2491180be39362386ff1c4dca5f6bf22bdf1567aa769bf87b9aa73126f"
+"vocab.txt" = "70629b199c5a6092d0986774148a231b6e1c1c0800fef4561caa2676ac02beed"
+
+[weights.bytes]
+"model.safetensors" = 438848308
+"Files/NER_DEAL_id2label.json" = 1365
+"Files/SciX_Categorizer_id2label.json" = 175
+"config.json" = 666
+"special_tokens_map.json" = 112
+"tokenizer.json" = 678854
+"tokenizer_config.json" = 624
+"vocab.txt" = 207303
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-astrobert"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "embed"
+title = "Embed"
+input = "ops/embed.input.json"
+output = "json"
+output_schema = "ops/embed.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,65 @@
+schema = 3
+id = "chronos-2"
+name = "Chronos-2"
+kind = "local.forecast"
+summary = "Forecasts the next values of one numeric series as a range of likely outcomes."
+description = "Chronos-2 is Amazon's 120M-parameter encoder-only time-series foundation model, built on the T5 encoder with group attention across related series. It reads up to 8192 past values in patches of 16 and returns 21 quantiles for up to 1024 future steps in one pass. It was trained on real Chronos and GIFT-Eval pretraining data plus synthetic series, and Amazon reports state-of-the-art zero-shot accuracy among public models on fev-bench, GIFT-Eval and Chronos Benchmark II (the maker's figures, not reproduced here)."
+purpose = "Forecast numeric time series"
+publisher = "amazon"
+released = 2025
+params = "119.5M"
+tasks = ["time-series-forecasting"]
+languages = ["und"]
+good_for = ["Probabilistic zero-shot forecasts of one numeric series, such as sales, load or counts, up to 1024 steps in one pass", "Long histories: it reads up to the last 8192 values", "Wide uncertainty bands: 21 quantile levels from 0.01 to 0.99", "Seasonal series: on monthly airline passengers it continues the summer peak and winter dip"]
+limits = ["Univariate here: one series in; the maker's multivariate, covariate and cross-learning modes are not ported", "Horizon at most 1024 steps (the model's one-pass limit); the maker's long-horizon unrolling beyond that is not ported", "Uses only the last 8192 values; missing values are not accepted", "Returns only the trained quantile levels 0.01, 0.05, 0.1 to 0.9 in steps of 0.05, 0.95 and 0.99", "The outer quantiles (0.01, 0.99) grow very wide far out on long horizons", "Reads and writes no language, so the Polish question does not apply", "Parity with the maker code (chronos-forecasting, MPS fp16): cosine 0.99999997, max abs diff 0.89 on forecasts up to 804 (airline series, 24 steps); cosine 0.9999965 over 1024 steps"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/amazon/chronos-2"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/amazon/chronos-2/blob/29ec3766d36d6f73f0696f85560a422f50e8498c/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "amazon/chronos-2"
+revision = "29ec3766d36d6f73f0696f85560a422f50e8498c"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "ddcda3c7508bf2528087723e98a20707cc04b7f370ae275a9fd88078ddba4f42"
+"config.json" = "ef1143bfdc9c0376d9a056eefca46cb4b1ec3d0ffacd541ff56feb40fb708031"
+
+[weights.bytes]
+"model.safetensors" = 477930472
+"config.json" = 1067
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-chronos-2"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

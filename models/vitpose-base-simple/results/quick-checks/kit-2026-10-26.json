@@ -1,0 +1,25 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of estimate_pose through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 1433.",
+  "model": "vitpose-base-simple",
+  "revision": "a93ac0c67e0b7e2c55287d21d4c460c8f3c54d45",
+  "rows": [
+    {
+      "date": "2026-10-26T21:14:31Z",
+      "load_seconds": 0.063,
+      "ops": {
+        "estimate_pose": {
+          "seconds_first": 0.023,
+          "seconds_warm": 0.011,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 691.1,
+      "precision": "fp16",
+      "swap": "total = 2048.00M  used = 836.00M  free = 1212.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-26",
+  "schema": "quick-check-1"
+}

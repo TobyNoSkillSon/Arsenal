@@ -1,0 +1,96 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "qwen3.5-2b"
+name = "Qwen3.5 2B"
+architecture = "qwen3_5"
+kind = "chat"
+tools = ["chat", "operation"]
+params = "2.2B"
+publisher = "mlx-community"
+released = 2026
+suggested = false
+summary = "Describe images and answer questions."
+purpose = "Describe images and answer questions"
+good_for = ["Describe images and answer questions"]
+limits = ["Trained weights, tokenizer correctness and FP16/int8/int4 task quality await the approved live trial.", "Thinking mode can loop with the card's recommended sampling settings; the model card warns that the 2B model is more prone to this than other Qwen3.5 models"]
+tasks = ["chat", "count_tokens", "describe", "tag"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/mlx-community/Qwen3.5-2B-bf16/tree/fb270110eb5a9af244937040c9c3e57addab8ee9"
+[weights]
+repo = "mlx-community/Qwen3.5-2B-bf16"
+revision = "fb270110eb5a9af244937040c9c3e57addab8ee9"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "model.safetensors", "model.safetensors.index.json", "preprocessor_config.json", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+"config.json" = "ed1c1723241f23f7f4e23430759cbd7dcfb4103cbdfe052bfe7626b57c2615b4"
+"model.safetensors" = "ae1fc68e515bf302d85011723ade12d552a3fb12b6ccc8f2e1a10e87f6fc3577"
+"model.safetensors.index.json" = "8bd3e95cb59bc69d5da74d6c8db82351be196903c1b8ea9952cf440d9c0a03a0"
+"preprocessor_config.json" = "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+"processor_config.json" = "14932921ca485d458a04dafd8069fbb0a4505622a48208d19ed247115801385b"
+"tokenizer.json" = "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4"
+"tokenizer_config.json" = "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182"
+[weights.bytes]
+"chat_template.jinja" = 7755
+"config.json" = 2908
+"model.safetensors" = 4426559145
+"model.safetensors.index.json" = 48960
+"preprocessor_config.json" = 390
+"processor_config.json" = 1300
+"tokenizer.json" = 19989343
+"tokenizer_config.json" = 1139
+[derive]
+int8 = "cast:language-half-g64-v2"
+int4 = "cast:language-half-g64-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "chat"
+title = "Chat"
+input = "ops/chat.input.json"
+output_schema = "ops/chat.output.json"
+output = "text-stream"
+stream = true
+[[op]]
+name = "count_tokens"
+title = "Count tokens"
+input = "ops/count_tokens.input.json"
+output_schema = "ops/count_tokens.output.json"
+output = "json"
+stream = false
+[[op]]
+name = "describe"
+title = "Describe"
+input = "ops/describe.input.json"
+output_schema = "ops/describe.output.json"
+output = "json"
+stream = false
+[[op]]
+name = "tag"
+title = "Tag"
+input = "ops/tag.input.json"
+output_schema = "ops/tag.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "weights_downloaded": 0,
+  "graph": "reduced random weights",
+  "precisions": [
+    {
+      "model": "hy-mt2-7b",
+      "precision": "fp16",
+      "parameters": 24,
+      "eligible_matrices": 15,
+      "packed_matrices": 0,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "translate",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "hy-mt2-7b",
+      "precision": "int8",
+      "parameters": 54,
+      "eligible_matrices": 15,
+      "packed_matrices": 15,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "translate",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "hy-mt2-7b",
+      "precision": "int4",
+      "parameters": 54,
+      "eligible_matrices": 15,
+      "packed_matrices": 15,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "translate",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    }
+  ],
+  "interpretation": "Structured cases pass only on the declared invalid_model_output parser rejection. Maker parser fixtures independently exercise positive schema-valid results."
+}

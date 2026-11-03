@@ -1,0 +1,204 @@
+{
+  "schema": 1,
+  "phase": "no-weights",
+  "weights_downloaded": 0,
+  "worker": "geometry",
+  "operations": [
+    "image_to_3d"
+  ],
+  "smoke": {
+    "precision": [
+      "fp16",
+      "int8",
+      "int4"
+    ],
+    "resolution": [
+      512,
+      1024,
+      1536
+    ],
+    "cases": 9,
+    "artifact_validator": "production OperationArtifacts via headless runner-check",
+    "graph": "shrunk widths, blocks and physical grids; all generation and bake stages"
+  },
+  "tiers": {
+    "fp16": {
+      "learned_tensors": 381,
+      "eligible_matrices": 85,
+      "packed_matrices": 0,
+      "eligible_parameter_values": 802112,
+      "total_parameter_values": 9844078,
+      "no_full_precision_learned_weights": true
+    },
+    "int8": {
+      "learned_tensors": 381,
+      "eligible_matrices": 85,
+      "packed_matrices": 85,
+      "eligible_parameter_values": 802112,
+      "total_parameter_values": 9844078,
+      "no_full_precision_learned_weights": true
+    },
+    "int4": {
+      "learned_tensors": 381,
+      "eligible_matrices": 85,
+      "packed_matrices": 85,
+      "eligible_parameter_values": 802112,
+      "total_parameter_values": 9844078,
+      "no_full_precision_learned_weights": true
+    }
+  },
+  "artifacts": [
+    {
+      "precision": "fp16",
+      "resolution": 512,
+      "vertices": 95,
+      "faces": 124,
+      "glb_bytes": 125232,
+      "preview_bytes": 121610,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "fp16",
+      "resolution": 1024,
+      "vertices": 94,
+      "faces": 110,
+      "glb_bytes": 165680,
+      "preview_bytes": 140131,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "fp16",
+      "resolution": 1536,
+      "vertices": 104,
+      "faces": 122,
+      "glb_bytes": 197140,
+      "preview_bytes": 172880,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "int8",
+      "resolution": 512,
+      "vertices": 94,
+      "faces": 118,
+      "glb_bytes": 127956,
+      "preview_bytes": 132400,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "int8",
+      "resolution": 1024,
+      "vertices": 95,
+      "faces": 124,
+      "glb_bytes": 168756,
+      "preview_bytes": 171342,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "int8",
+      "resolution": 1536,
+      "vertices": 95,
+      "faces": 128,
+      "glb_bytes": 197940,
+      "preview_bytes": 163357,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "int4",
+      "resolution": 512,
+      "vertices": 95,
+      "faces": 124,
+      "glb_bytes": 111116,
+      "preview_bytes": 121338,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "int4",
+      "resolution": 1024,
+      "vertices": 100,
+      "faces": 126,
+      "glb_bytes": 173876,
+      "preview_bytes": 157521,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    },
+    {
+      "precision": "int4",
+      "resolution": 1536,
+      "vertices": 94,
+      "faces": 122,
+      "glb_bytes": 193692,
+      "preview_bytes": 177718,
+      "pbr_textures": 2,
+      "alphaMode": "BLEND"
+    }
+  ],
+  "malformed_cases": 10,
+  "cancellation_checkpoints": [
+    "Sampling shape",
+    "Building textured mesh"
+  ],
+  "unload_exit": 0,
+  "family_tests": 10,
+  "source_header_payload_bytes": 0,
+  "pending": [
+    "Trained-weight output and reference parity",
+    "BF16 and FP32 cast numerical qualification",
+    "Int8 and int4 quality",
+    "Full-size topology, memory and latency"
+  ],
+  "live_test_risk": "uncertain: native random paths pass, but full-size trained FP16 graph and adaptive topology remain unqualified",
+  "immediate_sequential_requests_without_pacing": 100,
+  "rebased_contracts_commit": "162b7b9b0db8cd1c6016c06614250a87f41387e5",
+  "rgba_boundary_cases": [
+    "RGB",
+    "opaque RGBA",
+    "empty RGBA",
+    "gray-alpha"
+  ],
+  "helper_stripped_bytes": 18840848,
+  "helper_stripped_sha256": "b32c0aaa3ad89e1d4544f567862bc29928e142eecb1d80163fd699dedcc76803",
+  "catalog_valid_folders": 30,
+  "visual_sweep": {
+    "preview_images": 9,
+    "pixels_per_image": [
+      512,
+      512
+    ],
+    "inspection": "Viewed each full-resolution preview: nonempty finite mesh silhouette, material texture and transparent surround; random cubes are expected from topology initialization. This is not trained visual fidelity evidence."
+  },
+  "host_contract_tests": 3,
+  "host_preparation": {
+    "model": "birefnet",
+    "operation": "remove_background",
+    "file_id": "foreground",
+    "declaration": "checked in model.toml and catalog validation",
+    "fixture_chain": "passed shared NativeServiceContractTests, ordinaryGetLoadOperationAndFileValidation",
+    "missing_dependency": "dependency_not_installed for absent and uninstalled dependency",
+    "output_and_cleanup": [
+      "foreground RGBA path replaces source image",
+      "opaque/wrong-id dependency output rejected",
+      "intermediate removed after completion"
+    ],
+    "trained_chain": "not-run-no-weights",
+    "manifest_after_rebase": {
+      "model": "birefnet",
+      "operation": "remove_background",
+      "file_id": "foreground"
+    }
+  },
+  "checker_accommodations": [],
+  "direct_worker_smokes": "Tracked folders, original configs, shared serving_tiers/validate_inventory/validate_output; no source dtype edits, synthetic checkpoint model_type or request pacing.",
+  "base_main_commit": "48ef35c1d0fa0d38192b89ff4e23e1bf54db099e",
+  "checker_unit_tests": 11,
+  "header_cast_plans": {
+    "F32_to_F16": 453,
+    "BF16_to_F16_unqualified_differences": 3200
+  }
+}

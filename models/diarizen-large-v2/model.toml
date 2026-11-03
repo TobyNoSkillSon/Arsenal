@@ -1,0 +1,80 @@
+schema = 3
+architecture = "diarizen"
+id = "diarizen-large-v2"
+name = "DiariZen Large v2"
+kind = "audio"
+params = "76M"
+publisher = "BUT Speech@FIT"
+released = 2025
+suggested = false
+summary = "Find who spoke when in meetings and far-field recordings, with up to four overlapping speakers, using a native Swift MLX worker."
+description = "Brno University of Technology's DiariZen: a WavLM Large encoder structurally pruned to 63M parameters, four Conformer layers and a powerset head that marks up to four simultaneous speakers every 20 ms in 16-second windows, followed by pyannote-style WeSpeaker ResNet34 embeddings and VBx clustering across the recording. Trained on far-field single-channel meetings and conversations (AMI, AISHELL-4, AliMeeting, NOTSOFAR-1, MSDWild, DIHARD3, RAMC, VoxConverse); the card reports 13.9% DER on AMI, 10.1% on AISHELL-4, 14.5% on DIHARD3 and 9.1% on VoxConverse at collar 0, against 22.4%, 12.2%, 21.7% and 11.3% for pyannote 3.1."
+purpose = "Who spoke when, meetings, overlaps"
+good_for = ["Meetings and far-field room recordings", "Overlapping speech, up to four speakers at once", "Recordings with many speakers (the number is found automatically)", "Exclusive one-speaker-at-a-time turns for aligning transcripts", "RTTM export"]
+limits = ["At most ten minutes per recording.", "At most four speakers active at the same moment within a 16-second window.", "The number of speakers is always found automatically; the maker's pipeline takes no speaker count.", "Reads the first channel of a multichannel file.", "Speakers are numbered, not identified; no speaker embeddings are returned.", "Not streaming: the whole recording is processed at once.", "Polish is untested here; training data is mostly English and Mandarin."]
+languages = ["und"]
+tasks = ["diarize"]
+tools = ["operation"]
+assets = ["wespeaker-resnet34-lm"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "CC-BY-NC-4.0"
+name = "Creative Commons Attribution-NonCommercial 4.0"
+commercial = false
+conditions = "Non-commercial use only (CC BY-NC 4.0), as the model card asks; credit BUT Speech@FIT. The VBx PLDA files are CC BY 4.0 and the WeSpeaker ResNet34 embedding (pyannote/wespeaker-voxceleb-resnet34-LM) is CC BY 4.0."
+url = "https://huggingface.co/BUT-FIT/diarizen-wavlm-large-s80-md-v2/blob/027b3e221b9d81dce2be794084f1dbd3ba2da403/README.md"
+[weights]
+repo = "BUT-FIT/diarizen-wavlm-large-s80-md-v2"
+revision = "027b3e221b9d81dce2be794084f1dbd3ba2da403"
+dtype = "fp32"
+files = ["config.toml", "pytorch_model.bin", "plda/plda.npz", "plda/xvec_transform.npz"]
+[weights.sha256]
+"config.toml" = "6eb3dab9c3892efc4a271ef5f88b5453e6e96789961084a15e88ca352de98503"
+"pytorch_model.bin" = "689a10f0cbde6345b4bf9b1670cf3196488634b34e5b07bea0fe40d508e1196b"
+"plda/plda.npz" = "9b77bcd840692710dd3496f62ecfeed8d8e5f002fd991b785079b244eab7d255"
+"plda/xvec_transform.npz" = "325f1ce8e48f7e55e9c8aa47e05d2766b7c48c4b25b8de8dd751e7a4cc5fbe8f"
+[weights.bytes]
+"config.toml" = 657
+"pytorch_model.bin" = 278071526
+"plda/plda.npz" = 133852
+"plda/xvec_transform.npz" = 134376
+[derive]
+fp16 = "cast:audio-diarizen-v1"
+[selection]
+default = "native"
+[[asset]]
+id = "wespeaker-resnet34-lm"
+repo = "pyannote/wespeaker-voxceleb-resnet34-LM"
+repo_type = "model"
+into = "embedding"
+revision = "837717ddb9ff5507820346191109dc79c958d614"
+licence = "CC-BY-4.0"
+files = ["pytorch_model.bin"]
+[asset.bytes]
+"pytorch_model.bin" = 26645418
+[asset.sha256]
+"pytorch_model.bin" = "366edf44f4c80889a3eb7a9d7bdf02c4aede3127f7dd15e274dcdb826b143c56"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "diarize"
+title = "Who spoke when"
+input = "ops/diarize.input.json"
+output_schema = "ops/diarize.output.json"
+output = "json"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

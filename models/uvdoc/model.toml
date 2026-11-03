@@ -1,0 +1,67 @@
+schema = 3
+id = "uvdoc"
+name = "UVDoc"
+kind = "local.dewarp"
+summary = "Flattens a photo of a curved or tilted page into a straight, readable scan"
+description = "UVDoc is a small convolutional network that predicts a sampling grid for a photographed document and resamples the photo through it, removing page curl, folds, tilt and perspective. PaddlePaddle ships it in PaddleOCR as the document unwarping step before text recognition; this is their transformers release of the same model. The card reports a character error rate of 0.179 on the DocUNet benchmark after unwarping."
+purpose = "Flatten a photographed page"
+publisher = "PaddlePaddle"
+released = 2026
+params = "7.9M"
+tasks = ["image-to-image"]
+languages = ["mul"]
+good_for = ["Phone photos of book pages and curled or folded paper before OCR", "Straightening tilted or perspective-skewed documents"]
+limits = ["Reads no text, so language does not matter (Polish pages work like any other)", "The output keeps the photo's size and aspect ratio rather than the page's, and background around the page can stay in or be stretched", "Works from a 488 by 712 view of the photo, so very fine local wrinkles are not corrected", "Expects one page or one open book spread filling most of the frame"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/PaddlePaddle/UVDoc_safetensors"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/PaddlePaddle/UVDoc_safetensors/blob/bfa6aad03b549c7e2cf89cefd2fb02ba3bef2ae4/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "PaddlePaddle/UVDoc_safetensors"
+revision = "bfa6aad03b549c7e2cf89cefd2fb02ba3bef2ae4"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "preprocessor_config.json"]
+
+[weights.sha256]
+"model.safetensors" = "65f980e3083b4919d962d7b4c8ddb42a926dc8b36f4909944746cf2d7b7325dc"
+"config.json" = "7cab8c18905afaca325792ddba0dfc73a13dcadd886a5a7c008dabcb7fae7dd1"
+"preprocessor_config.json" = "d117e9226a945206cfb76a9d75d3ae5483080d90b48a34253626444b61771436"
+
+[weights.bytes]
+"model.safetensors" = 31667380
+"config.json" = 1421
+"preprocessor_config.json" = 240
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-uvdoc"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

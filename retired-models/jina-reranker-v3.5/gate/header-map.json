@@ -1,0 +1,11 @@
+{
+  "ignore": [],
+  "tensors": {
+    "projector.0.weight": {
+      "name": "projector.linear1.weight"
+    },
+    "projector.2.weight": {
+      "name": "projector.linear2.weight"
+    }
+  }
+}

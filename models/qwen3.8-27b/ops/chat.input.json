@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "messages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "system",
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "text"
+                  ],
+                  "properties": {
+                    "type": {
+                      "const": "text"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8192
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "top_p": {
+      "type": "number",
+      "maximum": 1,
+      "minimum": 1e-06
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "stop": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024,
+          "x-arsenal-maxUTF8Bytes": 1024
+        },
+        {
+          "type": "array",
+          "maxItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "x-arsenal-maxUTF8Bytes": 1024
+          }
+        }
+      ],
+      "description": "Up to four nonempty stop strings, each at most 1024 UTF-8 bytes."
+    },
+    "tools": {
+      "type": "array",
+      "maxItems": 0,
+      "description": "Tool calling is not implemented in the Arsenal text runner."
+    },
+    "response_format": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "const": "text"
+        }
+      },
+      "additionalProperties": false
+    },
+    "stream": {
+      "type": "boolean"
+    },
+    "thinking": {
+      "type": "boolean"
+    },
+    "system_prompt": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "messages"
+  ],
+  "additionalProperties": false
+}

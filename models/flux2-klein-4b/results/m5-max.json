@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "model": "flux2-klein-4b",
+  "kind": "images",
+  "chip": "m5-max",
+  "os_build": "26A434",
+  "app_build": "e78d8ef3297dc930dfd9b7c6129b8b7747aaded5",
+  "runner": "native",
+  "worker_digest": "0ab687b0d17dac4c98820ba586b6110fd4be0682e8f7678782b9156f875a7c50",
+  "precision": "bf16",
+  "mode": "exact",
+  "suite": {
+    "id": "mobius-images-suite-v1",
+    "version": 1,
+    "sha256": "27ad4cd14b10ad99ca22c08eb178132c2bfb2d2239f3db6efe7c247fba67a7be"
+  },
+  "profile": "quick",
+  "date": "2026-10-08T11:12:17+00:00",
+  "stub": false,
+  "gate_passed": false,
+  "conditions": {
+    "measurement_lock": false,
+    "contaminated": true,
+    "contended": true,
+    "cpu_limit_pct": 250,
+    "gpu_limit_pct": 10,
+    "sample_interval_s": 3,
+    "idle_samples": [
+      {
+        "at": "2026-10-08T11:12:06+00:00",
+        "phase": "idle",
+        "other_cpu_pct": 606.4,
+        "other_gpu_pct": null,
+        "compositing_gpu_pct": null,
+        "valid": false,
+        "note": "Mac in use; no GPU/compositor telemetry; uncontrolled quick check."
+      },
+      {
+        "at": "2026-10-08T11:12:09+00:00",
+        "phase": "idle",
+        "other_cpu_pct": 323.0,
+        "other_gpu_pct": null,
+        "compositing_gpu_pct": null,
+        "valid": false,
+        "note": "Mac in use; no GPU/compositor telemetry; uncontrolled quick check."
+      },
+      {
+        "at": "2026-10-08T11:12:12+00:00",
+        "phase": "idle",
+        "other_cpu_pct": 211.5,
+        "other_gpu_pct": null,
+        "compositing_gpu_pct": null,
+        "valid": false,
+        "note": "Mac in use; no GPU/compositor telemetry; uncontrolled quick check."
+      }
+    ],
+    "run_samples": [
+      {
+        "at": "2026-10-08T11:12:15+00:00",
+        "phase": "run",
+        "other_cpu_pct": 187.79999999999998,
+        "other_gpu_pct": null,
+        "compositing_gpu_pct": null,
+        "valid": false,
+        "note": "Mac in use; no GPU/compositor telemetry; uncontrolled quick check."
+      }
+    ],
+    "energy": "not_measured",
+    "note": "Standalone Swift worker over MobiusWire, frozen quick recipe (one photo warm-up, photo/text once), not mobius-bench. Binary SHA-256. Physical-footprint lifetime peak from task_vm_info plus rusage_info_v4. bf16 component regression gate=True; image regression against a constrained reference only. Stock mflux and image quality tolerance remain unqualified. Gate report: gate/evidence/bf16-prerelease-gate.json."
+  },
+  "metrics": {
+    "seconds_per_image": 1.0684575414925348,
+    "peak_ram_mb": 15915.838528,
+    "reference_deviation": null
+  },
+  "cases": [
+    {
+      "id": "photo-0",
+      "wall_s": 1.0677396669925656,
+      "metrics": {
+        "seconds_per_image": 1.0677396669925656
+      },
+      "output": ".build/flux-prerelease-20261008/evidence/quick-support/jobs/photo/image-1-2d1620e263be38aa.png"
+    },
+    {
+      "id": "text-0",
+      "wall_s": 1.069175415992504,
+      "metrics": {
+        "seconds_per_image": 1.069175415992504
+      },
+      "output": ".build/flux-prerelease-20261008/evidence/quick-support/jobs/text/image-1-c02cce4866a54491.png"
+    }
+  ],
+  "gpu_cores": 40,
+  "workload": "512×512 pixels, 4 steps; retained quick check, not the 1024×1024 default workload"
+}

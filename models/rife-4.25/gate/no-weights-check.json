@@ -1,0 +1,319 @@
+{
+  "status": "passed",
+  "synthetic_config": {
+    "model_type": "rife"
+  },
+  "worker": "mobius-worker-restoration",
+  "cases": [
+    {
+      "architecture": "rife",
+      "dtype": "fp16",
+      "operation": "interpolate_video",
+      "variant": "image",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 174,
+          "height": 16,
+          "id": "frame-0",
+          "mime": "image/png",
+          "name": "frame-0.png",
+          "sha256": "dd3807b49d95217f273e1479236460e325b0c835999caa844addb72e15c42e6d",
+          "width": 16
+        },
+        {
+          "bytes": 391,
+          "height": 16,
+          "id": "frame-1",
+          "mime": "image/png",
+          "name": "frame-1.png",
+          "sha256": "c9ee8a53e93022a97592b7e3bfd6813843ee62f7e3e208332b0517f32cf6ef50",
+          "width": 16
+        },
+        {
+          "bytes": 426,
+          "height": 16,
+          "id": "frame-2",
+          "mime": "image/png",
+          "name": "frame-2.png",
+          "sha256": "123077102dacede1601c4ab11333b96bf8840c5b81cbb3e9640cc0ab011bc9ec",
+          "width": 16
+        },
+        {
+          "bytes": 174,
+          "height": 16,
+          "id": "frame-3",
+          "mime": "image/png",
+          "name": "frame-3.png",
+          "sha256": "dd3807b49d95217f273e1479236460e325b0c835999caa844addb72e15c42e6d",
+          "width": 16
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "fp16",
+      "operation": "interpolate_video",
+      "variant": "video",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 1376,
+          "id": "video",
+          "mime": "video/mp4",
+          "name": "interpolated.mp4",
+          "sha256": "244a926f9ba394b2290cea3064680ad58f990b320dbfb1a6fbe40a8929cb9d4d"
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "fp16",
+      "operation": "interpolate_video",
+      "variant": "video",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 1401,
+          "id": "video",
+          "mime": "video/mp4",
+          "name": "interpolated.mp4",
+          "sha256": "433f76b9d7deeb9f97e0963e398233511a959903823baba804155c8da09a8a2f"
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "int8",
+      "operation": "interpolate_video",
+      "variant": "image",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 174,
+          "height": 16,
+          "id": "frame-0",
+          "mime": "image/png",
+          "name": "frame-0.png",
+          "sha256": "dd3807b49d95217f273e1479236460e325b0c835999caa844addb72e15c42e6d",
+          "width": 16
+        },
+        {
+          "bytes": 403,
+          "height": 16,
+          "id": "frame-1",
+          "mime": "image/png",
+          "name": "frame-1.png",
+          "sha256": "75f2020f489fe32b9e89feac7ef6f77e1e770e6a276e78008269cd539da291fb",
+          "width": 16
+        },
+        {
+          "bytes": 398,
+          "height": 16,
+          "id": "frame-2",
+          "mime": "image/png",
+          "name": "frame-2.png",
+          "sha256": "494ed7401047c0b6f6d29819e21840d11741ab26dacf5a19b867f3522c3c7b5b",
+          "width": 16
+        },
+        {
+          "bytes": 174,
+          "height": 16,
+          "id": "frame-3",
+          "mime": "image/png",
+          "name": "frame-3.png",
+          "sha256": "dd3807b49d95217f273e1479236460e325b0c835999caa844addb72e15c42e6d",
+          "width": 16
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "int8",
+      "operation": "interpolate_video",
+      "variant": "video",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 1375,
+          "id": "video",
+          "mime": "video/mp4",
+          "name": "interpolated.mp4",
+          "sha256": "e1261cf3a64ecc0a4182274e8ddf97486473af21e7ecbd11d097bfd14a4f4136"
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "int8",
+      "operation": "interpolate_video",
+      "variant": "video",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 1402,
+          "id": "video",
+          "mime": "video/mp4",
+          "name": "interpolated.mp4",
+          "sha256": "a35f354f43a1e70e4cf87ee845aedf62a1db8e387ed8c0932727189bb9b6e90e"
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "int4",
+      "operation": "interpolate_video",
+      "variant": "image",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 174,
+          "height": 16,
+          "id": "frame-0",
+          "mime": "image/png",
+          "name": "frame-0.png",
+          "sha256": "dd3807b49d95217f273e1479236460e325b0c835999caa844addb72e15c42e6d",
+          "width": 16
+        },
+        {
+          "bytes": 387,
+          "height": 16,
+          "id": "frame-1",
+          "mime": "image/png",
+          "name": "frame-1.png",
+          "sha256": "6f2b140425d7e592cf58db7bb0b715299afda861b5745c6f53688585eb45039c",
+          "width": 16
+        },
+        {
+          "bytes": 409,
+          "height": 16,
+          "id": "frame-2",
+          "mime": "image/png",
+          "name": "frame-2.png",
+          "sha256": "60f7b48a2d698833d00446db1e3fb9d442c15f8fd5e27b302c90e440ed2e789d",
+          "width": 16
+        },
+        {
+          "bytes": 174,
+          "height": 16,
+          "id": "frame-3",
+          "mime": "image/png",
+          "name": "frame-3.png",
+          "sha256": "dd3807b49d95217f273e1479236460e325b0c835999caa844addb72e15c42e6d",
+          "width": 16
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "int4",
+      "operation": "interpolate_video",
+      "variant": "video",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 1376,
+          "id": "video",
+          "mime": "video/mp4",
+          "name": "interpolated.mp4",
+          "sha256": "9688f7d4a87f996cb89f0313f079bfd19847e53b51333af87404dc55e003241b"
+        }
+      ]
+    },
+    {
+      "architecture": "rife",
+      "dtype": "int4",
+      "operation": "interpolate_video",
+      "variant": "video",
+      "tensor_count": 158,
+      "packed_matrices": 0,
+      "artifacts": [
+        {
+          "bytes": 1398,
+          "id": "video",
+          "mime": "video/mp4",
+          "name": "interpolated.mp4",
+          "sha256": "6c118ed4d2e53c44fc0269a1592b53a892ae728e26e553ddac9033ed40b4c76b"
+        }
+      ]
+    }
+  ],
+  "lifecycle": [
+    {
+      "architecture": "rife",
+      "case": "malformed",
+      "operation": "interpolate_video",
+      "error": "{'code': 'invalid_request', 'message': 'Supply exactly two frames and optional t positions, or a video with factor/target_fps.'}"
+    },
+    {
+      "architecture": "rife",
+      "case": "malformed",
+      "operation": "interpolate_video",
+      "error": "{'code': 'invalid_request', 'message': 't requires one to sixteen positions from zero to one.'}"
+    },
+    {
+      "architecture": "rife",
+      "case": "malformed",
+      "operation": "interpolate_video",
+      "error": "{'code': 'invalid_request', 'message': 'Video accepts factor or target_fps, not t or both rate controls.'}"
+    },
+    {
+      "architecture": "rife",
+      "case": "cancel-after-first-progress",
+      "error": "cancelled",
+      "cancel_ack": true,
+      "unload_exit": 0,
+      "partial_mp4_removed": true
+    }
+  ],
+  "eligible_matrices": 0,
+  "low_bit_policy": "All spatial kernels and vectors retained as FP16; no packing or compression",
+  "trained_weight_quality": "not-tested",
+  "ordinary_get_load": "architecture selector and cast recipe implemented; trained weights not fetched",
+  "operation_smokes": [
+    {
+      "status": "passed",
+      "operations": [
+        "interpolate_video"
+      ],
+      "parameters": 158,
+      "precision": "fp16",
+      "weights_downloaded": 0,
+      "effective_dtype": "fp16",
+      "eligible_matrices": 0,
+      "compression": "none"
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "interpolate_video"
+      ],
+      "parameters": 158,
+      "precision": "int8",
+      "weights_downloaded": 0,
+      "effective_dtype": "fp16",
+      "eligible_matrices": 0,
+      "compression": "none"
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "interpolate_video"
+      ],
+      "parameters": 158,
+      "precision": "int4",
+      "weights_downloaded": 0,
+      "effective_dtype": "fp16",
+      "eligible_matrices": 0,
+      "compression": "none"
+    }
+  ]
+}

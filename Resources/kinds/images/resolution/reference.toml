@@ -1,0 +1,39 @@
+# Reference settings for an image model that takes one size choice (a `resolution` enum) and is distilled to a few
+# steps, such as FLUX.2 klein. Copy the [[setting]] blocks its runner really accepts into model.toml, with that
+# model's sizes, tuned step count and help; settings.toml beside this file arranges exactly these.
+#
+# steps: default = the tuned count. A distilled model gets no Quality row: its tuned count is already the fast one.
+# seed: no default on purpose: nothing is sent, so every request gets a new random seed until one is pinned.
+
+[[setting]]
+id = "resolution"
+title = "Size"
+type = "choice"
+default = "1024x1024"
+choices = ["512x512", "768x768", "1024x1024"]
+applies = "request"
+maps_to = "request.resolution"
+help = "Image size in pixels."
+
+[[setting]]
+id = "steps"
+title = "Steps"
+type = "number"
+default = 4
+min = 1
+max = 100
+step = 1
+applies = "request"
+maps_to = "request.steps"
+help = "Denoising passes per image: this model is tuned for 4."
+
+[[setting]]
+id = "seed"
+title = "Seed"
+type = "number"
+min = 0
+max = 4294967295
+step = 1
+applies = "request"
+maps_to = "request.seed"
+help = "Starting noise: empty is a new random seed each request; the same seed and prompt give the same image."

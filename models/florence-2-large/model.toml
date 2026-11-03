@@ -1,0 +1,83 @@
+schema = 3
+id = "florence-2-large"
+name = "Florence-2 Large"
+kind = "local.vision"
+summary = "Writes an English caption for a photo, short or detailed, or reads the text in it line by line."
+description = "Florence-2 Large from Microsoft: a DaViT image encoder feeding a 12-layer BART-style encoder-decoder, 777M parameters, trained on FLD-5B (5.4 billion annotations over 126 million images) to handle many vision tasks from a text prompt. This release is continued pretraining with a 4k context, and its OCR writes line breaks. Arsenal runs its pure-text tasks: caption, detailed caption, more detailed caption and OCR. The card reports zero-shot COCO caption CIDEr 135.6 and NoCaps 120.8."
+purpose = "Caption a photo or read its text"
+publisher = "microsoft"
+released = 2024
+params = "776.7M"
+tasks = ["image-text-to-text"]
+languages = ["en"]
+good_for = [
+  "One-sentence captions of everyday photos",
+  "Paragraph descriptions with the prompt <DETAILED_CAPTION> or <MORE_DETAILED_CAPTION>",
+  "Reading printed English text such as signs and labels with the prompt <OCR>, one line per line",
+]
+limits = [
+  "English only; it does not write Polish, and OCR of Polish diacritics is untested.",
+  "The prompt is either a task token (<CAPTION>, <DETAILED_CAPTION>, <MORE_DETAILED_CAPTION>, <OCR>) or the start of a caption to continue; detection, grounding and segmentation tasks are not offered because their boxes do not fit the caption output.",
+  "The card warns this continued-pretraining release used only 0.1B samples and might not be trained well.",
+  "Every image is squashed to 768x768, so very wide or tall images lose detail; a tiny image still gets a confident caption (a 33x17 zebra came back as a cheetah).",
+  "The detailed captions can invent details (a green car was also called bright turquoise).",
+  "Parity with the maker code: output tokens identical on 9 of 9 fixed requests across all four tasks and a caption prefix (maker's repo code under transformers 5.22, MPS fp16); see log/003-parity.md.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/microsoft/Florence-2-large"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/microsoft/Florence-2-large/blob/21a599d414c4d928c9032694c424fb94458e3594/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "microsoft/Florence-2-large"
+revision = "21a599d414c4d928c9032694c424fb94458e3594"
+dtype = "fp16"
+files = ["model.safetensors", "config.json", "generation_config.json", "preprocessor_config.json", "tokenizer.json", "tokenizer_config.json", "vocab.json"]
+
+[weights.sha256]
+"model.safetensors" = "4f38ce741c6b71188fe2b3419a55e11917a8a7b321ae2e63c61da0191b0ebad7"
+"config.json" = "6f8a8f92a74ce18b5c1e5646b4a8222477dd1ac49f31b953e75d6fc3e0f8583a"
+"generation_config.json" = "30e9865458ecc8ee931eeeb43f44f1d169c5ab95be39e0072142a7a6b8f31990"
+"preprocessor_config.json" = "2f5921bbc53c7cc04251e1027b45b1cec726276be6db23d1bb40641bfbe2cf29"
+"tokenizer.json" = "847bbeab6174d66a88898f729d52fa8d355fafe1bea101cf960dd404581df70e"
+"tokenizer_config.json" = "79ffcf43af8ebda99d165f61d243180da2e2639952e41e71e11611c18770489c"
+"vocab.json" = "394fdc63c71aabe0a9b97117f5d62fb5fcc4d59b2b3ea929a3929e6a53217b3c"
+
+[weights.bytes]
+"model.safetensors" = 1553563458
+"config.json" = 2445
+"generation_config.json" = 51
+"preprocessor_config.json" = 806
+"tokenizer.json" = 1355863
+"tokenizer_config.json" = 34
+"vocab.json" = 1099884
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-florence-2-large"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,10 @@
+{
+  "model": "gemma-4-e4b-it",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 11,
+    "plain_tokens": 10,
+    "roundtrip": "Hello"
+  }
+}

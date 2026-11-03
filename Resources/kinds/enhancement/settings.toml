@@ -1,0 +1,18 @@
+# Settings panel reference for audio cleanup models (docs/MODEL-FOLDER.md, "Settings panel"). Copy it beside
+# model.toml and tailor it to the settings that model declares.
+schema = 1
+
+[[section]]
+
+[[section.row]]
+setting = "mode"
+control = "segments"
+labels = { denoise = "Denoise", restore = "Restore", upscale = "Upscale" }
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "chunk_seconds"
+unit = "s"

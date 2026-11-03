@@ -1,0 +1,13 @@
+{
+  "repo": "IndexTeam/Index-Translate-9B",
+  "revision": "4e06279e62352dab96bbeb6fa0579bca5e822d75",
+  "files": [
+    "model-00001-of-00004.safetensors",
+    "model-00002-of-00004.safetensors",
+    "model-00003-of-00004.safetensors",
+    "model-00004-of-00004.safetensors"
+  ],
+  "tensors": 775,
+  "header_bytes": 95184,
+  "errors": []
+}

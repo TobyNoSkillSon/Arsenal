@@ -1,0 +1,6 @@
+schema = 1
+id = "parakeet-v3-ultra-native-v1"
+reference_runner = "pinned-vendor-reference-pending"
+precision = "fp16"
+independent_vendor_qualified = false
+status = "no-weights"

@@ -1,0 +1,112 @@
+schema = 3
+architecture = "sam3.1_video"
+id = "sam3.1"
+name = "SAM 3.1"
+kind = "perception"
+params = "870M"
+publisher = "Meta"
+released = 2026
+suggested = false
+summary = "Select objects and track video. Native MLX inference in FP16."
+purpose = "Select objects and track video"
+good_for = ["Prompted image masks and object tracking"]
+limits = ["Four sessions; 16 tracked objects; at most 128 frames and 256 PNG masks per call; upright videos only"]
+languages = ["en"]
+tasks = ["image-segmentation", "video-object-tracking"]
+tools = ["operation"]
+assets = ["clip-bpe"]
+[facets]
+modalities_in = ["image", "video", "text"]
+modalities_out = ["image"]
+[licence]
+spdx = "LicenseRef-SAM"
+name = "SAM License"
+commercial = false
+conditions = "Meta's SAM License: you accept it on Hugging Face (Meta approves each request) and Arsenal downloads from facebook/sam3.1 with your token. No ITAR or other trade-controlled uses; anything redistributed carries the same licence; published research credits SAM."
+url = "https://huggingface.co/facebook/sam3.1/blob/daa63191845a41281374e725f4c9e51c7a824460/LICENSE"
+[weights]
+repo = "facebook/sam3.1"
+revision = "daa63191845a41281374e725f4c9e51c7a824460"
+dtype = "fp32"
+files = ["sam3.1_multiplex.pt", "config.json"]
+[weights.sha256]
+"sam3.1_multiplex.pt" = "0567debeec80ba4ac6369540c6c248025283cb3ff2b92827509e57e2b3541cb6"
+"config.json" = "4616385e4b21f2e5e22c875b65679185cbccfa95de42542b9166f7dc3d57160f"
+[weights.bytes]
+"sam3.1_multiplex.pt" = 3502755717
+"config.json" = 25843
+
+[[asset]]
+files = ["merges.txt", "vocab.json"]
+id = "clip-bpe"
+licence = "MIT"
+repo = "openai/clip-vit-base-patch32"
+repo_type = "model"
+revision = "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268"
+
+[asset.bytes]
+"merges.txt" = 524657
+"vocab.json" = 862328
+
+[asset.sha256]
+"merges.txt" = "f526393189112391ce6f9795d4695f704121ce452c3aad1f5335cc41337eba85"
+"vocab.json" = "5047b556ce86ccaf6aa22b3ffccfc52d391ea4accdab9c2f2407da5b742d4363"
+
+[precision]
+dtype = "fp16"
+source = "raw"
+reason = "Meta's FP32 checkpoint keeps its original key names and PyTorch layouts; Get maps, splits and transposes them in the model's own cast, drops an unused CLIP projection whose values exceed FP16's range, then stores FP16."
+evidence = "results/official-checkpoint-2026-11-02.md"
+[derive]
+fp16 = "cast:sam31-fp16-v3"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "perception"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "segment"
+title = "Segment"
+input = "ops/segment.input.json"
+output = "file"
+output_schema = "ops/segment.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[[op]]
+name = "segment_session"
+title = "Segment session"
+input = "ops/segment_session.input.json"
+output = "json"
+output_schema = "ops/segment_session.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[[op]]
+name = "video_session"
+title = "Video session"
+input = "ops/video_session.input.json"
+output = "json"
+output_schema = "ops/video_session.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[[op]]
+name = "track_video"
+title = "Track video"
+input = "ops/track_video.input.json"
+output = "file"
+output_schema = "ops/track_video.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

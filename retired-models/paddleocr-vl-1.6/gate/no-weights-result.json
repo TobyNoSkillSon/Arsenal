@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "weights_downloaded": 0,
+  "graph": "reduced random weights",
+  "precisions": [
+    {
+      "model": "paddleocr-vl-1.6",
+      "precision": "fp16",
+      "parameters": 94,
+      "eligible_matrices": 47,
+      "packed_matrices": 0,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "paddleocr-vl-1.6",
+      "precision": "int8",
+      "parameters": 188,
+      "eligible_matrices": 47,
+      "packed_matrices": 47,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "paddleocr-vl-1.6",
+      "precision": "int4",
+      "parameters": 188,
+      "eligible_matrices": 47,
+      "packed_matrices": 47,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    }
+  ],
+  "interpretation": "Structured cases pass only on the declared invalid_model_output parser rejection. Maker parser fixtures independently exercise positive schema-valid results."
+}

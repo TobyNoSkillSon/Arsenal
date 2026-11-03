@@ -1,0 +1,39 @@
+# Settings panel reference for sound and music models (docs/MODEL-FOLDER.md, "Settings panel"). Copy it beside
+# model.toml and tailor it to the settings that model declares: lengths it handles, and Quality from its tuned step
+# count (Final = tuned, Draft = about half).
+schema = 1
+
+[[section]]
+
+[[section.row]]
+label = "Length"
+presets = [
+  { title = "5 s", values = { duration = 5 } },
+  { title = "10 s", values = { duration = 10 } },
+  { title = "30 s", values = { duration = 30 } },
+]
+
+[[section.row]]
+label = "Quality"
+presets = [
+  { title = "Draft", values = { steps = 4 } },
+  { title = "Final", values = { steps = 8 } },
+]
+
+[[section.row]]
+setting = "seed"
+randomize = true
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "duration"
+unit = "s"
+
+[[section.row]]
+setting = "steps"
+
+[[section.row]]
+setting = "guidance"

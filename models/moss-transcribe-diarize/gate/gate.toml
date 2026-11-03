@@ -1,0 +1,7 @@
+schema = 1
+id = "moss-transcribe-diarize-native-v1"
+reference_runner = "pinned-vendor-remote-code-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Get casts all 682 tensors of the pinned BF16 release to FP16; the language model's output head is the tied token embedding", "the maker's transcript parser, audio-span time markers and audio token counts reproduced on fixed inputs (weight-free test)", "log-mel features, Whisper encoder and VQ adaptor against the maker's remote code on MPS in FP16: relative L2 below 0.02", "the greedy transcript of a 29 s two-speaker recording identical to the maker's, token for token", "one real run through the isolated service, including a two-chunk 58 s recording against the maker's transcript"]
+evidence = "gate/golden/golden.json"

@@ -1,0 +1,45 @@
+# Settings panel for Qwen-Image-2.1, from kinds/images/ (docs/MODEL-FOLDER.md, "Settings panel"). The runner takes free
+# width and height (multiples of 32, 256-2752; native up to 2K); Shape offers the Image window's sizes. Tuned for 40
+# steps (Final) with Draft at about a third. Guidance is true classifier-free guidance, off at 1 (the maker's default).
+schema = 1
+
+[[section]]
+
+[[section.row]]
+label = "Shape"
+presets = [
+  { title = "1:1", values = { width = 1024, height = 1024 } },
+  { title = "3:4", values = { width = 864, height = 1152 } },
+  { title = "4:3", values = { width = 1152, height = 864 } },
+  { title = "9:16", values = { width = 768, height = 1344 } },
+  { title = "16:9", values = { width = 1344, height = 768 } },
+]
+
+[[section.row]]
+label = "Quality"
+presets = [
+  { title = "Draft", values = { steps = 14 } },
+  { title = "Final", values = { steps = 40 } },
+]
+
+[[section.row]]
+setting = "seed"
+randomize = true
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "width"
+unit = "px"
+
+[[section.row]]
+setting = "height"
+unit = "px"
+
+[[section.row]]
+setting = "steps"
+
+[[section.row]]
+setting = "guidance"

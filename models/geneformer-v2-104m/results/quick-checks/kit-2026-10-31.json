@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of embed_cells through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "geneformer-v2-104m",
+  "revision": "1f7fbae4e469a5f4f1af8c111a529cfe1b3829f5",
+  "rows": [
+    {
+      "date": "2026-10-31T01:30:12Z",
+      "load_seconds": 0.145,
+      "ops": {
+        "embed_cells": {
+          "seconds_first": 0.014,
+          "seconds_warm": 0.009,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 827.7,
+      "precision": "fp16",
+      "runner_sha256": "822e94a686f07ca89e8b6b4435b24d87faeba14a4f8d9287c0d261c023d71951",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

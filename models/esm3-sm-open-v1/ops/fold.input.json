@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sequence"
+  ],
+  "properties": {
+    "sequence": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100000,
+      "description": "Amino acids, uppercase one-letter codes, no masks, at most 1,024 residues."
+    },
+    "num_steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4096,
+      "description": "Unmasking steps, capped at the number of residues. Default: residues / 16, at least 1 (the maker's folding example)."
+    },
+    "temperature": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Sampling temperature; 0 takes the most likely token.",
+      "default": 1.0
+    },
+    "temperature_annealing": {
+      "type": "boolean",
+      "description": "Anneal the temperature over the steps, as the maker's default: (T - step/(steps-1))^2, at least 1e-6.",
+      "default": true
+    },
+    "top_p": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 1,
+      "description": "Nucleus sampling mass (1 = off).",
+      "default": 1.0
+    },
+    "schedule": {
+      "type": "string",
+      "enum": [
+        "cosine",
+        "linear"
+      ],
+      "description": "How many positions stay masked after each step.",
+      "default": "cosine"
+    },
+    "strategy": {
+      "type": "string",
+      "enum": [
+        "random",
+        "entropy"
+      ],
+      "description": "Which masked positions to fill first: random, or lowest entropy.",
+      "default": "random"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2147483647,
+      "description": "Random seed (default: a new one, returned in the reply)."
+    },
+    "condition_on_coordinates_only": {
+      "type": "boolean",
+      "description": "With a structure prompt, condition on its coordinates and mask its structure tokens (the maker's default, true).",
+      "default": true
+    },
+    "return_pae": {
+      "type": "boolean",
+      "description": "Also return the predicted aligned error matrix: up to 800 residues, so the reply stays under 16 MB.",
+      "default": false
+    }
+  }
+}

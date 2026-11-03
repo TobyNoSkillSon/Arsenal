@@ -1,0 +1,10 @@
+{
+  "repo": "PrentisAI/GroundGUI-8B",
+  "revision": "9db378189fddaabb5f6e347b9053858a392022ac",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 750,
+  "header_bytes": 93192,
+  "errors": []
+}

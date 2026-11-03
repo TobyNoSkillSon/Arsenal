@@ -1,0 +1,10 @@
+{
+  "model": "lfm2.5-vl-450m",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 11,
+    "plain_tokens": 10,
+    "roundtrip": "Hello"
+  }
+}

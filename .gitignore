@@ -1,0 +1,26 @@
+.build/
+/lab/
+dist/
+.worktrees/
+.DS_Store
+*.log
+__pycache__/
+.venv/
+node_modules/
+.gpu-hold
+/tmp/
+*.xcuserstate
+
+# Local QA output and immutable model captures.
+/docs/screens/
+/docs/evidence/
+/evidence/
+/scripts/evidence/
+/Tests/conformance/evidence/
+/Workers/Chat/evidence/
+/Workers/Chat/receipts/
+/Workers/Voices/Evidence/
+/models/*/gate/evidence/intake/
+/models/*/results/intake/
+/models/*/gate/evidence/native/**/*.safetensors
+/models/*/gate/evidence/native/*.safetensors

@@ -1,0 +1,65 @@
+{
+ "commit": "ed86be5192df703a6e238107407c5ee58f4014c3",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [],
+  "request": [
+   {
+    "body": {
+     "duration": 10,
+     "lyrics": "[verse]\nMorning light on the river\nslow and gold",
+     "prompt": "calm acoustic folk, female vocal",
+     "seed": 7
+    },
+    "op": "generate_music"
+   }
+  ]
+ },
+ "maker_reference": {
+  "none": "No maker capture: M-A-P's reference (two-stage language model plus VAE in PyTorch) was not run."
+ },
+ "model": "yue2-3b",
+ "note": "Prompt 'calm acoustic folk, female vocal', two lyric lines, 10 s, seed 7.",
+ "output": [
+  {
+   "file_count": 1,
+   "files": [
+    {
+     "channels": 2,
+     "finite": true,
+     "frames": 479936,
+     "peak": 0.891266,
+     "rms": 0.099055,
+     "sample_rate": 48000,
+     "seconds": 9.9987,
+     "sha256": "7af999594d517de67a073e30b972286f127d2b8e831dec0439082de7b4087a8a",
+     "type": "wav"
+    }
+   ],
+   "op": "generate_music",
+   "reply": {},
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "fp16",
+ "schema": "golden-1",
+ "tolerance": {
+  "channels": 2,
+  "file_count": 1,
+  "note": "sampled generation; values differ between builds, so only counts, length and level are compared",
+  "rms_min": 0.01,
+  "sample_rate": 48000,
+  "seconds": 10.0
+ },
+ "weights": {
+  "repo": "m-a-p/YuE2-3B",
+  "revision": "8f24312f187763b9854adeec87e437e2b03bbff1",
+  "sha256": {
+   "config.json": "ad3477bbef890bf98ae196c1e4b44779494a6231c4ab66f32708eabadf265329",
+   "model.safetensors": "1d55c42c1a9875c34f5d736e15078449992b044e807ce2a138e6cf289a1e59e9",
+   "qwen.tiktoken": "b2b1b8dfb5cc5f024bafc373121c6aba3f66f9a5a0269e243470a1de16a33186"
+  }
+ }
+}

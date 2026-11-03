@@ -1,0 +1,31 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "rf-detr-nano",
+  "revision": "9f201577d9415f0378084748d27e68586e6b3600",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T02:54:06Z",
+      "load_seconds": 1.07,
+      "mac_peak_in_use_mb": 28986.6,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "detect": {
+          "files": [],
+          "seconds_first": 0.605,
+          "seconds_warm": 0.044,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 370.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 370.0,
+      "samples": 7
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

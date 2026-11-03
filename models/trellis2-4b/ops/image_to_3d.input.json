@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker",
+      "description": "Source image."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "resolution": {
+      "type": "integer",
+      "enum": [
+        512,
+        1024,
+        1536
+      ],
+      "default": 1024
+    },
+    "texture_size": {
+      "type": "integer",
+      "enum": [
+        256,
+        512,
+        1024,
+        2048,
+        4096
+      ],
+      "default": 1024
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 12
+    },
+    "target_faces": {
+      "type": "integer",
+      "minimum": 32,
+      "maximum": 500000,
+      "default": 120000
+    }
+  },
+  "required": [
+    "image"
+  ],
+  "additionalProperties": false
+}

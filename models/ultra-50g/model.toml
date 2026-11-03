@@ -1,0 +1,65 @@
+schema = 3
+id = "ultra-50g"
+name = "ULTRA 50g"
+kind = "local.graph"
+summary = "Fills in missing facts in a knowledge graph you supply as (head, relation, tail) triples: give an entity and a relation, get the likeliest missing ends ranked."
+description = "ULTRA (Galkin et al., ICLR 2024) is a foundation model for knowledge-graph reasoning: graph neural networks built on NBFNet that learn no embedding per entity or relation, so one checkpoint works zero-shot on any graph with any names. This checkpoint was pre-trained on 50 knowledge graphs for 1M steps and has about 169k parameters. The card reports an average MRR of 0.389 and Hits@10 of 0.549 over 16 transductive graphs, above supervised models trained on each graph (0.371 and 0.511)."
+purpose = "Predict missing knowledge-graph links"
+publisher = "mgalkin"
+released = 2023
+params = "0.2M"
+tasks = ["graph-ml"]
+languages = ["mul"]
+good_for = ["Knowledge-graph completion on your own graph without training: (Italy, located_in, ?) on a small geography graph ranks Europe first", "Ranking candidate links in any multi-relational data: people and organisations, products and categories, genes and diseases", "Finding missing heads as well as tails: give tail instead of head"]
+limits = ["Names carry no meaning to the model: it reasons only from the graph's structure, so an entity or relation with few triples gets weak predictions, and tiny graphs give rough answers", "The query entity and relation must appear in the triples; an unseen relation cannot be asked about", "The whole graph is sent with every request (at most 1,000,000 triples, 1,000,000 distinct entities and 4,096 distinct relations) and rebuilt each time", "Scores rank candidates for one query; the probabilities are the model's sigmoid and are not calibrated across graphs. Known links are left out of the list unless exclude_known is false", "Reads and writes no human language (names are opaque labels), so the Polish question does not apply", "Parity with the maker's ultra package (fused rspmm path, MPS, float32 since its code cannot run float16) checked: see log/003-parity.md"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/mgalkin/ultra_50g"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/mgalkin/ultra_50g/blob/d46107d8415549e7c7386d26903ad11c9a8de4fd/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "mgalkin/ultra_50g"
+revision = "d46107d8415549e7c7386d26903ad11c9a8de4fd"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "7db88a9d36e9d4a65af087d6e9ebd5cdd953a47ff2c3989eb1ad9ce262571a8f"
+"config.json" = "d002f283b12607c584bbe990f2247817010aa4a652f174f44ade351087a2d2b5"
+
+[weights.bytes]
+"model.safetensors" = 683868
+"config.json" = 769
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-ultra-50g"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

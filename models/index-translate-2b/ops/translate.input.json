@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 131072
+      },
+      "minItems": 1,
+      "maxItems": 128
+    },
+    "source_lang": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 32,
+      "x-arsenal-control": "language"
+    },
+    "target_lang": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 32,
+      "x-arsenal-control": "language"
+    },
+    "context": {
+      "type": "string",
+      "maxLength": 32768
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32768,
+      "default": 1024
+    },
+    "glossary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "tone": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "json",
+        "csv",
+        "markdown",
+        "code"
+      ]
+    },
+    "genre": {
+      "type": "string"
+    },
+    "instructions": {
+      "type": "string"
+    },
+    "hard_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "soft_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg",
+          "image/webp",
+          "image/bmp",
+          "image/gif"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    }
+  },
+  "required": [
+    "target_lang"
+  ],
+  "additionalProperties": false,
+  "anyOf": [
+    {
+      "required": [
+        "text"
+      ]
+    },
+    {
+      "required": [
+        "image"
+      ]
+    }
+  ]
+}

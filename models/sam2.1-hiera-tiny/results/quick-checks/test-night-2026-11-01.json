@@ -1,0 +1,25 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "sam2.1-hiera-tiny",
+  "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-11-01T02:58:02Z",
+      "machine": "test night 1 Nov 2026: quiet Mac (idle check before each reading)",
+      "ops": {
+        "segment": {
+          "seconds_warm": 0.221,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 1382.4,
+      "precision": "fp16"
+    }
+  ],
+  "run": "test-night-2026-11-01",
+  "schema": "quick-check-1",
+  "source": "lab/test-night-1101/table-import.jsonl"
+}

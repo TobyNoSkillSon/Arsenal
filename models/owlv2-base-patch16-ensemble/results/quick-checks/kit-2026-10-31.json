@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of detect through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "owlv2-base-patch16-ensemble",
+  "revision": "cfd3195ba4ea9592eec887ded089f4c08eff231d",
+  "rows": [
+    {
+      "date": "2026-10-31T01:30:56Z",
+      "load_seconds": 0.24,
+      "ops": {
+        "detect": {
+          "seconds_first": 2.011,
+          "seconds_warm": 0.05,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 1172.4,
+      "precision": "fp16",
+      "runner_sha256": "8c0b952496aea56366e902792ab2262d97b73b8d9ddf0d15a9200cb965c11b51",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

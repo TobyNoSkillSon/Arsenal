@@ -1,0 +1,67 @@
+{
+  "qualification": "wiring-only; no trained weights, output quality, speed or RAM qualification",
+  "configuration": "explicitly shrunk architecture using the production graph and operations",
+  "runs": [
+    {
+      "model": "tipsv2-l14",
+      "precision": "fp16",
+      "operations": [
+        "detect",
+        "embed",
+        "segment"
+      ],
+      "calls": 3,
+      "successful_outputs": 3,
+      "rejected_incomplete_or_malformed": 0,
+      "parameters": 37,
+      "eligible_matrices": 9,
+      "packed_matrices": 0,
+      "malformed": "passed",
+      "sessions": 0,
+      "cancellation": "cancelled",
+      "unload_exit": 0,
+      "weights_downloaded": 0
+    },
+    {
+      "model": "tipsv2-l14",
+      "precision": "int8",
+      "operations": [
+        "detect",
+        "embed",
+        "segment"
+      ],
+      "calls": 3,
+      "successful_outputs": 3,
+      "rejected_incomplete_or_malformed": 0,
+      "parameters": 55,
+      "eligible_matrices": 9,
+      "packed_matrices": 9,
+      "malformed": "passed",
+      "sessions": 0,
+      "cancellation": "cancelled",
+      "unload_exit": 0,
+      "weights_downloaded": 0
+    },
+    {
+      "model": "tipsv2-l14",
+      "precision": "int4",
+      "operations": [
+        "detect",
+        "embed",
+        "segment"
+      ],
+      "calls": 3,
+      "successful_outputs": 3,
+      "rejected_incomplete_or_malformed": 0,
+      "parameters": 55,
+      "eligible_matrices": 9,
+      "packed_matrices": 9,
+      "malformed": "passed",
+      "sessions": 0,
+      "cancellation": "cancelled",
+      "unload_exit": 0,
+      "weights_downloaded": 0
+    }
+  ],
+  "worker": "stripped release perception helper with colocated resources"
+}

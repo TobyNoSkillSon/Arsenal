@@ -1,0 +1,84 @@
+# Reference settings for a video model (no video kind ships yet; this is ready for the first one). Copy the
+# [[setting]] blocks its runner really accepts into model.toml, with that model's defaults, bounds and help;
+# settings.toml beside this file arranges exactly these.
+
+[[setting]]
+id = "width"
+title = "Width"
+type = "number"
+default = 1280
+min = 256
+max = 1920
+step = 16
+applies = "request"
+maps_to = "request.width"
+help = "Frame width in pixels."
+
+[[setting]]
+id = "height"
+title = "Height"
+type = "number"
+default = 720
+min = 256
+max = 1920
+step = 16
+applies = "request"
+maps_to = "request.height"
+help = "Frame height in pixels."
+
+[[setting]]
+id = "duration"
+title = "Duration"
+type = "number"
+default = 5
+min = 1
+max = 20
+step = 1
+applies = "request"
+maps_to = "request.duration"
+help = "Length of the clip, in seconds."
+
+[[setting]]
+id = "fps"
+title = "Frame rate"
+type = "choice"
+default = 24
+choices = [16, 24, 30]
+applies = "request"
+maps_to = "request.fps"
+help = "Frames per second."
+
+[[setting]]
+id = "steps"
+title = "Steps"
+type = "number"
+default = 30
+min = 1
+max = 100
+step = 1
+applies = "request"
+maps_to = "request.steps"
+help = "Denoising passes per clip: more is slower and can add detail."
+
+[[setting]]
+id = "guidance"
+title = "Guidance"
+type = "slider"
+default = 5
+min = 0
+max = 15
+step = 0.5
+applies = "request"
+maps_to = "request.guidance"
+help = "How closely the clip follows the prompt."
+
+[[setting]]
+id = "seed"
+title = "Seed"
+type = "number"
+min = 0
+max = 4294967295
+step = 1
+applies = "request"
+maps_to = "request.seed"
+help = "Starting noise: empty is a new random seed each request; the same seed and prompt give the same clip."

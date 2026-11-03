@@ -1,0 +1,161 @@
+{
+  "cases": [
+    {
+      "operation": "detect",
+      "source": "NVlabs/Eagle@bb860a7efa22bb40cd4bb77959512375b92db934 Embodied/evaluation/inference_detection_ddp.py parse_prediction (<ref>person</ref><box><100><200><300><400></box><box><500><600><700><800></box><ref>car</ref><box><150><250><350><450></box>); nvidia/LocateAnything-3B@c32291ca5e996f5a7a485845b4f57a233936bba0 README.md (Output Format(s): <box> x1, y1, x2, y2 </box> and <box> x, y </box>; LocateAnythingWorker.predict answer, parse_boxes/parse_points: coordinates are integers in [0, 1000] divided by 1000); modeling_locateanything.py generate (tokenizer.batch_decode(generated_ids, skip_special_tokens=False), so <|im_end|> is kept). Coordinates are chosen exact in binary (k/8 of 1000) so the expected values compare exactly; the 16x16 fixture image gives the pixels.",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "person",
+          "car"
+        ]
+      },
+      "raw": "<ref>person</ref><box><125><250><375><500></box><box><500><625><750><875></box><ref>car</ref><box><250><125><500><375></box><|im_end|>",
+      "expected": {
+        "detections": [
+          {
+            "label": "person",
+            "box": {
+              "xmin": 0.125,
+              "ymin": 0.25,
+              "xmax": 0.375,
+              "ymax": 0.5
+            }
+          },
+          {
+            "label": "person",
+            "box": {
+              "xmin": 0.5,
+              "ymin": 0.625,
+              "xmax": 0.75,
+              "ymax": 0.875
+            }
+          },
+          {
+            "label": "car",
+            "box": {
+              "xmin": 0.25,
+              "ymin": 0.125,
+              "xmax": 0.5,
+              "ymax": 0.375
+            }
+          }
+        ],
+        "coordinate_system": "normalized"
+      }
+    },
+    {
+      "operation": "detect",
+      "source": "nvidia/LocateAnything-3B@c32291ca5e996f5a7a485845b4f57a233936bba0 generate_utils.py handle_pattern empty_box ([box_start, none_token_id, box_end]; none_token_id 4064 decodes as 'None'); nvidia/LocateAnything-3B@c32291ca5e996f5a7a485845b4f57a233936bba0 README.md (Output Format(s): <box> x1, y1, x2, y2 </box> and <box> x, y </box>; LocateAnythingWorker.predict answer, parse_boxes/parse_points: coordinates are integers in [0, 1000] divided by 1000); modeling_locateanything.py generate (tokenizer.batch_decode(generated_ids, skip_special_tokens=False), so <|im_end|> is kept).",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "car"
+        ]
+      },
+      "raw": "<ref>car</ref><box>None</box><|im_end|>",
+      "expected": {
+        "detections": [],
+        "coordinate_system": "normalized"
+      }
+    },
+    {
+      "operation": "detect",
+      "source": "NVlabs/Eagle@bb860a7efa22bb40cd4bb77959512375b92db934 Embodied/evaluation/inference_sspro_ddp.py parse_prediction (Point to: {instruction}.; <ref>person</ref><box><100><200></box> for points, <ref>car</ref><box><150><250><350><450></box> for boxes); nvidia/LocateAnything-3B@c32291ca5e996f5a7a485845b4f57a233936bba0 README.md (Output Format(s): <box> x1, y1, x2, y2 </box> and <box> x, y </box>; LocateAnythingWorker.predict answer, parse_boxes/parse_points: coordinates are integers in [0, 1000] divided by 1000); modeling_locateanything.py generate (tokenizer.batch_decode(generated_ids, skip_special_tokens=False), so <|im_end|> is kept). Coordinates are chosen exact in binary (k/8 of 1000) so the expected values compare exactly; the 16x16 fixture image gives the pixels.",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "phrase": "red button",
+        "output_mode": "points"
+      },
+      "raw": "<ref>red button</ref><box><250><750></box><|im_end|>",
+      "expected": {
+        "detections": [
+          {
+            "label": "red button",
+            "point": {
+              "x": 0.25,
+              "y": 0.75
+            }
+          }
+        ],
+        "coordinate_system": "normalized"
+      }
+    },
+    {
+      "operation": "detect",
+      "source": "nvidia/LocateAnything-3B@c32291ca5e996f5a7a485845b4f57a233936bba0 README.md (Output Format(s): <box> x1, y1, x2, y2 </box> and <box> x, y </box>; LocateAnythingWorker.predict answer, parse_boxes/parse_points: coordinates are integers in [0, 1000] divided by 1000); modeling_locateanything.py generate (tokenizer.batch_decode(generated_ids, skip_special_tokens=False), so <|im_end|> is kept): generation ends at <|im_end|>; a box cut off before it is not a detection.",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "labels": [
+          "car"
+        ]
+      },
+      "raw": "<ref>car</ref><box><125><250>",
+      "expect_error": "invalid_model_output"
+    },
+    {
+      "operation": "ground_screen",
+      "source": "NVlabs/Eagle@bb860a7efa22bb40cd4bb77959512375b92db934 Embodied/evaluation/inference_sspro_ddp.py parse_prediction (Point to: {instruction}.; <ref>person</ref><box><100><200></box> for points, <ref>car</ref><box><150><250><350><450></box> for boxes); nvidia/LocateAnything-3B@c32291ca5e996f5a7a485845b4f57a233936bba0 README.md (Output Format(s): <box> x1, y1, x2, y2 </box> and <box> x, y </box>; LocateAnythingWorker.predict answer, parse_boxes/parse_points: coordinates are integers in [0, 1000] divided by 1000); modeling_locateanything.py generate (tokenizer.batch_decode(generated_ids, skip_special_tokens=False), so <|im_end|> is kept). Coordinates are chosen exact in binary (k/8 of 1000) so the expected values compare exactly; the 16x16 fixture image gives the pixels.",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "instruction": "Save"
+      },
+      "raw": "<ref>Save</ref><box><500><125></box><|im_end|>",
+      "expected": {
+        "detections": [
+          {
+            "label": "Save",
+            "point": {
+              "x": 8,
+              "y": 2
+            }
+          }
+        ],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 16,
+          "height": 16
+        }
+      }
+    },
+    {
+      "operation": "ground_screen",
+      "source": "NVlabs/Eagle@bb860a7efa22bb40cd4bb77959512375b92db934 Embodied/evaluation/inference_sspro_ddp.py parse_prediction (Point to: {instruction}.; <ref>person</ref><box><100><200></box> for points, <ref>car</ref><box><150><250><350><450></box> for boxes); nvidia/LocateAnything-3B@c32291ca5e996f5a7a485845b4f57a233936bba0 README.md (Output Format(s): <box> x1, y1, x2, y2 </box> and <box> x, y </box>; LocateAnythingWorker.predict answer, parse_boxes/parse_points: coordinates are integers in [0, 1000] divided by 1000); modeling_locateanything.py generate (tokenizer.batch_decode(generated_ids, skip_special_tokens=False), so <|im_end|> is kept). Coordinates are chosen exact in binary (k/8 of 1000) so the expected values compare exactly; the 16x16 fixture image gives the pixels.",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "instruction": "Save"
+      },
+      "raw": "<ref>Save</ref><box><125><250><375><500></box><|im_end|>",
+      "expected": {
+        "detections": [
+          {
+            "label": "Save",
+            "box": {
+              "xmin": 2,
+              "ymin": 4,
+              "xmax": 6,
+              "ymax": 8
+            }
+          }
+        ],
+        "coordinate_system": "pixels",
+        "image_size": {
+          "width": 16,
+          "height": 16
+        }
+      }
+    }
+  ]
+}

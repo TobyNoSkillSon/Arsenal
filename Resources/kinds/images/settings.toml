@@ -1,0 +1,46 @@
+# Settings panel reference for image models with free width and height (docs/MODEL-FOLDER.md, "Settings panel").
+# Copy it beside model.toml and tailor it: the shapes the model handles well, Quality from its tuned step count
+# (Final = tuned, Draft = about a third; no Quality row for a distilled model), no Guidance row without guidance.
+# The shapes are the Image window's free sizes (ImageSize.free), so the panel and the window offer the same set.
+schema = 1
+
+[[section]]
+
+[[section.row]]
+label = "Shape"
+presets = [
+  { title = "1:1", values = { width = 1024, height = 1024 } },
+  { title = "3:4", values = { width = 864, height = 1152 } },
+  { title = "4:3", values = { width = 1152, height = 864 } },
+  { title = "9:16", values = { width = 768, height = 1344 } },
+  { title = "16:9", values = { width = 1344, height = 768 } },
+]
+
+[[section.row]]
+label = "Quality"
+presets = [
+  { title = "Draft", values = { steps = 8 } },
+  { title = "Final", values = { steps = 28 } },
+]
+
+[[section.row]]
+setting = "seed"
+randomize = true
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "width"
+unit = "px"
+
+[[section.row]]
+setting = "height"
+unit = "px"
+
+[[section.row]]
+setting = "steps"
+
+[[section.row]]
+setting = "guidance"

@@ -1,0 +1,81 @@
+schema = 3
+architecture = "tipsv2"
+id = "tipsv2-l14"
+name = "TIPSv2 L/14"
+kind = "embeddings"
+params = "488M"
+publisher = "Google"
+released = 2026
+suggested = false
+summary = "Search photos with text or images. Native MLX inference in FP16."
+purpose = "Search photos with text or images"
+good_for = ["Photo retrieval and zero-shot image labels"]
+limits = ["English text; 64 token text limit; 256 inputs per batch; no trained DPT heads"]
+languages = ["en"]
+tasks = ["feature-extraction", "zero-shot-image-classification"]
+tools = ["operation"]
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/google/tipsv2-l14/blob/52847a71eb02a3082c370fbcd98cd799687bd4d0/README.md"
+[weights]
+repo = "google/tipsv2-l14"
+revision = "52847a71eb02a3082c370fbcd98cd799687bd4d0"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "tokenizer.model"]
+[weights.sha256]
+"model.safetensors" = "c75707eabca655e641a6c47a59dd26b347290ceadb993b34af184e7f654c5809"
+"config.json" = "23314a4fc62ae2b800922c172c723a794e7bcb62278243ccb57b2fce102ac10e"
+"tokenizer.model" = "4c40e7723348d5d9a3d3c2bdcec5120d97fb29edfe1bf118b4494bce02fc7624"
+[weights.bytes]
+"model.safetensors" = 1951820760
+"config.json" = 1959
+"tokenizer.model" = 731655
+[derive]
+fp16 = "cast:tipsv2-affine-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "perception"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "embed"
+title = "Embed"
+input = "ops/embed.input.json"
+output = "json"
+output_schema = "ops/embed.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[[op]]
+name = "detect"
+title = "Detect"
+input = "ops/detect.input.json"
+output = "json"
+output_schema = "ops/detect.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[[op]]
+name = "segment"
+title = "Label image regions"
+input = "ops/segment.input.json"
+output = "file"
+output_schema = "ops/segment.output.json"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

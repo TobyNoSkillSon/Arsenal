@@ -1,0 +1,18 @@
+id = "local.segmentation"
+title = "Segmentation"
+title_singular = "Segmentation model"
+icon = "sparkles"
+order = 20
+suite = "bench/kinds/local.segmentation/suite-v1.toml"
+primary_operation = "segment"
+
+[[op]]
+name = "segment"
+title = "Segment with points or boxes"
+input = "ops/segment.input.json"
+output = "json"
+output_schema = "ops/segment.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

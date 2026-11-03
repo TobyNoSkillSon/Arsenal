@@ -1,0 +1,66 @@
+id = "voices"
+title = "Voices"
+icon = "person.wave.2"
+title_singular = "Voice"
+# A run that names no operation speaks; cloning and design are asked for by name.
+primary_operation = "speak"
+order = 0
+suite = "bench/kinds/voices/suite-v1.toml"
+
+[[columns]]
+id = "speed"
+title = "Speed"
+unit = "× real time"
+
+[[columns]]
+id = "first_audio"
+title = "First audio"
+unit = "s"
+
+[[columns]]
+id = "roundtrip_wer"
+title = "Round-trip WER"
+unit = "%"
+
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+
+[api]
+speak = "/v1/audio/speech"
+voices = "/providers/elevenlabs/v2/voices"
+
+[facets]
+modalities_in = ["text", "audio"]
+modalities_out = ["audio"]
+
+[[op]]
+name = "speak"
+default = true
+title = "Speak"
+input = "kinds/voices/ops/speak.input.json"
+output = "audio"
+stream = true
+
+[[op]]
+name = "voices"
+default = true
+title = "Voices"
+input = "kinds/voices/ops/voices.input.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "design_voice"
+title = "Design Voice"
+input = "kinds/voices/ops/design_voice.input.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "clone_voice"
+title = "Clone Voice"
+input = "kinds/voices/ops/clone_voice.input.json"
+output = "json"
+stream = false

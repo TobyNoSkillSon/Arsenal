@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "big-lama"
+name = "Big LaMa"
+kind = "restoration"
+params = "51M"
+publisher = "Samsung AI Center (advimman)"
+released = 2021
+suggested = false
+purpose = "Photo inpainting"
+summary = "Fill the marked part of a photo with what plausibly lies behind it."
+tasks = ["inpaint"]
+languages = ["und"]
+good_for = ["Removing objects, people, text and scratches", "Large holes over repeating backgrounds"]
+limits = ["The mask must be the photo's size; every pixel that is not black is filled", "Fills invent plausible texture: lettering, faces and fine structure inside the hole are not recovered", "Checked against the makers' FP32 graph at 1024x576 (43 dB inside the hole); at 3840x2160 the FP16 fill drifts in tint (31.6 dB, mean 5.5 levels)", "Up to 8.3 megapixels per photo (3840×2160); larger photos are refused, so downscale them first"]
+architecture = "lama"
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://github.com/advimman/lama/blob/786f5936b27fb3dacd2b1ad799e4de968ea697e7/LICENSE"
+[weights]
+repo = "mlx-community/LaMa-fp32"
+revision = "92a388ff82beedfcf3de260d877e63e0c9c15dd8"
+dtype = "fp32"
+files = ["model.safetensors"]
+[weights.sha256]
+"model.safetensors" = "166187544dc18cce9743ca258e70bd3cf5fd49c5b344cccac67d5505cc6dac91"
+[weights.bytes]
+"model.safetensors" = 204316668
+[precision]
+dtype = "fp16"
+source = "raw"
+reason = "Big-LaMa's BatchNorm running variances reach 4.8e5, past FP16's range; Get folds them into the convolutions from the float32 source, then stores FP16."
+evidence = "log/001-port.md"
+[derive]
+fp16 = "cast:restoration-lama-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "restoration"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "inpaint"
+title = "Inpaint"
+input = "kinds/restoration/ops/inpaint.input.json"
+output_schema = "kinds/restoration/ops/inpaint.output.json"
+output = "file"
+stream = false
+timeout_s = 600
+first_response_timeout_s = 600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

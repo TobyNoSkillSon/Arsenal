@@ -1,0 +1,74 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "seedvr2-3b"
+name = "SeedVR2 3B"
+kind = "restoration"
+params = "3B"
+publisher = "ByteDance Seed"
+released = 2026
+suggested = false
+purpose = "Image and video restoration"
+summary = "Restore and enlarge images or video with one diffusion step."
+tasks = ["upscale_image", "upscale_video"]
+languages = ["und"]
+good_for = ["Degraded photos", "Video detail restoration"]
+limits = ["16 megapixels per output frame; at most 8192 pixels per side", "Video restores 5- to 21-frame chunks with one noise draw per clip; chunk boundaries need trained-weight review", "The VAE works in overlapping spatial tiles, which upstream does not use", "Job files are limited by the host to 4 GiB", "FP16 and derived int8/int4 output quality awaits trained weights"]
+[facets]
+modalities_in = ["image", "video"]
+modalities_out = ["image", "video"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/mlx-community/SeedVR2-3B-mlx/tree/46f851fe23b2a9fbefee6419b94e4fdf07b92965"
+[weights]
+repo = "mlx-community/SeedVR2-3B-mlx"
+revision = "46f851fe23b2a9fbefee6419b94e4fdf07b92965"
+dtype = "fp16"
+files = ["config.json", "transformer.safetensors", "vae.safetensors", "pos_emb.safetensors"]
+[weights.sha256]
+"config.json" = "d019bf291452572664b71cf18563ef8c311390f09ff3793b7e9646a512ae7072"
+"transformer.safetensors" = "f4b96e02638210c807b2e3748665a6d71a47330cdbb112ffaf238f6b05cd55ab"
+"vae.safetensors" = "a2efbfb38a82a99a9cd16432ca5d564510678d228ce6209692d528aa32285cfb"
+"pos_emb.safetensors" = "d2e06cadb10f1f149b5aa781185b250eb60f0e64327f12efd17886cecc9c2984"
+[weights.bytes]
+"config.json" = 289
+"transformer.safetensors" = 7936589830
+"vae.safetensors" = 501324772
+"pos_emb.safetensors" = 594008
+[derive]
+int8 = "native:seedvr2"
+int4 = "native:seedvr2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "restoration"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "upscale_image"
+title = "Upscale image"
+input = "ops/upscale_image.input.json"
+output_schema = "kinds/restoration/ops/upscale_image.output.json"
+output = "file"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 3600
+[[op]]
+name = "upscale_video"
+title = "Upscale video"
+input = "ops/upscale_video.input.json"
+output_schema = "kinds/restoration/ops/upscale_video.output.json"
+output = "file"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 3600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

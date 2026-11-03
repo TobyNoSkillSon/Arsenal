@@ -1,0 +1,6 @@
+schema = 1
+id = "rf-detr-large-native-v1"
+reference_runner = "pinned-maker-implementation"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Exact tensor inventory and layout", "Every declared operation on a random graph at each tier", "Per-component parity against the maker's Transformers code on MPS FP16 (gate/golden/golden.json)"]

@@ -1,0 +1,10 @@
+{
+  "repo": "numind/NuExtract3",
+  "revision": "c99dc8f5641b866aa0192b6ea78f84bf9f3535f1",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 723,
+  "header_bytes": 89432,
+  "errors": []
+}

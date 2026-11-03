@@ -1,0 +1,10 @@
+{
+  "model": "groundgui-8b",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 12,
+    "plain_tokens": 9,
+    "roundtrip": "Hello"
+  }
+}

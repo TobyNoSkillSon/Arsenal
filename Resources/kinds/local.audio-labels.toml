@@ -1,0 +1,18 @@
+id = "local.audio-labels"
+title = "Sound labels"
+title_singular = "Sound labelling model"
+icon = "waveform.badge.magnifyingglass"
+order = 20
+suite = "bench/kinds/local.audio-labels/suite-v1.toml"
+primary_operation = "label"
+
+[[op]]
+name = "label"
+title = "Label"
+input = "ops/label.input.json"
+output = "json"
+output_schema = "ops/label.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

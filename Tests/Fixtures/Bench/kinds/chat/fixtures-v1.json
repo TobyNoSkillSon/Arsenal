@@ -1,0 +1,53 @@
+[
+  {
+    "id": "arithmetic",
+    "op": "chat",
+    "params": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "What is 17 plus 25? Reply with only the number."
+        }
+      ],
+      "temperature": 0,
+      "seed": 24301,
+      "max_tokens": 64,
+      "stream": true
+    },
+    "expected": "42"
+  },
+  {
+    "id": "science",
+    "op": "chat",
+    "params": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "What gas do plants primarily absorb for photosynthesis? Reply with only its chemical formula."
+        }
+      ],
+      "temperature": 0,
+      "seed": 24301,
+      "max_tokens": 64,
+      "stream": true
+    },
+    "expected": "CO2"
+  },
+  {
+    "id": "reasoning",
+    "op": "chat",
+    "params": {
+      "messages": [
+        {
+          "role": "user",
+          "content": "All roses are flowers. Some flowers fade quickly. Does it follow that all roses fade quickly? Reply yes or no."
+        }
+      ],
+      "temperature": 0,
+      "seed": 24301,
+      "max_tokens": 64,
+      "stream": true
+    },
+    "expected": "no"
+  }
+]

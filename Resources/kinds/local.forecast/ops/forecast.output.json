@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "description": "Probabilistic forecast of one series at the model's trained quantile levels, in the input's units.",
+  "required": ["horizon", "quantile_levels", "median", "quantiles"],
+  "properties": {
+    "horizon": {
+      "type": "integer",
+      "description": "The number of forecast steps."
+    },
+    "quantile_levels": {
+      "type": "array",
+      "description": "The quantile levels this model was trained on (they differ between models), in the order quantiles uses.",
+      "items": { "type": "number" }
+    },
+    "median": {
+      "type": "array",
+      "description": "The 0.5 quantile for each future step.",
+      "items": { "type": "number" }
+    },
+    "quantiles": {
+      "type": "array",
+      "description": "One row per future step, one value per quantile level.",
+      "items": { "type": "array", "items": { "type": "number" } }
+    }
+  }
+}

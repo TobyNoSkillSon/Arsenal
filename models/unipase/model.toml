@@ -1,0 +1,74 @@
+# SPDX-License-Identifier: MIT
+schema = 2
+id = "unipase"
+name = "UniPASE"
+kind = "enhancement"
+params = "546.5M"
+publisher = "Xiaobin Rong et al. (Nanjing University)"
+released = 2026
+suggested = false
+summary = "Universal speech enhancement: noise, reverb, clipping, lost packets and narrow bandwidth, up to 48 kHz, using a native Swift MLX worker."
+description = "UniPASE (IEEE TASLP 2026) is a generative universal speech enhancer: a WavLM Large fine-tuned for enhancement (DeWavLM-Omni, 315M) reads the noisy speech, a Vocos adapter (115M) turns its noisy acoustic layer and its cleaned phonetic layer into a clean acoustic layer, a Vocos vocoder (114M) makes 16 kHz speech from it, and a TF-GridNet PostNet (2.8M) restores the band above 8 kHz whenever the output rate is above 16 kHz (22.05 to 48 kHz). 546.5M parameters in all (measured over the four checkpoints). The authors report first place in the objective evaluation of the URGENT 2026 challenge (arXiv 2604.14606)."
+purpose = "Universal speech enhancement"
+good_for = ["Cleaning recorded speech with several problems at once: background noise, reverb, clipping, codec damage and a narrow band", "Restoring old, phone or low-rate recordings to full 48 kHz bandwidth (upscale)", "Filling short dropouts of digital silence in calls and streams (packet-loss concealment)", "English, Chinese, Spanish, French and German speech, the languages its makers name", "Long recordings: past 20 s it works in 8 s segments, so memory stays flat"]
+limits = ["Speech only: music and other sounds are treated as noise.", "Generative: it re-synthesises the voice, so on very damaged input it can change details of the speech rather than only remove noise; the makers designed it to keep this low.", "Packet-loss concealment only sees dropouts that are digital silence (at least 99% of a 20 ms packet below 1e-7); quiet but non-zero gaps are not filled.", "Each channel is enhanced on its own as mono; stereo is not modelled jointly.", "Up to 10 minutes per clip; at least 0.1 s.", "Output is not streamed while it is made; the whole clip is enhanced first."]
+languages = ["en", "zh", "es", "fr", "de"]
+tasks = ["audio-to-audio", "denoise"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/Xiaobin-Rong/unipase/blob/f0b4d4c4411fe08fc2dddbf2d9f33260c27ac4a0/README.md"
+# The maker's four UniPASE checkpoints (FP32 PyTorch state dicts). Vocoder_WavLM-L24.pt in the same repository is
+# only the authors' evaluation vocoder for DeWavLM-Omni and is not part of UniPASE.
+[weights]
+repo = "Xiaobin-Rong/unipase"
+revision = "f0b4d4c4411fe08fc2dddbf2d9f33260c27ac4a0"
+dtype = "fp32"
+files = ["DeWavLM-Omni.pt", "Adapter.pt", "Vocoder_DWO-L1.pt", "PostNet.pt"]
+[weights.sha256]
+"DeWavLM-Omni.pt" = "16c94d05ff6ef2bdf08b0be2853826afda687c2d63c833382198db7682476689"
+"Adapter.pt" = "3f3f9f8076e304bc740fef5496f91528ca9ea6be7f5a63deec71cdc33471c8c7"
+"Vocoder_DWO-L1.pt" = "7595d48962c296bab2f7cb307f299acf5a02ec6a972d9ab7da3ed71b4a54a3d5"
+"PostNet.pt" = "1bf950dd2432e3cd2ef7055226b259bb3ac3fba8d7ce1f5f2424581a3d19cf63"
+[weights.bytes]
+"DeWavLM-Omni.pt" = 1261992190
+"Adapter.pt" = 458130478
+"Vocoder_DWO-L1.pt" = 454996467
+"PostNet.pt" = 11144698
+[derive]
+fp16 = "cast:unipase"
+[selection]
+default = "native"
+chips = { m5 = "native" }
+[[runner]]
+name = "native"
+language = "swift"
+worker = "sound"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "enhance"
+title = "Enhance speech"
+input = "ops/enhance.input.json"
+output = "audio"
+stream = true
+timeout_s = 1800
+first_response_timeout_s = 1800
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"
+
+[[format]]
+id = "fp16"
+bits_per_weight = 16
+storage = "fp16"
+source = "derived"
+runners = ["native"]

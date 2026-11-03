@@ -1,0 +1,23 @@
+{
+  "decide": {
+    "state": "The machine needs repair.",
+    "questions": {
+      "repair": {
+        "type": "noul",
+        "instructions": "Does the machine need repair?"
+      }
+    }
+  },
+  "judge": {
+    "items": [
+      "Needs repair.",
+      "Works correctly."
+    ],
+    "questions": {
+      "repair": {
+        "type": "noul",
+        "instructions": "Does it need repair?"
+      }
+    }
+  }
+}

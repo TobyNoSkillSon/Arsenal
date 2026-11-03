@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 131072
+      },
+      "minItems": 1,
+      "maxItems": 128
+    },
+    "target_lang": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 32,
+      "enum": [
+        "zh",
+        "en",
+        "fr",
+        "pt",
+        "es",
+        "ja",
+        "tr",
+        "ru",
+        "ar",
+        "ko",
+        "th",
+        "it",
+        "de",
+        "vi",
+        "ms",
+        "id",
+        "tl",
+        "hi",
+        "zh-Hant",
+        "pl",
+        "cs",
+        "nl",
+        "km",
+        "my",
+        "fa",
+        "gu",
+        "ur",
+        "te",
+        "mr",
+        "he",
+        "bn",
+        "ta",
+        "uk",
+        "bo",
+        "kk",
+        "mn",
+        "ug",
+        "yue"
+      ],
+      "x-arsenal-control": "language"
+    },
+    "glossary": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxProperties": 256
+    },
+    "tone": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 512
+    },
+    "context": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32768
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "json",
+        "xml",
+        "yaml",
+        "html",
+        "markdown",
+        "csv"
+      ]
+    },
+    "instructions": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 4096
+    },
+    "preserve_delimiters": {
+      "type": "boolean",
+      "default": false
+    },
+    "max_tokens": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 32768,
+      "default": 4096
+    }
+  },
+  "required": [
+    "text",
+    "target_lang"
+  ],
+  "additionalProperties": false
+}

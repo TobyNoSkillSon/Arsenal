@@ -1,0 +1,127 @@
+tools = ["voice", "sound"]
+id = "pocket-tts"
+kind = "voices"
+languages = ["en"]
+name = "Pocket TTS"
+params = "118M"
+publisher = "Kyutai"
+released = 2026
+schema = 2
+suggested = false
+summary = "Small streaming voice for short replies with preset or cloned voices. No voice design."
+purpose = "Streaming speech, voice cloning"
+tasks = ["text-to-speech"]
+
+[bench]
+recipe = "bench/bench.toml"
+
+[derive]
+bf16 = "cast:pocket-tts"
+
+[gate]
+recipe = "gate/gate.toml"
+
+[licence]
+commercial = true
+spdx = "CC-BY-4.0"
+url = "https://huggingface.co/mlx-community/pocket-tts/blob/cbf71d5f6657bbc3f4bc02f85ee408261225bec7/README.md"
+
+[[menu]]
+id = "speak-clipboard"
+input = "clipboard"
+op = "speak"
+title = "Speak Clipboard"
+
+
+[[runner]]
+chips = ["*"]
+fast_exact = true
+language = "swift"
+min_macos = "26.0"
+name = "native"
+protocol = 1
+worker = "voices"
+
+[weights]
+dtype = "bf16"
+files = ["config.json", "embeddings/alba.safetensors", "embeddings/azelma.safetensors", "embeddings/eponine.safetensors", "embeddings/fantine.safetensors", "embeddings/javert.safetensors", "embeddings/marius.safetensors", "model.safetensors", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json"]
+repo = "mlx-community/pocket-tts"
+revision = "cbf71d5f6657bbc3f4bc02f85ee408261225bec7"
+
+[weights.bytes]
+"config.json" = 1664
+"embeddings/alba.safetensors" = 512088
+"embeddings/azelma.safetensors" = 659544
+"embeddings/eponine.safetensors" = 573528
+"embeddings/fantine.safetensors" = 540760
+"embeddings/javert.safetensors" = 512088
+"embeddings/marius.safetensors" = 512088
+"model.safetensors" = 235739497
+"special_tokens_map.json" = 95
+"tokenizer.json" = 244993
+"tokenizer_config.json" = 220
+
+[weights.sha256]
+"config.json" = "403ff12260596fbfa348c7b07237c378b9ad8db9d8acd04d671470421954a68e"
+"embeddings/alba.safetensors" = "ad234695323e4030336b6afc8a050c97e3110603e11ecd8226d9562488300a50"
+"embeddings/azelma.safetensors" = "ef33fad34437cb187d2702f0a946d8ba7a01efdb8efbc8088c770d49c181ba73"
+"embeddings/eponine.safetensors" = "bb31940f62da665391de139da2e57d740757df26b73d7ec24152c78a3b8ac0c5"
+"embeddings/fantine.safetensors" = "b6918a2ece002d2d9037ff53c4ea38730175e8798786658b0958443edf49d355"
+"embeddings/javert.safetensors" = "2e857904ee76657e083b0e92664d21bd133e37df320af6eb04f752e679422d91"
+"embeddings/marius.safetensors" = "33f75e45fac0005630671f4b1bb632d51b6a083b18417de94855bbd7596a0630"
+"model.safetensors" = "60ddd85019dddbe6c1d220e311ca5fc753972978a89f563c0bbe1ae943120072"
+"special_tokens_map.json" = "0655d856e7dd462048486aac66d4247753e5cab12480baeb9f4e8f7fe03f7d4c"
+"tokenizer.json" = "ef29c4871fd62c7beb928150edc095be1327f0924c0eab9e06b95918b39eff5f"
+"tokenizer_config.json" = "ad6dc6a5790d0f94170998ab79921c97d28ea54602abcdb33cba3132d13ac233"
+
+[facets]
+modalities_in = ["text", "audio"]
+modalities_out = ["audio"]
+
+[selection]
+default = "native"
+chips = { m5 = "native" }
+
+[[setting]]
+id = "voice"
+title = "Voice"
+type = "voice"
+default = "alba"
+applies = "request"
+maps_to = "request.voice"
+help = "Default preset voice for speech requests."
+
+[[setting]]
+id = "reference_path"
+title = "Reference clip"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.path"
+help = "Local reference WAV used for voice cloning."
+
+[[op]]
+name = "speak"
+title = "Speak"
+input = "ops/speak.input.json"
+output = "audio"
+stream = true
+
+[[op]]
+name = "voices"
+title = "Voices"
+input = "ops/voices.input.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "clone_voice"
+title = "Clone Voice"
+input = "ops/clone_voice.input.json"
+output = "json"
+stream = false
+
+[popularity]
+hf_downloads = 718
+hf_likes = 7
+as_of = "2026-10-03"

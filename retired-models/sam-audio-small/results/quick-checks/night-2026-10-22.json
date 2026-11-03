@@ -1,0 +1,40 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "sam-audio-small",
+  "revision": "4ca84acc5c47f64bb2acee448f835dfac65ed318",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:49:32Z",
+      "load_seconds": 0.63,
+      "mac_peak_in_use_mb": 32767.4,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "separate_audio": {
+          "files": [
+            {
+              "name": "target.wav",
+              "sha256": "379db3a35531eacbbd050598b5b29280fa2daa1a770ddde086c92e0a1035aa9b"
+            },
+            {
+              "name": "residual.wav",
+              "sha256": "ddd7521deb0130b5dfc15adf7b7c15f4921e8d2e3e11aacb43cfecf6866f3b86"
+            }
+          ],
+          "seconds_first": 0.987,
+          "seconds_warm": 0.993,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 5958.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 3499.0,
+      "samples": 10
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

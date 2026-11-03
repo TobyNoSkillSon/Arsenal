@@ -1,0 +1,69 @@
+schema = 3
+id = "cohere-transcribe-03-2026"
+name = "Cohere Transcribe"
+kind = "audio"
+params = "2066M"
+publisher = "Cohere Labs"
+released = 2026
+suggested = false
+summary = "Multilingual transcription using a native Swift MLX worker."
+purpose = "Multilingual transcription"
+good_for = ["Multilingual transcription"]
+limits = ["Language defaults to English.", "Long recordings use 35-second encoder windows.", "Trained-weight and precision-quality verification is pending."]
+languages = ["en", "fr", "de", "es", "it", "pt", "nl", "pl", "el", "ar", "ja", "zh", "vi", "ko"]
+tasks = ["transcribe"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/beshkenadze/cohere-transcribe-03-2026-mlx-fp16/tree/06bbe0d853a93cbbf7c1f40cffccd4c5481459ef"
+[weights]
+repo = "beshkenadze/cohere-transcribe-03-2026-mlx-fp16"
+revision = "06bbe0d853a93cbbf7c1f40cffccd4c5481459ef"
+dtype = "fp16"
+files = ["config.json", "model.safetensors", "preprocessor_config.json", "special_tokens_map.json", "tokenizer.model", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "5de7e586cec6d8f51225c8d5fe17a56a3043dda9af8c42f9cb01dd545905eb18"
+"model.safetensors" = "1ec6ba9ee27da02b21b3ffdb5183b77020351d3331d05a74ad8d58a09394a2b8"
+"preprocessor_config.json" = "9f297d330646ecc8ebb9dc5784f48b7c35b118c913e306a1ccd0192f2c976332"
+"special_tokens_map.json" = "1814ce01458ff6a72b04a6618e75f18ce627be4dc17619cd3a7cd7f71e137f0f"
+"tokenizer.model" = "6d21e6a83b2d0d3e1241a7817e4bef8eb63bcb7cfe4a2675af9a35ff3bbf0e14"
+"tokenizer_config.json" = "0dfeb3eeba07bccaa1b4bf78f3135ad3059acf8d18f681675832b285ac0035b0"
+[weights.bytes]
+"config.json" = 3998
+"model.safetensors" = 4131827448
+"preprocessor_config.json" = 420
+"special_tokens_map.json" = 4091
+"tokenizer.model" = 492827
+"tokenizer_config.json" = 48141
+[derive]
+int8 = "audio-affine-v1:cohere"
+int4 = "audio-affine-v1:cohere"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "transcribe"
+title = "Transcribe"
+input = "ops/transcribe.input.json"
+output_schema = "ops/transcribe.output.json"
+output = "json"
+stream = true
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

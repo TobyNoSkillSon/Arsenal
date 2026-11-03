@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of caption through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "florence-2-large",
+  "revision": "21a599d414c4d928c9032694c424fb94458e3594",
+  "rows": [
+    {
+      "date": "2026-10-31T00:44:26Z",
+      "load_seconds": 0.281,
+      "ops": {
+        "caption": {
+          "seconds_first": 0.161,
+          "seconds_warm": 0.14,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 3768.8,
+      "precision": "fp16",
+      "runner_sha256": "ff7d1a2c660d0633d422b9c2ba7c9617ce21d76bd6427f09c7b1cc19a93e56d8",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

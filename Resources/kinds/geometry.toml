@@ -1,0 +1,22 @@
+id = "geometry"
+title = "3D"
+title_singular = "3D"
+icon = "cube"
+order = 10
+suite = "bench/kinds/geometry/suite-v1.toml"
+[api]
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+
+[[op]]
+name = "image_to_3d"
+title = "Make 3D"
+input = "ops/image_to_3d.input.json"
+output_schema = "ops/image_to_3d.output.json"
+output = "file"
+stream = true

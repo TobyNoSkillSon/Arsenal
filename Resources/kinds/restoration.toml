@@ -1,0 +1,54 @@
+id = "restoration"
+title = "Restoration"
+title_singular = "Restoration"
+icon = "sparkles.rectangle.stack"
+order = 9
+suite = "bench/kinds/restoration/suite-v1.toml"
+[api]
+[facets]
+modalities_in = ["image", "video"]
+modalities_out = ["image", "video"]
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+
+[[op]]
+name = "upscale_image"
+title = "Upscale image"
+input = "ops/upscale_image.input.json"
+output_schema = "ops/upscale_image.output.json"
+output = "file"
+stream = true
+
+[[op]]
+name = "upscale_video"
+title = "Upscale video"
+input = "ops/upscale_video.input.json"
+output_schema = "ops/upscale_video.output.json"
+output = "file"
+stream = true
+
+[[op]]
+name = "interpolate_video"
+title = "Smooth video"
+input = "ops/interpolate_video.input.json"
+output_schema = "ops/interpolate_video.output.json"
+output = "file"
+stream = true
+
+[[op]]
+name = "colorize"
+title = "Colorize"
+input = "ops/colorize.input.json"
+output_schema = "ops/colorize.output.json"
+output = "file"
+stream = true
+
+[[op]]
+name = "inpaint"
+title = "Inpaint"
+input = "ops/inpaint.input.json"
+output_schema = "ops/inpaint.output.json"
+output = "file"
+stream = true

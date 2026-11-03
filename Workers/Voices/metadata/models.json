@@ -1,0 +1,831 @@
+{
+  "models": [
+    {
+      "id": "kokoro-82m",
+      "summary": "Fast preset-voice reader; the default for spoken replies. No cloning or voice design.",
+      "publisher": "Hexgrad",
+      "released": 2025,
+      "name": "Kokoro 82M",
+      "repo": "mlx-community/Kokoro-82M-bf16",
+      "revision": "a71e4d38b236d968966a2002c4c895dbd12b1c3c",
+      "native_dtype": "fp32",
+      "tier16_dtype": "fp16",
+      "tiers_offered": [
+        "16",
+        "8",
+        "4"
+      ],
+      "download": {
+        "repo": "mlx-community/Kokoro-82M-bf16",
+        "revision": "a71e4d38b236d968966a2002c4c895dbd12b1c3c",
+        "bytes": 341742463,
+        "convert_to": {
+          "16": {
+            "method": "cast",
+            "dtype": "fp16",
+            "from": "source",
+            "layers": "every tensor of the model file; voice files unchanged",
+            "seconds": 2,
+            "stored_bytes": 178214411,
+            "keeps_source": false
+          },
+          "8": {
+            "method": "affine",
+            "bits": 8,
+            "group": 64,
+            "from": "16",
+            "rule": "kokoro",
+            "layers": "87 Linear and embedding layers (ALBERT text encoder, projections, prosody predictor, AdaIN projections); convolutions, LSTMs, norms and the vocoder stay FP16",
+            "seconds": 2,
+            "stored_bytes": 151279360
+          }
+        }
+      },
+      "optimized": {
+        "exact": [
+          "kokoro-host-alignment",
+          "kokoro-conv-weight-cache",
+          "kokoro-fused-lstm"
+        ],
+        "fast": [
+          "kokoro-host-alignment",
+          "kokoro-conv-weight-cache",
+          "kokoro-fused-lstm",
+          "kokoro-fp16-decoder"
+        ]
+      },
+      "files": [
+        "config.json",
+        "kokoro-v1_0.safetensors",
+        "voices/af_alloy.safetensors",
+        "voices/af_aoede.safetensors",
+        "voices/af_bella.safetensors",
+        "voices/af_heart.safetensors",
+        "voices/af_jessica.safetensors",
+        "voices/af_kore.safetensors",
+        "voices/af_nicole.safetensors",
+        "voices/af_nova.safetensors",
+        "voices/af_river.safetensors",
+        "voices/af_sarah.safetensors",
+        "voices/af_sky.safetensors",
+        "voices/am_adam.safetensors",
+        "voices/am_echo.safetensors",
+        "voices/am_eric.safetensors",
+        "voices/am_fenrir.safetensors",
+        "voices/am_liam.safetensors",
+        "voices/am_michael.safetensors",
+        "voices/am_onyx.safetensors",
+        "voices/am_puck.safetensors",
+        "voices/am_santa.safetensors",
+        "voices/bf_alice.safetensors",
+        "voices/bf_emma.safetensors",
+        "voices/bf_isabella.safetensors",
+        "voices/bf_lily.safetensors",
+        "voices/bm_daniel.safetensors",
+        "voices/bm_fable.safetensors",
+        "voices/bm_george.safetensors",
+        "voices/bm_lewis.safetensors"
+      ],
+      "voices": [
+        "af_alloy",
+        "af_aoede",
+        "af_bella",
+        "af_heart",
+        "af_jessica",
+        "af_kore",
+        "af_nicole",
+        "af_nova",
+        "af_river",
+        "af_sarah",
+        "af_sky",
+        "am_adam",
+        "am_echo",
+        "am_eric",
+        "am_fenrir",
+        "am_liam",
+        "am_michael",
+        "am_onyx",
+        "am_puck",
+        "am_santa",
+        "bf_alice",
+        "bf_emma",
+        "bf_isabella",
+        "bf_lily",
+        "bm_daniel",
+        "bm_fable",
+        "bm_george",
+        "bm_lewis"
+      ],
+      "license": "Apache-2.0",
+      "licence": "Apache-2.0",
+      "first_audio_ms": null,
+      "real_time_factor": null,
+      "memory_mb": null,
+      "languages": [
+        "en"
+      ],
+      "languages_note": "Verified in Vireo: English (US and UK voices). The model also has Spanish, French, Italian, Portuguese, Japanese, Mandarin and Hindi voices; those are not offered until their word checks pass.",
+      "control": [
+        "preset"
+      ],
+      "hosted": false,
+      "description": "Fast, small preset-voice reader: the default for spoken replies. No voice design or cloning.",
+      "size_mb": 341.7,
+      "file_sizes": {
+        "config.json": 2351,
+        "kokoro-v1_0.safetensors": 327115152,
+        "voices/af_alloy.safetensors": 522320,
+        "voices/af_aoede.safetensors": 522320,
+        "voices/af_bella.safetensors": 522320,
+        "voices/af_heart.safetensors": 522320,
+        "voices/af_jessica.safetensors": 522320,
+        "voices/af_kore.safetensors": 522320,
+        "voices/af_nicole.safetensors": 522320,
+        "voices/af_nova.safetensors": 522320,
+        "voices/af_river.safetensors": 522320,
+        "voices/af_sarah.safetensors": 522320,
+        "voices/af_sky.safetensors": 522320,
+        "voices/am_adam.safetensors": 522320,
+        "voices/am_echo.safetensors": 522320,
+        "voices/am_eric.safetensors": 522320,
+        "voices/am_fenrir.safetensors": 522320,
+        "voices/am_liam.safetensors": 522320,
+        "voices/am_michael.safetensors": 522320,
+        "voices/am_onyx.safetensors": 522320,
+        "voices/am_puck.safetensors": 522320,
+        "voices/am_santa.safetensors": 522320,
+        "voices/bf_alice.safetensors": 522320,
+        "voices/bf_emma.safetensors": 522320,
+        "voices/bf_isabella.safetensors": 522320,
+        "voices/bf_lily.safetensors": 522320,
+        "voices/bm_daniel.safetensors": 522320,
+        "voices/bm_fable.safetensors": 522320,
+        "voices/bm_george.safetensors": 522320,
+        "voices/bm_lewis.safetensors": 522320
+      },
+      "assets": [
+        "kokoro-english-g2p",
+        "kokoro-british-lexicon"
+      ],
+      "score": {
+        "score": 1065,
+        "unit": "Elo",
+        "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+        "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+        "snapshot": "2026-09-26",
+        "direction": "higher",
+        "ci": 11,
+        "rank": 48,
+        "of": 91,
+        "note": "Published board row \"Kokoro 82M v1.0\" (\u00b111, 95% CI, blind human preference, all categories); scored with its default voice."
+      },
+      "scores": {
+        "speech": {
+          "score": 1065,
+          "unit": "Elo",
+          "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+          "snapshot": "2026-09-26",
+          "direction": "higher",
+          "ci": 11,
+          "rank": 48,
+          "of": 91,
+          "note": "Published board row \"Kokoro 82M v1.0\" (\u00b111, 95% CI, blind human preference, all categories); scored with its default voice."
+        }
+      }
+    },
+    {
+      "id": "pocket-tts",
+      "summary": "Small streaming voice for short replies with preset or cloned voices. No voice design.",
+      "publisher": "Kyutai",
+      "released": 2026,
+      "name": "Pocket TTS",
+      "repo": "mlx-community/pocket-tts",
+      "revision": "cbf71d5f6657bbc3f4bc02f85ee408261225bec7",
+      "native_dtype": "bf16",
+      "tier16_dtype": "bf16",
+      "tiers_offered": [
+        "16",
+        "8",
+        "4"
+      ],
+      "download": {
+        "repo": "mlx-community/pocket-tts",
+        "revision": "cbf71d5f6657bbc3f4bc02f85ee408261225bec7",
+        "bytes": 240320741,
+        "convert_to": {
+          "8": {
+            "method": "affine",
+            "bits": 8,
+            "group": 64,
+            "from": "16",
+            "rule": "pocket-tts",
+            "layers": "the 6-layer FlowLM transformer (24 Linear layers, 75 M of 118 M parameters); Mimi codec, flow head, text embedding, input projection and EOS head stay BF16",
+            "seconds": 1,
+            "stored_bytes": 164966547
+          }
+        }
+      },
+      "optimized": {
+        "exact": [],
+        "fast": []
+      },
+      "files": [
+        "config.json",
+        "embeddings/alba.safetensors",
+        "embeddings/azelma.safetensors",
+        "embeddings/eponine.safetensors",
+        "embeddings/fantine.safetensors",
+        "embeddings/javert.safetensors",
+        "embeddings/marius.safetensors",
+        "model.safetensors",
+        "special_tokens_map.json",
+        "tokenizer.json",
+        "tokenizer_config.json"
+      ],
+      "voices": [
+        "alba",
+        "azelma",
+        "eponine",
+        "fantine",
+        "javert",
+        "marius"
+      ],
+      "license": "CC-BY-4.0 (preset voice terms vary)",
+      "first_audio_ms": 31.7080020904541,
+      "real_time_factor": 0.16447084072308663,
+      "memory_mb": 884.569383,
+      "languages": [
+        "en"
+      ],
+      "control": [
+        "preset",
+        "cloned"
+      ],
+      "hosted": false,
+      "licence": "CC-BY-4.0 (preset voice terms vary)",
+      "size_mb": 240.320741,
+      "file_sizes": {
+        "config.json": 1664,
+        "embeddings/alba.safetensors": 512088,
+        "embeddings/azelma.safetensors": 659544,
+        "embeddings/eponine.safetensors": 573528,
+        "embeddings/fantine.safetensors": 540760,
+        "embeddings/javert.safetensors": 512088,
+        "embeddings/marius.safetensors": 512088,
+        "model.safetensors": 235739497,
+        "special_tokens_map.json": 95,
+        "tokenizer.json": 244993,
+        "tokenizer_config.json": 220
+      },
+      "benchmark": {
+        "machine": "Apple M5 Max",
+        "date": "2026-09-24",
+        "warmup_runs": 1,
+        "measured_runs": 1,
+        "contention": "unknown; Vella idle checked before each run",
+        "text": "The native speech engine is ready to tell your next story.",
+        "first_audio_definition": "GPU gate admission to first decoded PCM, queue wait excluded",
+        "rtf_definition": "generation seconds / audio seconds; lower is faster",
+        "memory_definition": "peak active MLX allocation in decimal MB, only this model hot",
+        "generation_ms": 513.1490230560303,
+        "audio_seconds": 3.12
+      },
+      "score": {
+        "score": 991,
+        "unit": "Elo",
+        "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+        "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+        "snapshot": "2026-09-26",
+        "direction": "higher",
+        "score_estimated": true,
+        "score_range": [
+          922,
+          1060
+        ],
+        "score_method": "Est. from Kyutai's listening study (Pocket 39 Elo below Chatterbox Turbo), scaled to AA via Chatterbox.",
+        "note": "Not on the Artificial Analysis TTS arena (checked 2026-09-26); estimated AA-equivalent."
+      },
+      "scores": {
+        "speech": {
+          "score": 991,
+          "unit": "Elo",
+          "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+          "snapshot": "2026-09-26",
+          "direction": "higher",
+          "score_estimated": true,
+          "score_range": [
+            922,
+            1060
+          ],
+          "score_method": "Est. from Kyutai's listening study (Pocket 39 Elo below Chatterbox Turbo), scaled to AA via Chatterbox.",
+          "note": "Not on the Artificial Analysis TTS arena (checked 2026-09-26); estimated AA-equivalent."
+        }
+      }
+    },
+    {
+      "id": "qwen3-tts-voicedesign",
+      "summary": "Makes a new voice from a written description and follows delivery instructions. No cloning.",
+      "publisher": "Alibaba Qwen team",
+      "released": 2026,
+      "name": "Qwen3 VoiceDesign 1.7B",
+      "repo": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16",
+      "revision": "7d3824abff87e49756bb0f83fb5411de75d160c4",
+      "native_dtype": "bf16",
+      "tier16_dtype": "bf16",
+      "tiers_offered": [
+        "16",
+        "8",
+        "4"
+      ],
+      "download": {
+        "repo": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16",
+        "revision": "7d3824abff87e49756bb0f83fb5411de75d160c4",
+        "bytes": 4520192405,
+        "convert_to": {
+          "8": {
+            "method": "affine",
+            "bits": 8,
+            "group": 64,
+            "from": "16",
+            "rule": "qwen3-tts-talker",
+            "layers": "the talker's Linear layers and codec head (250 layers); embeddings, speaker encoder, speech tokenizer and norms stay BF16",
+            "seconds": 25,
+            "stored_bytes": 2393304544
+          },
+          "4": {
+            "method": "affine",
+            "bits": 4,
+            "group": 64,
+            "from": "16",
+            "rule": "qwen3-tts-talker",
+            "layers": "the talker's Linear layers and codec head (250 layers); embeddings, speaker encoder, speech tokenizer and norms stay BF16",
+            "seconds": 20,
+            "stored_bytes": 1625222624
+          }
+        }
+      },
+      "optimized": {
+        "exact": [
+          "qwen-fused-rope",
+          "qwen-predictor-tables",
+          "qwen-fused-sampler"
+        ],
+        "fast": [
+          "qwen-fused-rope",
+          "qwen-predictor-tables",
+          "qwen-fused-sampler"
+        ]
+      },
+      "files": [
+        "config.json",
+        "generation_config.json",
+        "merges.txt",
+        "model.safetensors",
+        "model.safetensors.index.json",
+        "preprocessor_config.json",
+        "speech_tokenizer/config.json",
+        "speech_tokenizer/configuration.json",
+        "speech_tokenizer/model.safetensors",
+        "speech_tokenizer/preprocessor_config.json",
+        "tokenizer_config.json",
+        "vocab.json"
+      ],
+      "voices": [],
+      "license": "Apache-2.0",
+      "first_audio_ms": null,
+      "real_time_factor": null,
+      "memory_mb": null,
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "ko",
+        "de",
+        "fr",
+        "ru",
+        "pt",
+        "es",
+        "it"
+      ],
+      "control": [
+        "described",
+        "instructions"
+      ],
+      "hosted": false,
+      "licence": "Apache-2.0",
+      "size_mb": 4520.2,
+      "file_sizes": {
+        "config.json": 5232,
+        "generation_config.json": 245,
+        "merges.txt": 1671839,
+        "model.safetensors": 3833402589,
+        "model.safetensors.index.json": 32458,
+        "preprocessor_config.json": 127,
+        "speech_tokenizer/config.json": 2336,
+        "speech_tokenizer/configuration.json": 76,
+        "speech_tokenizer/model.safetensors": 682293092,
+        "speech_tokenizer/preprocessor_config.json": 234,
+        "tokenizer_config.json": 7344,
+        "vocab.json": 2776833
+      },
+      "score": {
+        "score": 930,
+        "unit": "Elo",
+        "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+        "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+        "snapshot": "2026-09-26",
+        "direction": "higher",
+        "score_estimated": true,
+        "score_range": [
+          870,
+          980
+        ],
+        "score_method": "Est. from AA's 'Qwen3 TTS' row (same 1.7B family; designed voices untested, wider range).",
+        "note": "The open 1.7B VoiceDesign checkpoint is not on the board; estimated from AA's 'Qwen3 TTS' row (hosted, same model family)."
+      },
+      "scores": {
+        "speech": {
+          "score": 930,
+          "unit": "Elo",
+          "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+          "snapshot": "2026-09-26",
+          "direction": "higher",
+          "score_estimated": true,
+          "score_range": [
+            870,
+            980
+          ],
+          "score_method": "Est. from AA's 'Qwen3 TTS' row (same 1.7B family; designed voices untested, wider range).",
+          "note": "The open 1.7B VoiceDesign checkpoint is not on the board; estimated from AA's 'Qwen3 TTS' row (hosted, same model family)."
+        }
+      }
+    },
+    {
+      "id": "qwen3-tts-base",
+      "summary": "Clones a voice from a short reference clip with its transcript. No voice design.",
+      "publisher": "Alibaba Qwen team",
+      "released": 2026,
+      "name": "Qwen3 Base 1.7B",
+      "repo": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16",
+      "revision": "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+      "native_dtype": "bf16",
+      "tier16_dtype": "bf16",
+      "tiers_offered": [
+        "16",
+        "8",
+        "4"
+      ],
+      "download": {
+        "repo": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16",
+        "revision": "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+        "bytes": 4544210194,
+        "convert_to": {
+          "8": {
+            "method": "affine",
+            "bits": 8,
+            "group": 64,
+            "from": "16",
+            "rule": "qwen3-tts-talker",
+            "layers": "the talker's Linear layers and codec head (250 layers); embeddings, speaker encoder, speech tokenizer and norms stay BF16",
+            "seconds": 25,
+            "stored_bytes": 2417315080
+          },
+          "4": {
+            "method": "affine",
+            "bits": 4,
+            "group": 64,
+            "from": "16",
+            "rule": "qwen3-tts-talker",
+            "layers": "the talker's Linear layers and codec head (250 layers); embeddings, speaker encoder, speech tokenizer and norms stay BF16",
+            "seconds": 20,
+            "stored_bytes": 1649233160
+          }
+        }
+      },
+      "optimized": {
+        "exact": [
+          "qwen-fused-rope",
+          "qwen-predictor-tables",
+          "qwen-fused-sampler"
+        ],
+        "fast": [
+          "qwen-fused-rope",
+          "qwen-predictor-tables",
+          "qwen-fused-sampler"
+        ]
+      },
+      "files": [
+        "config.json",
+        "generation_config.json",
+        "merges.txt",
+        "model.safetensors",
+        "model.safetensors.index.json",
+        "preprocessor_config.json",
+        "speech_tokenizer/config.json",
+        "speech_tokenizer/configuration.json",
+        "speech_tokenizer/model.safetensors",
+        "speech_tokenizer/preprocessor_config.json",
+        "tokenizer_config.json",
+        "vocab.json"
+      ],
+      "voices": [],
+      "license": "Apache-2.0",
+      "first_audio_ms": null,
+      "real_time_factor": null,
+      "memory_mb": null,
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "ko",
+        "de",
+        "fr",
+        "ru",
+        "pt",
+        "es",
+        "it"
+      ],
+      "control": [
+        "cloned"
+      ],
+      "hosted": false,
+      "licence": "Apache-2.0",
+      "size_mb": 4544.2,
+      "file_sizes": {
+        "config.json": 5317,
+        "generation_config.json": 245,
+        "merges.txt": 1671839,
+        "model.safetensors": 3857414009,
+        "model.safetensors.index.json": 38742,
+        "preprocessor_config.json": 127,
+        "speech_tokenizer/config.json": 2336,
+        "speech_tokenizer/configuration.json": 76,
+        "speech_tokenizer/model.safetensors": 682293092,
+        "speech_tokenizer/preprocessor_config.json": 234,
+        "tokenizer_config.json": 7344,
+        "vocab.json": 2776833
+      },
+      "score": {
+        "score": 930,
+        "unit": "Elo",
+        "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+        "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+        "snapshot": "2026-09-26",
+        "direction": "higher",
+        "score_estimated": true,
+        "score_range": [
+          885,
+          965
+        ],
+        "score_method": "Est. from AA's 'Qwen3 TTS' row (hosted; AA files the open 1.7B weights under it).",
+        "note": "The open 1.7B Base checkpoint is not on the board by name; estimated from AA's 'Qwen3 TTS' row (hosted qwen3-tts-vc-realtime; AA lists the open weights on DeepInfra as the same model)."
+      },
+      "scores": {
+        "speech": {
+          "score": 930,
+          "unit": "Elo",
+          "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+          "snapshot": "2026-09-26",
+          "direction": "higher",
+          "score_estimated": true,
+          "score_range": [
+            885,
+            965
+          ],
+          "score_method": "Est. from AA's 'Qwen3 TTS' row (hosted; AA files the open 1.7B weights under it).",
+          "note": "The open 1.7B Base checkpoint is not on the board by name; estimated from AA's 'Qwen3 TTS' row (hosted qwen3-tts-vc-realtime; AA lists the open weights on DeepInfra as the same model)."
+        }
+      }
+    },
+    {
+      "id": "breeze-tts-2",
+      "summary": "Bilingual English and Chinese speech with voice cloning and voice design; the best open-weights voice on the board.",
+      "publisher": "BreezeBlue",
+      "released": 2026,
+      "name": "Breeze TTS 2",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "languages_note": "The publisher claims 600+ languages; English and Chinese are the documented ones.",
+      "control": [
+        "emotion",
+        "design",
+        "clone"
+      ],
+      "voices": [],
+      "hosted": false,
+      "licence": "Research & Non-Commercial v1.1",
+      "license": "Research & Non-Commercial v1.1",
+      "description": "English/Chinese speech generator that can invent a voice from a description or clone a sample.",
+      "benchmark_sources": [
+        {
+          "benchmark": "Artificial Analysis Provider Voice",
+          "score": 1204,
+          "unit": "Elo",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice/open-weights",
+          "snapshot": "2026-09-24"
+        },
+        {
+          "benchmark": "Artificial Analysis Controlled Voice",
+          "score": 1025,
+          "unit": "Elo",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/controlled-voice",
+          "snapshot": "2026-09-24"
+        }
+      ],
+      "repo": "mlx-community/Breeze-TTS-2-mlx",
+      "revision": "3c8829fb7fd335818f085cd2ef49b4100c0e46c8",
+      "native_dtype": "bf16",
+      "tier16_dtype": "bf16",
+      "tiers_offered": [
+        "16",
+        "8",
+        "4"
+      ],
+      "download": {
+        "repo": "mlx-community/Breeze-TTS-2-mlx",
+        "revision": "3c8829fb7fd335818f085cd2ef49b4100c0e46c8",
+        "bytes": 7625546547,
+        "convert_to": {
+          "8": {
+            "method": "affine",
+            "bits": 8,
+            "group": 64,
+            "from": "16",
+            "rule": "breeze-tts-2",
+            "layers": "468 Linear layers and token embeddings (text encoder, backbone, depth decoder, heads); audio tokenizer and norms stay BF16",
+            "seconds": 45,
+            "stored_bytes": 3983279044
+          }
+        },
+        "vendor_quant": {
+          "4": {
+            "repo": "mlx-community/Breeze-TTS-2-mlx-4bit",
+            "revision": "3a06d26b172ea4ae1da2f42d708383e9c79d5526",
+            "bytes": 3042459184,
+            "format": "mxfp4",
+            "group": 32,
+            "layers": "468 Linear layers and token embeddings (text encoder, backbone, depth decoder, heads); audio tokenizer and norms stay BF16",
+            "files": [
+              "LICENSE",
+              "NOTICE",
+              "audio_tokenizer/config.json",
+              "audio_tokenizer/configuration.json",
+              "audio_tokenizer/model.safetensors",
+              "audio_tokenizer/preprocessor_config.json",
+              "config.json",
+              "generation_config.json",
+              "model.safetensors",
+              "model.safetensors.index.json",
+              "special_tokens_map.json",
+              "tokenizer.json",
+              "tokenizer_config.json"
+            ],
+            "file_sizes": {
+              "LICENSE": 18856,
+              "NOTICE": 146,
+              "audio_tokenizer/config.json": 2336,
+              "audio_tokenizer/configuration.json": 76,
+              "audio_tokenizer/model.safetensors": 682293092,
+              "audio_tokenizer/preprocessor_config.json": 234,
+              "config.json": 12379,
+              "generation_config.json": 251,
+              "model.safetensors": 2325487160,
+              "model.safetensors.index.json": 98863,
+              "special_tokens_map.json": 886,
+              "tokenizer.json": 33386945,
+              "tokenizer_config.json": 1157960
+            }
+          }
+        }
+      },
+      "optimized": {
+        "exact": [
+          "breeze-lazy-frames"
+        ],
+        "fast": [
+          "breeze-lazy-frames",
+          "breeze-streaming-decode",
+          "breeze-depth-kv-cache",
+          "breeze-fused-depth-step"
+        ]
+      },
+      "files": [
+        "audio_tokenizer/config.json",
+        "audio_tokenizer/configuration.json",
+        "audio_tokenizer/model.safetensors",
+        "audio_tokenizer/preprocessor_config.json",
+        "config.json",
+        "generation_config.json",
+        "model-00001-of-00002.safetensors",
+        "model-00002-of-00002.safetensors",
+        "model.safetensors.index.json",
+        "special_tokens_map.json",
+        "tokenizer.json",
+        "tokenizer_config.json"
+      ],
+      "file_sizes": {
+        "audio_tokenizer/config.json": 2336,
+        "audio_tokenizer/configuration.json": 76,
+        "audio_tokenizer/model.safetensors": 682293092,
+        "audio_tokenizer/preprocessor_config.json": 234,
+        "config.json": 12176,
+        "generation_config.json": 251,
+        "model-00001-of-00002.safetensors": 4904052381,
+        "model-00002-of-00002.safetensors": 2004566801,
+        "model.safetensors.index.json": 73409,
+        "special_tokens_map.json": 886,
+        "tokenizer.json": 33386945,
+        "tokenizer_config.json": 1157960
+      },
+      "size_mb": 7625.5,
+      "first_audio_ms": null,
+      "real_time_factor": null,
+      "memory_mb": null,
+      "score": {
+        "score": 1206,
+        "unit": "Elo",
+        "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+        "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+        "snapshot": "2026-09-26",
+        "direction": "higher",
+        "ci": 16,
+        "rank": 9,
+        "of": 91,
+        "note": "Best open-weights model on the board."
+      },
+      "scores": {
+        "speech": {
+          "score": 1206,
+          "unit": "Elo",
+          "benchmark": "Artificial Analysis TTS arena \u2014 Provider Voice (default voices, all categories)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/provider-voice",
+          "snapshot": "2026-09-26",
+          "direction": "higher",
+          "ci": 16,
+          "rank": 9,
+          "of": 91,
+          "note": "Best open-weights model on the board."
+        },
+        "speech_secondary": {
+          "score": 1022,
+          "unit": "Elo",
+          "benchmark": "Artificial Analysis TTS arena \u2014 Controlled Voice (same cloned voices for every model)",
+          "url": "https://artificialanalysis.ai/text-to-speech/leaderboard/controlled-voice",
+          "snapshot": "2026-09-26",
+          "direction": "higher",
+          "ci": 15,
+          "rank": 15,
+          "of": 37
+        }
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "kokoro-english-g2p",
+      "name": "Kokoro English G2P",
+      "repo": "beshkenadze/kitten-tts-g2p",
+      "revision": "9c692b92682d959d9013a9cfe6a49541997add18",
+      "precision": "fp32",
+      "files": [
+        "us_bart.safetensors",
+        "us_bart_config.json",
+        "us_gold.json",
+        "us_silver.json"
+      ],
+      "voices": [],
+      "file_sizes": {
+        "us_bart.safetensors": 3011692,
+        "us_bart_config.json": 1257,
+        "us_gold.json": 3001196,
+        "us_silver.json": 3105352
+      },
+      "size_mb": 9.1
+    },
+    {
+      "id": "kokoro-british-lexicon",
+      "name": "Kokoro British English lexicon",
+      "repo": "hexgrad/misaki",
+      "repo_type": "dataset",
+      "revision": "7a6093fd11124188077f2dc16397cc465466d59a",
+      "licence": "Apache-2.0",
+      "description": "misaki's British English gold and silver dictionaries (by Kokoro's author), read by the UK voices (bf_, bm_).",
+      "files": [
+        "gb_gold.json",
+        "gb_silver.json"
+      ],
+      "voices": [],
+      "file_sizes": {
+        "gb_gold.json": 2841062,
+        "gb_silver.json": 3677750
+      },
+      "size_mb": 6.5
+    }
+  ]
+}

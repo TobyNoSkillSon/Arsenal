@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "audio"
+  ],
+  "properties": {
+    "audio": {
+      "type": "object",
+      "description": "The recording.",
+      "x-arsenal-file": {
+        "accept": [
+          "audio/wav",
+          "audio/mpeg",
+          "audio/x-m4a",
+          "audio/flac"
+        ]
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    }
+  }
+}

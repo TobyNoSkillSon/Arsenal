@@ -1,0 +1,175 @@
+{
+  "cases": [
+    {
+      "operation": "read_document",
+      "source": "infly/Infinity-Parser2-Flash@cfddc4106b0abc4706f05575a164f7dd35d09c46 README.md layout prompt; infly-ai/INF-MLLM@011866e93026290ba39f05b796c92d58dd0ce40c Infinity-Parser2/infinity_parser2/utils/utils.py postprocess_doc2json_result (synthetic page in the README layout format)",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        }
+      },
+      "raw": "```json\n[{\"bbox\": [0, 0, 1000, 125], \"category\": \"header\", \"text\": \"Running head\"}, {\"bbox\": [125, 250, 875, 500], \"category\": \"title\", \"text\": \"Example\"}, {\"bbox\": [125, 500, 875, 1000], \"category\": \"table\", \"text\": \"<table><tr><td>42</td></tr></table>\"}]\n```",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "Example\n\n<table><tr><td>42</td></tr></table>",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "blocks": [
+              {
+                "category": "header",
+                "text": "Running head",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 0,
+                  "ymin": 0,
+                  "xmax": 32,
+                  "ymax": 4
+                }
+              },
+              {
+                "category": "title",
+                "text": "Example",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 4,
+                  "ymin": 8,
+                  "xmax": 28,
+                  "ymax": 16
+                }
+              },
+              {
+                "category": "table",
+                "text": "<table><tr><td>42</td></tr></table>",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 4,
+                  "ymin": 16,
+                  "xmax": 28,
+                  "ymax": 32
+                }
+              }
+            ],
+            "tables": [
+              {
+                "id": "table-2",
+                "content": "<table><tr><td>42</td></tr></table>"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "operation": "read_document",
+      "source": "infly/Infinity-Parser2-Flash@cfddc4106b0abc4706f05575a164f7dd35d09c46 README.md layout prompt; infly-ai/INF-MLLM@011866e93026290ba39f05b796c92d58dd0ce40c Infinity-Parser2/infinity_parser2/utils/utils.py postprocess_doc2json_result truncate_last_incomplete_element (synthetic page in the README layout format)",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        }
+      },
+      "raw": "[{\"bbox\": [125, 250, 875, 500], \"category\": \"title\", \"text\": \"Example\"}, {\"bbox\": [125, 500",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "Example",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "blocks": [
+              {
+                "category": "title",
+                "text": "Example",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 4,
+                  "ymin": 8,
+                  "xmax": 28,
+                  "ymax": 16
+                }
+              }
+            ],
+            "tables": []
+          }
+        ]
+      }
+    },
+    {
+      "operation": "read_document",
+      "source": "infly-ai/INF-MLLM@011866e93026290ba39f05b796c92d58dd0ce40c Infinity-Parser2/tests/test_utils.py TestPostprocessDoc2JsonResult.test_full_postprocess_pipeline",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        }
+      },
+      "raw": "```json\n[{\"bbox\": [0, 0, 500, 500], \"category\": \"text\", \"text\": \"Test\"}]\n```",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "Test",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "blocks": [
+              {
+                "category": "text",
+                "text": "Test",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 0,
+                  "ymin": 0,
+                  "xmax": 16,
+                  "ymax": 16
+                }
+              }
+            ],
+            "tables": []
+          }
+        ]
+      }
+    },
+    {
+      "operation": "read_document",
+      "source": "infly-ai/INF-MLLM@011866e93026290ba39f05b796c92d58dd0ce40c Infinity-Parser2/tests/test_utils.py TestTruncateLastIncompleteElement.test_truncate_incomplete_element",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        }
+      },
+      "raw": "[{\"bbox\": [0,0,100,100], \"text\": \"hello\"}, {\"bbox\": [0,0,200,200], \"text\": \"incomplete",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "hello",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "blocks": [
+              {
+                "category": "unknown",
+                "text": "hello",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 0,
+                  "ymin": 0,
+                  "xmax": 3.2,
+                  "ymax": 3.2
+                }
+              }
+            ],
+            "tables": []
+          }
+        ]
+      }
+    }
+  ]
+}

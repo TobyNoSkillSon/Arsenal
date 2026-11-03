@@ -1,0 +1,6 @@
+schema = 1
+suite = "granite-speech-5.0-470m-turboctc-native-v1"
+version = 1
+precision = "fp16"
+runner = "native"
+status = "deferred-by-user"

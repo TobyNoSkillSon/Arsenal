@@ -1,0 +1,78 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "nuextract3"
+name = "NuExtract3"
+architecture = "qwen3_5"
+kind = "chat"
+params = "4.5B"
+publisher = "NuMind"
+released = 2026
+suggested = false
+summary = "Fill JSON templates from documents."
+purpose = "Fill JSON templates from documents"
+good_for = ["Fill JSON templates from documents"]
+limits = ["FP16 only: int8 and int4 changed read_document output too much. In the 22 Oct live check extract returned invalid JSON; check its output.", "The extraction template is a NuExtract template, not a JSON Schema.", "A document is read as at most 99 page images per request."]
+tasks = ["extract", "read_document"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/numind/NuExtract3/tree/c99dc8f5641b866aa0192b6ea78f84bf9f3535f1"
+[weights]
+repo = "numind/NuExtract3"
+revision = "c99dc8f5641b866aa0192b6ea78f84bf9f3535f1"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "generation_config.json", "model.safetensors", "model.safetensors.index.json", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "31e44d28615d268efdc3dcf59cb59bd2d51714d517455fbad97518d351b84119"
+"config.json" = "e7ab2e18b0761f34cbbee2b58dc284f73825395e0c79d1f47a1089636b838e6b"
+"generation_config.json" = "eda6aa8b0fbde9fbe38c044c6ba3c2890d4a9aad3cdd348da5ffe0ff0f91df09"
+"model.safetensors" = "aca0a9d61da5df4fa4b1475b68c0a7205e5f8f5f20beb5055fde0622991f9ed7"
+"model.safetensors.index.json" = "025bad45ab352f28167725c248ba194d9d18a644c227f5628d970018fa57d5d4"
+"processor_config.json" = "d89ef49ce9cd37fbf510158e13c1ef063d9286411c1ec9049932dbe0487143b1"
+"tokenizer.json" = "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4"
+"tokenizer_config.json" = "2e31d1126e81bddf8d15c3f95260fb487b48c5131b24fcbb5bb9d2537e7afac0"
+[weights.bytes]
+"chat_template.jinja" = 6752
+"config.json" = 2897
+"generation_config.json" = 115
+"model.safetensors" = 9078620504
+"model.safetensors.index.json" = 56330
+"processor_config.json" = 1191
+"tokenizer.json" = 19989343
+"tokenizer_config.json" = 1169
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "extract"
+title = "Extract"
+input = "ops/extract.input.json"
+output_schema = "ops/extract.output.json"
+output = "json"
+stream = false
+[[op]]
+name = "read_document"
+title = "Read document"
+input = "ops/read_document.input.json"
+output_schema = "ops/read_document.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

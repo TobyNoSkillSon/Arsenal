@@ -1,0 +1,10 @@
+{
+  "repo": "infly/Infinity-Parser2-Flash",
+  "revision": "cfddc4106b0abc4706f05575a164f7dd35d09c46",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 617,
+  "header_bytes": 75504,
+  "errors": []
+}

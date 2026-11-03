@@ -1,0 +1,30 @@
+# Settings panel reference for voice models that design or clone voices (docs/MODEL-FOLDER.md, "Settings panel"). Copy
+# it beside model.toml and tailor it to the settings that model declares: drop rows for inputs it does not take, and
+# drop the Voice row when the model lists no voices (a design-only model has none to choose).
+schema = 1
+
+[[section]]
+
+[[section.row]]
+setting = "voice"
+
+[[section.row]]
+setting = "language"
+control = "menu"
+labels = { english = "English", chinese = "Chinese", japanese = "Japanese", korean = "Korean", french = "French", german = "German", spanish = "Spanish" }
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "instructions"
+control = "editor"
+
+[[section.row]]
+setting = "reference_path"
+control = "file"
+
+[[section.row]]
+setting = "reference_text"
+control = "editor"

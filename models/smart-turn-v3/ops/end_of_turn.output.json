@@ -1,0 +1,1 @@
+{"$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object", "properties": {"prediction": {"type": "boolean"}, "probability": {"type": "number", "minimum": 0, "maximum": 1}}, "required": ["prediction", "probability"], "additionalProperties": false}

@@ -1,0 +1,489 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arsenal.local/schemas/results.schema.json",
+  "title": "Arsenal benchmark result v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "model",
+    "kind",
+    "chip",
+    "os_build",
+    "app_build",
+    "runner",
+    "worker_digest",
+    "precision",
+    "mode",
+    "suite",
+    "profile",
+    "date",
+    "stub",
+    "gate_passed",
+    "conditions",
+    "metrics",
+    "cases"
+  ],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "model": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "kind": {
+      "enum": [
+        "voices",
+        "decisions",
+        "images",
+        "chat"
+      ]
+    },
+    "chip": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "os_build": {
+      "type": "string",
+      "minLength": 1
+    },
+    "app_build": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "worker_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "precision": {
+      "enum": [
+        "bf16",
+        "fp16",
+        "int8",
+        "int4"
+      ]
+    },
+    "mode": {
+      "enum": [
+        "fast",
+        "exact"
+      ]
+    },
+    "suite": {
+      "type": "object",
+      "required": [
+        "id",
+        "version",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "const": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "profile": {
+      "enum": [
+        "quick",
+        "full"
+      ]
+    },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "stub": {
+      "type": "boolean"
+    },
+    "gate_passed": {
+      "type": "boolean"
+    },
+    "conditions": {
+      "type": "object",
+      "required": [
+        "measurement_lock",
+        "contaminated",
+        "cpu_limit_pct",
+        "gpu_limit_pct",
+        "sample_interval_s",
+        "idle_samples",
+        "run_samples",
+        "energy",
+        "contended"
+      ],
+      "properties": {
+        "measurement_lock": {
+          "type": "boolean"
+        },
+        "contaminated": {
+          "type": "boolean"
+        },
+        "cpu_limit_pct": {
+          "const": 250
+        },
+        "gpu_limit_pct": {
+          "const": 10
+        },
+        "sample_interval_s": {
+          "const": 3
+        },
+        "idle_samples": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "at",
+              "phase",
+              "other_cpu_pct",
+              "other_gpu_pct",
+              "compositing_gpu_pct",
+              "valid"
+            ],
+            "properties": {
+              "at": {
+                "type": "string"
+              },
+              "phase": {
+                "enum": [
+                  "idle",
+                  "run"
+                ]
+              },
+              "other_cpu_pct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "other_gpu_pct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "compositing_gpu_pct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "valid": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "run_samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "at",
+              "phase",
+              "other_cpu_pct",
+              "other_gpu_pct",
+              "compositing_gpu_pct",
+              "valid"
+            ],
+            "properties": {
+              "at": {
+                "type": "string"
+              },
+              "phase": {
+                "enum": [
+                  "idle",
+                  "run"
+                ]
+              },
+              "other_cpu_pct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "other_gpu_pct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "compositing_gpu_pct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "valid": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "energy": {
+          "const": "not_measured"
+        },
+        "note": {
+          "type": "string"
+        },
+        "contended": {
+          "type": "boolean"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "peak_ram_mb"
+      ],
+      "properties": {
+        "speed_x_realtime": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "first_audio_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "round_trip_wer": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "accuracy": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "latency_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "batch_questions_per_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "seconds_per_image": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "reference_deviation": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "prefill_tokens_per_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "decode_tokens_per_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "first_token_s": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "quality_accuracy": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "peak_ram_mb": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "context": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "cases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "wall_s",
+          "metrics"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "wall_s": {
+            "type": "number",
+            "minimum": 0
+          },
+          "metrics": {
+            "type": "object",
+            "additionalProperties": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "output": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "required": [
+        "protocol",
+        "parity",
+        "task",
+        "implementation_fingerprint",
+        "folder_digest",
+        "fixture_identity",
+        "cases",
+        "evidence",
+        "speed",
+        "evidence_hashes"
+      ],
+      "properties": {
+        "protocol": {
+          "enum": [
+            "pass",
+            "fail",
+            "not-run"
+          ]
+        },
+        "parity": {
+          "enum": [
+            "pass",
+            "fail",
+            "not-run"
+          ]
+        },
+        "task": {
+          "enum": [
+            "pass",
+            "fail",
+            "not-run"
+          ]
+        },
+        "reference": {
+          "type": "object"
+        },
+        "stale": {
+          "type": "boolean"
+        },
+        "implementation_fingerprint": {
+          "type": "string"
+        },
+        "folder_digest": {
+          "type": "string"
+        },
+        "fixture_identity": {
+          "type": "string"
+        },
+        "cases": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "speed": {
+          "enum": [
+            "pass",
+            "fail",
+            "not-run"
+          ]
+        },
+        "evidence_hashes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        }
+      }
+    },
+    "gpu_cores": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "workload": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

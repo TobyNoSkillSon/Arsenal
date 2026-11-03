@@ -1,0 +1,1 @@
+{"rerank": {"query": "question", "documents": ["first", "second"], "top_n": 2}}

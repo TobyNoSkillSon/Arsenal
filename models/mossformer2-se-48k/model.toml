@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: MIT
+schema = 2
+id = "mossformer2-se-48k"
+name = "MossFormer2 SE 48K"
+kind = "enhancement"
+params = "55.3M"
+publisher = "Alibaba Speech Lab (ClearerVoice-Studio)"
+released = 2024
+suggested = false
+summary = "Remove background noise from speech at full 48 kHz bandwidth using a native Swift MLX worker."
+description = "MossFormer2_SE_48K from Alibaba's ClearerVoice-Studio: a MossFormer2 mask network (24 blocks pairing gated attention with a recurrent-free FSMN memory, 55.3M parameters) that predicts a magnitude mask over a 48 kHz STFT from Kaldi log-mel features and their deltas. The maker trained it on large open and private datasets; on VoiceBank+DEMAND at 48 kHz it reports PESQ 3.15 and SI-SDR 19.36 dB against 1.97 and 8.39 for the noisy input."
+purpose = "Speech denoising at 48 kHz"
+good_for = ["Removing background noise from voice recordings, calls, podcasts and interviews", "Full-band 48 kHz speech, keeping the high frequencies other 16 kHz denoisers drop", "Long recordings: over 20 s it cleans 4 s windows at a 3 s stride, so memory stays flat", "Mono or stereo at any rate; each channel is cleaned and returned at the input's rate"]
+limits = ["Denoising only: it does not remove reverb, repair clipping or raise the sample rate.", "Speech only; music and other sounds under the noise are treated as noise.", "Up to 10 minutes per clip.", "Runs in BF16: its FP16 cast overflows inside the network, so Macs without BF16 arithmetic (M1, M2) emulate it more slowly.", "Output is not streamed while it is made; the whole clip is cleaned first."]
+languages = ["und"]
+tasks = ["audio-to-audio", "denoise"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/alibabasglab/MossFormer2_SE_48K/blob/eff8c97925c8bec812af707814b3e5d777fd4503/README.md"
+[weights]
+repo = "alibabasglab/MossFormer2_SE_48K"
+revision = "eff8c97925c8bec812af707814b3e5d777fd4503"
+dtype = "fp32"
+files = ["last_best_checkpoint.pt"]
+[weights.sha256]
+"last_best_checkpoint.pt" = "03692b9f773bbd6bb43b9c5a41f96b1e28affd66e13796b7bec66ad3d8b227c6"
+[weights.bytes]
+"last_best_checkpoint.pt" = 221552019
+[derive]
+bf16 = "cast:mossformer2-se-48k"
+[selection]
+default = "native"
+chips = { m5 = "native" }
+[[runner]]
+name = "native"
+language = "swift"
+worker = "sound"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "enhance"
+title = "Remove noise"
+input = "ops/enhance.input.json"
+output = "audio"
+stream = true
+timeout_s = 1800
+first_response_timeout_s = 1800
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"
+
+[[format]]
+id = "bf16"
+bits_per_weight = 16
+storage = "bf16"
+source = "derived"
+runners = ["native"]

@@ -1,0 +1,10 @@
+{
+  "model": "paddleocr-vl-1.6",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 12,
+    "plain_tokens": 8,
+    "roundtrip": "Hello"
+  }
+}

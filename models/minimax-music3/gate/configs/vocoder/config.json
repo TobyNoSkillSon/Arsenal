@@ -1,0 +1,14 @@
+{
+  "_class_name": "MiniMaxMusic3Vocoder",
+  "_diffusers_version": "0.40.0.dev0",
+  "decoder_hidden_dim": 1536,
+  "decoder_input_dim": 1024,
+  "latent_channels": 128,
+  "sampling_rate": 44100,
+  "upsampling_ratios": [
+    8,
+    8,
+    4,
+    2
+  ]
+}

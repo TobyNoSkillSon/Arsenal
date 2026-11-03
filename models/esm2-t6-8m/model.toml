@@ -1,0 +1,71 @@
+schema = 3
+id = "esm2-t6-8m"
+name = "ESM-2 8M"
+kind = "local.science"
+summary = "Turns a protein sequence (one-letter amino-acid codes) into a vector of numbers for similarity search, clustering or downstream prediction."
+description = "ESM-2 is Meta AI's protein language model, trained by masked language modelling on protein sequences from UniRef50 (Lin et al., 2022, Evolutionary-scale prediction of atomic-level protein structure with a language model). This is the 8M size: 6 transformer layers, 320 wide, 7.8M parameters, the smallest ESM-2: fast and light, for quick similarity searches, clustering or as features for a small classifier. Arsenal returns the final-layer embedding averaged over residues, and per-residue embeddings on request. The model card gives no benchmark score; it says larger sizes are generally more accurate."
+purpose = "Embed protein sequences"
+publisher = "facebook"
+released = 2022
+params = "7.8M"
+tasks = ["feature-extraction"]
+languages = ["mul"]
+good_for = ["Comparing proteins: similar sequences, homologues and point mutants get high cosine similarity", "Features for a small classifier or regressor (function, localisation, stability) trained on top", "Per-residue features for residue-level tasks such as binding-site or secondary-structure prediction"]
+limits = ["At most 1,022 residues per request (ESM-2's training crop); longer proteins are refused, so embed them in windows yourself", "Uppercase one-letter amino-acid codes only (the 20 standard plus X, B, U, Z, O); other characters are refused. Not for DNA or RNA", "Embeddings alone predict nothing: a property needs a model trained on top of them. Structure prediction (ESMFold) and the masked-residue head are not served", "It is the weakest ESM-2 size: the card says larger checkpoints are more accurate. Use ESM-2 650M when quality matters more than speed.", "Reads and writes no human language, so the Polish question does not apply", "Parity with transformers EsmModel (MPS, float16) checked: see log/003-parity.md"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/facebook/esm2_t6_8M_UR50D"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/facebook/esm2_t6_8M_UR50D/blob/c731040fcd8d73dceaa04b0a8e6329b345b0f5df/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "facebook/esm2_t6_8M_UR50D"
+revision = "c731040fcd8d73dceaa04b0a8e6329b345b0f5df"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "special_tokens_map.json", "tokenizer_config.json", "vocab.txt"]
+
+[weights.sha256]
+"model.safetensors" = "24c5fa474c48f3b754b86efe752d5f189d2bcd88190fa2270fc92b2ef3034189"
+"config.json" = "facb9355e8252149f6f99dff5fd1e32e890c3c655362b261d0c81cd6b5839c85"
+"special_tokens_map.json" = "3aedcd4211c0d43aec4e607ff60a63255f3174ead795e997350f09a5f8cd9ee1"
+"tokenizer_config.json" = "7e9161ecdb548ec45a41cbc6b24aa4476fdd418461f491c4207baa99419a29ad"
+"vocab.txt" = "0b82cc0a7c7cf9e567b1e5892d793285b9fbae822c964ca48696f7db44598e03"
+
+[weights.bytes]
+"model.safetensors" = 31384292
+"config.json" = 775
+"special_tokens_map.json" = 125
+"tokenizer_config.json" = 95
+"vocab.txt" = 93
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-esm2-t6-8m"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

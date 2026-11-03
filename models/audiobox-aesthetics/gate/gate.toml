@@ -1,0 +1,6 @@
+schema = 1
+id = "audiobox-aesthetics-kit-v1"
+reference_runner = "pinned-maker-implementation"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Parity with the maker code on fixed inputs (passed 2026-10-30: max abs diff 0.0022, log/003-parity.md)"]

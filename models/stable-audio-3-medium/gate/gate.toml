@@ -1,0 +1,5 @@
+schema = 1
+kind = "sound"
+recipe = "vireo-reference-parity"
+checks = ["framed-load-run-unload", "finite-nonempty-pcm", "reference-parity", "exact-bit-identity-or-fast-quality"]
+status = "unverified"

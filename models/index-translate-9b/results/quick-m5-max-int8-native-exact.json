@@ -1,0 +1,59 @@
+{
+  "mode": "exact",
+  "model": "index-translate-9b",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-10-22T08:14:30Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Translate at int8: one ordinary Load, then two Translate requests (warm-up, timed) through Arsenal's API. Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "4e06279e62352dab96bbeb6fa0579bca5e822d75",
+        "run": "night-2026-10-22-int8",
+        "source": "results/quick-checks/night-2026-10-22.json; int8"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "int8",
+    "kind": "chat",
+    "metrics": {
+      "batteryPercentPer100000Tokens": {
+        "state": "notMeasured"
+      },
+      "firstTokenSeconds": {
+        "state": "notMeasured"
+      },
+      "loadPeakMemoryGB": {
+        "state": "notMeasured"
+      },
+      "maximumContextTokens": {
+        "state": "notMeasured"
+      },
+      "nextTokenAgreementPercent": {
+        "state": "notMeasured"
+      },
+      "nextTokenKL": {
+        "state": "notMeasured"
+      },
+      "peakMemoryGB": {
+        "basis": "Load and two Translate requests on a short fixed test input.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-10-22T08:14:30Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Translate requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "4e06279e62352dab96bbeb6fa0579bca5e822d75",
+          "run": "night-2026-10-22-int8",
+          "source": "results/quick-checks/night-2026-10-22.json; int8"
+        },
+        "state": "quickCheck",
+        "value": 11.811160064
+      },
+      "tokensPerSecond": {
+        "state": "notMeasured"
+      }
+    },
+    "runner": "native"
+  }
+}

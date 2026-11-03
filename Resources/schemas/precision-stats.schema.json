@@ -1,0 +1,1187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arsenal per-precision stats v2 (TOML front matter decoded to JSON)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "model",
+    "mode",
+    "stats"
+  ],
+  "properties": {
+    "schema": {
+      "const": 2
+    },
+    "model": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "mode": {
+      "enum": [
+        "fast",
+        "exact"
+      ]
+    },
+    "stats": {
+      "$ref": "#/$defs/stats"
+    }
+  },
+  "$defs": {
+    "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "measured",
+            "quickCheck",
+            "derived",
+            "declared",
+            "notMeasured",
+            "unavailable"
+          ]
+        },
+        "value": {
+          "type": "number",
+          "minimum": 0
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1,
+          "description": "How a derived figure was worked out, or the operation and input a per-request time covers."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "notMeasured",
+                  "unavailable"
+                ]
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "required": [
+                "value"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "unavailable"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reason"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": [
+                  "measured",
+                  "quickCheck",
+                  "derived",
+                  "declared"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "provenance"
+            ]
+          }
+        }
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "chip",
+        "date",
+        "method"
+      ],
+      "properties": {
+        "chip": {
+          "type": "string",
+          "minLength": 1
+        },
+        "date": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "baseline": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "run": {
+          "type": "string",
+          "minLength": 1
+        },
+        "gpuCores": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "defaultWorkload": {
+          "type": "boolean"
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "dtype",
+        "runner",
+        "availability",
+        "metrics"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "decisions",
+            "chat",
+            "images",
+            "voices",
+            "sound",
+            "enhancement",
+            "audio",
+            "embeddings",
+            "perception",
+            "restoration",
+            "geometry"
+          ]
+        },
+        "dtype": {
+          "enum": [
+            "fp16",
+            "bf16",
+            "int8",
+            "int4"
+          ]
+        },
+        "runner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "availability": {
+          "$ref": "#/$defs/value"
+        },
+        "metrics": {
+          "type": "object"
+        },
+        "qualityCheckPassed": {
+          "type": "boolean",
+          "description": "Numerical quality outcome; absent means not checked. A failed int4 check warns without blocking selection."
+        },
+        "qualityOnlyUnavailable": {
+          "type": "boolean",
+          "description": "Legacy quality-only availability marker; never inferred from a failed quality flag."
+        },
+        "qualityIdentity": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA256 of derive recipe, runner declaration and relevant implementation identity."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "decisions"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "metrics": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "agreementPercent",
+                  "millisecondsPerDecision",
+                  "batchedDecisionsPerSecond",
+                  "peakMemoryGB",
+                  "batteryPercentPer1000Decisions"
+                ],
+                "properties": {
+                  "agreementPercent": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "millisecondsPerDecision": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "batchedDecisionsPerSecond": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "peakMemoryGB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "batteryPercentPer1000Decisions": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "chat"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "metrics": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "nextTokenAgreementPercent",
+                  "nextTokenKL",
+                  "firstTokenSeconds",
+                  "tokensPerSecond",
+                  "loadPeakMemoryGB",
+                  "maximumContextTokens",
+                  "batteryPercentPer100000Tokens"
+                ],
+                "properties": {
+                  "nextTokenAgreementPercent": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "nextTokenKL": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "firstTokenSeconds": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "tokensPerSecond": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "loadPeakMemoryGB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "maximumContextTokens": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "batteryPercentPer100000Tokens": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "images"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "metrics": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "psnrDB",
+                  "secondsPerImage",
+                  "peakMemoryGB",
+                  "batteryPercentPer100Images"
+                ],
+                "properties": {
+                  "psnrDB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "secondsPerImage": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "peakMemoryGB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "batteryPercentPer100Images": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "voices"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "metrics": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "spectralDistance",
+                  "realTimeFactor",
+                  "firstAudioSeconds",
+                  "peakMemoryGB",
+                  "batteryPercentPerHourSpeech"
+                ],
+                "properties": {
+                  "spectralDistance": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "realTimeFactor": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "firstAudioSeconds": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "peakMemoryGB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "batteryPercentPerHourSpeech": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "sound"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "metrics": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "spectralDistance",
+                  "realTimeFactor",
+                  "peakMemoryGB",
+                  "batteryPercentPerHourAudio"
+                ],
+                "properties": {
+                  "spectralDistance": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "realTimeFactor": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "peakMemoryGB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "batteryPercentPerHourAudio": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "enhancement"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "metrics": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "spectralDistance",
+                  "realTimeFactor",
+                  "peakMemoryGB",
+                  "batteryPercentPerHourAudio"
+                ],
+                "properties": {
+                  "spectralDistance": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "realTimeFactor": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "peakMemoryGB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "batteryPercentPerHourAudio": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "audio",
+                  "embeddings",
+                  "perception",
+                  "restoration",
+                  "geometry"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "metrics": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "secondsPerRequest",
+                  "peakMemoryGB"
+                ],
+                "properties": {
+                  "secondsPerRequest": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  "peakMemoryGB": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/value"
+                      },
+                      {
+                        "if": {
+                          "properties": {
+                            "state": {
+                              "enum": [
+                                "measured",
+                                "quickCheck",
+                                "declared"
+                              ]
+                            }
+                          }
+                        },
+                        "then": {
+                          "required": [
+                            "value"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

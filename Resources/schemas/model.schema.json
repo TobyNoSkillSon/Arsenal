@@ -1,0 +1,1020 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arsenal.local/schemas/model.schema.json",
+  "title": "Arsenal model folder (schemas 1\u20133)",
+  "description": "Decoded TOML; semantic checks via ModelManifest.problems and Arsenal catalog validate; CONTRACTS \u00a73,13.",
+  "type": "object",
+  "required": [
+    "schema",
+    "id",
+    "name",
+    "kind",
+    "summary",
+    "publisher",
+    "released",
+    "tasks",
+    "languages",
+    "params",
+    "licence",
+    "weights",
+    "runner",
+    "gate",
+    "bench"
+  ],
+  "properties": {
+    "schema": {
+      "enum": [
+        1,
+        2,
+        3
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 40,
+      "pattern": "^[^\\n]+$"
+    },
+    "publisher": {
+      "type": "string",
+      "minLength": 1
+    },
+    "released": {
+      "type": "integer"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "params": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "licence": {
+      "$ref": "#/$defs/licence"
+    },
+    "weights": {
+      "$ref": "#/$defs/weights"
+    },
+    "derive": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "vendor": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/weights"
+      }
+    },
+    "asset": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "runner": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/runner"
+      }
+    },
+    "menu": {
+      "anyOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "title",
+              "op",
+              "input"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "op": {
+                "type": "string",
+                "minLength": 1
+              },
+              "input": {
+                "enum": [
+                  "clipboard",
+                  "none"
+                ]
+              },
+              "params": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "section"
+          ],
+          "properties": {
+            "section": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "items"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "items": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "$ref": "#/$defs/menuItem"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "gate": {
+      "type": "object",
+      "required": [
+        "recipe"
+      ],
+      "properties": {
+        "recipe": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "bench": {
+      "type": "object",
+      "required": [
+        "recipe"
+      ],
+      "properties": {
+        "recipe": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "native_context": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Vendor native token context; separate from the context configured by Arsenal."
+    },
+    "suggested": {
+      "type": "boolean"
+    },
+    "popularity": {
+      "type": "object",
+      "required": [
+        "hf_downloads",
+        "hf_likes",
+        "as_of"
+      ],
+      "properties": {
+        "hf_downloads": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "hf_likes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "as_of": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        }
+      }
+    },
+    "facets": {
+      "$ref": "#/$defs/facets"
+    },
+    "setting": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/setting"
+      }
+    },
+    "op": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/op"
+      }
+    },
+    "selection": {
+      "type": "object",
+      "required": [
+        "default"
+      ],
+      "properties": {
+        "default": {
+          "type": "string",
+          "minLength": 1
+        },
+        "chips": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^m[0-9]+$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "scaffold": {
+      "type": "boolean",
+      "description": "Generated unfinished scaffold; true always fails semantic validation."
+    },
+    "format": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "storage",
+          "bits_per_weight",
+          "source",
+          "runners"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+          },
+          "storage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "method": {
+            "type": "string"
+          },
+          "profile": {
+            "type": "object"
+          },
+          "bits_per_weight": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "maximum": 64
+          },
+          "source": {
+            "enum": [
+              "vendor",
+              "derived",
+              "runner-native"
+            ]
+          },
+          "runners": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "size_bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "ram_mb": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "chat",
+          "image",
+          "voice",
+          "sound",
+          "operation",
+          "background"
+        ]
+      }
+    },
+    "activity": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$"
+    },
+    "kind_file": {
+      "type": "string",
+      "pattern": "^kinds/local\\.[a-z0-9.-]+\\.toml$"
+    },
+    "setting_alias": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "values"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "values": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "memory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "resident_bytes",
+        "basis"
+      ],
+      "properties": {
+        "resident_bytes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "good_for": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    },
+    "limits": {
+      "type": "array",
+      "maxItems": 32,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "weights": {
+      "type": "object",
+      "required": [
+        "repo",
+        "revision",
+        "dtype",
+        "files",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "repo": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{40}$"
+        },
+        "dtype": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "sha256": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{64}$"
+          }
+        },
+        "bytes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "group": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "repo_type": {
+          "enum": [
+            "model",
+            "dataset"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "licence": {
+      "type": "object",
+      "required": [
+        "spdx",
+        "commercial",
+        "url"
+      ],
+      "properties": {
+        "spdx": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commercial": {
+          "type": "boolean"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "conditions": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "runner": {
+      "type": "object",
+      "required": [
+        "name",
+        "language",
+        "protocol",
+        "chips",
+        "min_macos",
+        "fast_exact"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "language": {
+          "type": "string",
+          "minLength": 1,
+          "not": {
+            "const": "python"
+          }
+        },
+        "protocol": {
+          "const": 1
+        },
+        "chips": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "min_macos": {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)*$"
+        },
+        "fast_exact": {
+          "type": "boolean"
+        },
+        "worker": {
+          "type": "string",
+          "minLength": 1
+        },
+        "python": {
+          "not": {}
+        },
+        "entry": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lock": {
+          "not": {}
+        },
+        "env_download_bytes": {
+          "not": {}
+        },
+        "features": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "batching",
+              "sequentialOnly",
+              "streaming"
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "not": {
+              "properties": {
+                "language": {
+                  "const": "swift"
+                }
+              },
+              "required": [
+                "entry"
+              ]
+            }
+          },
+          "then": {
+            "required": [
+              "worker"
+            ]
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
+    "asset": {
+      "type": "object",
+      "required": [
+        "id",
+        "repo",
+        "repo_type",
+        "revision",
+        "files",
+        "licence",
+        "sha256",
+        "bytes"
+      ],
+      "properties": {
+        "repo": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*/[A-Za-z0-9][A-Za-z0-9_.-]*$"
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{40}$"
+        },
+        "dtype": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "sha256": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{64}$"
+          }
+        },
+        "bytes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "group": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "repo_type": {
+          "enum": [
+            "model",
+            "dataset"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]*$"
+        },
+        "licence": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "object",
+              "required": [
+                "spdx",
+                "commercial",
+                "url"
+              ],
+              "properties": {
+                "spdx": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "commercial": {
+                  "type": "boolean"
+                },
+                "url": {
+                  "type": "string",
+                  "pattern": "^https://"
+                }
+              },
+              "additionalProperties": true
+            }
+          ]
+        },
+        "into": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256,
+          "description": "Base snapshot subdirectory the model's Get conversion writes this asset into; no separate asset snapshot is kept."
+        }
+      },
+      "additionalProperties": true
+    },
+    "facets": {
+      "type": "object",
+      "required": [
+        "modalities_in",
+        "modalities_out"
+      ],
+      "properties": {
+        "modalities_in": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "text",
+              "audio",
+              "image",
+              "video"
+            ]
+          }
+        },
+        "modalities_out": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "text",
+              "audio",
+              "image",
+              "video"
+            ]
+          }
+        }
+      }
+    },
+    "setting": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "type",
+        "applies"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "enum": [
+            "toggle",
+            "choice",
+            "slider",
+            "number",
+            "text",
+            "voice"
+          ]
+        },
+        "default": {
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "choices": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        },
+        "min": {
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "step": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "applies": {
+          "enum": [
+            "load",
+            "request"
+          ]
+        },
+        "maps_to": {
+          "type": "string",
+          "pattern": "^(config|request)\\.[A-Za-z0-9_.]+$"
+        },
+        "help": {
+          "type": "string"
+        },
+        "excludes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "op": {
+      "type": "object",
+      "required": [
+        "name",
+        "title",
+        "input",
+        "output",
+        "stream"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input": {
+          "type": "string",
+          "minLength": 1
+        },
+        "output": {
+          "enum": [
+            "json",
+            "audio",
+            "image",
+            "text-stream",
+            "file"
+          ]
+        },
+        "output_schema": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stream": {
+          "type": "boolean"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "timeout_s": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "first_response_timeout_s": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 3600
+        },
+        "annotations": {
+          "type": "object"
+        }
+      }
+    },
+    "menuItem": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "op",
+        "input"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "op": {
+          "type": "string",
+          "minLength": 1
+        },
+        "input": {
+          "enum": [
+            "clipboard",
+            "none"
+          ]
+        },
+        "params": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number",
+              "boolean"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "weights": {
+            "properties": {
+              "dtype": {
+                "const": "fp32"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "derive"
+        ],
+        "properties": {
+          "derive": {
+            "anyOf": [
+              {
+                "required": [
+                  "fp16"
+                ]
+              },
+              {
+                "required": [
+                  "bf16"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schema": {
+            "const": 2
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "selection"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "schema": {
+            "const": 3
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "selection"
+        ]
+      }
+    }
+  ]
+}

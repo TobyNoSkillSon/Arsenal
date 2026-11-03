@@ -1,0 +1,10 @@
+{
+  "model": "ui-venus-2-9b",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 16,
+    "plain_tokens": 13,
+    "roundtrip": "Hello"
+  }
+}

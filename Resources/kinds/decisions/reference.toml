@@ -1,0 +1,10 @@
+# Reference settings for a decision model. Questions and answers arrive with each request, so the panel holds only
+# how the model runs. Copy the [[setting]] blocks its runner really accepts into model.toml.
+
+[[setting]]
+id = "stock_mlx"
+title = "Stock MLX path"
+type = "toggle"
+default = false
+applies = "load"
+help = "Run plain MLX without the fast tokenizer and kernels: same answers, slower; for diagnosis."

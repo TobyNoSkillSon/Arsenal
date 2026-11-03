@@ -1,0 +1,13 @@
+{
+  "repo": "inclusionAI/UI-Venus-2-9B",
+  "revision": "90d6dfe13ece735f82793635b69bcc10c710e2ab",
+  "files": [
+    "model-00001-of-00004.safetensors",
+    "model-00002-of-00004.safetensors",
+    "model-00003-of-00004.safetensors",
+    "model-00004-of-00004.safetensors"
+  ],
+  "tensors": 760,
+  "header_bytes": 93632,
+  "errors": []
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Batch judge response",
+  "type": "object",
+  "required": [
+    "results"
+  ],
+  "properties": {
+    "results": {
+      "type": "array",
+      "description": "One result per item, in item order.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "answers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "noul": {
+                  "type": "number"
+                },
+                "choice": {
+                  "type": "string"
+                },
+                "confidence": {
+                  "type": "number"
+                },
+                "probabilities": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number"
+                  }
+                },
+                "score": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "error": {
+            "type": "string"
+          },
+          "model": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "ms": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

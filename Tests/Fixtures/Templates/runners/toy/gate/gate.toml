@@ -1,0 +1,4 @@
+# SPDX-License-Identifier: MIT
+reference = "sum(values) * load.config.settings.scale"
+exact = "bit-for-bit"
+fast = "same arithmetic; no approximation in these templates"

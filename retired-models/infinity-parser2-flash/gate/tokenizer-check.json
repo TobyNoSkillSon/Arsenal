@@ -1,0 +1,10 @@
+{
+  "model": "infinity-parser2-flash",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 16,
+    "plain_tokens": 13,
+    "roundtrip": "Hello"
+  }
+}

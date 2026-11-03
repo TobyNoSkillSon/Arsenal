@@ -1,0 +1,60 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "ddcolor-modelscope",
+  "revision": "479a36712efde407b455a2088e69993f02340f30",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T09:44:29Z",
+      "load_seconds": 0.11,
+      "mac_peak_in_use_mb": 25846.7,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "colorize": {
+          "files": [
+            {
+              "name": "colorized.png",
+              "sha256": "2aa0708d520a2f8555654c0a217148ece8f33095247aede76910189d924dc298"
+            }
+          ],
+          "seconds_first": 0.474,
+          "seconds_warm": 0.184,
+          "status": 200
+        },
+        "inpaint": {
+          "error": "{\"error\":\"Model ddcolor-modelscope does not declare operation inpaint.\"}",
+          "seconds_first": 0.008,
+          "seconds_warm": 0.008,
+          "status": 404
+        },
+        "interpolate_video": {
+          "error": "{\"error\":\"Model ddcolor-modelscope does not declare operation interpolate_video.\"}",
+          "seconds_first": 0.001,
+          "seconds_warm": 0.001,
+          "status": 404
+        },
+        "upscale_image": {
+          "error": "{\"error\":\"Model ddcolor-modelscope does not declare operation upscale_image.\"}",
+          "seconds_first": 0.001,
+          "seconds_warm": 0.001,
+          "status": 404
+        },
+        "upscale_video": {
+          "error": "{\"error\":\"Model ddcolor-modelscope does not declare operation upscale_video.\"}",
+          "seconds_first": 0.001,
+          "seconds_warm": 0.001,
+          "status": 404
+        }
+      },
+      "peak_footprint_mb": 1621.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 1088.0,
+      "samples": 3
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

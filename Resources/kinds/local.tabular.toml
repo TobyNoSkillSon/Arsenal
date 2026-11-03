@@ -1,0 +1,18 @@
+id = "local.tabular"
+title = "Tables"
+title_singular = "Table model"
+icon = "tablecells"
+order = 20
+suite = "bench/kinds/local.tabular/suite-v1.toml"
+primary_operation = "classify_rows"
+
+[[op]]
+name = "classify_rows"
+title = "Classify rows"
+input = "ops/classify_rows.input.json"
+output = "json"
+output_schema = "ops/classify_rows.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

@@ -1,0 +1,283 @@
+{
+ "schema": "golden-1",
+ "model": "elephant-1",
+ "date": "2026-11-02",
+ "commit": "7250e6d7d2ad19f7ef79f564d74999d32405b5e8",
+ "precision": "fp16",
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "weights": {
+  "repo": "baselabs/elephant-1",
+  "revision": "b3f8a93462fb1051a9de031e94a7ff380e254072",
+  "sha256": {
+   "config.json": "f26324589d15932e2742dbb13dbc7c561865ce4f80990af3b7dff05efe4dadab",
+   "model.safetensors": "682f02348dfe4617dd21bba2915c12e805de8cf16327a61e895a831ea681d0ba",
+   "tokenizer.json": "a5cd9732badce41de57e6efce8302930ded1c1188c5f81feb2bd6c24c4a1941f",
+   "tokenizer_config.json": "2984c03425a28d242744e234a5003786fd289b3713db79fe0958c65eb59d85b2"
+  }
+ },
+ "input": {
+  "fixtures": [],
+  "request": [
+   {
+    "op": "decide",
+    "body": {
+     "state": "I was charged twice this month, please refund one of them.",
+     "questions": {
+      "refund": {
+       "type": "noul",
+       "instructions": "Is the customer asking for a refund?"
+      },
+      "team": {
+       "type": "choice",
+       "instructions": "Which team should handle this?",
+       "criteria": {
+        "billing": "Charges, refunds, invoices",
+        "technical": "App or site faults",
+        "fraud": "Suspected unauthorised use"
+       }
+      },
+      "urgency": {
+       "type": "score",
+       "instructions": "How urgent is this?",
+       "criteria": [
+        "Can wait",
+        "Today",
+        "Blocking the customer now"
+       ]
+      }
+     }
+    }
+   },
+   {
+    "op": "decide",
+    "body": {
+     "state": {
+      "ticket": "My card was charged twice for the same order and support has not replied in 3 days.",
+      "customer": {
+       "tenure_months": 14,
+       "vip": false,
+       "score": 0.25,
+       "tags": [
+        "café",
+        "naïve 😀",
+        null
+       ]
+      }
+     },
+     "questions": {
+      "refund": {
+       "type": "noul",
+       "instructions": "Is the customer asking for money back?",
+       "criteria": {
+        "true": "asks for money back",
+        "false": {
+         "note": "anything else"
+        }
+       }
+      },
+      "frustration": {
+       "type": "score",
+       "instructions": {
+        "ask": "How frustrated is the customer?",
+        "scale": "calm to angry"
+       },
+       "criteria": [
+        "calm",
+        "irritated",
+        "angry",
+        {
+         "level": "furious"
+        }
+       ]
+      }
+     }
+    }
+   },
+   {
+    "op": "judge",
+    "body": {
+     "items": [
+      "The box contains three red apples.",
+      "The box is empty.",
+      {
+       "image": "x.png"
+      }
+     ],
+     "questions": {
+      "present": {
+       "type": "noul",
+       "instructions": "Does the box contain apples?"
+      },
+      "fruit": {
+       "type": "choice",
+       "criteria": [
+        "apple",
+        "pear",
+        "none"
+       ]
+      }
+     }
+    }
+   }
+  ]
+ },
+ "output": [
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "refund": {
+      "noul": 0.99168,
+      "type": "noul"
+     },
+     "team": {
+      "choice": "billing",
+      "confidence": 0.99752,
+      "probabilities": {
+       "billing": 0.99835,
+       "fraud": 0.00143,
+       "technical": 0.00022
+      },
+      "type": "choice"
+     },
+     "urgency": {
+      "confidence": 0.46806,
+      "legend": {
+       "0": "Can wait",
+       "1": "Today",
+       "2": "Blocking the customer now"
+      },
+      "probabilities": {
+       "0": 0.24757,
+       "1": 0.64537,
+       "2": 0.10706
+      },
+      "score": 0.85949,
+      "type": "score"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 241,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "decide",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "answers": {
+     "frustration": {
+      "confidence": 0.40052,
+      "legend": {
+       "0": "calm",
+       "1": "irritated",
+       "2": "angry",
+       "3": {
+        "level": "furious"
+       }
+      },
+      "probabilities": {
+       "0": 0.03483,
+       "1": 0.26056,
+       "2": 0.43535,
+       "3": 0.26926
+      },
+      "score": 1.93904,
+      "type": "score"
+     },
+     "refund": {
+      "noul": 0.4773,
+      "type": "noul"
+     }
+    },
+    "model": "elephant-1",
+    "usage": {
+     "input_tokens": 294,
+     "output_tokens": 0
+    }
+   }
+  },
+  {
+   "op": "judge",
+   "status": 200,
+   "served": {},
+   "files": [],
+   "file_count": 0,
+   "reply": {
+    "results": [
+     {
+      "answers": {
+       "fruit": {
+        "choice": "apple",
+        "confidence": 0.98792,
+        "probabilities": {
+         "apple": 0.99195,
+         "none": 0.00664,
+         "pear": 0.00141
+        },
+        "type": "choice"
+       },
+       "present": {
+        "noul": 0.99902,
+        "type": "noul"
+       }
+      },
+      "model": "elephant-1",
+      "ms": 198.13108,
+      "usage": {
+       "input_tokens": 155,
+       "output_tokens": 0
+      }
+     },
+     {
+      "answers": {
+       "fruit": {
+        "choice": "none",
+        "confidence": 0.99779,
+        "probabilities": {
+         "apple": 0.00093,
+         "none": 0.99853,
+         "pear": 0.00054
+        },
+        "type": "choice"
+       },
+       "present": {
+        "noul": 0.01599,
+        "type": "noul"
+       }
+      },
+      "model": "elephant-1",
+      "ms": 197.15405,
+      "usage": {
+       "input_tokens": 153,
+       "output_tokens": 0
+      }
+     },
+     {
+      "error": "This elephant-1 runner reads text and JSON states; media items are not supported.",
+      "model": null,
+      "ms": 0
+     }
+    ]
+   }
+  }
+ ],
+ "maker_reference": {
+  "none": "Maker capture: OneJev qev @81ce62f + the checkpoint's serve.patch, DecisionEngine on PyTorch MPS (transformers 5.19.0), sequential branches, in BF16 and FP16 (lab/evidence/elephant-1/maker-2026-11-02). Card ticket, maker BF16: refund 0.991275, team billing 0.998343 (technical 0.000214, fraud 0.001443), urgency 0.247238/0.645004/0.107758. Nested JSON, maker BF16: refund 0.488867, frustration 0.034763/0.260084/0.435662/0.269492. Over nine fixed requests (15 questions): token ids identical; Arsenal FP16 vs maker FP16 max |dp| 0.00097, vs maker BF16 0.0116 (maker's own BF16-vs-FP16 0.0111); no answer changes; per-layer last-token cosine >= 0.999992."
+ },
+ "tolerance": {
+  "argmax": "unchanged on every question",
+  "max_abs_probability_difference_vs_maker": 0.025,
+  "frozen": "lab/evidence/elephant-1/bounds-2026-11-02.json"
+ },
+ "note": "Request order kept: a choice's option order sets its answer letters. The model card's ticket example, a nested JSON state with structured criteria, and judge over two text states plus one media item (refused per item)."
+}

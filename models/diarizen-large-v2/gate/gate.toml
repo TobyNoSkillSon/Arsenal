@@ -1,0 +1,7 @@
+schema = 1
+id = "diarizen-large-v2-native-v1"
+reference_runner = "pinned-vendor-diarizen-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Get converts every learned tensor of the pinned FP32 segmentation checkpoint and WeSpeaker asset to FP16 (weight norm folded) and checks every shape against the network", "pruned WavLM stages, weighted sum, Conformer, powerset logits and the WeSpeaker embeddings against DiariZen's own pipeline (torch 2.15 MPS, FP16 networks) on the same fixed window", "median filter, speaker counting, VBx clustering and reconstruction replayed on the maker's captured values", "end-to-end segments equal to DiariZenPipeline's on a three-voice fixture and the maker's AMI example"]
+evidence = "gate/golden/golden.json"

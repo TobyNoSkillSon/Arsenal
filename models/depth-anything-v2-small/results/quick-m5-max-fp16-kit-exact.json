@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "depth-anything-v2-small",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T02:54:18Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Estimate depth at fp16: one ordinary Load, then two Estimate depth requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "perception",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Estimate depth requests on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:54:18Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Estimate depth requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.5261754368
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Estimate depth request on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:54:18Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Estimate depth request, one sample, after one ordinary Load, then two Estimate depth requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.125
+      }
+    },
+    "runner": "kit"
+  }
+}

@@ -1,0 +1,113 @@
+schema = 3
+id = "esm3-sm-open-v1"
+name = "ESM3 Open Small (esm3-sm-open-v1)"
+kind = "local.protein"
+summary = "Reads and writes proteins across sequence, structure and function: fills in masked residues, scores mutations, folds a sequence into a backbone, designs a sequence for a structure, and predicts what a protein does."
+description = "ESM3 is a generative masked language model over three tracks of a protein at once: amino-acid sequence, 3D structure (as 4,096 learned structure tokens) and function (InterPro entries and keywords), plus secondary structure and solvent accessibility. This is esm3-sm-open-v1, the open 1.4B transformer, released by EvolutionaryScale, now Chan Zuckerberg Biohub, with the paper 'Simulating 500 million years of evolution with a language model' (Hayes et al., Science 2025); it was trained on 2.78 billion natural proteins. Arsenal ships the transformer with the structure-token encoder and decoder and the function-token decoder, so a prompt can mix tracks and the answer comes back as residues, a PDB backbone with pLDDT and pTM, or function annotations. On ProteinGym's zero-shot substitution benchmark the model's average Spearman is 0.466 (rank 14 of the summary table), against 0.414 for ESM-2 650M."
+purpose = "Protein design and prediction"
+publisher = "biohub"
+released = 2024
+params = "2.70B"
+tasks = ["fill-mask", "feature-extraction", "text-generation"]
+languages = ["mul"]
+good_for = [
+  "Filling in masked residues of a sequence (_ marks a mask), with the alternatives and their probabilities, plus the predicted secondary structure and solvent accessibility of every residue",
+  "Scoring mutations without any training data: masked or wild-type marginals over single and multiple substitutions (ProteinGym zero-shot average Spearman 0.466, the maker's benchmark table, not reproduced here)",
+  "Folding a sequence into a backbone: structure tokens by iterative unmasking, then the structure decoder's N, CA, C coordinates with per-residue pLDDT, pTM and the predicted aligned error, written as a PDB file",
+  "Inverse folding: a PDB backbone in, a designed sequence out, with the recovery against the file's own sequence",
+  "Predicting what a protein does: InterPro entries and function keywords over residue ranges, from sequence, structure or both",
+  "Prompting across tracks at once (a motif's coordinates inside a longer protein, a secondary-structure string, SASA values, function keywords) and generating one track at a time, including the maker's chain of thought (function, secondary structure, structure, then sequence)",
+  "Per-residue and pooled embeddings of the final layer for search, clustering and features",
+]
+limits = [
+  "At most 1,024 residues per request, one chain: multi-chain complexes (the maker's | chain break and its chain_id track) are not ported, so a complex must be sent one chain at a time",
+  "Structure prompts read N, CA and C of the first model of a PDB file, amino acids only; mmCIF, gzip files, and residue-level insertion handling beyond the first alternate location are not covered; a PDB with no residue holding N, CA and C is refused",
+  "A reply carries at most 640,000 numbers (16 MiB as JSON): per-residue embeddings up to 415 residues, the predicted aligned error up to 800 residues, returned logits up to 640,000 numbers in all; larger asks are refused before the model runs",
+  "Residue annotations can be read back from the model's own head but cannot be prompted: the maker's residue-annotation tokenizer needs its per-residue reference letters, so such labels are accepted and leave that track empty",
+  "No batching: one protein per request. Generation runs one forward pass per step, at most 1,024 passes per generate request summed over its tracks, so it ends inside the 15-minute limit",
+  "Not ported from the maker's code: the Forge/Biohub service API, batch generation, chain-of-thought as one call (send the tracks in order yourself), guided and constrained generation, cRMSD against a reference, SASA from a structure (the maker computes it with biotite, not the model), and the ESMFold2, ESMC and SAE models in the same repository",
+  "The model generates plausible proteins, not verified ones: a design needs wet-lab or at least independent structure prediction. The maker filtered viruses and select agents from its training data and its keyword vocabulary, and asks users to follow its acceptable-use policy",
+  "Reads and writes no human language, so the Polish question does not apply",
+  "Matches the maker's own esm code on Apple GPU (bf16 reference, FP16 port) on fixed inputs per component; see log/002-parity.md and gate/golden/golden.json. The maker's benchmark figures are not reproduced here",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/biohub/esm3-sm-open-v1"
+code = "https://github.com/Biohub/esm"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/biohub/esm3-sm-open-v1/blob/47f0545b2b6daf26a93439a3cd610f4f7f3d5478/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+
+[weights]
+repo = "biohub/esm3-sm-open-v1"
+revision = "47f0545b2b6daf26a93439a3cd610f4f7f3d5478"
+dtype = "bf16"
+files = [
+  "data/weights/esm3_sm_open_v1.pth",
+  "data/weights/esm3_structure_encoder_v0.pth",
+  "data/weights/esm3_structure_decoder_v0.pth",
+  "data/weights/esm3_function_decoder_v0.pth",
+  "data/keyword_vocabulary_safety_filtered_58641.txt",
+  "data/keyword_idf_safety_filtered_58641.npy",
+  "data/hyperplanes_8bit_58641.npz",
+  "data/interpro_29026_to_keywords_58641.csv",
+  "data/entry_list_safety_29026.list",
+  "data/uniref90_and_mgnify90_residue_annotations_gt_1k_proteins.csv",
+]
+
+[weights.sha256]
+"data/weights/esm3_sm_open_v1.pth" = "5ead5a135c658068db6a4f1b933e72d6110992c4668822e1c0e2dcc53e38acd9"
+"data/weights/esm3_structure_encoder_v0.pth" = "467acbaee703ba3ccde6e75241a912a316952e5ff071355f85c1d33c68704f40"
+"data/weights/esm3_structure_decoder_v0.pth" = "3b726258a44274792b40ce7ea307e10c5da09936368a4ffa2970264d909da65b"
+"data/weights/esm3_function_decoder_v0.pth" = "f76d074efcaccfe21365a4fa96f212dadd66798e1e49d809ab7ffbe025d227c9"
+"data/keyword_vocabulary_safety_filtered_58641.txt" = "503309e9b62a5155bc34a7338af39fb8fc13a0c1d78bad50603f2f81f47a4123"
+"data/keyword_idf_safety_filtered_58641.npy" = "d83bfb4cda19dcd3bac939c82d369310dbd09b07d30affe7dffc2e4af82200f6"
+"data/hyperplanes_8bit_58641.npz" = "25e680def9abb366a31bdea8fe26720828c778dce80689294744afdbe341e13e"
+"data/interpro_29026_to_keywords_58641.csv" = "e560a84c9953b4d8cf30e3c11e6673151d20de5ea9b0aaf11adf7bf7a6bb70fd"
+"data/entry_list_safety_29026.list" = "58eda77a7c0c89f8c04b62d0a584bdd758a23a7632ee834fcdfdbedc697ed897"
+"data/uniref90_and_mgnify90_residue_annotations_gt_1k_proteins.csv" = "557a053405eddbdf64f13532eabb4a38aa7a652014185a12406940b7fa61d86d"
+
+[weights.bytes]
+"data/weights/esm3_sm_open_v1.pth" = 2803646068
+"data/weights/esm3_structure_encoder_v0.pth" = 62349276
+"data/weights/esm3_structure_decoder_v0.pth" = 1237213098
+"data/weights/esm3_function_decoder_v0.pth" = 1299947178
+"data/keyword_vocabulary_safety_filtered_58641.txt" = 787696
+"data/keyword_idf_safety_filtered_58641.npy" = 469256
+"data/hyperplanes_8bit_58641.npz" = 30026086
+"data/interpro_29026_to_keywords_58641.csv" = 10061298
+"data/entry_list_safety_29026.list" = 1595245
+"data/uniref90_and_mgnify90_residue_annotations_gt_1k_proteins.csv" = 109468
+
+# Get converts the four PyTorch archives and the two NumPy files to safetensors through this runner's `convert`
+# (kit/runner/Sources/Runner/Checkpoints.swift reads them without running a pickle) and casts every floating tensor to
+# FP16. The CSV, list and vocabulary files are copied unchanged.
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-esm3-sm-open-v1"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

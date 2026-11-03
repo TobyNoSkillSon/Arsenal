@@ -1,0 +1,77 @@
+{
+  "status": "passed",
+  "weights_downloaded": 0,
+  "graph": "reduced random weights",
+  "precisions": [
+    {
+      "model": "chandra-ocr-2",
+      "precision": "fp16",
+      "parameters": 97,
+      "eligible_matrices": 45,
+      "packed_matrices": 0,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "chandra-ocr-2",
+      "precision": "int8",
+      "parameters": 187,
+      "eligible_matrices": 45,
+      "packed_matrices": 45,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    },
+    {
+      "model": "chandra-ocr-2",
+      "precision": "int4",
+      "parameters": 187,
+      "eligible_matrices": 45,
+      "packed_matrices": 45,
+      "tier_complete": true,
+      "operations": [
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        },
+        {
+          "operation": "read_document",
+          "passed": true,
+          "malformed_rejected": true
+        }
+      ],
+      "cancelled": true,
+      "cancel_ack": true,
+      "unloaded": true
+    }
+  ],
+  "interpretation": "Structured cases pass only on the declared invalid_model_output parser rejection. Maker parser fixtures independently exercise positive schema-valid results."
+}

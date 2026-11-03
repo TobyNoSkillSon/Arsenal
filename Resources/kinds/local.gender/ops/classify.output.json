@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "label",
+    "probabilities",
+    "duration_s"
+  ],
+  "description": "The speaker's gender label, the probability of each label, and the recording length in seconds.",
+  "properties": {
+    "label": {
+      "type": "string",
+      "enum": [
+        "male",
+        "female"
+      ],
+      "description": "The label with the higher probability."
+    },
+    "probabilities": {
+      "type": "object",
+      "required": [
+        "male",
+        "female"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "male": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "female": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "duration_s": {
+      "type": "number",
+      "minimum": 0
+    }
+  }
+}

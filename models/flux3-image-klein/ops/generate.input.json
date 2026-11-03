@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "prompt"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32768,
+      "description": "A full scene caption: medium and style, subjects with their colours, materials and positions, background, lighting and camera. Short prompts give generic images. Text to render goes in quotes; boxes for layout can follow as a JSON list of elements with bbox [top, left, bottom, right] on a 0 to 1000 grid."
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 64,
+      "maximum": 4096,
+      "multipleOf": 16,
+      "description": "Image width in pixels, a multiple of 16; width x height at most 4 megapixels; 1024 when omitted."
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 64,
+      "maximum": 4096,
+      "multipleOf": 16,
+      "description": "Image height in pixels, a multiple of 16; width x height at most 4 megapixels; 1024 when omitted."
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Denoising steps; the model is distilled for 16."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

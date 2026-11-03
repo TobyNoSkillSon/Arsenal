@@ -1,0 +1,7 @@
+schema = 1
+id = "melband-roformer-kim-native-v1"
+reference_runner = "pinned-vendor-kim-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Get converts all 672 learned tensors of the pinned checkpoint (FP32) to FP16 and checks every shape against the mel-band layout", "band layout identical to the maker's freq_indices and num_bands_per_freq", "band split, first axial block, trunk, mask estimator and one 8 s chunk against the maker's code on MPS (FP16 network)", "the maker's demix_track on a 12 s fixture"]
+evidence = "gate/golden/golden.json"

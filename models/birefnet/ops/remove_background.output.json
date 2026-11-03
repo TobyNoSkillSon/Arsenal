@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "files",
+    "metadata"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "files": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "path",
+          "mime",
+          "width",
+          "height",
+          "order",
+          "label",
+          "bytes",
+          "sha256"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "foreground",
+              "mask"
+            ]
+          },
+          "path": {
+            "type": "string"
+          },
+          "mime": {
+            "const": "image/png"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "label": {
+            "type": "string"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": [
+        "model",
+        "revision",
+        "dtype",
+        "engine"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "const": "birefnet"
+        },
+        "revision": {
+          "const": "e2bf8e4460fc8fa32bba5ea4d94b3233d367b0e4"
+        },
+        "dtype": {
+          "type": "string",
+          "enum": [
+            "fp16",
+            "int8",
+            "int4"
+          ]
+        },
+        "engine": {
+          "const": "mlx-swift"
+        }
+      }
+    },
+    "timing": {
+      "type": "object"
+    }
+  }
+}

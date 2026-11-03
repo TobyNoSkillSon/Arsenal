@@ -1,0 +1,22 @@
+# Gate = Verdict's Laya fixture regression (Projects/Verdict/lab/tests/test_laya_regression.py @ f8177ed) through the Arsenal wire
+# runner, plus typed accuracy on the frozen decisions suite.
+# The fixture files named below are maintainer-only references kept outside this repository.
+schema = 1
+model = "laya-english"
+fixtures = ["Projects/Verdict/lab/fixtures/laya-english-0bit.json.gz", "Projects/Verdict/lab/fixtures/laya-english-8bit.json.gz", "Projects/Verdict/lab/fixtures/laya-english-4bit.json.gz"]
+items = 202          # each judged alone, as the Python oracle produced them
+command = "scripts/mlock gpulock decisions -- python3 Workers/Decisions/scripts/parity.py laya laya-english all [--exact]"
+
+[criteria]
+exact = "wire answers byte-for-byte the oracle's (4-decimal rounding included) at fp16, int8 and int4; System One decide equals Verdict's System One view of the same answers"
+fast = "Verdict's small-M noise ruling (lab/notes/brief-verdict-smallm.md): chosen answer unchanged on >= 99.5 % of items, max |dp| <= 0.01; int8/int4 Fast = Exact"
+typed_accuracy = "4/4 on bench/kinds/decisions/fixtures-v1.json at fp16, int8 and int4"
+
+[evidence]
+fp16_exact = "gate/parity-fp16-exact.json"
+fp16_fast = "gate/parity-fp16.json"
+int8_exact = "gate/parity-int8-exact.json"
+int8_fast = "gate/parity-int8.json"
+int4_exact = "gate/parity-int4-exact.json"
+int4_fast = "gate/parity-int4.json"
+suite = "gate/smoke-suite-v1.json"

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "data": {},
+    "finish_reason": {
+      "type": "string",
+      "enum": [
+        "stop",
+        "length",
+        "repetition"
+      ]
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}

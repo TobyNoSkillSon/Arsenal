@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "anyOf": [
+    {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string",
+                "minLength": 1
+              },
+              "bytes": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4294967296
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65536
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65536
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200,
+                "description": "What this file is, for display (\"Vocals\", \"Depth map\")."
+              },
+              "order": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 65535,
+                "description": "Display position among the files; lower first."
+              }
+            },
+            "required": [
+              "path",
+              "mime"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "maxItems": 256
+        }
+      },
+      "required": [
+        "files"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sample_rate": {
+          "type": "integer",
+          "minimum": 8000,
+          "maximum": 192000
+        },
+        "duration_s": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    {
+      "type": "object",
+      "required": [
+        "sample_rate",
+        "channels",
+        "duration_s"
+      ],
+      "properties": {
+        "sample_rate": {
+          "type": "integer",
+          "minimum": 8000,
+          "maximum": 192000
+        },
+        "channels": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 8
+        },
+        "duration_s": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  ]
+}

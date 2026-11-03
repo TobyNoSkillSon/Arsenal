@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "eomt-coco-panoptic-large-640",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T03:24:33Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Select and segment at fp16: one ordinary Load, then two Select and segment requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "dcd130bed9b1ebda7041fd660fddb16f905b9c3b",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "perception",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Select and segment requests on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:24:33Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Select and segment requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "dcd130bed9b1ebda7041fd660fddb16f905b9c3b",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 1.5999172607999999
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Select and segment request on a 1024×1280 photo.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:24:33Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Select and segment request, one sample, after one ordinary Load, then two Select and segment requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "dcd130bed9b1ebda7041fd660fddb16f905b9c3b",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.123
+      }
+    },
+    "runner": "kit"
+  }
+}

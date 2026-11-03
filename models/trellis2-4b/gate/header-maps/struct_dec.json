@@ -1,0 +1,194 @@
+{
+  "casts": {
+    "blocks.0.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.0.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.0.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.0.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.1.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.1.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.1.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.1.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.3.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.3.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.3.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.3.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.4.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.4.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.4.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.4.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.6.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.6.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.6.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.6.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.7.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.7.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.7.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "blocks.7.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "input_layer.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "input_layer.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.0.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.0.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.0.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.0.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.1.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.1.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.1.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "middle_block.1.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "out_layer.0.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "out_layer.0.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "out_layer.2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "out_layer.2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    }
+  }
+}

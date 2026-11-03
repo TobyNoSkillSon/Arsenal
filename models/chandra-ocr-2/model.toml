@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "chandra-ocr-2"
+name = "Chandra OCR 2"
+architecture = "qwen3_5"
+kind = "chat"
+params = "4.5B"
+publisher = "Datalab"
+released = 2026
+suggested = false
+summary = "Read handwriting, forms and documents."
+purpose = "Read handwriting, forms and documents"
+good_for = ["Read handwriting, forms and documents"]
+limits = ["Checked live on 20 Oct at FP16, int8 and int4: a text page and a table read exactly.", "Page Markdown follows the maker's parse_markdown and blocks follow parse_layout; Image and Figure blocks keep their region and description but no extracted image file.", "Modified OpenRAIL-M: free for research, personal use and startups under US$2M in revenue or funding; no use that competes with Datalab's API"]
+tasks = ["read_document"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "LicenseRef-OpenRAIL"
+name = "OpenRAIL-M (modified)"
+commercial = false
+conditions = "Free for research, personal use and startups under US$2M in funding or revenue; not for uses that compete with Datalab's API. Broader commercial use needs a licence from Datalab."
+url = "https://huggingface.co/datalab-to/chandra-ocr-2/tree/af93b47dba1b47b6640c86ccf487ed2260ab9a09"
+[weights]
+repo = "datalab-to/chandra-ocr-2"
+revision = "af93b47dba1b47b6640c86ccf487ed2260ab9a09"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "generation_config.json", "model.safetensors", "preprocessor_config.json", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "0d158f349ca965f7eea9db0eb45cd177b85bb0e4ae05dcdd0f060da8f7d41812"
+"config.json" = "e26f17b70463de21fd68f1ef6d8f67f8e33e65d55a7a6895242130a18db60587"
+"generation_config.json" = "0c35bb39fbaed1ac0656baabc4f4e9bda20214e12336d0e4e8755aac1f487c2e"
+"model.safetensors" = "0804568be9f099d6479fad9ed77a4da4611f3c1e7bc6e009af7dce45e8aa3847"
+"preprocessor_config.json" = "957eb01d1ea45341a92d543daec95857a7cbeff5803834bc0603b27ba7b41b3f"
+"processor_config.json" = "14932921ca485d458a04dafd8069fbb0a4505622a48208d19ed247115801385b"
+"tokenizer.json" = "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4"
+"tokenizer_config.json" = "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8"
+[weights.bytes]
+"chat_template.jinja" = 7622
+"config.json" = 2773
+"generation_config.json" = 115
+"model.safetensors" = 10591220088
+"preprocessor_config.json" = 482
+"processor_config.json" = 1300
+"tokenizer.json" = 19989343
+"tokenizer_config.json" = 16710
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "read_document"
+title = "Read document"
+input = "ops/read_document.input.json"
+output_schema = "ops/read_document.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

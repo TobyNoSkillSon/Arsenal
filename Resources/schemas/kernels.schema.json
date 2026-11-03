@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Arsenal folder kernels manifest",
+  "type": "object",
+  "required": [
+    "kernel"
+  ],
+  "properties": {
+    "kernel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "chip",
+          "mode",
+          "files",
+          "entry",
+          "replaces"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9.-]*$"
+          },
+          "chip": {
+            "type": "string",
+            "pattern": "^(m[0-9]+|\\*)$"
+          },
+          "mode": {
+            "enum": [
+              "exact",
+              "fast"
+            ]
+          },
+          "files": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "\\.metal$"
+            }
+          },
+          "entry": {
+            "type": "string",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+          },
+          "replaces": {
+            "type": "string",
+            "minLength": 1
+          },
+          "api": {
+            "enum": [
+              "mlx",
+              "metal"
+            ],
+            "default": "mlx"
+          },
+          "header": {
+            "type": "string",
+            "minLength": 1
+          },
+          "inputs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "not": {
+                "properties": {
+                  "api": {
+                    "const": "metal"
+                  }
+                },
+                "required": [
+                  "api"
+                ]
+              }
+            },
+            "then": {
+              "required": [
+                "inputs",
+                "outputs"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "speaker": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "speaker"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 100000,
+      "description": "Regular diarization: overlapping speech has several speakers."
+    },
+    "exclusive_segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "speaker": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end",
+          "speaker"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 100000,
+      "description": "Exclusive diarization: at most one speaker at a time (pyannote 4.0's derivation from the same clusters)."
+    },
+    "speakers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 1024
+    },
+    "rttm": {
+      "type": "string",
+      "description": "Regular diarization in RTTM format."
+    }
+  },
+  "required": [
+    "segments",
+    "exclusive_segments",
+    "speakers",
+    "rttm"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,59 @@
+{
+  "source": "Qwen/Qwen-Image-2.1@d26bb61231c349cf6b7896fa83353113880e1ba3",
+  "method": "local safetensors headers vs the full-size Swift module graph through QwenImageWeights' name map (qwen-image-lab inventory); no tensor payload read",
+  "date": "2026-10-21",
+  "components": {
+    "text_encoder": {
+      "checkpoint_tensors": 750,
+      "loaded": 748,
+      "module_parameters": 748,
+      "loaded_values": 8144789744,
+      "source_dtypes": {
+        "bfloat16": 750
+      },
+      "not_loaded": [
+        "lm_head.weight",
+        "model.language_model.norm.weight"
+      ],
+      "missing": [],
+      "mismatched": []
+    },
+    "transformer": {
+      "checkpoint_tensors": 297,
+      "loaded": 297,
+      "module_parameters": 297,
+      "loaded_values": 7115124736,
+      "source_dtypes": {
+        "bfloat16": 297
+      },
+      "not_loaded": [],
+      "missing": [],
+      "mismatched": []
+    },
+    "vae": {
+      "checkpoint_tensors": 238,
+      "loaded": 226,
+      "module_parameters": 226,
+      "loaded_values": 330987188,
+      "source_dtypes": {
+        "float32": 238
+      },
+      "not_loaded": [
+        "decoder.up_blocks.0.upsampler.time_conv.bias",
+        "decoder.up_blocks.0.upsampler.time_conv.weight",
+        "decoder.up_blocks.1.upsampler.time_conv.bias",
+        "decoder.up_blocks.1.upsampler.time_conv.weight",
+        "decoder.up_blocks.2.upsampler.time_conv.bias",
+        "decoder.up_blocks.2.upsampler.time_conv.weight",
+        "encoder.down_blocks.1.downsampler.time_conv.bias",
+        "encoder.down_blocks.1.downsampler.time_conv.weight",
+        "encoder.down_blocks.2.downsampler.time_conv.bias",
+        "encoder.down_blocks.2.downsampler.time_conv.weight",
+        "encoder.down_blocks.3.downsampler.time_conv.bias",
+        "encoder.down_blocks.3.downsampler.time_conv.weight"
+      ],
+      "missing": [],
+      "mismatched": []
+    }
+  }
+}

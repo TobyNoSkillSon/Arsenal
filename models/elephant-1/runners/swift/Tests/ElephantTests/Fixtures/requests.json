@@ -1,0 +1,22 @@
+[
+  {"id": "bench-yes", "state": "The box contains three red apples.", "questions": {"present": {"type": "noul", "instructions": "Does the box contain apples?"}}, "labels": {"present": true}},
+  {"id": "bench-no", "state": "The box is empty.", "questions": {"present": {"type": "noul", "instructions": "Does the box contain apples?"}}, "labels": {"present": false}},
+  {"id": "bench-choice", "state": "A cat is sleeping on the sofa.", "questions": {"animal": {"type": "choice", "instructions": "Which animal is mentioned?", "criteria": {"cat": null, "dog": null, "bird": null}}}, "labels": {"animal": "cat"}},
+  {"id": "bench-score", "state": "The shop is closed and no customer can buy anything.", "questions": {"severity": {"type": "score", "instructions": "How much does this block shopping?", "criteria": ["No impact", "Minor inconvenience", "Completely blocked"]}}, "labels": {"severity": 2}},
+  {"id": "card-ticket", "state": "I was charged twice this month, please refund one of them.", "questions": {
+    "refund": {"type": "noul", "instructions": "Is the customer asking for a refund?"},
+    "team": {"type": "choice", "instructions": "Which team should handle this?", "criteria": {"billing": "Charges, refunds, invoices", "technical": "App or site faults", "fraud": "Suspected unauthorised use"}},
+    "urgency": {"type": "score", "instructions": "How urgent is this?", "criteria": ["Can wait", "Today", "Blocking the customer now"]}}},
+  {"id": "json-state", "state": {"ticket": "My card was charged twice for the same order and support has not replied in 3 days.", "customer": {"tenure_months": 14, "vip": false, "score": 0.25, "tags": ["café", "naïve 😀", null]}}, "questions": {
+    "refund": {"type": "noul", "instructions": "Is the customer asking for money back?", "criteria": {"true": "asks for money back", "false": {"note": "anything else"}}},
+    "frustration": {"type": "score", "instructions": {"ask": "How frustrated is the customer?", "scale": "calm to angry"}, "criteria": ["calm", "irritated", "angry", {"level": "furious"}]}}},
+  {"id": "many-options", "state": "The parcel left the Poznań depot this morning and should arrive tomorrow.", "questions": {
+    "city": {"type": "choice", "instructions": "Which city is mentioned?", "criteria": {"Amsterdam": null, "Berlin": null, "Copenhagen": null, "Dublin": null, "Edinburgh": null, "Florence": null, "Geneva": null, "Hamburg": null, "Istanbul": null, "Kraków": null, "Lisbon": null, "Madrid": null, "Naples": null, "Oslo": null, "Paris": null, "Poznań": null, "Riga": null, "Seville": null, "Tallinn": null, "Utrecht": null, "Vienna": null, "Warsaw": null, "Zagreb": null, "Athens": null, "Brussels": null, "Cologne": null, "Dresden": null, "Ghent": null, "Helsinki": null, "Lyon": null}}}},
+  {"id": "polish", "state": "Klient pisze: paczka przyszła uszkodzona, chcę zwrotu pieniędzy.", "questions": {
+    "refund": {"type": "noul", "instructions": "Czy klient prosi o zwrot pieniędzy?"},
+    "mood": {"type": "choice", "instructions": "Jaki jest nastrój klienta?", "criteria": {"zadowolony": "pozytywny", "neutralny": null, "niezadowolony": "negatywny"}}}},
+  {"id": "no-instructions", "state": ["first line", "second line", 3, 4.5, true], "questions": {
+    "bare": {"type": "noul"},
+    "pick": {"type": "choice", "criteria": {"x": "the first", "y": ""}},
+    "level": {"type": "score", "criteria": ["low", "high"]}}}
+]

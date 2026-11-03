@@ -1,0 +1,49 @@
+# Reference settings for a sound or music model. Copy the [[setting]] blocks its runner really accepts into
+# model.toml, with that model's defaults, bounds and help; settings.toml beside this file arranges exactly these.
+
+[[setting]]
+id = "duration"
+title = "Duration"
+type = "number"
+default = 10
+min = 1
+max = 120
+step = 0.5
+applies = "request"
+maps_to = "request.duration"
+help = "Length of the generated audio, in seconds."
+
+[[setting]]
+id = "steps"
+title = "Steps"
+type = "number"
+default = 8
+min = 1
+max = 100
+step = 1
+applies = "request"
+maps_to = "request.steps"
+help = "Sampler passes per clip: more is slower."
+
+[[setting]]
+id = "guidance"
+title = "Guidance"
+type = "slider"
+default = 1
+min = 0
+max = 10
+step = 0.5
+applies = "request"
+maps_to = "request.guidance"
+help = "How strictly the audio follows the prompt."
+
+[[setting]]
+id = "seed"
+title = "Seed"
+type = "number"
+min = 0
+max = 4294967295
+step = 1
+applies = "request"
+maps_to = "request.seed"
+help = "Starting noise: empty is a new random seed each request; the same seed and prompt give the same audio."

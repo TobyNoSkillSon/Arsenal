@@ -1,0 +1,61 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of encode_structure through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "esm3-sm-open-v1",
+  "revision": "47f0545b2b6daf26a93439a3cd610f4f7f3d5478",
+  "rows": [
+    {
+      "date": "2026-11-02T07:22:24Z",
+      "load_seconds": 0.65,
+      "ops": {
+        "embed_sequence": {
+          "seconds_first": 0.644,
+          "seconds_warm": 0.021,
+          "status": 200
+        },
+        "encode_structure": {
+          "seconds_first": 0.061,
+          "seconds_warm": 0.027,
+          "status": 200
+        },
+        "fold": {
+          "seconds_first": 0.33,
+          "seconds_warm": 0.09,
+          "status": 200
+        },
+        "generate": {
+          "seconds_first": 0.057,
+          "seconds_warm": 0.038,
+          "status": 200
+        },
+        "inverse_fold": {
+          "seconds_first": 0.348,
+          "seconds_warm": 0.075,
+          "status": 200
+        },
+        "predict_function": {
+          "seconds_first": 0.398,
+          "seconds_warm": 0.044,
+          "status": 200
+        },
+        "predict_masked": {
+          "seconds_first": 0.043,
+          "seconds_warm": 0.024,
+          "status": 200
+        },
+        "score_variants": {
+          "seconds_first": 0.058,
+          "seconds_warm": 0.038,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 5451.1,
+      "precision": "fp16",
+      "runner_sha256": "51d357f607708d1950a6b482c7abff54912dc9f9a2aa0afd21189d594824f9cc",
+      "swap": "total = 3072.00M  used = 2093.31M  free = 978.69M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-11-02",
+  "schema": "quick-check-1"
+}

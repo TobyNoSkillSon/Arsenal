@@ -1,0 +1,29 @@
+{
+  "status": "header_read",
+  "method": "Exact HTTP Range reads of each pinned safetensors header (8-byte length, then the JSON header); no tensor payload read",
+  "checked": "2026-10-18",
+  "sources": [
+    "https://huggingface.co/mlx-community/sam-audio-large-fp16/resolve/110947e651c2f7837c47d8897cfca1cb22ce9633/model-00001-of-00002.safetensors",
+    "https://huggingface.co/mlx-community/sam-audio-large-fp16/resolve/110947e651c2f7837c47d8897cfca1cb22ce9633/model-00002-of-00002.safetensors",
+    "https://huggingface.co/google-t5/t5-base/resolve/a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1/model.safetensors"
+  ],
+  "header_sha256": {
+    "mlx-community/sam-audio-large-fp16@110947e651c2f7837c47d8897cfca1cb22ce9633/model-00001-of-00002.safetensors": "87d129606736d55ca1a1885698bbaeeed3ceff5fddf8459a7f1e5951447800a8",
+    "mlx-community/sam-audio-large-fp16@110947e651c2f7837c47d8897cfca1cb22ce9633/model-00002-of-00002.safetensors": "ac5105097d090333bc61df2908ab77a30b0096c9f184400fe12d9808b3d11603",
+    "google-t5/t5-base@a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1/model.safetensors": "392c7b7f519a21a5d7814909c5346e5da362aa12c2bebf150b73d9e8fa0b3bc9"
+  },
+  "header_bytes_read": 118893,
+  "tensor_payload_bytes_read": 0,
+  "remote_tensors": 993,
+  "remote_dtypes": {
+    "F16": 735,
+    "F32": 258
+  },
+  "ignored": 159,
+  "mapped_tensors": 834,
+  "renamed_or_permuted": 111,
+  "planned_casts": 99,
+  "header_map_errors": [],
+  "full_precision_not_cast": [],
+  "graph_inventory": "pending: the comparison with the adapter graph needs its full-config parameter inventory from the built audio worker (scripts/model-check.py smoke --inventory with the real config.json), then scripts/model-check.py header --parameters"
+}

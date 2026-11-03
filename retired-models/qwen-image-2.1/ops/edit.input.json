@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "prompt",
+    "images"
+  ],
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32768,
+      "description": "The edit or composition to make. Refer to references as image 1, image 2 \u2026 in order; a mask or annotated copy is just another reference."
+    },
+    "negative_prompt": {
+      "type": "string",
+      "maxLength": 32768,
+      "description": "What to steer away from; used only when guidance is above 1."
+    },
+    "guidance": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "True classifier-free guidance. 1 (the model's default) runs without it; above 1 with a negative prompt doubles the work per step."
+    },
+    "images": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "description": "Reference images in order (1-10): the image to edit, extra subjects, a mask or a copy with circles or painted notes. Each is resized to about one megapixel; transparency is kept.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path"
+        ],
+        "x-arsenal-file": {
+          "accept": [
+            "image/png",
+            "image/jpeg"
+          ]
+        },
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4096
+          }
+        }
+      }
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 256,
+      "maximum": 2752,
+      "multipleOf": 32,
+      "description": "Output width in pixels; omitted, the last reference's aspect ratio at about one megapixel."
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 256,
+      "maximum": 2752,
+      "multipleOf": 32,
+      "description": "Output height in pixels; omitted, the last reference's aspect ratio at about one megapixel."
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Denoising steps; the model is tuned for 40."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "n": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

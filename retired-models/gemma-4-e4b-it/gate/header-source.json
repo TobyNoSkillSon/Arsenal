@@ -1,0 +1,10 @@
+{
+  "repo": "google/gemma-4-E4B-it",
+  "revision": "ee0ef6023621cff504d758262d4e04895a5af4a2",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 2130,
+  "header_bytes": 281048,
+  "errors": []
+}

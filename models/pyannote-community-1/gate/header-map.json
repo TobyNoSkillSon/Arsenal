@@ -1,0 +1,2144 @@
+{
+  "ignore": [
+    "embedding.resnet.bn1.num_batches_tracked",
+    "embedding.resnet.layer1.0.bn1.num_batches_tracked",
+    "embedding.resnet.layer1.0.bn2.num_batches_tracked",
+    "embedding.resnet.layer1.1.bn1.num_batches_tracked",
+    "embedding.resnet.layer1.1.bn2.num_batches_tracked",
+    "embedding.resnet.layer1.2.bn1.num_batches_tracked",
+    "embedding.resnet.layer1.2.bn2.num_batches_tracked",
+    "embedding.resnet.layer2.0.bn1.num_batches_tracked",
+    "embedding.resnet.layer2.0.bn2.num_batches_tracked",
+    "embedding.resnet.layer2.0.shortcut.1.num_batches_tracked",
+    "embedding.resnet.layer2.1.bn1.num_batches_tracked",
+    "embedding.resnet.layer2.1.bn2.num_batches_tracked",
+    "embedding.resnet.layer2.2.bn1.num_batches_tracked",
+    "embedding.resnet.layer2.2.bn2.num_batches_tracked",
+    "embedding.resnet.layer2.3.bn1.num_batches_tracked",
+    "embedding.resnet.layer2.3.bn2.num_batches_tracked",
+    "embedding.resnet.layer3.0.bn1.num_batches_tracked",
+    "embedding.resnet.layer3.0.bn2.num_batches_tracked",
+    "embedding.resnet.layer3.0.shortcut.1.num_batches_tracked",
+    "embedding.resnet.layer3.1.bn1.num_batches_tracked",
+    "embedding.resnet.layer3.1.bn2.num_batches_tracked",
+    "embedding.resnet.layer3.2.bn1.num_batches_tracked",
+    "embedding.resnet.layer3.2.bn2.num_batches_tracked",
+    "embedding.resnet.layer3.3.bn1.num_batches_tracked",
+    "embedding.resnet.layer3.3.bn2.num_batches_tracked",
+    "embedding.resnet.layer3.4.bn1.num_batches_tracked",
+    "embedding.resnet.layer3.4.bn2.num_batches_tracked",
+    "embedding.resnet.layer3.5.bn1.num_batches_tracked",
+    "embedding.resnet.layer3.5.bn2.num_batches_tracked",
+    "embedding.resnet.layer4.0.bn1.num_batches_tracked",
+    "embedding.resnet.layer4.0.bn2.num_batches_tracked",
+    "embedding.resnet.layer4.0.shortcut.1.num_batches_tracked",
+    "embedding.resnet.layer4.1.bn1.num_batches_tracked",
+    "embedding.resnet.layer4.1.bn2.num_batches_tracked",
+    "embedding.resnet.layer4.2.bn1.num_batches_tracked",
+    "embedding.resnet.layer4.2.bn2.num_batches_tracked",
+    "segmentation.sincnet.conv1d.0.filterbank.n_",
+    "segmentation.sincnet.conv1d.0.filterbank.window_"
+  ],
+  "tensors": {
+    "embedding.resnet.bn1.bias": {
+      "name": "embedding.bn1.bias"
+    },
+    "embedding.resnet.bn1.running_mean": {
+      "name": "embedding.bn1.running_mean"
+    },
+    "embedding.resnet.bn1.running_var": {
+      "name": "embedding.bn1.running_var"
+    },
+    "embedding.resnet.bn1.weight": {
+      "name": "embedding.bn1.weight"
+    },
+    "embedding.resnet.conv1.weight": {
+      "name": "embedding.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer1.0.bn1.bias": {
+      "name": "embedding.layer1.0.bn1.bias"
+    },
+    "embedding.resnet.layer1.0.bn1.running_mean": {
+      "name": "embedding.layer1.0.bn1.running_mean"
+    },
+    "embedding.resnet.layer1.0.bn1.running_var": {
+      "name": "embedding.layer1.0.bn1.running_var"
+    },
+    "embedding.resnet.layer1.0.bn1.weight": {
+      "name": "embedding.layer1.0.bn1.weight"
+    },
+    "embedding.resnet.layer1.0.bn2.bias": {
+      "name": "embedding.layer1.0.bn2.bias"
+    },
+    "embedding.resnet.layer1.0.bn2.running_mean": {
+      "name": "embedding.layer1.0.bn2.running_mean"
+    },
+    "embedding.resnet.layer1.0.bn2.running_var": {
+      "name": "embedding.layer1.0.bn2.running_var"
+    },
+    "embedding.resnet.layer1.0.bn2.weight": {
+      "name": "embedding.layer1.0.bn2.weight"
+    },
+    "embedding.resnet.layer1.0.conv1.weight": {
+      "name": "embedding.layer1.0.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer1.0.conv2.weight": {
+      "name": "embedding.layer1.0.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer1.1.bn1.bias": {
+      "name": "embedding.layer1.1.bn1.bias"
+    },
+    "embedding.resnet.layer1.1.bn1.running_mean": {
+      "name": "embedding.layer1.1.bn1.running_mean"
+    },
+    "embedding.resnet.layer1.1.bn1.running_var": {
+      "name": "embedding.layer1.1.bn1.running_var"
+    },
+    "embedding.resnet.layer1.1.bn1.weight": {
+      "name": "embedding.layer1.1.bn1.weight"
+    },
+    "embedding.resnet.layer1.1.bn2.bias": {
+      "name": "embedding.layer1.1.bn2.bias"
+    },
+    "embedding.resnet.layer1.1.bn2.running_mean": {
+      "name": "embedding.layer1.1.bn2.running_mean"
+    },
+    "embedding.resnet.layer1.1.bn2.running_var": {
+      "name": "embedding.layer1.1.bn2.running_var"
+    },
+    "embedding.resnet.layer1.1.bn2.weight": {
+      "name": "embedding.layer1.1.bn2.weight"
+    },
+    "embedding.resnet.layer1.1.conv1.weight": {
+      "name": "embedding.layer1.1.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer1.1.conv2.weight": {
+      "name": "embedding.layer1.1.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer1.2.bn1.bias": {
+      "name": "embedding.layer1.2.bn1.bias"
+    },
+    "embedding.resnet.layer1.2.bn1.running_mean": {
+      "name": "embedding.layer1.2.bn1.running_mean"
+    },
+    "embedding.resnet.layer1.2.bn1.running_var": {
+      "name": "embedding.layer1.2.bn1.running_var"
+    },
+    "embedding.resnet.layer1.2.bn1.weight": {
+      "name": "embedding.layer1.2.bn1.weight"
+    },
+    "embedding.resnet.layer1.2.bn2.bias": {
+      "name": "embedding.layer1.2.bn2.bias"
+    },
+    "embedding.resnet.layer1.2.bn2.running_mean": {
+      "name": "embedding.layer1.2.bn2.running_mean"
+    },
+    "embedding.resnet.layer1.2.bn2.running_var": {
+      "name": "embedding.layer1.2.bn2.running_var"
+    },
+    "embedding.resnet.layer1.2.bn2.weight": {
+      "name": "embedding.layer1.2.bn2.weight"
+    },
+    "embedding.resnet.layer1.2.conv1.weight": {
+      "name": "embedding.layer1.2.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer1.2.conv2.weight": {
+      "name": "embedding.layer1.2.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.0.bn1.bias": {
+      "name": "embedding.layer2.0.bn1.bias"
+    },
+    "embedding.resnet.layer2.0.bn1.running_mean": {
+      "name": "embedding.layer2.0.bn1.running_mean"
+    },
+    "embedding.resnet.layer2.0.bn1.running_var": {
+      "name": "embedding.layer2.0.bn1.running_var"
+    },
+    "embedding.resnet.layer2.0.bn1.weight": {
+      "name": "embedding.layer2.0.bn1.weight"
+    },
+    "embedding.resnet.layer2.0.bn2.bias": {
+      "name": "embedding.layer2.0.bn2.bias"
+    },
+    "embedding.resnet.layer2.0.bn2.running_mean": {
+      "name": "embedding.layer2.0.bn2.running_mean"
+    },
+    "embedding.resnet.layer2.0.bn2.running_var": {
+      "name": "embedding.layer2.0.bn2.running_var"
+    },
+    "embedding.resnet.layer2.0.bn2.weight": {
+      "name": "embedding.layer2.0.bn2.weight"
+    },
+    "embedding.resnet.layer2.0.conv1.weight": {
+      "name": "embedding.layer2.0.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.0.conv2.weight": {
+      "name": "embedding.layer2.0.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.0.shortcut.0.weight": {
+      "name": "embedding.layer2.0.shortcut.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.0.shortcut.1.bias": {
+      "name": "embedding.layer2.0.shortcutBN.bias"
+    },
+    "embedding.resnet.layer2.0.shortcut.1.running_mean": {
+      "name": "embedding.layer2.0.shortcutBN.running_mean"
+    },
+    "embedding.resnet.layer2.0.shortcut.1.running_var": {
+      "name": "embedding.layer2.0.shortcutBN.running_var"
+    },
+    "embedding.resnet.layer2.0.shortcut.1.weight": {
+      "name": "embedding.layer2.0.shortcutBN.weight"
+    },
+    "embedding.resnet.layer2.1.bn1.bias": {
+      "name": "embedding.layer2.1.bn1.bias"
+    },
+    "embedding.resnet.layer2.1.bn1.running_mean": {
+      "name": "embedding.layer2.1.bn1.running_mean"
+    },
+    "embedding.resnet.layer2.1.bn1.running_var": {
+      "name": "embedding.layer2.1.bn1.running_var"
+    },
+    "embedding.resnet.layer2.1.bn1.weight": {
+      "name": "embedding.layer2.1.bn1.weight"
+    },
+    "embedding.resnet.layer2.1.bn2.bias": {
+      "name": "embedding.layer2.1.bn2.bias"
+    },
+    "embedding.resnet.layer2.1.bn2.running_mean": {
+      "name": "embedding.layer2.1.bn2.running_mean"
+    },
+    "embedding.resnet.layer2.1.bn2.running_var": {
+      "name": "embedding.layer2.1.bn2.running_var"
+    },
+    "embedding.resnet.layer2.1.bn2.weight": {
+      "name": "embedding.layer2.1.bn2.weight"
+    },
+    "embedding.resnet.layer2.1.conv1.weight": {
+      "name": "embedding.layer2.1.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.1.conv2.weight": {
+      "name": "embedding.layer2.1.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.2.bn1.bias": {
+      "name": "embedding.layer2.2.bn1.bias"
+    },
+    "embedding.resnet.layer2.2.bn1.running_mean": {
+      "name": "embedding.layer2.2.bn1.running_mean"
+    },
+    "embedding.resnet.layer2.2.bn1.running_var": {
+      "name": "embedding.layer2.2.bn1.running_var"
+    },
+    "embedding.resnet.layer2.2.bn1.weight": {
+      "name": "embedding.layer2.2.bn1.weight"
+    },
+    "embedding.resnet.layer2.2.bn2.bias": {
+      "name": "embedding.layer2.2.bn2.bias"
+    },
+    "embedding.resnet.layer2.2.bn2.running_mean": {
+      "name": "embedding.layer2.2.bn2.running_mean"
+    },
+    "embedding.resnet.layer2.2.bn2.running_var": {
+      "name": "embedding.layer2.2.bn2.running_var"
+    },
+    "embedding.resnet.layer2.2.bn2.weight": {
+      "name": "embedding.layer2.2.bn2.weight"
+    },
+    "embedding.resnet.layer2.2.conv1.weight": {
+      "name": "embedding.layer2.2.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.2.conv2.weight": {
+      "name": "embedding.layer2.2.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.3.bn1.bias": {
+      "name": "embedding.layer2.3.bn1.bias"
+    },
+    "embedding.resnet.layer2.3.bn1.running_mean": {
+      "name": "embedding.layer2.3.bn1.running_mean"
+    },
+    "embedding.resnet.layer2.3.bn1.running_var": {
+      "name": "embedding.layer2.3.bn1.running_var"
+    },
+    "embedding.resnet.layer2.3.bn1.weight": {
+      "name": "embedding.layer2.3.bn1.weight"
+    },
+    "embedding.resnet.layer2.3.bn2.bias": {
+      "name": "embedding.layer2.3.bn2.bias"
+    },
+    "embedding.resnet.layer2.3.bn2.running_mean": {
+      "name": "embedding.layer2.3.bn2.running_mean"
+    },
+    "embedding.resnet.layer2.3.bn2.running_var": {
+      "name": "embedding.layer2.3.bn2.running_var"
+    },
+    "embedding.resnet.layer2.3.bn2.weight": {
+      "name": "embedding.layer2.3.bn2.weight"
+    },
+    "embedding.resnet.layer2.3.conv1.weight": {
+      "name": "embedding.layer2.3.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer2.3.conv2.weight": {
+      "name": "embedding.layer2.3.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.0.bn1.bias": {
+      "name": "embedding.layer3.0.bn1.bias"
+    },
+    "embedding.resnet.layer3.0.bn1.running_mean": {
+      "name": "embedding.layer3.0.bn1.running_mean"
+    },
+    "embedding.resnet.layer3.0.bn1.running_var": {
+      "name": "embedding.layer3.0.bn1.running_var"
+    },
+    "embedding.resnet.layer3.0.bn1.weight": {
+      "name": "embedding.layer3.0.bn1.weight"
+    },
+    "embedding.resnet.layer3.0.bn2.bias": {
+      "name": "embedding.layer3.0.bn2.bias"
+    },
+    "embedding.resnet.layer3.0.bn2.running_mean": {
+      "name": "embedding.layer3.0.bn2.running_mean"
+    },
+    "embedding.resnet.layer3.0.bn2.running_var": {
+      "name": "embedding.layer3.0.bn2.running_var"
+    },
+    "embedding.resnet.layer3.0.bn2.weight": {
+      "name": "embedding.layer3.0.bn2.weight"
+    },
+    "embedding.resnet.layer3.0.conv1.weight": {
+      "name": "embedding.layer3.0.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.0.conv2.weight": {
+      "name": "embedding.layer3.0.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.0.shortcut.0.weight": {
+      "name": "embedding.layer3.0.shortcut.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.0.shortcut.1.bias": {
+      "name": "embedding.layer3.0.shortcutBN.bias"
+    },
+    "embedding.resnet.layer3.0.shortcut.1.running_mean": {
+      "name": "embedding.layer3.0.shortcutBN.running_mean"
+    },
+    "embedding.resnet.layer3.0.shortcut.1.running_var": {
+      "name": "embedding.layer3.0.shortcutBN.running_var"
+    },
+    "embedding.resnet.layer3.0.shortcut.1.weight": {
+      "name": "embedding.layer3.0.shortcutBN.weight"
+    },
+    "embedding.resnet.layer3.1.bn1.bias": {
+      "name": "embedding.layer3.1.bn1.bias"
+    },
+    "embedding.resnet.layer3.1.bn1.running_mean": {
+      "name": "embedding.layer3.1.bn1.running_mean"
+    },
+    "embedding.resnet.layer3.1.bn1.running_var": {
+      "name": "embedding.layer3.1.bn1.running_var"
+    },
+    "embedding.resnet.layer3.1.bn1.weight": {
+      "name": "embedding.layer3.1.bn1.weight"
+    },
+    "embedding.resnet.layer3.1.bn2.bias": {
+      "name": "embedding.layer3.1.bn2.bias"
+    },
+    "embedding.resnet.layer3.1.bn2.running_mean": {
+      "name": "embedding.layer3.1.bn2.running_mean"
+    },
+    "embedding.resnet.layer3.1.bn2.running_var": {
+      "name": "embedding.layer3.1.bn2.running_var"
+    },
+    "embedding.resnet.layer3.1.bn2.weight": {
+      "name": "embedding.layer3.1.bn2.weight"
+    },
+    "embedding.resnet.layer3.1.conv1.weight": {
+      "name": "embedding.layer3.1.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.1.conv2.weight": {
+      "name": "embedding.layer3.1.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.2.bn1.bias": {
+      "name": "embedding.layer3.2.bn1.bias"
+    },
+    "embedding.resnet.layer3.2.bn1.running_mean": {
+      "name": "embedding.layer3.2.bn1.running_mean"
+    },
+    "embedding.resnet.layer3.2.bn1.running_var": {
+      "name": "embedding.layer3.2.bn1.running_var"
+    },
+    "embedding.resnet.layer3.2.bn1.weight": {
+      "name": "embedding.layer3.2.bn1.weight"
+    },
+    "embedding.resnet.layer3.2.bn2.bias": {
+      "name": "embedding.layer3.2.bn2.bias"
+    },
+    "embedding.resnet.layer3.2.bn2.running_mean": {
+      "name": "embedding.layer3.2.bn2.running_mean"
+    },
+    "embedding.resnet.layer3.2.bn2.running_var": {
+      "name": "embedding.layer3.2.bn2.running_var"
+    },
+    "embedding.resnet.layer3.2.bn2.weight": {
+      "name": "embedding.layer3.2.bn2.weight"
+    },
+    "embedding.resnet.layer3.2.conv1.weight": {
+      "name": "embedding.layer3.2.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.2.conv2.weight": {
+      "name": "embedding.layer3.2.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.3.bn1.bias": {
+      "name": "embedding.layer3.3.bn1.bias"
+    },
+    "embedding.resnet.layer3.3.bn1.running_mean": {
+      "name": "embedding.layer3.3.bn1.running_mean"
+    },
+    "embedding.resnet.layer3.3.bn1.running_var": {
+      "name": "embedding.layer3.3.bn1.running_var"
+    },
+    "embedding.resnet.layer3.3.bn1.weight": {
+      "name": "embedding.layer3.3.bn1.weight"
+    },
+    "embedding.resnet.layer3.3.bn2.bias": {
+      "name": "embedding.layer3.3.bn2.bias"
+    },
+    "embedding.resnet.layer3.3.bn2.running_mean": {
+      "name": "embedding.layer3.3.bn2.running_mean"
+    },
+    "embedding.resnet.layer3.3.bn2.running_var": {
+      "name": "embedding.layer3.3.bn2.running_var"
+    },
+    "embedding.resnet.layer3.3.bn2.weight": {
+      "name": "embedding.layer3.3.bn2.weight"
+    },
+    "embedding.resnet.layer3.3.conv1.weight": {
+      "name": "embedding.layer3.3.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.3.conv2.weight": {
+      "name": "embedding.layer3.3.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.4.bn1.bias": {
+      "name": "embedding.layer3.4.bn1.bias"
+    },
+    "embedding.resnet.layer3.4.bn1.running_mean": {
+      "name": "embedding.layer3.4.bn1.running_mean"
+    },
+    "embedding.resnet.layer3.4.bn1.running_var": {
+      "name": "embedding.layer3.4.bn1.running_var"
+    },
+    "embedding.resnet.layer3.4.bn1.weight": {
+      "name": "embedding.layer3.4.bn1.weight"
+    },
+    "embedding.resnet.layer3.4.bn2.bias": {
+      "name": "embedding.layer3.4.bn2.bias"
+    },
+    "embedding.resnet.layer3.4.bn2.running_mean": {
+      "name": "embedding.layer3.4.bn2.running_mean"
+    },
+    "embedding.resnet.layer3.4.bn2.running_var": {
+      "name": "embedding.layer3.4.bn2.running_var"
+    },
+    "embedding.resnet.layer3.4.bn2.weight": {
+      "name": "embedding.layer3.4.bn2.weight"
+    },
+    "embedding.resnet.layer3.4.conv1.weight": {
+      "name": "embedding.layer3.4.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.4.conv2.weight": {
+      "name": "embedding.layer3.4.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.5.bn1.bias": {
+      "name": "embedding.layer3.5.bn1.bias"
+    },
+    "embedding.resnet.layer3.5.bn1.running_mean": {
+      "name": "embedding.layer3.5.bn1.running_mean"
+    },
+    "embedding.resnet.layer3.5.bn1.running_var": {
+      "name": "embedding.layer3.5.bn1.running_var"
+    },
+    "embedding.resnet.layer3.5.bn1.weight": {
+      "name": "embedding.layer3.5.bn1.weight"
+    },
+    "embedding.resnet.layer3.5.bn2.bias": {
+      "name": "embedding.layer3.5.bn2.bias"
+    },
+    "embedding.resnet.layer3.5.bn2.running_mean": {
+      "name": "embedding.layer3.5.bn2.running_mean"
+    },
+    "embedding.resnet.layer3.5.bn2.running_var": {
+      "name": "embedding.layer3.5.bn2.running_var"
+    },
+    "embedding.resnet.layer3.5.bn2.weight": {
+      "name": "embedding.layer3.5.bn2.weight"
+    },
+    "embedding.resnet.layer3.5.conv1.weight": {
+      "name": "embedding.layer3.5.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer3.5.conv2.weight": {
+      "name": "embedding.layer3.5.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer4.0.bn1.bias": {
+      "name": "embedding.layer4.0.bn1.bias"
+    },
+    "embedding.resnet.layer4.0.bn1.running_mean": {
+      "name": "embedding.layer4.0.bn1.running_mean"
+    },
+    "embedding.resnet.layer4.0.bn1.running_var": {
+      "name": "embedding.layer4.0.bn1.running_var"
+    },
+    "embedding.resnet.layer4.0.bn1.weight": {
+      "name": "embedding.layer4.0.bn1.weight"
+    },
+    "embedding.resnet.layer4.0.bn2.bias": {
+      "name": "embedding.layer4.0.bn2.bias"
+    },
+    "embedding.resnet.layer4.0.bn2.running_mean": {
+      "name": "embedding.layer4.0.bn2.running_mean"
+    },
+    "embedding.resnet.layer4.0.bn2.running_var": {
+      "name": "embedding.layer4.0.bn2.running_var"
+    },
+    "embedding.resnet.layer4.0.bn2.weight": {
+      "name": "embedding.layer4.0.bn2.weight"
+    },
+    "embedding.resnet.layer4.0.conv1.weight": {
+      "name": "embedding.layer4.0.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer4.0.conv2.weight": {
+      "name": "embedding.layer4.0.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer4.0.shortcut.0.weight": {
+      "name": "embedding.layer4.0.shortcut.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer4.0.shortcut.1.bias": {
+      "name": "embedding.layer4.0.shortcutBN.bias"
+    },
+    "embedding.resnet.layer4.0.shortcut.1.running_mean": {
+      "name": "embedding.layer4.0.shortcutBN.running_mean"
+    },
+    "embedding.resnet.layer4.0.shortcut.1.running_var": {
+      "name": "embedding.layer4.0.shortcutBN.running_var"
+    },
+    "embedding.resnet.layer4.0.shortcut.1.weight": {
+      "name": "embedding.layer4.0.shortcutBN.weight"
+    },
+    "embedding.resnet.layer4.1.bn1.bias": {
+      "name": "embedding.layer4.1.bn1.bias"
+    },
+    "embedding.resnet.layer4.1.bn1.running_mean": {
+      "name": "embedding.layer4.1.bn1.running_mean"
+    },
+    "embedding.resnet.layer4.1.bn1.running_var": {
+      "name": "embedding.layer4.1.bn1.running_var"
+    },
+    "embedding.resnet.layer4.1.bn1.weight": {
+      "name": "embedding.layer4.1.bn1.weight"
+    },
+    "embedding.resnet.layer4.1.bn2.bias": {
+      "name": "embedding.layer4.1.bn2.bias"
+    },
+    "embedding.resnet.layer4.1.bn2.running_mean": {
+      "name": "embedding.layer4.1.bn2.running_mean"
+    },
+    "embedding.resnet.layer4.1.bn2.running_var": {
+      "name": "embedding.layer4.1.bn2.running_var"
+    },
+    "embedding.resnet.layer4.1.bn2.weight": {
+      "name": "embedding.layer4.1.bn2.weight"
+    },
+    "embedding.resnet.layer4.1.conv1.weight": {
+      "name": "embedding.layer4.1.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer4.1.conv2.weight": {
+      "name": "embedding.layer4.1.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer4.2.bn1.bias": {
+      "name": "embedding.layer4.2.bn1.bias"
+    },
+    "embedding.resnet.layer4.2.bn1.running_mean": {
+      "name": "embedding.layer4.2.bn1.running_mean"
+    },
+    "embedding.resnet.layer4.2.bn1.running_var": {
+      "name": "embedding.layer4.2.bn1.running_var"
+    },
+    "embedding.resnet.layer4.2.bn1.weight": {
+      "name": "embedding.layer4.2.bn1.weight"
+    },
+    "embedding.resnet.layer4.2.bn2.bias": {
+      "name": "embedding.layer4.2.bn2.bias"
+    },
+    "embedding.resnet.layer4.2.bn2.running_mean": {
+      "name": "embedding.layer4.2.bn2.running_mean"
+    },
+    "embedding.resnet.layer4.2.bn2.running_var": {
+      "name": "embedding.layer4.2.bn2.running_var"
+    },
+    "embedding.resnet.layer4.2.bn2.weight": {
+      "name": "embedding.layer4.2.bn2.weight"
+    },
+    "embedding.resnet.layer4.2.conv1.weight": {
+      "name": "embedding.layer4.2.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.layer4.2.conv2.weight": {
+      "name": "embedding.layer4.2.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    },
+    "embedding.resnet.seg_1.bias": {
+      "name": "embedding.seg_1.bias"
+    },
+    "embedding.resnet.seg_1.weight": {
+      "name": "embedding.seg_1.weight"
+    },
+    "segmentation.classifier.bias": {
+      "name": "segmentation.classifier.bias"
+    },
+    "segmentation.classifier.weight": {
+      "name": "segmentation.classifier.weight"
+    },
+    "segmentation.linear.0.bias": {
+      "name": "segmentation.linear.0.bias"
+    },
+    "segmentation.linear.0.weight": {
+      "name": "segmentation.linear.0.weight"
+    },
+    "segmentation.linear.1.bias": {
+      "name": "segmentation.linear.1.bias"
+    },
+    "segmentation.linear.1.weight": {
+      "name": "segmentation.linear.1.weight"
+    },
+    "segmentation.lstm.bias_hh_l0": {
+      "name": "segmentation.forward.0.h_proj.bias"
+    },
+    "segmentation.lstm.bias_hh_l0_reverse": {
+      "name": "segmentation.backward.0.h_proj.bias"
+    },
+    "segmentation.lstm.bias_hh_l1": {
+      "name": "segmentation.forward.1.h_proj.bias"
+    },
+    "segmentation.lstm.bias_hh_l1_reverse": {
+      "name": "segmentation.backward.1.h_proj.bias"
+    },
+    "segmentation.lstm.bias_hh_l2": {
+      "name": "segmentation.forward.2.h_proj.bias"
+    },
+    "segmentation.lstm.bias_hh_l2_reverse": {
+      "name": "segmentation.backward.2.h_proj.bias"
+    },
+    "segmentation.lstm.bias_hh_l3": {
+      "name": "segmentation.forward.3.h_proj.bias"
+    },
+    "segmentation.lstm.bias_hh_l3_reverse": {
+      "name": "segmentation.backward.3.h_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l0": {
+      "name": "segmentation.forward.0.x_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l0_reverse": {
+      "name": "segmentation.backward.0.x_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l1": {
+      "name": "segmentation.forward.1.x_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l1_reverse": {
+      "name": "segmentation.backward.1.x_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l2": {
+      "name": "segmentation.forward.2.x_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l2_reverse": {
+      "name": "segmentation.backward.2.x_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l3": {
+      "name": "segmentation.forward.3.x_proj.bias"
+    },
+    "segmentation.lstm.bias_ih_l3_reverse": {
+      "name": "segmentation.backward.3.x_proj.bias"
+    },
+    "segmentation.lstm.weight_hh_l0": {
+      "name": "segmentation.forward.0.h_proj.weight"
+    },
+    "segmentation.lstm.weight_hh_l0_reverse": {
+      "name": "segmentation.backward.0.h_proj.weight"
+    },
+    "segmentation.lstm.weight_hh_l1": {
+      "name": "segmentation.forward.1.h_proj.weight"
+    },
+    "segmentation.lstm.weight_hh_l1_reverse": {
+      "name": "segmentation.backward.1.h_proj.weight"
+    },
+    "segmentation.lstm.weight_hh_l2": {
+      "name": "segmentation.forward.2.h_proj.weight"
+    },
+    "segmentation.lstm.weight_hh_l2_reverse": {
+      "name": "segmentation.backward.2.h_proj.weight"
+    },
+    "segmentation.lstm.weight_hh_l3": {
+      "name": "segmentation.forward.3.h_proj.weight"
+    },
+    "segmentation.lstm.weight_hh_l3_reverse": {
+      "name": "segmentation.backward.3.h_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l0": {
+      "name": "segmentation.forward.0.x_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l0_reverse": {
+      "name": "segmentation.backward.0.x_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l1": {
+      "name": "segmentation.forward.1.x_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l1_reverse": {
+      "name": "segmentation.backward.1.x_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l2": {
+      "name": "segmentation.forward.2.x_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l2_reverse": {
+      "name": "segmentation.backward.2.x_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l3": {
+      "name": "segmentation.forward.3.x_proj.weight"
+    },
+    "segmentation.lstm.weight_ih_l3_reverse": {
+      "name": "segmentation.backward.3.x_proj.weight"
+    },
+    "segmentation.sincnet.conv1d.0.filterbank.band_hz_": {
+      "name": "segmentation.sinc.band_hz_"
+    },
+    "segmentation.sincnet.conv1d.0.filterbank.low_hz_": {
+      "name": "segmentation.sinc.low_hz_"
+    },
+    "segmentation.sincnet.conv1d.1.bias": {
+      "name": "segmentation.conv.0.bias"
+    },
+    "segmentation.sincnet.conv1d.1.weight": {
+      "name": "segmentation.conv.0.weight",
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "segmentation.sincnet.conv1d.2.bias": {
+      "name": "segmentation.conv.1.bias"
+    },
+    "segmentation.sincnet.conv1d.2.weight": {
+      "name": "segmentation.conv.1.weight",
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "segmentation.sincnet.norm1d.0.bias": {
+      "name": "segmentation.norm.0.bias"
+    },
+    "segmentation.sincnet.norm1d.0.weight": {
+      "name": "segmentation.norm.0.weight"
+    },
+    "segmentation.sincnet.norm1d.1.bias": {
+      "name": "segmentation.norm.1.bias"
+    },
+    "segmentation.sincnet.norm1d.1.weight": {
+      "name": "segmentation.norm.1.weight"
+    },
+    "segmentation.sincnet.norm1d.2.bias": {
+      "name": "segmentation.norm.2.bias"
+    },
+    "segmentation.sincnet.norm1d.2.weight": {
+      "name": "segmentation.norm.2.weight"
+    },
+    "segmentation.sincnet.wav_norm1d.bias": {
+      "name": "segmentation.wav.bias"
+    },
+    "segmentation.sincnet.wav_norm1d.weight": {
+      "name": "segmentation.wav.weight"
+    }
+  },
+  "casts": {
+    "embedding.resnet.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.0.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.1.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer1.2.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.shortcut.0.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.shortcut.1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.shortcut.1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.shortcut.1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.0.shortcut.1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.1.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.2.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer2.3.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.shortcut.0.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.shortcut.1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.shortcut.1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.shortcut.1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.0.shortcut.1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.1.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.2.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.3.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.4.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer3.5.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.shortcut.0.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.shortcut.1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.shortcut.1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.shortcut.1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.0.shortcut.1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.1.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn1.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn1.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn2.running_mean": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn2.running_var": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.bn2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.layer4.2.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.seg_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "embedding.resnet.seg_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.classifier.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.classifier.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.linear.0.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.linear.0.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.linear.1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.linear.1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l0": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l0_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l1": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l1_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l2": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l2_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l3": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_hh_l3_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l0": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l0_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l1": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l1_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l2": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l2_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l3": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.bias_ih_l3_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l0": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l0_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l1": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l1_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l2": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l2_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l3": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_hh_l3_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l0": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l0_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l1": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l1_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l2": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l2_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l3": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.lstm.weight_ih_l3_reverse": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.conv1d.0.filterbank.band_hz_": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.conv1d.0.filterbank.low_hz_": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.conv1d.1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.conv1d.1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.conv1d.2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.conv1d.2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.norm1d.0.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.norm1d.0.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.norm1d.1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.norm1d.1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.norm1d.2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.norm1d.2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.wav_norm1d.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "segmentation.sincnet.wav_norm1d.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of embed_sequence through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "esm2-t33-650m",
+  "revision": "08e4846e537177426273712802403f7ba8261b6c",
+  "rows": [
+    {
+      "date": "2026-10-30T07:51:38Z",
+      "load_seconds": 0.066,
+      "ops": {
+        "embed_sequence": {
+          "seconds_first": 0.058,
+          "seconds_warm": 0.015,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 1462.1,
+      "precision": "fp16",
+      "runner_sha256": "91164265d37090de0a16296a6d531f6ec836dc62a9e19c36d2f29680faa7f7b7",
+      "swap": "total = 3072.00M  used = 1364.00M  free = 1708.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-30",
+  "schema": "quick-check-1"
+}

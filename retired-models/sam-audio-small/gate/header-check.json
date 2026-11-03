@@ -1,0 +1,26 @@
+{
+  "status": "header_read",
+  "method": "Exact HTTP Range reads of each pinned safetensors header (8-byte length, then the JSON header); no tensor payload read",
+  "checked": "2026-10-18",
+  "sources": [
+    "https://huggingface.co/mlx-community/sam-audio-small/resolve/4ca84acc5c47f64bb2acee448f835dfac65ed318/model.safetensors",
+    "https://huggingface.co/google-t5/t5-base/resolve/a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1/model.safetensors"
+  ],
+  "header_sha256": {
+    "mlx-community/sam-audio-small@4ca84acc5c47f64bb2acee448f835dfac65ed318/model.safetensors": "ec363749a2f8453aa5749c140b0f9828a8791681460916fc7c081852546c0cd9",
+    "google-t5/t5-base@a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1/model.safetensors": "392c7b7f519a21a5d7814909c5346e5da362aa12c2bebf150b73d9e8fa0b3bc9"
+  },
+  "header_bytes_read": 97240,
+  "tensor_payload_bytes_read": 0,
+  "remote_tensors": 813,
+  "remote_dtypes": {
+    "F32": 813
+  },
+  "ignored": 159,
+  "mapped_tensors": 654,
+  "renamed_or_permuted": 111,
+  "planned_casts": 654,
+  "header_map_errors": [],
+  "full_precision_not_cast": [],
+  "graph_inventory": "pending: the comparison with the adapter graph needs its full-config parameter inventory from the built audio worker (scripts/model-check.py smoke --inventory with the real config.json), then scripts/model-check.py header --parameters"
+}

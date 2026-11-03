@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: MIT
+schema = 2
+id = "deepfilternet3"
+name = "DeepFilterNet3"
+kind = "enhancement"
+params = "2.2M"
+publisher = "Hendrik Schröter (Rikorose/DeepFilterNet)"
+released = 2023
+suggested = false
+summary = "Remove background noise from speech at 48 kHz in real time using a native Swift MLX worker."
+description = "DeepFilterNet3 by Hendrik Schröter and colleagues: a 2.2M-parameter full-band (48 kHz) speech enhancement network built for real time. One path estimates gains for 32 ERB bands of the whole spectrum; the other predicts complex deep-filter coefficients that clean the lowest 96 STFT bins (up to 4.8 kHz) over five frames, recovering speech harmonics a gain alone cannot. Each 10 ms frame needs 20 ms of lookahead."
+purpose = "Fast speech denoising at 48 kHz"
+good_for = ["Removing steady and changing background noise from calls, voice notes, meetings and podcasts", "Full-band 48 kHz speech", "Long recordings, up to 10 minutes per clip, with a 2.2M-parameter model", "Keeping some ambience: the attenuation limit caps how much noise is removed"]
+limits = ["Denoising only: no reverb removal, clipping repair or bandwidth extension.", "Speech only; music under the noise is suppressed with it.", "Up to 10 minutes per clip. Each channel is cleaned in one pass over the whole file, so memory grows with length; the peak for a 10-minute file is not measured (estimated at a few GB).", "Arsenal cleans a whole file and then returns it; the maker's live microphone mode (LADSPA plugin) is not offered.", "The attenuation limit keeps some noise on purpose; at 0 (the default) the model removes as much as it can."]
+languages = ["und"]
+tasks = ["audio-to-audio", "denoise"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "MIT"
+name = "MIT License"
+commercial = true
+url = "https://huggingface.co/mlx-community/DeepFilterNet-mlx/blob/220d5dfb7266352272d74c2a7d2025c59e07b391/README.md"
+[weights]
+repo = "mlx-community/DeepFilterNet-mlx"
+revision = "220d5dfb7266352272d74c2a7d2025c59e07b391"
+dtype = "fp32"
+files = ["v3/config.json", "v3/model.safetensors"]
+[weights.sha256]
+"v3/config.json" = "cc96fe1bf688e99ed9d31c26ad881d8e0799394862eb35e0be2513afcb3cf7ca"
+"v3/model.safetensors" = "fca0af2f25cad49d74fc9ac5f9155813416e4b350ec344bb433b4a48a9a76d38"
+[weights.bytes]
+"v3/config.json" = 859
+"v3/model.safetensors" = 8682709
+[derive]
+fp16 = "cast:deepfilternet3"
+[selection]
+default = "native"
+chips = { m5 = "native" }
+[[runner]]
+name = "native"
+language = "swift"
+worker = "sound"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "enhance"
+title = "Remove noise"
+input = "ops/enhance.input.json"
+output = "audio"
+stream = true
+timeout_s = 900
+first_response_timeout_s = 900
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"
+
+[[format]]
+id = "fp16"
+bits_per_weight = 16
+storage = "fp16"
+source = "derived"
+runners = ["native"]

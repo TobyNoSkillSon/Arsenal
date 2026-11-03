@@ -1,0 +1,1115 @@
+{
+  "status": "passed",
+  "remote_tensors": 158,
+  "module_parameters": 158,
+  "bytes_read": 15158,
+  "errors": [],
+  "planned_casts": [
+    {
+      "source": "block0.conv0.0.conv.bias",
+      "target": "block0.conv0.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.conv0.0.conv.weight",
+      "target": "block0.conv0.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.conv0.1.conv.bias",
+      "target": "block0.conv0.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.conv0.1.conv.weight",
+      "target": "block0.conv0.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.0.beta",
+      "target": "block0.convblock.0.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.0.conv.bias",
+      "target": "block0.convblock.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.0.conv.weight",
+      "target": "block0.convblock.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.1.beta",
+      "target": "block0.convblock.1.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.1.conv.bias",
+      "target": "block0.convblock.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.1.conv.weight",
+      "target": "block0.convblock.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.2.beta",
+      "target": "block0.convblock.2.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.2.conv.bias",
+      "target": "block0.convblock.2.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.2.conv.weight",
+      "target": "block0.convblock.2.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.3.beta",
+      "target": "block0.convblock.3.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.3.conv.bias",
+      "target": "block0.convblock.3.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.3.conv.weight",
+      "target": "block0.convblock.3.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.4.beta",
+      "target": "block0.convblock.4.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.4.conv.bias",
+      "target": "block0.convblock.4.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.4.conv.weight",
+      "target": "block0.convblock.4.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.5.beta",
+      "target": "block0.convblock.5.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.5.conv.bias",
+      "target": "block0.convblock.5.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.5.conv.weight",
+      "target": "block0.convblock.5.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.6.beta",
+      "target": "block0.convblock.6.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.6.conv.bias",
+      "target": "block0.convblock.6.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.6.conv.weight",
+      "target": "block0.convblock.6.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.7.beta",
+      "target": "block0.convblock.7.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.7.conv.bias",
+      "target": "block0.convblock.7.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.convblock.7.conv.weight",
+      "target": "block0.convblock.7.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.lastconv.bias",
+      "target": "block0.lastconv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block0.lastconv.weight",
+      "target": "block0.lastconv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.conv0.0.conv.bias",
+      "target": "block1.conv0.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.conv0.0.conv.weight",
+      "target": "block1.conv0.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.conv0.1.conv.bias",
+      "target": "block1.conv0.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.conv0.1.conv.weight",
+      "target": "block1.conv0.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.0.beta",
+      "target": "block1.convblock.0.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.0.conv.bias",
+      "target": "block1.convblock.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.0.conv.weight",
+      "target": "block1.convblock.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.1.beta",
+      "target": "block1.convblock.1.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.1.conv.bias",
+      "target": "block1.convblock.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.1.conv.weight",
+      "target": "block1.convblock.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.2.beta",
+      "target": "block1.convblock.2.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.2.conv.bias",
+      "target": "block1.convblock.2.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.2.conv.weight",
+      "target": "block1.convblock.2.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.3.beta",
+      "target": "block1.convblock.3.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.3.conv.bias",
+      "target": "block1.convblock.3.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.3.conv.weight",
+      "target": "block1.convblock.3.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.4.beta",
+      "target": "block1.convblock.4.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.4.conv.bias",
+      "target": "block1.convblock.4.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.4.conv.weight",
+      "target": "block1.convblock.4.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.5.beta",
+      "target": "block1.convblock.5.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.5.conv.bias",
+      "target": "block1.convblock.5.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.5.conv.weight",
+      "target": "block1.convblock.5.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.6.beta",
+      "target": "block1.convblock.6.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.6.conv.bias",
+      "target": "block1.convblock.6.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.6.conv.weight",
+      "target": "block1.convblock.6.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.7.beta",
+      "target": "block1.convblock.7.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.7.conv.bias",
+      "target": "block1.convblock.7.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.convblock.7.conv.weight",
+      "target": "block1.convblock.7.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.lastconv.bias",
+      "target": "block1.lastconv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block1.lastconv.weight",
+      "target": "block1.lastconv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.conv0.0.conv.bias",
+      "target": "block2.conv0.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.conv0.0.conv.weight",
+      "target": "block2.conv0.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.conv0.1.conv.bias",
+      "target": "block2.conv0.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.conv0.1.conv.weight",
+      "target": "block2.conv0.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.0.beta",
+      "target": "block2.convblock.0.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.0.conv.bias",
+      "target": "block2.convblock.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.0.conv.weight",
+      "target": "block2.convblock.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.1.beta",
+      "target": "block2.convblock.1.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.1.conv.bias",
+      "target": "block2.convblock.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.1.conv.weight",
+      "target": "block2.convblock.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.2.beta",
+      "target": "block2.convblock.2.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.2.conv.bias",
+      "target": "block2.convblock.2.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.2.conv.weight",
+      "target": "block2.convblock.2.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.3.beta",
+      "target": "block2.convblock.3.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.3.conv.bias",
+      "target": "block2.convblock.3.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.3.conv.weight",
+      "target": "block2.convblock.3.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.4.beta",
+      "target": "block2.convblock.4.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.4.conv.bias",
+      "target": "block2.convblock.4.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.4.conv.weight",
+      "target": "block2.convblock.4.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.5.beta",
+      "target": "block2.convblock.5.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.5.conv.bias",
+      "target": "block2.convblock.5.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.5.conv.weight",
+      "target": "block2.convblock.5.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.6.beta",
+      "target": "block2.convblock.6.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.6.conv.bias",
+      "target": "block2.convblock.6.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.6.conv.weight",
+      "target": "block2.convblock.6.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.7.beta",
+      "target": "block2.convblock.7.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.7.conv.bias",
+      "target": "block2.convblock.7.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.convblock.7.conv.weight",
+      "target": "block2.convblock.7.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.lastconv.bias",
+      "target": "block2.lastconv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block2.lastconv.weight",
+      "target": "block2.lastconv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.conv0.0.conv.bias",
+      "target": "block3.conv0.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.conv0.0.conv.weight",
+      "target": "block3.conv0.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.conv0.1.conv.bias",
+      "target": "block3.conv0.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.conv0.1.conv.weight",
+      "target": "block3.conv0.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.0.beta",
+      "target": "block3.convblock.0.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.0.conv.bias",
+      "target": "block3.convblock.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.0.conv.weight",
+      "target": "block3.convblock.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.1.beta",
+      "target": "block3.convblock.1.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.1.conv.bias",
+      "target": "block3.convblock.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.1.conv.weight",
+      "target": "block3.convblock.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.2.beta",
+      "target": "block3.convblock.2.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.2.conv.bias",
+      "target": "block3.convblock.2.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.2.conv.weight",
+      "target": "block3.convblock.2.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.3.beta",
+      "target": "block3.convblock.3.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.3.conv.bias",
+      "target": "block3.convblock.3.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.3.conv.weight",
+      "target": "block3.convblock.3.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.4.beta",
+      "target": "block3.convblock.4.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.4.conv.bias",
+      "target": "block3.convblock.4.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.4.conv.weight",
+      "target": "block3.convblock.4.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.5.beta",
+      "target": "block3.convblock.5.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.5.conv.bias",
+      "target": "block3.convblock.5.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.5.conv.weight",
+      "target": "block3.convblock.5.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.6.beta",
+      "target": "block3.convblock.6.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.6.conv.bias",
+      "target": "block3.convblock.6.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.6.conv.weight",
+      "target": "block3.convblock.6.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.7.beta",
+      "target": "block3.convblock.7.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.7.conv.bias",
+      "target": "block3.convblock.7.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.convblock.7.conv.weight",
+      "target": "block3.convblock.7.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.lastconv.bias",
+      "target": "block3.lastconv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block3.lastconv.weight",
+      "target": "block3.lastconv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.conv0.0.conv.bias",
+      "target": "block4.conv0.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.conv0.0.conv.weight",
+      "target": "block4.conv0.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.conv0.1.conv.bias",
+      "target": "block4.conv0.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.conv0.1.conv.weight",
+      "target": "block4.conv0.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.0.beta",
+      "target": "block4.convblock.0.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.0.conv.bias",
+      "target": "block4.convblock.0.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.0.conv.weight",
+      "target": "block4.convblock.0.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.1.beta",
+      "target": "block4.convblock.1.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.1.conv.bias",
+      "target": "block4.convblock.1.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.1.conv.weight",
+      "target": "block4.convblock.1.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.2.beta",
+      "target": "block4.convblock.2.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.2.conv.bias",
+      "target": "block4.convblock.2.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.2.conv.weight",
+      "target": "block4.convblock.2.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.3.beta",
+      "target": "block4.convblock.3.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.3.conv.bias",
+      "target": "block4.convblock.3.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.3.conv.weight",
+      "target": "block4.convblock.3.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.4.beta",
+      "target": "block4.convblock.4.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.4.conv.bias",
+      "target": "block4.convblock.4.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.4.conv.weight",
+      "target": "block4.convblock.4.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.5.beta",
+      "target": "block4.convblock.5.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.5.conv.bias",
+      "target": "block4.convblock.5.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.5.conv.weight",
+      "target": "block4.convblock.5.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.6.beta",
+      "target": "block4.convblock.6.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.6.conv.bias",
+      "target": "block4.convblock.6.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.6.conv.weight",
+      "target": "block4.convblock.6.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.7.beta",
+      "target": "block4.convblock.7.beta",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.7.conv.bias",
+      "target": "block4.convblock.7.conv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.convblock.7.conv.weight",
+      "target": "block4.convblock.7.conv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.lastconv.bias",
+      "target": "block4.lastconv.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "block4.lastconv.weight",
+      "target": "block4.lastconv.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn0.bias",
+      "target": "encode.cnn0.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn0.weight",
+      "target": "encode.cnn0.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn1.bias",
+      "target": "encode.cnn1.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn1.weight",
+      "target": "encode.cnn1.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn2.bias",
+      "target": "encode.cnn2.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn2.weight",
+      "target": "encode.cnn2.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn3.bias",
+      "target": "encode.cnn3.bias",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    {
+      "source": "encode.cnn3.weight",
+      "target": "encode.cnn3.weight",
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    }
+  ]
+}

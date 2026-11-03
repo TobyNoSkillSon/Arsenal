@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: MIT
+[[kernel]]
+id = "qwen-fused-rope"
+chip = "m5"
+mode = "exact"
+files = ["qwen-fused-rope.metal"]
+entry = "mobius_qwen3tts_rope_rotate_half"  # legacy-compat: the entry name is hashed into the kernel identity and its recorded evidence
+replaces = "qwen.rotate-half-rope"
+api = "mlx"
+inputs = ["q", "k", "cos_in", "sin_in", "dims"]
+outputs = ["q_out", "k_out"]

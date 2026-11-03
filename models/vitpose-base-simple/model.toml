@@ -1,0 +1,75 @@
+schema = 3
+id = "vitpose-base-simple"
+name = "ViTPose Base Simple"
+kind = "local.pose"
+summary = "Finds 17 body keypoints, from nose to ankles, for the person in a photo."
+description = "ViTPose Base Simple is a plain Vision Transformer (12 layers, 768 wide, 85.9M parameters) with a light decoder that turns its features into one heatmap per keypoint. Yufei Xu, Jing Zhang, Qiming Zhang and Dacheng Tao published it in the ViTPose paper (2022); usyd-community ported it to transformers. It was trained on MS COCO, AI Challenger, MPII and CrowdPose. The card's headline score, 81.1 AP on the COCO keypoint test-dev set, belongs to the larger ViTPose+ family; this base checkpoint's own score appears only as a chart on the card."
+purpose = "Find body keypoints"
+publisher = "usyd-community"
+released = 2025
+params = "85.9M"
+tasks = ["keypoint-detection"]
+languages = ["en"]
+good_for = [
+  "One person filling most of a photo: nose, eyes, ears, shoulders, elbows, wrists, hips, knees and ankles",
+  "Posture or exercise-form checks on a cropped person",
+]
+limits = [
+  "No person detector in this port: the whole photo is treated as one person. In a wide room shot with a small person, the legs land on the furniture; cropped to the person, the skeleton fit and the scores went from 0.16-0.61 to 0.63-0.94.",
+  "Several people in one photo are not separated. The card's own example runs a separate detector first.",
+  "Weak joints score below about 0.4. Occluded people are the card's hardest case (OCHuman).",
+  "It has no language input or output, so Polish does not apply.",
+  "Parity with the maker's transformers code on MPS FP16: joints within 2.2 pixels on a 640x425 photo",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/usyd-community/vitpose-base-simple"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/usyd-community/vitpose-base-simple/blob/a93ac0c67e0b7e2c55287d21d4c460c8f3c54d45/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["text"]
+
+[weights]
+repo = "usyd-community/vitpose-base-simple"
+revision = "a93ac0c67e0b7e2c55287d21d4c460c8f3c54d45"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "preprocessor_config.json"]
+
+[weights.sha256]
+"model.safetensors" = "85375373893ddd3641f3912821073e53f5435f9e966e1dca59d004454bfe4fdf"
+"config.json" = "72fc2f0fc29eef43e87aa0ddd4c1269c5226ae157a99d0057019dd40129fed7c"
+"preprocessor_config.json" = "9b11cadc98c30b968a70cc1658ce1fbd74b721b0f21402a2ff8bc1dc9d1474a0"
+
+[weights.bytes]
+"model.safetensors" = 343673076
+"config.json" = 1798
+"preprocessor_config.json" = 363
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-vitpose-base-simple"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

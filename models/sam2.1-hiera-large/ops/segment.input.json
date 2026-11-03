@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker"
+    },
+    "points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "label": {
+            "type": "string",
+            "enum": [
+              "foreground",
+              "background"
+            ],
+            "default": "foreground"
+          }
+        },
+        "required": [
+          "x",
+          "y"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "x-arsenal-control": "image-points",
+      "x-arsenal-image": "image",
+      "x-arsenal-coordinates": "normalized"
+    },
+    "boxes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "xmin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "xmax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "required": [
+          "xmin",
+          "ymin",
+          "xmax",
+          "ymax"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 64,
+      "x-arsenal-control": "image-boxes",
+      "x-arsenal-image": "image",
+      "x-arsenal-coordinates": "normalized"
+    },
+    "multimask": {
+      "type": "boolean",
+      "description": "Return three alternative masks for one click or box (default true). Several boxes always give one mask each."
+    }
+  },
+  "required": [
+    "image"
+  ],
+  "additionalProperties": false
+}

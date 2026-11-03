@@ -1,0 +1,50 @@
+# Reference settings for a voice model that designs or clones voices and takes a language (Qwen3-TTS, Breeze). A
+# preset-voice model uses kinds/voices/ instead. Copy the [[setting]] blocks its runner really accepts into model.toml
+# (a design-only model has no reference clip; a cloning model may have no description), with that model's defaults
+# and help; settings.toml beside this file arranges exactly these.
+
+[[setting]]
+id = "voice"
+title = "Voice"
+type = "voice"
+default = ""
+applies = "request"
+maps_to = "request.voice"
+help = "The voice used when a request names none."
+
+[[setting]]
+id = "language"
+title = "Language"
+type = "choice"
+default = "english"
+choices = ["english", "chinese", "japanese", "korean", "french", "german", "spanish"]
+applies = "request"
+maps_to = "request.language"
+help = "Language used to condition the generated speech."
+
+[[setting]]
+id = "instructions"
+title = "Voice description"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.instructions"
+help = "Describe the voice and delivery for the next request."
+
+[[setting]]
+id = "reference_path"
+title = "Reference clip"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.path"
+help = "Local reference WAV used for voice cloning."
+
+[[setting]]
+id = "reference_text"
+title = "Reference transcript"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.text"
+help = "Exact words spoken in the reference clip."

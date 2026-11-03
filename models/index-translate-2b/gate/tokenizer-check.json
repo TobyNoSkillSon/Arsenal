@@ -1,0 +1,10 @@
+{
+  "model": "index-translate-2b",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 0,
+    "plain_tokens": 17,
+    "roundtrip": "Hello"
+  }
+}

@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "index-translate-2b"
+name = "Index Translate 2B"
+architecture = "qwen3_5"
+kind = "chat"
+params = "2.2B"
+publisher = "IndexTeam"
+released = 2026
+suggested = false
+summary = "Translate with glossary and style."
+purpose = "Translate with glossary and style"
+good_for = ["Translate with glossary and style"]
+limits = ["Checked live on 20 Oct at FP16 and int8: Polish correct; German dropped one word in one sentence. int4 failed that check and is not offered."]
+tasks = ["translate"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/IndexTeam/Index-Translate-2B/tree/9bc08445315723eb9b77d1b93505915eb03c3f01"
+[weights]
+repo = "IndexTeam/Index-Translate-2B"
+revision = "9bc08445315723eb9b77d1b93505915eb03c3f01"
+dtype = "bf16"
+files = ["config.json", "generation_config.json", "model.safetensors", "preprocessor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"config.json" = "ed1c1723241f23f7f4e23430759cbd7dcfb4103cbdfe052bfe7626b57c2615b4"
+"generation_config.json" = "5b2e05bd687ce6eb52f8beff6d9dc98a0fb1e02ce8898062869218d17264220f"
+"model.safetensors" = "2f499211fe352913464be69365e2e5724f913051efb3ae2b6fd0fa617a4c0b60"
+"preprocessor_config.json" = "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+"tokenizer.json" = "fe000e3ed39ed12b8d2481d527d44f93c65d37e87645d2dcc80d1bf9d50d2927"
+"tokenizer_config.json" = "e611fbccc7c29ef3b1cafb1cb7ea548d189968632901d678fd62be68c47885de"
+[weights.bytes]
+"config.json" = 2908
+"generation_config.json" = 100
+"model.safetensors" = 4548216776
+"preprocessor_config.json" = 390
+"tokenizer.json" = 12807196
+"tokenizer_config.json" = 16712
+[derive]
+int8 = "cast:language-half-g64-v3"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "translate"
+title = "Translate"
+input = "ops/translate.input.json"
+output_schema = "ops/translate.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

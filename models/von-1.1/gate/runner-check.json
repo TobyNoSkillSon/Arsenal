@@ -1,0 +1,59 @@
+{
+  "decide": {
+    "state": "The Pay button spins forever since Tuesday's deploy; nobody can check out.",
+    "questions": {
+      "bug": {
+        "type": "noul",
+        "instructions": "Does the writer report something broken?"
+      },
+      "kind": {
+        "type": "choice",
+        "instructions": "What kind of message is this?",
+        "criteria": {
+          "bug": "something is broken",
+          "feature": "a request for something new",
+          "question": "asks for information"
+        }
+      },
+      "priority": {
+        "type": "score",
+        "instructions": "How soon does it need a fix?",
+        "criteria": [
+          "whenever",
+          "this sprint",
+          "today"
+        ]
+      }
+    }
+  },
+  "judge": {
+    "items": [
+      "The Pay button spins forever since Tuesday's deploy; nobody can check out.",
+      "Would love a dark theme for the dashboard."
+    ],
+    "questions": {
+      "bug": {
+        "type": "noul",
+        "instructions": "Does the writer report something broken?"
+      },
+      "kind": {
+        "type": "choice",
+        "instructions": "What kind of message is this?",
+        "criteria": {
+          "bug": "something is broken",
+          "feature": "a request for something new",
+          "question": "asks for information"
+        }
+      },
+      "priority": {
+        "type": "score",
+        "instructions": "How soon does it need a fix?",
+        "criteria": [
+          "whenever",
+          "this sprint",
+          "today"
+        ]
+      }
+    }
+  }
+}

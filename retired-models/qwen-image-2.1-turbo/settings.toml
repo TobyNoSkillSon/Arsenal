@@ -1,0 +1,32 @@
+# Settings panel for Qwen-Image-2.1-Turbo, from kinds/images/ (docs/MODEL-FOLDER.md, "Settings panel"). The runner
+# takes free width and height (multiples of 32, 256-2752; native up to 2K); Shape offers the Image window's sizes. Turbo
+# always runs its saved 8-step schedule without guidance, so it has no Quality, Steps or Guidance row.
+schema = 1
+
+[[section]]
+
+[[section.row]]
+label = "Shape"
+presets = [
+  { title = "1:1", values = { width = 1024, height = 1024 } },
+  { title = "3:4", values = { width = 864, height = 1152 } },
+  { title = "4:3", values = { width = 1152, height = 864 } },
+  { title = "9:16", values = { width = 768, height = 1344 } },
+  { title = "16:9", values = { width = 1344, height = 768 } },
+]
+
+[[section.row]]
+setting = "seed"
+randomize = true
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "width"
+unit = "px"
+
+[[section.row]]
+setting = "height"
+unit = "px"

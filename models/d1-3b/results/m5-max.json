@@ -1,0 +1,119 @@
+{
+  "app_build": "ac0afaf11365e6b0f76624d05869568d5af49924",
+  "cases": [
+    {
+      "id": "yes-0",
+      "metrics": {
+        "accuracy": 1.0,
+        "latency_s": 0.01743249999708496
+      },
+      "wall_s": 0.01743249999708496
+    },
+    {
+      "id": "no-0",
+      "metrics": {
+        "accuracy": 1.0,
+        "latency_s": 0.017668583983322605
+      },
+      "wall_s": 0.017668583983322605
+    },
+    {
+      "id": "choice-0",
+      "metrics": {
+        "accuracy": 1.0,
+        "latency_s": 0.01803479201043956
+      },
+      "wall_s": 0.01803479201043956
+    },
+    {
+      "id": "score-0",
+      "metrics": {
+        "accuracy": 0.0,
+        "latency_s": 0.018434208992403
+      },
+      "wall_s": 0.018434208992403
+    },
+    {
+      "id": "batch",
+      "metrics": {
+        "batch_questions_per_s": 279.7515218021614
+      },
+      "wall_s": 0.04289520901511423
+    }
+  ],
+  "chip": "m5-max",
+  "conditions": {
+    "contaminated": true,
+    "contended": true,
+    "cpu_limit_pct": 250,
+    "energy": "not_measured",
+    "gpu_limit_pct": 10,
+    "idle_samples": [
+      {
+        "at": "2026-10-08T09:46:33Z",
+        "compositing_gpu_pct": null,
+        "note": "top interval CPU over all processes x cores; idle GPU = IOAccelerator device utilisation (compositor not separated); run GPU not attributed; 3 s sample.",
+        "other_cpu_pct": 236.34,
+        "other_gpu_pct": 87.0,
+        "phase": "idle",
+        "valid": false
+      },
+      {
+        "at": "2026-10-08T09:46:37Z",
+        "compositing_gpu_pct": null,
+        "note": "top interval CPU over all processes x cores; idle GPU = IOAccelerator device utilisation (compositor not separated); run GPU not attributed; 3 s sample.",
+        "other_cpu_pct": 184.85999999999999,
+        "other_gpu_pct": 7.0,
+        "phase": "idle",
+        "valid": false
+      },
+      {
+        "at": "2026-10-08T09:46:41Z",
+        "compositing_gpu_pct": null,
+        "note": "top interval CPU over all processes x cores; idle GPU = IOAccelerator device utilisation (compositor not separated); run GPU not attributed; 3 s sample.",
+        "other_cpu_pct": 208.44,
+        "other_gpu_pct": 8.0,
+        "phase": "idle",
+        "valid": false
+      }
+    ],
+    "measurement_lock": false,
+    "note": "suite-v1 quick recipe (warm-up = first case, one repeat, batch of the four states with the merged questions) run over MobiusWire against the standalone Swift runner (mobius-worker-d1) by a lab script, not mobius-bench; not a controlled measurement, never ranked or Measured. Daytime, Mac in use by other agents (FLUX port work). worker_digest = SHA-256 over runners/swift (relative path, NUL, bytes; sorted). peak_ram_mb = the runner's phys_footprint at the end of the run (text only). Energy not measured.",
+    "run_samples": [
+      {
+        "at": "2026-10-08T09:46:45Z",
+        "compositing_gpu_pct": null,
+        "note": "top interval CPU over all processes x cores; idle GPU = IOAccelerator device utilisation (compositor not separated); run GPU not attributed; 3 s sample.",
+        "other_cpu_pct": 222.66,
+        "other_gpu_pct": null,
+        "phase": "run",
+        "valid": false
+      }
+    ],
+    "sample_interval_s": 3
+  },
+  "date": "2026-10-08T09:46:49Z",
+  "gate_passed": true,
+  "kind": "decisions",
+  "metrics": {
+    "accuracy": 0.75,
+    "batch_questions_per_s": 279.7515218021614,
+    "latency_s": 0.017851687996881083,
+    "peak_ram_mb": 6032
+  },
+  "mode": "exact",
+  "model": "d1-3b",
+  "os_build": "26A434",
+  "precision": "bf16",
+  "profile": "quick",
+  "runner": "native",
+  "schema": 1,
+  "stub": false,
+  "suite": {
+    "id": "mobius-decisions-suite-v1",
+    "sha256": "ea637a0953492ef0c599719ddce031321a4564dbeca5d598c7f24848cfbd47b1",
+    "version": 1
+  },
+  "worker_digest": "43c152e3df8ef4d16b1b1f4ff0b33099b2cf793f4145c04bdd2384d66ed4427c",
+  "gpu_cores": 40
+}

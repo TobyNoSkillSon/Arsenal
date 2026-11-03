@@ -1,0 +1,7 @@
+schema = 1
+id = "big-lama-native-v1"
+reference_runner = "spandrel-0.4.2 provider graph, torch 2.14.1 MPS (FP32 capture: the unfolded provider graph fails at FP16 and BF16)"
+precision = "fp16"
+independent_vendor_qualified = false
+status = "static-checks-and-visual-review"
+passing_requires = ["Exact checkpoint names and shapes", "Per-component fixed-tensor parity against the captured reference (PhotoParityTests)", "One end-to-end image against the provider pipeline"]

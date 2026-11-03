@@ -1,0 +1,4 @@
+schema = 1
+kind = "enhancement"
+suite = "arsenal-enhancement-suite-v1"
+profile = "quick"

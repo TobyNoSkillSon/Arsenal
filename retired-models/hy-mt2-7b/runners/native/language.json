@@ -1,0 +1,16 @@
+{
+  "operations": [
+    "translate"
+  ],
+  "processor": "",
+  "prompts": {
+    "ocr": "OCR:"
+  },
+  "processor_config": {},
+  "sampling": {
+    "temperature": 0.7,
+    "top_p": 0.6,
+    "top_k": 20,
+    "repetition_penalty": 1.05
+  }
+}

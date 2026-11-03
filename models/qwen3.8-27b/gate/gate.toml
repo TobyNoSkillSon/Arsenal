@@ -1,0 +1,11 @@
+schema = 1
+id = "qwen3.8-27b-chat-gate-v1"
+fixtures = "fixtures-v1.json"
+temperature = 0.0
+seed = 24301
+max_tokens = 64
+metric = "normalized exact match"
+minimum_accuracy = 0.90
+maximum_regression_vs_bf16 = 0.05
+reject_empty = true
+reject_crash = true

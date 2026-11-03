@@ -1,0 +1,70 @@
+{
+  "cases": [
+    {
+      "operation": "read_document",
+      "source": "XingChen-AGI/TeleOCR@70a19ec6a3b036311af19ae5e762e650f41a5980 README.md convert_otsl_to_html (table prompt) (synthetic OTSL in the card format)",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        },
+        "mode": "table"
+      },
+      "raw": "<fcel>A<lcel><nl><fcel>1<fcel>2<nl>",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "<table><tr><td colspan=\"2\">A</td></tr><tr><td>1</td><td>2</td></tr></table>",
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            },
+            "tables": [
+              {
+                "id": "table-0",
+                "content": "<table><tr><td colspan=\"2\">A</td></tr><tr><td>1</td><td>2</td></tr></table>"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "operation": "read_document",
+      "source": "Ascend-Research/NaviDC-OCR@1e71f4f TeleOCR_client.py parse_layout_output line format <box:...><label:...><angle> (synthetic layout line)",
+      "input": {
+        "document": {
+          "path": "$INBOX/image.png"
+        },
+        "mode": "layout"
+      },
+      "raw": "<box:0 0 500 500><label:text><up>\nnot a layout line",
+      "expected": {
+        "pages": [
+          {
+            "index": 0,
+            "markdown": "",
+            "tables": [],
+            "blocks": [
+              {
+                "category": "text",
+                "text": "",
+                "coordinate_system": "pixels",
+                "box": {
+                  "xmin": 0,
+                  "ymin": 0,
+                  "xmax": 16,
+                  "ymax": 16
+                }
+              }
+            ],
+            "dimensions": {
+              "width": 32,
+              "height": 32
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

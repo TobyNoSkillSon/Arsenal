@@ -1,0 +1,172 @@
+{
+  "chip": "m5-max",
+  "date": "2026-10-15T10:32:04Z",
+  "fp16_selected": false,
+  "gpu_cores": 40,
+  "model": "stable-audio-3-medium",
+  "network_bytes": 0,
+  "note": "Screening only. No new tier is offered until independent reference qualification and coordinator review.",
+  "policy": {
+    "audio_max_spectral_relative_l2": 0.05,
+    "audio_max_waveform_relative_l2": 0.1,
+    "fixture": {
+      "duration": 5,
+      "prompt": "Gentle rain on a window.",
+      "seed": 42,
+      "steps": 8,
+      "stream": false
+    },
+    "image_min_psnr_db": 30,
+    "independent_reference_qualified": false,
+    "source": "Engineering screening thresholds, fixed before capture; not a seed-noise qualification",
+    "audio_metric_definition": "StatsQuality.spectralDistance: Hann-window magnitude spectra on interleaved stereo PCM16 samples normalized to [-1,1], frame256/hop128, relative L2; waveform relative L2 checks both channels without sign/phase alignment."
+  },
+  "revision": "da6edc54ddba10bfd79a077102ded687f80e882b",
+  "rows": [
+    {
+      "load": {
+        "engine": "optimized",
+        "engine_reason": "fp16 residual stream (self-test passed: log-mel distance 0.06 dB to stock) + SWA views in the decoder (self-test passed: 3 decodes bit-identical to stock)",
+        "id": 1,
+        "load_s": 7.386927962303162,
+        "memory": {
+          "footprint_mb": 4729.573528,
+          "mlx_active_mb": 4323.46482,
+          "mlx_cache_mb": 134.306878
+        },
+        "ok": true,
+        "timing": {
+          "load_s": 7.387100416701287,
+          "peak_mb": 6198.623828,
+          "queue_s": 0.006877416628412902
+        }
+      },
+      "machine_in_use": true,
+      "peak_gb": 5.609558432,
+      "precision": "fp16",
+      "qualified": false,
+      "quality_metric": 0,
+      "reference": "FP16 cast diagnostic baseline; original decoder is FP32 and cannot be run under policy",
+      "relative_gate_passed": true,
+      "reply": {
+        "bytes": 882044,
+        "channels": 2,
+        "duration_s": 5,
+        "gen_s": 0.23886609077453613,
+        "id": 2,
+        "ok": true,
+        "path": "tmp/intake-audio/jobs/intake-fp16/C8A54480-43EF-46AD-BC82-6571FA896DC6.wav",
+        "rtf": 0.047773218154907225,
+        "sample_rate": 44100,
+        "seconds": 0.23886609077453613,
+        "seed": 42,
+        "sha256": "b7ffaa61c3cff67095341a81273e11c51234158728b08263b9abb57e393af9e7",
+        "timing": {
+          "peak_mb": 5425.28034,
+          "queue_s": 3.829167690128088e-05
+        }
+      },
+      "rtf": 0.04878253333736211,
+      "seconds": 0.24391266668681055,
+      "state": "quickCheck",
+      "waveform_relative_l2": 0
+    },
+    {
+      "load": {
+        "engine": "optimized",
+        "engine_reason": "fp16 residual stream (self-test passed: log-mel distance 0.24 dB to stock) + SWA views in the decoder (self-test passed: 3 decodes bit-identical to stock)",
+        "id": 1,
+        "load_s": 3.400470018386841,
+        "memory": {
+          "footprint_mb": 2756.922248,
+          "mlx_active_mb": 2312.525428,
+          "mlx_cache_mb": 134.386666
+        },
+        "ok": true,
+        "timing": {
+          "load_s": 3.4006870416924357,
+          "peak_mb": 4204.702916,
+          "queue_s": 0.006788458325900137
+        }
+      },
+      "machine_in_use": true,
+      "peak_gb": 4.547300328,
+      "precision": "int8",
+      "qualified": false,
+      "quality_metric": 0.1096110137908255,
+      "reference": "FP16 cast diagnostic baseline; original decoder is FP32 and cannot be run under policy",
+      "relative_gate_passed": false,
+      "reply": {
+        "bytes": 882044,
+        "channels": 2,
+        "duration_s": 5,
+        "gen_s": 0.2395099401473999,
+        "id": 2,
+        "ok": true,
+        "path": "tmp/intake-audio/jobs/intake-int8/46A0EB37-7BD9-4442-81EF-D672D5852F19.wav",
+        "rtf": 0.04790198802947998,
+        "sample_rate": 44100,
+        "seconds": 0.2395099401473999,
+        "seed": 42,
+        "sha256": "2e64351a55c0ab8764b5e9beae020f47a5e79dd995c3846a08320ea6bcb4c884",
+        "timing": {
+          "peak_mb": 3603.174812,
+          "queue_s": 3.712496254593134e-05
+        }
+      },
+      "rtf": 0.0489940500119701,
+      "seconds": 0.24497025005985051,
+      "state": "quickCheck",
+      "waveform_relative_l2": 0.11352428358771893
+    },
+    {
+      "load": {
+        "engine": "optimized",
+        "engine_reason": "fp16 residual stream (self-test passed: log-mel distance 0.03 dB to stock) + SWA views in the decoder (self-test passed: 3 decodes bit-identical to stock)",
+        "id": 1,
+        "load_s": 3.1334089040756226,
+        "memory": {
+          "footprint_mb": 1641.597088,
+          "mlx_active_mb": 1237.8661,
+          "mlx_cache_mb": 134.393842
+        },
+        "ok": true,
+        "timing": {
+          "load_s": 3.133621041662991,
+          "peak_mb": 3130.042296,
+          "queue_s": 0.007630041684024036
+        }
+      },
+      "machine_in_use": true,
+      "peak_gb": 3.412920504,
+      "precision": "int4",
+      "qualified": false,
+      "quality_metric": 0.6942521369067328,
+      "reference": "FP16 cast diagnostic baseline; original decoder is FP32 and cannot be run under policy",
+      "relative_gate_passed": false,
+      "reply": {
+        "bytes": 882044,
+        "channels": 2,
+        "duration_s": 5,
+        "gen_s": 0.2285609245300293,
+        "id": 2,
+        "ok": true,
+        "path": "tmp/intake-audio/jobs/intake-int4/2935362B-928D-4B9F-A145-7B36A9517421.wav",
+        "rtf": 0.04571218490600586,
+        "sample_rate": 44100,
+        "seconds": 0.2285609245300293,
+        "seed": 42,
+        "sha256": "b31179b726904e79923cbf53420f0dfe0710a8067041818ef1fa8befc6de9165",
+        "timing": {
+          "peak_mb": 2528.515484,
+          "queue_s": 3.7083402276039124e-05
+        }
+      },
+      "rtf": 0.046883725002408026,
+      "seconds": 0.23441862501204014,
+      "state": "quickCheck",
+      "waveform_relative_l2": 0.7428770596297259
+    }
+  ],
+  "worker_sha256": "744e75ae6ae7a3aa05a2c096f294bbd2e19a24c23a698deb5a39867957b8b799"
+}

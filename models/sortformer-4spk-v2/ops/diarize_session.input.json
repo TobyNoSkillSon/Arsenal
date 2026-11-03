@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "create",
+        "push",
+        "finish",
+        "close"
+      ],
+      "description": "create (with the streaming and post-processing settings), push audio, finish (flushes the last chunk), close (discard)."
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "audio/*"
+        ]
+      },
+      "x-arsenal-control": "audio-picker",
+      "description": "The next piece of the live recording (push only, up to 30 s per push, ten minutes per session)."
+    },
+    "latency": {
+      "type": "string",
+      "enum": [
+        "very_high",
+        "high",
+        "low",
+        "ultra_low"
+      ],
+      "default": "very_high",
+      "description": "The model card's streaming presets (input buffer latency): very_high 30.4 s (chunk 340, right context 40, FIFO 40, update 300), high 10.0 s (124, 1, 124, 124), low 1.04 s (6, 7, 188, 144), ultra_low 0.32 s (3, 1, 188, 144); speaker cache 188 in all. Lower latency costs some accuracy."
+    },
+    "chunk_frames": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "CHUNK_SIZE in 80 ms frames; overrides the preset."
+    },
+    "right_context_frames": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "RIGHT_CONTEXT: future 80 ms frames attached after each chunk; overrides the preset."
+    },
+    "fifo_frames": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1000,
+      "description": "FIFO_SIZE: previous 80 ms frames attached before each chunk; overrides the preset."
+    },
+    "update_period_frames": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1000,
+      "description": "UPDATE_PERIOD: frames moved from the FIFO into the speaker cache at a time; overrides the preset."
+    },
+    "speaker_cache_frames": {
+      "type": "integer",
+      "minimum": 16,
+      "maximum": 1000,
+      "description": "SPEAKER_CACHE_SIZE in 80 ms frames; overrides the preset (188)."
+    },
+    "onset": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.5,
+      "description": "Activity probability above which a speaker's segment starts."
+    },
+    "offset": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1,
+      "default": 0.5,
+      "description": "Activity probability below which a speaker's segment ends."
+    },
+    "pad_onset": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0,
+      "description": "Seconds added before each segment."
+    },
+    "pad_offset": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0,
+      "description": "Seconds added after each segment."
+    },
+    "min_duration_on": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 60,
+      "default": 0,
+      "description": "Drop segments shorter than this many seconds."
+    },
+    "min_duration_off": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 60,
+      "default": 0,
+      "description": "Fill gaps shorter than this many seconds within a speaker."
+    },
+    "include_probabilities": {
+      "type": "boolean",
+      "default": false,
+      "description": "Also return each speaker's activity probability for every 80 ms frame."
+    }
+  },
+  "required": [
+    "action"
+  ],
+  "additionalProperties": false
+}

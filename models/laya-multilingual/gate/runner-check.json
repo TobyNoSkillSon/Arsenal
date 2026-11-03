@@ -1,0 +1,59 @@
+{
+  "decide": {
+    "state": "Der Bezahlen-Knopf dreht sich seit dem Update am Dienstag endlos; niemand kann bezahlen.",
+    "questions": {
+      "bug": {
+        "type": "noul",
+        "instructions": "Does the writer report something broken?"
+      },
+      "kind": {
+        "type": "choice",
+        "instructions": "What kind of message is this?",
+        "criteria": {
+          "bug": "something is broken",
+          "feature": "a request for something new",
+          "question": "asks for information"
+        }
+      },
+      "priority": {
+        "type": "score",
+        "instructions": "How soon does it need a fix?",
+        "criteria": [
+          "whenever",
+          "this sprint",
+          "today"
+        ]
+      }
+    }
+  },
+  "judge": {
+    "items": [
+      "Der Bezahlen-Knopf dreht sich seit dem Update am Dienstag endlos; niemand kann bezahlen.",
+      "Czy jest plan roczny ze zniżką?"
+    ],
+    "questions": {
+      "bug": {
+        "type": "noul",
+        "instructions": "Does the writer report something broken?"
+      },
+      "kind": {
+        "type": "choice",
+        "instructions": "What kind of message is this?",
+        "criteria": {
+          "bug": "something is broken",
+          "feature": "a request for something new",
+          "question": "asks for information"
+        }
+      },
+      "priority": {
+        "type": "score",
+        "instructions": "How soon does it need a fix?",
+        "criteria": [
+          "whenever",
+          "this sprint",
+          "today"
+        ]
+      }
+    }
+  }
+}

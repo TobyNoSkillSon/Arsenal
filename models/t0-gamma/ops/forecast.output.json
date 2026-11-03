@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": true,
+  "description": "Probabilistic forecast of the target series at the requested quantile levels, in the input's units.",
+  "required": ["horizon", "quantile_levels", "median", "quantiles"],
+  "properties": {
+    "horizon": {
+      "type": "integer",
+      "description": "The number of forecast steps."
+    },
+    "quantile_levels": {
+      "type": "array",
+      "description": "The quantile levels of each quantiles row, ascending: the requested ones, or the 21 trained levels.",
+      "items": { "type": "number" }
+    },
+    "median": {
+      "type": "array",
+      "description": "The 0.5 quantile for each future step (interpolated when 0.5 was not requested).",
+      "items": { "type": "number" }
+    },
+    "quantiles": {
+      "type": "array",
+      "description": "One row per future step, one value per quantile level.",
+      "items": { "type": "array", "items": { "type": "number" } }
+    },
+    "past_covariate_forecasts": {
+      "type": "array",
+      "description": "Present when past_covariates were given: one forecast per past covariate, in their order.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["median", "quantiles"],
+        "properties": {
+          "median": { "type": "array", "items": { "type": "number" } },
+          "quantiles": { "type": "array", "items": { "type": "array", "items": { "type": "number" } } }
+        }
+      }
+    }
+  }
+}

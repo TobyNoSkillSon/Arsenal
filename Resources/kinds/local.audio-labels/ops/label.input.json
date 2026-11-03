@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "audio",
+    "labels"
+  ],
+  "properties": {
+    "audio": {
+      "type": "object",
+      "description": "The sound or music clip. Clips over 10 seconds are summarised from the whole clip plus three 10-second crops.",
+      "x-arsenal-file": {
+        "accept": [
+          "audio/wav",
+          "audio/mpeg",
+          "audio/x-m4a",
+          "audio/flac"
+        ]
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    },
+    "labels": {
+      "type": "array",
+      "description": "Candidate descriptions to score the clip against, e.g. \"a dog barking\", \"rain on a window\", \"jazz piano\".",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1000
+      }
+    },
+    "return_embedding": {
+      "type": "boolean",
+      "default": false,
+      "description": "Also return the clip's 512-number audio embedding (unit length), for search."
+    }
+  }
+}

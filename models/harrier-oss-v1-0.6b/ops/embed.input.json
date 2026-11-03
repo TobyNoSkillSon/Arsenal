@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "input": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "const": "text"
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "type",
+              "text"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 1,
+      "maxItems": 2048
+    },
+    "task": {
+      "type": "string",
+      "enum": [
+        "query",
+        "document",
+        "similarity",
+        "classification",
+        "clustering"
+      ]
+    },
+    "instruction": {
+      "type": "string",
+      "maxLength": 32768
+    },
+    "dimensions": {
+      "type": "integer",
+      "minimum": 1024,
+      "maximum": 1024
+    },
+    "normalize": {
+      "type": "boolean"
+    },
+    "truncate": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "input"
+  ],
+  "additionalProperties": false
+}

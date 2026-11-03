@@ -1,0 +1,81 @@
+schema = 3
+id = "sam2.1-hiera-tiny"
+name = "SAM 2.1 Hiera Tiny"
+kind = "perception"
+summary = "Cuts out the object you click or box in a photo and returns its mask."
+description = "SAM 2.1 is Meta FAIR's Segment Anything Model 2 (2024, arXiv 2408.00714) with improved 2.1 checkpoints; this is the tiny size with a Hiera image encoder. It was trained on SA-1B images, Meta's SA-V videos (the largest video segmentation dataset at release) and internal data. The maker reports 76.5 J&F on SA-V test for video tracking; this entry runs the image predictor."
+purpose = "Cut out an object by click or box"
+publisher = "facebook"
+released = 2024
+params = "39.0M"
+tasks = ["mask-generation"]
+languages = ["mul"]
+good_for = ["Cutting one object out of a photo from a click or a box", "Several boxes at once: one mask per box from one image encoding", "Three alternative masks for an ambiguous click, each with a predicted quality score"]
+limits = ["Needs a click or box: it does not find objects by name or segment everything at once", "A single click can be ambiguous (a window or the whole cab); a box or a few clicks is more reliable", "Image path only: the video memory and tracking modules are not loaded, so it segments one photo at a time", "Masks are predicted at 256x256 and upsampled, so fine edges such as hair are soft", "No language input or output", "Parity with the maker's transformers Sam2Model on MPS FP16: mask logits cosine 0.99991 or better on six photo and prompt pairs"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/facebook/sam2.1-hiera-tiny"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/facebook/sam2.1-hiera-tiny/blob/de431c4043854a71d8101e17995dfe596bf101a5/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "facebook/sam2.1-hiera-tiny"
+revision = "de431c4043854a71d8101e17995dfe596bf101a5"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "preprocessor_config.json", "processor_config.json", "video_preprocessor_config.json"]
+
+[weights.sha256]
+"model.safetensors" = "48c14467e5cf9e51870511feb72c89688e82dd74523142c0538b663e193ac2a7"
+"config.json" = "860aff9751b139d83a4ad7df1e5535416fded533e0ead02625edbefcb9953cce"
+"preprocessor_config.json" = "6ebf229ee259368ce4a8d4f2fe893a72b053023710853e257253939e601f583d"
+"processor_config.json" = "f8a68e865cfad115c1c2763f3d93eca7b1c622da06da2a9273eb437fb2389b6d"
+"video_preprocessor_config.json" = "9fccfe5f464ec38c2f236d0e6a68e95511c80c22132fc2fa4b9f7b65f24fad95"
+
+[weights.bytes]
+"model.safetensors" = 155908064
+"config.json" = 5695
+"preprocessor_config.json" = 683
+"processor_config.json" = 95
+"video_preprocessor_config.json" = 705
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-sam2.1-hiera-tiny"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "segment"
+title = "Select and segment"
+input = "ops/segment.input.json"
+output = "file"
+output_schema = "ops/segment.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

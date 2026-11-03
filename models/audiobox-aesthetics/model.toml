@@ -1,0 +1,75 @@
+schema = 3
+id = "audiobox-aesthetics"
+name = "Audiobox Aesthetics"
+kind = "local.audio-quality"
+summary = "Rates a speech, music or sound clip on four axes: enjoyment, usefulness, production complexity and production quality, each about 1 to 10."
+description = "Audiobox Aesthetics is Meta's automatic quality rater for speech, music and sound (Tjandra et al., 2025). A WavLM Base+ encoder (12 layers, 103.9M parameters) feeds four small heads that predict Content Enjoyment, Content Usefulness, Production Complexity and Production Quality, as human raters would score them, with no reference recording. It was trained on clips from LibriTTS, Common Voice, EARS, MUSDB18, MusicCaps, AudioSet and PAM, each rated by 10 annotators on the four axes."
+purpose = "Rate audio quality"
+publisher = "facebook"
+released = 2025
+params = "103.9M"
+tasks = ["audio-classification"]
+languages = ["mul"]
+good_for = [
+  "Ranking takes, renders or recordings of the same kind by production quality (PQ)",
+  "Filtering a sound or music collection for clean, enjoyable clips before training or publishing",
+  "Spotting noisy, clipped or thin recordings without a clean reference",
+]
+limits = [
+  "Scores are predictions of human ratings, not measurements; compare clips of the same kind rather than reading one number alone.",
+  "Clips are scored in 10-second windows and averaged by length; a long file with one bad stretch gets an average, not the low point.",
+  "Very short clips (under about a second) mostly see silence padding and score less reliably.",
+  "Files not at 16 kHz are resampled with macOS's converter rather than the maker's torchaudio one; on a 1.6 s chime this moved scores by up to 0.1.",
+  "It does not read language, so Polish speech is rated like any other speech; its training speech was mostly English.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/facebook/audiobox-aesthetics"
+
+[licence]
+spdx = "CC-BY-4.0"
+name = "CC-BY-4.0"
+commercial = true
+url = "https://huggingface.co/facebook/audiobox-aesthetics/blob/9b1dd8e5df9af7216e836a98974fe3b82c56ded6/README.md"
+
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "facebook/audiobox-aesthetics"
+revision = "9b1dd8e5df9af7216e836a98974fe3b82c56ded6"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "a5a3c2412649cc2384ec525ffd5180ce6c4778f43bed6108e0a1303de04d014e"
+"config.json" = "0b8eabc5ced92cefed116a3aca8f1e59d2a33dc4d376b9e86dfb9c072e1d280d"
+
+[weights.bytes]
+"model.safetensors" = 415472992
+"config.json" = 492
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-audiobox-aesthetics"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

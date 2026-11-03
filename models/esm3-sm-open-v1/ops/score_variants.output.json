@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "method",
+    "scores",
+    "residues"
+  ],
+  "properties": {
+    "method": {
+      "type": "string"
+    },
+    "residues": {
+      "type": "integer"
+    },
+    "scores": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "variant",
+          "score"
+        ],
+        "properties": {
+          "variant": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "description": "log p(mutant) - log p(wild type), summed over the mutations; higher is more favoured."
+          }
+        }
+      }
+    }
+  }
+}

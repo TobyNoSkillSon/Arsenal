@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "messages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "role",
+          "content"
+        ],
+        "properties": {
+          "role": {
+            "enum": [
+              "system",
+              "user",
+              "assistant"
+            ]
+          },
+          "content": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "type",
+                    "text"
+                  ],
+                  "properties": {
+                    "type": {
+                      "const": "text"
+                    },
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "text": {
+      "type": "string"
+    },
+    "thinking": {
+      "type": "boolean"
+    }
+  },
+  "required": [],
+  "oneOf": [
+    {
+      "required": [
+        "messages"
+      ]
+    },
+    {
+      "required": [
+        "text"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,478 @@
+// Prompt/calibration port of laya-mlx 0.2.0 common.py and agent.py (Apache-2.0).
+import Foundation
+import MLX
+import ArsenalKernels
+import VerdictSmallMGEMM
+
+public enum LayaLoader: ModelLoader {
+    public static func load(id: String, snapshot: URL, bits: Int, recipe: KernelRecipe) throws -> any DecisionModel {
+        try LayaModel(id: id, snapshot: snapshot, bits: bits, recipe: recipe)
+    }
+    /// Arsenal: with the folder kernels the supervisor resolved for this chip and mode (`load.config.kernels`).
+    public static func load(id: String, snapshot: URL, bits: Int, recipe: KernelRecipe, kernels: FolderKernels?) throws -> any DecisionModel {
+        try LayaModel(id: id, snapshot: snapshot, bits: bits, recipe: recipe, kernels: kernels)
+    }
+}
+
+public struct LayaPreparedRow: Codable, Sendable {
+    public let ids: [Int]
+    public let markers: [Int]
+    public let qtype: Int
+    public init(ids: [Int], markers: [Int], qtype: Int) { self.ids = ids; self.markers = markers; self.qtype = qtype }
+}
+
+public final class LayaModel: DecisionModel, KernelPathReporting, InferencePathSwitching {
+    public let id: String
+    public var contextLimit: Int { prompt.contextLimit }
+    private let bits: Int
+    /// 0 and 16 both load plain fp16 Linear weights (LayaNetwork quantizes only 8 and 4), so both take the fp16 path.
+    private var fp16: Bool { bits == 0 || bits == 16 }
+    /// Rows chunked in length order under the token budget: fp16, and quantized unless VERDICT_LAYA_QUANT_SORT=0.
+    /// Quantized keep exact (unbucketed) lengths, so a single item's rows match the Python worker exactly.
+    private var sorted: Bool { Self.sortByLength && (fp16 || Self.quantizedSorted) }
+    public var residentBytes: Int { network.residentBytes }
+    public var kernelPath: String { network.kernelPath }
+    public var optimizedPathActive: Bool { prompt.hasFastTokenizer || network.windowedActive || network.smallMActive || network.exactDownActive }
+    public func useStockPath(_ stock: Bool) throws {
+        try prompt.useLibraryTokenizer(stock)
+        network.useStockAttention(stock)
+        questionCache.removeAll()   // templates hold token ids from the previous tokenizer
+    }
+    private let prompt: LayaPrompt
+    private let temperatures: [Double]
+    private let temperatureBuckets: [String: Double]
+    private let network: LayaNetwork
+    /// The weights the load-time gates ran on (part of their persisted keys: the gates compare model outputs).
+    private let weightsIdentity: String
+    /// Question templates and token counts survive across requests: agents repeat the same
+    /// questions, and tokenizing a long question (e.g. 20 options) dominated single-item calls.
+    /// Keyed by the question's source JSON, which fully determines both values, as exact UTF-8 bytes:
+    /// String keys compare by canonical equivalence, but the Multilingual tokenizer (no normalizer)
+    /// gives NFC and NFD spellings different token IDs.
+    static let sortByLength = ProcessInfo.processInfo.environment["VERDICT_LAYA_ARRIVAL_ORDER"] != "1"
+    static let tokenBudget = Int(ProcessInfo.processInfo.environment["VERDICT_LAYA_TOKEN_BUDGET"] ?? "") ?? 8192
+    static let padMultiple = Int(ProcessInfo.processInfo.environment["VERDICT_LAYA_PAD_MULTIPLE"] ?? "") ?? 16
+    static let parallelBytesFast = Int(ProcessInfo.processInfo.environment["VERDICT_LAYA_PARALLEL_BYTES"] ?? "") ?? Int.max
+    static let bucketAll = Int(ProcessInfo.processInfo.environment["VERDICT_LAYA_BUCKET"] ?? "") ?? 8
+    static let quantizedSorted = ProcessInfo.processInfo.environment["VERDICT_LAYA_QUANT_SORT"] != "0"
+    /// Rows per forward chunk (default 64, as the Python worker).
+    static let quantizedBudget = ProcessInfo.processInfo.environment["VERDICT_LAYA_QUANT_BUDGET"] != "0"
+    static let rowCap = max(1, Int(ProcessInfo.processInfo.environment["VERDICT_LAYA_ROWS"] ?? "") ?? 64)
+    static let exactSingle = Int(ProcessInfo.processInfo.environment["VERDICT_LAYA_EXACT_SINGLE"] ?? "") ?? 512
+    static let unmaskedFull = ProcessInfo.processInfo.environment["VERDICT_LAYA_UNMASKED"] != "0"
+    static let profile = ProcessInfo.processInfo.environment["VERDICT_PROFILE"] == "1"
+    private var questionCache: [Data: (template: LayaPrompt.QuestionTemplate, count: Int)] = [:]
+
+    /// 0 = the native fp16 weights (16 means the same).
+    public static let precisions: Set<Int> = [0, 16, 8, 4]
+    public static let precisionMessage = "Laya precision must be 16, 8 or 4 bits"
+    public init(id: String, snapshot: URL, bits: Int = 0, recipe: KernelRecipe = .fast, kernels: FolderKernels? = nil) throws {
+        guard ["laya-english", "laya-multilingual", "laya-typed-decisions"].contains(id) else { throw LayaError.invalid("Unknown Laya model '\(id)'") }
+        guard Self.precisions.contains(bits) else { throw LayaError.invalid(Self.precisionMessage) }
+        self.id = id; self.bits = bits
+        weightsIdentity = Self.weightsIdentity(snapshot)
+        let agent = try JSONSerialization.jsonObject(with: Data(contentsOf: snapshot.appendingPathComponent("rl_agent_config.json"))) as? [String: Any] ?? [:]
+        guard let headLayers = agent["head_layers"] as? Int, headLayers >= 0, agent["encoder"] != nil else { throw LayaError.invalid("Laya config must specify encoder and head_layers") }
+        let rawTemps = agent["temperature"] as? [Double] ?? [1, 1, 1]
+        let rawBuckets = agent["temperature_by_options"] as? [String: Double] ?? [:]
+        guard rawTemps.count == 3, (rawTemps + Array(rawBuckets.values)).allSatisfy({ $0.isFinite && $0 > 0 }) else { throw LayaError.invalid("Calibration temperatures must be finite and positive") }
+        temperatures = rawTemps.map { min(5, max(0.5, $0)) }
+        temperatureBuckets = rawBuckets.mapValues { min(5, max(0.5, $0)) }
+        prompt = try LayaPrompt(snapshot: snapshot)
+        network = try LayaNetwork(snapshot: snapshot, config: LayaEncoderConfiguration(data: Data(contentsOf: snapshot.appendingPathComponent("encoder/config.json"))), headLayers: headLayers, bits: bits)
+        // Quantizing leaves the fp16 checkpoint arrays (~0.7 GB) in MLX's buffer cache once the loader's
+        // locals go out of scope; return them now rather than at the first cache trim.
+        Memory.clearCache()
+        network.standardSelected = recipe == .standard
+        // The small-M tile kernel exists only when the folder resolved it to `linear.down` (Fast on its chip).
+        let down = kernels?.spec(FolderKernelRoute.site)
+        SmallMGEMM.tile = down?.entry == "smallm_tile" ? kernels?.candidate(FolderKernelRoute.site) : nil
+        network.qualifySmallM(model: id + "@" + weightsIdentity, bits: bits, allowed: recipe == .fast, modelCheck: smallMCheck)
+        if let kernels, let down { qualifyFolderKernel(kernels, down, recipe: recipe) }
+    }
+
+    /// Bump when the Exact check's inputs or comparison change (part of the persisted verdict key).
+    static let exactCheckRevision = "laya-exact-1"
+
+    /// Snapshot directory as Arsenal lays it out (`snapshots/<id>/<revision>/<dtype>`: the last two components name the
+    /// pinned revision) plus the checkpoint's size and mtime, which also tells apart development directories. stat
+    /// only: hashing ~0.7 GB at every load would cost more than the gate it saves.
+    static func weightsIdentity(_ snapshot: URL) -> String {
+        let directory = snapshot.standardizedFileURL.resolvingSymlinksInPath()
+        let attrs = try? FileManager.default.attributesOfItem(atPath: directory.appendingPathComponent("model.safetensors").path)
+        let size = (attrs?[.size] as? NSNumber)?.intValue ?? 0
+        let mtime = Int((attrs?[.modificationDate] as? Date)?.timeIntervalSince1970 ?? 0)
+        return directory.pathComponents.suffix(2).joined(separator: "/") + ":\(size):\(mtime)"
+    }
+
+    /// The folder kernel on `linear.down`: smallm_tile reports SmallMGate's verdict; splitk_exact must reproduce the
+    /// stock path bit for bit (ExactGate) on the built-in items, each alone and all together, and must have run.
+    private func qualifyFolderKernel(_ kernels: FolderKernels, _ spec: KernelSpec, recipe: KernelRecipe) {
+        let site = FolderKernelRoute.site
+        guard recipe != .standard else { kernels.deactivate(site, reason: "Standard selected"); return }
+        switch spec.entry {
+        case "smallm_tile":
+            if network.smallMActive { kernels.activate(site, reason: network.smallMPath) } else { kernels.deactivate(site, reason: network.smallMPath) }
+        case "splitk_exact":
+            guard let kernel = kernels.candidate(site) else { return }
+            guard SmallMGEMM.tensorOpsAvailable else { kernels.deactivate(site, reason: "MLX splits K on tensor-op GPUs only (M5 class)"); return }
+            guard fp16, LayaNetwork.activationType == .float16 else { kernels.deactivate(site, reason: "\(bits)-bit weights stay on MLX"); return }
+            // ExactGate refuses (and never persists) a pass from a run that did not dispatch the kernel.
+            let result = ExactGate.qualify(kernels: [kernel], model: id, dtype: "fp16", weights: weightsIdentity,
+                                           checkRevision: Self.exactCheckRevision) { on in
+                exactCheckOutputs(on ? kernel : nil)
+            }
+            Memory.clearCache()
+            if let failure = kernel.failure {
+                kernels.deactivate(site, reason: failure)
+            } else if !result.pass {
+                kernels.deactivate(site, reason: "Exact check failed: " + result.detail)
+            } else {
+                network.activateExactDown(kernel)
+                kernels.activate(site, reason: result.detail + (result.persisted ? " (persisted)" : ""))
+            }
+        default:
+            kernels.deactivate(site, reason: "this runner has no host code for entry \(spec.entry)")
+        }
+    }
+
+    /// Logits of every built-in item alone, then of all their rows in one chunk (larger M), with the exact kernel
+    /// on (`kernel`) or off. Empty on any error, which fails the check.
+    private func exactCheckOutputs(_ kernel: FolderMLXKernel?) -> [MLXArray] {
+        network.withExactDown(kernel) {
+            var outputs: [MLXArray] = [], all: [LayaPreparedRow] = []
+            for (text, questions) in Self.gateItems {
+                guard let prepared = try? questions.map({ try prompt.prepare(Item(text: text), $0) }), let y = try? launch(prepared) else { return [] }
+                eval(y); outputs.append(y); all += prepared
+            }
+            guard let y = try? launch(all) else { return [] }
+            eval(y); outputs.append(y)
+            return outputs
+        }
+    }
+
+    /// Built-in items for the small-M gate's task check: single-item requests as served (1–2 rows, M 16–128 after
+    /// the bucket), short and medium texts, all three question kinds.
+    static let gateItems: [(String, [Question])] = {
+        let money = Question(id: "money", kind: .noul, instructions: "Does the writer ask for money back?", criteria: [])
+        let tone = Question(id: "tone", kind: .choice, instructions: "What is the tone?",
+                            criteria: [("angry", "angry or upset"), ("neutral", "neutral"), ("happy", "pleased")])
+        let remote = Question(id: "remote", kind: .noul, instructions: "Is the job fully remote?", criteria: [])
+        let stack = Question(id: "stack", kind: .choice, instructions: "Which stack?",
+                             criteria: [("ios", "iOS or Swift"), ("web", "web frontend"), ("backend", "backend"), ("other", "anything else")])
+        let satisfied = Question(id: "satisfied", kind: .score, instructions: "How satisfied is the customer?",
+                                 criteria: [("0", "very unhappy"), ("1", "unhappy"), ("2", "neutral"), ("3", "happy"), ("4", "very happy")])
+        let question = Question(id: "question", kind: .noul, instructions: "Is this a question?", criteria: [])
+        return [
+            ("I want my money back.", [money]),
+            ("I want my money back. The blender stopped working after two days and nobody answers my emails.", [money, tone]),
+            ("Senior iOS engineer, fully remote within EU time zones. Swift, SwiftUI, Combine; five years of experience.", [remote, stack]),
+            ("We are hiring a backend developer for our Warsaw office: Go, PostgreSQL and Kubernetes, three days on site.", [remote, stack]),
+            ("The delivery came two days late and the box was damaged, but support replaced the vase within a week.", [satisfied, tone]),
+            ("Thanks a lot, the new version fixed the crash and the app feels much faster now!", [satisfied]),
+            ("Can I change the shipping address after the order has been dispatched?", [question, tone]),
+            ("Frontend role: React, TypeScript and design systems. Remote first, occasional team weeks in Berlin. We offer a "
+             + "learning budget, a four-day week in summer and a relaxed culture where nobody pretends to be busy.", [remote, stack]),
+        ]
+    }()
+
+    /// The small-M gate's model stage: every built-in single item with the kernel off and on. Pass when all logits
+    /// are finite, their relative RMS is ≤ `SmallMGate.logitsBound` and the chosen option is unchanged on every row
+    /// whose stock top-two logit margin is ≥ `SmallMGate.tieMargin` (near-ties are counted, not judged).
+    private func smallMCheck() -> (pass: Bool, detail: String) {
+        var diff2: Double = 0, ref2: Double = 0, rows = 0, changed = 0, ties = 0
+        do {
+            for (text, questions) in Self.gateItems {
+                let prepared = try questions.map { try prompt.prepare(Item(text: text), $0) }
+                let stock = try network.withSmallM(false) { try collect(launch(prepared), rows: prepared, serving: false) }
+                let fast = try network.withSmallM(true) { try collect(launch(prepared), rows: prepared, serving: false) }
+                for (r, row) in prepared.enumerated() {
+                    let k = max(2, row.markers.count)
+                    let a = Array(stock[r].prefix(k)), b = Array(fast[r].prefix(k))
+                    for (x, y) in zip(a, b) { diff2 += Double(y - x) * Double(y - x); ref2 += Double(x) * Double(x) }
+                    let order = a.indices.sorted { a[$0] > a[$1] }
+                    rows += 1
+                    if a[order[0]] - a[order[1]] < SmallMGate.tieMargin { ties += 1; continue }
+                    if b.indices.max(by: { b[$0] < b[$1] }) != order[0] { changed += 1 }
+                }
+            }
+        } catch { return (false, "\(error)".prefix(120).description) }
+        let rel = ref2 > 0 ? Float((diff2 / ref2).squareRoot()) : .infinity
+        let detail = String(format: "logits rel %.1e, %d/%d answers unchanged, %d near-ties", rel, rows - ties - changed, rows - ties, ties)
+        return (rel.isFinite && rel <= SmallMGate.logitsBound && changed == 0, detail)
+    }
+
+    public func encode(_ text: String, addSpecialTokens: Bool = false) -> [Int] {
+        prompt.encode(text, addSpecialTokens: addSpecialTokens)
+    }
+
+    private func typeIndex(_ question: Question) -> Int {
+        switch question.kind { case .choice: 0; case .score: 1; case .noul: 2 }
+    }
+
+    /// Python common.build_sequence, including literal-mask replacement and per-option cap.
+    public func prepare(_ item: Item, _ question: Question) throws -> LayaPreparedRow {
+        try prompt.prepare(item, question)
+    }
+
+    /// Raw logits are exposed for numerical parity fixtures, not through the public HTTP API.
+    public func logits(_ rows: [LayaPreparedRow]) throws -> [[Float]] {
+        try collect(launch(rows), rows: rows)
+    }
+
+    /// Build the chunk's inputs and queue its forward on the GPU without waiting.
+    private func launch(_ rows: [LayaPreparedRow]) throws -> MLXArray {
+        guard !rows.isEmpty, rows.count <= Self.rowCap else { throw LayaError.invalid("Expected 1...\(Self.rowCap) Laya rows") }
+        let length = paddedLength(rows)
+        // No padding in the chunk (e.g. a long row alone): full-attention layers skip the key mask
+        // (−20% per global layer at 2k–8k tokens; an all-true mask changes nothing).
+        return network.launch(inputs(rows, length: length), unmasked: Self.unmaskedFull && rows.allSatisfy { $0.ids.count == length })
+    }
+
+    private func inputs(_ rows: [LayaPreparedRow], length: Int) -> [MLXArray] {
+        let count = max(2, rows.map { $0.markers.count }.max()!)
+        var ids = [Int32](repeating: Int32(prompt.padID), count: rows.count * length)
+        var valid = [Bool](repeating: false, count: ids.count)
+        var positions = [Int32](repeating: 0, count: rows.count * count)
+        var markerMask = [Bool](repeating: false, count: positions.count)
+        for (i, row) in rows.enumerated() {
+            for (j, token) in row.ids.enumerated() { ids[i * length + j] = Int32(token); valid[i * length + j] = true }
+            for (j, marker) in row.markers.enumerated() { positions[i * count + j] = Int32(marker); markerMask[i * count + j] = true }
+        }
+        return [MLXArray(ids, [rows.count, length]), MLXArray(valid, [rows.count, length]), MLXArray(positions, [rows.count, count]), MLXArray(markerMask, [rows.count, count]), MLXArray(rows.map { Int32($0.qtype) })]
+    }
+
+    /// Arsenal intake: one unpadded row through the component observer (LayaIntake.swift).
+    func intakeForward(_ row: LayaPreparedRow, session: LayaIntakeSession, prefix: String) -> MLXArray {
+        network.withIntake(session, prefix: prefix) { network.forward(inputs([row], length: row.ids.count), unmasked: true) }
+    }
+    var intakeLayers: Int { network.config.num_hidden_layers }
+    var intakeHeadLayers: Int { network.headLayers }
+
+    /// Sequence length a chunk is padded to. fp16 rounds up to a bucket (VERDICT_LAYA_PAD_MULTIPLE, default 16, for
+    /// chunks of <= 8 rows; VERDICT_LAYA_BUCKET, default 8, above); quantized models keep exact lengths.
+    /// Still worth it without compile (fewer distinct shapes for MLX's kernel and buffer reuse), measured
+    /// 24 Sep: jobs batches 22-23% vs 42-44% helper CPU at the same items/s; single items 4.3 vs 5.1 ms
+    /// CPU and 7.5 vs 7.9 ms wall p50.
+    private func paddedLength(_ rows: [LayaPreparedRow]) -> Int {
+        let length = rows.map { $0.ids.count }.max() ?? 0
+        // A long row alone keeps its exact length: shape reuse is moot there, and no padding means no mask.
+        guard fp16, !(rows.count == 1 && length >= Self.exactSingle) else { return length }
+        let step = rows.count <= 8 ? Self.padMultiple : Self.bucketAll
+        return step > 1 ? (length + step - 1) / step * step : length
+    }
+
+    /// Wait for a launched chunk and split its logits per row.
+    private func collect(_ output: MLXArray, rows: [LayaPreparedRow], serving: Bool = true) throws -> [[Float]] {
+        let count = max(2, rows.map { $0.markers.count }.max()!)
+        var flat = output.asArray(Float.self)
+        if serving && OptimizedPathFault.poisons(optimized: optimizedPathActive) { flat[0] = .nan }
+        if serving && SmallMRoute.injectNaN && network.smallMActive { flat[0] = .nan }
+        guard flat.allSatisfy(\.isFinite) else { throw LayaError.invalid("Non-finite model outputs; retry with dtype='float32'") }
+        return rows.indices.map { Array(flat[($0 * count)..<($0 * count + count)]) }
+    }
+
+    public func tokenCount(_ item: Item, _ questions: [Question]) throws -> Int {
+        // The reference worker's backend.encode() defaults to adding tokenizer special tokens.
+        encode(item.text, addSpecialTokens: true).count + (questions.map { encode($0.sourceJSON ?? Self.questionJSON($0), addSpecialTokens: true).count }.max() ?? 0) + 8
+    }
+
+    public func predict(_ items: [Item], _ questions: [Question]) throws -> [ItemResult] {
+        try predict(groups: [RequestGroup(items: items, questions: questions)])[0].results
+    }
+
+    /// Every group's rows in one sorted, chunked pass. Rows are laid out group by group, item by item, question by
+    /// question, so one group is exactly the single-request pass.
+    public func predict(groups: [RequestGroup]) throws -> [GroupResult] {
+        do { return try predictPass(groups) } catch let error as LayaError where network.smallMActive && error.nonFinite {
+            // Runtime fallback for the small-M kernel alone: rerun without it and keep it off until reload.
+            network.disableSmallM()
+            FileHandle.standardError.write(Data("{\"smallm_fallback\":\"\(id)\",\"reason\":\"non-finite output\"}\n".utf8))
+            return try predictPass(groups)
+        }
+    }
+
+    private func predictPass(_ groups: [RequestGroup]) throws -> [GroupResult] {
+        guard groups.allSatisfy({ !$0.questions.isEmpty }) else { throw LayaError.invalid("questions must be a nonempty object") }
+        try OptimizedPathFault.check(optimized: optimizedPathActive)
+        let clock = ContinuousClock(), t0 = clock.now
+        let prepared = try groups.map { try $0.questions.map(cachedQuestion) }
+        var results = groups.map { Array(repeating: ItemResult.answers([:]), count: $0.items.count) }
+        var answers = groups.map { Array(repeating: Answers(), count: $0.items.count) }
+        var tokens = groups.map { Array(repeating: 0, count: $0.items.count) }
+        var rows: [LayaPreparedRow] = [], metadata: [(group: Int, item: Int, question: Question)] = []
+        let states = encodeStates(groups.flatMap { $0.items.map(\.text) })
+        var next = 0
+        for (g, group) in groups.enumerated() {
+            let questionCount = prepared[g].map(\.count).max() ?? 0
+            let templates = prepared[g].map(\.template)
+            for i in group.items.indices {
+                let state = states[next]; next += 1
+                let count = state.count + questionCount + 8
+                if count > contextLimit {
+                    results[g][i] = .error("Item needs about \(count) tokens; \(id) accepts \(contextLimit). Shorten it or split it.")
+                    continue
+                }
+                for (question, template) in zip(group.questions, templates) {
+                    let row = prompt.row(stateIDs: state.ids, template: template)
+                    tokens[g][i] += row.ids.count
+                    rows.append(row)
+                    metadata.append((g, i, question))
+                }
+            }
+        }
+        let t1 = clock.now
+        var gpu = Duration.zero, padded = 0
+        // fp16: chunk rows in length order so each 64-row forward pads only to similar lengths.
+        // Not always bit-identical to the Python worker's arrival-order chunks: MLX picks matmul tiling
+        // from the chunk's total size (e.g. M*N >= 2^20), so a row in a small chunk (a lone tail row) can
+        // differ in the 4th decimal (measured 11/1261 random batched items, max 0.0031; arrival order,
+        // VERDICT_LAYA_ARRIVAL_ORDER=1, matched 1261/1261). Quantized (8/4-bit) are sorted too (their results
+        // depend on chunk shape: 9-set batches max |dp| 0.001, 0 changed answers; mixed requests ~2x faster).
+        let order = sorted ? rows.indices.sorted { (rows[$0].ids.count, $0) < (rows[$1].ids.count, $1) } : Array(rows.indices)
+        // Double-buffered: queue chunk k+1 on the GPU before waiting for chunk k, so the CPU encodes the
+        // next graph while the GPU runs the current one. Same computation, only scheduling changes.
+        // At most two chunks are in flight, which bounds activation memory.
+        func finish(_ slots: [Int], _ output: MLXArray) throws {
+            let chunk = slots.map { rows[$0] }
+            let values = try collect(output, rows: chunk)
+            for (r, row) in chunk.enumerated() {
+                let (g, index, question) = metadata[slots[r]]
+                answers[g][index][question.id] = answer(values[r], optionCount: row.markers.count, question: question)
+            }
+        }
+        let gpuStart = clock.now
+        var inflight: ([Int], MLXArray)? = nil
+        for slots in chunks(order, rows: rows) {
+            let chunk = slots.map { rows[$0] }
+            let output = try launch(chunk)
+            padded += chunk.count * paddedLength(chunk)
+            if let (previous, previousOutput) = inflight { try finish(previous, previousOutput) }
+            inflight = (slots, output)
+        }
+        if let (previous, previousOutput) = inflight { try finish(previous, previousOutput) }
+        gpu = clock.now - gpuStart
+        for g in groups.indices {
+            for i in groups[g].items.indices { if case .answers = results[g][i] { results[g][i] = .answers(answers[g][i]) } }
+        }
+        if Self.profile {
+            let total = clock.now - t0, real = rows.reduce(0) { $0 + $1.ids.count }
+            func ms(_ d: Duration) -> String { String(format: "%.1f", Double(d.components.attoseconds) / 1e15 + Double(d.components.seconds) * 1000) }
+            FileHandle.standardError.write(Data("profile \(id) items=\(states.count) rows=\(rows.count) tokens=\(real) padded=\(padded) prepare=\(ms(t1 - t0))ms forward=\(ms(gpu))ms post=\(ms(total - (t1 - t0) - gpu))ms total=\(ms(total))ms groups=\(groups.count)\n".utf8))
+        }
+        return groups.indices.map { GroupResult(results: results[$0], inputTokens: tokens[$0]) }
+    }
+
+    /// Tokenize item texts across CPU cores. Same tokenizer function, same tokens; the
+    /// tokenizer (swift-transformers PreTrainedTokenizer) is Sendable with read-only state.
+    /// Serial below ~8 items or ~4 KB of text, where thread hand-off costs more than it saves.
+    private func encodeStates(_ texts: [String]) -> [(ids: [Int], count: Int)] {
+        let prompt = self.prompt, bytes = texts.reduce(0) { $0 + $1.utf8.count }
+        // The fast tokenizer encodes ~5 MB/s per core: go parallel only when a serial pass would take
+        // several milliseconds; below that, thread hand-off and word-cache locking cost more CPU than they save.
+        let threshold = prompt.hasFastTokenizer ? Self.parallelBytesFast : 4096   // fast: serial measured best (35% vs 50% CPU, same speed)
+        if texts.count < 8 || bytes < threshold { return texts.map { prompt.encodeState($0) } }
+        var out = [(ids: [Int], count: Int)](repeating: ([], 0), count: texts.count)
+        out.withUnsafeMutableBufferPointer { buffer in
+            let base = buffer.baseAddress!
+            DispatchQueue.concurrentPerform(iterations: texts.count) { i in base[i] = prompt.encodeState(texts[i]) }
+        }
+        return out
+    }
+
+    /// Chunks of at most 64 rows. Length-sorted, a chunk also closes when its padded size would exceed the
+    /// token budget, so a request of long items cannot allocate gigabytes of activations at once.
+    private func chunks(_ order: [Int], rows: [LayaPreparedRow]) -> [[Int]] {
+        guard sorted else {
+            // Arrival order (quantized): plain 64-row chunks, except that a chunk also closes when its padded
+            // size would exceed the token budget. Only chunks holding long rows change shape; 64 rows of ~7.5k
+            // tokens otherwise peaked at 8.9 GB.
+            guard Self.quantizedBudget else { return stride(from: 0, to: order.count, by: Self.rowCap).map { Array(order[$0..<min($0 + Self.rowCap, order.count)]) } }
+            var out: [[Int]] = [], current: [Int] = [], longest = 0
+            for slot in order {
+                let length = rows[slot].ids.count
+                if !current.isEmpty && (current.count == Self.rowCap || (current.count + 1) * max(longest, length) > Self.tokenBudget) {
+                    out.append(current); current = []; longest = 0
+                }
+                current.append(slot); longest = max(longest, length)
+            }
+            if !current.isEmpty { out.append(current) }
+            return out
+        }
+        var out: [[Int]] = [], current: [Int] = []
+        for slot in order {
+            let length = rows[slot].ids.count   // ascending, so this row sets the padded length
+            if !current.isEmpty && (current.count == Self.rowCap || (current.count + 1) * length > Self.tokenBudget) { out.append(current); current = [] }
+            current.append(slot)
+        }
+        if !current.isEmpty { out.append(current) }
+        return out
+    }
+
+    private func cachedQuestion(_ question: Question) throws -> (template: LayaPrompt.QuestionTemplate, count: Int) {
+        let json = question.sourceJSON ?? Self.questionJSON(question), key = Data(json.utf8)
+        if let hit = questionCache[key] { return hit }
+        let value = (template: try prompt.template(question), count: encode(json, addSpecialTokens: true).count)
+        if questionCache.count >= 512 { questionCache.removeAll(keepingCapacity: true) }
+        questionCache[key] = value
+        return value
+    }
+
+    /// Temperature-calibrated option probabilities, before rounding.
+    func calibratedProbabilities(_ logits: [Float], optionCount k: Int, question: Question) -> [Float] {
+        let bucket = k <= 2 ? "2" : k <= 5 ? "3-5" : k <= 10 ? "6-10" : "11+"
+        let temperature = Float(temperatureBuckets[question.kind.rawValue + ":" + bucket] ?? temperatures[typeIndex(question)])
+        let z = logits.prefix(k).map { $0 / temperature }, maxZ = z.max()!
+        let exponents = z.map { exp($0 - maxZ) }, total = exponents.reduce(Float(0), +)
+        return exponents.map { $0 / total }
+    }
+
+    private func answer(_ logits: [Float], optionCount k: Int, question: Question) -> Answer {
+        let p = calibratedProbabilities(logits, optionCount: k, question: question)
+        let entropy = -p.reduce(Float(0)) { $0 + $1 * log(min(1, max(1e-12, $1))) }
+        // NumPy's weak scalar promotion keeps this expression in float32.
+        let confidence: Float = k < 2 ? 1 : min(1, max(0, 1 - entropy / Float(log(Double(k)))))
+        func rounded(_ value: Double) -> Double { (value * 10000).rounded(.toNearestOrEven) / 10000 }
+        var result = Answer(); result.confidence = rounded(Double(confidence))
+        switch question.kind {
+        case .noul:
+            result.noul = rounded(Double(p[1])); result.confidence = rounded(max(Double(p[1]), 1 - Double(p[1])))
+        case .choice:
+            let winner = p.firstIndex(of: p.max()!)!
+            result.choice = question.criteria[winner].0
+            result.probabilities = Probabilities(labels: question.criteria.map(\.0), values: p.map { rounded(Double($0)) })
+        case .score:
+            result.score = rounded(p.enumerated().reduce(0) { $0 + Double($1.offset) * Double($1.element) })
+            result.probabilities = Probabilities(labels: p.indices.map(String.init), values: p.map { rounded(Double($0)) })
+        }
+        return result
+    }
+
+    // Ordered Python json.dumps(... ensure_ascii=False) for ordinary client Question shapes.
+    // The service should retain raw question JSON for arbitrary criteria shapes / key order.
+    static func questionJSON(_ question: Question) -> String {
+        func quote(_ s: String) -> String {
+            let bytes = try! JSONSerialization.data(withJSONObject: s, options: [.fragmentsAllowed, .withoutEscapingSlashes])
+            return String(decoding: bytes, as: UTF8.self)
+        }
+        var fields = ["\"type\": " + quote(question.kind.rawValue), "\"instructions\": " + quote(question.instructions)]
+        switch question.kind {
+        case .choice:
+            fields.append("\"criteria\": {" + question.criteria.map { quote($0.0) + ": " + quote($0.1) }.joined(separator: ", ") + "}")
+        case .score:
+            fields.append("\"criteria\": [" + question.criteria.map { quote($0.1) }.joined(separator: ", ") + "]")
+        case .noul:
+            if !question.criteria.isEmpty { fields.append("\"criteria\": {" + question.criteria.map { quote($0.0) + ": " + quote($0.1) }.joined(separator: ", ") + "}") }
+        }
+        return "{" + fields.joined(separator: ", ") + "}"
+    }
+}
+
+extension LayaModel: TokenizerPathReporting { public var tokenizerPath: String { prompt.hasFastTokenizer ? "fast" : "library" } }
+
+extension LayaModel: SmallMReporting { public var smallMPath: String { network.smallMPath } }
+
+extension LayaError {
+    /// The collect() failure for NaN/Inf logits (the small-M runtime fallback reruns only these).
+    var nonFinite: Bool { if case .invalid(let message) = self { return message.hasPrefix("Non-finite") }; return false }
+}

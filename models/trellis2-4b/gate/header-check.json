@@ -1,0 +1,199 @@
+{
+  "status": "names-and-shapes-pass",
+  "weight_payload_bytes_read": 0,
+  "parameter_inventory": "Independent TrellisShapeSpec, exported by --trellis-spec full",
+  "parameter_inventory_sha256": "7dfe81553f5f3e0758bb88bbcc4f326b9546ac379d56ce6fab68c791a809111e",
+  "components": {
+    "struct_flow": {
+      "parameters": 640,
+      "source_dtypes": {
+        "BF16": 640
+      },
+      "eligible_matrices": 214,
+      "eligible_parameter_values": 1290940416,
+      "total_parameter_values": 1292179976,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "shape_flow_512": {
+      "parameters": 640,
+      "source_dtypes": {
+        "BF16": 640
+      },
+      "eligible_matrices": 214,
+      "eligible_parameter_values": 1290977280,
+      "total_parameter_values": 1292253728,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "shape_flow_1024": {
+      "parameters": 640,
+      "source_dtypes": {
+        "BF16": 640
+      },
+      "eligible_matrices": 214,
+      "eligible_parameter_values": 1290977280,
+      "total_parameter_values": 1292253728,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "tex_flow_512": {
+      "parameters": 640,
+      "source_dtypes": {
+        "BF16": 640
+      },
+      "eligible_matrices": 215,
+      "eligible_parameter_values": 1291075584,
+      "total_parameter_values": 1292302880,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "tex_flow_1024": {
+      "parameters": 640,
+      "source_dtypes": {
+        "BF16": 640
+      },
+      "eligible_matrices": 215,
+      "eligible_parameter_values": 1291075584,
+      "total_parameter_values": 1292302880,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "shape_dec": {
+      "parameters": 292,
+      "source_dtypes": {
+        "F16": 292
+      },
+      "eligible_matrices": 69,
+      "eligible_parameter_values": 71843264,
+      "total_parameter_values": 474231463,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "tex_dec": {
+      "parameters": 284,
+      "source_dtypes": {
+        "F16": 284
+      },
+      "eligible_matrices": 65,
+      "eligible_parameter_values": 71827840,
+      "total_parameter_values": 474216006,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "struct_dec": {
+      "parameters": 74,
+      "source_dtypes": {
+        "F16": 36,
+        "F32": 38
+      },
+      "eligible_matrices": 0,
+      "eligible_parameter_values": 0,
+      "total_parameter_values": 73671201,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    },
+    "dino": {
+      "parameters": 415,
+      "source_dtypes": {
+        "F32": 415
+      },
+      "eligible_matrices": 144,
+      "eligible_parameter_values": 301989888,
+      "total_parameter_values": 303129600,
+      "layout": "checkpoint identity; spatial permutations occur at execution"
+    }
+  },
+  "dtype_status": "BF16 and F32 source tensors require the declared streamed FP16 cast; trained cast quality is unqualified.",
+  "parameters": 4265,
+  "eligible_matrices": 1350,
+  "total_parameter_values": 7786541462,
+  "eligible_parameter_values": 6900707136,
+  "required_component_header_bytes_read": 437176,
+  "range_validation": {
+    "dino": {
+      "repo": "camenduru/dinov3-vitl16-pretrain-lvd1689m",
+      "revision": "3c276edd87d6f6e569ff0c4400e086807d0f3881",
+      "file": "model.safetensors",
+      "bytes_read": 41408,
+      "tensors": 415,
+      "planned_casts": 415,
+      "unqualified_BF16_to_F16_differences": 0,
+      "tensor_payload_bytes_read": 0
+    },
+    "shape_dec": {
+      "repo": "microsoft/TRELLIS.2-4B",
+      "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+      "file": "ckpts/shape_dec_next_dc_f16c32_fp16.safetensors",
+      "bytes_read": 27568,
+      "tensors": 292,
+      "planned_casts": 0,
+      "unqualified_BF16_to_F16_differences": 0,
+      "tensor_payload_bytes_read": 0
+    },
+    "shape_flow_1024": {
+      "repo": "microsoft/TRELLIS.2-4B",
+      "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+      "file": "ckpts/slat_flow_img2shape_dit_1_3B_1024_bf16.safetensors",
+      "bytes_read": 66968,
+      "tensors": 640,
+      "planned_casts": 0,
+      "unqualified_BF16_to_F16_differences": 640,
+      "tensor_payload_bytes_read": 0
+    },
+    "shape_flow_512": {
+      "repo": "microsoft/TRELLIS.2-4B",
+      "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+      "file": "ckpts/slat_flow_img2shape_dit_1_3B_512_bf16.safetensors",
+      "bytes_read": 66968,
+      "tensors": 640,
+      "planned_casts": 0,
+      "unqualified_BF16_to_F16_differences": 640,
+      "tensor_payload_bytes_read": 0
+    },
+    "struct_dec": {
+      "repo": "microsoft/TRELLIS-image-large",
+      "revision": "25e0d31ffbebe4b5a97464dd851910efc3002d96",
+      "file": "ckpts/ss_dec_conv3d_16l8_fp16.safetensors",
+      "bytes_read": 6560,
+      "tensors": 74,
+      "planned_casts": 38,
+      "unqualified_BF16_to_F16_differences": 0,
+      "tensor_payload_bytes_read": 0
+    },
+    "struct_flow": {
+      "repo": "microsoft/TRELLIS.2-4B",
+      "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+      "file": "ckpts/ss_flow_img_dit_1_3B_64_bf16.safetensors",
+      "bytes_read": 66968,
+      "tensors": 640,
+      "planned_casts": 0,
+      "unqualified_BF16_to_F16_differences": 640,
+      "tensor_payload_bytes_read": 0
+    },
+    "tex_dec": {
+      "repo": "microsoft/TRELLIS.2-4B",
+      "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+      "file": "ckpts/tex_dec_next_dc_f16c32_fp16.safetensors",
+      "bytes_read": 26800,
+      "tensors": 284,
+      "planned_casts": 0,
+      "unqualified_BF16_to_F16_differences": 0,
+      "tensor_payload_bytes_read": 0
+    },
+    "tex_flow_1024": {
+      "repo": "microsoft/TRELLIS.2-4B",
+      "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+      "file": "ckpts/slat_flow_imgshape2tex_dit_1_3B_1024_bf16.safetensors",
+      "bytes_read": 66968,
+      "tensors": 640,
+      "planned_casts": 0,
+      "unqualified_BF16_to_F16_differences": 640,
+      "tensor_payload_bytes_read": 0
+    },
+    "tex_flow_512": {
+      "repo": "microsoft/TRELLIS.2-4B",
+      "revision": "af44b45f2e35a493886929c6d786e563ec68364d",
+      "file": "ckpts/slat_flow_imgshape2tex_dit_1_3B_512_bf16.safetensors",
+      "bytes_read": 66968,
+      "tensors": 640,
+      "planned_casts": 0,
+      "unqualified_BF16_to_F16_differences": 640,
+      "tensor_payload_bytes_read": 0
+    }
+  },
+  "planned_F32_to_F16_casts": 453,
+  "unqualified_BF16_to_F16_differences": 3200
+}

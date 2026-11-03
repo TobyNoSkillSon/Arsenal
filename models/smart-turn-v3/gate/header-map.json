@@ -1,0 +1,577 @@
+{
+  "ignore": [],
+  "tensors": {
+    "inner.classifier.0.bias": {
+      "name": "classifier_0.bias"
+    },
+    "inner.classifier.0.weight": {
+      "name": "classifier_0.weight"
+    },
+    "inner.classifier.1.bias": {
+      "name": "classifier_1.bias"
+    },
+    "inner.classifier.1.weight": {
+      "name": "classifier_1.weight"
+    },
+    "inner.classifier.4.bias": {
+      "name": "classifier_4.bias"
+    },
+    "inner.classifier.4.weight": {
+      "name": "classifier_4.weight"
+    },
+    "inner.classifier.6.bias": {
+      "name": "classifier_6.bias"
+    },
+    "inner.classifier.6.weight": {
+      "name": "classifier_6.weight"
+    },
+    "inner.encoder.conv1.bias": {
+      "name": "encoder.conv1.bias"
+    },
+    "inner.encoder.conv1.weight": {
+      "name": "encoder.conv1.weight",
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "inner.encoder.conv2.bias": {
+      "name": "encoder.conv2.bias"
+    },
+    "inner.encoder.conv2.weight": {
+      "name": "encoder.conv2.weight",
+      "permutation": [
+        0,
+        2,
+        1
+      ]
+    },
+    "inner.encoder.embed_positions.weight": {
+      "name": "encoder.embed_positions.weight"
+    },
+    "inner.encoder.layer_norm.bias": {
+      "name": "encoder.layer_norm.bias"
+    },
+    "inner.encoder.layer_norm.weight": {
+      "name": "encoder.layer_norm.weight"
+    },
+    "inner.encoder.layers.0.fc1.bias": {
+      "name": "encoder.layers.0.fc1.bias"
+    },
+    "inner.encoder.layers.0.fc2.bias": {
+      "name": "encoder.layers.0.fc2.bias"
+    },
+    "inner.encoder.layers.0.final_layer_norm.bias": {
+      "name": "encoder.layers.0.final_layer_norm.bias"
+    },
+    "inner.encoder.layers.0.final_layer_norm.weight": {
+      "name": "encoder.layers.0.final_layer_norm.weight"
+    },
+    "inner.encoder.layers.0.self_attn.out_proj.bias": {
+      "name": "encoder.layers.0.self_attn.out_proj.bias"
+    },
+    "inner.encoder.layers.0.self_attn.q_proj.bias": {
+      "name": "encoder.layers.0.self_attn.q_proj.bias"
+    },
+    "inner.encoder.layers.0.self_attn.v_proj.bias": {
+      "name": "encoder.layers.0.self_attn.v_proj.bias"
+    },
+    "inner.encoder.layers.0.self_attn_layer_norm.bias": {
+      "name": "encoder.layers.0.self_attn_layer_norm.bias"
+    },
+    "inner.encoder.layers.0.self_attn_layer_norm.weight": {
+      "name": "encoder.layers.0.self_attn_layer_norm.weight"
+    },
+    "inner.encoder.layers.1.fc1.bias": {
+      "name": "encoder.layers.1.fc1.bias"
+    },
+    "inner.encoder.layers.1.fc2.bias": {
+      "name": "encoder.layers.1.fc2.bias"
+    },
+    "inner.encoder.layers.1.final_layer_norm.bias": {
+      "name": "encoder.layers.1.final_layer_norm.bias"
+    },
+    "inner.encoder.layers.1.final_layer_norm.weight": {
+      "name": "encoder.layers.1.final_layer_norm.weight"
+    },
+    "inner.encoder.layers.1.self_attn.out_proj.bias": {
+      "name": "encoder.layers.1.self_attn.out_proj.bias"
+    },
+    "inner.encoder.layers.1.self_attn.q_proj.bias": {
+      "name": "encoder.layers.1.self_attn.q_proj.bias"
+    },
+    "inner.encoder.layers.1.self_attn.v_proj.bias": {
+      "name": "encoder.layers.1.self_attn.v_proj.bias"
+    },
+    "inner.encoder.layers.1.self_attn_layer_norm.bias": {
+      "name": "encoder.layers.1.self_attn_layer_norm.bias"
+    },
+    "inner.encoder.layers.1.self_attn_layer_norm.weight": {
+      "name": "encoder.layers.1.self_attn_layer_norm.weight"
+    },
+    "inner.encoder.layers.2.fc1.bias": {
+      "name": "encoder.layers.2.fc1.bias"
+    },
+    "inner.encoder.layers.2.fc2.bias": {
+      "name": "encoder.layers.2.fc2.bias"
+    },
+    "inner.encoder.layers.2.final_layer_norm.bias": {
+      "name": "encoder.layers.2.final_layer_norm.bias"
+    },
+    "inner.encoder.layers.2.final_layer_norm.weight": {
+      "name": "encoder.layers.2.final_layer_norm.weight"
+    },
+    "inner.encoder.layers.2.self_attn.out_proj.bias": {
+      "name": "encoder.layers.2.self_attn.out_proj.bias"
+    },
+    "inner.encoder.layers.2.self_attn.q_proj.bias": {
+      "name": "encoder.layers.2.self_attn.q_proj.bias"
+    },
+    "inner.encoder.layers.2.self_attn.v_proj.bias": {
+      "name": "encoder.layers.2.self_attn.v_proj.bias"
+    },
+    "inner.encoder.layers.2.self_attn_layer_norm.bias": {
+      "name": "encoder.layers.2.self_attn_layer_norm.bias"
+    },
+    "inner.encoder.layers.2.self_attn_layer_norm.weight": {
+      "name": "encoder.layers.2.self_attn_layer_norm.weight"
+    },
+    "inner.encoder.layers.3.fc1.bias": {
+      "name": "encoder.layers.3.fc1.bias"
+    },
+    "inner.encoder.layers.3.fc2.bias": {
+      "name": "encoder.layers.3.fc2.bias"
+    },
+    "inner.encoder.layers.3.final_layer_norm.bias": {
+      "name": "encoder.layers.3.final_layer_norm.bias"
+    },
+    "inner.encoder.layers.3.final_layer_norm.weight": {
+      "name": "encoder.layers.3.final_layer_norm.weight"
+    },
+    "inner.encoder.layers.3.self_attn.out_proj.bias": {
+      "name": "encoder.layers.3.self_attn.out_proj.bias"
+    },
+    "inner.encoder.layers.3.self_attn.q_proj.bias": {
+      "name": "encoder.layers.3.self_attn.q_proj.bias"
+    },
+    "inner.encoder.layers.3.self_attn.v_proj.bias": {
+      "name": "encoder.layers.3.self_attn.v_proj.bias"
+    },
+    "inner.encoder.layers.3.self_attn_layer_norm.bias": {
+      "name": "encoder.layers.3.self_attn_layer_norm.bias"
+    },
+    "inner.encoder.layers.3.self_attn_layer_norm.weight": {
+      "name": "encoder.layers.3.self_attn_layer_norm.weight"
+    },
+    "inner.pool_attention.0.bias": {
+      "name": "pool_attention_0.bias"
+    },
+    "inner.pool_attention.2.bias": {
+      "name": "pool_attention_2.bias"
+    },
+    "pool_attention.0.weight": {
+      "name": "pool_attention_0.weight"
+    },
+    "pool_attention.2.weight": {
+      "name": "pool_attention_2.weight"
+    }
+  },
+  "casts": {
+    "encoder.layers.0.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.0.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.0.self_attn.k_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.0.self_attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.0.self_attn.q_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.0.self_attn.v_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.1.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.1.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.1.self_attn.k_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.1.self_attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.1.self_attn.q_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.1.self_attn.v_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.2.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.2.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.2.self_attn.k_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.2.self_attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.2.self_attn.q_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.2.self_attn.v_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.3.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.3.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.3.self_attn.k_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.3.self_attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.3.self_attn.q_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "encoder.layers.3.self_attn.v_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.0.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.0.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.4.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.4.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.6.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.classifier.6.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.conv1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.conv1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.conv2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.conv2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.embed_positions.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.final_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.final_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.self_attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.self_attn.q_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.self_attn.v_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.self_attn_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.0.self_attn_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.final_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.final_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.self_attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.self_attn.q_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.self_attn.v_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.self_attn_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.1.self_attn_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.final_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.final_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.self_attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.self_attn.q_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.self_attn.v_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.self_attn_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.2.self_attn_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.final_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.final_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.self_attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.self_attn.q_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.self_attn.v_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.self_attn_layer_norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.encoder.layers.3.self_attn_layer_norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.pool_attention.0.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "inner.pool_attention.2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "pool_attention.0.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "pool_attention.2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    }
+  }
+}

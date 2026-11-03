@@ -1,0 +1,32 @@
+{
+  "operations": [
+    "read_document"
+  ],
+  "processor": "Qwen3VLProcessor",
+  "prompts": {
+    "ocr": "\nExtract all readable content from the image in natural human reading order and output the result as a single Markdown document. For charts or images, represent them using an HTML image tag: <img src=\"images/bbox_{left}_{top}_{right}_{bottom}.jpg\" />, where left, top, right, bottom are bounding box coordinates scaled to [0, 1000). Format formulas as LaTeX. Format tables as HTML: <table>...</table>. Transcribe all other text as standard Markdown. Preserve the original text without translation or paraphrasing."
+  },
+  "processor_config": {
+    "size": {
+      "longest_edge": 16777216,
+      "shortest_edge": 65536
+    },
+    "patch_size": 16,
+    "temporal_patch_size": 2,
+    "merge_size": 2,
+    "image_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "image_std": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "processor_class": "Qwen3VLProcessor",
+    "image_processor_type": "Qwen2VLImageProcessorFast"
+  },
+  "min_pixels": 200704,
+  "max_pixels": 8294400
+}

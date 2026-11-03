@@ -1,0 +1,91 @@
+{
+  "mode" : "fast",
+  "model" : "qwen3-tts-base",
+  "schema" : 2,
+  "stats" : {
+    "availability" : {
+      "provenance" : {
+        "baseline" : "Selected bf16 cast, same production path",
+        "chip" : "m5-max",
+        "date" : "2026-10-16T01:55:25Z",
+        "defaultWorkload" : true,
+        "gpuCores" : 40,
+        "method" : "Production Load\/speak on default speech workload, seed 0, streamed output; balanced ABBA BAAB warm windows; fresh workers exclude capture-only buffers from lifetime footprint. Busy Mac; quick check. Worker build: debug.",
+        "revision" : "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+        "run" : "intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0-int4",
+        "source" : "results\/intake\/intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0.json; bounds SHA256 6a91198619f76f4ce3b73e3b45bc2afa37664409c69ca3b1997cb7e0312dac5e"
+      },
+      "state" : "quickCheck"
+    },
+    "dtype" : "int4",
+    "kind" : "voices",
+    "metrics" : {
+      "batteryPercentPerHourSpeech" : {
+        "state" : "notMeasured"
+      },
+      "firstAudioSeconds" : {
+        "provenance" : {
+          "baseline" : "Selected bf16 cast, same production path",
+          "chip" : "m5-max",
+          "date" : "2026-10-16T01:55:25Z",
+          "defaultWorkload" : true,
+          "gpuCores" : 40,
+          "method" : "Production Load\/speak on default speech workload, seed 0, streamed output; balanced ABBA BAAB warm windows; fresh workers exclude capture-only buffers from lifetime footprint. Busy Mac; quick check. Worker build: debug.",
+          "revision" : "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+          "run" : "intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0-int4",
+          "source" : "results\/intake\/intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0.json; bounds SHA256 6a91198619f76f4ce3b73e3b45bc2afa37664409c69ca3b1997cb7e0312dac5e"
+        },
+        "state" : "quickCheck",
+        "value" : 0.179082989692688
+      },
+      "peakMemoryGB" : {
+        "provenance" : {
+          "baseline" : "Selected bf16 cast, same production path",
+          "chip" : "m5-max",
+          "date" : "2026-10-16T01:55:25Z",
+          "defaultWorkload" : true,
+          "gpuCores" : 40,
+          "method" : "Production Load\/speak on default speech workload, seed 0, streamed output; balanced ABBA BAAB warm windows; fresh workers exclude capture-only buffers from lifetime footprint. Busy Mac; quick check. Worker build: debug.",
+          "revision" : "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+          "run" : "intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0-int4",
+          "source" : "results\/intake\/intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0.json; bounds SHA256 6a91198619f76f4ce3b73e3b45bc2afa37664409c69ca3b1997cb7e0312dac5e"
+        },
+        "state" : "quickCheck",
+        "value" : 1.9639685999999998
+      },
+      "realTimeFactor" : {
+        "provenance" : {
+          "baseline" : "Selected bf16 cast, same production path",
+          "chip" : "m5-max",
+          "date" : "2026-10-16T01:55:25Z",
+          "defaultWorkload" : true,
+          "gpuCores" : 40,
+          "method" : "Production Load\/speak on default speech workload, seed 0, streamed output; balanced ABBA BAAB warm windows; fresh workers exclude capture-only buffers from lifetime footprint. Busy Mac; quick check. Worker build: debug.",
+          "revision" : "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+          "run" : "intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0-int4",
+          "source" : "results\/intake\/intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0.json; bounds SHA256 6a91198619f76f4ce3b73e3b45bc2afa37664409c69ca3b1997cb7e0312dac5e"
+        },
+        "state" : "quickCheck",
+        "value" : 0.45354591439599573
+      },
+      "spectralDistance" : {
+        "provenance" : {
+          "baseline" : "Selected bf16 cast, same production path",
+          "chip" : "m5-max",
+          "date" : "2026-10-16T01:55:25Z",
+          "defaultWorkload" : true,
+          "gpuCores" : 40,
+          "method" : "Unaligned common-prefix Hann256\/hop128 magnitude-spectral distance on the one cold WAV per tier; diagnostic only, unequal lengths and sampling divergence are reported separately. Production Load\/speak on default speech workload, seed 0, streamed output; balanced ABBA BAAB warm windows; fresh workers exclude capture-only buffers from lifetime footprint. Busy Mac; quick check. Worker build: debug.",
+          "revision" : "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+          "run" : "intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0-int4",
+          "source" : "results\/intake\/intake-2026-10-16T01-52-22Z-267e7abd-0dc9-4a20-b3f6-8bcddc8dd9d0.json; bounds SHA256 6a91198619f76f4ce3b73e3b45bc2afa37664409c69ca3b1997cb7e0312dac5e"
+        },
+        "state" : "quickCheck",
+        "value" : 1.0536227497626298
+      }
+    },
+    "qualityCheckPassed" : false,
+    "qualityIdentity" : "6e6fe2b643089b0bc12867c99861afdee8e3bd0c2f51dcc94a6ca16fc3a0342c",
+    "runner" : "native"
+  }
+}

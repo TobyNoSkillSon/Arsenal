@@ -1,0 +1,224 @@
+name: Release
+
+# A tag vX.Y.Z builds the release zip, attests the zip's build provenance and attaches the zip, symbols and SHA256SUMS
+# to a DRAFT release. Nothing is published: the maintainer checks the draft (and the build on the reference Mac) and
+# publishes it by hand and updates the tap cask. Users can check the zip with
+#   gh attestation verify Arsenal-X.Y.Z-arm64.zip --repo TobyNoSkillSon/Arsenal
+# Started by hand only (`gh workflow run release.yml --ref vX.Y.Z`), so no tag or push spends runner minutes. It needs the
+# release-signing environment's secrets; until they exist, releases are built and signed on the maintainer's Mac.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+# Toolchains: Command Line Tools Swift for all Swift code (scripts/pkg-lib.sh), Xcode with its Metal
+# Toolchain for MLX's shaders.
+#
+# Signing. Arsenal needs Microphone permission (live transcription) and folder access for the files agents hand it,
+# which macOS ties to the app's designated requirement; the updater also installs only a download that satisfies the
+# installed app's requirement. Every release is signed with the project's self-signed identity "Arsenal Release
+# Signing" (no Apple certificate), so the requirement is
+#   identifier "dev.arsenal.app" and certificate leaf = H"<SHA-1 below>"
+# in every version, and permissions and updates survive. The p12 and its password are secrets of the GitHub
+# environment `release-signing`, which only `v*` tags may use. A release without them fails; there is no unsigned
+# fallback.
+env:
+  XCODE_APP: /Applications/Xcode_26.6.app
+  CLT_SWIFT: /Library/Developer/CommandLineTools/usr/bin/swift
+  # SHA-1 of the "Arsenal Release Signing" certificate (public; the private key is the secret). Changing it is a
+  # rotation: every user grants Microphone and folder access once more and the updater refuses the new build.
+  ARSENAL_SIGNING_SHA1: 011C682945C225DBDEC95AEAA187BECBB0207282
+  # scripts/build.sh and scripts/test.sh route through scripts/mlock on a development Mac; a runner has no locks to take.
+  ARSENAL_PKG_LOCKED: "1"
+  ARSENAL_DEV_LOCKED: "1"
+
+jobs:
+  release:
+    name: Build, attest and draft
+    runs-on: macos-26
+    timeout-minutes: 150
+    environment: release-signing   # the signing secrets; deployment rule: v* tags only
+    permissions:
+      contents: write       # create the draft release and upload its assets
+      id-token: write       # sign the provenance attestation
+      attestations: write   # store it
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check for an existing release
+        id: existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Release state for the tag: missing, empty-draft, draft-with-assets or published. `gh release view` also
+          # finds drafts (the REST tag endpoint does not); anything but "release not found" stops the build.
+          release_state() {
+            if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,assets > "$RUNNER_TEMP/release.json" 2> "$RUNNER_TEMP/release-error"; then
+              jq -r 'if .isDraft == false then "published" elif .isDraft == true then (if (.assets | length) == 0 then "empty-draft" else "draft-with-assets" end) else "invalid" end' "$RUNNER_TEMP/release.json"
+            elif grep -q 'release not found' "$RUNNER_TEMP/release-error"; then
+              echo missing
+            else
+              cat "$RUNNER_TEMP/release-error" >&2; echo error
+            fi
+          }
+          case "$(release_state)" in
+            missing|empty-draft) ;;
+            published)
+              echo "Release $GITHUB_REF_NAME is already published; assets left unchanged."
+              echo "published=true" >> "$GITHUB_OUTPUT" ;;
+            draft-with-assets)
+              # Assets are never replaced: a rebuild differs byte for byte, and the draft could be published mid-upload.
+              echo "::error::Draft release $GITHUB_REF_NAME already has assets. Delete the draft (gh release delete $GITHUB_REF_NAME) and rerun."; exit 1 ;;
+            *) echo '::error::Could not read the release for this tag'; exit 1 ;;
+          esac
+
+      - name: Version, build number and update repository from the tag
+        if: steps.existing.outputs.published != 'true'
+        id: version
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          PLIST=Resources/Info.plist
+          SHORT="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$PLIST")"
+          BUILD="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$PLIST")"
+          REPO="$(/usr/libexec/PlistBuddy -c 'Print :ArsenalUpdateRepo' "$PLIST" 2>/dev/null || true)"
+          # The updater, install.sh and the cask download the release named after the app's version.
+          if [[ "$VERSION" != "$SHORT" ]]; then echo "::error::Tag $GITHUB_REF_NAME does not match Resources/Info.plist version $SHORT"; exit 1; fi
+          # Builds stay above the last build numbered by commit count (1433).
+          if [[ ! "$BUILD" =~ ^[0-9]+$ || "$BUILD" -le 1433 ]]; then echo "::error::CFBundleVersion $BUILD must be a number above 1433"; exit 1; fi
+          if [[ "$REPO" != "$GITHUB_REPOSITORY" ]]; then echo "::error::ArsenalUpdateRepo is '$REPO', not $GITHUB_REPOSITORY"; exit 1; fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "out=$RUNNER_TEMP/release/$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Select Xcode and show the Swift toolchain
+        if: steps.existing.outputs.published != 'true'
+        run: |
+          sudo xcode-select -s "$XCODE_APP/Contents/Developer"
+          xcodebuild -version
+          "$CLT_SWIFT" --version
+
+      - name: Metal Toolchain
+        if: steps.existing.outputs.published != 'true'
+        run: |
+          if ! xcodebuild -showComponent MetalToolchain 2>/dev/null | grep 'Status: installed' >/dev/null; then
+            xcodebuild -downloadComponent MetalToolchain
+          fi
+          xcrun metal --version
+
+      - name: Signing identity (environment release-signing)
+        if: steps.existing.outputs.published != 'true'
+        env:
+          ARSENAL_SIGNING_P12_BASE64: ${{ secrets.ARSENAL_SIGNING_P12_BASE64 }}
+          ARSENAL_SIGNING_P12_PASSWORD: ${{ secrets.ARSENAL_SIGNING_P12_PASSWORD }}
+        run: |
+          for v in ARSENAL_SIGNING_P12_BASE64 ARSENAL_SIGNING_P12_PASSWORD; do
+            if [[ -z "${!v}" ]]; then
+              echo "::error::Secret $v is missing from the release-signing environment; releases are never unsigned"; exit 1
+            fi
+          done
+          scripts/ci-keychain.sh import
+
+      - name: Package (scripts/package-release.sh)
+        if: steps.existing.outputs.published != 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          # scripts/sign.sh signs the helper bundles, the helpers, then the app, pinning the certificate.
+          ARSENAL_SIGN_IDENTITY: ${{ env.ARSENAL_SIGNING_SHA1 }}
+          ARSENAL_SIGN_KEYCHAIN: ${{ runner.temp }}/arsenal-signing.keychain-db
+          ARSENAL_XCODE_DEVELOPER_DIR: ${{ env.XCODE_APP }}/Contents/Developer
+          ARSENAL_RELEASE_OUTPUT_DIR: ${{ steps.version.outputs.out }}
+          # Lint runs locally (scripts/check.sh); the drop-in and fresh-install smokes need a real Mac and run before tagging.
+          ARSENAL_STRICT: "0"
+          ARSENAL_BUILD_JOBS: "3"
+        run: |
+          scripts/package-release.sh "$VERSION"
+          if [[ -e "$ARSENAL_RELEASE_OUTPUT_DIR/LOCAL-ONLY-NOT-FOR-UPLOAD.txt" ]]; then
+            cat "$ARSENAL_RELEASE_OUTPUT_DIR/LOCAL-ONLY-NOT-FOR-UPLOAD.txt"; exit 1
+          fi
+          cd "$ARSENAL_RELEASE_OUTPUT_DIR" && shasum -a 256 -c SHA256SUMS
+
+      - name: Check the signature in the zip
+        if: steps.existing.outputs.published != 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          OUT: ${{ steps.version.outputs.out }}
+        run: |
+          scripts/release-identity.sh for-upload "$OUT"
+          CHECK="$RUNNER_TEMP/signature-check"
+          rm -rf "$CHECK" && mkdir -p "$CHECK"
+          /usr/bin/unzip -q "$OUT/Arsenal-$VERSION-arm64.zip" -d "$CHECK"
+          APP="$CHECK/Arsenal.app"
+          codesign --verify --deep --strict "$APP"
+          PIN="$(tr '[:upper:]' '[:lower:]' <<<"$ARSENAL_SIGNING_SHA1")"
+          EXPECTED="identifier \"dev.arsenal.app\" and certificate leaf = H\"$PIN\""
+          REQUIREMENT="$(codesign -d -r- "$APP" 2>&1 | sed -n 's/^designated => //p')"
+          [[ "$REQUIREMENT" == "$EXPECTED" ]] || { echo "::error::Designated requirement is '$REQUIREMENT', expected '$EXPECTED'"; exit 1; }
+          [[ "$(/usr/libexec/PlistBuddy -c 'Print :ArsenalUpdateRepo' "$APP/Contents/Info.plist")" == "$GITHUB_REPOSITORY" ]] || { echo '::error::The app does not name this repository for updates'; exit 1; }
+          { echo "### Signature"; echo; echo '```'; codesign -dvv "$APP" 2>&1 | grep -E '^(Identifier|Authority|Signature)='; echo "designated => $REQUIREMENT"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+
+      # GitHub stores attestations for public repositories only (user-owned private ones get "Feature not available").
+      - name: Attest build provenance
+        if: ${{ steps.existing.outputs.published != 'true' && !github.event.repository.private }}
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: ${{ steps.version.outputs.out }}/Arsenal-${{ steps.version.outputs.version }}-arm64.zip
+
+      - name: No attestation in a private repository
+        if: ${{ steps.existing.outputs.published != 'true' && github.event.repository.private }}
+        run: |
+          echo "::warning::Private repository: build provenance is not attested (GitHub stores attestations for public repositories only)"
+
+      - name: Draft release
+        if: steps.existing.outputs.published != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ steps.version.outputs.version }}
+          OUT: ${{ steps.version.outputs.out }}
+        run: |
+          # Notes: this version's CHANGELOG.md section (if there is one), then how to install and verify.
+          NOTES="$RUNNER_TEMP/notes.md"
+          : > "$NOTES"
+          if [[ -f CHANGELOG.md ]]; then
+            awk -v v="$VERSION" '$0 ~ "^## " v "( |$)" {on=1; next} on && /^## / {exit} on' CHANGELOG.md > "$RUNNER_TEMP/changelog.md"
+          fi
+          if [[ -s "$RUNNER_TEMP/changelog.md" ]]; then cat "$RUNNER_TEMP/changelog.md" >> "$NOTES"; else echo "Arsenal $VERSION." >> "$NOTES"; fi
+          {
+            echo
+            echo "Install with Homebrew: \`brew install --cask tobynoskillson/tap/arsenal\`, or with \`curl -fsSL https://raw.githubusercontent.com/$GITHUB_REPOSITORY/main/scripts/install.sh | bash\`, which checks the zip against SHA256SUMS and the signing certificate before installing. Arsenal updates itself from this page. To check the zip's build provenance:"
+            echo
+            echo "    gh attestation verify Arsenal-$VERSION-arm64.zip --repo $GITHUB_REPOSITORY"
+            echo
+            echo "Signed with Arsenal's own certificate \"Arsenal Release Signing\" (SHA-1 \`$ARSENAL_SIGNING_SHA1\`), the same in every release, and not notarised by Apple. Microphone and folder permissions carry over between releases signed with this pinned identity."
+          } >> "$NOTES"
+          release_state() {
+            if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" --json isDraft,assets > "$RUNNER_TEMP/release.json" 2> "$RUNNER_TEMP/release-error"; then
+              jq -r 'if .isDraft == false then "published" elif .isDraft == true then (if (.assets | length) == 0 then "empty-draft" else "draft-with-assets" end) else "invalid" end' "$RUNNER_TEMP/release.json"
+            elif grep -q 'release not found' "$RUNNER_TEMP/release-error"; then
+              echo missing
+            else
+              cat "$RUNNER_TEMP/release-error" >&2; echo error
+            fi
+          }
+          # Recheck after the build: the maintainer may have created or published the release in the meantime.
+          case "$(release_state)" in
+            missing) gh release create "$GITHUB_REF_NAME" --draft --verify-tag --title "Arsenal $VERSION" --notes-file "$NOTES" ;;
+            empty-draft) ;;
+            published) echo "Release $GITHUB_REF_NAME is already published; assets left unchanged."; exit 0 ;;
+            draft-with-assets) echo "::error::Draft release $GITHUB_REF_NAME already has assets. Delete the draft (gh release delete $GITHUB_REF_NAME) and rerun."; exit 1 ;;
+            *) echo '::error::Could not read the release for this tag'; exit 1 ;;
+          esac
+          # Never --clobber: existing assets are refused above, so an upload only ever adds files.
+          gh release upload "$GITHUB_REF_NAME" \
+            "$OUT/Arsenal-$VERSION-arm64.zip" "$OUT/Arsenal-$VERSION-arm64-symbols.zip" "$OUT/SHA256SUMS"
+
+      - name: Remove the temporary keychain
+        if: ${{ always() && steps.existing.outputs.published != 'true' }}
+        run: scripts/ci-keychain.sh delete

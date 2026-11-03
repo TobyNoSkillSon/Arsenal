@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "ovisocr2"
+name = "OvisOCR2"
+architecture = "qwen3_5"
+kind = "chat"
+params = "853M"
+publisher = "ATH-MaaS"
+released = 2026
+suggested = false
+summary = "Read documents in reading order."
+purpose = "Read documents in reading order"
+good_for = ["Read documents in reading order"]
+limits = ["Trained weights, tokenizer correctness and FP16 task quality await the approved live trial."]
+tasks = ["read_document"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/ATH-MaaS/OvisOCR2/tree/1fc9221b7823a371d6e97f92d527cc847e24e107"
+[weights]
+repo = "ATH-MaaS/OvisOCR2"
+revision = "1fc9221b7823a371d6e97f92d527cc847e24e107"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "model.safetensors", "preprocessor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+"config.json" = "b90b86f35c8e6925ef74ee04d0e758f0a845c83a42089ad82bbaa948de9b4204"
+"model.safetensors" = "9270560288656ece5cb3a6989001afcf5af8d223bceed4a423c33a008861d009"
+"preprocessor_config.json" = "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+"tokenizer.json" = "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+"tokenizer_config.json" = "49e2b6e395f959f077f1e992b338919c0d4a9732fc6e613995e06557f843500c"
+[weights.bytes]
+"chat_template.jinja" = 7755
+"config.json" = 2907
+"model.safetensors" = 1706030496
+"preprocessor_config.json" = 390
+"tokenizer.json" = 12807982
+"tokenizer_config.json" = 16709
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "read_document"
+title = "Read document"
+input = "ops/read_document.input.json"
+output_schema = "ops/read_document.output.json"
+output = "file"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

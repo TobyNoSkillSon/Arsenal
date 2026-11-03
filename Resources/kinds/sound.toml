@@ -1,0 +1,34 @@
+id = "sound"
+title = "Sound"
+title_singular = "Sound"
+icon = "waveform"
+order = 4
+suite = "bench/kinds/sound/suite-v1.toml"
+[facets]
+modalities_in = ["text"]
+modalities_out = ["audio"]
+[[op]]
+name = "generate_sound"
+default = true
+title = "Generate Sound"
+input = "ops/generate_sound.input.json"
+output = "audio"
+stream = true
+[[op]]
+name = "generate_music"
+title = "Generate Music"
+input = "ops/generate_music.input.json"
+output_schema = "ops/generate_music.output.json"
+output = "audio"
+stream = true
+[[columns]]
+id = "speed"
+title = "Speed"
+unit = "× real time"
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+[api]
+generate_sound = "/providers/elevenlabs/v1/sound-generation"
+generate_music = "/providers/elevenlabs/v1/music"

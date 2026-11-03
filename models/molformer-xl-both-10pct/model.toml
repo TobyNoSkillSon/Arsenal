@@ -1,0 +1,69 @@
+schema = 3
+id = "molformer-xl-both-10pct"
+name = "MoLFormer-XL Both 10%"
+kind = "local.molecules"
+summary = "Turns a molecule written as a SMILES string into a vector of numbers for similarity search, clustering or property prediction."
+description = "MoLFormer-XL is IBM Research's chemical language model (Ross et al., Nature Machine Intelligence 2022): a 12-layer, 768-wide transformer with linear attention and rotary positions, pretrained by masked language modelling on RDKit-canonical SMILES. This checkpoint was trained on 10% of ZINC15 plus 10% of PubChem. Arsenal returns the card's pooled embedding (the final-layer token embeddings averaged). The card reports, after fine-tuning, AUROC 91.5 on BBBP, 81.3 on HIV, 86.6 on BACE and 84.5 on Tox21."
+purpose = "Embed molecules from SMILES"
+publisher = "ibm-research"
+released = 2023
+params = "46.8M"
+tasks = ["feature-extraction"]
+languages = ["mul"]
+good_for = ["Comparing molecules: structurally related compounds (caffeine and theobromine) get a higher cosine than unrelated ones (caffeine and aspirin)", "Features for a small classifier or regressor of a molecular property (solubility, toxicity, permeability) trained on top", "Clustering or visualising a compound library"]
+limits = ["At most 200 SMILES tokens per molecule (training dropped longer ones); larger molecules and macromolecules are refused, and the card says they are untested", "SMILES only: input with characters outside SMILES is refused. Invalid or non-canonical SMILES and stereo marks give weaker embeddings (training used canonical SMILES with isomeric information removed); tokens missing from the vocabulary are read as unknown and listed in the reply", "Embeddings alone predict nothing: a property needs a model trained on top of them. Not for molecule generation; the masked-token head is not served", "This is the 10% ZINC + 10% PubChem checkpoint; the card's full MoLFormer-XL scores higher on most benchmarks", "Reads and writes no human language, so the Polish question does not apply", "Parity with the maker's modeling_molformer.py (MPS, float32, since its float16 path overflows) checked: see log/003-parity.md"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/ibm-research/MoLFormer-XL-both-10pct"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/ibm-research/MoLFormer-XL-both-10pct/blob/361063d0ad524ef77cf39b08469f6be770dc550f/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "ibm-research/MoLFormer-XL-both-10pct"
+revision = "361063d0ad524ef77cf39b08469f6be770dc550f"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "tokenizer.json", "tokenizer_config.json"]
+
+[weights.sha256]
+"model.safetensors" = "0795977fe7192c4acdaf052f0e8464af57bc4bb59211271c5e61aaba2637b9c6"
+"config.json" = "3ef9eaac8c7ca6282fd6256ed038d151bd4ff42a4ff855367e0d7197bbc1c284"
+"tokenizer.json" = "3df1f2219653c44fac9fa03b7f788b372eb2544ecc176737bb9aca8411b471a5"
+"tokenizer_config.json" = "56f93dc43e4383fcfc6342e09d782ef38d48ef227215a4a92ff8762fd5b8ff3e"
+
+[weights.bytes]
+"model.safetensors" = 187248784
+"config.json" = 1015
+"tokenizer.json" = 54010
+"tokenizer_config.json" = 1132
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-molformer-xl-both-10pct"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

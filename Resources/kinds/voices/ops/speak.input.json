@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "text"
+  ],
+  "properties": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100000
+    },
+    "voice": {
+      "type": "string"
+    },
+    "speed": {
+      "type": "number",
+      "minimum": 0.25,
+      "maximum": 4
+    },
+    "language": {
+      "type": "string"
+    },
+    "instructions": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "stream": {
+      "type": "boolean"
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

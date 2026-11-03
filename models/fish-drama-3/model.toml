@@ -1,0 +1,210 @@
+# SPDX-License-Identifier: MIT
+schema = 2
+id = "fish-drama-3"
+name = "Fish Audio Drama 3"
+kind = "voices"
+params = "35B"
+publisher = "Fish Audio"
+released = 2026
+suggested = false
+summary = "Expressive speech in the voice of a short reference clip, with inline delivery cues and up to 16 speakers. Built with Fish Audio."
+purpose = "Expressive speech, voice cloning"
+tasks = ["text-to-speech"]
+tools = ["voice", "sound"]
+languages = ["zh", "en", "ja", "ko", "es", "pt", "ar", "ru", "fr", "de", "sv", "it", "tr", "no", "nl", "cy", "eu", "ca", "da", "gl", "ta", "hu", "fi", "pl", "et", "hi", "la", "ur", "th", "vi", "jw", "bn", "yo", "sl", "cs", "sw", "nn", "he", "ms", "uk", "id", "kk", "bg", "lv", "my", "tl", "sk", "ne", "fa", "af", "el", "bo", "hr", "ro", "sn", "mi", "yi", "am", "be", "km", "is", "az", "sd", "br", "sq", "ps", "mn", "ht", "ml", "sr", "sa", "te", "ka", "bs", "pa", "lt", "kn", "si", "hy", "mr", "as", "gu", "fo"]
+limits = ["No preset voices: a request clones a reference clip with its exact transcript, a saved voice, or draws an unprompted voice.", "No speed control or instructions; delivery cues go inline, e.g. [whispers], and speakers as <|speaker:0|> to <|speaker:15|>.", "Runs only the vendor 4/8-bit checkpoint (about 27 GB resident); the 16-bit release is 72 GB and has no runner here.", "Fish Audio Community License: never imitate an identifiable person's voice without their consent."]
+
+[licence]
+spdx = "LicenseRef-Fish-Audio-Community-1.0"
+name = "Fish Audio Community License 1.0"
+commercial = false
+conditions = "Free for research and non-commercial use; commercial use only while you and your affiliates earn under US$500,000 a year; no hosted speech service without a Fish Audio licence; never imitate a real person's voice without consent. Show \"Built with Fish Audio\" where you distribute it."
+url = "https://huggingface.co/mlx-community/fish-audio-drama-3-4bit/blob/cc639e27aba7edb73429d3e3806f471dcd79d316/LICENSE"
+
+[weights]
+repo = "mlx-community/fish-audio-drama-3-bf16"
+revision = "d947126c6a85861382a89ba54067b1af0a1cd6e2"
+dtype = "bf16"
+files = ["config.json", "codec.safetensors", "model-00001.safetensors", "model-00002.safetensors", "model-00003.safetensors", "model-00004.safetensors", "model-00005.safetensors", "model-00006.safetensors", "model-00007.safetensors", "model-00008.safetensors", "model-00009.safetensors", "model-00010.safetensors", "model-00011.safetensors", "model-00012.safetensors", "model-00013.safetensors", "model-00014.safetensors", "model-00015.safetensors", "model-00016.safetensors", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json", "LICENSE", "NOTICE"]
+
+[weights.bytes]
+"config.json" = 5380
+"codec.safetensors" = 1572080341
+"model-00001.safetensors" = 4396843915
+"model-00002.safetensors" = 4573903843
+"model-00003.safetensors" = 4507514512
+"model-00004.safetensors" = 4431658019
+"model-00005.safetensors" = 4518309819
+"model-00006.safetensors" = 4384482409
+"model-00007.safetensors" = 4499096134
+"model-00008.safetensors" = 4506457536
+"model-00009.safetensors" = 4451928780
+"model-00010.safetensors" = 4499096112
+"model-00011.safetensors" = 4506457552
+"model-00012.safetensors" = 4451928806
+"model-00013.safetensors" = 4482425358
+"model-00014.safetensors" = 4506457524
+"model-00015.safetensors" = 4303385441
+"model-00016.safetensors" = 3763490668
+"special_tokens_map.json" = 102779
+"tokenizer.json" = 20791070
+"tokenizer_config.json" = 103580
+"LICENSE" = 19685
+"NOTICE" = 726
+
+[weights.sha256]
+"config.json" = "b7401b9fd070d17855f3e9da9be939087b36dafb4e61e4a72b0dd2488408dbce"
+"codec.safetensors" = "6ff9d6f07920b2155e3a48ada21956004b96df9114d255ed9f0788484ba73040"
+"model-00001.safetensors" = "61e1c87d7aee4341acd2967129e219d83efdf9a8ab72c58eb85d9207d165d1a6"
+"model-00002.safetensors" = "f1e39d1d7aa2d6c3d33df537672ecf7ee7de5b22b33ae8f051f20f74d60286dc"
+"model-00003.safetensors" = "1c450efc912147fcee878c6b5f7a883eb10fa22264e43e48728e6591610ab9e5"
+"model-00004.safetensors" = "53948d1c15c7b4b7d698065a61b08746737014282f1e5e979ea31573c247382c"
+"model-00005.safetensors" = "9dfd7bfbe177acd42def853eccae467b22b46304f104e062bc0457afe62d59fc"
+"model-00006.safetensors" = "13afdf8c903ce1bdc0b3bfe5f7d66d36cf48b8ffa9d52d5635b1363dd12a9325"
+"model-00007.safetensors" = "0cab9c56ef6b20fa075891c3bff53da2ec96b2d5f8ec0ab9b085590d520b4252"
+"model-00008.safetensors" = "a12e043b75c35aa44ac3a6990a6c7458092f4cf7c4d241fd7214ef7e75302cc1"
+"model-00009.safetensors" = "662bb99a345f258670efff77cb493cb29d47cbf12f09915fe296818210dc40c2"
+"model-00010.safetensors" = "0523f098e6798cda48853ab11a5b20e7c6d4446f7646610911887195d97c26a9"
+"model-00011.safetensors" = "27134b3ba7b61a748305573f7ae28ea01648f9effb5c71ab0a18a3d6d7de0fe3"
+"model-00012.safetensors" = "c42171f2a00b92239a3c820549393cd8b6b04d2dee69683a8ac06a3f59f05580"
+"model-00013.safetensors" = "217d5babe37acec92655325e86520df0484876d90632499e4648629a20ea5204"
+"model-00014.safetensors" = "ba1a6fb9989a616da6aaa466bddc9f1c829d64983d58afaa4ac5d70a9e0314ea"
+"model-00015.safetensors" = "3ccdb07af6c19f59ffe2a14e48d4bc3802b3d80f7f51d63a0250301eb47758ed"
+"model-00016.safetensors" = "720b786c550ecc0cdceab79f56d64c67aebe1922a7ee99e15d0ea6ed0cf7d0aa"
+"special_tokens_map.json" = "08aed9e321dc05275ac68cf883bfa96006b3fc09ff5cccadf262b6bce0873adb"
+"tokenizer.json" = "0e9b9db76b2f0389b04b6ef057a2ac3b89100b7e96f2dd7034d19580a09654d6"
+"tokenizer_config.json" = "00e800279d8436c324b924e97872c7eacd2b19406aa0fe71eeb557b4cd53aa3e"
+"LICENSE" = "733a32442087acbda12ecafe8e71eb8ee5890c89b50ce7ac4ea3777faa3c823e"
+"NOTICE" = "36fa9e43fb0c99ad99476586c4497607dac871f68f233bbc4177de807d9bf8bf"
+
+[vendor.int4]
+repo = "mlx-community/fish-audio-drama-3-4bit"
+revision = "cc639e27aba7edb73429d3e3806f471dcd79d316"
+dtype = "int4"
+format = "affine"
+group = 64
+files = ["config.json", "codec.safetensors", "model-00001.safetensors", "model-00002.safetensors", "model-00003.safetensors", "model-00004.safetensors", "model-00005.safetensors", "model-00006.safetensors", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json", "LICENSE", "NOTICE"]
+
+[vendor.int4.bytes]
+"config.json" = 53444
+"codec.safetensors" = 1572080341
+"model-00001.safetensors" = 4354661374
+"model-00002.safetensors" = 4360386773
+"model-00003.safetensors" = 4304379853
+"model-00004.safetensors" = 4407528323
+"model-00005.safetensors" = 4425623733
+"model-00006.safetensors" = 335374378
+"special_tokens_map.json" = 102779
+"tokenizer.json" = 20791070
+"tokenizer_config.json" = 103580
+"LICENSE" = 19685
+"NOTICE" = 910
+
+[vendor.int4.sha256]
+"config.json" = "e980dfd9128edeb5f5d066fd7c322a2dfc08fedcbea58019d8d2e8e5cf7b50d5"
+"codec.safetensors" = "6ff9d6f07920b2155e3a48ada21956004b96df9114d255ed9f0788484ba73040"
+"model-00001.safetensors" = "de6eeebdd8c09316acd4f5fdd05482221e8596a19a6e8384d7fd129d70e894bf"
+"model-00002.safetensors" = "cdd874495884ba7a1f9ae5b2baf7fc8fed85f73799556e87a6406184b4f8cf9f"
+"model-00003.safetensors" = "eefa12cee1d032b511869de2a71666b4f07c82ca2fd8c94c3c5bcd1da431ef11"
+"model-00004.safetensors" = "cd4960872fc5ceff7c719bd5be9d9f770f3357068eca83af065db6ba68927a8a"
+"model-00005.safetensors" = "e0dbbeb7f66a2168fd744df15987b145780213d65cb6b3579a2531a78e92774e"
+"model-00006.safetensors" = "0b3e0b1b620080e4f4db53cc3b9c697c4179964be0e2172b339b605459470a7e"
+"special_tokens_map.json" = "08aed9e321dc05275ac68cf883bfa96006b3fc09ff5cccadf262b6bce0873adb"
+"tokenizer.json" = "0e9b9db76b2f0389b04b6ef057a2ac3b89100b7e96f2dd7034d19580a09654d6"
+"tokenizer_config.json" = "00e800279d8436c324b924e97872c7eacd2b19406aa0fe71eeb557b4cd53aa3e"
+"LICENSE" = "733a32442087acbda12ecafe8e71eb8ee5890c89b50ce7ac4ea3777faa3c823e"
+"NOTICE" = "d2dc9c9fd71c2faf01b825f69797b20e1eca961505aa9ba2a3c5004b99262d73"
+
+# The 16-bit release is listed so the vendor tier has its source, but no runner here serves it (72 GB).
+[[format]]
+id = "bf16"
+storage = "bf16"
+source = "vendor"
+bits_per_weight = 16
+runners = []
+
+# Routed experts 4-bit, every other projection and the audio tower 8-bit (group 64); embeddings bf16; norms and codec float32 on disk.
+[[format]]
+id = "int4"
+storage = "affine"
+source = "vendor"
+bits_per_weight = 5
+profile = { group_size = 64, default_bits = 8, module_bits = { "mlp.switch_mlp" = 4 } }
+ram_mb = 27000
+runners = ["native"]
+
+[[runner]]
+name = "native"
+language = "swift"
+worker = "voices"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+
+[selection]
+default = "native"
+chips = { m5 = "native" }
+
+[facets]
+modalities_in = ["text", "audio"]
+modalities_out = ["audio"]
+
+[[setting]]
+id = "voice"
+title = "Voice"
+type = "voice"
+default = ""
+applies = "request"
+maps_to = "request.voice"
+help = "Saved voice cloned for Drama 3; leave empty to use the reference clip."
+
+[[setting]]
+id = "reference_path"
+title = "Reference clip"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.path"
+help = "Your own recording of the voice to clone, up to 30 seconds."
+
+[[setting]]
+id = "reference_text"
+title = "Reference transcript"
+type = "text"
+default = ""
+applies = "request"
+maps_to = "request.reference.text"
+help = "Exact words spoken in the reference clip."
+
+[[op]]
+name = "speak"
+title = "Speak"
+input = "ops/speak.input.json"
+output = "audio"
+stream = true
+
+[[op]]
+name = "voices"
+title = "Voices"
+input = "ops/voices.input.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "clone_voice"
+title = "Clone Voice"
+input = "ops/clone_voice.input.json"
+output = "json"
+stream = false
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"
+
+[popularity]
+hf_downloads = 15274
+hf_likes = 888
+as_of = "2026-10-22"

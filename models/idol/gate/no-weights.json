@@ -1,0 +1,30 @@
+{
+  "config": {},
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAALElEQVR4nGNgGJ7gRIXGf2yYIs1EGUJIM0FDRg2gggHEGIJXMyFDiNI89AAAedfTaY7djEEAAAAASUVORK5CYII="
+  },
+  "operations": [
+    {
+      "operation": "image_to_3d",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "steps": 2,
+        "seed": 42
+      }
+    },
+    {
+      "operation": "image_to_3d",
+      "input": {
+        "image": {
+          "path": "$INBOX/fixture.png"
+        },
+        "mode": "real",
+        "steps": 1,
+        "seed": 7,
+        "cfg_strength": 0
+      }
+    }
+  ]
+}

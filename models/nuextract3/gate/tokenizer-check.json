@@ -1,0 +1,10 @@
+{
+  "model": "nuextract3",
+  "passed": true,
+  "error": null,
+  "result": {
+    "image_tokens": 47,
+    "plain_tokens": 43,
+    "roundtrip": "Hello"
+  }
+}

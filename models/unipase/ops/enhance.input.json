@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "audio": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "denoise",
+        "restore",
+        "upscale"
+      ],
+      "default": "denoise",
+      "description": "denoise and restore run the same universal pass (noise, reverb, clipping, band limits and packet loss together); upscale also extends the band. Without rate, denoise and restore return the input's rate and upscale returns 48000. With upscale, rate must be at least the input's rate, or the request is refused."
+    },
+    "rate": {
+      "type": "integer",
+      "enum": [
+        8000,
+        16000,
+        22050,
+        24000,
+        32000,
+        44100,
+        48000
+      ],
+      "description": "Output sample rate. Default: the input's rate for denoise and restore, 48000 for upscale. Above 16000 (22050 to 48000) the PostNet restores the band above 8 kHz; at 16000 or below no PostNet runs. With upscale it must be at least the input's rate."
+    },
+    "enable_plc": {
+      "type": "boolean",
+      "default": true,
+      "description": "Packet-loss concealment: 20 ms stretches that are digital silence are treated as lost and filled in."
+    },
+    "one_time_decode_length": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 60,
+      "default": 20,
+      "description": "Longest clip, in seconds, enhanced in one pass; longer clips are enhanced in 8 s segments at a 4 s hop."
+    },
+    "out_dir": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stream": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "audio"
+  ],
+  "additionalProperties": false
+}

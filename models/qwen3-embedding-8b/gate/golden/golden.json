@@ -1,0 +1,146 @@
+{
+ "commit": "d14492ceb5a999f09e29dbe55cb222203db97f43",
+ "date": "2026-11-02",
+ "input": {
+  "fixtures": [],
+  "request": [
+   {
+    "body": {
+     "input": [
+      "A zebra standing in the savanna.",
+      "Quarterly revenue rose by twelve percent.",
+      "Zebras have stripes."
+     ],
+     "task": "document"
+    },
+    "op": "embed"
+   },
+   {
+    "body": {
+     "input": [
+      "Which animal has black and white stripes?"
+     ],
+     "task": "query"
+    },
+    "op": "embed"
+   }
+  ]
+ },
+ "maker_reference": {
+  "none": "Maker capture: Qwen's model-card Transformers usage (last-token pooling on the appended <|endoftext|>, 'Instruct: ...\\nQuery:' with no space) on the GPU in FP16, lab/evidence/qwen3-embedding-8b/maker-2026-11-02. Arsenal FP16 vs maker: cosine 0.999996 to 0.999998 per text, max element difference 0.00034, cosine-matrix difference at most 0.0006. Maker cosine matrix (zebra doc, revenue doc, stripes doc, query): [[1,0.236,0.703,0.501],[0.236,1,0.268,0.089],[0.703,0.268,1,0.625],[0.501,0.089,0.625,1]]."
+ },
+ "model": "qwen3-embedding-8b",
+ "note": "Three documents (task document) and one query (task query, default web-search instruction).",
+ "output": [
+  {
+   "file_count": 0,
+   "files": [],
+   "op": "embed",
+   "reply": {
+    "embeddings": [
+     {
+      "first8": [
+       0.01153,
+       -0.00264,
+       -0.00742,
+       -0.02153,
+       0.00667,
+       -0.00729,
+       -0.01635,
+       -0.02225
+      ],
+      "l2_norm": 1.0,
+      "length": 4096,
+      "sha256_rounded4": "40d575080d2ad29453a03f0488b07915db664fb6323824faab14af789d934af1"
+     },
+     {
+      "first8": [
+       0.01355,
+       -0.00727,
+       -0.02296,
+       -0.00205,
+       0.01279,
+       0.01247,
+       -0.00319,
+       0.02528
+      ],
+      "l2_norm": 1.0,
+      "length": 4096,
+      "sha256_rounded4": "61176a20086a157b8f5b846dde391c3853bdcc1c8b054ff586ae3c1d1d96c2dd"
+     },
+     {
+      "first8": [
+       0.00744,
+       0.00505,
+       0.00347,
+       -0.03425,
+       -0.00449,
+       0.00206,
+       -0.03355,
+       -0.02661
+      ],
+      "l2_norm": 1.0,
+      "length": 4096,
+      "sha256_rounded4": "dd14cd8508eb19ed686cc7542af07b0621968bb82c2e80ca820676b5a3087e91"
+     }
+    ],
+    "input_tokens": 25
+   },
+   "served": {},
+   "status": 200
+  },
+  {
+   "file_count": 0,
+   "files": [],
+   "op": "embed",
+   "reply": {
+    "embeddings": [
+     {
+      "first8": [
+       0.01437,
+       -0.01439,
+       -0.00768,
+       -0.01223,
+       0.01229,
+       0.00612,
+       -0.04275,
+       -0.0417
+      ],
+      "l2_norm": 1.0,
+      "length": 4096,
+      "sha256_rounded4": "2e536e75d17eadf4f6db9b28b07857b5510f9a30c9a6919e948ae58b920399c8"
+     }
+    ],
+    "input_tokens": 28
+   },
+   "served": {},
+   "status": 200
+  }
+ ],
+ "path": "arsenal-testserver --real (RealModelsService, private QA catalog, loopback Hugging Face client)",
+ "precision": "fp16",
+ "schema": "golden-1",
+ "tolerance": {
+  "cosine_matrix_max_abs_diff": 0.002,
+  "cosine_vs_maker_min": 0.9999,
+  "dimensions": 4096,
+  "input_tokens": [
+   25,
+   28
+  ],
+  "vectors": 4
+ },
+ "weights": {
+  "repo": "Qwen/Qwen3-Embedding-8B",
+  "revision": "1d8ad4ca9b3dd8059ad90a75d4983776a23d44af",
+  "sha256": {
+   "config.json": "dcccf7c7890c8debc4af8dace8d6acd8dd50bd56d50d4d8b60529381ba3de3d7",
+   "model-00001-of-00004.safetensors": "99b343597fe840706146144699a8b9188dd3387e43eb61faf0231b70b249d451",
+   "model-00002-of-00004.safetensors": "dff635b0f6dbbaad2a2d633ef037ec0a39bc165cc1806c712fbd6fcbcb4526c0",
+   "model-00003-of-00004.safetensors": "30b1d4c53d84eb018f642cad7b373f0aabf79699872d8702c1f38577c0a59a2f",
+   "model-00004-of-00004.safetensors": "36cbc9c60375693629f25743c1e77ebb1724af58e671b2376463193c7fd21ef6",
+   "tokenizer.json": "83cdf8c3a34f68862319cb1810ee7b1e2c0a44e0864ae930194ddb76bb7feb8d",
+   "tokenizer_config.json": "2f58f4bbd7bbce15d683f525954ef3a92cd82f5e06415a9c513859bf8ab72436"
+  }
+ }
+}

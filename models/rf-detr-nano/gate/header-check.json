@@ -1,0 +1,26 @@
+{
+  "status": "passed-with-planned-get-casts",
+  "source_dtype": "fp32",
+  "runtime_dtype": "fp16",
+  "source_tensors": 465,
+  "runtime_parameters": 464,
+  "source_repo": "Roboflow/rf-detr-nano",
+  "source_revision": "9f201577d9415f0378084748d27e68586e6b3600",
+  "port_repo": "mnmly/mlx-swift-rf-detr",
+  "port_revision": "83941f0461313cdd1991d6873e205f613ff1be31",
+  "mapping_sha256": "d9324e0665381406d0b6555e9aab7bd116d2bc5ca4c424bee40c54144b50f2a9",
+  "header_only": true,
+  "tensor_payload_bytes_downloaded": 0,
+  "planned_transform": "cast each floating tensor to FP16 during Get; trained output parity remains unqualified",
+  "ignored_source_tensors": [
+    "backbone.0.encoder.encoder.embeddings.mask_token"
+  ],
+  "full_graph_eligible_matrices": 159,
+  "eligible_parameters": 27390464,
+  "learned_parameters": 30466914,
+  "eligibility": "Linear/Embedding weight matrices with group-64-compatible input width; spatial kernels, norms and bare learned query/position tensors remain half",
+  "header_bytes_read": 57144,
+  "dtype_mismatches": 0,
+  "planned_get_casts": 464,
+  "source_dtype_matches_runtime": false
+}

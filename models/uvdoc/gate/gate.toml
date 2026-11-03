@@ -1,0 +1,6 @@
+schema = 1
+id = "uvdoc-kit-v1"
+reference_runner = "pinned-maker-implementation"
+precision = "fp16"
+independent_vendor_qualified = false
+passing_requires = ["Parity with the maker code on fixed inputs (not run)"]

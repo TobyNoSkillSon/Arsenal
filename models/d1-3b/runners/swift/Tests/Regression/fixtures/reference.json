@@ -1,0 +1,15 @@
+{
+  "reference": "Pillow Image.open(...).convert(\"RGB\").tobytes()",
+  "pillow": "12.3.0",
+  "values16": [
+    0,
+    1,
+    128,
+    255,
+    256,
+    512,
+    32768,
+    65535
+  ],
+  "maximum_source_pixels": 178946048
+}

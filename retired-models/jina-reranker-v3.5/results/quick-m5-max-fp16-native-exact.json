@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "jina-reranker-v3.5",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-10-22T02:54:49Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Rank passages at fp16: one ordinary Load, then two Rank passages requests (warm-up, timed) through Arsenal's API. Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "3dd4ac901ccdcac85abe3815df0a0aaaf44e4a21",
+        "run": "night-2026-10-22-fp16",
+        "source": "results/quick-checks/night-2026-10-22.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "embeddings",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Rank passages requests on a query and four short documents.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-10-22T02:54:49Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Rank passages requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "3dd4ac901ccdcac85abe3815df0a0aaaf44e4a21",
+          "run": "night-2026-10-22-fp16",
+          "source": "results/quick-checks/night-2026-10-22.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 2.192572416
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Rank passages request on a query and four short documents.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-10-22T02:54:49Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Rank passages request, one sample, after one ordinary Load, then two Rank passages requests (warm-up, timed) through Arsenal's API; includes the API round trip. Mac in use (other jobs and downloads running). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "3dd4ac901ccdcac85abe3815df0a0aaaf44e4a21",
+          "run": "night-2026-10-22-fp16",
+          "source": "results/quick-checks/night-2026-10-22.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.058
+      }
+    },
+    "runner": "native"
+  }
+}

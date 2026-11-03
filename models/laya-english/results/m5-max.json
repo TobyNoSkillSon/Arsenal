@@ -1,0 +1,128 @@
+{
+  "app_build" : "33fc9291c5e2a395e1838a5f120a9a9e7e87e09d",
+  "cases" : [
+    {
+      "id" : "yes-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.014667034149169922
+      },
+      "wall_s" : 0.014667034149169922
+    },
+    {
+      "id" : "no-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.006966948509216309
+      },
+      "wall_s" : 0.006966948509216309
+    },
+    {
+      "id" : "choice-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.05736899375915527
+      },
+      "wall_s" : 0.05736899375915527
+    },
+    {
+      "id" : "score-0",
+      "metrics" : {
+        "accuracy" : 1,
+        "latency_s" : 0.01814711093902588
+      },
+      "wall_s" : 0.01814711093902588
+    },
+    {
+      "id" : "batch",
+      "metrics" : {
+        "batch_questions_per_s" : 486.04487535428547
+      },
+      "wall_s" : 0.024689078330993652
+    }
+  ],
+  "chip" : "m5-max",
+  "conditions" : {
+    "contaminated" : true,
+    "contended" : true,
+    "cpu_limit_pct" : 250,
+    "energy" : "not_measured",
+    "gpu_limit_pct" : 10,
+    "idle_samples" : [
+      {
+        "at" : "2026-10-02T08:58:17Z",
+        "compositing_gpu_pct" : 27.02786254056713,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 134.80000000000004,
+        "other_gpu_pct" : 13.972137459432869,
+        "phase" : "idle",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T08:58:21Z",
+        "compositing_gpu_pct" : 27.530614449432615,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 208.30000000000004,
+        "other_gpu_pct" : 9.469385550567385,
+        "phase" : "idle",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T08:58:25Z",
+        "compositing_gpu_pct" : 26.87555275359689,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 214.6,
+        "other_gpu_pct" : 9.124447246403111,
+        "phase" : "idle",
+        "valid" : false
+      }
+    ],
+    "measurement_lock" : false,
+    "note" : "Quick check under gpulock; gpulock quick proof; not controlled measurement, never ranked or Measured. Speed and quality only; energy not measured. RAM is sampled worker footprint, a lower bound on transient peak.",
+    "run_samples" : [
+      {
+        "at" : "2026-10-02T08:58:36Z",
+        "compositing_gpu_pct" : 23.15937664234146,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 159.69999999999993,
+        "other_gpu_pct" : 0.09298661741080223,
+        "phase" : "run",
+        "valid" : false
+      },
+      {
+        "at" : "2026-10-02T08:58:40Z",
+        "compositing_gpu_pct" : 27.42306355609969,
+        "note" : "top interval CPU; idle=device GPU minus compositor; run=non-owned client GPU-time delta; 3 s sample.",
+        "other_cpu_pct" : 141.79999999999995,
+        "other_gpu_pct" : 0.16902819440769162,
+        "phase" : "run",
+        "valid" : false
+      }
+    ],
+    "sample_interval_s" : 3
+  },
+  "date" : "2026-10-02T08:58:40Z",
+  "gate_passed" : false,
+  "kind" : "decisions",
+  "metrics" : {
+    "accuracy" : 1,
+    "batch_questions_per_s" : 486.04487535428547,
+    "latency_s" : 0.0164070725440979,
+    "peak_ram_mb" : 1754
+  },
+  "mode" : "fast",
+  "model" : "laya-english",
+  "os_build" : "25G72",
+  "precision" : "fp16",
+  "profile" : "quick",
+  "runner" : "native",
+  "schema" : 1,
+  "stub" : false,
+  "suite" : {
+    "id" : "mobius-decisions-suite-v1",
+    "sha256" : "ea637a0953492ef0c599719ddce031321a4564dbeca5d598c7f24848cfbd47b1",
+    "version" : 1
+  },
+  "worker_digest" : "46d6e3aa7dfe67f8bf333de93f8b40aec0067a38dfc56505aeaf7ec741fa50dc",
+  "gpu_cores": 40
+}

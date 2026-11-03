@@ -1,0 +1,12 @@
+{
+  "speak": {
+    "text": "Hello world.",
+    "stream": true,
+    "instructions": "A calm narrator."
+  },
+  "voices": {},
+  "design_voice": {
+    "description": "A calm narrator.",
+    "preview_text": "Hello world."
+  }
+}

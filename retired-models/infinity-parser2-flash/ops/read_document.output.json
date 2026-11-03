@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "pages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000
+          },
+          "markdown": {
+            "type": "string"
+          },
+          "tables": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "content"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 0,
+            "maxItems": 1024
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "image_base64": {
+                  "type": "string"
+                },
+                "top_left_x": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                },
+                "top_left_y": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                },
+                "bottom_right_x": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                },
+                "bottom_right_y": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 65536
+                }
+              },
+              "required": [
+                "id",
+                "top_left_x",
+                "top_left_y",
+                "bottom_right_x",
+                "bottom_right_y"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 0,
+            "maxItems": 1024
+          },
+          "dimensions": {
+            "type": "object",
+            "properties": {
+              "width": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65536
+              },
+              "height": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 65536
+              },
+              "dpi": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 2400
+              }
+            },
+            "required": [
+              "width",
+              "height"
+            ],
+            "additionalProperties": false
+          },
+          "blocks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "category": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                },
+                "coordinate_system": {
+                  "const": "pixels"
+                },
+                "box": {
+                  "type": "object",
+                  "properties": {
+                    "xmin": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 65536
+                    },
+                    "ymin": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 65536
+                    },
+                    "xmax": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 65536
+                    },
+                    "ymax": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 65536
+                    }
+                  },
+                  "required": [
+                    "xmin",
+                    "ymin",
+                    "xmax",
+                    "ymax"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "category",
+                "text",
+                "coordinate_system"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 1024
+          },
+          "truncated": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "index",
+          "markdown"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 1024
+    },
+    "model": {
+      "type": "string"
+    },
+    "usage_info": {
+      "type": "object"
+    },
+    "document_annotation": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "pages"
+  ],
+  "additionalProperties": false
+}

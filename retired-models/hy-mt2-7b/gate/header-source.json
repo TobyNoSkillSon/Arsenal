@@ -1,0 +1,12 @@
+{
+  "repo": "mlx-community/Hy-MT2-7B-bf16",
+  "revision": "3168d7f87d357415a4a12448c8385c3a2c4b8847",
+  "files": [
+    "model-00001-of-00003.safetensors",
+    "model-00002-of-00003.safetensors",
+    "model-00003-of-00003.safetensors"
+  ],
+  "tensors": 354,
+  "header_bytes": 41311,
+  "errors": []
+}

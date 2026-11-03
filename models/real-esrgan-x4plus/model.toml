@@ -1,0 +1,84 @@
+schema = 3
+id = "real-esrgan-x4plus"
+name = "Real-ESRGAN x4plus"
+kind = "restoration"
+summary = "Enlarges a photo 4x, sharpening edges and cleaning blur, noise and JPEG artefacts as it goes."
+description = "Real-ESRGAN x4plus is the general-purpose 4x model from Xintao Wang, Liangbin Xie, Chao Dong and Ying Shan (Tencent ARC, Real-ESRGAN: Training Real-World Blind Super-Resolution with Pure Synthetic Data, ICCV Workshops 2021). It is an ESRGAN RRDBNet (23 residual-in-residual dense blocks, 16.7M parameters) trained with a high-order synthetic degradation model (blur, resize, noise and JPEG, applied twice) on DIV2K, Flickr2K and OutdoorSceneTraining, so it restores real low-quality photos rather than only clean downscales. Comfy-Org repackaged the maker's RealESRGAN_x4plus.pth as safetensors."
+purpose = "Upscale a photo 4x"
+publisher = "Comfy-Org"
+released = 2021
+params = "16.7M"
+tasks = ["upscale_image"]
+languages = ["mul"]
+good_for = [
+  "Small or soft photos and web images that need to print or display larger",
+  "Removing JPEG blocking, mild blur and noise while enlarging",
+  "Landscapes, buildings, objects and illustrations",
+]
+limits = [
+  "Fine natural texture (grass, foliage, hair) can come out smooth or painterly; it invents plausible detail, not the real one.",
+  "Faces are not specially restored (the maker pairs it with GFPGAN for that), and small text can be garbled.",
+  "Anime and line art do better with the maker's separate anime model.",
+  "The network is fixed at 4x; scale 2 and target_height resize its 4x result with a high-quality filter. Input at most 4 megapixels and 4096 pixels per side; output at most 64 megapixels and 16384 pixels per side.",
+  "Transparency is flattened; the output is an opaque PNG.",
+  "It has no language input or output, so Polish does not apply.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/Comfy-Org/Real-ESRGAN"
+
+[licence]
+spdx = "BSD-3-Clause"
+name = "BSD-3-Clause"
+commercial = true
+url = "https://huggingface.co/Comfy-Org/Real-ESRGAN/blob/5fd49b7b278836f48af63ecd314d0f98ab336105/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "Comfy-Org/Real-ESRGAN"
+revision = "5fd49b7b278836f48af63ecd314d0f98ab336105"
+dtype = "fp32"
+files = ["RealESRGAN_x4plus.safetensors"]
+
+[weights.sha256]
+"RealESRGAN_x4plus.safetensors" = "37f9a931c215f040aa6d50f711f2cb115f713c46df1d0d6469a8bd7bfe9a60bb"
+
+[weights.bytes]
+"RealESRGAN_x4plus.safetensors" = 66857836
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-real-esrgan-x4plus"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "upscale_image"
+title = "Upscale image"
+input = "ops/upscale_image.input.json"
+output = "file"
+output_schema = "ops/upscale_image.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

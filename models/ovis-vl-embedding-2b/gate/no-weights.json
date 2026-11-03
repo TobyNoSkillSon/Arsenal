@@ -1,0 +1,166 @@
+{
+  "config": {
+    "architectures": [
+      "Qwen3_5ForConditionalGeneration"
+    ],
+    "dtype": "bfloat16",
+    "hidden_size": 2048,
+    "image_token_id": 20,
+    "model_type": "qwen3_5",
+    "text_config": {
+      "attention_bias": false,
+      "attention_dropout": 0.0,
+      "attn_output_gate": true,
+      "bos_token_id": null,
+      "dtype": "bfloat16",
+      "eos_token_id": 248044,
+      "full_attention_interval": 4,
+      "head_dim": 16,
+      "hidden_act": "silu",
+      "hidden_size": 64,
+      "initializer_range": 0.02,
+      "intermediate_size": 128,
+      "layer_types": [
+        "linear_attention",
+        "linear_attention",
+        "linear_attention",
+        "full_attention"
+      ],
+      "linear_conv_kernel_dim": 4,
+      "linear_key_head_dim": 64,
+      "linear_num_key_heads": 2,
+      "linear_num_value_heads": 2,
+      "linear_value_head_dim": 64,
+      "mamba_ssm_dtype": "float32",
+      "max_position_embeddings": 262144,
+      "mlp_only_layers": [],
+      "model_type": "qwen3_5_text",
+      "mtp_num_hidden_layers": 1,
+      "mtp_use_dedicated_embeddings": false,
+      "num_attention_heads": 4,
+      "num_hidden_layers": 4,
+      "num_key_value_heads": 2,
+      "pad_token_id": null,
+      "partial_rotary_factor": 0.25,
+      "rms_norm_eps": 1e-06,
+      "rope_parameters": {
+        "mrope_interleaved": true,
+        "mrope_section": [
+          11,
+          11,
+          10
+        ],
+        "partial_rotary_factor": 0.25,
+        "rope_theta": 10000000,
+        "rope_type": "default"
+      },
+      "tie_word_embeddings": true,
+      "use_cache": true,
+      "vocab_size": 256
+    },
+    "tie_word_embeddings": true,
+    "transformers_version": "5.12.1",
+    "video_token_id": 21,
+    "vision_config": {
+      "deepstack_visual_indexes": [],
+      "depth": 1,
+      "dtype": "bfloat16",
+      "hidden_act": "gelu_pytorch_tanh",
+      "hidden_size": 64,
+      "in_channels": 3,
+      "initializer_range": 0.02,
+      "intermediate_size": 128,
+      "model_type": "qwen3_5_vision",
+      "num_heads": 4,
+      "num_position_embeddings": 16,
+      "out_hidden_size": 64,
+      "patch_size": 16,
+      "spatial_merge_size": 2,
+      "temporal_patch_size": 2
+    },
+    "vision_end_token_id": 23,
+    "vision_start_token_id": 22
+  },
+  "files": {
+    "fixture.png": "iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAJ0lEQVR4nO3NsQkAAAgDsJ7u5/YKByGQPcnsLYFAIBAIBAKBQPAlKPAr/Ez/cO8XAAAAAElFTkSuQmCC",
+    "fixture.pdf": "JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9Db3VudCAxIC9LaWRzIFszIDAgUl0gPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCAzMiAzMl0gL0NvbnRlbnRzIDQgMCBSIC9SZXNvdXJjZXMgPDwgPj4gPj4KZW5kb2JqCjQgMCBvYmoKPDwgL0xlbmd0aCAyMSA+PgpzdHJlYW0KMCAwIDMyIDMyIHJlIDAuNSBnIGYKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgNQowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyMTcgMDAwMDAgbiAKdHJhaWxlcgo8PCAvU2l6ZSA1IC9Sb290IDEgMCBSID4+CnN0YXJ0eHJlZgoyODcKJSVFT0YK",
+    "fixture.mp4": "AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAAANptZGF0AAAANQYFLUdWStxcTEM/lO/FETzRQ6gBAAADAAEDAAADAAECAAHmAAsAAAMAAAMAAF8ADAORKwGAAAAATCW4IB/eCOPG/4K46mJ5DM89jf/Jqz+I7ABUe2wcBvEZZhZ9IL7dROvNAe32ZaGoKAQXiflOneSoAFIQyeoCmIQ2fpHt2CgySlDip5gAAAAUAeEE/83y7qzisU7Wt0XQAKSINkAAAAAUIeEIX8SS7yRh38NvYE0QABIbUKQAAAAVAeIMn/8BO1U4Q8lYNL8vwAArThRNAAADLG1vb3YAAABsbXZoZAAAAAAAAAAAAAAAAAAAA+gAAAfQAAEAAAEAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAJWdHJhawAAAFx0a2hkAAAAAwAAAAAAAAAAAAAAAQAAAAAAAAfQAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAQAAAAABAAAAAQAAAAAAAJGVkdHMAAAAcZWxzdAAAAAAAAAABAAAH0AAAAAAAAQAAAAABzm1kaWEAAAAgbWRoZAAAAAAAAAAAAAAAAAAAQAAAAIAAVcQAAAAAAC1oZGxyAAAAAAAAAAB2aWRlAAAAAAAAAAAAAAAAVmlkZW9IYW5kbGVyAAAAAXltaW5mAAAAFHZtaGQAAAABAAAAAAAAAAAAAAAkZGluZgAAABxkcmVmAAAAAAAAAAEAAAAMdXJsIAAAAAEAAAE5c3RibAAAALFzdHNkAAAAAAAAAAEAAAChYXZjMQAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAABAAEAASAAAAEgAAAAAAAAAAR9MYXZjNjIuMjguMTAyIGgyNjRfdmlkZW90b29sYm94ABj//wAAACdhdmNDAWQAC//hAAwnZAALrFYsMN4EGEUBAAQo7jyw/fj4AAAAABBwYXNwAAAAAQAAAAEAAAAUYnRydAAAAAAAAANIAAADSAAAABhzdHRzAAAAAAAAAAEAAAAEAAAgAAAAABRzdHNzAAAAAAAAAAEAAAABAAAAHHN0c2MAAAAAAAAAAQAAAAEAAAAEAAAAAQAAACRzdHN6AAAAAAAAAAAAAAAEAAAAiQAAABgAAAAYAAAAGQAAABRzdGNvAAAAAAAAAAEAAAAwAAAAYnVkdGEAAABabWV0YQAAAAAAAAAhaGRscgAAAAAAAAAAbWRpcmFwcGwAAAAAAAAAAAAAAAAtaWxzdAAAACWpdG9vAAAAHWRhdGEAAAABAAAAAExhdmY2Mi4xMi4xMDI="
+  },
+  "operations": [
+    {
+      "operation": "embed",
+      "input": {
+        "input": [
+          "hello",
+          "world"
+        ],
+        "task": "query"
+      }
+    },
+    {
+      "operation": "embed",
+      "input": {
+        "input": [
+          {
+            "type": "image",
+            "image": {
+              "path": "$INBOX/fixture.png"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation": "embed",
+      "input": {
+        "input": [
+          {
+            "type": "document",
+            "document": {
+              "path": "$INBOX/fixture.pdf"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation": "embed",
+      "input": {
+        "input": [
+          {
+            "type": "video",
+            "video": {
+              "path": "$INBOX/fixture.mp4"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "operation": "embed",
+      "input": {
+        "input": [
+          {
+            "type": "content",
+            "content": [
+              "hello",
+              {
+                "type": "image",
+                "image": {
+                  "path": "$INBOX/fixture.png"
+                }
+              },
+              "world",
+              {
+                "type": "image",
+                "image": {
+                  "path": "$INBOX/fixture.png"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

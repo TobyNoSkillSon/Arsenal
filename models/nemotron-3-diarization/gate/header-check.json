@@ -1,0 +1,25 @@
+{
+  "status": "header_read",
+  "method": "Exact HTTP Range reads of each pinned safetensors header (8-byte length, then the JSON header); no tensor payload read",
+  "checked": "2026-10-18",
+  "sources": [
+    "https://huggingface.co/mlx-community/Nemotron-3-Diarization/resolve/59ed2dbfc1346dcea9d423c71306a3a2499c568f/model.safetensors"
+  ],
+  "header_sha256": {
+    "mlx-community/Nemotron-3-Diarization@59ed2dbfc1346dcea9d423c71306a3a2499c568f/model.safetensors": "acd8005e33366fa3c26b3b46cdf9dfd977c0a3ba8b3bf237ebb6a5d694c4c28e"
+  },
+  "header_bytes_read": 37942,
+  "tensor_payload_bytes_read": 0,
+  "remote_tensors": 363,
+  "remote_dtypes": {
+    "BF16": 361,
+    "F32": 2
+  },
+  "ignored": 2,
+  "mapped_tensors": 361,
+  "renamed_or_permuted": 0,
+  "planned_casts": 361,
+  "header_map_errors": [],
+  "full_precision_not_cast": [],
+  "graph_inventory": "pending: the comparison with the adapter graph needs its full-config parameter inventory from the built audio worker (scripts/model-check.py smoke --inventory with the real config.json), then scripts/model-check.py header --parameters"
+}

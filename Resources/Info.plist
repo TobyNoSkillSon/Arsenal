@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+<!-- Version and build are set here only (scripts/assemble.sh reads them); bump both after every release tag. -->
+<key>ArsenalUpdateRepo</key><string>TobyNoSkillSon/Arsenal</string>
+<key>CFBundleExecutable</key><string>Arsenal</string>
+<key>CFBundleIdentifier</key><string>dev.arsenal.app</string>
+<key>CFBundleName</key><string>Arsenal</string>
+<key>CFBundleDisplayName</key><string>Arsenal</string>
+<key>CFBundlePackageType</key><string>APPL</string>
+<key>CFBundleShortVersionString</key><string>1.0.0</string>
+<key>CFBundleVersion</key><string>2000</string>
+<key>LSMinimumSystemVersion</key><string>26.0</string>
+<key>LSUIElement</key><true/>
+<key>LSMultipleInstancesProhibited</key><true/>
+<key>NSHighResolutionCapable</key><true/>
+<key>NSMicrophoneUsageDescription</key><string>Arsenal transcribes what you say live, on this Mac, when you start the microphone in Transcribe.</string>
+<key>NSHumanReadableCopyright</key><string>Copyright 2026 Arsenal contributors. Third-party code and model weights keep their own licences.</string>
+</dict></plist>

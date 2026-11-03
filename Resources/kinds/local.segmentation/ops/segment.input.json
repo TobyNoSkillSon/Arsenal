@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "image"
+  ],
+  "properties": {
+    "image": {
+      "type": "object",
+      "description": "The photo to segment.",
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg",
+          "image/heic"
+        ]
+      },
+      "x-arsenal-control": "image-picker",
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    },
+    "points": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "x-arsenal-control": "image-points",
+      "x-arsenal-image": "image",
+      "x-arsenal-coordinates": "normalized",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "x",
+          "y"
+        ],
+        "properties": {
+          "x": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "y": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "label": {
+            "type": "string",
+            "enum": [
+              "foreground",
+              "background"
+            ],
+            "default": "foreground"
+          }
+        }
+      }
+    },
+    "boxes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "x-arsenal-control": "image-boxes",
+      "x-arsenal-image": "image",
+      "x-arsenal-coordinates": "normalized",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "xmin",
+          "ymin",
+          "xmax",
+          "ymax"
+        ],
+        "properties": {
+          "xmin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymin": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "xmax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "ymax": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "multimask_output": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "anyOf": [
+    {
+      "required": [
+        "points"
+      ]
+    },
+    {
+      "required": [
+        "boxes"
+      ]
+    }
+  ]
+}

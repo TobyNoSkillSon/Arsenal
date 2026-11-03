@@ -1,0 +1,2437 @@
+{
+  "casts": {
+    "encoder.backbone.blocks.0.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.0.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.1.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.10.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.11.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.12.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.13.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.14.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.15.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.16.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.17.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.18.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.19.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.2.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.20.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.21.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.22.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.23.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.3.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.4.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.5.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.6.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.7.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.8.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.attn.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.attn.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.attn.qkv.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.attn.qkv.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.ls1.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.ls2.gamma": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.mlp.fc1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.mlp.fc1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.mlp.fc2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.mlp.fc2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.norm2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.blocks.9.norm2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.cls_token": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.mask_token": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.norm.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.norm.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.patch_embed.proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.patch_embed.proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.backbone.pos_embed": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.image_mean": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.image_std": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.3.bias": {"at":"Get","from":"F32","to":"F16"},
+    "encoder.output_projections.3.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.3.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.3.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.input_blocks.4.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.output_blocks.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.output_blocks.4.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.1.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.1.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.1.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.1.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.2.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.2.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.2.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.2.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.3.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.3.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.3.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.res_blocks.3.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.0.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.0.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.0.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.0.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.1.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.1.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.1.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.1.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.2.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.2.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.2.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.2.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.3.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "mask_head.resamplers.3.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.3.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.3.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.input_blocks.4.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.1.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.1.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.1.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.1.1.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.1.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.1.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.1.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.2.1.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.1.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.1.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.1.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.res_blocks.3.1.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.0.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.0.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.0.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.0.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.1.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.1.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.1.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.1.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.2.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.2.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.2.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.2.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.3.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "neck.resamplers.3.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.3.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.3.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.input_blocks.4.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.output_blocks.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.output_blocks.4.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.1.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.1.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.1.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.1.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.2.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.2.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.2.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.2.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.3.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.3.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.3.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.res_blocks.3.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.0.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.0.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.0.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.0.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.1.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.1.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.1.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.1.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.2.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.2.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.2.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.2.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.3.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "normal_head.resamplers.3.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.3.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.3.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.input_blocks.4.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.output_blocks.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.output_blocks.4.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.1.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.1.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.1.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.1.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.2.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.2.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.2.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.2.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.3.0.layers.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.3.0.layers.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.3.0.layers.5.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.res_blocks.3.0.layers.5.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.0.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.0.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.0.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.0.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.1.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.1.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.1.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.1.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.2.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.2.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.2.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.2.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.3.1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "points_head.resamplers.3.1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.bottleneck_stage.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.bottleneck_stage.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.bottleneck_stage.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.bottleneck_stage.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.bottleneck_stage.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.bottleneck_stage.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.0.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.0.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.0.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.0.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.0.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.0.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.1.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.1.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.1.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.1.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.1.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.1.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.2.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.2.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.2.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.2.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.2.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.2.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.3.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.3.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.3.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.3.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.3.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.3.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.4.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.4.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.4.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.4.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.4.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.down_stages.4.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.0.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.0.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.1.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.1.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.2.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.2.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.3.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.downsample_blocks.3.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.encoder_fuse.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.encoder_fuse.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.fuse_proj.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.fuse_proj.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.fuse_proj.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.fuse_proj.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.input_proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.input_proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.out_proj.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.out_proj.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.0.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.0.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.0.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.0.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.0.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.0.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.1.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.1.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.1.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.1.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.1.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.1.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.2.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.2.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.2.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.2.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.2.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.2.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.3.0.conv1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.3.0.conv1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.3.0.conv2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.3.0.conv2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.3.0.norm1.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.up_stages.3.0.norm1.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.0.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.0.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.1.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.1.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.2.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.2.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.3.linear.bias": {"at":"Get","from":"F32","to":"F16"},
+    "refiner.upsample_blocks.3.linear.weight": {"at":"Get","from":"F32","to":"F16"},
+    "scale_head.0.bias": {"at":"Get","from":"F32","to":"F16"},
+    "scale_head.0.weight": {"at":"Get","from":"F32","to":"F16"},
+    "scale_head.2.bias": {"at":"Get","from":"F32","to":"F16"},
+    "scale_head.2.weight": {"at":"Get","from":"F32","to":"F16"},
+    "scale_head.4.bias": {"at":"Get","from":"F32","to":"F16"},
+    "scale_head.4.weight": {"at":"Get","from":"F32","to":"F16"}
+  },
+  "ignore" : [
+
+  ],
+  "tensors" : {
+    "encoder.backbone.blocks.0.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.0.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.0.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.0.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.0.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.0.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.0.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.0.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.0.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.0.ls1.gamma"
+    },
+    "encoder.backbone.blocks.0.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.0.ls2.gamma"
+    },
+    "encoder.backbone.blocks.0.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.0.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.0.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.0.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.0.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.0.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.0.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.0.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.0.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.0.norm1.bias"
+    },
+    "encoder.backbone.blocks.0.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.0.norm1.weight"
+    },
+    "encoder.backbone.blocks.0.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.0.norm2.bias"
+    },
+    "encoder.backbone.blocks.0.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.0.norm2.weight"
+    },
+    "encoder.backbone.blocks.1.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.1.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.1.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.1.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.1.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.1.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.1.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.1.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.1.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.1.ls1.gamma"
+    },
+    "encoder.backbone.blocks.1.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.1.ls2.gamma"
+    },
+    "encoder.backbone.blocks.1.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.1.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.1.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.1.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.1.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.1.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.1.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.1.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.1.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.1.norm1.bias"
+    },
+    "encoder.backbone.blocks.1.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.1.norm1.weight"
+    },
+    "encoder.backbone.blocks.1.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.1.norm2.bias"
+    },
+    "encoder.backbone.blocks.1.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.1.norm2.weight"
+    },
+    "encoder.backbone.blocks.2.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.2.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.2.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.2.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.2.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.2.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.2.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.2.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.2.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.2.ls1.gamma"
+    },
+    "encoder.backbone.blocks.2.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.2.ls2.gamma"
+    },
+    "encoder.backbone.blocks.2.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.2.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.2.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.2.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.2.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.2.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.2.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.2.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.2.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.2.norm1.bias"
+    },
+    "encoder.backbone.blocks.2.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.2.norm1.weight"
+    },
+    "encoder.backbone.blocks.2.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.2.norm2.bias"
+    },
+    "encoder.backbone.blocks.2.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.2.norm2.weight"
+    },
+    "encoder.backbone.blocks.3.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.3.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.3.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.3.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.3.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.3.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.3.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.3.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.3.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.3.ls1.gamma"
+    },
+    "encoder.backbone.blocks.3.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.3.ls2.gamma"
+    },
+    "encoder.backbone.blocks.3.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.3.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.3.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.3.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.3.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.3.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.3.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.3.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.3.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.3.norm1.bias"
+    },
+    "encoder.backbone.blocks.3.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.3.norm1.weight"
+    },
+    "encoder.backbone.blocks.3.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.3.norm2.bias"
+    },
+    "encoder.backbone.blocks.3.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.3.norm2.weight"
+    },
+    "encoder.backbone.blocks.4.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.4.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.4.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.4.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.4.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.4.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.4.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.4.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.4.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.4.ls1.gamma"
+    },
+    "encoder.backbone.blocks.4.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.4.ls2.gamma"
+    },
+    "encoder.backbone.blocks.4.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.4.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.4.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.4.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.4.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.4.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.4.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.4.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.4.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.4.norm1.bias"
+    },
+    "encoder.backbone.blocks.4.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.4.norm1.weight"
+    },
+    "encoder.backbone.blocks.4.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.4.norm2.bias"
+    },
+    "encoder.backbone.blocks.4.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.4.norm2.weight"
+    },
+    "encoder.backbone.blocks.5.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.5.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.5.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.5.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.5.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.5.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.5.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.5.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.5.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.5.ls1.gamma"
+    },
+    "encoder.backbone.blocks.5.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.5.ls2.gamma"
+    },
+    "encoder.backbone.blocks.5.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.5.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.5.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.5.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.5.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.5.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.5.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.5.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.5.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.5.norm1.bias"
+    },
+    "encoder.backbone.blocks.5.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.5.norm1.weight"
+    },
+    "encoder.backbone.blocks.5.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.5.norm2.bias"
+    },
+    "encoder.backbone.blocks.5.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.5.norm2.weight"
+    },
+    "encoder.backbone.blocks.6.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.6.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.6.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.6.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.6.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.6.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.6.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.6.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.6.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.6.ls1.gamma"
+    },
+    "encoder.backbone.blocks.6.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.6.ls2.gamma"
+    },
+    "encoder.backbone.blocks.6.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.6.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.6.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.6.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.6.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.6.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.6.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.6.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.6.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.6.norm1.bias"
+    },
+    "encoder.backbone.blocks.6.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.6.norm1.weight"
+    },
+    "encoder.backbone.blocks.6.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.6.norm2.bias"
+    },
+    "encoder.backbone.blocks.6.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.6.norm2.weight"
+    },
+    "encoder.backbone.blocks.7.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.7.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.7.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.7.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.7.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.7.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.7.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.7.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.7.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.7.ls1.gamma"
+    },
+    "encoder.backbone.blocks.7.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.7.ls2.gamma"
+    },
+    "encoder.backbone.blocks.7.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.7.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.7.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.7.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.7.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.7.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.7.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.7.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.7.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.7.norm1.bias"
+    },
+    "encoder.backbone.blocks.7.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.7.norm1.weight"
+    },
+    "encoder.backbone.blocks.7.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.7.norm2.bias"
+    },
+    "encoder.backbone.blocks.7.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.7.norm2.weight"
+    },
+    "encoder.backbone.blocks.8.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.8.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.8.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.8.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.8.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.8.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.8.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.8.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.8.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.8.ls1.gamma"
+    },
+    "encoder.backbone.blocks.8.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.8.ls2.gamma"
+    },
+    "encoder.backbone.blocks.8.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.8.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.8.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.8.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.8.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.8.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.8.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.8.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.8.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.8.norm1.bias"
+    },
+    "encoder.backbone.blocks.8.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.8.norm1.weight"
+    },
+    "encoder.backbone.blocks.8.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.8.norm2.bias"
+    },
+    "encoder.backbone.blocks.8.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.8.norm2.weight"
+    },
+    "encoder.backbone.blocks.9.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.9.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.9.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.9.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.9.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.9.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.9.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.9.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.9.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.9.ls1.gamma"
+    },
+    "encoder.backbone.blocks.9.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.9.ls2.gamma"
+    },
+    "encoder.backbone.blocks.9.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.9.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.9.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.9.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.9.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.9.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.9.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.9.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.9.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.9.norm1.bias"
+    },
+    "encoder.backbone.blocks.9.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.9.norm1.weight"
+    },
+    "encoder.backbone.blocks.9.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.9.norm2.bias"
+    },
+    "encoder.backbone.blocks.9.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.9.norm2.weight"
+    },
+    "encoder.backbone.blocks.10.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.10.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.10.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.10.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.10.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.10.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.10.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.10.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.10.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.10.ls1.gamma"
+    },
+    "encoder.backbone.blocks.10.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.10.ls2.gamma"
+    },
+    "encoder.backbone.blocks.10.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.10.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.10.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.10.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.10.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.10.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.10.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.10.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.10.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.10.norm1.bias"
+    },
+    "encoder.backbone.blocks.10.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.10.norm1.weight"
+    },
+    "encoder.backbone.blocks.10.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.10.norm2.bias"
+    },
+    "encoder.backbone.blocks.10.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.10.norm2.weight"
+    },
+    "encoder.backbone.blocks.11.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.11.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.11.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.11.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.11.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.11.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.11.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.11.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.11.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.11.ls1.gamma"
+    },
+    "encoder.backbone.blocks.11.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.11.ls2.gamma"
+    },
+    "encoder.backbone.blocks.11.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.11.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.11.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.11.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.11.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.11.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.11.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.11.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.11.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.11.norm1.bias"
+    },
+    "encoder.backbone.blocks.11.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.11.norm1.weight"
+    },
+    "encoder.backbone.blocks.11.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.11.norm2.bias"
+    },
+    "encoder.backbone.blocks.11.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.11.norm2.weight"
+    },
+    "encoder.backbone.blocks.12.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.12.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.12.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.12.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.12.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.12.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.12.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.12.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.12.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.12.ls1.gamma"
+    },
+    "encoder.backbone.blocks.12.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.12.ls2.gamma"
+    },
+    "encoder.backbone.blocks.12.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.12.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.12.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.12.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.12.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.12.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.12.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.12.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.12.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.12.norm1.bias"
+    },
+    "encoder.backbone.blocks.12.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.12.norm1.weight"
+    },
+    "encoder.backbone.blocks.12.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.12.norm2.bias"
+    },
+    "encoder.backbone.blocks.12.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.12.norm2.weight"
+    },
+    "encoder.backbone.blocks.13.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.13.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.13.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.13.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.13.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.13.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.13.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.13.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.13.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.13.ls1.gamma"
+    },
+    "encoder.backbone.blocks.13.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.13.ls2.gamma"
+    },
+    "encoder.backbone.blocks.13.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.13.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.13.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.13.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.13.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.13.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.13.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.13.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.13.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.13.norm1.bias"
+    },
+    "encoder.backbone.blocks.13.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.13.norm1.weight"
+    },
+    "encoder.backbone.blocks.13.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.13.norm2.bias"
+    },
+    "encoder.backbone.blocks.13.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.13.norm2.weight"
+    },
+    "encoder.backbone.blocks.14.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.14.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.14.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.14.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.14.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.14.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.14.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.14.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.14.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.14.ls1.gamma"
+    },
+    "encoder.backbone.blocks.14.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.14.ls2.gamma"
+    },
+    "encoder.backbone.blocks.14.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.14.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.14.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.14.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.14.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.14.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.14.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.14.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.14.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.14.norm1.bias"
+    },
+    "encoder.backbone.blocks.14.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.14.norm1.weight"
+    },
+    "encoder.backbone.blocks.14.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.14.norm2.bias"
+    },
+    "encoder.backbone.blocks.14.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.14.norm2.weight"
+    },
+    "encoder.backbone.blocks.15.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.15.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.15.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.15.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.15.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.15.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.15.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.15.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.15.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.15.ls1.gamma"
+    },
+    "encoder.backbone.blocks.15.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.15.ls2.gamma"
+    },
+    "encoder.backbone.blocks.15.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.15.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.15.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.15.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.15.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.15.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.15.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.15.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.15.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.15.norm1.bias"
+    },
+    "encoder.backbone.blocks.15.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.15.norm1.weight"
+    },
+    "encoder.backbone.blocks.15.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.15.norm2.bias"
+    },
+    "encoder.backbone.blocks.15.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.15.norm2.weight"
+    },
+    "encoder.backbone.blocks.16.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.16.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.16.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.16.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.16.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.16.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.16.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.16.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.16.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.16.ls1.gamma"
+    },
+    "encoder.backbone.blocks.16.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.16.ls2.gamma"
+    },
+    "encoder.backbone.blocks.16.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.16.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.16.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.16.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.16.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.16.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.16.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.16.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.16.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.16.norm1.bias"
+    },
+    "encoder.backbone.blocks.16.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.16.norm1.weight"
+    },
+    "encoder.backbone.blocks.16.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.16.norm2.bias"
+    },
+    "encoder.backbone.blocks.16.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.16.norm2.weight"
+    },
+    "encoder.backbone.blocks.17.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.17.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.17.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.17.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.17.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.17.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.17.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.17.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.17.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.17.ls1.gamma"
+    },
+    "encoder.backbone.blocks.17.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.17.ls2.gamma"
+    },
+    "encoder.backbone.blocks.17.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.17.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.17.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.17.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.17.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.17.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.17.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.17.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.17.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.17.norm1.bias"
+    },
+    "encoder.backbone.blocks.17.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.17.norm1.weight"
+    },
+    "encoder.backbone.blocks.17.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.17.norm2.bias"
+    },
+    "encoder.backbone.blocks.17.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.17.norm2.weight"
+    },
+    "encoder.backbone.blocks.18.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.18.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.18.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.18.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.18.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.18.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.18.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.18.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.18.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.18.ls1.gamma"
+    },
+    "encoder.backbone.blocks.18.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.18.ls2.gamma"
+    },
+    "encoder.backbone.blocks.18.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.18.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.18.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.18.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.18.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.18.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.18.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.18.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.18.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.18.norm1.bias"
+    },
+    "encoder.backbone.blocks.18.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.18.norm1.weight"
+    },
+    "encoder.backbone.blocks.18.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.18.norm2.bias"
+    },
+    "encoder.backbone.blocks.18.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.18.norm2.weight"
+    },
+    "encoder.backbone.blocks.19.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.19.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.19.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.19.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.19.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.19.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.19.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.19.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.19.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.19.ls1.gamma"
+    },
+    "encoder.backbone.blocks.19.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.19.ls2.gamma"
+    },
+    "encoder.backbone.blocks.19.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.19.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.19.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.19.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.19.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.19.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.19.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.19.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.19.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.19.norm1.bias"
+    },
+    "encoder.backbone.blocks.19.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.19.norm1.weight"
+    },
+    "encoder.backbone.blocks.19.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.19.norm2.bias"
+    },
+    "encoder.backbone.blocks.19.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.19.norm2.weight"
+    },
+    "encoder.backbone.blocks.20.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.20.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.20.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.20.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.20.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.20.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.20.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.20.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.20.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.20.ls1.gamma"
+    },
+    "encoder.backbone.blocks.20.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.20.ls2.gamma"
+    },
+    "encoder.backbone.blocks.20.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.20.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.20.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.20.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.20.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.20.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.20.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.20.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.20.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.20.norm1.bias"
+    },
+    "encoder.backbone.blocks.20.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.20.norm1.weight"
+    },
+    "encoder.backbone.blocks.20.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.20.norm2.bias"
+    },
+    "encoder.backbone.blocks.20.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.20.norm2.weight"
+    },
+    "encoder.backbone.blocks.21.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.21.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.21.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.21.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.21.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.21.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.21.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.21.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.21.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.21.ls1.gamma"
+    },
+    "encoder.backbone.blocks.21.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.21.ls2.gamma"
+    },
+    "encoder.backbone.blocks.21.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.21.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.21.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.21.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.21.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.21.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.21.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.21.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.21.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.21.norm1.bias"
+    },
+    "encoder.backbone.blocks.21.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.21.norm1.weight"
+    },
+    "encoder.backbone.blocks.21.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.21.norm2.bias"
+    },
+    "encoder.backbone.blocks.21.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.21.norm2.weight"
+    },
+    "encoder.backbone.blocks.22.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.22.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.22.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.22.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.22.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.22.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.22.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.22.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.22.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.22.ls1.gamma"
+    },
+    "encoder.backbone.blocks.22.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.22.ls2.gamma"
+    },
+    "encoder.backbone.blocks.22.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.22.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.22.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.22.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.22.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.22.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.22.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.22.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.22.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.22.norm1.bias"
+    },
+    "encoder.backbone.blocks.22.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.22.norm1.weight"
+    },
+    "encoder.backbone.blocks.22.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.22.norm2.bias"
+    },
+    "encoder.backbone.blocks.22.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.22.norm2.weight"
+    },
+    "encoder.backbone.blocks.23.attn.proj.bias" : {
+      "name" : "encoder.backbone.blocks.23.attn.proj.bias"
+    },
+    "encoder.backbone.blocks.23.attn.proj.weight" : {
+      "name" : "encoder.backbone.blocks.23.attn.proj.weight"
+    },
+    "encoder.backbone.blocks.23.attn.qkv.bias" : {
+      "name" : "encoder.backbone.blocks.23.attn.qkv.bias"
+    },
+    "encoder.backbone.blocks.23.attn.qkv.weight" : {
+      "name" : "encoder.backbone.blocks.23.attn.qkv.weight"
+    },
+    "encoder.backbone.blocks.23.ls1.gamma" : {
+      "name" : "encoder.backbone.blocks.23.ls1.gamma"
+    },
+    "encoder.backbone.blocks.23.ls2.gamma" : {
+      "name" : "encoder.backbone.blocks.23.ls2.gamma"
+    },
+    "encoder.backbone.blocks.23.mlp.fc1.bias" : {
+      "name" : "encoder.backbone.blocks.23.mlp.fc1.bias"
+    },
+    "encoder.backbone.blocks.23.mlp.fc1.weight" : {
+      "name" : "encoder.backbone.blocks.23.mlp.fc1.weight"
+    },
+    "encoder.backbone.blocks.23.mlp.fc2.bias" : {
+      "name" : "encoder.backbone.blocks.23.mlp.fc2.bias"
+    },
+    "encoder.backbone.blocks.23.mlp.fc2.weight" : {
+      "name" : "encoder.backbone.blocks.23.mlp.fc2.weight"
+    },
+    "encoder.backbone.blocks.23.norm1.bias" : {
+      "name" : "encoder.backbone.blocks.23.norm1.bias"
+    },
+    "encoder.backbone.blocks.23.norm1.weight" : {
+      "name" : "encoder.backbone.blocks.23.norm1.weight"
+    },
+    "encoder.backbone.blocks.23.norm2.bias" : {
+      "name" : "encoder.backbone.blocks.23.norm2.bias"
+    },
+    "encoder.backbone.blocks.23.norm2.weight" : {
+      "name" : "encoder.backbone.blocks.23.norm2.weight"
+    },
+    "encoder.backbone.cls_token" : {
+      "name" : "encoder.backbone.cls_token"
+    },
+    "encoder.backbone.mask_token" : {
+      "name" : "encoder.backbone.mask_token"
+    },
+    "encoder.backbone.norm.bias" : {
+      "name" : "encoder.backbone.norm.bias"
+    },
+    "encoder.backbone.norm.weight" : {
+      "name" : "encoder.backbone.norm.weight"
+    },
+    "encoder.backbone.patch_embed.proj.bias" : {
+      "name" : "encoder.backbone.patch_embed.proj.bias"
+    },
+    "encoder.backbone.patch_embed.proj.weight" : {
+      "name" : "encoder.backbone.patch_embed.proj.weight"
+    },
+    "encoder.backbone.pos_embed" : {
+      "name" : "encoder.backbone.pos_embed"
+    },
+    "encoder.image_mean" : {
+      "name" : "encoder.image_mean"
+    },
+    "encoder.image_std" : {
+      "name" : "encoder.image_std"
+    },
+    "encoder.output_projections.0.bias" : {
+      "name" : "encoder.output_projections.0.bias"
+    },
+    "encoder.output_projections.0.weight" : {
+      "name" : "encoder.output_projections.0.weight"
+    },
+    "encoder.output_projections.1.bias" : {
+      "name" : "encoder.output_projections.1.bias"
+    },
+    "encoder.output_projections.1.weight" : {
+      "name" : "encoder.output_projections.1.weight"
+    },
+    "encoder.output_projections.2.bias" : {
+      "name" : "encoder.output_projections.2.bias"
+    },
+    "encoder.output_projections.2.weight" : {
+      "name" : "encoder.output_projections.2.weight"
+    },
+    "encoder.output_projections.3.bias" : {
+      "name" : "encoder.output_projections.3.bias"
+    },
+    "encoder.output_projections.3.weight" : {
+      "name" : "encoder.output_projections.3.weight"
+    },
+    "mask_head.input_blocks.0.bias" : {
+      "name" : "mask_head.input_blocks.0.bias"
+    },
+    "mask_head.input_blocks.0.weight" : {
+      "name" : "mask_head.input_blocks.0.weight"
+    },
+    "mask_head.input_blocks.1.bias" : {
+      "name" : "mask_head.input_blocks.1.bias"
+    },
+    "mask_head.input_blocks.1.weight" : {
+      "name" : "mask_head.input_blocks.1.weight"
+    },
+    "mask_head.input_blocks.2.bias" : {
+      "name" : "mask_head.input_blocks.2.bias"
+    },
+    "mask_head.input_blocks.2.weight" : {
+      "name" : "mask_head.input_blocks.2.weight"
+    },
+    "mask_head.input_blocks.3.bias" : {
+      "name" : "mask_head.input_blocks.3.bias"
+    },
+    "mask_head.input_blocks.3.weight" : {
+      "name" : "mask_head.input_blocks.3.weight"
+    },
+    "mask_head.input_blocks.4.bias" : {
+      "name" : "mask_head.input_blocks.4.bias"
+    },
+    "mask_head.input_blocks.4.weight" : {
+      "name" : "mask_head.input_blocks.4.weight"
+    },
+    "mask_head.output_blocks.4.bias" : {
+      "name" : "mask_head.output_blocks.4.bias"
+    },
+    "mask_head.output_blocks.4.weight" : {
+      "name" : "mask_head.output_blocks.4.weight"
+    },
+    "mask_head.res_blocks.1.0.layers.2.bias" : {
+      "name" : "mask_head.res_blocks.1.0.layers.2.bias"
+    },
+    "mask_head.res_blocks.1.0.layers.2.weight" : {
+      "name" : "mask_head.res_blocks.1.0.layers.2.weight"
+    },
+    "mask_head.res_blocks.1.0.layers.5.bias" : {
+      "name" : "mask_head.res_blocks.1.0.layers.5.bias"
+    },
+    "mask_head.res_blocks.1.0.layers.5.weight" : {
+      "name" : "mask_head.res_blocks.1.0.layers.5.weight"
+    },
+    "mask_head.res_blocks.2.0.layers.2.bias" : {
+      "name" : "mask_head.res_blocks.2.0.layers.2.bias"
+    },
+    "mask_head.res_blocks.2.0.layers.2.weight" : {
+      "name" : "mask_head.res_blocks.2.0.layers.2.weight"
+    },
+    "mask_head.res_blocks.2.0.layers.5.bias" : {
+      "name" : "mask_head.res_blocks.2.0.layers.5.bias"
+    },
+    "mask_head.res_blocks.2.0.layers.5.weight" : {
+      "name" : "mask_head.res_blocks.2.0.layers.5.weight"
+    },
+    "mask_head.res_blocks.3.0.layers.2.bias" : {
+      "name" : "mask_head.res_blocks.3.0.layers.2.bias"
+    },
+    "mask_head.res_blocks.3.0.layers.2.weight" : {
+      "name" : "mask_head.res_blocks.3.0.layers.2.weight"
+    },
+    "mask_head.res_blocks.3.0.layers.5.bias" : {
+      "name" : "mask_head.res_blocks.3.0.layers.5.bias"
+    },
+    "mask_head.res_blocks.3.0.layers.5.weight" : {
+      "name" : "mask_head.res_blocks.3.0.layers.5.weight"
+    },
+    "mask_head.resamplers.0.0.bias" : {
+      "name" : "mask_head.resamplers.0.layers.0.bias"
+    },
+    "mask_head.resamplers.0.0.weight" : {
+      "name" : "mask_head.resamplers.0.layers.0.weight"
+    },
+    "mask_head.resamplers.0.1.bias" : {
+      "name" : "mask_head.resamplers.0.layers.1.bias"
+    },
+    "mask_head.resamplers.0.1.weight" : {
+      "name" : "mask_head.resamplers.0.layers.1.weight"
+    },
+    "mask_head.resamplers.1.0.bias" : {
+      "name" : "mask_head.resamplers.1.layers.0.bias"
+    },
+    "mask_head.resamplers.1.0.weight" : {
+      "name" : "mask_head.resamplers.1.layers.0.weight"
+    },
+    "mask_head.resamplers.1.1.bias" : {
+      "name" : "mask_head.resamplers.1.layers.1.bias"
+    },
+    "mask_head.resamplers.1.1.weight" : {
+      "name" : "mask_head.resamplers.1.layers.1.weight"
+    },
+    "mask_head.resamplers.2.0.bias" : {
+      "name" : "mask_head.resamplers.2.layers.0.bias"
+    },
+    "mask_head.resamplers.2.0.weight" : {
+      "name" : "mask_head.resamplers.2.layers.0.weight"
+    },
+    "mask_head.resamplers.2.1.bias" : {
+      "name" : "mask_head.resamplers.2.layers.1.bias"
+    },
+    "mask_head.resamplers.2.1.weight" : {
+      "name" : "mask_head.resamplers.2.layers.1.weight"
+    },
+    "mask_head.resamplers.3.1.bias" : {
+      "name" : "mask_head.resamplers.3.layers.1.bias"
+    },
+    "mask_head.resamplers.3.1.weight" : {
+      "name" : "mask_head.resamplers.3.layers.1.weight"
+    },
+    "neck.input_blocks.0.bias" : {
+      "name" : "neck.input_blocks.0.bias"
+    },
+    "neck.input_blocks.0.weight" : {
+      "name" : "neck.input_blocks.0.weight"
+    },
+    "neck.input_blocks.1.bias" : {
+      "name" : "neck.input_blocks.1.bias"
+    },
+    "neck.input_blocks.1.weight" : {
+      "name" : "neck.input_blocks.1.weight"
+    },
+    "neck.input_blocks.2.bias" : {
+      "name" : "neck.input_blocks.2.bias"
+    },
+    "neck.input_blocks.2.weight" : {
+      "name" : "neck.input_blocks.2.weight"
+    },
+    "neck.input_blocks.3.bias" : {
+      "name" : "neck.input_blocks.3.bias"
+    },
+    "neck.input_blocks.3.weight" : {
+      "name" : "neck.input_blocks.3.weight"
+    },
+    "neck.input_blocks.4.bias" : {
+      "name" : "neck.input_blocks.4.bias"
+    },
+    "neck.input_blocks.4.weight" : {
+      "name" : "neck.input_blocks.4.weight"
+    },
+    "neck.res_blocks.1.0.layers.2.bias" : {
+      "name" : "neck.res_blocks.1.0.layers.2.bias"
+    },
+    "neck.res_blocks.1.0.layers.2.weight" : {
+      "name" : "neck.res_blocks.1.0.layers.2.weight"
+    },
+    "neck.res_blocks.1.0.layers.5.bias" : {
+      "name" : "neck.res_blocks.1.0.layers.5.bias"
+    },
+    "neck.res_blocks.1.0.layers.5.weight" : {
+      "name" : "neck.res_blocks.1.0.layers.5.weight"
+    },
+    "neck.res_blocks.1.1.layers.2.bias" : {
+      "name" : "neck.res_blocks.1.1.layers.2.bias"
+    },
+    "neck.res_blocks.1.1.layers.2.weight" : {
+      "name" : "neck.res_blocks.1.1.layers.2.weight"
+    },
+    "neck.res_blocks.1.1.layers.5.bias" : {
+      "name" : "neck.res_blocks.1.1.layers.5.bias"
+    },
+    "neck.res_blocks.1.1.layers.5.weight" : {
+      "name" : "neck.res_blocks.1.1.layers.5.weight"
+    },
+    "neck.res_blocks.2.0.layers.2.bias" : {
+      "name" : "neck.res_blocks.2.0.layers.2.bias"
+    },
+    "neck.res_blocks.2.0.layers.2.weight" : {
+      "name" : "neck.res_blocks.2.0.layers.2.weight"
+    },
+    "neck.res_blocks.2.0.layers.5.bias" : {
+      "name" : "neck.res_blocks.2.0.layers.5.bias"
+    },
+    "neck.res_blocks.2.0.layers.5.weight" : {
+      "name" : "neck.res_blocks.2.0.layers.5.weight"
+    },
+    "neck.res_blocks.2.1.layers.2.bias" : {
+      "name" : "neck.res_blocks.2.1.layers.2.bias"
+    },
+    "neck.res_blocks.2.1.layers.2.weight" : {
+      "name" : "neck.res_blocks.2.1.layers.2.weight"
+    },
+    "neck.res_blocks.2.1.layers.5.bias" : {
+      "name" : "neck.res_blocks.2.1.layers.5.bias"
+    },
+    "neck.res_blocks.2.1.layers.5.weight" : {
+      "name" : "neck.res_blocks.2.1.layers.5.weight"
+    },
+    "neck.res_blocks.3.0.layers.2.bias" : {
+      "name" : "neck.res_blocks.3.0.layers.2.bias"
+    },
+    "neck.res_blocks.3.0.layers.2.weight" : {
+      "name" : "neck.res_blocks.3.0.layers.2.weight"
+    },
+    "neck.res_blocks.3.0.layers.5.bias" : {
+      "name" : "neck.res_blocks.3.0.layers.5.bias"
+    },
+    "neck.res_blocks.3.0.layers.5.weight" : {
+      "name" : "neck.res_blocks.3.0.layers.5.weight"
+    },
+    "neck.res_blocks.3.1.layers.2.bias" : {
+      "name" : "neck.res_blocks.3.1.layers.2.bias"
+    },
+    "neck.res_blocks.3.1.layers.2.weight" : {
+      "name" : "neck.res_blocks.3.1.layers.2.weight"
+    },
+    "neck.res_blocks.3.1.layers.5.bias" : {
+      "name" : "neck.res_blocks.3.1.layers.5.bias"
+    },
+    "neck.res_blocks.3.1.layers.5.weight" : {
+      "name" : "neck.res_blocks.3.1.layers.5.weight"
+    },
+    "neck.resamplers.0.0.bias" : {
+      "name" : "neck.resamplers.0.layers.0.bias"
+    },
+    "neck.resamplers.0.0.weight" : {
+      "name" : "neck.resamplers.0.layers.0.weight"
+    },
+    "neck.resamplers.0.1.bias" : {
+      "name" : "neck.resamplers.0.layers.1.bias"
+    },
+    "neck.resamplers.0.1.weight" : {
+      "name" : "neck.resamplers.0.layers.1.weight"
+    },
+    "neck.resamplers.1.0.bias" : {
+      "name" : "neck.resamplers.1.layers.0.bias"
+    },
+    "neck.resamplers.1.0.weight" : {
+      "name" : "neck.resamplers.1.layers.0.weight"
+    },
+    "neck.resamplers.1.1.bias" : {
+      "name" : "neck.resamplers.1.layers.1.bias"
+    },
+    "neck.resamplers.1.1.weight" : {
+      "name" : "neck.resamplers.1.layers.1.weight"
+    },
+    "neck.resamplers.2.0.bias" : {
+      "name" : "neck.resamplers.2.layers.0.bias"
+    },
+    "neck.resamplers.2.0.weight" : {
+      "name" : "neck.resamplers.2.layers.0.weight"
+    },
+    "neck.resamplers.2.1.bias" : {
+      "name" : "neck.resamplers.2.layers.1.bias"
+    },
+    "neck.resamplers.2.1.weight" : {
+      "name" : "neck.resamplers.2.layers.1.weight"
+    },
+    "neck.resamplers.3.1.bias" : {
+      "name" : "neck.resamplers.3.layers.1.bias"
+    },
+    "neck.resamplers.3.1.weight" : {
+      "name" : "neck.resamplers.3.layers.1.weight"
+    },
+    "normal_head.input_blocks.0.bias" : {
+      "name" : "normal_head.input_blocks.0.bias"
+    },
+    "normal_head.input_blocks.0.weight" : {
+      "name" : "normal_head.input_blocks.0.weight"
+    },
+    "normal_head.input_blocks.1.bias" : {
+      "name" : "normal_head.input_blocks.1.bias"
+    },
+    "normal_head.input_blocks.1.weight" : {
+      "name" : "normal_head.input_blocks.1.weight"
+    },
+    "normal_head.input_blocks.2.bias" : {
+      "name" : "normal_head.input_blocks.2.bias"
+    },
+    "normal_head.input_blocks.2.weight" : {
+      "name" : "normal_head.input_blocks.2.weight"
+    },
+    "normal_head.input_blocks.3.bias" : {
+      "name" : "normal_head.input_blocks.3.bias"
+    },
+    "normal_head.input_blocks.3.weight" : {
+      "name" : "normal_head.input_blocks.3.weight"
+    },
+    "normal_head.input_blocks.4.bias" : {
+      "name" : "normal_head.input_blocks.4.bias"
+    },
+    "normal_head.input_blocks.4.weight" : {
+      "name" : "normal_head.input_blocks.4.weight"
+    },
+    "normal_head.output_blocks.4.bias" : {
+      "name" : "normal_head.output_blocks.4.bias"
+    },
+    "normal_head.output_blocks.4.weight" : {
+      "name" : "normal_head.output_blocks.4.weight"
+    },
+    "normal_head.res_blocks.1.0.layers.2.bias" : {
+      "name" : "normal_head.res_blocks.1.0.layers.2.bias"
+    },
+    "normal_head.res_blocks.1.0.layers.2.weight" : {
+      "name" : "normal_head.res_blocks.1.0.layers.2.weight"
+    },
+    "normal_head.res_blocks.1.0.layers.5.bias" : {
+      "name" : "normal_head.res_blocks.1.0.layers.5.bias"
+    },
+    "normal_head.res_blocks.1.0.layers.5.weight" : {
+      "name" : "normal_head.res_blocks.1.0.layers.5.weight"
+    },
+    "normal_head.res_blocks.2.0.layers.2.bias" : {
+      "name" : "normal_head.res_blocks.2.0.layers.2.bias"
+    },
+    "normal_head.res_blocks.2.0.layers.2.weight" : {
+      "name" : "normal_head.res_blocks.2.0.layers.2.weight"
+    },
+    "normal_head.res_blocks.2.0.layers.5.bias" : {
+      "name" : "normal_head.res_blocks.2.0.layers.5.bias"
+    },
+    "normal_head.res_blocks.2.0.layers.5.weight" : {
+      "name" : "normal_head.res_blocks.2.0.layers.5.weight"
+    },
+    "normal_head.res_blocks.3.0.layers.2.bias" : {
+      "name" : "normal_head.res_blocks.3.0.layers.2.bias"
+    },
+    "normal_head.res_blocks.3.0.layers.2.weight" : {
+      "name" : "normal_head.res_blocks.3.0.layers.2.weight"
+    },
+    "normal_head.res_blocks.3.0.layers.5.bias" : {
+      "name" : "normal_head.res_blocks.3.0.layers.5.bias"
+    },
+    "normal_head.res_blocks.3.0.layers.5.weight" : {
+      "name" : "normal_head.res_blocks.3.0.layers.5.weight"
+    },
+    "normal_head.resamplers.0.0.bias" : {
+      "name" : "normal_head.resamplers.0.layers.0.bias"
+    },
+    "normal_head.resamplers.0.0.weight" : {
+      "name" : "normal_head.resamplers.0.layers.0.weight"
+    },
+    "normal_head.resamplers.0.1.bias" : {
+      "name" : "normal_head.resamplers.0.layers.1.bias"
+    },
+    "normal_head.resamplers.0.1.weight" : {
+      "name" : "normal_head.resamplers.0.layers.1.weight"
+    },
+    "normal_head.resamplers.1.0.bias" : {
+      "name" : "normal_head.resamplers.1.layers.0.bias"
+    },
+    "normal_head.resamplers.1.0.weight" : {
+      "name" : "normal_head.resamplers.1.layers.0.weight"
+    },
+    "normal_head.resamplers.1.1.bias" : {
+      "name" : "normal_head.resamplers.1.layers.1.bias"
+    },
+    "normal_head.resamplers.1.1.weight" : {
+      "name" : "normal_head.resamplers.1.layers.1.weight"
+    },
+    "normal_head.resamplers.2.0.bias" : {
+      "name" : "normal_head.resamplers.2.layers.0.bias"
+    },
+    "normal_head.resamplers.2.0.weight" : {
+      "name" : "normal_head.resamplers.2.layers.0.weight"
+    },
+    "normal_head.resamplers.2.1.bias" : {
+      "name" : "normal_head.resamplers.2.layers.1.bias"
+    },
+    "normal_head.resamplers.2.1.weight" : {
+      "name" : "normal_head.resamplers.2.layers.1.weight"
+    },
+    "normal_head.resamplers.3.1.bias" : {
+      "name" : "normal_head.resamplers.3.layers.1.bias"
+    },
+    "normal_head.resamplers.3.1.weight" : {
+      "name" : "normal_head.resamplers.3.layers.1.weight"
+    },
+    "points_head.input_blocks.0.bias" : {
+      "name" : "points_head.input_blocks.0.bias"
+    },
+    "points_head.input_blocks.0.weight" : {
+      "name" : "points_head.input_blocks.0.weight"
+    },
+    "points_head.input_blocks.1.bias" : {
+      "name" : "points_head.input_blocks.1.bias"
+    },
+    "points_head.input_blocks.1.weight" : {
+      "name" : "points_head.input_blocks.1.weight"
+    },
+    "points_head.input_blocks.2.bias" : {
+      "name" : "points_head.input_blocks.2.bias"
+    },
+    "points_head.input_blocks.2.weight" : {
+      "name" : "points_head.input_blocks.2.weight"
+    },
+    "points_head.input_blocks.3.bias" : {
+      "name" : "points_head.input_blocks.3.bias"
+    },
+    "points_head.input_blocks.3.weight" : {
+      "name" : "points_head.input_blocks.3.weight"
+    },
+    "points_head.input_blocks.4.bias" : {
+      "name" : "points_head.input_blocks.4.bias"
+    },
+    "points_head.input_blocks.4.weight" : {
+      "name" : "points_head.input_blocks.4.weight"
+    },
+    "points_head.output_blocks.4.bias" : {
+      "name" : "points_head.output_blocks.4.bias"
+    },
+    "points_head.output_blocks.4.weight" : {
+      "name" : "points_head.output_blocks.4.weight"
+    },
+    "points_head.res_blocks.1.0.layers.2.bias" : {
+      "name" : "points_head.res_blocks.1.0.layers.2.bias"
+    },
+    "points_head.res_blocks.1.0.layers.2.weight" : {
+      "name" : "points_head.res_blocks.1.0.layers.2.weight"
+    },
+    "points_head.res_blocks.1.0.layers.5.bias" : {
+      "name" : "points_head.res_blocks.1.0.layers.5.bias"
+    },
+    "points_head.res_blocks.1.0.layers.5.weight" : {
+      "name" : "points_head.res_blocks.1.0.layers.5.weight"
+    },
+    "points_head.res_blocks.2.0.layers.2.bias" : {
+      "name" : "points_head.res_blocks.2.0.layers.2.bias"
+    },
+    "points_head.res_blocks.2.0.layers.2.weight" : {
+      "name" : "points_head.res_blocks.2.0.layers.2.weight"
+    },
+    "points_head.res_blocks.2.0.layers.5.bias" : {
+      "name" : "points_head.res_blocks.2.0.layers.5.bias"
+    },
+    "points_head.res_blocks.2.0.layers.5.weight" : {
+      "name" : "points_head.res_blocks.2.0.layers.5.weight"
+    },
+    "points_head.res_blocks.3.0.layers.2.bias" : {
+      "name" : "points_head.res_blocks.3.0.layers.2.bias"
+    },
+    "points_head.res_blocks.3.0.layers.2.weight" : {
+      "name" : "points_head.res_blocks.3.0.layers.2.weight"
+    },
+    "points_head.res_blocks.3.0.layers.5.bias" : {
+      "name" : "points_head.res_blocks.3.0.layers.5.bias"
+    },
+    "points_head.res_blocks.3.0.layers.5.weight" : {
+      "name" : "points_head.res_blocks.3.0.layers.5.weight"
+    },
+    "points_head.resamplers.0.0.bias" : {
+      "name" : "points_head.resamplers.0.layers.0.bias"
+    },
+    "points_head.resamplers.0.0.weight" : {
+      "name" : "points_head.resamplers.0.layers.0.weight"
+    },
+    "points_head.resamplers.0.1.bias" : {
+      "name" : "points_head.resamplers.0.layers.1.bias"
+    },
+    "points_head.resamplers.0.1.weight" : {
+      "name" : "points_head.resamplers.0.layers.1.weight"
+    },
+    "points_head.resamplers.1.0.bias" : {
+      "name" : "points_head.resamplers.1.layers.0.bias"
+    },
+    "points_head.resamplers.1.0.weight" : {
+      "name" : "points_head.resamplers.1.layers.0.weight"
+    },
+    "points_head.resamplers.1.1.bias" : {
+      "name" : "points_head.resamplers.1.layers.1.bias"
+    },
+    "points_head.resamplers.1.1.weight" : {
+      "name" : "points_head.resamplers.1.layers.1.weight"
+    },
+    "points_head.resamplers.2.0.bias" : {
+      "name" : "points_head.resamplers.2.layers.0.bias"
+    },
+    "points_head.resamplers.2.0.weight" : {
+      "name" : "points_head.resamplers.2.layers.0.weight"
+    },
+    "points_head.resamplers.2.1.bias" : {
+      "name" : "points_head.resamplers.2.layers.1.bias"
+    },
+    "points_head.resamplers.2.1.weight" : {
+      "name" : "points_head.resamplers.2.layers.1.weight"
+    },
+    "points_head.resamplers.3.1.bias" : {
+      "name" : "points_head.resamplers.3.layers.1.bias"
+    },
+    "points_head.resamplers.3.1.weight" : {
+      "name" : "points_head.resamplers.3.layers.1.weight"
+    },
+    "refiner.bottleneck_stage.0.conv1.bias" : {
+      "name" : "refiner.bottleneck_stage.0.conv1.bias"
+    },
+    "refiner.bottleneck_stage.0.conv1.weight" : {
+      "name" : "refiner.bottleneck_stage.0.conv1.weight"
+    },
+    "refiner.bottleneck_stage.0.conv2.bias" : {
+      "name" : "refiner.bottleneck_stage.0.conv2.bias"
+    },
+    "refiner.bottleneck_stage.0.conv2.weight" : {
+      "name" : "refiner.bottleneck_stage.0.conv2.weight"
+    },
+    "refiner.bottleneck_stage.0.norm1.bias" : {
+      "name" : "refiner.bottleneck_stage.0.norm1.bias"
+    },
+    "refiner.bottleneck_stage.0.norm1.weight" : {
+      "name" : "refiner.bottleneck_stage.0.norm1.weight"
+    },
+    "refiner.down_stages.0.0.conv1.bias" : {
+      "name" : "refiner.down_stages.0.0.conv1.bias"
+    },
+    "refiner.down_stages.0.0.conv1.weight" : {
+      "name" : "refiner.down_stages.0.0.conv1.weight"
+    },
+    "refiner.down_stages.0.0.conv2.bias" : {
+      "name" : "refiner.down_stages.0.0.conv2.bias"
+    },
+    "refiner.down_stages.0.0.conv2.weight" : {
+      "name" : "refiner.down_stages.0.0.conv2.weight"
+    },
+    "refiner.down_stages.0.0.norm1.bias" : {
+      "name" : "refiner.down_stages.0.0.norm1.bias"
+    },
+    "refiner.down_stages.0.0.norm1.weight" : {
+      "name" : "refiner.down_stages.0.0.norm1.weight"
+    },
+    "refiner.down_stages.1.0.conv1.bias" : {
+      "name" : "refiner.down_stages.1.0.conv1.bias"
+    },
+    "refiner.down_stages.1.0.conv1.weight" : {
+      "name" : "refiner.down_stages.1.0.conv1.weight"
+    },
+    "refiner.down_stages.1.0.conv2.bias" : {
+      "name" : "refiner.down_stages.1.0.conv2.bias"
+    },
+    "refiner.down_stages.1.0.conv2.weight" : {
+      "name" : "refiner.down_stages.1.0.conv2.weight"
+    },
+    "refiner.down_stages.1.0.norm1.bias" : {
+      "name" : "refiner.down_stages.1.0.norm1.bias"
+    },
+    "refiner.down_stages.1.0.norm1.weight" : {
+      "name" : "refiner.down_stages.1.0.norm1.weight"
+    },
+    "refiner.down_stages.2.0.conv1.bias" : {
+      "name" : "refiner.down_stages.2.0.conv1.bias"
+    },
+    "refiner.down_stages.2.0.conv1.weight" : {
+      "name" : "refiner.down_stages.2.0.conv1.weight"
+    },
+    "refiner.down_stages.2.0.conv2.bias" : {
+      "name" : "refiner.down_stages.2.0.conv2.bias"
+    },
+    "refiner.down_stages.2.0.conv2.weight" : {
+      "name" : "refiner.down_stages.2.0.conv2.weight"
+    },
+    "refiner.down_stages.2.0.norm1.bias" : {
+      "name" : "refiner.down_stages.2.0.norm1.bias"
+    },
+    "refiner.down_stages.2.0.norm1.weight" : {
+      "name" : "refiner.down_stages.2.0.norm1.weight"
+    },
+    "refiner.down_stages.3.0.conv1.bias" : {
+      "name" : "refiner.down_stages.3.0.conv1.bias"
+    },
+    "refiner.down_stages.3.0.conv1.weight" : {
+      "name" : "refiner.down_stages.3.0.conv1.weight"
+    },
+    "refiner.down_stages.3.0.conv2.bias" : {
+      "name" : "refiner.down_stages.3.0.conv2.bias"
+    },
+    "refiner.down_stages.3.0.conv2.weight" : {
+      "name" : "refiner.down_stages.3.0.conv2.weight"
+    },
+    "refiner.down_stages.3.0.norm1.bias" : {
+      "name" : "refiner.down_stages.3.0.norm1.bias"
+    },
+    "refiner.down_stages.3.0.norm1.weight" : {
+      "name" : "refiner.down_stages.3.0.norm1.weight"
+    },
+    "refiner.down_stages.4.0.conv1.bias" : {
+      "name" : "refiner.down_stages.4.0.conv1.bias"
+    },
+    "refiner.down_stages.4.0.conv1.weight" : {
+      "name" : "refiner.down_stages.4.0.conv1.weight"
+    },
+    "refiner.down_stages.4.0.conv2.bias" : {
+      "name" : "refiner.down_stages.4.0.conv2.bias"
+    },
+    "refiner.down_stages.4.0.conv2.weight" : {
+      "name" : "refiner.down_stages.4.0.conv2.weight"
+    },
+    "refiner.down_stages.4.0.norm1.bias" : {
+      "name" : "refiner.down_stages.4.0.norm1.bias"
+    },
+    "refiner.down_stages.4.0.norm1.weight" : {
+      "name" : "refiner.down_stages.4.0.norm1.weight"
+    },
+    "refiner.downsample_blocks.0.linear.bias" : {
+      "name" : "refiner.downsample_blocks.0.linear.bias"
+    },
+    "refiner.downsample_blocks.0.linear.weight" : {
+      "name" : "refiner.downsample_blocks.0.linear.weight"
+    },
+    "refiner.downsample_blocks.1.linear.bias" : {
+      "name" : "refiner.downsample_blocks.1.linear.bias"
+    },
+    "refiner.downsample_blocks.1.linear.weight" : {
+      "name" : "refiner.downsample_blocks.1.linear.weight"
+    },
+    "refiner.downsample_blocks.2.linear.bias" : {
+      "name" : "refiner.downsample_blocks.2.linear.bias"
+    },
+    "refiner.downsample_blocks.2.linear.weight" : {
+      "name" : "refiner.downsample_blocks.2.linear.weight"
+    },
+    "refiner.downsample_blocks.3.linear.bias" : {
+      "name" : "refiner.downsample_blocks.3.linear.bias"
+    },
+    "refiner.downsample_blocks.3.linear.weight" : {
+      "name" : "refiner.downsample_blocks.3.linear.weight"
+    },
+    "refiner.encoder_fuse.bias" : {
+      "name" : "refiner.encoder_fuse.bias"
+    },
+    "refiner.encoder_fuse.weight" : {
+      "name" : "refiner.encoder_fuse.weight"
+    },
+    "refiner.fuse_proj.0.bias" : {
+      "name" : "refiner.fuse_proj.0.bias"
+    },
+    "refiner.fuse_proj.0.weight" : {
+      "name" : "refiner.fuse_proj.0.weight"
+    },
+    "refiner.fuse_proj.2.bias" : {
+      "name" : "refiner.fuse_proj.2.bias"
+    },
+    "refiner.fuse_proj.2.weight" : {
+      "name" : "refiner.fuse_proj.2.weight"
+    },
+    "refiner.input_proj.bias" : {
+      "name" : "refiner.input_proj.bias"
+    },
+    "refiner.input_proj.weight" : {
+      "name" : "refiner.input_proj.weight"
+    },
+    "refiner.out_proj.bias" : {
+      "name" : "refiner.out_proj.bias"
+    },
+    "refiner.out_proj.weight" : {
+      "name" : "refiner.out_proj.weight"
+    },
+    "refiner.up_stages.0.0.conv1.bias" : {
+      "name" : "refiner.up_stages.0.0.conv1.bias"
+    },
+    "refiner.up_stages.0.0.conv1.weight" : {
+      "name" : "refiner.up_stages.0.0.conv1.weight"
+    },
+    "refiner.up_stages.0.0.conv2.bias" : {
+      "name" : "refiner.up_stages.0.0.conv2.bias"
+    },
+    "refiner.up_stages.0.0.conv2.weight" : {
+      "name" : "refiner.up_stages.0.0.conv2.weight"
+    },
+    "refiner.up_stages.0.0.norm1.bias" : {
+      "name" : "refiner.up_stages.0.0.norm1.bias"
+    },
+    "refiner.up_stages.0.0.norm1.weight" : {
+      "name" : "refiner.up_stages.0.0.norm1.weight"
+    },
+    "refiner.up_stages.1.0.conv1.bias" : {
+      "name" : "refiner.up_stages.1.0.conv1.bias"
+    },
+    "refiner.up_stages.1.0.conv1.weight" : {
+      "name" : "refiner.up_stages.1.0.conv1.weight"
+    },
+    "refiner.up_stages.1.0.conv2.bias" : {
+      "name" : "refiner.up_stages.1.0.conv2.bias"
+    },
+    "refiner.up_stages.1.0.conv2.weight" : {
+      "name" : "refiner.up_stages.1.0.conv2.weight"
+    },
+    "refiner.up_stages.1.0.norm1.bias" : {
+      "name" : "refiner.up_stages.1.0.norm1.bias"
+    },
+    "refiner.up_stages.1.0.norm1.weight" : {
+      "name" : "refiner.up_stages.1.0.norm1.weight"
+    },
+    "refiner.up_stages.2.0.conv1.bias" : {
+      "name" : "refiner.up_stages.2.0.conv1.bias"
+    },
+    "refiner.up_stages.2.0.conv1.weight" : {
+      "name" : "refiner.up_stages.2.0.conv1.weight"
+    },
+    "refiner.up_stages.2.0.conv2.bias" : {
+      "name" : "refiner.up_stages.2.0.conv2.bias"
+    },
+    "refiner.up_stages.2.0.conv2.weight" : {
+      "name" : "refiner.up_stages.2.0.conv2.weight"
+    },
+    "refiner.up_stages.2.0.norm1.bias" : {
+      "name" : "refiner.up_stages.2.0.norm1.bias"
+    },
+    "refiner.up_stages.2.0.norm1.weight" : {
+      "name" : "refiner.up_stages.2.0.norm1.weight"
+    },
+    "refiner.up_stages.3.0.conv1.bias" : {
+      "name" : "refiner.up_stages.3.0.conv1.bias"
+    },
+    "refiner.up_stages.3.0.conv1.weight" : {
+      "name" : "refiner.up_stages.3.0.conv1.weight"
+    },
+    "refiner.up_stages.3.0.conv2.bias" : {
+      "name" : "refiner.up_stages.3.0.conv2.bias"
+    },
+    "refiner.up_stages.3.0.conv2.weight" : {
+      "name" : "refiner.up_stages.3.0.conv2.weight"
+    },
+    "refiner.up_stages.3.0.norm1.bias" : {
+      "name" : "refiner.up_stages.3.0.norm1.bias"
+    },
+    "refiner.up_stages.3.0.norm1.weight" : {
+      "name" : "refiner.up_stages.3.0.norm1.weight"
+    },
+    "refiner.upsample_blocks.0.linear.bias" : {
+      "name" : "refiner.upsample_blocks.0.linear.bias"
+    },
+    "refiner.upsample_blocks.0.linear.weight" : {
+      "name" : "refiner.upsample_blocks.0.linear.weight"
+    },
+    "refiner.upsample_blocks.1.linear.bias" : {
+      "name" : "refiner.upsample_blocks.1.linear.bias"
+    },
+    "refiner.upsample_blocks.1.linear.weight" : {
+      "name" : "refiner.upsample_blocks.1.linear.weight"
+    },
+    "refiner.upsample_blocks.2.linear.bias" : {
+      "name" : "refiner.upsample_blocks.2.linear.bias"
+    },
+    "refiner.upsample_blocks.2.linear.weight" : {
+      "name" : "refiner.upsample_blocks.2.linear.weight"
+    },
+    "refiner.upsample_blocks.3.linear.bias" : {
+      "name" : "refiner.upsample_blocks.3.linear.bias"
+    },
+    "refiner.upsample_blocks.3.linear.weight" : {
+      "name" : "refiner.upsample_blocks.3.linear.weight"
+    },
+    "scale_head.0.bias" : {
+      "name" : "scale_head.layers.0.bias"
+    },
+    "scale_head.0.weight" : {
+      "name" : "scale_head.layers.0.weight"
+    },
+    "scale_head.2.bias" : {
+      "name" : "scale_head.layers.2.bias"
+    },
+    "scale_head.2.weight" : {
+      "name" : "scale_head.layers.2.weight"
+    },
+    "scale_head.4.bias" : {
+      "name" : "scale_head.layers.4.bias"
+    },
+    "scale_head.4.weight" : {
+      "name" : "scale_head.layers.4.weight"
+    }
+  }
+}

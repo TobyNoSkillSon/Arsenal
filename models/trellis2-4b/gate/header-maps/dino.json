@@ -1,0 +1,2079 @@
+{
+  "casts": {
+    "embeddings.cls_token": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "embeddings.mask_token": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "embeddings.patch_embeddings.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "embeddings.patch_embeddings.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "embeddings.register_tokens": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.0.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.1.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.10.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.11.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.12.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.13.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.14.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.15.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.16.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.17.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.18.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.19.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.2.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.20.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.21.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.22.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.23.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.3.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.4.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.5.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.6.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.7.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.8.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.attention.k_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.attention.o_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.attention.o_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.attention.q_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.attention.q_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.attention.v_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.attention.v_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.layer_scale1.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.layer_scale2.lambda1": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.mlp.down_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.mlp.down_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.mlp.up_proj.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.mlp.up_proj.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.norm1.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.norm1.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.norm2.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "layer.9.norm2.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "norm.bias": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    },
+    "norm.weight": {
+      "at": "Get",
+      "from": "F32",
+      "to": "F16"
+    }
+  }
+}

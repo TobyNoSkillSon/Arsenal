@@ -1,0 +1,7 @@
+{
+  "speak": {
+    "text": "Hello world.",
+    "stream": true
+  },
+  "voices": {}
+}

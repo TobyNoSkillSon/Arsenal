@@ -1,0 +1,76 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "hy-mt2-7b"
+name = "Hy-MT2 7B"
+architecture = "hunyuan_v1_dense"
+kind = "chat"
+params = "7.5B"
+publisher = "Tencent"
+released = 2026
+suggested = false
+summary = "Translate between 33 languages."
+purpose = "Translate between 33 languages"
+good_for = ["Translate between 33 languages"]
+limits = ["Trained weights, tokenizer correctness and FP16/int8/int4 task quality await the approved live trial."]
+tasks = ["translate"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/mlx-community/Hy-MT2-7B-bf16/tree/3168d7f87d357415a4a12448c8385c3a2c4b8847"
+[weights]
+repo = "mlx-community/Hy-MT2-7B-bf16"
+revision = "3168d7f87d357415a4a12448c8385c3a2c4b8847"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "generation_config.json", "model-00001-of-00003.safetensors", "model-00002-of-00003.safetensors", "model-00003-of-00003.safetensors", "model.safetensors.index.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "788ac16c5d7bfefc28655928ad524c8f378a44cb24d24fb125d6a5859b167677"
+"config.json" = "7f876beea8359ef5042361653a975d1e444e35dcf90d45f4434828e6bed9c269"
+"generation_config.json" = "56cd0974cae79f49ecaec4a02936bcabed2a4c8d8b6a780bf4a94ccbf344a78b"
+"model-00001-of-00003.safetensors" = "7b4970f5656de4e20f113f62e342d1590d3bb8f76ae012bddd3662517e947491"
+"model-00002-of-00003.safetensors" = "02b5c51efc223e581978f7dfeb14115a73583bcd996f4c19f8a7a24f34febed2"
+"model-00003-of-00003.safetensors" = "1cbf91bd69caae3d83faa692dcc6703e6e03c4a22b5acad47676ccbafd973caa"
+"model.safetensors.index.json" = "1bbf007156e237384d25a1a5016a5f4b56a1b0b39d57620c2a46a5830b915b35"
+"tokenizer.json" = "4185389a69284fdd3ebf737c6120bbeee36cbed9763151fa5bac5986a39e05d4"
+"tokenizer_config.json" = "c22cbe91c8a483be0947552bc45505f4f5d32b1d5ad6bdaa38e49f5aac6d8e7a"
+[weights.bytes]
+"chat_template.jinja" = 662
+"config.json" = 1516
+"generation_config.json" = 217
+"model-00001-of-00003.safetensors" = 5294744818
+"model-00002-of-00003.safetensors" = 5352166844
+"model-00003-of-00003.safetensors" = 4362266289
+"model.safetensors.index.json" = 31163
+"tokenizer.json" = 16388221
+"tokenizer_config.json" = 277
+[derive]
+int8 = "cast:language-half-g64-v2"
+int4 = "cast:language-half-g64-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "translate"
+title = "Translate"
+input = "ops/translate.input.json"
+output_schema = "ops/translate.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

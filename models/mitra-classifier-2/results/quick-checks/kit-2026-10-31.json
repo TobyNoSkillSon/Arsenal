@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of classify_rows through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "mitra-classifier-2",
+  "revision": "edada0d20759c58ada8c8605c25f22f6e98ea5f0",
+  "rows": [
+    {
+      "date": "2026-10-31T01:30:13Z",
+      "load_seconds": 0.186,
+      "ops": {
+        "classify_rows": {
+          "seconds_first": 0.036,
+          "seconds_warm": 0.023,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 1132.2,
+      "precision": "fp16",
+      "runner_sha256": "237cd4c5919e18740c1b38b65f32e2e2f2b6b7fb118e083c18a5b8cd5c55a37b",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

@@ -1,0 +1,18 @@
+id = "local.audio-quality"
+title = "Audio quality"
+title_singular = "Audio quality model"
+icon = "waveform.badge.magnifyingglass"
+order = 20
+suite = "bench/kinds/local.audio-quality/suite-v1.toml"
+primary_operation = "score_quality"
+
+[[op]]
+name = "score_quality"
+title = "Score quality"
+input = "ops/score_quality.input.json"
+output = "json"
+output_schema = "ops/score_quality.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

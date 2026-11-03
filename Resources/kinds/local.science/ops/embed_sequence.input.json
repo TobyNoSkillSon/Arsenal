@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sequence"
+  ],
+  "properties": {
+    "sequence": {
+      "type": "string",
+      "description": "A protein sequence in one-letter amino-acid codes, uppercase (e.g. MALWMRLLPL...). Whitespace and line breaks are ignored; at most 1,022 residues.",
+      "minLength": 1,
+      "maxLength": 100000
+    },
+    "per_residue": {
+      "type": "boolean",
+      "description": "Also return one embedding per residue.",
+      "default": false
+    }
+  }
+}

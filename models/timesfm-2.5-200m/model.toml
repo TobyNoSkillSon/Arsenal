@@ -1,0 +1,65 @@
+schema = 3
+id = "timesfm-2.5-200m"
+name = "TimesFM 2.5 200M"
+kind = "local.forecast"
+summary = "Forecasts the next values of one numeric series as a range of likely outcomes."
+description = "TimesFM 2.5 200M is Google Research's third open checkpoint of its decoder-only time-series foundation model (ICML 2024 paper). It reads the history in patches of 32 values, decodes 128 steps per pass, and has a separate head for continuous quantiles over 1024 steps. It was pretrained on GIFT-Eval pretraining data, Wikimedia pageviews, Google Trends top queries and synthetic and augmented series."
+purpose = "Forecast numeric time series"
+publisher = "google"
+released = 2025
+params = "231.3M"
+tasks = ["time-series-forecasting"]
+languages = ["und"]
+good_for = ["Probabilistic zero-shot forecasts of one numeric series, such as sales, traffic or counts, up to 1024 steps", "Long histories: it reads up to the last 8192 values here (the model allows 16k with the horizon)", "Non-negative series stay non-negative, and quantiles never cross", "Seasonal series: on monthly airline passengers it continues the summer peak and winter dip"]
+limits = ["Univariate here: one series in; the maker's covariate regression (XReg) is not ported", "Horizon at most 1024 steps (the continuous quantile head's length); past 128 steps it decodes autoregressively on its own median", "Uses the model card's settings, fixed: input normalisation, flip invariance (two passes), non-negativity when the history is non-negative, the continuous quantile head and quantile-crossing repair", "Returns the quantile levels 0.1 to 0.9 in steps of 0.1; missing values are not accepted", "Reads and writes no language, so the Polish question does not apply", "Parity with the maker code (timesfm 3.0.2, MPS fp16 autocast): cosine 0.99999996, max abs diff 0.53 on forecasts up to 697 (airline series, 24 steps); cosine 0.999999 over 1024 steps"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/google/timesfm-2.5-200m-pytorch"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/google/timesfm-2.5-200m-pytorch/blob/1d952420fba87f3c6dee4f240de0f1a0fbc790e3/README.md"
+
+[facets]
+modalities_in = ["text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "google/timesfm-2.5-200m-pytorch"
+revision = "1d952420fba87f3c6dee4f240de0f1a0fbc790e3"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "2f776efe6245e42b24bc4153ffdf61810140210e4bd3b01fb21f7aa779ab6ce8"
+"config.json" = "cd3315b760d5cc7e278d7afdf41b897031ced888fc6c115bd9b3ac0ea2c47408"
+
+[weights.bytes]
+"model.safetensors" = 925181104
+"config.json" = 475
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-timesfm-2.5-200m"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

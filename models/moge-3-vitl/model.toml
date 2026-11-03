@@ -1,0 +1,62 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+architecture = "moge3"
+id = "moge-3-vitl"
+name = "MoGe-3 ViT-L"
+kind = "perception"
+params = "370M"
+publisher = "Microsoft"
+released = 2026
+suggested = false
+summary = "Metric depth and 3D from one image."
+purpose = "Metric depth and 3D from one image"
+good_for = ["Metric point maps, surface normals and camera intrinsics"]
+limits = ["Checked live at FP16 on 19 Oct: metric depth with sharp edges, near and far in the right order", "Single image only"]
+languages = ["und"]
+tasks = ["depth-estimation"]
+tools = ["operation"]
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/mlx-community/moge-3-vitl-mlx-fp32/tree/f5ceca7512506731fb1c50307c313da76aac500f"
+[weights]
+repo = "mlx-community/moge-3-vitl-mlx-fp32"
+revision = "f5ceca7512506731fb1c50307c313da76aac500f"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+[weights.sha256]
+"model.safetensors" = "d21ea545b5f760b0d34d6538902378f6daa9d4c79dc5843891bbebec7c4da87b"
+"config.json" = "545f1ba3ecd850aa21668817e65fdd2d716513b90ef0c435d4d56effde32b53f"
+[weights.bytes]
+"model.safetensors" = 1481204170
+"config.json" = 2741
+[derive]
+fp16 = "cast:geometry-moge-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "geometry"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "estimate_depth"
+title = "Estimate depth"
+input = "ops/estimate_depth.input.json"
+output_schema = "ops/estimate_depth.output.json"
+output = "file"
+stream = false
+timeout_s = 180
+first_response_timeout_s = 180
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

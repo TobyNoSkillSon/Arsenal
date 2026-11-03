@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "ui-venus-2-9b"
+name = "UI Venus 2 9B"
+architecture = "qwen3_5"
+kind = "perception"
+params = "9.4B"
+publisher = "inclusionAI"
+released = 2026
+suggested = false
+summary = "Locate screen elements from instructions."
+purpose = "Locate screen elements from instructions"
+good_for = ["Locate screen elements from instructions"]
+limits = ["Checked live on 20 Oct at FP16, int8 and int4: both test clicks landed inside their targets."]
+tasks = ["ground_screen"]
+languages = ["mul"]
+context = 262144
+native_context = 262144
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "LicenseRef-Pending"
+name = "Model-weight licence pending upstream confirmation"
+commercial = false
+url = "https://huggingface.co/inclusionAI/UI-Venus-2-9B/tree/90d6dfe13ece735f82793635b69bcc10c710e2ab"
+[weights]
+repo = "inclusionAI/UI-Venus-2-9B"
+revision = "90d6dfe13ece735f82793635b69bcc10c710e2ab"
+dtype = "bf16"
+files = ["chat_template.jinja", "config.json", "generation_config.json", "model-00001-of-00004.safetensors", "model-00002-of-00004.safetensors", "model-00003-of-00004.safetensors", "model-00004-of-00004.safetensors", "model.safetensors.index.json", "preprocessor_config.json", "processor_config.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"chat_template.jinja" = "4a3d47f53cc133e5dc859e9532fcb74baf0459ef426b8f107a3ac6e5926533e5"
+"config.json" = "2eee51ab0a20f551ea4331798eb2e8d1efbac82235e5e443f51024d479e50899"
+"generation_config.json" = "8262eda335c4c901a3b34fee06cc0b2f2057bfe1aaaeb1833fc1b446a81dd45c"
+"model-00001-of-00004.safetensors" = "6e19364616d0915dc0220158ceb3b5e6c86483470ad8b8a97971f9946feac538"
+"model-00002-of-00004.safetensors" = "cecc4bb1e881b0d7311574cad66990f928b54dd92052dc6e9f3ff06b7c8f85a9"
+"model-00003-of-00004.safetensors" = "ef9730ff45ef2551ee0e91a5e24443f2a9b89e9d51b3262c9a27e685f1f52c7f"
+"model-00004-of-00004.safetensors" = "7c84b8beacfa9d67156986628af2a0a9f794fb8ddc437ff5bc4ba33f015e195b"
+"model.safetensors.index.json" = "eeb332b082e4a74225ef573ab58ba7c751809b2fc2f4be377952970eec651243"
+"preprocessor_config.json" = "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+"processor_config.json" = "01562eddd6f9e9ec4bc31656a3b7055284cafbf889acc6c4348dca431ae31f68"
+"tokenizer.json" = "87a7830d63fcf43bf241c3c5242e96e62dd3fdc29224ca26fed8ea333db72de4"
+"tokenizer_config.json" = "e98f1901ac6f0adff67b1d540bfa0c36ac1a0cf59eb72ed78146ef89aafa1182"
+[weights.bytes]
+"chat_template.jinja" = 7740
+"config.json" = 2924
+"generation_config.json" = 137
+"model-00001-of-00004.safetensors" = 4942706120
+"model-00002-of-00004.safetensors" = 4987757928
+"model-00003-of-00004.safetensors" = 4954810240
+"model-00004-of-00004.safetensors" = 3934446832
+"model.safetensors.index.json" = 69249
+"preprocessor_config.json" = 390
+"processor_config.json" = 1296
+"tokenizer.json" = 19989343
+"tokenizer_config.json" = 1139
+[derive]
+int8 = "cast:language-half-g64-v2"
+int4 = "cast:language-half-g64-v2"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "ground_screen"
+title = "Ground screen"
+input = "ops/ground_screen.input.json"
+output_schema = "ops/ground_screen.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

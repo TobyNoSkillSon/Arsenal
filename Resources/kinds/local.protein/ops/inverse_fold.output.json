@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sequence",
+    "length",
+    "seed",
+    "steps"
+  ],
+  "properties": {
+    "sequence": {
+      "type": "string",
+      "description": "The designed sequence."
+    },
+    "length": {
+      "type": "integer"
+    },
+    "native_sequence": {
+      "type": "string"
+    },
+    "recovery": {
+      "type": "number",
+      "description": "Fraction of residues equal to the file's own sequence."
+    },
+    "chain": {
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "steps": {
+      "type": "integer"
+    }
+  }
+}

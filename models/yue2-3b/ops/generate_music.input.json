@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10000
+    },
+    "lyrics": {
+      "type": "string",
+      "maxLength": 100000,
+      "x-arsenal-control": "lyrics"
+    },
+    "duration": {
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 360
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "instrumental": {
+      "type": "boolean",
+      "default": false
+    },
+    "bpm": {
+      "type": "integer",
+      "minimum": 30,
+      "maximum": 300
+    },
+    "key": {
+      "type": "string",
+      "maxLength": 30
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200
+    },
+    "batch_size": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 16,
+      "default": 1
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": true
+    },
+    "normalization_db": {
+      "type": "number",
+      "minimum": -40,
+      "maximum": 0
+    },
+    "fade_in": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 30
+    },
+    "fade_out": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 30
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "wav",
+        "wav32",
+        "flac",
+        "m4a",
+        "alac"
+      ],
+      "default": "wav"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "song",
+        "score"
+      ],
+      "default": "song"
+    },
+    "yue": {
+      "type": "object",
+      "properties": {
+        "planning": {
+          "type": "string",
+          "enum": [
+            "off",
+            "melody",
+            "full"
+          ],
+          "default": "full"
+        },
+        "score": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100000
+        },
+        "guidance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "ode_steps": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 200,
+          "default": 32
+        },
+        "decoder_tile_frames": {
+          "type": "integer",
+          "minimum": 16,
+          "maximum": 4096
+        },
+        "decoder": {
+          "type": "string",
+          "enum": [
+            "standard"
+          ]
+        },
+        "abc_temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "abc_top_p": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "abc_top_k": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 184704
+        },
+        "abc_repetition_penalty": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10
+        },
+        "abc_penalty_window": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "abc_min_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9000
+        },
+        "abc_max_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9000
+        },
+        "semantic_temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "semantic_top_p": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "semantic_top_k": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 184704
+        },
+        "semantic_repetition_penalty": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 10
+        },
+        "semantic_penalty_window": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "semantic_min_tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9000
+        },
+        "semantic_max_tokens": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9000
+        }
+      },
+      "additionalProperties": false
+    },
+    "include_metadata": {
+      "type": "boolean",
+      "default": false
+    },
+    "include_score": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "prompt"
+  ],
+  "additionalProperties": false
+}

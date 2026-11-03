@@ -1,0 +1,2063 @@
+{
+  "ignore": [],
+  "tensors": {
+    "text_encoder.transformer.resblocks.0.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.0.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.0.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.0.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.0.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.0.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.0.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.0.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.0.ln_1.bias": {
+      "name": "text_encoder.blocks.0.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.0.ln_1.weight": {
+      "name": "text_encoder.blocks.0.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.0.ln_2.bias": {
+      "name": "text_encoder.blocks.0.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.0.ln_2.weight": {
+      "name": "text_encoder.blocks.0.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.0.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.0.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.0.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.0.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.1.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.1.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.1.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.1.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.1.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.1.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.1.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.1.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.1.ln_1.bias": {
+      "name": "text_encoder.blocks.1.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.1.ln_1.weight": {
+      "name": "text_encoder.blocks.1.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.1.ln_2.bias": {
+      "name": "text_encoder.blocks.1.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.1.ln_2.weight": {
+      "name": "text_encoder.blocks.1.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.1.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.1.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.1.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.1.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.10.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.10.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.10.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.10.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.10.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.10.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.10.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.10.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.10.ln_1.bias": {
+      "name": "text_encoder.blocks.10.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.10.ln_1.weight": {
+      "name": "text_encoder.blocks.10.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.10.ln_2.bias": {
+      "name": "text_encoder.blocks.10.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.10.ln_2.weight": {
+      "name": "text_encoder.blocks.10.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.10.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.10.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.10.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.10.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.11.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.11.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.11.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.11.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.11.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.11.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.11.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.11.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.11.ln_1.bias": {
+      "name": "text_encoder.blocks.11.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.11.ln_1.weight": {
+      "name": "text_encoder.blocks.11.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.11.ln_2.bias": {
+      "name": "text_encoder.blocks.11.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.11.ln_2.weight": {
+      "name": "text_encoder.blocks.11.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.11.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.11.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.11.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.11.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.2.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.2.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.2.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.2.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.2.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.2.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.2.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.2.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.2.ln_1.bias": {
+      "name": "text_encoder.blocks.2.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.2.ln_1.weight": {
+      "name": "text_encoder.blocks.2.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.2.ln_2.bias": {
+      "name": "text_encoder.blocks.2.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.2.ln_2.weight": {
+      "name": "text_encoder.blocks.2.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.2.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.2.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.2.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.2.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.3.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.3.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.3.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.3.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.3.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.3.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.3.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.3.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.3.ln_1.bias": {
+      "name": "text_encoder.blocks.3.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.3.ln_1.weight": {
+      "name": "text_encoder.blocks.3.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.3.ln_2.bias": {
+      "name": "text_encoder.blocks.3.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.3.ln_2.weight": {
+      "name": "text_encoder.blocks.3.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.3.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.3.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.3.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.3.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.4.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.4.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.4.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.4.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.4.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.4.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.4.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.4.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.4.ln_1.bias": {
+      "name": "text_encoder.blocks.4.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.4.ln_1.weight": {
+      "name": "text_encoder.blocks.4.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.4.ln_2.bias": {
+      "name": "text_encoder.blocks.4.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.4.ln_2.weight": {
+      "name": "text_encoder.blocks.4.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.4.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.4.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.4.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.4.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.5.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.5.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.5.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.5.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.5.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.5.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.5.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.5.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.5.ln_1.bias": {
+      "name": "text_encoder.blocks.5.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.5.ln_1.weight": {
+      "name": "text_encoder.blocks.5.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.5.ln_2.bias": {
+      "name": "text_encoder.blocks.5.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.5.ln_2.weight": {
+      "name": "text_encoder.blocks.5.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.5.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.5.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.5.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.5.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.6.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.6.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.6.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.6.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.6.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.6.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.6.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.6.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.6.ln_1.bias": {
+      "name": "text_encoder.blocks.6.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.6.ln_1.weight": {
+      "name": "text_encoder.blocks.6.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.6.ln_2.bias": {
+      "name": "text_encoder.blocks.6.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.6.ln_2.weight": {
+      "name": "text_encoder.blocks.6.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.6.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.6.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.6.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.6.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.7.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.7.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.7.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.7.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.7.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.7.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.7.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.7.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.7.ln_1.bias": {
+      "name": "text_encoder.blocks.7.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.7.ln_1.weight": {
+      "name": "text_encoder.blocks.7.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.7.ln_2.bias": {
+      "name": "text_encoder.blocks.7.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.7.ln_2.weight": {
+      "name": "text_encoder.blocks.7.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.7.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.7.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.7.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.7.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.8.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.8.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.8.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.8.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.8.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.8.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.8.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.8.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.8.ln_1.bias": {
+      "name": "text_encoder.blocks.8.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.8.ln_1.weight": {
+      "name": "text_encoder.blocks.8.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.8.ln_2.bias": {
+      "name": "text_encoder.blocks.8.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.8.ln_2.weight": {
+      "name": "text_encoder.blocks.8.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.8.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.8.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.8.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.8.mlp_c_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.9.attn.in_proj_bias": {
+      "name": "text_encoder.blocks.9.attn.in_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.9.attn.in_proj_weight": {
+      "name": "text_encoder.blocks.9.attn.in_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.9.attn.out_proj.bias": {
+      "name": "text_encoder.blocks.9.attn.out_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.9.attn.out_proj.weight": {
+      "name": "text_encoder.blocks.9.attn.out_proj.weight"
+    },
+    "text_encoder.transformer.resblocks.9.ln_1.bias": {
+      "name": "text_encoder.blocks.9.ln_1.bias"
+    },
+    "text_encoder.transformer.resblocks.9.ln_1.weight": {
+      "name": "text_encoder.blocks.9.ln_1.weight"
+    },
+    "text_encoder.transformer.resblocks.9.ln_2.bias": {
+      "name": "text_encoder.blocks.9.ln_2.bias"
+    },
+    "text_encoder.transformer.resblocks.9.ln_2.weight": {
+      "name": "text_encoder.blocks.9.ln_2.weight"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_fc.bias": {
+      "name": "text_encoder.blocks.9.mlp_c_fc.bias"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_fc.weight": {
+      "name": "text_encoder.blocks.9.mlp_c_fc.weight"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_proj.bias": {
+      "name": "text_encoder.blocks.9.mlp_c_proj.bias"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_proj.weight": {
+      "name": "text_encoder.blocks.9.mlp_c_proj.weight"
+    },
+    "vision_encoder.patch_embed.proj.weight": {
+      "name": "vision_encoder.patch_embed.proj.weight",
+      "permutation": [
+        0,
+        2,
+        3,
+        1
+      ]
+    }
+  },
+  "casts": {
+    "text_encoder.ln_final.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.ln_final.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.token_embedding.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.0.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.1.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.10.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.11.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.2.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.3.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.4.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.5.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.6.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.7.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.8.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.attn.in_proj_bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.attn.in_proj_weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.attn.out_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.attn.out_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.ln_1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.ln_1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.ln_2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.ln_2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_fc.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_fc.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "text_encoder.transformer.resblocks.9.mlp.c_proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.0.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.1.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.10.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.11.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.2.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.3.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.4.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.5.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.6.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.7.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.8.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.attn.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.attn.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.attn.qkv.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.attn.qkv.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.ls1.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.ls2.gamma": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.mlp.fc1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.mlp.fc1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.mlp.fc2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.mlp.fc2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.norm1.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.norm1.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.norm2.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.blocks.9.norm2.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.cls_token": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.mask_token": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.norm.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.norm.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.patch_embed.proj.bias": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.patch_embed.proj.weight": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.pos_embed": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    },
+    "vision_encoder.register_tokens": {
+      "from": "F32",
+      "to": "F16",
+      "at": "Get"
+    }
+  }
+}

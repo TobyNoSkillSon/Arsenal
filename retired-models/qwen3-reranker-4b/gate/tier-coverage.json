@@ -1,0 +1,39 @@
+{
+  "basis": "Graph inventory matched to source headers; derived synthetic worker inventories, not trained quality.",
+  "runtime_half": "fp16",
+  "real_served_parameter_tensors": 398,
+  "real_eligible_matrices": 253,
+  "real_eligible_elements": 4021588480,
+  "real_total_elements": 4021784576,
+  "synthetic_tiers": [
+    {
+      "precision": "fp16",
+      "eligible_matrices": 15,
+      "packed_matrices": 0,
+      "packed_layout_companions": "not applicable",
+      "malformed_input": "rejected",
+      "cancellation": "one cancelled terminal reply",
+      "unload_exit": 0
+    },
+    {
+      "precision": "int8",
+      "eligible_matrices": 15,
+      "packed_matrices": 15,
+      "packed_layout_companions": "passed",
+      "malformed_input": "rejected",
+      "cancellation": "one cancelled terminal reply",
+      "unload_exit": 0
+    },
+    {
+      "precision": "int4",
+      "eligible_matrices": 15,
+      "packed_matrices": 15,
+      "packed_layout_companions": "passed",
+      "malformed_input": "rejected",
+      "cancellation": "one cancelled terminal reply",
+      "unload_exit": 0
+    }
+  ],
+  "trained_quality": "pending",
+  "retained_int8_quality_exceptions": []
+}

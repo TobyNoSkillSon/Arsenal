@@ -1,0 +1,179 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string"
+          },
+          "mime": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 4294967296
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "width": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65536
+          },
+          "height": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 65536
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          }
+        },
+        "required": [
+          "id",
+          "path",
+          "mime"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 256
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "relative",
+        "metric"
+      ]
+    },
+    "intrinsics": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": -1e+20,
+          "maximum": 1e+20
+        },
+        "minItems": 3,
+        "maxItems": 3
+      },
+      "minItems": 3,
+      "maxItems": 3
+    },
+    "depth_unit": {
+      "type": "string",
+      "enum": [
+        "relative",
+        "meters"
+      ]
+    },
+    "views": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "file_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "intrinsics": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "minimum": -1e+20,
+                "maximum": 1e+20
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "minItems": 3,
+            "maxItems": 3
+          },
+          "extrinsics": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "image_size": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "depth_size": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "minItems": 2,
+            "maxItems": 2
+          },
+          "point_frame": {
+            "type": "string",
+            "const": "camera_x_right_y_down_z_forward"
+          },
+          "pose_convention": {
+            "type": "string",
+            "const": "world_to_camera"
+          },
+          "intrinsics_unit": {
+            "type": "string",
+            "enum": [
+              "normalized",
+              "pixels"
+            ]
+          }
+        },
+        "required": [
+          "index",
+          "file_ids"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "files",
+    "mode",
+    "depth_unit"
+  ],
+  "additionalProperties": false
+}

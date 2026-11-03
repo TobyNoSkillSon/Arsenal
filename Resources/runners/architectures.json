@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "_about": "Checkpoint families a bundled worker already runs. `arsenal catalog add-local` reads config.json model_type and copies the template folder's operations, runner and settings. A model_type missing here is refused with no write; add a row only when the worker registers that model_type and the template runs. Tests in ArsenalCoreTests check every row against the templates and the worker sources.",
+  "architectures": [
+    { "model_type": "qwen3", "kind": "embeddings", "worker": "embed", "template": "harrier-oss-v1-0.6b", "pipeline_tags": ["feature-extraction", "sentence-similarity"] },
+    { "model_type": "pyannote_community_1", "kind": "audio", "worker": "audio", "template": "pyannote-community-1" },
+    { "model_type": "htdemucs_ft", "kind": "audio", "worker": "audio", "template": "htdemucs-ft" },
+    { "model_type": "audiosr", "kind": "enhancement", "worker": "audio", "template": "audiosr-basic" },
+    { "model_type": "smart_turn", "kind": "audio", "worker": "audio", "template": "smart-turn-v3" },
+    { "model_type": "acestep", "kind": "sound", "worker": "music", "template": "ace-step-1.5" },
+    { "model_type": "moge3", "kind": "perception", "worker": "geometry", "template": "moge-3-vitl" },
+    { "model_type": "tipsv2", "kind": "embeddings", "worker": "perception", "template": "tipsv2-l14" },
+    { "model_type": "rf_detr", "kind": "perception", "worker": "perception", "template": "rf-detr-nano" },
+    { "model_type": "seedvr2", "kind": "restoration", "worker": "restoration", "template": "seedvr2-3b" }
+  ]
+}

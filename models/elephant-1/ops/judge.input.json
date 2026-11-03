@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "elephant-1 judge",
+  "description": "Many text/JSON states with the same questions; each item is its own state, read in the key order sent.",
+  "type": "object",
+  "required": [
+    "items",
+    "questions"
+  ],
+  "properties": {
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "description": "One text/JSON state per item (string or any JSON value); input order is preserved. Over MCP an object loses its key order; to keep it, also send ordered_json: {\"items\": \"<the same list as JSON text>\"}.",
+      "maxItems": 256,
+      "x-arsenal-ordered": true
+    },
+    "questions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/question"
+      },
+      "description": "Question name → question. Names come back as the answers' keys; they are not shown to the model. Their order and each choice's option order set the prompt; over MCP send questions as their JSON text to keep both.",
+      "maxProperties": 64,
+      "x-arsenal-ordered": true
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1,
+      "description": "elephant-1; omit on this model’s operation endpoint."
+    },
+    "bits": {
+      "description": "Required precision; 0 accepts the loaded FP16 and 16 matches it. Any other value returns 409.",
+      "type": [
+        "integer",
+        "null"
+      ],
+      "enum": [
+        0,
+        16,
+        null
+      ]
+    }
+  },
+  "$defs": {
+    "question": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "A typed question about the state. Unknown fields are ignored.",
+      "properties": {
+        "type": {
+          "enum": [
+            "noul",
+            "choice",
+            "score"
+          ],
+          "description": "noul = yes/no (answer P(yes)); choice = one of named options; score = an ordered level."
+        },
+        "instructions": {
+          "description": "The question, as text or structured JSON. Optional; null or absent uses the default wording.",
+          "type": [
+            "string",
+            "object",
+            "array",
+            "null"
+          ]
+        },
+        "criteria": {
+          "description": "noul: optional {\"true\", \"false\"}; choice: options; score: levels, lowest first."
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "noul"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "criteria": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "true": {
+                    "description": "What this side means: text or structured JSON; null or absent uses the default wording.",
+                    "type": [
+                      "string",
+                      "object",
+                      "array",
+                      "null"
+                    ]
+                  },
+                  "false": {
+                    "description": "What this side means: text or structured JSON; null or absent uses the default wording.",
+                    "type": [
+                      "string",
+                      "object",
+                      "array",
+                      "null"
+                    ]
+                  }
+                },
+                "description": "Optional {\"true\", \"false\"} descriptions; other keys are ignored, as the makers’ schema does."
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "choice"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "criteria"
+            ],
+            "properties": {
+              "criteria": {
+                "type": [
+                  "object",
+                  "array"
+                ],
+                "description": "Option label → description (null for the bare label), or a plain list of labels (batch extension). Labels are compared as exact strings.",
+                "minProperties": 1,
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                },
+                "maxProperties": 255,
+                "maxItems": 255
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "score"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "criteria"
+            ],
+            "properties": {
+              "criteria": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "description": "What the option means: text, structured JSON, or null for the bare option.",
+                  "type": [
+                    "string",
+                    "object",
+                    "array",
+                    "null"
+                  ]
+                },
+                "description": "Level descriptions, lowest first; levels are answered as \"0\", \"1\", …",
+                "maxItems": 10
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,95 @@
+id = "local.protein"
+title = "Proteins"
+title_singular = "Protein model"
+icon = "sparkles"
+order = 20
+suite = "bench/kinds/local.protein/suite-v1.toml"
+primary_operation = "embed_sequence"
+
+[[op]]
+name = "embed_sequence"
+title = "Embed sequence"
+input = "ops/embed_sequence.input.json"
+output = "json"
+output_schema = "ops/embed_sequence.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300
+
+[[op]]
+name = "predict_masked"
+title = "Predict masked residues"
+input = "ops/predict_masked.input.json"
+output = "json"
+output_schema = "ops/predict_masked.output.json"
+stream = false
+default = true
+timeout_s = 900
+first_response_timeout_s = 900
+
+[[op]]
+name = "score_variants"
+title = "Score variants"
+input = "ops/score_variants.input.json"
+output = "json"
+output_schema = "ops/score_variants.output.json"
+stream = false
+default = true
+timeout_s = 900
+first_response_timeout_s = 900
+
+[[op]]
+name = "generate"
+title = "Generate"
+input = "ops/generate.input.json"
+output = "json"
+output_schema = "ops/generate.output.json"
+stream = false
+default = true
+timeout_s = 900
+first_response_timeout_s = 900
+
+[[op]]
+name = "fold"
+title = "Fold"
+input = "ops/fold.input.json"
+output = "file"
+output_schema = "ops/fold.output.json"
+stream = false
+default = true
+timeout_s = 900
+first_response_timeout_s = 900
+
+[[op]]
+name = "inverse_fold"
+title = "Inverse fold"
+input = "ops/inverse_fold.input.json"
+output = "json"
+output_schema = "ops/inverse_fold.output.json"
+stream = false
+default = true
+timeout_s = 900
+first_response_timeout_s = 900
+
+[[op]]
+name = "predict_function"
+title = "Predict function"
+input = "ops/predict_function.input.json"
+output = "json"
+output_schema = "ops/predict_function.output.json"
+stream = false
+default = true
+timeout_s = 900
+first_response_timeout_s = 900
+
+[[op]]
+name = "encode_structure"
+title = "Encode structure"
+input = "ops/encode_structure.input.json"
+output = "json"
+output_schema = "ops/encode_structure.output.json"
+stream = false
+default = true
+timeout_s = 900
+first_response_timeout_s = 900

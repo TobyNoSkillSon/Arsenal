@@ -1,0 +1,70 @@
+id = "perception"
+title = "Perception"
+title_singular = "Perception"
+icon = "viewfinder"
+order = 8
+suite = "bench/kinds/perception/suite-v1.toml"
+[api]
+[facets]
+modalities_in = ["image", "video", "text"]
+modalities_out = ["image", "text"]
+[[columns]]
+id = "peak_ram"
+title = "Peak RAM"
+unit = "GB"
+
+[[op]]
+name = "detect"
+title = "Find objects"
+input = "ops/detect.input.json"
+output_schema = "ops/detect.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "ground_screen"
+title = "Ground screen"
+input = "ops/ground_screen.input.json"
+output_schema = "ops/ground_screen.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "segment"
+title = "Select and segment"
+input = "ops/segment.input.json"
+output_schema = "ops/segment.output.json"
+output = "file"
+stream = false
+
+[[op]]
+name = "segment_session"
+title = "Image session"
+input = "ops/segment_session.input.json"
+output_schema = "ops/segment_session.output.json"
+output = "json"
+stream = false
+
+[[op]]
+name = "track_video"
+title = "Track selection"
+input = "ops/track_video.input.json"
+output_schema = "ops/track_video.output.json"
+output = "file"
+stream = true
+
+[[op]]
+name = "estimate_depth"
+title = "Depth"
+input = "ops/estimate_depth.input.json"
+output_schema = "ops/estimate_depth.output.json"
+output = "file"
+stream = false
+
+[[op]]
+name = "video_session"
+title = "Create or close a video session"
+input = "ops/video_session.input.json"
+output_schema = "ops/video_session.output.json"
+output = "json"
+stream = false

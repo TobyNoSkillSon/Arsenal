@@ -1,0 +1,48 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "htdemucs-ft",
+  "revision": "908d2d05cf3035bf4017fc0f52be64163689a61f",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T09:34:04Z",
+      "load_seconds": 0.93,
+      "mac_peak_in_use_mb": 26535.5,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "separate_audio": {
+          "files": [
+            {
+              "name": "drums.wav",
+              "sha256": "491bc46cc5751709916b1008836a3cc8e06860cef0ade4054cd53a7c587e6a92"
+            },
+            {
+              "name": "bass.wav",
+              "sha256": "c507572054890236dabaec0fd92481fe17fc947ab4cfdb47f4809b0fa7e6bd00"
+            },
+            {
+              "name": "other.wav",
+              "sha256": "7d1be13674572bed887a855bd19eb273133fc1b64fbc0b601c0cdc4119a0adf9"
+            },
+            {
+              "name": "vocals.wav",
+              "sha256": "b80504dedd0aec9c2f8fc08d47fd1af66cf3eb0c6ba0f47135d1fcb397dedf94"
+            }
+          ],
+          "seconds_first": 0.425,
+          "seconds_warm": 0.402,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 1487.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 1340.0,
+      "samples": 7
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

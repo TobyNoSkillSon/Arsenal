@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of image_to_3d through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "triposr",
+  "revision": "4e22858523f295f3c2b3852c39c90f399ea0e7d3",
+  "rows": [
+    {
+      "date": "2026-10-31T01:34:05Z",
+      "load_seconds": 0.417,
+      "ops": {
+        "image_to_3d": {
+          "seconds_first": 2.706,
+          "seconds_warm": 2.606,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 2274.7,
+      "precision": "fp16",
+      "runner_sha256": "c391048526a820ebdb8eee3c9fe44e50e0acaca402192e3e7b7dad4962e2b727",
+      "swap": "total = 2048.00M  used = 1134.06M  free = 913.94M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-31",
+  "schema": "quick-check-1"
+}

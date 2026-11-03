@@ -1,0 +1,75 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "paddleocr-vl-1.6"
+name = "PaddleOCR VL 1.6"
+architecture = "paddleocr_vl"
+kind = "chat"
+params = "959M"
+publisher = "PaddlePaddle"
+released = 2026
+suggested = false
+summary = "Read documents, charts and seals."
+purpose = "Read documents, charts and seals"
+good_for = ["Read documents, charts and seals"]
+limits = ["Trained weights, tokenizer correctness and FP16 task quality await the approved live trial.", "Element-level recognition: the maker's separate page-layout detector is not included, so each page or image is read as one region."]
+tasks = ["read_document"]
+languages = ["mul"]
+context = 131072
+native_context = 131072
+[facets]
+modalities_in = ["text", "image"]
+modalities_out = ["text"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache License 2.0"
+commercial = true
+url = "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6/tree/c5630abae1d940eafe0697512a0325494b02ab42"
+[weights]
+repo = "PaddlePaddle/PaddleOCR-VL-1.6"
+revision = "c5630abae1d940eafe0697512a0325494b02ab42"
+dtype = "bf16"
+files = ["added_tokens.json", "chat_template.jinja", "config.json", "generation_config.json", "model.safetensors", "preprocessor_config.json", "processor_config.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json"]
+[weights.sha256]
+"added_tokens.json" = "f59f889088e0fe21c523e7cf121bb6dca3b0bb148cb7159fbb4572c74dfc5644"
+"chat_template.jinja" = "2f27812dab7f333e471884e0c803d807f11953d5453140dfb1aaba234f872bc8"
+"config.json" = "ce7f4565f8b1db78532ad5d1b9ebe55c2139d49bd4cb04778b580a08a598f171"
+"generation_config.json" = "a6701d78ab3b4d972307cdec3b69d4c13f46e0d5140514f50ab7d84259324b94"
+"model.safetensors" = "85a479d506a11e724e7285d395c551be69f41dbc16b6342d3cacfb189aed71db"
+"preprocessor_config.json" = "111872ab1e8bb7fd040ac5087bfced7ab8f011f02139b088cba294964c3b1d0e"
+"processor_config.json" = "1568858960a9760c54431dae693a6152e601ff55cdf6d2eab97a4a99958faea0"
+"special_tokens_map.json" = "d3a125c03103deb2acaf7730791bdbbf196f620e5a2213b664511ff9b4b25bab"
+"tokenizer.json" = "c8a215a59183d0d0781adc33bacd3ce6162716f7fd568fb30234a74d69803a7d"
+"tokenizer_config.json" = "1f979337347cc0cb72a6282d8a23ed183539aa81a87a906f022aee2bab83c7c5"
+[weights.bytes]
+"added_tokens.json" = 25381
+"chat_template.jinja" = 1474
+"config.json" = 2059
+"generation_config.json" = 133
+"model.safetensors" = 1917255968
+"preprocessor_config.json" = 641
+"processor_config.json" = 137
+"special_tokens_map.json" = 1151
+"tokenizer.json" = 11189060
+"tokenizer_config.json" = 186947
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "language"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "read_document"
+title = "Read document"
+input = "ops/read_document.input.json"
+output_schema = "ops/read_document.output.json"
+output = "json"
+stream = false
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

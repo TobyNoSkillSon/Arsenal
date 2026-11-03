@@ -1,0 +1,10 @@
+{
+  "repo": "mlx-community/UI-Venus-1.5-2B-bf16",
+  "revision": "d5286cd3d2580c331e2f57a976987744cd65e51d",
+  "files": [
+    "model.safetensors"
+  ],
+  "tensors": 626,
+  "header_bytes": 76343,
+  "errors": []
+}

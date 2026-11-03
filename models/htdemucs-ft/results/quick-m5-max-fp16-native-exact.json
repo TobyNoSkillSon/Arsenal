@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "htdemucs-ft",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T03:01:39Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Separate Audio at fp16: one ordinary Load, then two Separate Audio requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "908d2d05cf3035bf4017fc0f52be64163689a61f",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "audio",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Separate Audio requests on a 3.3 s speech-and-music clip.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:01:39Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Separate Audio requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "908d2d05cf3035bf4017fc0f52be64163689a61f",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 1.4602469375999998
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Separate Audio request on a 3.3 s speech-and-music clip.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T03:01:39Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Separate Audio request, one sample, after one ordinary Load, then two Separate Audio requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "908d2d05cf3035bf4017fc0f52be64163689a61f",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.501
+      }
+    },
+    "runner": "native"
+  }
+}

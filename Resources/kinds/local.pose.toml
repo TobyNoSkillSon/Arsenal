@@ -1,0 +1,18 @@
+id = "local.pose"
+title = "Poses"
+title_singular = "Pose model"
+icon = "sparkles"
+order = 20
+suite = "bench/kinds/local.pose/suite-v1.toml"
+primary_operation = "estimate_pose"
+
+[[op]]
+name = "estimate_pose"
+title = "Estimate pose"
+input = "ops/estimate_pose.input.json"
+output = "json"
+output_schema = "ops/estimate_pose.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

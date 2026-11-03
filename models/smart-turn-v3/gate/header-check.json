@@ -1,0 +1,24 @@
+{
+  "status": "header_read",
+  "method": "Exact HTTP Range reads of each pinned safetensors header (8-byte length, then the JSON header); no tensor payload read",
+  "checked": "2026-10-18",
+  "sources": [
+    "https://huggingface.co/mlx-community/smart-turn-v3/resolve/74af1538ebace37b0fcc667a6a8a3d902d73eee0/model.safetensors"
+  ],
+  "header_sha256": {
+    "mlx-community/smart-turn-v3@74af1538ebace37b0fcc667a6a8a3d902d73eee0/model.safetensors": "7531c16eeb20cbc1355ebbccc18fc1ab29b9f793ee343db4ed61d4afcede12a8"
+  },
+  "header_bytes_read": 8472,
+  "tensor_payload_bytes_read": 0,
+  "remote_tensors": 79,
+  "remote_dtypes": {
+    "F32": 79
+  },
+  "ignored": 0,
+  "mapped_tensors": 79,
+  "renamed_or_permuted": 55,
+  "planned_casts": 79,
+  "header_map_errors": [],
+  "full_precision_not_cast": [],
+  "graph_inventory": "pending: the comparison with the adapter graph needs its full-config parameter inventory from the built audio worker (scripts/model-check.py smoke --inventory with the real config.json), then scripts/model-check.py header --parameters"
+}

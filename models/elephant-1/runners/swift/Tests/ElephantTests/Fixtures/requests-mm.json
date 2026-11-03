@@ -1,0 +1,127 @@
+[
+ {
+  "id": "probe",
+  "state": {
+   "screen": "<image:1>",
+   "task": "Pay the open invoice."
+  },
+  "media": [
+   {
+    "type": "image",
+    "path": "probe-320x240.png"
+   }
+  ],
+  "questions": {
+   "a": {
+    "type": "noul",
+    "instructions": "Is there a red rectangle on the screen?"
+   },
+   "b": {
+    "type": "choice",
+    "instructions": "Which shape is blue?",
+    "criteria": {
+     "circle": "a round shape",
+     "rectangle": "a box",
+     "none": "no blue shape"
+    }
+   },
+   "c": {
+    "type": "score",
+    "instructions": "How cluttered is the screen?",
+    "criteria": [
+     "empty",
+     "a few items",
+     "crowded"
+    ]
+   }
+  }
+ },
+ {
+  "id": "lights",
+  "state": "Camera at 08:00: <image:1>\nCamera at 08:01: <image:2>",
+  "media": [
+   {
+    "type": "image",
+    "path": "light-red-256x256.png"
+   },
+   {
+    "type": "image",
+    "path": "light-green-400x300.png"
+   }
+  ],
+  "questions": {
+   "go": {
+    "type": "noul",
+    "instructions": "Did the traffic light turn green between the two pictures?"
+   },
+   "first": {
+    "type": "choice",
+    "instructions": "What colour is the light in the first picture?",
+    "criteria": {
+     "red": null,
+     "yellow": null,
+     "green": null
+    }
+   }
+  }
+ },
+ {
+  "id": "tiny",
+  "state": "Sticker: <image:1>",
+  "media": [
+   {
+    "type": "image",
+    "path": "tiny-50x40.png"
+   }
+  ],
+  "questions": {
+   "green": {
+    "type": "noul",
+    "instructions": "Is the square green?"
+   }
+  }
+ },
+ {
+  "id": "textured",
+  "state": {
+   "document": "<image:1>"
+  },
+  "media": [
+   {
+    "type": "image",
+    "path": "textured-300x260.png"
+   }
+  ],
+  "questions": {
+   "yellow": {
+    "type": "noul",
+    "instructions": "Is there a yellow rectangle in the picture?"
+   },
+   "kind": {
+    "type": "choice",
+    "instructions": "What does the picture mainly show?",
+    "criteria": {
+     "noise": "a noisy colour texture with a few shapes",
+     "portrait": "a person",
+     "chart": "a bar chart"
+    }
+   }
+  }
+ },
+ {
+  "id": "jpeg",
+  "state": "Photo: <image:1>",
+  "media": [
+   {
+    "type": "image",
+    "path": "textured-400x300.jpg"
+   }
+  ],
+  "questions": {
+   "red": {
+    "type": "noul",
+    "instructions": "Is there a red rectangle in the photo?"
+   }
+  }
+ }
+]

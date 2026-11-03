@@ -1,0 +1,1379 @@
+{
+ "cases": {
+  "audio_speech": {
+   "ids_sha256": "5b20381745ed4742a485ed2f2c44573a57fe17455d6759bd3ffa8ef2929be457",
+   "input": {
+    "audio": "speech.wav"
+   },
+   "lab_cosine_vs_maker_bf16": 0.999983,
+   "lab_cosine_vs_maker_fp16": 0.999999,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.04234,
+    -0.07343,
+    -0.00948,
+    0.00398,
+    0.00145,
+    -0.01114,
+    -0.00658,
+    -0.00857
+   ],
+   "maker_fp16_head": [
+    0.04222,
+    -0.07328,
+    -0.00965,
+    0.00403,
+    0.00109,
+    -0.01076,
+    -0.00654,
+    -0.00811
+   ],
+   "prompt": null,
+   "served_cosine_vs_maker_bf16": 0.999983,
+   "served_cosine_vs_maker_fp16": 0.999999,
+   "served_head": [
+    0.04217,
+    -0.07329,
+    -0.00969,
+    0.00401,
+    0.00104,
+    -0.01078,
+    -0.00653,
+    -0.00809
+   ],
+   "tokens": 76
+  },
+  "doc_aurora": {
+   "ids_sha256": "8c4e8fe462dd3a55a09be980d43fb1afb59609fbae8a5e43b344683807530d42",
+   "input": "The northern lights are caused by charged particles from the sun hitting the atmosphere.",
+   "lab_cosine_vs_maker_bf16": 0.999938,
+   "lab_cosine_vs_maker_fp16": 0.999999,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.00508,
+    -0.0148,
+    0.05333,
+    -0.0024,
+    0.0074,
+    0.03425,
+    -0.00673,
+    -0.02556
+   ],
+   "maker_fp16_head": [
+    0.00492,
+    -0.01447,
+    0.0531,
+    -0.00252,
+    0.00783,
+    0.03439,
+    -0.00591,
+    -0.02551
+   ],
+   "prompt": "title: none | text: ",
+   "served_cosine_vs_maker_bf16": 0.999938,
+   "served_cosine_vs_maker_fp16": 0.999999,
+   "served_head": [
+    0.00493,
+    -0.0143,
+    0.05314,
+    -0.00257,
+    0.00775,
+    0.03437,
+    -0.00589,
+    -0.02548
+   ],
+   "tokens": 23
+  },
+  "doc_pasta": {
+   "ids_sha256": "0e6f725e7ba4aa8b536e8091fc7503006fcd2aed131a60001940bf2143f2abba",
+   "input": "Spaghetti is boiled in salted water and served with tomato sauce.",
+   "lab_cosine_vs_maker_bf16": 0.999956,
+   "lab_cosine_vs_maker_fp16": 0.999999,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.01457,
+    -0.00104,
+    0.05828,
+    -0.03243,
+    0.00805,
+    0.03536,
+    0.00466,
+    0.01817
+   ],
+   "maker_fp16_head": [
+    0.01465,
+    -0.00149,
+    0.05824,
+    -0.03239,
+    0.00802,
+    0.03642,
+    0.00453,
+    0.01842
+   ],
+   "prompt": "title: none | text: ",
+   "served_cosine_vs_maker_bf16": 0.999956,
+   "served_cosine_vs_maker_fp16": 0.999999,
+   "served_head": [
+    0.01465,
+    -0.00147,
+    0.05827,
+    -0.03241,
+    0.00802,
+    0.03638,
+    0.0045,
+    0.01841
+   ],
+   "tokens": 20
+  },
+  "doc_polish": {
+   "ids_sha256": "d150211d6394d1b01c7434583aa1b3fe05f2bfdbcd8c01b04dd6b789a3bbd0bd",
+   "input": "Zorza polarna powstaje, gdy na\u0142adowane cz\u0105stki ze S\u0142o\u0144ca uderzaj\u0105 w atmosfer\u0119 Ziemi.",
+   "lab_cosine_vs_maker_bf16": 0.999954,
+   "lab_cosine_vs_maker_fp16": 0.999998,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    -0.01048,
+    -0.02596,
+    0.06289,
+    -0.03144,
+    0.00408,
+    0.05704,
+    0.00277,
+    -0.04387
+   ],
+   "maker_fp16_head": [
+    -0.0103,
+    -0.02618,
+    0.06311,
+    -0.03043,
+    0.00416,
+    0.05698,
+    0.00263,
+    -0.04391
+   ],
+   "prompt": "title: none | text: ",
+   "served_cosine_vs_maker_bf16": 0.999954,
+   "served_cosine_vs_maker_fp16": 0.999998,
+   "served_head": [
+    -0.01034,
+    -0.02618,
+    0.06319,
+    -0.03038,
+    0.00407,
+    0.05693,
+    0.00262,
+    -0.04397
+   ],
+   "tokens": 37
+  },
+  "image_coast": {
+   "ids_sha256": "7451491a8cfb7f6b2105ca99db9d87e8cf1c32fc01635f344066fb37177e5841",
+   "input": {
+    "image": "coast.png"
+   },
+   "lab_cosine_vs_maker_bf16": 0.999977,
+   "lab_cosine_vs_maker_fp16": 1.0,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    -0.03119,
+    0.01847,
+    -0.00118,
+    0.05063,
+    -0.00972,
+    -0.00157,
+    -0.01339,
+    0.00175
+   ],
+   "maker_fp16_head": [
+    -0.03098,
+    0.01818,
+    -0.00118,
+    0.05095,
+    -0.01,
+    -0.00155,
+    -0.01365,
+    0.00138
+   ],
+   "prompt": null,
+   "served_cosine_vs_maker_bf16": 0.999977,
+   "served_cosine_vs_maker_fp16": 1.0,
+   "served_head": [
+    -0.03097,
+    0.01817,
+    -0.00114,
+    0.05095,
+    -0.00997,
+    -0.00157,
+    -0.01362,
+    0.00137
+   ],
+   "tokens": 264
+  },
+  "image_recipe": {
+   "ids_sha256": "4bedcf8cc1cd48484a0767323e415c900b58b6df957a88a4508a86ad7a48bc2f",
+   "input": {
+    "image": "recipe.png"
+   },
+   "lab_cosine_vs_maker_bf16": 0.999974,
+   "lab_cosine_vs_maker_fp16": 1.0,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    -0.02295,
+    -0.01062,
+    0.06984,
+    -0.01966,
+    0.02417,
+    0.0315,
+    0.04127,
+    0.01783
+   ],
+   "maker_fp16_head": [
+    -0.02302,
+    -0.01092,
+    0.06935,
+    -0.01951,
+    0.02369,
+    0.03095,
+    0.0406,
+    0.01758
+   ],
+   "prompt": null,
+   "served_cosine_vs_maker_bf16": 0.999974,
+   "served_cosine_vs_maker_fp16": 1.0,
+   "served_head": [
+    -0.02303,
+    -0.01092,
+    0.06938,
+    -0.01951,
+    0.02365,
+    0.03104,
+    0.0406,
+    0.01755
+   ],
+   "tokens": 270
+  },
+  "mixed": {
+   "ids_sha256": "e2ba96e5066d0e6450ac38a89ba9ad0309a4aedd08a39d9178fac5f68acf00c0",
+   "input": {
+    "audio": "speech.wav",
+    "image": "coast.png",
+    "text": "Coastline photo: <|image|> and a recording: <|audio|>"
+   },
+   "lab_cosine_vs_maker_bf16": 0.999958,
+   "lab_cosine_vs_maker_fp16": 0.999999,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    -0.00709,
+    -0.01547,
+    -0.0096,
+    -0.00624,
+    -0.011,
+    -0.00468,
+    -0.0121,
+    0.00446
+   ],
+   "maker_fp16_head": [
+    -0.00721,
+    -0.01528,
+    -0.00994,
+    -0.00653,
+    -0.01083,
+    -0.0047,
+    -0.01231,
+    0.00428
+   ],
+   "prompt": null,
+   "served_cosine_vs_maker_bf16": 0.999958,
+   "served_cosine_vs_maker_fp16": 0.999999,
+   "served_head": [
+    -0.00719,
+    -0.01529,
+    -0.00992,
+    -0.00654,
+    -0.01082,
+    -0.00459,
+    -0.01234,
+    0.00441
+   ],
+   "tokens": 348
+  },
+  "q_ball": {
+   "ids_sha256": "c17accc73b29771224f46cd8938a52fe5ce321dbdd4b7449bd5dc8045f378c02",
+   "input": "a red ball rolling across a field",
+   "lab_cosine_vs_maker_bf16": 0.999978,
+   "lab_cosine_vs_maker_fp16": 0.999999,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.01158,
+    -0.05218,
+    -0.015,
+    -0.00466,
+    -0.01975,
+    0.03584,
+    -0.01634,
+    0.02426
+   ],
+   "maker_fp16_head": [
+    0.01151,
+    -0.05242,
+    -0.01488,
+    -0.00466,
+    -0.02009,
+    0.03607,
+    -0.0162,
+    0.02458
+   ],
+   "prompt": "task: search result | query: ",
+   "served_cosine_vs_maker_bf16": 0.999979,
+   "served_cosine_vs_maker_fp16": 0.999999,
+   "served_head": [
+    0.01155,
+    -0.05242,
+    -0.01488,
+    -0.0047,
+    -0.02005,
+    0.03601,
+    -0.01622,
+    0.0246
+   ],
+   "tokens": 16
+  },
+  "q_coast": {
+   "ids_sha256": "f3683df4548149c089137d9ed2c20e0355717f5d71de80be7ea0e600a0801bd2",
+   "input": "a rocky ocean coastline",
+   "lab_cosine_vs_maker_bf16": 0.999978,
+   "lab_cosine_vs_maker_fp16": 1.0,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    -0.05076,
+    0.01574,
+    -0.00038,
+    0.01336,
+    -0.01745,
+    0.00223,
+    0.03685,
+    0.0043
+   ],
+   "maker_fp16_head": [
+    -0.05149,
+    0.01569,
+    0.0002,
+    0.01335,
+    -0.01729,
+    0.00196,
+    0.03644,
+    0.00437
+   ],
+   "prompt": "task: search result | query: ",
+   "served_cosine_vs_maker_bf16": 0.999978,
+   "served_cosine_vs_maker_fp16": 0.999999,
+   "served_head": [
+    -0.05143,
+    0.01568,
+    0.00023,
+    0.01336,
+    -0.01732,
+    0.00193,
+    0.03641,
+    0.00439
+   ],
+   "tokens": 13
+  },
+  "q_dog": {
+   "ids_sha256": "395db0828f0ccbd57abcd380a201fd1da908d1ffc789a3358c3f4aa6bbf753c0",
+   "input": "a dog barking",
+   "lab_cosine_vs_maker_bf16": 0.999963,
+   "lab_cosine_vs_maker_fp16": 0.999999,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.04174,
+    -0.0476,
+    -0.02063,
+    0.01385,
+    -0.01172,
+    0.01221,
+    0.01306,
+    0.04833
+   ],
+   "maker_fp16_head": [
+    0.04118,
+    -0.04753,
+    -0.02059,
+    0.01401,
+    -0.0112,
+    0.01281,
+    0.01273,
+    0.04808
+   ],
+   "prompt": "task: search result | query: ",
+   "served_cosine_vs_maker_bf16": 0.999963,
+   "served_cosine_vs_maker_fp16": 0.999999,
+   "served_head": [
+    0.0412,
+    -0.0476,
+    -0.02057,
+    0.01402,
+    -0.01123,
+    0.01278,
+    0.01273,
+    0.04806
+   ],
+   "tokens": 12
+  },
+  "q_pasta": {
+   "ids_sha256": "e47a6eb4652f8c3364544a5e949dacd7706a5c5887dac6e2579e1531b5a61559",
+   "input": "how to cook pasta",
+   "lab_cosine_vs_maker_bf16": 0.999979,
+   "lab_cosine_vs_maker_fp16": 1.0,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.05376,
+    0.00192,
+    0.0347,
+    -0.03934,
+    0.03421,
+    -0.00017,
+    0.00522,
+    0.00168
+   ],
+   "maker_fp16_head": [
+    0.0534,
+    0.00193,
+    0.03454,
+    -0.03857,
+    0.03414,
+    0.00014,
+    0.00457,
+    0.00168
+   ],
+   "prompt": "task: search result | query: ",
+   "served_cosine_vs_maker_bf16": 0.999979,
+   "served_cosine_vs_maker_fp16": 1.0,
+   "served_head": [
+    0.05344,
+    0.0019,
+    0.0345,
+    -0.0386,
+    0.03408,
+    0.00016,
+    0.00456,
+    0.00163
+   ],
+   "tokens": 13
+  },
+  "query": {
+   "ids_sha256": "7def6c5ad0d554bfd563cd5c1f03103a29ce93b449aaf2ad74ce5e5b64873c4e",
+   "input": "What causes the northern lights?",
+   "lab_cosine_vs_maker_bf16": 0.999969,
+   "lab_cosine_vs_maker_fp16": 1.0,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.01222,
+    -0.00248,
+    0.03965,
+    -0.01812,
+    -0.04062,
+    0.01101,
+    -0.01113,
+    -0.01034
+   ],
+   "maker_fp16_head": [
+    0.01245,
+    -0.00281,
+    0.04023,
+    -0.01829,
+    -0.04057,
+    0.01095,
+    -0.01109,
+    -0.01012
+   ],
+   "prompt": "task: search result | query: ",
+   "served_cosine_vs_maker_bf16": 0.999969,
+   "served_cosine_vs_maker_fp16": 1.0,
+   "served_head": [
+    0.0125,
+    -0.00277,
+    0.04022,
+    -0.01826,
+    -0.04059,
+    0.01093,
+    -0.01113,
+    -0.01015
+   ],
+   "tokens": 15
+  },
+  "sim": {
+   "ids_sha256": "56c066e9c9cb42d2ba73ea1e31dbb56ff20eaa6743a9022815c87ed75086a456",
+   "input": "The aurora borealis is caused by solar wind.",
+   "lab_cosine_vs_maker_bf16": 0.999976,
+   "lab_cosine_vs_maker_fp16": 1.0,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    0.03522,
+    -0.04085,
+    -0.01406,
+    -0.00826,
+    -0.01406,
+    0.03767,
+    -0.00342,
+    -0.00893
+   ],
+   "maker_fp16_head": [
+    0.03546,
+    -0.04093,
+    -0.01405,
+    -0.00799,
+    -0.01467,
+    0.03784,
+    -0.00315,
+    -0.00915
+   ],
+   "prompt": "task: sentence similarity | query: ",
+   "tokens": 19
+  },
+  "video_ball": {
+   "ids_sha256": "6edb889e10a034be2da53fd4dae7a370f706a8297410b6d63126f9f3d8ed9286",
+   "input": {
+    "video": "ball.mp4"
+   },
+   "lab_cosine_vs_maker_bf16": 0.999879,
+   "lab_cosine_vs_maker_fp16": 0.999928,
+   "lab_ids_equal": 1,
+   "maker_bf16_head": [
+    -0.03213,
+    -0.06865,
+    0.01077,
+    -0.02799,
+    0.02398,
+    0.0594,
+    0.00809,
+    -0.03505
+   ],
+   "maker_fp16_head": [
+    -0.03198,
+    -0.06885,
+    0.0106,
+    -0.02806,
+    0.02379,
+    0.05954,
+    0.00784,
+    -0.03488
+   ],
+   "prompt": null,
+   "served_cosine_vs_maker_bf16": 0.999879,
+   "served_cosine_vs_maker_fp16": 0.999928,
+   "served_head": [
+    -0.03213,
+    -0.06888,
+    0.01074,
+    -0.02786,
+    0.02316,
+    0.06065,
+    0.00846,
+    -0.03534
+   ],
+   "tokens": 530
+  }
+ },
+ "commit": "8bf6264bf024871ef7bdaf467202e58dfc113665",
+ "components_vs_maker_fp16": {
+  "audio_speech.audio_tower": {
+   "cosine": 0.999997,
+   "finite": 1,
+   "max_abs": 0.3125,
+   "rel_l2": 0.002296
+  },
+  "audio_speech.embed_audio": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 0.062988,
+   "rel_l2": 0.002129
+  },
+  "audio_speech.features": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0.000408,
+   "rel_l2": 4e-06
+  },
+  "audio_speech.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 167.420792,
+   "rel_l2": 537.02887
+  },
+  "audio_speech.tokens": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 2,
+   "rel_l2": 0.001873
+  },
+  "doc_aurora.pooled": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 344.889435,
+   "rel_l2": 1147.131714
+  },
+  "doc_aurora.tokens": {
+   "cosine": 0.999996,
+   "finite": 1,
+   "max_abs": 2.0625,
+   "rel_l2": 0.002941
+  },
+  "doc_pasta.pooled": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 392.145996,
+   "rel_l2": 1215.540283
+  },
+  "doc_pasta.tokens": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 1.25,
+   "rel_l2": 0.002156
+  },
+  "doc_polish.hidden.1": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0.007812,
+   "rel_l2": 0.000812
+  },
+  "doc_polish.hidden.12": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 0.0625,
+   "rel_l2": 0.00201
+  },
+  "doc_polish.hidden.18": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 0.15625,
+   "rel_l2": 0.001981
+  },
+  "doc_polish.hidden.6": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 0.025391,
+   "rel_l2": 0.001982
+  },
+  "doc_polish.inputs_embeds": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0,
+   "rel_l2": 0
+  },
+  "doc_polish.pooled": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 246.540237,
+   "rel_l2": 807.202942
+  },
+  "doc_polish.tokens": {
+   "cosine": 0.999994,
+   "finite": 1,
+   "max_abs": 1.9375,
+   "rel_l2": 0.003568
+  },
+  "image_coast.embed_vision": {
+   "cosine": 0.999997,
+   "finite": 1,
+   "max_abs": 0.044434,
+   "rel_l2": 0.002594
+  },
+  "image_coast.hidden.1": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0.007812,
+   "rel_l2": 0.00076
+  },
+  "image_coast.hidden.12": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 0.076172,
+   "rel_l2": 0.001213
+  },
+  "image_coast.hidden.18": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 0.15625,
+   "rel_l2": 0.001226
+  },
+  "image_coast.hidden.6": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 0.023438,
+   "rel_l2": 0.001369
+  },
+  "image_coast.inputs_embeds": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0,
+   "rel_l2": 0
+  },
+  "image_coast.pixels": {
+   "cosine": 1,
+   "finite": 1,
+   "levels_max_abs": 0,
+   "max_abs": 0,
+   "rel_l2": 0
+  },
+  "image_coast.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 152.907303,
+   "rel_l2": 439.250946
+  },
+  "image_coast.tokens": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 5,
+   "rel_l2": 0.002119
+  },
+  "image_coast.vision_tower": {
+   "cosine": 0.999997,
+   "finite": 1,
+   "max_abs": 56.628418,
+   "rel_l2": 0.002497
+  },
+  "image_recipe.embed_vision": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 0.031403,
+   "rel_l2": 0.001773
+  },
+  "image_recipe.pixels": {
+   "cosine": 1,
+   "finite": 1,
+   "levels_max_abs": 0,
+   "max_abs": 0,
+   "rel_l2": 0
+  },
+  "image_recipe.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 116.354309,
+   "rel_l2": 363.302032
+  },
+  "image_recipe.tokens": {
+   "cosine": 0.999995,
+   "finite": 1,
+   "max_abs": 4.0625,
+   "rel_l2": 0.003243
+  },
+  "image_recipe.vision_tower": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 86.120117,
+   "rel_l2": 0.001304
+  },
+  "mixed.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 98.964104,
+   "rel_l2": 321.648895
+  },
+  "mixed.tokens": {
+   "cosine": 0.999995,
+   "finite": 1,
+   "max_abs": 2.5,
+   "rel_l2": 0.003132
+  },
+  "q_ball.pooled": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 327.130371,
+   "rel_l2": 1006.4729
+  },
+  "q_ball.tokens": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 2,
+   "rel_l2": 0.001576
+  },
+  "q_coast.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 347.307739,
+   "rel_l2": 1119.689087
+  },
+  "q_coast.tokens": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 1,
+   "rel_l2": 0.001428
+  },
+  "q_dog.pooled": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 379.531494,
+   "rel_l2": 1185.387329
+  },
+  "q_dog.tokens": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "max_abs": 3,
+   "rel_l2": 0.001781
+  },
+  "q_pasta.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 336.173859,
+   "rel_l2": 1144.677368
+  },
+  "q_pasta.tokens": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 1,
+   "rel_l2": 0.001445
+  },
+  "query.hidden.1": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0.007812,
+   "rel_l2": 0.00084
+  },
+  "query.hidden.12": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0.03125,
+   "rel_l2": 0.000945
+  },
+  "query.hidden.18": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 0.0625,
+   "rel_l2": 0.00064
+  },
+  "query.hidden.6": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 0.015625,
+   "rel_l2": 0.001374
+  },
+  "query.inputs_embeds": {
+   "cosine": 1,
+   "finite": 1,
+   "max_abs": 0,
+   "rel_l2": 0
+  },
+  "query.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 328.066803,
+   "rel_l2": 1175.812256
+  },
+  "query.tokens": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 1,
+   "rel_l2": 0.001692
+  },
+  "sim.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 546.204285,
+   "rel_l2": 1395.982178
+  },
+  "sim.tokens": {
+   "cosine": 0.999999,
+   "finite": 1,
+   "max_abs": 1,
+   "rel_l2": 0.001684
+  },
+  "video_ball.embed_vision": {
+   "cosine": 0.999997,
+   "finite": 1,
+   "max_abs": 0.067383,
+   "rel_l2": 0.002579
+  },
+  "video_ball.pixels": {
+   "cosine": 0.999998,
+   "finite": 1,
+   "frames": 4,
+   "levels_max_abs": 2.000015,
+   "max_abs": 0.007843,
+   "rel_l2": 0.002094
+  },
+  "video_ball.pooled": {
+   "cosine": 1.0,
+   "finite": 1,
+   "max_abs": 114.606758,
+   "rel_l2": 346.720306
+  },
+  "video_ball.tokens": {
+   "cosine": 0.999996,
+   "finite": 1,
+   "max_abs": 4,
+   "rel_l2": 0.002948
+  },
+  "video_ball.vision_tower": {
+   "cosine": 0.999997,
+   "finite": 1,
+   "max_abs": 55.95166,
+   "rel_l2": 0.002509
+  }
+ },
+ "date": "2026-11-02",
+ "end_to_end_lab_min_cosine": {
+  "bf16": 0.999879,
+  "fp16": 0.999928
+ },
+ "input": {
+  "fixtures": [
+   {
+    "file": "ball.mp4",
+    "sha256": "b673e10eec337f10527b07035f7bfadd4825ba5e44c95e1e6f9edeadf70cc96a"
+   },
+   {
+    "file": "coast.png",
+    "sha256": "e8c1962df5331e35c334d23b1d32253f2d08a6db822f29808b21ac2bfa2cbd38"
+   },
+   {
+    "file": "recipe.png",
+    "sha256": "97aaac3e01a26190d4beb13e53e38f7ab60269bd8f2b3aabdd329d284a5851bb"
+   },
+   {
+    "file": "speech.wav",
+    "sha256": "18abd240e3a3efd16801c73f5fbee8709524ef64fccfc4d482134557f357e7d2"
+   }
+  ],
+  "request": [
+   {
+    "body": {
+     "input": [
+      "What causes the northern lights?",
+      "a rocky ocean coastline",
+      "a dog barking",
+      "how to cook pasta",
+      "a red ball rolling across a field"
+     ],
+     "task": "query"
+    },
+    "op": "embed"
+   },
+   {
+    "body": {
+     "input": [
+      "The northern lights are caused by charged particles from the sun hitting the atmosphere.",
+      "Spaghetti is boiled in salted water and served with tomato sauce.",
+      "Zorza polarna powstaje, gdy na\u0142adowane cz\u0105stki ze S\u0142o\u0144ca uderzaj\u0105 w atmosfer\u0119 Ziemi."
+     ],
+     "task": "document"
+    },
+    "op": "embed"
+   },
+   {
+    "body": {
+     "input": [
+      {
+       "image": {
+        "path": "lab/evidence/embeddinggemma-2/fixtures/coast.png"
+       },
+       "type": "image"
+      },
+      {
+       "image": {
+        "path": "lab/evidence/embeddinggemma-2/fixtures/recipe.png"
+       },
+       "type": "image"
+      },
+      {
+       "audio": {
+        "path": "lab/evidence/embeddinggemma-2/fixtures/speech.wav"
+       },
+       "type": "audio"
+      },
+      {
+       "type": "video",
+       "video": {
+        "path": "lab/evidence/embeddinggemma-2/fixtures/ball.mp4"
+       }
+      },
+      {
+       "content": [
+        "Coastline photo: <|image|> and a recording: <|audio|>",
+        {
+         "image": {
+          "path": "lab/evidence/embeddinggemma-2/fixtures/coast.png"
+         },
+         "type": "image"
+        },
+        {
+         "audio": {
+          "path": "lab/evidence/embeddinggemma-2/fixtures/speech.wav"
+         },
+         "type": "audio"
+        }
+       ],
+       "type": "content"
+      }
+     ]
+    },
+    "op": "embed"
+   },
+   {
+    "body": {
+     "dimensions": 256,
+     "input": [
+      "What causes the northern lights?"
+     ],
+     "task": "query"
+    },
+    "op": "embed"
+   }
+  ]
+ },
+ "language_max_abs_hidden": 83.8125,
+ "maker_reference": {
+  "code": "sentence-transformers 6.2.0 SentenceTransformer('google/embeddinggemma-2').forward on preprocess() features with the model card prompts; Transformers 5.22.1, PyTorch 2.15.0 on MPS, captured once in FP16 and once in BF16; video decoded by Transformers' PyAV reader",
+  "fp16_stress_vs_bf16": {
+   "black": {
+    "bfloat16": {
+     "finite": true,
+     "tokens": 260,
+     "top": [
+      [
+       "vision_tower",
+       11328.0
+      ],
+      [
+       "vision_tower.pooler",
+       11306.8271484375
+      ],
+      [
+       "language_model.embedding_projection",
+       4352.0
+      ]
+     ]
+    },
+    "cos_bf16_fp16": 0.9999882578849792,
+    "float16": {
+     "finite": true,
+     "tokens": 260,
+     "top": [
+      [
+       "vision_tower.pooler",
+       11306.8271484375
+      ],
+      [
+       "vision_tower",
+       11304.0
+      ],
+      [
+       "language_model.embedding_projection",
+       4348.0
+      ]
+     ]
+    }
+   },
+   "long_text": {
+    "bfloat16": {
+     "finite": true,
+     "tokens": 11409,
+     "top": [
+      [
+       "language_model.embedding_projection",
+       3632.0
+      ],
+      [
+       "language_model",
+       3632.0
+      ],
+      [
+       "language_model.layers.21.ple_block.per_layer_projection",
+       1336.0
+      ]
+     ]
+    },
+    "cos_bf16_fp16": 0.9999510645866394,
+    "float16": {
+     "finite": true,
+     "tokens": 11409,
+     "top": [
+      [
+       "language_model.embedding_projection",
+       3646.0
+      ],
+      [
+       "language_model",
+       3646.0
+      ],
+      [
+       "language_model.layers.21.ple_block.per_layer_projection",
+       1324.0
+      ]
+     ]
+    }
+   },
+   "noise20s": {
+    "bfloat16": {
+     "finite": true,
+     "tokens": 504,
+     "top": [
+      [
+       "language_model.embedding_projection",
+       3760.0
+      ],
+      [
+       "language_model",
+       3760.0
+      ],
+      [
+       "language_model.layers.21.ple_block.per_layer_projection",
+       1256.0
+      ]
+     ]
+    },
+    "cos_bf16_fp16": 0.9997727274894714,
+    "float16": {
+     "finite": true,
+     "tokens": 504,
+     "top": [
+      [
+       "language_model.embedding_projection",
+       3744.0
+      ],
+      [
+       "language_model",
+       3744.0
+      ],
+      [
+       "language_model.layers.21.ple_block.per_layer_projection",
+       1234.0
+      ]
+     ]
+    }
+   },
+   "short": {
+    "bfloat16": {
+     "finite": true,
+     "tokens": 9,
+     "top": [
+      [
+       "language_model.embedding_projection",
+       2720.0
+      ],
+      [
+       "language_model",
+       2720.0
+      ],
+      [
+       "language_model.layers.21.ple_block.per_layer_projection",
+       1304.0
+      ]
+     ]
+    },
+    "cos_bf16_fp16": 0.9999794960021973,
+    "float16": {
+     "finite": true,
+     "tokens": 9,
+     "top": [
+      [
+       "language_model.embedding_projection",
+       2708.0
+      ],
+      [
+       "language_model",
+       2708.0
+      ],
+      [
+       "language_model.layers.21.ple_block.per_layer_projection",
+       1287.0
+      ]
+     ]
+    }
+   },
+   "white": {
+    "bfloat16": {
+     "finite": true,
+     "tokens": 260,
+     "top": [
+      [
+       "vision_tower.pooler",
+       10142.8896484375
+      ],
+      [
+       "vision_tower",
+       10112.0
+      ],
+      [
+       "language_model.embedding_projection",
+       4256.0
+      ]
+     ]
+    },
+    "cos_bf16_fp16": 0.9999887347221375,
+    "float16": {
+     "finite": true,
+     "tokens": 260,
+     "top": [
+      [
+       "vision_tower",
+       10160.0
+      ],
+      [
+       "vision_tower.pooler",
+       10156.74609375
+      ],
+      [
+       "language_model.embedding_projection",
+       4260.0
+      ]
+     ]
+    }
+   }
+  },
+  "maker_similarity_fp16": {
+   "q_ball": {
+    "audio_speech": 0.5365,
+    "doc_aurora": 0.6121,
+    "doc_pasta": 0.6147,
+    "doc_polish": 0.5735,
+    "image_coast": 0.6326,
+    "image_recipe": 0.5715,
+    "mixed": 0.6471,
+    "q_ball": 1.0002,
+    "q_coast": 0.637,
+    "q_dog": 0.6317,
+    "q_pasta": 0.5547,
+    "query": 0.5966,
+    "sim": 0.6618,
+    "video_ball": 0.7534
+   },
+   "q_coast": {
+    "audio_speech": 0.5223,
+    "doc_aurora": 0.6157,
+    "doc_pasta": 0.6251,
+    "doc_polish": 0.5297,
+    "image_coast": 0.7634,
+    "image_recipe": 0.5711,
+    "mixed": 0.7179,
+    "q_ball": 0.637,
+    "q_coast": 0.9998,
+    "q_dog": 0.6495,
+    "q_pasta": 0.5571,
+    "query": 0.611,
+    "sim": 0.6391,
+    "video_ball": 0.6063
+   },
+   "q_dog": {
+    "audio_speech": 0.7807,
+    "doc_aurora": 0.5772,
+    "doc_pasta": 0.5866,
+    "doc_polish": 0.5441,
+    "image_coast": 0.5864,
+    "image_recipe": 0.5526,
+    "mixed": 0.7095,
+    "q_ball": 0.6317,
+    "q_coast": 0.6495,
+    "q_dog": 1.0007,
+    "q_pasta": 0.5359,
+    "query": 0.5786,
+    "sim": 0.6205,
+    "video_ball": 0.6362
+   },
+   "q_pasta": {
+    "audio_speech": 0.4458,
+    "doc_aurora": 0.5251,
+    "doc_pasta": 0.7202,
+    "doc_polish": 0.4419,
+    "image_coast": 0.5362,
+    "image_recipe": 0.7449,
+    "mixed": 0.5411,
+    "q_ball": 0.5547,
+    "q_coast": 0.5571,
+    "q_dog": 0.5359,
+    "q_pasta": 1.0004,
+    "query": 0.5403,
+    "sim": 0.5363,
+    "video_ball": 0.5261
+   },
+   "query": {
+    "audio_speech": 0.4739,
+    "doc_aurora": 0.8664,
+    "doc_pasta": 0.551,
+    "doc_polish": 0.6835,
+    "image_coast": 0.5775,
+    "image_recipe": 0.4999,
+    "mixed": 0.5733,
+    "q_ball": 0.5966,
+    "q_coast": 0.611,
+    "q_dog": 0.5786,
+    "q_pasta": 0.5403,
+    "query": 0.9994,
+    "sim": 0.8237,
+    "video_ball": 0.5743
+   }
+  }
+ },
+ "precision": "fp16",
+ "served": {
+  "dims256_cosine_vs_maker_truncated": 0.9999996,
+  "input_tokens": [
+   69,
+   80,
+   1488,
+   15
+  ],
+  "similarity": {
+   "q_ball": {
+    "audio_speech": 0.5364,
+    "doc_aurora": 0.6121,
+    "doc_pasta": 0.6149,
+    "doc_polish": 0.5736,
+    "image_coast": 0.6325,
+    "image_recipe": 0.5717,
+    "mixed": 0.6468,
+    "video_ball": 0.7529
+   },
+   "q_coast": {
+    "audio_speech": 0.5223,
+    "doc_aurora": 0.6157,
+    "doc_pasta": 0.6253,
+    "doc_polish": 0.5298,
+    "image_coast": 0.7634,
+    "image_recipe": 0.5713,
+    "mixed": 0.7176,
+    "video_ball": 0.6056
+   },
+   "q_dog": {
+    "audio_speech": 0.78,
+    "doc_aurora": 0.5769,
+    "doc_pasta": 0.5864,
+    "doc_polish": 0.5439,
+    "image_coast": 0.586,
+    "image_recipe": 0.5527,
+    "mixed": 0.7089,
+    "video_ball": 0.6353
+   },
+   "q_pasta": {
+    "audio_speech": 0.4456,
+    "doc_aurora": 0.5251,
+    "doc_pasta": 0.7203,
+    "doc_polish": 0.4418,
+    "image_coast": 0.5361,
+    "image_recipe": 0.7449,
+    "mixed": 0.5408,
+    "video_ball": 0.526
+   },
+   "query": {
+    "audio_speech": 0.474,
+    "doc_aurora": 0.8668,
+    "doc_pasta": 0.5512,
+    "doc_polish": 0.6836,
+    "image_coast": 0.5776,
+    "image_recipe": 0.5001,
+    "mixed": 0.5732,
+    "video_ball": 0.5747
+   }
+  },
+  "worker_footprint_mb": 2116
+ },
+ "tolerances": {
+  "component_cosine_vs_maker_fp16": 0.9999,
+  "embedding_cosine_vs_maker_bf16": 0.9995,
+  "embedding_cosine_vs_maker_fp16": 0.9999,
+  "note": "set before the first comparison; video allows the FFmpeg/AVFoundation colour rounding",
+  "token_ids": "identical",
+  "video_embedding_cosine_vs_maker_fp16": 0.999
+ }
+}

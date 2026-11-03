@@ -1,0 +1,18 @@
+id = "local.vision"
+title = "Vision"
+title_singular = "Vision model"
+icon = "text.below.photo"
+order = 20
+suite = "bench/kinds/local.vision/suite-v1.toml"
+primary_operation = "caption"
+
+[[op]]
+name = "caption"
+title = "Caption"
+input = "ops/caption.input.json"
+output = "json"
+output_schema = "ops/caption.output.json"
+stream = false
+default = true
+timeout_s = 300
+first_response_timeout_s = 300

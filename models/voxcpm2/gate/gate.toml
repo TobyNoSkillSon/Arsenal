@@ -1,0 +1,7 @@
+schema = 1
+id = "voxcpm2-native-v1"
+reference_runner = "pinned-vendor-github-code-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Get casts the pinned mlx-community BF16 release (language models bit-identical to the maker's, AudioVAE equal to the maker's fused FP32 weights) to FP16 with a range check", "tokens of five fixed texts (Polish, English, Polish continuation, Chinese, a voice description) identical to the maker's tokenizer wrapper", "AudioVAE encode and decode, LocEnc, both LM prefills, the DiT and ten CFM steps on fixed noise against the maker's code on MPS in FP16: relative L2 within the tolerances in the golden", "a teacher-forced replay of the maker's 28-step Polish ultimate-cloning generation: every stop decision identical, worst step within 5% relative L2, and the 48 kHz decode within 5%", "one real run through the isolated service, with Polish and English output transcribed by an installed ASR model"]
+evidence = "gate/golden/golden.json"

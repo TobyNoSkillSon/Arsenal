@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "ace-step-1.5"
+name = "ACE-Step 1.5 Turbo"
+kind = "sound"
+tools = ["sound"]
+params = "5.01B"
+publisher = "ACE-Step"
+released = 2026
+suggested = false
+purpose = "Songs from lyrics and style"
+summary = "Generate songs with a planner, text and lyric encoders, diffusion transformer and audio VAE."
+tasks = ["text-to-audio"]
+languages = ["mul"]
+good_for = ["Songs with vocals in 50 languages", "Instrumental music", "Covers of a supplied song", "Repainting a section of a song", "Timbre from a reference recording"]
+limits = ["Turbo model: no stem extraction, Lego or completion tasks", "Trained FP16 and quantized output quality awaits qualification", "Song files count against the 4 GiB per-job artifact limit, checked before generation", "Generation produces complete files with progress, not live PCM"]
+architecture = "acestep"
+[facets]
+modalities_in = ["text"]
+modalities_out = ["audio"]
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/ACE-Step/Ace-Step1.5/tree/19671f406d603126926c1b7e2adc169acbcade22"
+[weights]
+repo = "ACE-Step/Ace-Step1.5"
+revision = "19671f406d603126926c1b7e2adc169acbcade22"
+dtype = "bf16"
+files = ["config.json", "acestep-v15-turbo/config.json", "acestep-v15-turbo/model.safetensors", "acestep-v15-turbo/silence_latent.pt", "vae/config.json", "vae/diffusion_pytorch_model.safetensors", "Qwen3-Embedding-0.6B/config.json", "Qwen3-Embedding-0.6B/model.safetensors", "Qwen3-Embedding-0.6B/tokenizer.json", "Qwen3-Embedding-0.6B/tokenizer_config.json", "Qwen3-Embedding-0.6B/special_tokens_map.json", "Qwen3-Embedding-0.6B/added_tokens.json", "Qwen3-Embedding-0.6B/vocab.json", "Qwen3-Embedding-0.6B/merges.txt", "Qwen3-Embedding-0.6B/chat_template.jinja", "acestep-5Hz-lm-1.7B/config.json", "acestep-5Hz-lm-1.7B/model.safetensors", "acestep-5Hz-lm-1.7B/tokenizer.json", "acestep-5Hz-lm-1.7B/tokenizer_config.json", "acestep-5Hz-lm-1.7B/special_tokens_map.json", "acestep-5Hz-lm-1.7B/added_tokens.json", "acestep-5Hz-lm-1.7B/vocab.json", "acestep-5Hz-lm-1.7B/merges.txt", "acestep-5Hz-lm-1.7B/chat_template.jinja"]
+[weights.sha256]
+"config.json" = "74745ff704ea49164c3d2d1c99fc0670f3fc635a869f0aec2d1311e6a52d400a"
+"acestep-v15-turbo/config.json" = "74745ff704ea49164c3d2d1c99fc0670f3fc635a869f0aec2d1311e6a52d400a"
+"acestep-v15-turbo/model.safetensors" = "3f6e0797fad420a39bd33979eb6e840e30989e34a3794e843d23b60ec6e422d7"
+"acestep-v15-turbo/silence_latent.pt" = "a778e9dd942f5e8b2c09c55370782d318834432b03dabbcdf70e6ed49ad6358b"
+"vae/config.json" = "14e019904df567f26df750317a70e2bd08f9f8f3c40ff4a24c97d1cd3f20ccd2"
+"vae/diffusion_pytorch_model.safetensors" = "da17edb604c40deaf09e9b24974e590d1ca83a374070e5d0884cfa4bed9a99b0"
+"Qwen3-Embedding-0.6B/config.json" = "bb23c1607cfe059a58d8f0196cf1cebb52082b1056b8e358a579da80a5759420"
+"Qwen3-Embedding-0.6B/model.safetensors" = "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd"
+"Qwen3-Embedding-0.6B/tokenizer.json" = "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a"
+"Qwen3-Embedding-0.6B/tokenizer_config.json" = "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0"
+"Qwen3-Embedding-0.6B/special_tokens_map.json" = "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+"Qwen3-Embedding-0.6B/added_tokens.json" = "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680"
+"Qwen3-Embedding-0.6B/vocab.json" = "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+"Qwen3-Embedding-0.6B/merges.txt" = "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+"Qwen3-Embedding-0.6B/chat_template.jinja" = "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5"
+"acestep-5Hz-lm-1.7B/config.json" = "73515ca4bfd86a5b56f28bf680311d1911e159c85d7f7ceb2188e310007c9010"
+"acestep-5Hz-lm-1.7B/model.safetensors" = "f161689da73e5ecefa28ff780d51c2d92a00f056d021d7933c779ed5c6cd7db8"
+"acestep-5Hz-lm-1.7B/tokenizer.json" = "35af56c3f5cb3ea2cc578aa28a8937770981d504f183ac5c8c38baf4bbd4af4d"
+"acestep-5Hz-lm-1.7B/tokenizer_config.json" = "6cd70cdd89425971794f5235562edcc608b0629a6c4686ae51a8b8c8b8ba5e95"
+"acestep-5Hz-lm-1.7B/special_tokens_map.json" = "76e233bfc357b0b03d7b6e6ba8e799244f358552575a7cdadb78d3d19106b298"
+"acestep-5Hz-lm-1.7B/added_tokens.json" = "db08b66a515fb5d6acca0b3492d25bb44e0deda6241fc1113ac0679d40558c48"
+"acestep-5Hz-lm-1.7B/vocab.json" = "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+"acestep-5Hz-lm-1.7B/merges.txt" = "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+"acestep-5Hz-lm-1.7B/chat_template.jinja" = "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+[weights.bytes]
+"config.json" = 1968
+"acestep-v15-turbo/config.json" = 1968
+"acestep-v15-turbo/model.safetensors" = 4787825604
+"acestep-v15-turbo/silence_latent.pt" = 3841215
+"vae/config.json" = 425
+"vae/diffusion_pytorch_model.safetensors" = 337431388
+"Qwen3-Embedding-0.6B/config.json" = 1359
+"Qwen3-Embedding-0.6B/model.safetensors" = 1191586416
+"Qwen3-Embedding-0.6B/tokenizer.json" = 11423705
+"Qwen3-Embedding-0.6B/tokenizer_config.json" = 5404
+"Qwen3-Embedding-0.6B/special_tokens_map.json" = 613
+"Qwen3-Embedding-0.6B/added_tokens.json" = 707
+"Qwen3-Embedding-0.6B/vocab.json" = 2776833
+"Qwen3-Embedding-0.6B/merges.txt" = 1671853
+"Qwen3-Embedding-0.6B/chat_template.jinja" = 4116
+"acestep-5Hz-lm-1.7B/config.json" = 1385
+"acestep-5Hz-lm-1.7B/model.safetensors" = 3708521528
+"acestep-5Hz-lm-1.7B/tokenizer.json" = 24321939
+"acestep-5Hz-lm-1.7B/tokenizer_config.json" = 14072925
+"acestep-5Hz-lm-1.7B/special_tokens_map.json" = 1824199
+"acestep-5Hz-lm-1.7B/added_tokens.json" = 2217787
+"acestep-5Hz-lm-1.7B/vocab.json" = 2776833
+"acestep-5Hz-lm-1.7B/merges.txt" = 1671853
+"acestep-5Hz-lm-1.7B/chat_template.jinja" = 4168
+[derive]
+fp16 = "cast:ace-step-v1"
+int8 = "native:ace-step-v1"
+int4 = "native:ace-step-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "music"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "generate_music"
+title = "Make music"
+input = "ops/generate_music.input.json"
+output_schema = "ops/generate_music.output.json"
+output = "file"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 3600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

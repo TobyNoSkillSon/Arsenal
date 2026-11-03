@@ -1,0 +1,85 @@
+schema = 3
+id = "grounding-dino-base"
+name = "Grounding DINO Base"
+kind = "perception"
+summary = "Finds and boxes the things you describe in a short English phrase"
+description = "Grounding DINO (Liu et al., IDEA Research, 2023) extends the DINO detector with a BERT text encoder and fuses image and text features throughout, so it detects any object you name rather than a fixed list. This base variant uses a Swin-B image backbone, picks 900 candidate boxes from the image-text features and refines them in six decoder layers. The card reports 52.5 AP on COCO zero-shot."
+purpose = "Find objects described in words"
+publisher = "IDEA-Research"
+released = 2023
+params = "232.8M"
+tasks = ["zero-shot-object-detection"]
+languages = ["en"]
+good_for = ["Finding objects named in plain words, including descriptive phrases (\"black cable\", \"a remote control\")", "Several things at once; each box is labelled with the phrase it matched"]
+limits = ["English only; Polish words are not understood", "Labels and phrases are lowercased and joined as \"a. b.\" for the model; full stops, commas and semicolons split a phrase into separate things to find, at most 256 tokens in all", "No duplicate suppression, as in the maker's post-processing: one object can get two overlapping boxes, and a box around a whole group can appear beside the single objects", "Each box gets the one phrase whose words score highest; the maker's own post-processing can return a partial phrase instead", "Needs more memory than OWLv2: a Swin-B backbone on an 800-pixel view plus six encoder and six decoder layers", "At most 128 things per request"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/IDEA-Research/grounding-dino-base"
+
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/IDEA-Research/grounding-dino-base/blob/12bdfa3120f3e7ec7b434d90674b3396eccf88eb/README.md"
+
+[facets]
+modalities_in = ["image", "text"]
+modalities_out = ["text"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "IDEA-Research/grounding-dino-base"
+revision = "12bdfa3120f3e7ec7b434d90674b3396eccf88eb"
+dtype = "fp32"
+files = ["model.safetensors", "config.json", "preprocessor_config.json", "special_tokens_map.json", "tokenizer.json", "tokenizer_config.json", "vocab.txt"]
+
+[weights.sha256]
+"model.safetensors" = "5548f844c928c4b6f411fa8cbcc2bfa8dbbba437cb1d513975519f93c2a9ed21"
+"config.json" = "eda416dae6f49419ff831b1c190ec430a060b19aae688dbaf2425a075b650608"
+"preprocessor_config.json" = "8454179ba95e2ad22947835aad7b45862a601fc0055ab88bf1ee70892d3aea60"
+"special_tokens_map.json" = "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3"
+"tokenizer.json" = "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66"
+"tokenizer_config.json" = "d40ab645b68211910b9170d22433d43186a6ec8ee6fd10ba170524b25bf4fb56"
+"vocab.txt" = "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+
+[weights.bytes]
+"model.safetensors" = 933400872
+"config.json" = 1737
+"preprocessor_config.json" = 457
+"special_tokens_map.json" = 125
+"tokenizer.json" = 711396
+"tokenizer_config.json" = 1237
+"vocab.txt" = 231508
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-grounding-dino-base"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "detect"
+title = "Detect"
+input = "ops/detect.input.json"
+output = "json"
+output_schema = "ops/detect.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

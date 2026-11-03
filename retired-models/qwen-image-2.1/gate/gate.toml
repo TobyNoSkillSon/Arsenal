@@ -1,0 +1,11 @@
+schema = 1
+id = "qwen-image-2.1-native-v1"
+reference_runner = "diffusers QwenImage21Pipeline (specification only; not run)"
+precision = "bf16"
+width = 1024
+height = 1024
+steps = 40
+independent_vendor_qualified = false
+status = "static-checks-and-visual-review"
+human_checks = ["A red apple sticker on a transparent background keeps an alpha channel.", "A neon sign reads its quoted text exactly.", "An edit keeps the reference's subject and changes only what the prompt asks."]
+passing_requires = ["Exact checkpoint names and shapes", "Static component checks (scheduler, RoPE, block-causal mask, prefix cache, VAE shortcuts, patch layout)", "Finite outputs", "Visual review of 1024 x 1024 images at 16-bit"]

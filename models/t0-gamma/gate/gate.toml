@@ -1,0 +1,7 @@
+schema = 1
+id = "t0-gamma-kit-v1"
+reference_runner = "pinned-vendor-pytorch-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["255,614,293 checkpoint parameters load by exact name and shape; head.quantile_levels is a constant, not loaded", "per-component parity (scaled input, location and scale, patch encoder, each of 24 layers, output norm, decoder) on five fixed requests against tfc-t0 0.6.0 captured once on MPS under FP16 autocast: relative L2 below 0.01", "final quantiles: cosine at least 0.9999, relative L2 at most 0.005, largest gap at most 0.5% of the largest reference value (plus one unit where snap_integers rounds)", "one isolated end-to-end run: FP16 cast with the runner's convert op (no tensor beyond FP16 range), load from the cast copy, two forecasts and three refused inputs"]
+evidence = "gate/golden/golden.json"

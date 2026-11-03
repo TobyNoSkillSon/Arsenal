@@ -1,0 +1,14 @@
+# Settings panel reference for decision models (docs/MODEL-FOLDER.md, "Settings panel"). Copy it beside model.toml
+# and tailor it to the settings that model declares.
+schema = 1
+
+# The execution path is a diagnosis switch, so it sits behind More.
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "stock_mlx"
+label = "Kernels"
+control = "segments"
+labels = { false = "Tuned", true = "Stock MLX" }

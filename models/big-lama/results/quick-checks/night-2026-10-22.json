@@ -1,0 +1,60 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "big-lama",
+  "revision": "92a388ff82beedfcf3de260d877e63e0c9c15dd8",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T09:44:27Z",
+      "load_seconds": 0.1,
+      "mac_peak_in_use_mb": 25770.7,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "colorize": {
+          "error": "{\"error\":\"Model big-lama does not declare operation colorize.\"}",
+          "seconds_first": 0.001,
+          "seconds_warm": 0.001,
+          "status": 404
+        },
+        "inpaint": {
+          "files": [
+            {
+              "name": "inpainted.png",
+              "sha256": "184e8d4696fe6eeaf1ca951e253e2beaca2549c3aa9163463e789a4a5a27b031"
+            }
+          ],
+          "seconds_first": 0.529,
+          "seconds_warm": 0.32,
+          "status": 200
+        },
+        "interpolate_video": {
+          "error": "{\"error\":\"Model big-lama does not declare operation interpolate_video.\"}",
+          "seconds_first": 0.005,
+          "seconds_warm": 0.005,
+          "status": 404
+        },
+        "upscale_image": {
+          "error": "{\"error\":\"Model big-lama does not declare operation upscale_image.\"}",
+          "seconds_first": 0.008,
+          "seconds_warm": 0.008,
+          "status": 404
+        },
+        "upscale_video": {
+          "error": "{\"error\":\"Model big-lama does not declare operation upscale_video.\"}",
+          "seconds_first": 0.001,
+          "seconds_warm": 0.001,
+          "status": 404
+        }
+      },
+      "peak_footprint_mb": 1997.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 1903.0,
+      "samples": 4
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

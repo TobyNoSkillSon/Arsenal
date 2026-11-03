@@ -1,0 +1,28 @@
+# Folder kernels for Laya Typed Decisions (same encoder shapes as Laya English; sources identical to laya-english/kernels) (docs/KERNELS.md). Sites the decisions runner understands:
+#   linear.down  - the K > N Linears (mlp.Wo 2624->1024 + residual, head linear2 4096->1024 + bias + residual), rows 9-256
+
+[[kernel]]
+id = "smallm-tile"
+chip = "m5"
+mode = "fast"
+replaces = "linear.down"
+entry = "smallm_tile"
+api = "mlx"
+files = ["m5/smallm_tile.h.metal", "m5/smallm_tile.metal"]
+header = "m5/smallm_tile.h.metal"
+inputs = ["x", "w", "bias", "res"]
+outputs = ["out"]
+
+# Exact on every NAX chip: MLX's own split-K GEMM in one dispatch (+ bias/residual epilogue), bit-identical to the
+# stock path. Declines every call MLX would not route to split-K.
+[[kernel]]
+id = "splitk-exact"
+chip = "*"
+mode = "exact"
+replaces = "linear.down"
+entry = "splitk_exact"
+api = "mlx"
+files = ["any/splitk_exact.h.metal", "any/splitk_exact.metal"]
+header = "any/splitk_exact.h.metal"
+inputs = ["x", "w", "bias", "res"]
+outputs = ["out"]

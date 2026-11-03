@@ -1,0 +1,25 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of embed through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 1433.",
+  "model": "granite-embedding-small-english-r2",
+  "revision": "2ab6fa8ea2d674564defd37171ae19079b864b33",
+  "rows": [
+    {
+      "date": "2026-10-26T21:21:06Z",
+      "load_seconds": 0.227,
+      "ops": {
+        "embed": {
+          "seconds_first": 2.496,
+          "seconds_warm": 0.029,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 306.6,
+      "precision": "fp16",
+      "swap": "total = 2048.00M  used = 828.00M  free = 1220.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-26",
+  "schema": "quick-check-1"
+}

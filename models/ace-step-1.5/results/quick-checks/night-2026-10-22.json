@@ -1,0 +1,98 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "lab peak.py: per precision, one ordinary Load and two requests of each one-shot operation through the installed Arsenal's API; peak_footprint_mb is the sum of macOS phys_footprint_peak (MiB) over all Arsenal worker processes (only the measured model was loaded); seconds_warm is the second request's wall time. Busy Mac; quick check.",
+  "model": "ace-step-1.5",
+  "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:47:27Z",
+      "load_seconds": 3.39,
+      "mac_peak_in_use_mb": 43440.3,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "generate_music": {
+          "files": [
+            {
+              "name": "song-0-93F85102-C930-4A3C-80ED-4444C5145901.wav",
+              "sha256": "ff76d48bf7edbc847a35292c086c5407d46d3147aa5a9052fe2fde508440ade5"
+            }
+          ],
+          "seconds_first": 15.744,
+          "seconds_warm": 15.744,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 14336.0,
+      "precision": "fp16",
+      "sampled_peak_mb": 13312.0,
+      "samples": 117
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:48:51Z",
+      "load_seconds": 3.98,
+      "mac_peak_in_use_mb": 36938.4,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "generate_music": {
+          "files": [
+            {
+              "name": "song-0-C597D1F2-F773-4B76-A65F-D7A54C76B262.wav",
+              "sha256": "84434459891cdb6f1da3b644c66f61413ff21ca0385cbc06362382128276d4d6"
+            }
+          ],
+          "seconds_first": 11.112,
+          "seconds_warm": 11.155,
+          "status": 200,
+          "vs16": {
+            "audio_rel_l2": [
+              1.3135833384563134
+            ],
+            "files_identical": false
+          }
+        }
+      },
+      "peak_footprint_mb": 6916.0,
+      "precision": "int4",
+      "sampled_peak_mb": 6429.0,
+      "samples": 93
+    },
+    {
+      "chip": "m5-max",
+      "date": "2026-10-22T07:48:02Z",
+      "derived_now": true,
+      "derived_seconds": 18.3,
+      "load_seconds": 4.11,
+      "mac_peak_in_use_mb": 39363.2,
+      "machine": "Mac in use (other jobs and downloads running)",
+      "ops": {
+        "generate_music": {
+          "files": [
+            {
+              "name": "song-0-9E9684CD-38F2-41FF-A5F8-22FE6762B37C.wav",
+              "sha256": "dbf0f3e1bdbea572c95aac22632ef26105eedbac519941f4da53451ec8a2f552"
+            }
+          ],
+          "seconds_first": 12.835,
+          "seconds_warm": 12.863,
+          "status": 200,
+          "vs16": {
+            "audio_rel_l2": [
+              1.2603082579086369
+            ],
+            "files_identical": false
+          }
+        }
+      },
+      "peak_footprint_mb": 9251.0,
+      "precision": "int8",
+      "sampled_peak_mb": 8329.0,
+      "samples": 103
+    }
+  ],
+  "run": "night-2026-10-22",
+  "schema": "quick-check-1",
+  "source": "lab/night-2026-10-22/peak-results.jsonl"
+}

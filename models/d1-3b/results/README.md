@@ -1,0 +1,3 @@
+# Performance evidence
+
+`m5-max.json`: the decisions suite-v1 quick recipe (four labelled questions plus one batch) on the MLX runner, run in-process by a Python port of the bench harness, not by `arsenal-bench`; daytime and contended, so it is never ranked or Measured. Run of 8 Oct 2026 on runner commit fbddc9b: median 19.8 ms per question, batch 274 questions/s, accuracy 0.75, peak 6,439 MB phys_footprint (text only; the first picture adds the torch tower). Accuracy 0.75 is the model's own: the score case's expected level is 1.42 in fp32 too, which rounds to 1, not the labelled 2. Single-decision and batch speed on real job ads, with the torch MPS comparison, is in `../log/004-mlx-runner.md`.

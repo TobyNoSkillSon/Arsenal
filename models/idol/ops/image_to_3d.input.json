@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "image/png",
+          "image/jpeg"
+        ]
+      },
+      "x-arsenal-control": "image-picker",
+      "description": "Picture of one object."
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "synthetic",
+        "real"
+      ],
+      "default": "synthetic",
+      "description": "synthetic: renders and generated images (tight crop); real: photos (looser crop)."
+    },
+    "crop_margin": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4,
+      "description": "Square crop side as a multiple of the object's size; overrides mode."
+    },
+    "num_gaussians": {
+      "type": "integer",
+      "minimum": 32768,
+      "maximum": 1048576,
+      "default": 262144,
+      "description": "Gaussians in the splat, rounded down to a multiple of 32."
+    },
+    "steps": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 200,
+      "default": 50
+    },
+    "cfg_strength": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 20,
+      "default": 3,
+      "description": "Guidance strength."
+    },
+    "rescale_t": {
+      "type": "number",
+      "minimum": 0.1,
+      "maximum": 20,
+      "default": 3,
+      "description": "Shifts the steps towards high noise."
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295,
+      "default": 42
+    }
+  },
+  "required": [
+    "image"
+  ],
+  "additionalProperties": false
+}

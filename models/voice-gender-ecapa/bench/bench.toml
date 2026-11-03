@@ -1,0 +1,7 @@
+schema = 1
+suite = "voice-gender-ecapa-kit-v1"
+version = 1
+precision = "fp16"
+runner = "kit"
+status = "deferred-by-user"
+metrics = ["seconds_per_request", "peak_ram_mb"]

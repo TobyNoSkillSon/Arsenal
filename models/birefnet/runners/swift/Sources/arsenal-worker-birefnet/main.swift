@@ -1,0 +1,2 @@
+import BiRefNetWorker
+BiRefNetWorker.run()

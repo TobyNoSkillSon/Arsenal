@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string"
+    },
+    "language": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 86400
+    },
+    "words": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "word": {
+            "type": "string"
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "speaker": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "word",
+          "start",
+          "end"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 1024
+    },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 86400
+          },
+          "speaker": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "end"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 1024
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "additionalProperties": false
+}

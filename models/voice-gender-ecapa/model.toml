@@ -1,0 +1,64 @@
+schema = 3
+id = "voice-gender-ecapa"
+name = "Voice Gender Classifier (ECAPA-TDNN)"
+kind = "local.gender"
+summary = "Labels one speaker in a recording as male or female, with probabilities."
+description = "A 15.5M-parameter ECAPA-TDNN speaker network with a two-class head, made by Jaesung Huh (MIT). It was fine-tuned on the VoxCeleb2 dev set from TaoRuijie's pretrained ECAPA-TDNN. The card reports 98.7% accuracy on the VoxCeleb1 identification test split."
+purpose = "Tell male or female voice"
+publisher = "JaesungHuh"
+released = 2024
+params = "15.5M"
+tasks = ["audio-classification"]
+languages = ["mul"]
+good_for = ["One speaker per clip, a few seconds or longer", "Speech like its training data: VoxCeleb celebrity interview clips"]
+limits = ["Two labels only, male and female, as the VoxCeleb training data labels them; the card warns the data may not represent the global population", "The 98.7% figure is the card's claim, not measured here", "Clips under 0.03 s are refused; silence scores male at 0.81, so check the label against probabilities", "The card names no languages; none were tested, Polish included", "Parity with the maker code not run"]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/JaesungHuh/voice-gender-classifier"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/JaesungHuh/voice-gender-classifier/blob/db1222153bd60337e900be22add7af180452adc0/README.md"
+
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["text"]
+
+[weights]
+repo = "JaesungHuh/voice-gender-classifier"
+revision = "db1222153bd60337e900be22add7af180452adc0"
+dtype = "fp32"
+files = ["model.safetensors", "config.json"]
+
+[weights.sha256]
+"model.safetensors" = "2d8e0be1fdf159d60d5087416e6f6277c5e30ce9e33a61c767a9a409e6c503c5"
+"config.json" = "e7b95bff037d352af7822e2c2210a3304f38bb2c017c925388440478f334179a"
+
+[weights.bytes]
+"model.safetensors" = 61907512
+"config.json" = 15
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-voice-gender-ecapa"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of read through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "manga-ocr-base",
+  "revision": "82c77fb84369e0fce0d6e8f0ad96fa82646d0346",
+  "rows": [
+    {
+      "date": "2026-10-30T07:49:59Z",
+      "load_seconds": 0.026,
+      "ops": {
+        "read": {
+          "seconds_first": 0.138,
+          "seconds_warm": 0.038,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 423.8,
+      "precision": "fp16",
+      "runner_sha256": "be200f49a44dc29c08b1f0092f8a49156d247931403fff09b9e9303f95bcbc9f",
+      "swap": "total = 3072.00M  used = 1364.00M  free = 1708.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-30",
+  "schema": "quick-check-1"
+}

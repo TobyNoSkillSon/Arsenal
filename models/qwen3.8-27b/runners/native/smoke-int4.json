@@ -1,0 +1,67 @@
+{
+  "after_answer": {
+    "context": 8192,
+    "dtype": "int4",
+    "id": 3,
+    "loaded": true,
+    "memory": {
+      "footprint_mb": 15025.792510986328,
+      "mlx_active_mb": 14468.04860496521,
+      "mlx_cache_mb": 258.900842666626,
+      "mlx_peak_mb": 14751.149139404297,
+      "peak_mb": 15050.776885986328
+    },
+    "ok": true
+  },
+  "after_cancel": {
+    "context": 8192,
+    "dtype": "int4",
+    "id": 6,
+    "loaded": true,
+    "memory": {
+      "footprint_mb": 15074.339385986328,
+      "mlx_active_mb": 14468.151830673218,
+      "mlx_cache_mb": 258.73304176330566,
+      "mlx_peak_mb": 14756.844512939453,
+      "peak_mb": 15102.542510986328
+    },
+    "ok": true
+  },
+  "answer": {
+    "finish_reason": "stop",
+    "id": 2,
+    "ok": true,
+    "text": "17 plus 25 equals 42.",
+    "tokens_per_s": 31.4780437353392,
+    "ttft_s": 0.3380185002461076,
+    "usage": {
+      "completion_tokens": 11,
+      "prompt_tokens": 28
+    }
+  },
+  "cancel_settled_s": 0.03417595848441124,
+  "controlled_benchmark": false,
+  "dtype": "int4",
+  "load": {
+    "context": 8192,
+    "engine": "mlx-swift",
+    "engine_reason": "Fast/Exact is unavailable; this runner uses the pinned upstream kernels.",
+    "id": 1,
+    "load_s": 0.5983199579641223,
+    "memory": {
+      "footprint_mb": 14562.760986328125,
+      "mlx_active_mb": 14432.522262573242,
+      "mlx_cache_mb": 0.002445220947265625,
+      "mlx_peak_mb": 14432.522262573242,
+      "peak_mb": 14620.823509216309
+    },
+    "ok": true
+  },
+  "mode": "smoke",
+  "model": "qwen3.8-27b",
+  "pid": 4174,
+  "process_gone": true,
+  "runner": "native",
+  "stream_events": 11,
+  "stream_span_s": 0.317454875446856
+}

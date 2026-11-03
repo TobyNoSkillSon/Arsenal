@@ -1,0 +1,83 @@
+schema = 3
+id = "triposr"
+name = "TripoSR"
+kind = "geometry"
+summary = "Turns one photo of an object into a coloured 3D mesh (GLB)."
+description = "TripoSR is a feed-forward single-image 3D reconstruction model from Stability AI and Tripo AI (2024), built on the LRM design: a DINO ViT-B/16 image encoder, a 16-layer transformer that writes a 3x64x64 triplane, and a small NeRF decoder whose density field is turned into a mesh by marching cubes. It was trained for five days on 176 A100 GPUs on renders of a curated CC-BY subset of Objaverse; the makers' tech report (arXiv 2403.02151) reports better shape quality than earlier feed-forward methods on GSO and OmniObject3D."
+purpose = "Make a 3D model from one photo"
+publisher = "stabilityai"
+released = 2024
+params = "419.3M"
+tasks = ["image-to-3d"]
+languages = ["mul"]
+good_for = [
+  "A single object cut out from its background: furniture, toys, figurines, products, food",
+  "Quick draft 3D assets and previews from product shots or concept art",
+  "Coloured meshes to view in Quick Look, a browser or a 3D editor",
+]
+limits = [
+  "Needs a cut-out object: give a PNG with a transparent background (Arsenal's Remove Background makes one). An opaque photo is used as it is, which only works when the object already sits on a plain grey background and fills most of the frame; the makers' automatic background removal (rembg) is not included.",
+  "One object per image; scenes, people in context and very thin parts (wires, antennas) come out poorly or blobby.",
+  "The hidden back is guessed, so it is smoother and less detailed than the visible side.",
+  "Colours are per vertex, not a texture map; texture_size, simplify and seed are accepted but have no effect. resolution sets the marching-cubes grid, 256 to 512 per side (default 256); 512 is this port's limit, larger values are refused.",
+  "It has no language input or output, so Polish does not apply.",
+]
+suggested = false
+
+[links]
+homepage = "https://huggingface.co/stabilityai/TripoSR"
+
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/stabilityai/TripoSR/blob/4e22858523f295f3c2b3852c39c90f399ea0e7d3/README.md"
+
+[facets]
+modalities_in = ["image"]
+modalities_out = ["image"]
+# modalities: each of text, audio, image, video
+
+[weights]
+repo = "stabilityai/TripoSR"
+revision = "4e22858523f295f3c2b3852c39c90f399ea0e7d3"
+dtype = "fp32"
+files = ["model.safetensors"]
+
+[weights.sha256]
+"model.safetensors" = "8443343cd2e9afc84bcb13ce566e3ceff8e37c0869e1267b9dc27180fe82fe50"
+
+[weights.bytes]
+"model.safetensors" = 1677170968
+
+[derive]
+fp16 = "cast:arsenal-kit-half-v1"
+
+[selection]
+default = "kit"
+
+[[runner]]
+name = "kit"
+language = "swift"
+worker = "kit-triposr"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+
+[[op]]
+name = "image_to_3d"
+title = "Image to 3d"
+input = "ops/image_to_3d.input.json"
+output = "file"
+output_schema = "ops/image_to_3d.output.json"
+stream = false
+timeout_s = 300
+first_response_timeout_s = 300
+
+[gate]
+recipe = "gate/gate.toml"
+
+[bench]
+recipe = "bench/bench.toml"

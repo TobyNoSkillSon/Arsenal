@@ -1,0 +1,110 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "minimax-music3"
+name = "MiniMax Music 3"
+kind = "sound"
+tools = ["sound"]
+params = "11.7B"
+publisher = "MiniMax"
+released = 2026
+suggested = false
+purpose = "Songs from lyrics and a description"
+summary = "Complete 44.1 kHz stereo songs up to six minutes from lyrics and a music description, with vocals."
+description = "MiniMax Music 3: an 8.6B global language model (from Qwen3-8B) writes one semantic music code per 25 Hz frame, a 0.65B local model fills seven residual codebooks, and their fused hidden states condition a 2.4B flow-matching transformer whose latents a 54M Flow-VAE decoder turns into stereo audio. 11.7B parameters in all."
+tasks = ["text-to-audio"]
+languages = ["en", "zh"]
+good_for = ["Complete songs with sung vocals, up to six minutes", "Structured captions: genre, BPM, key, vocal timbre and section-by-section arrangement", "Instrumental pieces"]
+limits = ["Section tags such as [verse] and [chorus] must stand on their own lines; text after a tag on the same line is dropped", "Duration is an upper bound: the model may end the song earlier, and past the given lyrics it may sing lines of its own", "Tempo, key, instrumentation and structure are guidance, not guarantees", "The maker documents no vocal languages; its examples are English, and Polish is untested", "Generation produces a complete file with progress, not live audio", "16-bit only: about 22 GB in memory when loaded"]
+architecture = "minimax_music3"
+[facets]
+modalities_in = ["text"]
+modalities_out = ["audio"]
+[licence]
+spdx = "LicenseRef-MiniMax-Music3-Community"
+name = "MiniMax-Music3 Community License"
+commercial = false
+conditions = "MiniMax-Music3 Community License: keep the copyright and licence notice with copies; follow its acceptable-use policy (no infringing outputs, AI-generated content disclosed when published); a commercial product shows \"MiniMax-Music3\" in its interface, and above US$20 million yearly revenue needs MiniMax's written authorization. Anyone offering others a product or service that generates with it must keep reasonable safeguards against infringing or prohibited uses and outputs (section 4)."
+url = "https://huggingface.co/MiniMaxAI/MiniMax-Music3/blob/1b525ccb685ae809f33027c51c351eeb5833cf72/LICENSE"
+[weights]
+repo = "MiniMaxAI/MiniMax-Music3"
+revision = "1b525ccb685ae809f33027c51c351eeb5833cf72"
+dtype = "bf16"
+files = ["LICENSE", "modular_model_index.json", "scheduler/scheduler_config.json", "tokenizer/chat_template.jinja", "tokenizer/tokenizer.json", "tokenizer/tokenizer_config.json", "language_model/config.json", "language_model/generation_config.json", "language_model/model.safetensors.index.json", "language_model/model-00001-of-00004.safetensors", "language_model/model-00002-of-00004.safetensors", "language_model/model-00003-of-00004.safetensors", "language_model/model-00004-of-00004.safetensors", "rvq_depth_decoder/config.json", "rvq_depth_decoder/diffusion_pytorch_model.safetensors", "condition_encoder/config.json", "condition_encoder/diffusion_pytorch_model.safetensors", "transformer/config.json", "transformer/diffusion_pytorch_model.safetensors.index.json", "transformer/diffusion_pytorch_model-00001-of-00002.safetensors", "transformer/diffusion_pytorch_model-00002-of-00002.safetensors", "vocoder/config.json", "vocoder/diffusion_pytorch_model.safetensors"]
+[weights.sha256]
+"LICENSE" = "b21d12df2adae59dad3fcf80c1d81492654c662342f497d9a9770198c9317e58"
+"modular_model_index.json" = "1dc86609cf8855e70cc3f5d085213988094fb59e448aedcda06740d34e386002"
+"scheduler/scheduler_config.json" = "b544466124aab333da4874417da0168610067e9c9ff95fcb63d749e4bf891d99"
+"tokenizer/chat_template.jinja" = "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+"tokenizer/tokenizer.json" = "b1537fa9e59a537276ecbc2e12d0438edff635a1f4a4948e679774b5feb3e610"
+"tokenizer/tokenizer_config.json" = "1689852cc9c45010de040c8302a8acdc0d2c4c6c740dd7e9dd0a8c704e16eada"
+"language_model/config.json" = "34ded58fcd5e8181557f1417e76af9f3e95109a5ce113a4771fd16f8625b53c0"
+"language_model/generation_config.json" = "c0f7c1612e174a7bdec9548464a7bf031a0292587033228e6767fb9e5dc367cd"
+"language_model/model.safetensors.index.json" = "a8bf9de1e8c0d680f39730a127d74445b4abf505623bd91d5ed4f97c0869cc2a"
+"language_model/model-00001-of-00004.safetensors" = "1e95924a158b45b67cfad04fa0f0a352e5a263e69338734d7c1d558be776cc98"
+"language_model/model-00002-of-00004.safetensors" = "fde2d335eef7eafa268d35e53d4b040ee51d2f3fa727f9855b4c97d88a2892da"
+"language_model/model-00003-of-00004.safetensors" = "6549a831637ab678a573047e7fa8fdf966998c4f45330e6eb7573d67f7b9b4c6"
+"language_model/model-00004-of-00004.safetensors" = "a1c9865f357b64d3ae9f428fb98a844831e5a0aee9ed17b19bd7f7be32b964a9"
+"rvq_depth_decoder/config.json" = "b38c7f72d4b2fa8667442071f9e4a63ca5a7b5d0859e5e64ee7f79c4bc64520c"
+"rvq_depth_decoder/diffusion_pytorch_model.safetensors" = "80e86ab006bb5c8d4f223205045035a1c77b2bb9c3be9a86d7e740bbafe5ddf0"
+"condition_encoder/config.json" = "1cdea3f36506719128ae4a29cdfff74b1134e607eb4a504ce6d810568fac8263"
+"condition_encoder/diffusion_pytorch_model.safetensors" = "83179c5eaa9a68a370affe0c1b96c2179f659ea4175666b31071490a202c2a4d"
+"transformer/config.json" = "f60856be934127a8b8223510aff2e38a9efd8bbdbc230c3d3339b96e2cb12f00"
+"transformer/diffusion_pytorch_model.safetensors.index.json" = "5a57fc3b98e91ec7f4e9da199b3dc8ce1c67e42824c42bed91c15443c049b991"
+"transformer/diffusion_pytorch_model-00001-of-00002.safetensors" = "1943baebe93b5d5a57e9e1f603d9cef51a73a55e7a42f52913932dc06dcf10f0"
+"transformer/diffusion_pytorch_model-00002-of-00002.safetensors" = "b2f9e29d241e107e5a281f8b369d6db48eee983917df966c56d7b8dd0bd482c2"
+"vocoder/config.json" = "4161afd07ba7d5b949e29c8a7a005592259fba73e9110b6ece9dfd38d3489eac"
+"vocoder/diffusion_pytorch_model.safetensors" = "daf0bf0560ea978ce7b5ec3e82f420a44429efef18bdfbe3c714d55ceffbe934"
+[weights.bytes]
+"LICENSE" = 7373
+"modular_model_index.json" = 2391
+"scheduler/scheduler_config.json" = 483
+"tokenizer/chat_template.jinja" = 4168
+"tokenizer/tokenizer.json" = 11423801
+"tokenizer/tokenizer_config.json" = 377
+"language_model/config.json" = 1596
+"language_model/generation_config.json" = 158
+"language_model/model.safetensors.index.json" = 32914
+"language_model/model-00001-of-00004.safetensors" = 4910103856
+"language_model/model-00002-of-00004.safetensors" = 4915960352
+"language_model/model-00003-of-00004.safetensors" = 4983068496
+"language_model/model-00004-of-00004.safetensors" = 2359864688
+"rvq_depth_decoder/config.json" = 274
+"rvq_depth_decoder/diffusion_pytorch_model.safetensors" = 1292055248
+"condition_encoder/config.json" = 292
+"condition_encoder/diffusion_pytorch_model.safetensors" = 100671852
+"transformer/config.json" = 294
+"transformer/diffusion_pytorch_model.safetensors.index.json" = 42679
+"transformer/diffusion_pytorch_model-00001-of-00002.safetensors" = 4959921384
+"transformer/diffusion_pytorch_model-00002-of-00002.safetensors" = 4767750800
+"vocoder/config.json" = 251
+"vocoder/diffusion_pytorch_model.safetensors" = 216695272
+[derive]
+fp16 = "cast:minimax-music3-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "music"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "generate_music"
+title = "Make music"
+input = "ops/generate_music.input.json"
+output_schema = "ops/generate_music.output.json"
+output = "file"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 3600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"
+[popularity]
+as_of = "2026-11-02"
+hf_downloads = 5974
+hf_likes = 1497

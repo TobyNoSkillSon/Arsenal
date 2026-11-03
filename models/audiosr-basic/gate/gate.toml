@@ -1,0 +1,7 @@
+schema = 1
+id = "audiosr-basic-native-v1"
+reference_runner = "pinned-vendor-pytorch-mps-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["three networks from 3743 source tensors (VAE, UNet, HiFi-GAN); CLAP, EMA and the duplicate condition VAE are not loaded", "cosine schedule recomputed and checked against the checkpoint's alphas_cumprod within 1e-6", "DSP against SciPy 1.17 / librosa 0.9.2 test vectors: filter type per seed, four low-pass families, resample_poly, mel basis", "component parity on the reference's own inputs, captured once from audiosr 0.0.7 on MPS under FP16 autocast", "one 5.12 s end-to-end clip replaying the reference's noise"]
+evidence = "gate/evidence/native/parity.json"

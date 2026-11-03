@@ -1,0 +1,8 @@
+schema = 1
+id = "embeddinggemma-2-native-v2"
+kind = "embeddings"
+reference_runner = "pinned-vendor-sentence-transformers-mps-bf16-fp16"
+precision = "fp16"
+independent_vendor_qualified = true
+passing_requires = ["Chat-template layouts, resize sizes, resized patch bytes, EXIF orientation, frame sampling, log-mel features, audio token counts, the audio tower's blocked key mask and relative shift, and the vision RoPE table and pooling match Transformers 5.22.1 without weights (EmbedWorkerTests, Fixtures/eg2-reference.json)", "token ids identical to the maker's processor for text, image, audio, video and interleaved inputs", "component parity on the maker's own inputs, captured once from sentence-transformers 6.2 / Transformers 5.22.1 on PyTorch MPS in FP16 and BF16: vision tower, audio tower, text encoder per token and per layer", "end-to-end vectors within cosine 0.9999 of the maker's FP16 run (video 0.99993, colour conversion)", "FP16 accepted: every activation finite, largest text hidden state 84, vision pooler output (kept in float32 up to the embedder norm) 28,489 of 65,504; the maker's own FP16 run stays within 0.9998 of BF16 on an 11,409-token text, white and black images and 20 s of full-scale noise"]
+evidence = "gate/golden/golden.json"

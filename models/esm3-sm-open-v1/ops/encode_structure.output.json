@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "structure_tokens",
+    "sequence",
+    "length",
+    "chain",
+    "missing_backbone"
+  ],
+  "properties": {
+    "structure_tokens": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "One of 4,096 structure tokens per residue."
+    },
+    "sequence": {
+      "type": "string"
+    },
+    "length": {
+      "type": "integer"
+    },
+    "chain": {
+      "type": "string"
+    },
+    "missing_backbone": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "description": "Residues without N, CA or C."
+    },
+    "pdb": {
+      "type": "string"
+    },
+    "plddt": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "ptm": {
+      "type": "number"
+    }
+  }
+}

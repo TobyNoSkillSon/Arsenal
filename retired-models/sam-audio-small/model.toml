@@ -1,0 +1,78 @@
+schema = 3
+architecture = "sam_audio"
+id = "sam-audio-small"
+name = "SAM Audio Small"
+kind = "audio"
+params = "712M"
+publisher = "Meta"
+released = 2026
+suggested = false
+summary = "Isolate a sound by description using a native Swift MLX worker."
+purpose = "Isolate a sound by description"
+good_for = ["Isolate a sound by description"]
+limits = ["Text and time prompts; no visual encoder in this port.", "Anchors support ten-second clips; unanchored audio uses overlapping windows.", "Checked live at FP16 on 19 Oct: speech isolated from and removed from a mix with a beep; a prompt for the pure beep tone found nothing."]
+languages = ["en"]
+tasks = ["separate_audio"]
+tools = ["operation"]
+assets = ["sam-t5-base"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "LicenseRef-SAM"
+name = "LicenseRef-SAM"
+commercial = true
+url = "https://huggingface.co/mlx-community/sam-audio-small/tree/4ca84acc5c47f64bb2acee448f835dfac65ed318"
+[weights]
+repo = "mlx-community/sam-audio-small"
+revision = "4ca84acc5c47f64bb2acee448f835dfac65ed318"
+dtype = "fp32"
+files = ["config.json", "model.safetensors"]
+[weights.sha256]
+"config.json" = "50a67c841676043afdd3af6484ef6a1b47e300e36ee24eb3e07c31da8216f47b"
+"model.safetensors" = "ae851c17699821e4a7a7c6b0aae44be61c190ceb3c9a603b2a2e5b327d2509f8"
+[weights.bytes]
+"config.json" = 2251
+"model.safetensors" = 2409315890
+[derive]
+fp16 = "cast:audio-sam-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "separate_audio"
+title = "Separate Audio"
+input = "ops/separate_audio.input.json"
+output_schema = "ops/separate_audio.output.json"
+output = "file"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"
+[[asset]]
+id = "sam-t5-base"
+repo = "google-t5/t5-base"
+repo_type = "model"
+into = "text_encoder"
+revision = "a9723ea7f1b39c1eae772870f3b547bf6ef7e6c1"
+licence = "Apache-2.0"
+files = ["config.json", "model.safetensors", "tokenizer.json"]
+[asset.bytes]
+"config.json" = 1208
+"model.safetensors" = 891646390
+"tokenizer.json" = 1389353
+[asset.sha256]
+"config.json" = "46dd7cb62d29c81fb551e0ef1ea274c24a46ba441eeb948897706252933df033"
+"model.safetensors" = "a90903540cc02cbeb7ff9f823f1a80eb778c7e22426a0e620b01c77a5ec8f5b4"
+"tokenizer.json" = "d2acde0d8d71dd30a711834b07781b9c89feaac33fd332f60507699282740066"

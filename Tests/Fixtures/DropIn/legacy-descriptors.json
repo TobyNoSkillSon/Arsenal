@@ -1,0 +1,2997 @@
+[
+  {
+    "id": "breeze-tts-2",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "int8": "mlx-affine-g64:breeze-tts-2"
+      },
+      "facets": {
+        "modalities_in": [
+          "text",
+          "audio"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "breeze-tts-2",
+      "kind": "voices",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "licence": {
+        "commercial": false,
+        "name": "BreezeBlue Research & Non-Commercial 1.1",
+        "spdx": "LicenseRef-BreezeBlue-RNC-1.1",
+        "url": "https://huggingface.co/mlx-community/Breeze-TTS-2-mlx/blob/3c8829fb7fd335818f085cd2ef49b4100c0e46c8/LICENSE"
+      },
+      "menu": [
+        {
+          "id": "speak-clipboard",
+          "input": "clipboard",
+          "op": "speak",
+          "title": "Speak Clipboard"
+        }
+      ],
+      "name": "Breeze TTS 2",
+      "op": [
+        {
+          "input": "ops/speak.input.json",
+          "name": "speak",
+          "output": "audio",
+          "stream": true,
+          "title": "Speak"
+        },
+        {
+          "input": "ops/voices.input.json",
+          "name": "voices",
+          "output": "json",
+          "stream": false,
+          "title": "Voices"
+        },
+        {
+          "input": "ops/design_voice.input.json",
+          "name": "design_voice",
+          "output": "json",
+          "stream": false,
+          "title": "Design Voice"
+        },
+        {
+          "input": "ops/clone_voice.input.json",
+          "name": "clone_voice",
+          "output": "json",
+          "stream": false,
+          "title": "Clone Voice"
+        }
+      ],
+      "params": "3B",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 1102,
+        "hf_likes": 6
+      },
+      "publisher": "BreezeBlue",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "voices"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Choose a saved voice; leave empty to use the description or reference inputs.",
+          "id": "voice",
+          "maps_to": "request.voice",
+          "title": "Voice",
+          "type": "voice"
+        },
+        {
+          "applies": "request",
+          "choices": [
+            "english",
+            "chinese"
+          ],
+          "default": "english",
+          "help": "Language used to condition the generated speech.",
+          "id": "language",
+          "maps_to": "request.language",
+          "title": "Language",
+          "type": "choice"
+        },
+        {
+          "applies": "request",
+          "default": "A warm adult narrator with a clear, relaxed conversational voice.",
+          "help": "Describe the voice and delivery for the next request.",
+          "id": "instructions",
+          "maps_to": "request.instructions",
+          "title": "Voice description",
+          "type": "text"
+        },
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Local reference WAV used for voice cloning.",
+          "id": "reference_path",
+          "maps_to": "request.reference.path",
+          "title": "Reference clip",
+          "type": "text"
+        },
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Exact words spoken in the reference clip.",
+          "id": "reference_text",
+          "maps_to": "request.reference.text",
+          "title": "Reference transcript",
+          "type": "text"
+        }
+      ],
+      "suggested": false,
+      "summary": "Bilingual English and Chinese speech with voice cloning and voice design.",
+      "tasks": [
+        "text-to-speech"
+      ],
+      "tools": [
+        "voice"
+      ],
+      "vendor": {
+        "int4": {
+          "bytes": {
+            "LICENSE": 18856,
+            "NOTICE": 146,
+            "audio_tokenizer/config.json": 2336,
+            "audio_tokenizer/configuration.json": 76,
+            "audio_tokenizer/model.safetensors": 682293092,
+            "audio_tokenizer/preprocessor_config.json": 234,
+            "config.json": 12379,
+            "generation_config.json": 251,
+            "model.safetensors": 2325487160,
+            "model.safetensors.index.json": 98863,
+            "special_tokens_map.json": 886,
+            "tokenizer.json": 33386945,
+            "tokenizer_config.json": 1157960
+          },
+          "dtype": "int4",
+          "files": [
+            "LICENSE",
+            "NOTICE",
+            "audio_tokenizer/config.json",
+            "audio_tokenizer/configuration.json",
+            "audio_tokenizer/model.safetensors",
+            "audio_tokenizer/preprocessor_config.json",
+            "config.json",
+            "generation_config.json",
+            "model.safetensors",
+            "model.safetensors.index.json",
+            "special_tokens_map.json",
+            "tokenizer.json",
+            "tokenizer_config.json"
+          ],
+          "format": "mxfp4",
+          "group": 32,
+          "repo": "mlx-community/Breeze-TTS-2-mlx-4bit",
+          "revision": "3a06d26b172ea4ae1da2f42d708383e9c79d5526",
+          "sha256": {
+            "LICENSE": "2a143ae167cb0253d95bafa694e415570dcce336d712230d205c538523bbd855",
+            "NOTICE": "70bc248b98e5bb527f160c86be56d60ef8c63776c43051273643db036ebee40d",
+            "audio_tokenizer/config.json": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+            "audio_tokenizer/configuration.json": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+            "audio_tokenizer/model.safetensors": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+            "audio_tokenizer/preprocessor_config.json": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+            "config.json": "f6871e70a5e937cf23f8ca6eb252ea377c9e489f87f3f7c70b76066ff5768bdf",
+            "generation_config.json": "2ef3f2c0ab8d9ad241059138a795433c5410fd9954efb9625674ecd2a9529434",
+            "model.safetensors": "e8499e75e043b16d0734897869a124198aca2fa88436eb83c855d58a39fdac0a",
+            "model.safetensors.index.json": "fe6889d333789126501d6f3c5aa9fe198b00477403c7c1507d86f8cf3b32e381",
+            "special_tokens_map.json": "194f265bb588d142a16f27d9576104eb3dab3d7ba9961541d2d6e3d5e77e6470",
+            "tokenizer.json": "d3ec9ac3eb2392389b9f5112e85d8b43316494addb587ba7b7a9d61eac23af96",
+            "tokenizer_config.json": "2c084fd6725c2284e8aa6da095a8d036d48fe79665595bfcd50371821b620e44"
+          }
+        }
+      },
+      "weights": {
+        "bytes": {
+          "audio_tokenizer/config.json": 2336,
+          "audio_tokenizer/configuration.json": 76,
+          "audio_tokenizer/model.safetensors": 682293092,
+          "audio_tokenizer/preprocessor_config.json": 234,
+          "config.json": 12176,
+          "generation_config.json": 251,
+          "model-00001-of-00002.safetensors": 4904052381,
+          "model-00002-of-00002.safetensors": 2004566801,
+          "model.safetensors.index.json": 73409,
+          "special_tokens_map.json": 886,
+          "tokenizer.json": 33386945,
+          "tokenizer_config.json": 1157960
+        },
+        "dtype": "bf16",
+        "files": [
+          "audio_tokenizer/config.json",
+          "audio_tokenizer/configuration.json",
+          "audio_tokenizer/model.safetensors",
+          "audio_tokenizer/preprocessor_config.json",
+          "config.json",
+          "generation_config.json",
+          "model-00001-of-00002.safetensors",
+          "model-00002-of-00002.safetensors",
+          "model.safetensors.index.json",
+          "special_tokens_map.json",
+          "tokenizer.json",
+          "tokenizer_config.json"
+        ],
+        "repo": "mlx-community/Breeze-TTS-2-mlx",
+        "revision": "3c8829fb7fd335818f085cd2ef49b4100c0e46c8",
+        "sha256": {
+          "audio_tokenizer/config.json": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+          "audio_tokenizer/configuration.json": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+          "audio_tokenizer/model.safetensors": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "audio_tokenizer/preprocessor_config.json": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+          "config.json": "11f40bae4cb68c87638d3998c78926f7b5143c4ca7aa782e50c02209dbb072c0",
+          "generation_config.json": "2ef3f2c0ab8d9ad241059138a795433c5410fd9954efb9625674ecd2a9529434",
+          "model-00001-of-00002.safetensors": "06c0acb9057e13659aa297a889001dcf86f181d1355ef84c1134ba8b72313572",
+          "model-00002-of-00002.safetensors": "83e7d3a903b70a0be2a1f3dc1b37c4605678536efe9e1a45b86fd70599f5bf77",
+          "model.safetensors.index.json": "b2b8ad998777f80440a51b8504d22c44575623e8bae3a76a925bccc59725ad02",
+          "special_tokens_map.json": "194f265bb588d142a16f27d9576104eb3dab3d7ba9961541d2d6e3d5e77e6470",
+          "tokenizer.json": "d3ec9ac3eb2392389b9f5112e85d8b43316494addb587ba7b7a9d61eac23af96",
+          "tokenizer_config.json": "2c084fd6725c2284e8aa6da095a8d036d48fe79665595bfcd50371821b620e44"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/clone_voice.input.json",
+        "name": "clone_voice",
+        "output": "json",
+        "stream": false,
+        "title": "Clone Voice"
+      },
+      {
+        "input": "ops/design_voice.input.json",
+        "name": "design_voice",
+        "output": "json",
+        "stream": false,
+        "title": "Design Voice"
+      },
+      {
+        "input": "ops/speak.input.json",
+        "name": "speak",
+        "output": "audio",
+        "stream": true,
+        "title": "Speak"
+      },
+      {
+        "input": "ops/voices.input.json",
+        "name": "voices",
+        "output": "json",
+        "stream": false,
+        "title": "Voices"
+      }
+    ]
+  },
+  {
+    "id": "d1-3b",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "context": 32768,
+      "facets": {
+        "modalities_in": [
+          "text",
+          "image"
+        ],
+        "modalities_out": [
+          "text"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "d1-3b",
+      "kind": "decisions",
+      "languages": [
+        "ar",
+        "zh",
+        "en",
+        "fr",
+        "de",
+        "hi",
+        "id",
+        "it",
+        "ja",
+        "ko",
+        "pl",
+        "pt",
+        "ru",
+        "es",
+        "th",
+        "vi"
+      ],
+      "licence": {
+        "commercial": true,
+        "conditions": "Commercial use has a US$10 million annual-revenue threshold (legal entity, including affiliates); above it, a separate Liquid AI licence is required. Redistribution must retain the licence and attribution and identify modifications. See the pinned LICENSE for boundary wording.",
+        "name": "LFM Open License v1.0",
+        "spdx": "LicenseRef-LFM-Open-1.0",
+        "url": "https://huggingface.co/LiquidAI/d1-3B/blob/051bcc464b01b9f92942b364d9586b0ef5912432/LICENSE"
+      },
+      "name": "d1 \u00b7 3B",
+      "native_context": 32768,
+      "op": [
+        {
+          "input": "ops/decide.input.json",
+          "name": "decide",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/decide.output.json",
+          "stream": false,
+          "title": "Decide"
+        },
+        {
+          "input": "ops/judge.input.json",
+          "name": "judge",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/judge.output.json",
+          "stream": false,
+          "title": "Judge"
+        }
+      ],
+      "params": "3.12B",
+      "publisher": "Liquid AI",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": false,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "d1"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "summary": "Single-pass text, JSON and image decisions; 32,768-token context.",
+      "tasks": [
+        "yes-no",
+        "choice",
+        "score",
+        "visual-inspection"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE": 10574,
+          "chat_template.jinja": 5436,
+          "config.json": 2773,
+          "model.safetensors": 6247065504,
+          "processor_config.json": 824,
+          "tokenizer.json": 17905750,
+          "tokenizer_config.json": 507
+        },
+        "dtype": "bf16",
+        "files": [
+          "LICENSE",
+          "chat_template.jinja",
+          "config.json",
+          "model.safetensors",
+          "processor_config.json",
+          "tokenizer.json",
+          "tokenizer_config.json"
+        ],
+        "repo": "LiquidAI/d1-3B",
+        "revision": "051bcc464b01b9f92942b364d9586b0ef5912432",
+        "sha256": {
+          "LICENSE": "4d28ca14dedc0b3d0fcc2b3339f0e79931faa33874f3d24f522183a8fc70068c",
+          "chat_template.jinja": "86f4770449a4797c9b4212d110b0cc70fb993c1ce960095bcfb12eea22f61cca",
+          "config.json": "0cbac0f580bd8036ef94ac83aa632a57a170e66d20f381ef47c3f6486c9a3e8c",
+          "model.safetensors": "50e03317847caf6df9a9aee27ed40f20554a86a21e60d1d47ba41a422b546c0c",
+          "processor_config.json": "b9b82ad34a69e2f70a9033741e11f82b8a98bb5f8e6c13b3b2d5efdd3935d916",
+          "tokenizer.json": "8096ecb9f54599d756c8de728a598a340bc1e43c0deb77ddd62456c38349fcee",
+          "tokenizer_config.json": "ef6770d12dd9ac58d334e979bf160c5cdfd41f13d205fd5d5516857645feb0ea"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/decide.input.json",
+        "name": "decide",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/decide.output.json",
+        "stream": false,
+        "title": "Decide"
+      },
+      {
+        "input": "ops/judge.input.json",
+        "name": "judge",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/judge.output.json",
+        "stream": false,
+        "title": "Judge"
+      }
+    ]
+  },
+  {
+    "id": "flux2-klein-4b",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "image"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "flux2-klein-4b",
+      "kind": "images",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B/blob/e7b7dc27f91deacad38e78976d1f2b499d76a294/LICENSE.md"
+      },
+      "name": "FLUX.2 Klein 4B",
+      "op": [
+        {
+          "input": "ops/generate.input.json",
+          "name": "generate",
+          "output": "image",
+          "output_schema": "ops/generate.output.json",
+          "stream": false,
+          "title": "Generate"
+        }
+      ],
+      "params": "4B",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 400725,
+        "hf_likes": 998
+      },
+      "publisher": "Black Forest Labs",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": false,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "flux"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "choices": [
+            "512x512",
+            "768x768",
+            "1024x1024"
+          ],
+          "default": "1024x1024",
+          "help": "Image size in pixels.",
+          "id": "resolution",
+          "maps_to": "request.resolution",
+          "title": "Resolution",
+          "type": "choice"
+        },
+        {
+          "applies": "request",
+          "default": 4,
+          "help": "Denoising passes per image: more is slower and can add detail; this model is tuned for 4.",
+          "id": "steps",
+          "maps_to": "request.steps",
+          "max": 100,
+          "min": 1,
+          "step": 1,
+          "title": "Steps",
+          "type": "number"
+        },
+        {
+          "applies": "request",
+          "default": 0,
+          "help": "Starting noise: the same seed and prompt give the same image.",
+          "id": "seed",
+          "maps_to": "request.seed",
+          "max": 4294967295,
+          "min": 0,
+          "step": 1,
+          "title": "Seed",
+          "type": "number"
+        }
+      ],
+      "suggested": true,
+      "summary": "Four-step image generation with a local Qwen3 text encoder.",
+      "tasks": [
+        "text-to-image"
+      ],
+      "tools": [
+        "image"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE.md": 9584,
+          "model_index.json": 446,
+          "text_encoder/config.json": 1536,
+          "text_encoder/generation_config.json": 214,
+          "text_encoder/model-00001-of-00002.safetensors": 4967215360,
+          "text_encoder/model-00002-of-00002.safetensors": 3077766632,
+          "text_encoder/model.safetensors.index.json": 32855,
+          "tokenizer/added_tokens.json": 707,
+          "tokenizer/chat_template.jinja": 4168,
+          "tokenizer/merges.txt": 1671853,
+          "tokenizer/special_tokens_map.json": 613,
+          "tokenizer/tokenizer.json": 11422654,
+          "tokenizer/tokenizer_config.json": 5404,
+          "tokenizer/vocab.json": 2776833,
+          "transformer/config.json": 541,
+          "transformer/diffusion_pytorch_model.safetensors": 7751109744,
+          "vae/config.json": 821,
+          "vae/diffusion_pytorch_model.safetensors": 168120878
+        },
+        "dtype": "bf16",
+        "files": [
+          "LICENSE.md",
+          "model_index.json",
+          "text_encoder/config.json",
+          "text_encoder/generation_config.json",
+          "text_encoder/model-00001-of-00002.safetensors",
+          "text_encoder/model-00002-of-00002.safetensors",
+          "text_encoder/model.safetensors.index.json",
+          "tokenizer/added_tokens.json",
+          "tokenizer/chat_template.jinja",
+          "tokenizer/merges.txt",
+          "tokenizer/special_tokens_map.json",
+          "tokenizer/tokenizer.json",
+          "tokenizer/tokenizer_config.json",
+          "tokenizer/vocab.json",
+          "transformer/config.json",
+          "transformer/diffusion_pytorch_model.safetensors",
+          "vae/config.json",
+          "vae/diffusion_pytorch_model.safetensors"
+        ],
+        "repo": "black-forest-labs/FLUX.2-klein-4B",
+        "revision": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+        "sha256": {
+          "LICENSE.md": "ca02bc51900ab07789d1b70283329e7137f5af98f5161c23a1c81fc38a4af1fe",
+          "model_index.json": "51a76cb1cf3ed37423a1128c79c22faee8e6fbe7f5aaeb737f0a258930dbaac0",
+          "text_encoder/config.json": "214b4c29a0d975e9fddf9994a5673f22cb2c4c5750352f9227c2c3251ebeab40",
+          "text_encoder/generation_config.json": "4347b1aeed2b2b78bc059920a0b7f5fec71482e1344952b76d7665d638d71f13",
+          "text_encoder/model-00001-of-00002.safetensors": "8c0506e7f4936fa7e26183a4fd8da4e2bdbc5990ba64ae441f965d51228f36ea",
+          "text_encoder/model-00002-of-00002.safetensors": "82f2bd839378541b0557bfabaf37c7d3d637071fdcb73302dedd7cf61162ce07",
+          "text_encoder/model.safetensors.index.json": "06b3d5319b6d76d1a4a2433419180016cfd54ed62d086a5e6567a809f8c82634",
+          "tokenizer/added_tokens.json": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+          "tokenizer/chat_template.jinja": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+          "tokenizer/merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "tokenizer/special_tokens_map.json": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+          "tokenizer/tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer/tokenizer_config.json": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+          "tokenizer/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+          "transformer/config.json": "09733c74a3da6d17dd0a0472a091a8950c7c6935889c32c16cc800ede05029de",
+          "transformer/diffusion_pytorch_model.safetensors": "9f29f9edcfdae452a653ffb51a534ca4decd389952c225724ff3b94042612a6e",
+          "vae/config.json": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948",
+          "vae/diffusion_pytorch_model.safetensors": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/generate.input.json",
+        "name": "generate",
+        "output": "image",
+        "output_schema": "ops/generate.output.json",
+        "stream": false,
+        "title": "Generate"
+      }
+    ]
+  },
+  {
+    "id": "kokoro-82m",
+    "manifest": {
+      "asset": [
+        {
+          "bytes": {
+            "us_bart.safetensors": 3011692,
+            "us_bart_config.json": 1257,
+            "us_gold.json": 3001196,
+            "us_silver.json": 3105352
+          },
+          "files": [
+            "us_bart.safetensors",
+            "us_bart_config.json",
+            "us_gold.json",
+            "us_silver.json"
+          ],
+          "id": "kokoro-english-g2p",
+          "licence": "MIT",
+          "repo": "beshkenadze/kitten-tts-g2p",
+          "repo_type": "model",
+          "revision": "9c692b92682d959d9013a9cfe6a49541997add18",
+          "sha256": {
+            "us_bart.safetensors": "dc4a02e62d4fcb4bb4097ecf00db89b8e1a12a549a52ab6adfbba220b80a55c5",
+            "us_bart_config.json": "8deb3537fb29c63cd9f20d75515ae06e4c92f1b6db0703a2d45bca95b33a53a4",
+            "us_gold.json": "8507f89840f0813b10cf584740942f58e9cc9ad3660e24088b442ab0a6b126be",
+            "us_silver.json": "ea0e1abca0c9b18fb0d3402034633a337154a3153e9a9f49f97d668c908e140c"
+          }
+        },
+        {
+          "bytes": {
+            "gb_gold.json": 2841062,
+            "gb_silver.json": 3677750
+          },
+          "files": [
+            "gb_gold.json",
+            "gb_silver.json"
+          ],
+          "id": "kokoro-british-lexicon",
+          "licence": "Apache-2.0",
+          "repo": "hexgrad/misaki",
+          "repo_type": "dataset",
+          "revision": "7a6093fd11124188077f2dc16397cc465466d59a",
+          "sha256": {
+            "gb_gold.json": "090cdecbe6bda9516a2cdc21563d62def0b91f5b55ea74fe6ef729eef682785f",
+            "gb_silver.json": "cb8655f5e614e6306146e0da1bf93522ac542ebd39dcd9892afcf51c9aa52e1a"
+          }
+        }
+      ],
+      "assets": [
+        "kokoro-english-g2p",
+        "kokoro-british-lexicon"
+      ],
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "fp16": "cast:kokoro",
+        "int8": "mlx-affine-g64:kokoro-82m"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "kokoro-82m",
+      "kind": "voices",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/mlx-community/Kokoro-82M-bf16/blob/a71e4d38b236d968966a2002c4c895dbd12b1c3c/LICENSE"
+      },
+      "menu": [
+        {
+          "id": "speak-clipboard",
+          "input": "clipboard",
+          "op": "speak",
+          "title": "Speak Clipboard"
+        }
+      ],
+      "name": "Kokoro 82M",
+      "op": [
+        {
+          "input": "ops/speak.input.json",
+          "name": "speak",
+          "output": "audio",
+          "stream": true,
+          "title": "Speak"
+        },
+        {
+          "input": "ops/voices.input.json",
+          "name": "voices",
+          "output": "json",
+          "stream": false,
+          "title": "Voices"
+        }
+      ],
+      "params": "82M",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 31425,
+        "hf_likes": 67
+      },
+      "publisher": "Hexgrad",
+      "released": 2025,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "voices"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "default": "af_heart",
+          "help": "Default preset voice for speech requests.",
+          "id": "voice",
+          "maps_to": "request.voice",
+          "title": "Voice",
+          "type": "voice"
+        },
+        {
+          "applies": "request",
+          "default": 1.0,
+          "help": "Speech speed relative to the preset voice.",
+          "id": "speed",
+          "maps_to": "request.speed",
+          "max": 4.0,
+          "min": 0.25,
+          "step": 0.05,
+          "title": "Speed",
+          "type": "slider"
+        }
+      ],
+      "suggested": true,
+      "summary": "Fast preset-voice reader; the default for spoken replies. No cloning or voice design.",
+      "tasks": [
+        "text-to-speech"
+      ],
+      "tools": [
+        "voice"
+      ],
+      "weights": {
+        "bytes": {
+          "config.json": 2351,
+          "kokoro-v1_0.safetensors": 327115152,
+          "voices/af_alloy.safetensors": 522320,
+          "voices/af_aoede.safetensors": 522320,
+          "voices/af_bella.safetensors": 522320,
+          "voices/af_heart.safetensors": 522320,
+          "voices/af_jessica.safetensors": 522320,
+          "voices/af_kore.safetensors": 522320,
+          "voices/af_nicole.safetensors": 522320,
+          "voices/af_nova.safetensors": 522320,
+          "voices/af_river.safetensors": 522320,
+          "voices/af_sarah.safetensors": 522320,
+          "voices/af_sky.safetensors": 522320,
+          "voices/am_adam.safetensors": 522320,
+          "voices/am_echo.safetensors": 522320,
+          "voices/am_eric.safetensors": 522320,
+          "voices/am_fenrir.safetensors": 522320,
+          "voices/am_liam.safetensors": 522320,
+          "voices/am_michael.safetensors": 522320,
+          "voices/am_onyx.safetensors": 522320,
+          "voices/am_puck.safetensors": 522320,
+          "voices/am_santa.safetensors": 522320,
+          "voices/bf_alice.safetensors": 522320,
+          "voices/bf_emma.safetensors": 522320,
+          "voices/bf_isabella.safetensors": 522320,
+          "voices/bf_lily.safetensors": 522320,
+          "voices/bm_daniel.safetensors": 522320,
+          "voices/bm_fable.safetensors": 522320,
+          "voices/bm_george.safetensors": 522320,
+          "voices/bm_lewis.safetensors": 522320
+        },
+        "dtype": "fp32",
+        "files": [
+          "config.json",
+          "kokoro-v1_0.safetensors",
+          "voices/af_alloy.safetensors",
+          "voices/af_aoede.safetensors",
+          "voices/af_bella.safetensors",
+          "voices/af_heart.safetensors",
+          "voices/af_jessica.safetensors",
+          "voices/af_kore.safetensors",
+          "voices/af_nicole.safetensors",
+          "voices/af_nova.safetensors",
+          "voices/af_river.safetensors",
+          "voices/af_sarah.safetensors",
+          "voices/af_sky.safetensors",
+          "voices/am_adam.safetensors",
+          "voices/am_echo.safetensors",
+          "voices/am_eric.safetensors",
+          "voices/am_fenrir.safetensors",
+          "voices/am_liam.safetensors",
+          "voices/am_michael.safetensors",
+          "voices/am_onyx.safetensors",
+          "voices/am_puck.safetensors",
+          "voices/am_santa.safetensors",
+          "voices/bf_alice.safetensors",
+          "voices/bf_emma.safetensors",
+          "voices/bf_isabella.safetensors",
+          "voices/bf_lily.safetensors",
+          "voices/bm_daniel.safetensors",
+          "voices/bm_fable.safetensors",
+          "voices/bm_george.safetensors",
+          "voices/bm_lewis.safetensors"
+        ],
+        "repo": "mlx-community/Kokoro-82M-bf16",
+        "revision": "a71e4d38b236d968966a2002c4c895dbd12b1c3c",
+        "sha256": {
+          "config.json": "5abb01e2403b072bf03d04fde160443e209d7a0dad49a423be15196b9b43c17f",
+          "kokoro-v1_0.safetensors": "4e9ecdf03b8b6cf906070390237feda473dc13327cb8d56a43deaa374c02acd8",
+          "voices/af_alloy.safetensors": "5bb848d02ade7e37981809acad52a1761ef7a586ff9f30d02d65fd71c4af95f9",
+          "voices/af_aoede.safetensors": "23809148777f2a2378983dd856bc14b9c261018279f916f98c23d86e844409a5",
+          "voices/af_bella.safetensors": "112d310468cbb3cf23404d3d0b50ad3adf017b87bf38bf9edd15f4ad572df6a3",
+          "voices/af_heart.safetensors": "2c1c733b0e6576c810e268d3e440c21dea4e0f0131a3ba4cfc98d7fe6136d094",
+          "voices/af_jessica.safetensors": "c358448e4277b79e8b13b92033711660a1a2205c3940c2dfb16698b99fed58a8",
+          "voices/af_kore.safetensors": "c491174280cb1ad25210a842f2f34b46a9ef904ec6f6a8e784839531795fa278",
+          "voices/af_nicole.safetensors": "574656386022c81a029e9a72558191925f44c3de2dad2fa2e45751938557d062",
+          "voices/af_nova.safetensors": "242b9a0a01eac1ac2865c69fc617a756b20d86df82d5fae3970533e2312ca50e",
+          "voices/af_river.safetensors": "82c866b0b976d50e82cbd781ac7bc771471ce5bd21decf05ab92812a08fb1c04",
+          "voices/af_sarah.safetensors": "4940072182542f54c1035d1daf4c1cf3136ca9baa9ac57c8e006b4befcc50be6",
+          "voices/af_sky.safetensors": "957af332330db8e9bd7f9dc449475a946cb0d7d689afef64b91007bbbf20eaa0",
+          "voices/am_adam.safetensors": "a4f60a3b9c20353c2604a17485ba53260502a758681a84d41e8af53cc559d929",
+          "voices/am_echo.safetensors": "031fc608a900332c4e1a29bd0884f5d0e84bd0348261fa79981e5cbd138c950d",
+          "voices/am_eric.safetensors": "1fb4a61dcee1f114f90886ecf29bc2feed05e29eed9caa6ddb109f1934d73274",
+          "voices/am_fenrir.safetensors": "9abed964b906c4cae6f404d9849e76260689aea862bc6ca85fc3f5207ba96538",
+          "voices/am_liam.safetensors": "66b65a96e16c3d91035a6e9019d9986ed524d27ce35b487270cdf61c99e3ebad",
+          "voices/am_michael.safetensors": "3940147ded35deba0bb52e8132f89b719298e0520258c34584358aa5a24da2ea",
+          "voices/am_onyx.safetensors": "b5d6132a5747648d98c82c9c4aaa9cf52d7230e63e403c1cb9c12858446ca5f5",
+          "voices/am_puck.safetensors": "9a8c2e56413bd2063f814cb4c3885fc425876157369117c3f8258d03c8a9ad89",
+          "voices/am_santa.safetensors": "d1f433b57ffccf105ea9e434ea19af6c2a8a7916ba6d1a73c34f0046bd226084",
+          "voices/bf_alice.safetensors": "9c77e390d93d9db7c4a7526c3b1f393290a2be46f233b89a00b8188e850c20a8",
+          "voices/bf_emma.safetensors": "8878a75a6661305849eeb1d6293a7177250193616e161b4c3100636434dfe69f",
+          "voices/bf_isabella.safetensors": "f7b6076f025649699fcfed1a6debf13049a87afdc7aafc8c72b7d81246db6ead",
+          "voices/bf_lily.safetensors": "ee77a419046a765420ac82cb46e8b8cf5754a0b9d20c340fece1d4b18be7ecdb",
+          "voices/bm_daniel.safetensors": "b195dec592ee024f57ddc5bf481464596082ba60998a2a295eba90bfc1064f4b",
+          "voices/bm_fable.safetensors": "9fa80184e96d016a744bc13b0b2e7695e55d6b855556fa003325cb1e5ebf2c2b",
+          "voices/bm_george.safetensors": "a3d9b8995cbbe5536f954b6be2a0f1f312f077118ba0d4d2178fc41dc8306672",
+          "voices/bm_lewis.safetensors": "e1e68013c21a141efe527aaec561e1174c2f5a6951b3bcecc8396adab315b247"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/speak.input.json",
+        "name": "speak",
+        "output": "audio",
+        "stream": true,
+        "title": "Speak"
+      },
+      {
+        "input": "ops/voices.input.json",
+        "name": "voices",
+        "output": "json",
+        "stream": false,
+        "title": "Voices"
+      }
+    ]
+  },
+  {
+    "id": "laya-english",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "context": 8192,
+      "derive": {
+        "int4": "mlx-affine-g64:verdict-at-load",
+        "int8": "mlx-affine-g64:verdict-at-load"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "text"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "laya-english",
+      "kind": "decisions",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/aac6fef/laya-mlx/blob/20aed815fc6acde75733882e7ec0e3f28aeb9717/LICENSE"
+      },
+      "name": "Laya \u00b7 English",
+      "op": [
+        {
+          "input": "kinds/decisions/ops/decide.input.json",
+          "name": "decide",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/decide.output.json",
+          "stream": false,
+          "title": "Decide"
+        },
+        {
+          "input": "kinds/decisions/ops/judge.input.json",
+          "name": "judge",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/judge.output.json",
+          "stream": false,
+          "title": "Judge"
+        }
+      ],
+      "params": "421M",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 0,
+        "hf_likes": 116
+      },
+      "publisher": "Convai Innovations",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "decisions"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "load",
+          "default": false,
+          "help": "Run plain MLX without Verdict's fast tokenizer and kernels: same answers as Exact, slower; for diagnosis.",
+          "id": "stock_mlx",
+          "title": "Stock MLX path",
+          "type": "toggle"
+        }
+      ],
+      "suggested": true,
+      "summary": "Answers yes-no, choice and score questions about a text in one pass; English only.",
+      "tasks": [
+        "yes-no",
+        "choice",
+        "score"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE": 10173,
+          "NOTICE": 698,
+          "encoder/config.json": 2083,
+          "manifest.json": 1746,
+          "mlx_config.json": 290,
+          "model.safetensors": 842609225,
+          "rl_agent_config.json": 746,
+          "tokenizer/tokenizer.json": 3583228,
+          "tokenizer/tokenizer_config.json": 308,
+          "validation.json": 18257
+        },
+        "dtype": "fp16",
+        "files": [
+          "LICENSE",
+          "NOTICE",
+          "encoder/config.json",
+          "manifest.json",
+          "mlx_config.json",
+          "model.safetensors",
+          "rl_agent_config.json",
+          "tokenizer/tokenizer.json",
+          "tokenizer/tokenizer_config.json",
+          "validation.json"
+        ],
+        "repo": "aac6fef/laya-mlx",
+        "revision": "20aed815fc6acde75733882e7ec0e3f28aeb9717",
+        "sha256": {
+          "LICENSE": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+          "NOTICE": "f23ae8ae701f5a43e186182e387aeef00b666daed18a946fc7c9ea827b00a8fa",
+          "encoder/config.json": "bf3ab80598fdccf414855a2ce80f22859e4492d06ca8a62ddd1cfb63972f8979",
+          "manifest.json": "d8e254b51322fc0462a3cb384bde4d1b449baec9a716cbbc0d0aa99c0cb216b6",
+          "mlx_config.json": "c022368f128dc9b7f6478a9163c96e0406f1da6a7c6bae660ea8515b016ed7ef",
+          "model.safetensors": "b9c07bf14be2fa5c78a9193a3e6d840ac80e89e62fc40f425834c3d8a6eaa3de",
+          "rl_agent_config.json": "d96dc2cb39d6375e030ff48c9957088f3c52668f45c30c56504f4e801ed3ee62",
+          "tokenizer/tokenizer.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30",
+          "tokenizer/tokenizer_config.json": "50044de60daaa73df97d262e15a40d4faf0160e7d742df64b377877a1320dd12",
+          "validation.json": "adc9a4baac1430b58cd8fdaf7c7587b380d4a91834ba405bbdeeabd9d35b5771"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "kinds/decisions/ops/decide.input.json",
+        "name": "decide",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/decide.output.json",
+        "stream": false,
+        "title": "Decide"
+      },
+      {
+        "input": "kinds/decisions/ops/judge.input.json",
+        "name": "judge",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/judge.output.json",
+        "stream": false,
+        "title": "Judge"
+      }
+    ]
+  },
+  {
+    "id": "laya-multilingual",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "context": 8192,
+      "derive": {
+        "int4": "mlx-affine-g64:verdict-at-load",
+        "int8": "mlx-affine-g64:verdict-at-load"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "text"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "laya-multilingual",
+      "kind": "decisions",
+      "languages": [
+        "mul"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/aac6fef/laya-multilingual-mlx/blob/f2b4faf51023039425946074e2cf1361d2db11d5/LICENSE"
+      },
+      "name": "Laya \u00b7 Multilingual",
+      "op": [
+        {
+          "input": "kinds/decisions/ops/decide.input.json",
+          "name": "decide",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/decide.output.json",
+          "stream": false,
+          "title": "Decide"
+        },
+        {
+          "input": "kinds/decisions/ops/judge.input.json",
+          "name": "judge",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/judge.output.json",
+          "stream": false,
+          "title": "Judge"
+        }
+      ],
+      "params": "322M",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 0,
+        "hf_likes": 15
+      },
+      "publisher": "Convai Innovations",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "decisions"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "load",
+          "default": false,
+          "help": "Run plain MLX without Verdict's fast tokenizer and kernels: same answers as Exact, slower; for diagnosis.",
+          "id": "stock_mlx",
+          "title": "Stock MLX path",
+          "type": "toggle"
+        }
+      ],
+      "summary": "The Laya decision model for non-English text (100+ languages); the fastest Laya.",
+      "tasks": [
+        "yes-no",
+        "choice",
+        "score"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE": 10173,
+          "NOTICE": 698,
+          "encoder/config.json": 1938,
+          "manifest.json": 1773,
+          "mlx_config.json": 316,
+          "model.safetensors": 643835426,
+          "rl_agent_config.json": 473,
+          "tokenizer/tokenizer.json": 34363188,
+          "tokenizer/tokenizer_config.json": 524,
+          "validation.json": 18322
+        },
+        "dtype": "fp16",
+        "files": [
+          "LICENSE",
+          "NOTICE",
+          "encoder/config.json",
+          "manifest.json",
+          "mlx_config.json",
+          "model.safetensors",
+          "rl_agent_config.json",
+          "tokenizer/tokenizer.json",
+          "tokenizer/tokenizer_config.json",
+          "validation.json"
+        ],
+        "repo": "aac6fef/laya-multilingual-mlx",
+        "revision": "f2b4faf51023039425946074e2cf1361d2db11d5",
+        "sha256": {
+          "LICENSE": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+          "NOTICE": "f23ae8ae701f5a43e186182e387aeef00b666daed18a946fc7c9ea827b00a8fa",
+          "encoder/config.json": "83f6916d13ef0f556ac461f28308dc2bffa7ebeadee8ec9e2db5812020ea5bb4",
+          "manifest.json": "deb2de8ec6b1520b74866249bda632f40501440cdac29fdd90af80a3c422c778",
+          "mlx_config.json": "20ec723e1365a268597cc7e8cd39495c5e2eb58311b925f8e8c165ec5855cc28",
+          "model.safetensors": "7fc5834af4d8fdfb268d272a9d1a66e5819a0daac98241651c4c888cc43adff1",
+          "rl_agent_config.json": "9a669a70961064c3c6cc76d2afb8bc5fb10dcd8349bb66e5f7b9b1afb74440d5",
+          "tokenizer/tokenizer.json": "609d8f4c067cd3950f88594c5a802616cea245823836ef5848ee4fc40aab5b6f",
+          "tokenizer/tokenizer_config.json": "6c6b2d8e3c84ce0e671c129cd6b374b235d6f9863042a5836358d00a89bbb5a1",
+          "validation.json": "f64ef4e455afb2dc3d183f2bf0f2edfded8297e5573334caf462c2d89dab7966"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "kinds/decisions/ops/decide.input.json",
+        "name": "decide",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/decide.output.json",
+        "stream": false,
+        "title": "Decide"
+      },
+      {
+        "input": "kinds/decisions/ops/judge.input.json",
+        "name": "judge",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/judge.output.json",
+        "stream": false,
+        "title": "Judge"
+      }
+    ]
+  },
+  {
+    "id": "laya-typed-decisions",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "context": 8192,
+      "derive": {
+        "int4": "mlx-affine-g64:verdict-at-load",
+        "int8": "mlx-affine-g64:verdict-at-load"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "text"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "laya-typed-decisions",
+      "kind": "decisions",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/aac6fef/laya-typed-decisions-mlx/blob/f9e501c2080cc57c13d6887820329758f5351125/LICENSE"
+      },
+      "name": "Laya \u00b7 Typed decisions",
+      "op": [
+        {
+          "input": "kinds/decisions/ops/decide.input.json",
+          "name": "decide",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/decide.output.json",
+          "stream": false,
+          "title": "Decide"
+        },
+        {
+          "input": "kinds/decisions/ops/judge.input.json",
+          "name": "judge",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/judge.output.json",
+          "stream": false,
+          "title": "Judge"
+        }
+      ],
+      "params": "421M",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 0,
+        "hf_likes": 5
+      },
+      "publisher": "Convai Innovations",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "decisions"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "load",
+          "default": false,
+          "help": "Run plain MLX without Verdict's fast tokenizer and kernels: same answers as Exact, slower; for diagnosis.",
+          "id": "stock_mlx",
+          "title": "Stock MLX path",
+          "type": "toggle"
+        }
+      ],
+      "summary": "English Laya tuned for typed workflow decisions (invoices, incidents, tickets); the best-calibrated Laya.",
+      "tasks": [
+        "yes-no",
+        "choice",
+        "score"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE": 10173,
+          "NOTICE": 698,
+          "encoder/config.json": 2084,
+          "manifest.json": 1778,
+          "mlx_config.json": 322,
+          "model.safetensors": 842609225,
+          "rl_agent_config.json": 848,
+          "tokenizer/tokenizer.json": 3583228,
+          "tokenizer/tokenizer_config.json": 337,
+          "validation.json": 18275
+        },
+        "dtype": "fp16",
+        "files": [
+          "LICENSE",
+          "NOTICE",
+          "encoder/config.json",
+          "manifest.json",
+          "mlx_config.json",
+          "model.safetensors",
+          "rl_agent_config.json",
+          "tokenizer/tokenizer.json",
+          "tokenizer/tokenizer_config.json",
+          "validation.json"
+        ],
+        "repo": "aac6fef/laya-typed-decisions-mlx",
+        "revision": "f9e501c2080cc57c13d6887820329758f5351125",
+        "sha256": {
+          "LICENSE": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9",
+          "NOTICE": "f23ae8ae701f5a43e186182e387aeef00b666daed18a946fc7c9ea827b00a8fa",
+          "encoder/config.json": "5268d24ad3b77c8151de5dcb0762ba4391619aad9ab0bda33e36fb083cfeae6d",
+          "manifest.json": "393f58c941c55ce29717f7550a75df78e0e8a412fc785cd9637f2728b72090f3",
+          "mlx_config.json": "fe0d126c46e70e28e47767801b15e3219280484ce298cab6aadcd339ca242cae",
+          "model.safetensors": "804ef8802b4cac7a67913b0cfb8448659e934a50284aaa867b98d7d9a6e7d1e0",
+          "rl_agent_config.json": "d99c800b818cb1a60734adba961c27abeaff2d142bb9fc473edb34b7de32fde9",
+          "tokenizer/tokenizer.json": "6c8aaa9a542084f2457eab775d4eeb51f92a70c0fd9de28d5edb0ddec3c08d30",
+          "tokenizer/tokenizer_config.json": "08d4cf3ac4dca381759441b85b91a6d40e688471dcd33d15d6649eb0a9a854d1",
+          "validation.json": "3b3c53564fd89f431252518733b4f70b856c1b911bcdf3a271d8ca1ec7a1b60c"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "kinds/decisions/ops/decide.input.json",
+        "name": "decide",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/decide.output.json",
+        "stream": false,
+        "title": "Decide"
+      },
+      {
+        "input": "kinds/decisions/ops/judge.input.json",
+        "name": "judge",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/judge.output.json",
+        "stream": false,
+        "title": "Judge"
+      }
+    ]
+  },
+  {
+    "id": "pocket-tts",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "int8": "mlx-affine-g64:pocket-tts"
+      },
+      "facets": {
+        "modalities_in": [
+          "text",
+          "audio"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "pocket-tts",
+      "kind": "voices",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "CC-BY-4.0",
+        "url": "https://huggingface.co/mlx-community/pocket-tts/blob/cbf71d5f6657bbc3f4bc02f85ee408261225bec7/LICENSE"
+      },
+      "menu": [
+        {
+          "id": "speak-clipboard",
+          "input": "clipboard",
+          "op": "speak",
+          "title": "Speak Clipboard"
+        }
+      ],
+      "name": "Pocket TTS",
+      "op": [
+        {
+          "input": "ops/speak.input.json",
+          "name": "speak",
+          "output": "audio",
+          "stream": true,
+          "title": "Speak"
+        },
+        {
+          "input": "ops/voices.input.json",
+          "name": "voices",
+          "output": "json",
+          "stream": false,
+          "title": "Voices"
+        },
+        {
+          "input": "ops/clone_voice.input.json",
+          "name": "clone_voice",
+          "output": "json",
+          "stream": false,
+          "title": "Clone Voice"
+        }
+      ],
+      "params": "118M",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 718,
+        "hf_likes": 7
+      },
+      "publisher": "Kyutai",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "voices"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "default": "alba",
+          "help": "Default preset voice for speech requests.",
+          "id": "voice",
+          "maps_to": "request.voice",
+          "title": "Voice",
+          "type": "voice"
+        },
+        {
+          "applies": "request",
+          "choices": [
+            "english"
+          ],
+          "default": "english",
+          "help": "Language used to condition the generated speech.",
+          "id": "language",
+          "maps_to": "request.language",
+          "title": "Language",
+          "type": "choice"
+        },
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Local reference WAV used for voice cloning.",
+          "id": "reference_path",
+          "maps_to": "request.reference.path",
+          "title": "Reference clip",
+          "type": "text"
+        }
+      ],
+      "suggested": false,
+      "summary": "Small streaming voice for short replies with preset or cloned voices. No voice design.",
+      "tasks": [
+        "text-to-speech"
+      ],
+      "tools": [
+        "voice"
+      ],
+      "weights": {
+        "bytes": {
+          "config.json": 1664,
+          "embeddings/alba.safetensors": 512088,
+          "embeddings/azelma.safetensors": 659544,
+          "embeddings/cosette.safetensors": 512088,
+          "embeddings/eponine.safetensors": 573528,
+          "embeddings/fantine.safetensors": 540760,
+          "embeddings/javert.safetensors": 512088,
+          "embeddings/jean.safetensors": 512088,
+          "embeddings/marius.safetensors": 512088,
+          "model.safetensors": 235739497,
+          "special_tokens_map.json": 95,
+          "tokenizer.json": 244993,
+          "tokenizer_config.json": 220
+        },
+        "dtype": "bf16",
+        "files": [
+          "config.json",
+          "embeddings/alba.safetensors",
+          "embeddings/azelma.safetensors",
+          "embeddings/cosette.safetensors",
+          "embeddings/eponine.safetensors",
+          "embeddings/fantine.safetensors",
+          "embeddings/javert.safetensors",
+          "embeddings/jean.safetensors",
+          "embeddings/marius.safetensors",
+          "model.safetensors",
+          "special_tokens_map.json",
+          "tokenizer.json",
+          "tokenizer_config.json"
+        ],
+        "repo": "mlx-community/pocket-tts",
+        "revision": "cbf71d5f6657bbc3f4bc02f85ee408261225bec7",
+        "sha256": {
+          "config.json": "403ff12260596fbfa348c7b07237c378b9ad8db9d8acd04d671470421954a68e",
+          "embeddings/alba.safetensors": "ad234695323e4030336b6afc8a050c97e3110603e11ecd8226d9562488300a50",
+          "embeddings/azelma.safetensors": "ef33fad34437cb187d2702f0a946d8ba7a01efdb8efbc8088c770d49c181ba73",
+          "embeddings/cosette.safetensors": "ca8926c4f234afa9d722173967e7bebdc6269538ca5910d65f41c3c1317717d3",
+          "embeddings/eponine.safetensors": "bb31940f62da665391de139da2e57d740757df26b73d7ec24152c78a3b8ac0c5",
+          "embeddings/fantine.safetensors": "b6918a2ece002d2d9037ff53c4ea38730175e8798786658b0958443edf49d355",
+          "embeddings/javert.safetensors": "2e857904ee76657e083b0e92664d21bd133e37df320af6eb04f752e679422d91",
+          "embeddings/jean.safetensors": "329530f87ce503061acefca8669300963420ff97e43647a326aa46bd987b983c",
+          "embeddings/marius.safetensors": "33f75e45fac0005630671f4b1bb632d51b6a083b18417de94855bbd7596a0630",
+          "model.safetensors": "60ddd85019dddbe6c1d220e311ca5fc753972978a89f563c0bbe1ae943120072",
+          "special_tokens_map.json": "0655d856e7dd462048486aac66d4247753e5cab12480baeb9f4e8f7fe03f7d4c",
+          "tokenizer.json": "ef29c4871fd62c7beb928150edc095be1327f0924c0eab9e06b95918b39eff5f",
+          "tokenizer_config.json": "ad6dc6a5790d0f94170998ab79921c97d28ea54602abcdb33cba3132d13ac233"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/clone_voice.input.json",
+        "name": "clone_voice",
+        "output": "json",
+        "stream": false,
+        "title": "Clone Voice"
+      },
+      {
+        "input": "ops/speak.input.json",
+        "name": "speak",
+        "output": "audio",
+        "stream": true,
+        "title": "Speak"
+      },
+      {
+        "input": "ops/voices.input.json",
+        "name": "voices",
+        "output": "json",
+        "stream": false,
+        "title": "Voices"
+      }
+    ]
+  },
+  {
+    "id": "qwen3-tts-base",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "int4": "mlx-affine-g64:qwen3-tts-base",
+        "int8": "mlx-affine-g64:qwen3-tts-base"
+      },
+      "facets": {
+        "modalities_in": [
+          "text",
+          "audio"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "qwen3-tts-base",
+      "kind": "voices",
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "ko",
+        "de",
+        "fr",
+        "ru",
+        "pt",
+        "es",
+        "it"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16/blob/a6eb4f68e4b056f1215157bb696209bc82a6db48/LICENSE"
+      },
+      "name": "Qwen3 Base 1.7B",
+      "op": [
+        {
+          "input": "ops/speak.input.json",
+          "name": "speak",
+          "output": "audio",
+          "stream": true,
+          "title": "Speak"
+        },
+        {
+          "input": "ops/voices.input.json",
+          "name": "voices",
+          "output": "json",
+          "stream": false,
+          "title": "Voices"
+        },
+        {
+          "input": "ops/clone_voice.input.json",
+          "name": "clone_voice",
+          "output": "json",
+          "stream": false,
+          "title": "Clone Voice"
+        }
+      ],
+      "params": "1.7B",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 14198,
+        "hf_likes": 21
+      },
+      "publisher": "Qwen",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "voices"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Choose a saved voice; leave empty to use the description or reference inputs.",
+          "id": "voice",
+          "maps_to": "request.voice",
+          "title": "Voice",
+          "type": "voice"
+        },
+        {
+          "applies": "request",
+          "choices": [
+            "auto",
+            "chinese",
+            "english",
+            "japanese",
+            "korean",
+            "german",
+            "french",
+            "russian",
+            "portuguese",
+            "spanish",
+            "italian"
+          ],
+          "default": "english",
+          "help": "Language used to condition the generated speech.",
+          "id": "language",
+          "maps_to": "request.language",
+          "title": "Language",
+          "type": "choice"
+        },
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Local reference WAV used for voice cloning.",
+          "id": "reference_path",
+          "maps_to": "request.reference.path",
+          "title": "Reference clip",
+          "type": "text"
+        },
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Exact words spoken in the reference clip.",
+          "id": "reference_text",
+          "maps_to": "request.reference.text",
+          "title": "Reference transcript",
+          "type": "text"
+        }
+      ],
+      "suggested": false,
+      "summary": "Clones a voice from a short reference clip with its transcript. No voice design.",
+      "tasks": [
+        "text-to-speech"
+      ],
+      "tools": [
+        "voice"
+      ],
+      "weights": {
+        "bytes": {
+          "config.json": 5317,
+          "generation_config.json": 245,
+          "merges.txt": 1671839,
+          "model.safetensors": 3857414009,
+          "model.safetensors.index.json": 38742,
+          "preprocessor_config.json": 127,
+          "speech_tokenizer/config.json": 2336,
+          "speech_tokenizer/configuration.json": 76,
+          "speech_tokenizer/model.safetensors": 682293092,
+          "speech_tokenizer/preprocessor_config.json": 234,
+          "tokenizer_config.json": 7344,
+          "vocab.json": 2776833
+        },
+        "dtype": "bf16",
+        "files": [
+          "config.json",
+          "generation_config.json",
+          "merges.txt",
+          "model.safetensors",
+          "model.safetensors.index.json",
+          "preprocessor_config.json",
+          "speech_tokenizer/config.json",
+          "speech_tokenizer/configuration.json",
+          "speech_tokenizer/model.safetensors",
+          "speech_tokenizer/preprocessor_config.json",
+          "tokenizer_config.json",
+          "vocab.json"
+        ],
+        "repo": "mlx-community/Qwen3-TTS-12Hz-1.7B-Base-bf16",
+        "revision": "a6eb4f68e4b056f1215157bb696209bc82a6db48",
+        "sha256": {
+          "config.json": "39ffdadc03c1a7c7f8116ee8830d6a577ac87039edcbd88759b4fcc4db272070",
+          "generation_config.json": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "81fb76175ff74e69be25fef2cc3e54f016df3034f1514c8e1c89da06a3510cff",
+          "model.safetensors.index.json": "f5bb337c2f77c5046024c7342ed8d6ade28fdfbab862baf9f13269743b920005",
+          "preprocessor_config.json": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119",
+          "speech_tokenizer/config.json": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+          "speech_tokenizer/configuration.json": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+          "speech_tokenizer/model.safetensors": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "speech_tokenizer/preprocessor_config.json": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+          "tokenizer_config.json": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/clone_voice.input.json",
+        "name": "clone_voice",
+        "output": "json",
+        "stream": false,
+        "title": "Clone Voice"
+      },
+      {
+        "input": "ops/speak.input.json",
+        "name": "speak",
+        "output": "audio",
+        "stream": true,
+        "title": "Speak"
+      },
+      {
+        "input": "ops/voices.input.json",
+        "name": "voices",
+        "output": "json",
+        "stream": false,
+        "title": "Voices"
+      }
+    ]
+  },
+  {
+    "id": "qwen3-tts-voicedesign",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "int4": "mlx-affine-g64:qwen3-tts-voicedesign",
+        "int8": "mlx-affine-g64:qwen3-tts-voicedesign"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "qwen3-tts-voicedesign",
+      "kind": "voices",
+      "languages": [
+        "zh",
+        "en",
+        "ja",
+        "ko",
+        "de",
+        "fr",
+        "ru",
+        "pt",
+        "es",
+        "it"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16/blob/7d3824abff87e49756bb0f83fb5411de75d160c4/LICENSE"
+      },
+      "menu": [
+        {
+          "id": "speak-clipboard",
+          "input": "clipboard",
+          "op": "speak",
+          "title": "Speak Clipboard"
+        }
+      ],
+      "name": "Qwen3 VoiceDesign 1.7B",
+      "op": [
+        {
+          "input": "ops/speak.input.json",
+          "name": "speak",
+          "output": "audio",
+          "stream": true,
+          "title": "Speak"
+        },
+        {
+          "input": "ops/voices.input.json",
+          "name": "voices",
+          "output": "json",
+          "stream": false,
+          "title": "Voices"
+        },
+        {
+          "input": "ops/design_voice.input.json",
+          "name": "design_voice",
+          "output": "json",
+          "stream": false,
+          "title": "Design Voice"
+        }
+      ],
+      "params": "1.7B",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 4771,
+        "hf_likes": 16
+      },
+      "publisher": "Qwen",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "voices"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Choose a saved voice; leave empty to use the description or reference inputs.",
+          "id": "voice",
+          "maps_to": "request.voice",
+          "title": "Voice",
+          "type": "voice"
+        },
+        {
+          "applies": "request",
+          "choices": [
+            "auto",
+            "chinese",
+            "english",
+            "japanese",
+            "korean",
+            "german",
+            "french",
+            "russian",
+            "portuguese",
+            "spanish",
+            "italian"
+          ],
+          "default": "english",
+          "help": "Language used to condition the generated speech.",
+          "id": "language",
+          "maps_to": "request.language",
+          "title": "Language",
+          "type": "choice"
+        },
+        {
+          "applies": "request",
+          "default": "A warm adult narrator with a clear, relaxed conversational voice.",
+          "help": "Describe the voice and delivery for the next request.",
+          "id": "instructions",
+          "maps_to": "request.instructions",
+          "title": "Voice description",
+          "type": "text"
+        }
+      ],
+      "suggested": false,
+      "summary": "Makes a new voice from a written description and follows delivery instructions. No cloning.",
+      "tasks": [
+        "text-to-speech"
+      ],
+      "tools": [
+        "voice"
+      ],
+      "weights": {
+        "bytes": {
+          "config.json": 5232,
+          "generation_config.json": 245,
+          "merges.txt": 1671839,
+          "model.safetensors": 3833402589,
+          "model.safetensors.index.json": 32458,
+          "preprocessor_config.json": 127,
+          "speech_tokenizer/config.json": 2336,
+          "speech_tokenizer/configuration.json": 76,
+          "speech_tokenizer/model.safetensors": 682293092,
+          "speech_tokenizer/preprocessor_config.json": 234,
+          "tokenizer_config.json": 7344,
+          "vocab.json": 2776833
+        },
+        "dtype": "bf16",
+        "files": [
+          "config.json",
+          "generation_config.json",
+          "merges.txt",
+          "model.safetensors",
+          "model.safetensors.index.json",
+          "preprocessor_config.json",
+          "speech_tokenizer/config.json",
+          "speech_tokenizer/configuration.json",
+          "speech_tokenizer/model.safetensors",
+          "speech_tokenizer/preprocessor_config.json",
+          "tokenizer_config.json",
+          "vocab.json"
+        ],
+        "repo": "mlx-community/Qwen3-TTS-12Hz-1.7B-VoiceDesign-bf16",
+        "revision": "7d3824abff87e49756bb0f83fb5411de75d160c4",
+        "sha256": {
+          "config.json": "8a9be83c045ee9ab9d2e6609655f547b9291a070f5acae3428c3ff07a365de40",
+          "generation_config.json": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "96ae28bec2205ec0b5e0c750bea2b8a5deac4f14d33a8a25a5f753299486b70e",
+          "model.safetensors.index.json": "abf019e063dcc595d7aef7c9554d2806ffdc58746a7ac6238cb26177af8d431f",
+          "preprocessor_config.json": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119",
+          "speech_tokenizer/config.json": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+          "speech_tokenizer/configuration.json": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+          "speech_tokenizer/model.safetensors": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+          "speech_tokenizer/preprocessor_config.json": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+          "tokenizer_config.json": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/design_voice.input.json",
+        "name": "design_voice",
+        "output": "json",
+        "stream": false,
+        "title": "Design Voice"
+      },
+      {
+        "input": "ops/speak.input.json",
+        "name": "speak",
+        "output": "audio",
+        "stream": true,
+        "title": "Speak"
+      },
+      {
+        "input": "ops/voices.input.json",
+        "name": "voices",
+        "output": "json",
+        "stream": false,
+        "title": "Voices"
+      }
+    ]
+  },
+  {
+    "id": "qwen3.8-27b",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "context": 32768,
+      "derive": {
+        "int4": "mlx-affine-g64",
+        "int8": "mlx-affine-g64"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "text"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "qwen3.8-27b",
+      "kind": "chat",
+      "languages": [
+        "en",
+        "pl",
+        "zh",
+        "ja",
+        "de",
+        "fr",
+        "es"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3.8-27B/blob/1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0/LICENSE"
+      },
+      "name": "Qwen3.8 27B",
+      "native_context": 262144,
+      "op": [
+        {
+          "input": "ops/chat.input.json",
+          "name": "chat",
+          "output": "text-stream",
+          "output_schema": "ops/chat.output.json",
+          "stream": true,
+          "title": "Chat"
+        },
+        {
+          "input": "ops/count_tokens.input.json",
+          "name": "count_tokens",
+          "output": "json",
+          "output_schema": "ops/count_tokens.output.json",
+          "stream": false,
+          "title": "Count tokens"
+        }
+      ],
+      "params": "27B",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 6934867,
+        "hf_likes": 16812
+      },
+      "publisher": "Qwen",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": false,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "chat"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "load",
+          "choices": [
+            8192,
+            32768
+          ],
+          "default": 32768,
+          "help": "Longest conversation the model holds at once, in tokens; a larger limit reserves more memory.",
+          "id": "context_limit",
+          "maps_to": "config.context_limit",
+          "title": "Context",
+          "type": "choice"
+        },
+        {
+          "applies": "request",
+          "default": false,
+          "help": "Lets the model reason before it answers: slower, often better on hard questions.",
+          "id": "thinking",
+          "maps_to": "request.thinking",
+          "title": "Thinking",
+          "type": "toggle"
+        },
+        {
+          "applies": "request",
+          "default": 0.6,
+          "help": "Randomness of the answer: lower is steadier, higher is more varied.",
+          "id": "temperature",
+          "maps_to": "request.temperature",
+          "max": 2,
+          "min": 0,
+          "step": 0.1,
+          "title": "Temperature",
+          "type": "slider"
+        },
+        {
+          "applies": "request",
+          "default": "",
+          "help": "Instructions placed before every conversation unless a request brings its own.",
+          "id": "system_prompt",
+          "maps_to": "request.system_prompt",
+          "title": "System prompt",
+          "type": "text"
+        }
+      ],
+      "suggested": true,
+      "summary": "Qwen text chat with native hybrid linear/full attention.",
+      "tasks": [
+        "chat"
+      ],
+      "tools": [
+        "chat"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE": 11544,
+          "README.md": 65012,
+          "chat_template.jinja": 8952,
+          "config.json": 4312,
+          "crc32.txt": 238,
+          "generation_config.json": 202,
+          "merges.txt": 3353259,
+          "model-00001-of-00018.safetensors": 3966730552,
+          "model-00002-of-00018.safetensors": 3043080328,
+          "model-00003-of-00018.safetensors": 2542796952,
+          "model-00004-of-00018.safetensors": 3988973152,
+          "model-00005-of-00018.safetensors": 2099339864,
+          "model-00006-of-00018.safetensors": 3979553696,
+          "model-00007-of-00018.safetensors": 2108759344,
+          "model-00008-of-00018.safetensors": 3979553696,
+          "model-00009-of-00018.safetensors": 2108759344,
+          "model-00010-of-00018.safetensors": 3979553696,
+          "model-00011-of-00018.safetensors": 2108759344,
+          "model-00012-of-00018.safetensors": 3979553696,
+          "model-00013-of-00018.safetensors": 2108759344,
+          "model-00014-of-00018.safetensors": 3979553696,
+          "model-00015-of-00018.safetensors": 2108759344,
+          "model-00016-of-00018.safetensors": 3979564040,
+          "model-00017-of-00018.safetensors": 2108759344,
+          "model-00018-of-00018.safetensors": 3392197344,
+          "model.safetensors.index.json": 112216,
+          "preprocessor_config.json": 390,
+          "tokenizer.json": 12809320,
+          "tokenizer_config.json": 17928,
+          "video_preprocessor_config.json": 385,
+          "vocab.json": 6722759
+        },
+        "dtype": "bf16",
+        "files": [
+          "LICENSE",
+          "README.md",
+          "chat_template.jinja",
+          "config.json",
+          "crc32.txt",
+          "generation_config.json",
+          "merges.txt",
+          "model-00001-of-00018.safetensors",
+          "model-00002-of-00018.safetensors",
+          "model-00003-of-00018.safetensors",
+          "model-00004-of-00018.safetensors",
+          "model-00005-of-00018.safetensors",
+          "model-00006-of-00018.safetensors",
+          "model-00007-of-00018.safetensors",
+          "model-00008-of-00018.safetensors",
+          "model-00009-of-00018.safetensors",
+          "model-00010-of-00018.safetensors",
+          "model-00011-of-00018.safetensors",
+          "model-00012-of-00018.safetensors",
+          "model-00013-of-00018.safetensors",
+          "model-00014-of-00018.safetensors",
+          "model-00015-of-00018.safetensors",
+          "model-00016-of-00018.safetensors",
+          "model-00017-of-00018.safetensors",
+          "model-00018-of-00018.safetensors",
+          "model.safetensors.index.json",
+          "preprocessor_config.json",
+          "tokenizer.json",
+          "tokenizer_config.json",
+          "video_preprocessor_config.json",
+          "vocab.json"
+        ],
+        "repo": "Qwen/Qwen3.8-27B",
+        "revision": "1d4bf0f2ff6012fd82039f2fa52739d0dd7c60c0",
+        "sha256": {
+          "LICENSE": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+          "README.md": "57e4bdb258ee1a7d2635c5174ebd4e56abe392505cdb5f8bbb356b0dc4293641",
+          "chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+          "config.json": "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab",
+          "crc32.txt": "b42dd291f5f98b05807e458f5b47849969a9b3326acbf0c97d28b05826740b83",
+          "generation_config.json": "e70c136c1b78ddc1fb0905bac8e733a4dc448d4f852a5dd75143fffc70be550e",
+          "merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+          "model-00001-of-00018.safetensors": "ba0ce20aae489ad196733da5064bcdf159a1fe84f53336648196e1ebb7751b1c",
+          "model-00002-of-00018.safetensors": "06a148c01bfbe3faa14a5f184a7ff29a706f7ae1c8b2705d2058e26d17a001fb",
+          "model-00003-of-00018.safetensors": "2e1bf62cbcd406eaa64b60d10353e1f0ef4039d0976e56f05cabe953454f9968",
+          "model-00004-of-00018.safetensors": "511e34063187882659753c4d93f3859f93c019fd438d8813071921c81d9a3f1a",
+          "model-00005-of-00018.safetensors": "635cb53446dc74f219740fc59e18b774f877b803b9722e289ca62575a6efa701",
+          "model-00006-of-00018.safetensors": "0bc5214fac607f0e6cc92eec3789d4b8559410ef9fce66621ba8158e8410dae0",
+          "model-00007-of-00018.safetensors": "80b0c49033e9a0d5762562aa12f4acdb7f54da586f3d0110f28c48d91cf07892",
+          "model-00008-of-00018.safetensors": "7192c5b66185d3592927daabee1cc19e6f6e0ce75988ee20e824b624765fda79",
+          "model-00009-of-00018.safetensors": "af3c48cc37af44f3db6ae0579baf019180d48d9c527caa0a1f03ff85813a56d8",
+          "model-00010-of-00018.safetensors": "163490a76f3bea3a40855b7efc04ce6d27afaf1a34f0bbde495b9491f76457c9",
+          "model-00011-of-00018.safetensors": "5f3ae1b948aeee39da77aec558e8236cd65fe4d7cb7686a76bb007acc563c6d8",
+          "model-00012-of-00018.safetensors": "a3de1c7114677a8f5ac5c4892c90e8238ea5c1e2038c80e757dfc87c3902ca55",
+          "model-00013-of-00018.safetensors": "06ab79a41f74c9c5cb734816feb0c7fc364104b227165ee7391231e1155aa02a",
+          "model-00014-of-00018.safetensors": "4138ed94603065ba884bbcadedb04d7718bb40117e85e6f5c6fc5b9c05b7a85b",
+          "model-00015-of-00018.safetensors": "69224e27b9de4e7dbf6fc936c6eaae08447bda3b80a6c31a871ab451173afd22",
+          "model-00016-of-00018.safetensors": "73cb9a1089fb6155cb648609478d6633be8a5c7d9ca5a05bc8925ce8a553cefe",
+          "model-00017-of-00018.safetensors": "beb51f01056142ac4984bd800507b0dd0fd18de57f8e9ef6ea41d1a3598983a8",
+          "model-00018-of-00018.safetensors": "1d3479509e21494658f9b64d317f5ea8e55c4025d28c702d6c4d0b356ce8ea06",
+          "model.safetensors.index.json": "77042094076611b69791a610065f28b7013b8c621795fa86ddccc8bac7d1b9df",
+          "preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+          "tokenizer.json": "0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3",
+          "tokenizer_config.json": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27",
+          "video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+          "vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/chat.input.json",
+        "name": "chat",
+        "output": "text-stream",
+        "output_schema": "ops/chat.output.json",
+        "stream": true,
+        "title": "Chat"
+      },
+      {
+        "input": "ops/count_tokens.input.json",
+        "name": "count_tokens",
+        "output": "json",
+        "output_schema": "ops/count_tokens.output.json",
+        "stream": false,
+        "title": "Count tokens"
+      }
+    ]
+  },
+  {
+    "id": "re-use",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "fp16": "cast:re-use",
+        "int4": "mlx-affine-g64:re-use",
+        "int8": "mlx-affine-g64:re-use"
+      },
+      "facets": {
+        "modalities_in": [
+          "audio"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "re-use",
+      "kind": "enhancement",
+      "languages": [
+        "und"
+      ],
+      "licence": {
+        "commercial": false,
+        "name": "NVIDIA NSCL v1",
+        "spdx": "LicenseRef-NVIDIA-NSCLv1",
+        "url": "https://huggingface.co/faraday/re-use-mlx/blob/f4432e3e5101762bc30550b8e0031c7c8c0c4489/LICENSE"
+      },
+      "name": "RE-USE",
+      "op": [
+        {
+          "input": "ops/enhance.input.json",
+          "name": "enhance",
+          "output": "audio",
+          "stream": true,
+          "title": "Enhance"
+        }
+      ],
+      "params": "9.6M",
+      "publisher": "NVIDIA",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "sound"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "load",
+          "default": 5,
+          "help": "Length of audio cleaned in one pass, in seconds; longer windows use more memory.",
+          "id": "chunk_seconds",
+          "maps_to": "config.chunk_seconds",
+          "max": 30,
+          "min": 0.1,
+          "title": "Chunk duration",
+          "type": "number"
+        },
+        {
+          "applies": "request",
+          "choices": [
+            "denoise",
+            "restore",
+            "upscale"
+          ],
+          "default": "denoise",
+          "help": "Denoise and restore clean noise, reverb, clipping and codec damage at the input's rate; upscale also raises it to 48 kHz.",
+          "id": "mode",
+          "maps_to": "request.mode",
+          "title": "Mode",
+          "type": "choice"
+        }
+      ],
+      "suggested": false,
+      "summary": "Universal speech cleanup; noncommercial model weights.",
+      "tasks": [
+        "audio-to-audio"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE": 4060,
+          "NOTICE": 430,
+          "model_mlx.safetensors": 38583628
+        },
+        "dtype": "fp32",
+        "files": [
+          "model_mlx.safetensors",
+          "LICENSE",
+          "NOTICE"
+        ],
+        "repo": "faraday/re-use-mlx",
+        "revision": "f4432e3e5101762bc30550b8e0031c7c8c0c4489",
+        "sha256": {
+          "LICENSE": "6d1daa9c89ec421ba80fe051ac9f0dd46010d4fa4e8f4af654eb8e62f64e2ad5",
+          "NOTICE": "6c04e66aeea0b9ef5d78826117f3b3a57f28b2c6dc6e6415ad3f3fb9be34ea82",
+          "model_mlx.safetensors": "d1158502eaf39d0b11d097177160ce3804454653c5d14d17921b6c274ca53237"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/enhance.input.json",
+        "name": "enhance",
+        "output": "audio",
+        "stream": true,
+        "title": "Enhance"
+      }
+    ]
+  },
+  {
+    "id": "stable-audio-3-medium",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "int4": "mlx-affine-g64:stable-audio-3-medium",
+        "int8": "mlx-affine-g64:stable-audio-3-medium"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "stable-audio-3-medium",
+      "kind": "sound",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": false,
+        "conditions": "Commercial use only after registering with Stability AI and while you and your affiliates earn under US$1M a year; above that an enterprise licence is needed.",
+        "name": "Stability AI Community",
+        "spdx": "LicenseRef-Stability-AI-Community",
+        "url": "https://huggingface.co/stabilityai/stable-audio-3-optimized/blob/da6edc54ddba10bfd79a077102ded687f80e882b/LICENSE.md"
+      },
+      "name": "Stable Audio 3 Medium",
+      "op": [
+        {
+          "input": "ops/generate_sound.input.json",
+          "name": "generate_sound",
+          "output": "audio",
+          "stream": true,
+          "title": "Generate Sound"
+        },
+        {
+          "input": "ops/generate_music.input.json",
+          "name": "generate_music",
+          "output": "audio",
+          "stream": true,
+          "title": "Generate Music"
+        }
+      ],
+      "params": "1.45B",
+      "publisher": "Stability AI",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "sound"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "default": 5,
+          "help": "Length of the generated audio, in seconds.",
+          "id": "duration",
+          "maps_to": "request.duration",
+          "max": 380,
+          "min": 0.1,
+          "title": "Duration",
+          "type": "number"
+        },
+        {
+          "applies": "request",
+          "default": 8,
+          "help": "Sampler passes per clip: more is slower; this model is tuned for 8.",
+          "id": "steps",
+          "maps_to": "request.steps",
+          "max": 100,
+          "min": 1,
+          "step": 1,
+          "title": "Steps",
+          "type": "number"
+        },
+        {
+          "applies": "request",
+          "default": 1,
+          "help": "How strictly the audio follows the prompt; this model is tuned for 1.",
+          "id": "guidance",
+          "maps_to": "request.guidance",
+          "max": 20,
+          "min": 0,
+          "title": "Guidance",
+          "type": "number"
+        }
+      ],
+      "suggested": false,
+      "summary": "Prompted stereo sound effects and instrumental music.",
+      "tasks": [
+        "text-to-audio"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE.md": 11852,
+          "LICENSE_GEMMA.md": 10541,
+          "MLX/dit_medium_f16.npz": 2907300946,
+          "MLX/same_l_decoder_f32.npz": 1704311976,
+          "MLX/t5gemma_f16.npz": 567443068,
+          "NOTICE": 97
+        },
+        "dtype": "fp16",
+        "files": [
+          "MLX/dit_medium_f16.npz",
+          "MLX/same_l_decoder_f32.npz",
+          "MLX/t5gemma_f16.npz",
+          "LICENSE.md",
+          "LICENSE_GEMMA.md",
+          "NOTICE"
+        ],
+        "repo": "stabilityai/stable-audio-3-optimized",
+        "revision": "da6edc54ddba10bfd79a077102ded687f80e882b",
+        "sha256": {
+          "LICENSE.md": "d6f6b1a4dce5c852bd6d7d9482d002baf0ccdb71e662250b73be9eec8764ee8d",
+          "LICENSE_GEMMA.md": "e77acc0d3163bb7534675045c584b4d04b387b529239fc4b3647da0a01ba4745",
+          "MLX/dit_medium_f16.npz": "f9e5647ea3225818657d47d47ae4b34afa29c0568206ca89566c1a758944a38e",
+          "MLX/same_l_decoder_f32.npz": "84924be2122d3a20fce443f40b782d9cd88e8e73707476326003ac47659a2287",
+          "MLX/t5gemma_f16.npz": "8deb20489f36d9aec539f26c9c67321f99bc5fe300d470435ed6e76be4f16bbd",
+          "NOTICE": "66f856d7da72797f528fca46b7c80634ab481f917bfe020960e123d84b19f75f"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/generate_music.input.json",
+        "name": "generate_music",
+        "output": "audio",
+        "stream": true,
+        "title": "Generate Music"
+      },
+      {
+        "input": "ops/generate_sound.input.json",
+        "name": "generate_sound",
+        "output": "audio",
+        "stream": true,
+        "title": "Generate Sound"
+      }
+    ]
+  },
+  {
+    "id": "stable-audio-3-small-sfx",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "derive": {
+        "int8": "mlx-affine-g64:stable-audio-3-small-sfx"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "audio"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "stable-audio-3-small-sfx",
+      "kind": "sound",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": false,
+        "conditions": "Commercial use only after registering with Stability AI and while you and your affiliates earn under US$1M a year; above that an enterprise licence is needed.",
+        "name": "Stability AI Community",
+        "spdx": "LicenseRef-Stability-AI-Community",
+        "url": "https://huggingface.co/stabilityai/stable-audio-3-optimized/blob/da6edc54ddba10bfd79a077102ded687f80e882b/LICENSE.md"
+      },
+      "name": "Stable Audio 3 Small SFX",
+      "op": [
+        {
+          "input": "ops/generate_sound.input.json",
+          "name": "generate_sound",
+          "output": "audio",
+          "stream": true,
+          "title": "Generate Sound"
+        }
+      ],
+      "params": "459M",
+      "publisher": "Stability AI",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "sound"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "chips": {
+          "m5": "native"
+        },
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "request",
+          "default": 5,
+          "help": "Length of the generated audio, in seconds.",
+          "id": "duration",
+          "maps_to": "request.duration",
+          "max": 120,
+          "min": 0.1,
+          "title": "Duration",
+          "type": "number"
+        },
+        {
+          "applies": "request",
+          "default": 8,
+          "help": "Sampler passes per clip: more is slower; this model is tuned for 8.",
+          "id": "steps",
+          "maps_to": "request.steps",
+          "max": 100,
+          "min": 1,
+          "step": 1,
+          "title": "Steps",
+          "type": "number"
+        },
+        {
+          "applies": "request",
+          "default": 1,
+          "help": "How strictly the audio follows the prompt; this model is tuned for 1.",
+          "id": "guidance",
+          "maps_to": "request.guidance",
+          "max": 20,
+          "min": 0,
+          "title": "Guidance",
+          "type": "number"
+        }
+      ],
+      "suggested": false,
+      "summary": "Prompted stereo sound effects.",
+      "tasks": [
+        "text-to-audio"
+      ],
+      "weights": {
+        "bytes": {
+          "LICENSE.md": 11852,
+          "LICENSE_GEMMA.md": 10541,
+          "MLX/dit_sm-sfx_f16.npz": 919193814,
+          "MLX/same_s_decoder_f32.npz": 218090820,
+          "MLX/t5gemma_f16.npz": 567443068,
+          "NOTICE": 97
+        },
+        "dtype": "fp16",
+        "files": [
+          "MLX/dit_sm-sfx_f16.npz",
+          "MLX/same_s_decoder_f32.npz",
+          "MLX/t5gemma_f16.npz",
+          "LICENSE.md",
+          "LICENSE_GEMMA.md",
+          "NOTICE"
+        ],
+        "repo": "stabilityai/stable-audio-3-optimized",
+        "revision": "da6edc54ddba10bfd79a077102ded687f80e882b",
+        "sha256": {
+          "LICENSE.md": "d6f6b1a4dce5c852bd6d7d9482d002baf0ccdb71e662250b73be9eec8764ee8d",
+          "LICENSE_GEMMA.md": "e77acc0d3163bb7534675045c584b4d04b387b529239fc4b3647da0a01ba4745",
+          "MLX/dit_sm-sfx_f16.npz": "7e702d2640699a57fe436ca975fda16832040ba568c1e092c2ae826987558118",
+          "MLX/same_s_decoder_f32.npz": "909928a8e6937c1ebe6ac4b729f0462bd3773704a11ea18278e42671dc69bfe4",
+          "MLX/t5gemma_f16.npz": "8deb20489f36d9aec539f26c9c67321f99bc5fe300d470435ed6e76be4f16bbd",
+          "NOTICE": "66f856d7da72797f528fca46b7c80634ab481f917bfe020960e123d84b19f75f"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "ops/generate_sound.input.json",
+        "name": "generate_sound",
+        "output": "audio",
+        "stream": true,
+        "title": "Generate Sound"
+      }
+    ]
+  },
+  {
+    "id": "von-1.1",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "context": 2048,
+      "derive": {
+        "fp16": "cast:von-fp16-1",
+        "int4": "mlx-affine-g64:verdict-at-load",
+        "int8": "mlx-affine-g64:verdict-at-load"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "text"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "von-1.1",
+      "kind": "decisions",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/wfzyx/von/blob/d8bb5e0745d8ee1fb65d536d6d4892d54d5a93fd/README.md"
+      },
+      "name": "Von \u00b7 1.1",
+      "op": [
+        {
+          "input": "kinds/decisions/ops/decide.input.json",
+          "name": "decide",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/decide.output.json",
+          "stream": false,
+          "title": "Decide"
+        },
+        {
+          "input": "kinds/decisions/ops/judge.input.json",
+          "name": "judge",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/judge.output.json",
+          "stream": false,
+          "title": "Judge"
+        }
+      ],
+      "params": "395M",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 80938,
+        "hf_likes": 53
+      },
+      "publisher": "wfzyx (Victor Hugo Panisa)",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "decisions"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "load",
+          "default": false,
+          "help": "Run plain MLX without Verdict's fast tokenizer and kernels: same answers as Exact, slower; for diagnosis.",
+          "id": "stock_mlx",
+          "title": "Stock MLX path",
+          "type": "toggle"
+        }
+      ],
+      "summary": "Earlier Von: answers can change when options are reordered; 2048-token context; English only.",
+      "tasks": [
+        "yes-no",
+        "choice",
+        "score"
+      ],
+      "weights": {
+        "bytes": {
+          "config.json": 6349,
+          "marker_calibration.json": 664,
+          "option_marker.pt": 1581316050,
+          "tokenizer.json": 3583485,
+          "tokenizer_config.json": 599
+        },
+        "dtype": "fp32",
+        "files": [
+          "option_marker.pt",
+          "config.json",
+          "tokenizer.json",
+          "tokenizer_config.json",
+          "marker_calibration.json"
+        ],
+        "repo": "wfzyx/von",
+        "revision": "d8bb5e0745d8ee1fb65d536d6d4892d54d5a93fd",
+        "sha256": {
+          "config.json": "968db6072229e54691be4d535487a5c8d8132cc4893b6a3fdfa1e605457a7ec3",
+          "marker_calibration.json": "c3b5345c89be9ee802a5587dcda4e530e69a9bb5965dd839b877b7e8cfff048f",
+          "option_marker.pt": "52202f176080d1efe38ca62c45264894fc7e444d332f4af6bac86f4e3146e0f2",
+          "tokenizer.json": "3703d011b3ee259e00b59b60772f8fd54998d79e8fa5a1388d507eff28f8f09e",
+          "tokenizer_config.json": "57170b72a72c60407eec1f7894000c567309a8e41c5d0504b946c624cb069984"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "kinds/decisions/ops/decide.input.json",
+        "name": "decide",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/decide.output.json",
+        "stream": false,
+        "title": "Decide"
+      },
+      {
+        "input": "kinds/decisions/ops/judge.input.json",
+        "name": "judge",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/judge.output.json",
+        "stream": false,
+        "title": "Judge"
+      }
+    ]
+  },
+  {
+    "id": "von-1.2",
+    "manifest": {
+      "bench": {
+        "recipe": "bench/bench.toml"
+      },
+      "context": 8192,
+      "derive": {
+        "fp16": "cast:von-fp16-1",
+        "int4": "mlx-affine-g64:verdict-at-load",
+        "int8": "mlx-affine-g64:verdict-at-load"
+      },
+      "facets": {
+        "modalities_in": [
+          "text"
+        ],
+        "modalities_out": [
+          "text"
+        ]
+      },
+      "gate": {
+        "recipe": "gate/gate.toml"
+      },
+      "id": "von-1.2",
+      "kind": "decisions",
+      "languages": [
+        "en"
+      ],
+      "licence": {
+        "commercial": true,
+        "spdx": "Apache-2.0",
+        "url": "https://huggingface.co/wfzyx/von/blob/5df8185a4f2327ad0a7cd117cc4f701ac557b9ae/README.md"
+      },
+      "name": "Von \u00b7 1.2",
+      "op": [
+        {
+          "input": "kinds/decisions/ops/decide.input.json",
+          "name": "decide",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/decide.output.json",
+          "stream": false,
+          "title": "Decide"
+        },
+        {
+          "input": "kinds/decisions/ops/judge.input.json",
+          "name": "judge",
+          "output": "json",
+          "output_schema": "kinds/decisions/ops/judge.output.json",
+          "stream": false,
+          "title": "Judge"
+        }
+      ],
+      "params": "395M",
+      "popularity": {
+        "as_of": "2026-10-03",
+        "hf_downloads": 80938,
+        "hf_likes": 53
+      },
+      "publisher": "wfzyx (Victor Hugo Panisa)",
+      "released": 2026,
+      "runner": [
+        {
+          "chips": [
+            "*"
+          ],
+          "fast_exact": true,
+          "language": "swift",
+          "min_macos": "26.0",
+          "name": "native",
+          "protocol": 1,
+          "worker": "decisions"
+        }
+      ],
+      "schema": 2,
+      "selection": {
+        "default": "native"
+      },
+      "setting": [
+        {
+          "applies": "load",
+          "default": false,
+          "help": "Run plain MLX without Verdict's fast tokenizer and kernels: same answers as Exact, slower; for diagnosis.",
+          "id": "stock_mlx",
+          "title": "Stock MLX path",
+          "type": "toggle"
+        }
+      ],
+      "summary": "Scores every option in one pass, independent of option order; English only.",
+      "tasks": [
+        "yes-no",
+        "choice",
+        "score"
+      ],
+      "weights": {
+        "bytes": {
+          "config.json": 6329,
+          "marker_calibration.json": 1456,
+          "option_marker.pt": 1581316459,
+          "tokenizer.json": 3583486,
+          "tokenizer_config.json": 571
+        },
+        "dtype": "fp32",
+        "files": [
+          "option_marker.pt",
+          "config.json",
+          "tokenizer.json",
+          "tokenizer_config.json",
+          "marker_calibration.json"
+        ],
+        "repo": "wfzyx/von",
+        "revision": "5df8185a4f2327ad0a7cd117cc4f701ac557b9ae",
+        "sha256": {
+          "config.json": "091b9a53c47e1cbc0b10b521a2d2f21dedf863851c07122cfa3d3e497e5e82ec",
+          "marker_calibration.json": "9b32949dcd0cfd122db509c9bd5be67f0cfe35696153aa93d667caf0aae147c9",
+          "option_marker.pt": "3faf27f88d30aaf9aa37860d4cdef99f1d05450cf40364f6236ac892d4d139ed",
+          "tokenizer.json": "bb637767e8dfb8044597df6c58243bff2e592ae9e3b310c0bbdb8591f6ac543d",
+          "tokenizer_config.json": "4d2a485d5fd1ee514db180744fc00807c11da34012ac3666744c0377f6c23731"
+        }
+      }
+    },
+    "operations": [
+      {
+        "input": "kinds/decisions/ops/decide.input.json",
+        "name": "decide",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/decide.output.json",
+        "stream": false,
+        "title": "Decide"
+      },
+      {
+        "input": "kinds/decisions/ops/judge.input.json",
+        "name": "judge",
+        "output": "json",
+        "output_schema": "kinds/decisions/ops/judge.output.json",
+        "stream": false,
+        "title": "Judge"
+      }
+    ]
+  }
+]

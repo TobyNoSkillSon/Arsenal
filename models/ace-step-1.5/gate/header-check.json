@@ -1,0 +1,49 @@
+{
+  "status": "mapped-name-shape-pass-precision-unqualified",
+  "headers_inspected": [
+    {
+      "file": "acestep-v15-turbo/model.safetensors",
+      "tensors": 677,
+      "dtypes": [
+        "BF16"
+      ]
+    },
+    {
+      "file": "acestep-5Hz-lm-1.7B/model.safetensors",
+      "tensors": 310,
+      "dtypes": [
+        "BF16"
+      ]
+    },
+    {
+      "file": "Qwen3-Embedding-0.6B/model.safetensors",
+      "tensors": 310,
+      "dtypes": [
+        "BF16"
+      ]
+    },
+    {
+      "file": "vae/diffusion_pytorch_model.safetensors",
+      "tensors": 365,
+      "dtypes": [
+        "BF16"
+      ]
+    }
+  ],
+  "weight_payload_bytes_read": 0,
+  "mapping": "component-map.json",
+  "native_tensors": 1589,
+  "mapped_safetensors_tensors": 1588,
+  "ignored_unused_tensors": 0,
+  "name_shape_errors": 0,
+  "dtype": "Prepared FP16 layout matches native inventory. Source BF16-to-FP16 and FP32-to-FP16 transforms are plans; trained precision quality is not qualified.",
+  "conditioning": {
+    "source": "acestep-v15-turbo/silence_latent.pt",
+    "target": "silence.silence",
+    "shape": [
+      15000,
+      64
+    ],
+    "note": "Serialized source size; checked by bounded torch ZIP reader at Get; no payload downloaded"
+  }
+}

@@ -1,0 +1,61 @@
+schema = 3
+architecture = "bs_roformer"
+id = "bs-roformer-viperx-1296"
+name = "BS-RoFormer vocals (viperx 1296)"
+kind = "audio"
+params = "160M"
+publisher = "viperx"
+released = 2024
+suggested = false
+summary = "Separate vocals or speech from music and effects using a native Swift MLX worker."
+purpose = "Pull voice out of music"
+good_for = ["Vocals or narration out of music and sound effects", "An instrumental or music-and-effects bed without the voice"]
+limits = ["Two stems only: vocals and everything else (instrumental).", "Stereo 44.1 kHz; up to ten minutes per clip.", "Clips under ten seconds use 2.55 s chunks, as python-audio-separator does."]
+languages = ["und"]
+tasks = ["separate_audio"]
+tools = ["operation"]
+[facets]
+modalities_in = ["audio"]
+modalities_out = ["audio"]
+[licence]
+spdx = "MIT"
+name = "MIT"
+commercial = true
+url = "https://huggingface.co/Politrees/UVR_resources/blob/929e057b81aa49bc2e6490bef8671f47b2c120f6/README.md"
+[weights]
+repo = "Politrees/UVR_resources"
+revision = "929e057b81aa49bc2e6490bef8671f47b2c120f6"
+dtype = "fp32"
+files = ["models/Roformer/BandSplit/model_bs_roformer_ep_368_sdr_12.9628.ckpt", "models/Roformer/BandSplit/config_bs_roformer_ep_368_sdr_12.9628.yaml"]
+[weights.sha256]
+"models/Roformer/BandSplit/model_bs_roformer_ep_368_sdr_12.9628.ckpt" = "f6c94864adfb73bbb0ca58ec14d58dd0b364549e9fb61433ae51916f3e2f8d0b"
+"models/Roformer/BandSplit/config_bs_roformer_ep_368_sdr_12.9628.yaml" = "aea599b3f9bd4892a9c6bf5ac7c44787d3c99f717903d16054702665d477c86b"
+[weights.bytes]
+"models/Roformer/BandSplit/model_bs_roformer_ep_368_sdr_12.9628.ckpt" = 639317465
+"models/Roformer/BandSplit/config_bs_roformer_ep_368_sdr_12.9628.yaml" = 2274
+[derive]
+fp16 = "cast:audio-bs-roformer-v1"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "audio"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "separate_audio"
+title = "Separate Audio"
+input = "ops/separate_audio.input.json"
+output_schema = "ops/separate_audio.output.json"
+output = "file"
+stream = false
+timeout_s = 590
+first_response_timeout_s = 590
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

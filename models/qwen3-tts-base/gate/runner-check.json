@@ -1,0 +1,18 @@
+{
+  "speak": {
+    "text": "Hello world.",
+    "stream": true,
+    "reference": {
+      "path": "/tmp/mobius-v2-voices/reference.wav",
+      "text": "Hello world."
+    }
+  },
+  "voices": {},
+  "clone_voice": {
+    "audio": {
+      "path": "/tmp/mobius-v2-voices/reference.wav"
+    },
+    "transcript": "Hello world.",
+    "name": "Reference voice"
+  }
+}

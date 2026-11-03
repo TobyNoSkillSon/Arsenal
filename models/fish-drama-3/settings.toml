@@ -1,0 +1,19 @@
+# Drama 3 takes no language and no instructions; cues go inline in the text.
+schema = 1
+
+[[section]]
+
+[[section.row]]
+setting = "voice"
+
+[[section]]
+title = "More"
+collapsed = true
+
+[[section.row]]
+setting = "reference_path"
+control = "file"
+
+[[section.row]]
+setting = "reference_text"
+control = "editor"

@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "worker": "embed",
+  "graph": "explicitly shrunk configuration in no-weights.json",
+  "weights_downloaded": 0,
+  "trained_weight_quality": "pending",
+  "production_output_validator": true,
+  "results": [
+    {
+      "status": "passed",
+      "operations": [
+        "rerank"
+      ],
+      "parameters": 25,
+      "precision": "fp16",
+      "weights_downloaded": 0,
+      "effective_dtype": "fp16",
+      "eligible_matrices": null,
+      "compression": "model-policy"
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "rerank"
+      ],
+      "parameters": 57,
+      "precision": "int8",
+      "weights_downloaded": 0,
+      "effective_dtype": "int8",
+      "eligible_matrices": null,
+      "compression": "model-policy"
+    },
+    {
+      "status": "passed",
+      "operations": [
+        "rerank"
+      ],
+      "parameters": 57,
+      "precision": "int4",
+      "weights_downloaded": 0,
+      "effective_dtype": "int4",
+      "eligible_matrices": null,
+      "compression": "model-policy"
+    }
+  ],
+  "error": "",
+  "worker_sha256": "c05407f480884f408cc1d62c8e9752675c6bab6b620f874b00ea11b8317976b9",
+  "checked_at": "2026-10-18T15:42:11.335288+00:00",
+  "rebase_base": "162b7b9b0db8cd1c6016c06614250a87f41387e5"
+}

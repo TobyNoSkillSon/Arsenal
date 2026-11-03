@@ -1,0 +1,26 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "kit/new-model.py try: one Load and two requests of estimate_depth through the kit runner outside the app, FP16; peak_footprint_mb is the runner's largest phys_footprint after a reply, in MiB; Arsenal build 2000.",
+  "model": "depth-anything-v2-small",
+  "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+  "rows": [
+    {
+      "date": "2026-10-30T07:39:45Z",
+      "load_seconds": 0.023,
+      "ops": {
+        "estimate_depth": {
+          "seconds_first": 0.055,
+          "seconds_warm": 0.029,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 336.1,
+      "precision": "fp16",
+      "runner_sha256": "5d88f23ba39be9d37b435945b4e72bc357e8ab14aa335771c2d02bb6186dfc7b",
+      "swap": "total = 3072.00M  used = 1364.00M  free = 1708.00M  (encrypted)"
+    }
+  ],
+  "run": "kit-2026-10-30",
+  "schema": "quick-check-1"
+}

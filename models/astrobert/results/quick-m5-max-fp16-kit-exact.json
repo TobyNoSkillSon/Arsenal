@@ -1,0 +1,52 @@
+{
+  "mode": "exact",
+  "model": "astrobert",
+  "schema": 2,
+  "stats": {
+    "availability": {
+      "provenance": {
+        "chip": "m5-max",
+        "date": "2026-11-01T02:50:13Z",
+        "gpuCores": 40,
+        "method": "Loaded and answered Embed at fp16: one ordinary Load, then two Embed requests (warm-up, timed) through Arsenal's API. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+        "revision": "6b9c25bb799152c5849a5b263ea71025fce548f0",
+        "run": "test-night-2026-11-01-fp16",
+        "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+      },
+      "state": "quickCheck"
+    },
+    "dtype": "fp16",
+    "kind": "embeddings",
+    "metrics": {
+      "peakMemoryGB": {
+        "basis": "Load and two Embed requests on three short sentences.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:50:13Z",
+          "gpuCores": 40,
+          "method": "Sum of macOS phys_footprint_peak over all Arsenal worker processes (only the measured model was loaded) across one ordinary Load, then two Embed requests (warm-up, timed) through Arsenal's API; MiB converted to GB (10^9 bytes). test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "6b9c25bb799152c5849a5b263ea71025fce548f0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.3865051136
+      },
+      "secondsPerRequest": {
+        "basis": "One warm Embed request on three short sentences.",
+        "provenance": {
+          "chip": "m5-max",
+          "date": "2026-11-01T02:50:13Z",
+          "gpuCores": 40,
+          "method": "Wall time of the timed (second) Embed request, one sample, after one ordinary Load, then two Embed requests (warm-up, timed) through Arsenal's API; includes the API round trip. test night 1 Nov 2026: quiet Mac (idle check before each reading). Quick check, not the controlled interleaved (ABBA) protocol.",
+          "revision": "6b9c25bb799152c5849a5b263ea71025fce548f0",
+          "run": "test-night-2026-11-01-fp16",
+          "source": "results/quick-checks/test-night-2026-11-01.json; fp16"
+        },
+        "state": "quickCheck",
+        "value": 0.092
+      }
+    },
+    "runner": "kit"
+  }
+}

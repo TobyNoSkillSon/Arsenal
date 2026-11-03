@@ -1,0 +1,6 @@
+schema = 1
+kind = "voices"
+recipe = "vireo-reference-parity"
+source_commit = "9366da5e14dcafe846fc41565c94f4f145eaf7cc"
+checks = ["framed-load-speak-unload", "finite-nonempty-pcm", "reference-parity", "round-trip-intelligibility"]
+status = "unverified"

@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sequence",
+    "variants"
+  ],
+  "properties": {
+    "sequence": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100000,
+      "description": "The wild-type sequence (no masks), uppercase one-letter codes, at most 1,024 residues."
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10000,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 2000
+      },
+      "description": "Mutations like A23G (wild type, 1-indexed position, mutant); join several with : for a multi-mutant (scores add)."
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "masked_marginal",
+        "wildtype_marginal"
+      ],
+      "description": "masked_marginal (default): each mutated position masked in turn; wildtype_marginal: one pass over the wild type.",
+      "default": "masked_marginal"
+    },
+    "structure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path"
+      ],
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      },
+      "x-arsenal-file": {
+        "accept": [
+          "chemical/x-pdb",
+          "text/plain",
+          "application/octet-stream"
+        ]
+      },
+      "description": "A protein structure as a PDB file. The first model is read: ATOM records of amino acids (HETATM ignored), one chain, the first alternate location of each atom. N, CA and C are used (at least one residue needs all three). Plain text, UTF-8 or Latin-1; a gzip file is refused."
+    },
+    "chain": {
+      "type": "string",
+      "maxLength": 4,
+      "description": "Chain to read from the PDB file (default: the first)."
+    }
+  }
+}
