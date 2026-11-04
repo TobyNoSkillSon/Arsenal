@@ -28,6 +28,16 @@ public struct ChatMemory: Codable, Sendable {
     public let mlx_cache_mb: Double
     public let peak_mb: Double
     public let mlx_peak_mb: Double
+    /// MLX active memory right after the load (the weights); absent while nothing is loaded.
+    public let mlx_weights_mb: Double?
+    /// Set when a load finishes, cleared at unload.
+    static let weights = WeightsMark()
+    final class WeightsMark: @unchecked Sendable {
+        private let lock = NSLock()
+        private var bytes: Int?
+        var mb: Double? { lock.withLock { bytes.map { Double($0) / 1e6 } } }
+        func set(_ value: Int?) { lock.withLock { bytes = value } }
+    }
     public static func snapshot() -> ChatMemory {
         var info = task_vm_info_data_t()
         var count = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<integer_t>.size)
@@ -38,10 +48,10 @@ public struct ChatMemory: Codable, Sendable {
         }
         return .init(
             footprint_mb: result == KERN_SUCCESS ? Double(info.phys_footprint) / 1e6 : 0,
-            mlx_active_mb: Double(Memory.activeMemory) / 1_048_576,
-            mlx_cache_mb: Double(Memory.cacheMemory) / 1_048_576,
-            peak_mb: result == KERN_SUCCESS ? Double(info.ledger_phys_footprint_peak) / 1_048_576 : 0,
-            mlx_peak_mb: Double(Memory.peakMemory) / 1_048_576)
+            mlx_active_mb: Double(Memory.activeMemory) / 1e6,
+            mlx_cache_mb: Double(Memory.cacheMemory) / 1e6,
+            peak_mb: result == KERN_SUCCESS ? Double(info.ledger_phys_footprint_peak) / 1e6 : 0,
+            mlx_peak_mb: Double(Memory.peakMemory) / 1e6, mlx_weights_mb: weights.mb)
     }
 }
 
@@ -72,13 +82,15 @@ public actor ChatEngine {
         }
         Memory.cacheLimit = 256 * 1024 * 1024
         let start = ProcessInfo.processInfo.systemUptime
+        Memory.peakMemory = 0
         context = try await LLMModelFactory.shared.load(from: url, using: LocalTokenizerLoader())
         self.contextLimit = contextLimit
         loadedDtype = dtype
+        ChatMemory.weights.set(Memory.activeMemory)
         return ProcessInfo.processInfo.systemUptime - start
     }
     public func unload() {
-        context = nil; loadedDtype = nil; Memory.clearCache()
+        context = nil; loadedDtype = nil; ChatMemory.weights.set(nil); Memory.clearCache()
     }
     public func status() -> (loaded: Bool, dtype: String?, context: Int) { (context != nil, loadedDtype, contextLimit) }
     public func count(text: String?, messages: [ChatMessage]?, thinking: Bool = false) throws -> Int {

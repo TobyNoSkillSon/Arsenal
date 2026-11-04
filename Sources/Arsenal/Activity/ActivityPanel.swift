@@ -57,7 +57,8 @@ struct ActivityPanel: View {
             ForEach(model.feed.models) { m in
                 ModelActivityCard(
                     model: m, name: model.name(m.id), memoryMB: m.memoryMB ?? model.memory[m.id], colour: colours[m.id] ?? p.accent, section: model.section(m),
-                    resident: model.rows[m.id]?.residentDType != nil, p: p, reduceMotion: reduceMotion
+                    resident: model.rows[m.id]?.residentDType != nil, p: p, reduceMotion: reduceMotion,
+                    scaleMB: model.feed.machine.memoryTotalMB ?? Double(ProcessInfo.processInfo.physicalMemory) / 1e6
                 )
                 .transition(reduceMotion ? .identity : .opacity.combined(with: .move(edge: .top)))
             }
@@ -289,6 +290,8 @@ struct ModelActivityCard: View {
     let resident: Bool
     let p: ArsenalPalette
     let reduceMotion: Bool
+    /// The Mac's memory: every card's memory bar is drawn to it, so cards compare and the machine bar above agrees.
+    var scaleMB: Double = Double(ProcessInfo.processInfo.physicalMemory) / 1e6
 
     var body: some View {
         let lines = section == .decision ? [] : ActivityText.lines(model)
@@ -324,6 +327,9 @@ struct ModelActivityCard: View {
             if let recent = model.recent {
                 MinuteLine(recent: recent, section: section, colour: colour, p: p)
             }
+            if let memory = model.memory {
+                ModelMemoryLine(memory: memory, scaleMB: scaleMB, colour: colour, p: p)
+            }
         }
         .padding(.horizontal, 11).padding(.vertical, 9)
         .background(Self.fill(p).swiftUI, in: RoundedRectangle(cornerRadius: 9))
@@ -331,6 +337,79 @@ struct ModelActivityCard: View {
     /// A card is a faint lift of the menu's own material, never a solid panel over it: the wallpaper still reads through
     /// it in light as in dark.
     static func fill(_ p: ArsenalPalette) -> NSColor { NSColor.white.withAlphaComponent(p.dark ? 0.05 : 0.2) }
+}
+
+/// What the model's memory is for, on the Mac's scale: its weights in its colour, its working memory (activations, KV
+/// cache or context, scratch) lighter and MLX's reuse cache lighter still, what its process holds outside MLX in grey; the
+/// most the current or last job took is a faint band behind them ending in a tick. Under it, the parts' figures in GB.
+/// Every value is measured (C3's `memory`); redrawn only when a reading changes, never animated.
+struct ModelMemoryLine: View {
+    let memory: ActivityFeed.Memory
+    let scaleMB: Double
+    let colour: NSColor
+    let p: ArsenalPalette
+    static let barHeight: CGFloat = 6
+
+    var body: some View {
+        let parts = ActivityText.memoryBar(memory)
+        // The memory chip in the header symbol's column marks this bar as memory, apart from the progress bars above it.
+        HStack(alignment: .top, spacing: 7) {
+            Image(systemName: "memorychip").font(.system(size: 10)).foregroundStyle(p.t3.swiftUI).frame(width: 15, height: Self.barHeight)
+            bars(parts)
+        }
+        .padding(.leading, 15).padding(.top, 2)
+        .contentShape(Rectangle())
+        .cellTooltip(ActivityText.memoryHelp(memory))
+        .transaction { $0.animation = nil }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(ActivityText.memoryHelp(memory))
+    }
+    private func bars(_ parts: [ActivityText.MemoryPiece]) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Canvas { context, size in
+                let track = Path(roundedRect: CGRect(origin: .zero, size: size), cornerRadius: 2)
+                context.fill(track, with: .color(p.field.swiftUI))
+                context.clip(to: track)
+                func width(_ mb: Double) -> CGFloat { size.width * CGFloat(min(1, max(0, mb / max(1, scaleMB)))) }
+                // Each part is drawn at least 2 pt wide: the peak's band and tick never end inside the drawn bar.
+                let drawn = parts.filter { $0.mb > 0 }.reduce(CGFloat(0)) { $0 + max(2, width($1.mb)) + 1 }
+                let peak = memory.peakMB.map { max(3, width($0), drawn - 1) }
+                if let peak { context.fill(Path(CGRect(x: 0, y: 0, width: peak, height: size.height)), with: .color(Self.peakFill(colour, p).swiftUI)) }
+                var x: CGFloat = 0
+                for part in parts where part.mb > 0 {
+                    let w = max(2, width(part.mb))
+                    context.fill(Path(CGRect(x: x, y: 0, width: w, height: size.height)), with: .color(part.layer.fill(colour, p).swiftUI))
+                    x += w + 1
+                }
+                if let peak {
+                    context.fill(Path(CGRect(x: max(0, peak - 1.5), y: 0, width: 1.5, height: size.height)), with: .color(ActivityColours.ink(colour, p).swiftUI))
+                }
+            }
+            .frame(height: Self.barHeight)
+            HStack(spacing: 12) {
+                ForEach(ActivityText.memoryLegend(memory), id: \.name) { entry in
+                    HStack(spacing: 4) {
+                        Group {
+                            if let layer = entry.layer {
+                                RoundedRectangle(cornerRadius: 2).fill(layer.fill(colour, p).swiftUI)
+                            } else {
+                                // The peak: its faint band and its tick.
+                                ZStack(alignment: .trailing) {
+                                    RoundedRectangle(cornerRadius: 2).fill(Self.peakFill(colour, p).swiftUI)
+                                    Rectangle().fill(ActivityColours.ink(colour, p).swiftUI).frame(width: 1.5)
+                                }.clipShape(RoundedRectangle(cornerRadius: 2))
+                            }
+                        }.frame(width: 8, height: 8)
+                        (Text(entry.name + " ").foregroundColor(p.t3.swiftUI)
+                            + Text(ActivityText.gb(entry.mb) ?? "\u{2014}").foregroundColor((entry.mb == nil ? p.t4 : p.t2).swiftUI))
+                            .font(.system(size: 11).monospacedDigit()).lineLimit(1).fixedSize()
+                    }
+                }
+                Spacer(minLength: 0)
+            }
+        }
+    }
+    static func peakFill(_ colour: NSColor, _ p: ArsenalPalette) -> NSColor { colour.withAlphaComponent(p.dark ? 0.26 : 0.3) }
 }
 
 /// "1 running · 40 waiting · 8 s wait": the numbers carry the line, their words stay quiet; zeros are left out, and with
@@ -582,7 +661,7 @@ enum ActivityText {
         return s < 3570 ? "\(Int((s / 60).rounded())) min" : String(format: "%.1f h", s / 3600)
     }
     /// The minute's caption in the kind's own terms, one time base per quantity: "250 decisions/min · 190 ms each",
-    /// "2 replies/min · avg 29.8 tok/s", "2 images/min · 6.1 s each", "42 s audio/min"; failures separately, so they can
+    /// "2 replies/min · avg 29.8 tok/s", "2 images/min · 6.1 s each", "1.2× real time"; failures separately, so they can
     /// read amber.
     static func minute(_ r: ActivityFeed.Recent, _ section: ActivitySection) -> (text: String, failed: String?) {
         let each = duration(r.meanRunS).map { " \u{00b7} \($0) each" } ?? ""
@@ -597,24 +676,33 @@ enum ActivityText {
             let images = r.images > 0 ? r.images : r.finished
             text = images > 0 ? plural(images, "image") + "/min" + each : r.steps > 0 ? plural(r.steps, "step") + "/min" : ""
         case .voice:
-            text = r.audioS > 0 ? audio(r.audioS) + " audio/min" : r.finished > 0 ? plural(r.finished, "clip") + "/min" : ""
+            text = speechRate(r) ?? (r.finished > 0 ? plural(r.finished, "clip") + "/min" : "")
         case .decision:
             text = r.finished > 0 ? plural(r.finished, "decision") + "/min" + each : ""
         case .default:
             text =
-                r.audioS > 0
-                ? audio(r.audioS) + " audio/min"
-                : r.finished > 0 ? plural(r.finished, "request") + "/min" + each : r.steps > 0 ? plural(r.steps, "step") + "/min" : ""
+                speechRate(r)
+                ?? (r.finished > 0 ? plural(r.finished, "request") + "/min" + each : r.steps > 0 ? plural(r.steps, "step") + "/min" : "")
         }
         let failed = r.failed > 0 ? "\(r.failed.grouped) failed" : nil
         return (text, failed)
     }
+    /// The finished requests' audio over the seconds they worked, so idle gaps between requests do not dilute it:
+    /// "1.2× real time". Until one finishes, the minute's audio so far.
+    static func speechRate(_ r: ActivityFeed.Recent) -> String? {
+        if let x = r.realTime, x.isFinite, x > 0 { return realTime(x) }
+        return r.audioS > 0 ? audio(r.audioS) + " audio/min" : nil
+    }
+    static func realTime(_ x: Double) -> String { (x < 9.95 ? String(format: "%.1f", x) : (x.roundedInt ?? 0).grouped) + "\u{00d7} real time" }
     /// The minute in full, on hover.
     static func minuteHelp(_ r: ActivityFeed.Recent, _ section: ActivitySection) -> String {
         var lines = ["Last minute: \(r.finished.grouped) finished, \(r.failed.grouped) failed; working \(Int(r.busyS.rounded())) s of 60."]
         if let run = duration(r.meanRunS) {
             // The minute's past average, worded apart from the counts line's projected wait.
             lines.append("Each worked \(run)" + (duration(r.meanWaitS).map { " and waited \($0) on average." } ?? " on average."))
+        }
+        if let x = r.realTime, x.isFinite, x > 0 {
+            lines.append("Each request made \(realTime(x)): seconds of audio per second it worked, over the minute's finished requests.")
         }
         lines.append("Graph: how much of each second it was working; full height is the whole second.")
         return lines.joined(separator: "\n")
@@ -711,6 +799,84 @@ enum ActivityText {
     /// A card's memory figure: what the model holds now (the Models table's Peak memory is the most it uses).
     static func nowHelp(_ mb: Double?) -> String {
         gb(mb).map { "\($0) GB in memory now. The Models table\u{2019}s Peak memory is the most it uses." } ?? "Memory now: not reported yet."
+    }
+
+    /// The layers of a model's memory bar, drawn in its colour.
+    enum MemoryLayer: Equatable {
+        case weights, working, cache, outside
+        func fill(_ colour: NSColor, _ p: ArsenalPalette) -> NSColor {
+            switch self {
+            case .weights: return colour
+            case .working: return colour.withAlphaComponent(0.6)
+            case .cache: return colour.withAlphaComponent(0.34)
+            case .outside: return ActivityColours.other(p)
+            }
+        }
+    }
+    struct MemoryPiece: Equatable {
+        var layer: MemoryLayer
+        var mb: Double
+    }
+    /// The bar, left to right. With MLX's counters: weights (or, when the weights were not measured apart, everything MLX
+    /// holds), working memory, MLX's cache, and the rest of the process; without them, the process as one piece.
+    static func memoryBar(_ m: ActivityFeed.Memory) -> [MemoryPiece] {
+        guard m.source == "mlx" else { return [.init(layer: .weights, mb: m.totalMB)] }
+        var pieces = [MemoryPiece(layer: .weights, mb: m.weightsMB ?? m.arraysMB ?? 0)]
+        // What grew since the runner's last reading is drawn as working memory: it grew while a job ran.
+        if m.weightsMB != nil || m.unsplitMB != nil { pieces.append(.init(layer: .working, mb: (m.workingMB ?? 0) + (m.unsplitMB ?? 0))) }
+        pieces += [.init(layer: .cache, mb: m.cacheMB ?? 0), .init(layer: .outside, mb: outsideMLX(m))]
+        return pieces
+    }
+    /// The process beyond MLX's parts (and beyond what grew since the runner's last reading).
+    static func outsideMLX(_ m: ActivityFeed.Memory) -> Double {
+        let arrays = m.weightsMB.map { $0 + (m.workingMB ?? 0) } ?? m.arraysMB ?? 0
+        return max(0, m.totalMB - arrays - (m.cacheMB ?? 0) - (m.unsplitMB ?? 0))
+    }
+    /// The figures under the bar, always the same entries for a model (a value not known yet is a dash): weights, working
+    /// memory (its cache included) and the peak; or what MLX holds, its cache and the peak; or the process and its peak.
+    /// A nil layer is the peak's mark.
+    struct MemoryLegendEntry: Equatable {
+        var name: String
+        var mb: Double?
+        var layer: MemoryLayer?
+    }
+    static func memoryLegend(_ m: ActivityFeed.Memory) -> [MemoryLegendEntry] {
+        let peak = MemoryLegendEntry(name: "Peak", mb: m.peakMB, layer: nil)
+        guard m.source == "mlx" else { return [.init(name: "In use", mb: m.totalMB, layer: .weights), peak] }
+        if let weights = m.weightsMB {
+            return [
+                .init(name: "Weights", mb: weights, layer: .weights), .init(name: "Working", mb: (m.workingMB ?? 0) + (m.cacheMB ?? 0) + (m.unsplitMB ?? 0), layer: .working), peak
+            ]
+        }
+        return [.init(name: "In use", mb: m.arraysMB.map { $0 + (m.unsplitMB ?? 0) }, layer: .weights), .init(name: "Cache", mb: m.cacheMB, layer: .cache), peak]
+    }
+    /// The bar's hover: each part in words and GB, then where the figures come from.
+    static func memoryHelp(_ m: ActivityFeed.Memory) -> String {
+        func g(_ mb: Double?) -> String { (gb(mb) ?? "\u{2014}") + " GB" }
+        var lines: [String] = []
+        let peak: String
+        if m.source == "mlx" {
+            if let weights = m.weightsMB {
+                lines.append("Weights \(g(weights)): what MLX held once the model had loaded.")
+                lines.append(
+                    "Working \(g((m.workingMB ?? 0) + (m.cacheMB ?? 0))): activations, KV cache or context and scratch \(g(m.workingMB)), and buffers MLX keeps for reuse \(g(m.cacheMB))."
+                )
+            } else {
+                lines.append("In use \(g(m.arraysMB)): weights and working memory together; this runner does not measure its weights apart.")
+                lines.append("Cache \(g(m.cacheMB)): buffers MLX keeps for reuse.")
+            }
+            if let unsplit = m.unsplitMB {
+                lines.append("Of which \(g(unsplit)) grew during this job since the runner last reported; Arsenal sees it in the process\u{2019}s footprint.")
+            }
+            lines.append("Outside MLX \(g(outsideMLX(m))): the runner's code and CPU memory.")
+            peak = m.mlxPeakMB.map { " MLX\u{2019}s own peak was \(g($0))." } ?? ""
+        } else {
+            lines.append("In use \(g(m.totalMB)): this runner\u{2019}s whole process. Its engine does not report MLX\u{2019}s counters, so the parts are not known.")
+            peak = ""
+        }
+        lines.append(m.peakMB == nil ? "Peak: not measured yet." : "Peak \(g(m.peakMB)): the most the current or last job (or the load) took.\(peak)")
+        lines.append("Measured in the runner\u{2019}s process\(m.source == "mlx" ? " with MLX\u{2019}s counters" : ""), and by Arsenal twice a second while a job runs.")
+        return lines.joined(separator: "\n")
     }
 
     /// A legend entry: the models together (their colours side by side), the app, everything else, free.

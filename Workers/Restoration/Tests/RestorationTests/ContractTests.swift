@@ -5,7 +5,7 @@ import LaMaNative
 @testable import RestorationWorker
 struct ContractTests {
     @Test func registrationsAndPrecisionPolicies() {
-        #expect(RestorationWorker.registrations.count == 5)
+        #expect(RestorationWorker.registrations.count == 6)
         #expect(RestorationWorker.registrations.compactMap(\.conversion).map(\.recipe).contains("cast:restoration-lama-v1"))
         #expect(!DDColorAdapter.eligible("encoder.arch.stages.0.0.pwconv1.weight", [768, 192]))
         #expect(!LaMaAdapter.eligible("model.5.conv1.ffc.convl2l.weight", [128, 3, 3, 128]))

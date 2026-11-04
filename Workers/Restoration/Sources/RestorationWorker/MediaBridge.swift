@@ -114,6 +114,9 @@ enum MediaBridge {
         if let total, total > 0 { event["total"] = .number(Double(Swift.max(total, done))) }
         try emit(.json(event))
     }
+    /// Frame 0 of the clip, sent once the video opens: Activity and the tool windows count the request as running from here,
+    /// not from the first finished batch (a short clip is one batch, so it read as waiting for the whole job).
+    static func begin(total: Int?, label: String, emit: (WireFrame) throws -> Void) throws { try progress(0, total: total, label: label, emit: emit) }
     /// One pass's stage (image restoration has no frames to count): step of total under `label`.
     static func stage(_ step: Int, of total: Int, _ label: String, emit: (WireFrame) throws -> Void) throws {
         try emit(.json(["event": "progress", "step": .number(Double(step)), "total": .number(Double(total)), "label": .string(label)]))

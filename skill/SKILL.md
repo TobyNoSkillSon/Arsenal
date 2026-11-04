@@ -7,6 +7,8 @@ description: Use Arsenal's on-device models on this Mac through its MCP tools (H
 
 Arsenal is the Mac app that runs AI models locally. You drive it through its MCP tools; the loopback HTTP API is for scripts. Answers are short text written for you to relay; errors start with a `[category]` tag. The work goes **find → read → choose → run → wait**, then you relay the result.
 
+For showcases, tests, demos and evaluations, run models through the installed Arsenal, not an isolated copy; isolate only to test an unreleased Arsenal build.
+
 ## Connect
 
 If the `arsenal_*` tools are missing, start Arsenal, then register its stdio bridge once; it finds the app's port and token on every launch:

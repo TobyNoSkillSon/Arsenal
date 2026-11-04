@@ -5488,6 +5488,154 @@
     {
       "files" : [
         {
+          "bytes" : 7792,
+          "path" : "README.md",
+          "sha256" : "f56c825dbf52b3324ce519456b351be5d5e47f5a98309dd909a1a1cc151837e9"
+        },
+        {
+          "bytes" : 189,
+          "path" : "bench/bench.toml",
+          "sha256" : "cf6da8c2051a1319fb270a8e008702a311ffe24dddc0b960a738997876a29713"
+        },
+        {
+          "bytes" : 339,
+          "path" : "gate/gate.toml",
+          "sha256" : "d7f0330116ff13b1e924626eef1f9d731f11041ee01ecb34c3ec663a6e60f292"
+        },
+        {
+          "bytes" : 1046,
+          "path" : "log/001-native.md",
+          "sha256" : "5afd3b1796ae75f8d611b15991352d461eacc995b8ba3936ecfb56fef45db6f2"
+        },
+        {
+          "bytes" : 2478,
+          "path" : "model.toml",
+          "sha256" : "a6c3375dd90c27679f851e05ec4114ec7c858c9cdd1b66001a527d54c58a8327"
+        },
+        {
+          "bytes" : 963,
+          "path" : "ops/upscale_video.input.json",
+          "sha256" : "0a44543952b9087a94f8eb43cb1f9be3601d631b361eb7b978a49c265c497425"
+        },
+        {
+          "bytes" : 1463,
+          "path" : "results/m5-max.md",
+          "sha256" : "878599a126b2d1931f87a3317100b18b3c3aef819f7cfb41758cb18a799d0881"
+        }
+      ],
+      "manifest" : {
+        "architecture" : "flashvsr",
+        "bench" : {
+          "recipe" : "bench/bench.toml"
+        },
+        "derive" : {
+          "fp16" : "cast:restoration-flashvsr"
+        },
+        "facets" : {
+          "modalities_in" : [
+            "video"
+          ],
+          "modalities_out" : [
+            "video"
+          ]
+        },
+        "gate" : {
+          "recipe" : "gate/gate.toml"
+        },
+        "good_for" : [
+          "Live-action footage",
+          "Long clips in one pass"
+        ],
+        "id" : "flashvsr-v1.1",
+        "kind" : "restoration",
+        "languages" : [
+          "und"
+        ],
+        "licence" : {
+          "commercial" : true,
+          "name" : "Apache-2.0",
+          "spdx" : "Apache-2.0",
+          "url" : "https://huggingface.co/mlx-community/FlashVSR-v1.1-bf16/tree/1466bf43ff8010ba4184d21084f121d1671854dc"
+        },
+        "limits" : [
+          "Invents detail; not for anime, cartoons, graphics or text",
+          "Turns soft focus and bokeh into crisp texture",
+          "At most about 4.2 megapixels per output frame",
+          "Job files are limited by the host to 4 GiB"
+        ],
+        "name" : "FlashVSR v1.1",
+        "op" : [
+          {
+            "first_response_timeout_s" : 3600,
+            "input" : "ops/upscale_video.input.json",
+            "name" : "upscale_video",
+            "output" : "file",
+            "output_schema" : "kinds/restoration/ops/upscale_video.output.json",
+            "stream" : false,
+            "timeout_s" : 3600,
+            "title" : "Upscale video"
+          }
+        ],
+        "params" : "1.8B",
+        "publisher" : "OpenImagingLab",
+        "purpose" : "Video super-resolution",
+        "released" : 2025,
+        "runner" : [
+          {
+            "chips" : [
+              "*"
+            ],
+            "fast_exact" : false,
+            "features" : [
+              "sequentialOnly"
+            ],
+            "language" : "swift",
+            "min_macos" : "26.0",
+            "name" : "native",
+            "protocol" : 1,
+            "worker" : "restoration"
+          }
+        ],
+        "schema" : 3,
+        "selection" : {
+          "default" : "native"
+        },
+        "suggested" : false,
+        "summary" : "Enlarge live-action video up to four times in one streaming diffusion step.",
+        "tasks" : [
+          "upscale_video"
+        ],
+        "weights" : {
+          "bytes" : {
+            "config.json" : 2585,
+            "dit_bf16.safetensors" : 2838077584,
+            "lq_proj_bf16.safetensors" : 575692736,
+            "prompt_bf16.safetensors" : 4194648,
+            "tcdecoder_bf16.safetensors" : 90683270
+          },
+          "dtype" : "bf16",
+          "files" : [
+            "config.json",
+            "dit_bf16.safetensors",
+            "lq_proj_bf16.safetensors",
+            "prompt_bf16.safetensors",
+            "tcdecoder_bf16.safetensors"
+          ],
+          "repo" : "mlx-community/FlashVSR-v1.1-bf16",
+          "revision" : "1466bf43ff8010ba4184d21084f121d1671854dc",
+          "sha256" : {
+            "config.json" : "c0fd5528d4b135ac920fc09db549ff1aaee14f62340863d4a1e23879bec0b1d6",
+            "dit_bf16.safetensors" : "141f48131e72eac0cf0709cc50e7862e16be239058735d14196667760f41fb01",
+            "lq_proj_bf16.safetensors" : "6bec96434c240efa808c83f639948a42b31b2877d96667491846d9ba5cfd2b41",
+            "prompt_bf16.safetensors" : "7c4f9b13ccc593c6fb4e779720cdf5351c64670f2e5793fa8c887a16c4a1d573",
+            "tcdecoder_bf16.safetensors" : "9f0d8096bf8c0f0ecd95ae17f12c62114aac10ef03b498ea3be5839903890d0b"
+          }
+        }
+      }
+    },
+    {
+      "files" : [
+        {
           "bytes" : 4341,
           "path" : "README.md",
           "sha256" : "ac37577efa54c36b6cb28938cea31859ad493baa8aaada77a9c4fd61e4db233e"
@@ -19704,7 +19852,7 @@
 
   },
   "schema" : 2,
-  "sequence" : 79,
-  "source_commit" : "288889d1edb7a5f66dbce6c1f85cbabb93f83c4c",
-  "source_date" : "2026-11-02T22:04:52+01:00"
+  "sequence" : 80,
+  "source_commit" : "763402c6e356295a1b68a6608b0af033947dd766",
+  "source_date" : "2026-11-04T05:15:33+01:00"
 }

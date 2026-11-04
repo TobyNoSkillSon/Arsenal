@@ -13,6 +13,7 @@ import Testing
 /// decision queue drained a few seconds ago. Fixture feeds with figures the live panel can show (rate, time
 /// each and wait agree), no worker, no GPU. Run with ARSENAL_ACTIVITY_RENDERS=<dir>.
 @MainActor @Suite(.menuState, .serialized) final class ActivityDesignRenders {
+    static let seedvr = "seedvr2-3b"
     static let laya = "laya-typed-decisions", qwen = "qwen3.8-27b", flux = "flux2-klein-4b", kokoro = "kokoro-82m", layers = LayersFixture.id
 
     /// The fixture table's rows with all four loaded (the panel takes names and kinds from them).
@@ -22,6 +23,8 @@ import Testing
         rows.append(
             ModelRow(id: laya, name: "Laya \u{00b7} Typed decisions", kind: "decisions", precisions: ["fp16"], states: ["fp16": .init(state: .loaded)], selectedPrecision: "fp16"))
         rows.append(LayersFixture.row)
+        rows.append(
+            ModelRow(id: seedvr, name: "SeedVR2 3B", kind: "restoration", precisions: ["fp16"], states: ["fp16": .init(state: .loaded)], selectedPrecision: "fp16"))
         return rows
     }
     static let machineIdle = ActivityFeed.Machine(cpuBusyPct: 4, gpuBusyPct: 2, cpuTempC: 41, gpuTempC: 38, memoryUsedMB: 52_400, memoryTotalMB: 137_439, arsenalMB: 310)
@@ -113,6 +116,23 @@ import Testing
         return m
     }
 
+    /// SeedVR2 mid-upscale, on tonight's figures: 8.4 GB of weights as MLX held them after the load (the installed app's
+    /// reading, 3 Nov), a 5-frame batch's working memory on top, and the job's peak 29 GB above the weights.
+    static let machineRestoring = ActivityFeed.Machine(cpuBusyPct: 18, gpuBusyPct: 97, cpuTempC: 61, gpuTempC: 79, memoryUsedMB: 88_600, memoryTotalMB: 137_439, arsenalMB: 330)
+    static func restoring() -> ActivityFeed.Model {
+        let started = Date().addingTimeInterval(-41)
+        let request = ActivityFeed.Request(
+            id: "r", requester: "Claude Code", op: "upscale_video", phase: "step", title: "Upscale video", label: "Upscaling", unit: "batches", step: 7, total: 24,
+            startedAt: started, runningSince: started)
+        let busy = busy(from: 0)
+        let memory = ActivityFeed.Memory(source: "mlx", totalMB: 31_700, weightsMB: 8_438, workingMB: 21_900, cacheMB: 790, peakMB: 37_900, mlxPeakMB: 37_300)
+        return .init(
+            id: seedvr, kind: "restoration", state: "step", requests: [request], queued: 0, batch: nil, memoryMB: memory.totalMB, running: 1,
+            recent: .init(finished: 0, steps: 6, busyS: busyS(busy), busy: busy), memory: memory)
+    }
+    static func withMemory(_ model: ActivityFeed.Model, _ memory: ActivityFeed.Memory) -> ActivityFeed.Model {
+        var model = model; model.memory = memory; model.memoryMB = memory.totalMB; return model
+    }
     static func feeds() -> [(String, ActivityFeed)] {
         [
             ("idle", ActivityFeed(models: [idle(laya, kind: "decisions"), idle(qwen, kind: "chat"), idle(kokoro, kind: "voices")], machine: machineIdle)),
@@ -122,7 +142,12 @@ import Testing
             ("voice", ActivityFeed(models: [voice(), idle(qwen, kind: "chat")], machine: machineVoice)),
             ("generic", ActivityFeed(models: [layered()], machine: machineVoice)),
             ("three-busy", ActivityFeed(models: [decisions(), chat(), image()], machine: machineBusy)),
-            ("decisions-drained", ActivityFeed(models: [decisionsDrained(), idle(qwen, kind: "chat")], machine: machineIdle))
+            ("decisions-drained", ActivityFeed(models: [decisionsDrained(), idle(qwen, kind: "chat")], machine: machineIdle)),
+            ("memory-restore", ActivityFeed(models: [restoring()], machine: machineRestoring)),
+            (
+                "memory-kinds",
+                ActivityFeed(models: [withMemory(chat(), .chatMemory), withMemory(voice(), .arraysMemory), withMemory(layered(), .processMemory)], machine: machineBusy)
+            )
         ]
     }
 
@@ -150,10 +175,51 @@ import Testing
         // Every hover text the cards carry, as text (a PNG cannot hover).
         let tips = Self.feeds().flatMap { name, feed in
             feed.models.flatMap { m in
-                [ActivityText.countsHelp(m), m.recent.map { ActivityText.minuteHelp($0, model.section(m)) }].compactMap { $0 }
+                [ActivityText.countsHelp(m), m.recent.map { ActivityText.minuteHelp($0, model.section(m)) }, m.memory.map(ActivityText.memoryHelp)].compactMap { $0 }
                     .map { "\(name) / \(m.id): " + $0.replacingOccurrences(of: "\n", with: " | ") }
             }
         }
         try (sizes + [""] + tips).joined(separator: "\n").write(to: directory.appendingPathComponent("activity-renders.txt"), atomically: true, encoding: .utf8)
     }
+
+    /// A live reading (`GET /arsenal/v1/activity` saved as JSON) drawn through the same panel, dark and light, with its
+    /// hover texts: real figures in the menu's hosted view. Run with ARSENAL_ACTIVITY_CAPTURE=<json> and
+    /// ARSENAL_ACTIVITY_RENDERS=<dir>.
+    @Test(.enabled(if: ProcessInfo.processInfo.environment["ARSENAL_ACTIVITY_CAPTURE"] != nil && ProcessInfo.processInfo.environment["ARSENAL_ACTIVITY_RENDERS"] != nil))
+    func renderCapturedActivity() async throws {
+        let environment = ProcessInfo.processInfo.environment
+        let capture = URL(fileURLWithPath: environment["ARSENAL_ACTIVITY_CAPTURE"]!)
+        let directory = URL(fileURLWithPath: environment["ARSENAL_ACTIVITY_RENDERS"]!)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let json = try #require(try JSONSerialization.jsonObject(with: Data(contentsOf: capture)) as? [String: Any])
+        let feed = ActivityFeed(json: json)
+        #expect(!feed.models.isEmpty)
+        defer { Appearance.shared.set(.dark); NSApp.appearance = nil }
+        let model = ActivityModel()
+        model.rows = Dictionary(Self.rows().map { ($0.id, $0) }, uniquingKeysWith: { a, _ in a })
+        let name = capture.deletingPathExtension().lastPathComponent
+        var lines: [String] = []
+        for mode in [RenderAppearance.dark, .light] {
+            Appearance.shared.set(mode); NSApp.appearance = Appearance.shared.nsAppearance
+            try await Task.sleep(for: .milliseconds(100))
+            model.preview(feed)
+            let file = "activity-\(name)-\(mode.rawValue).png"
+            let size = await QA.renderActivity(model, to: directory.appendingPathComponent(file))
+            lines.append("\(file) \(Int(size.width)) × \(Int(size.height)) pt")
+        }
+        for m in feed.models {
+            lines += [ActivityText.countsHelp(m), m.recent.map { ActivityText.minuteHelp($0, model.section(m)) }, m.memory.map(ActivityText.memoryHelp)].compactMap { $0 }
+                .map { "\(m.id): " + $0.replacingOccurrences(of: "\n", with: " | ") }
+        }
+        try lines.joined(separator: "\n").write(to: directory.appendingPathComponent("activity-\(name).txt"), atomically: true, encoding: .utf8)
+    }
+}
+
+extension ActivityFeed.Memory {
+    /// A chat model: its weights, a long context's KV cache, and the reply's peak.
+    static let chatMemory = ActivityFeed.Memory(source: "mlx", totalMB: 17_900, weightsMB: 15_420, workingMB: 2_050, cacheMB: 240, peakMB: 18_600, mlxPeakMB: 18_100)
+    /// A runner that reports MLX's counters but not its weights apart.
+    static let arraysMemory = ActivityFeed.Memory(source: "mlx", totalMB: 610, arraysMB: 420, cacheMB: 90, peakMB: 700)
+    /// An engine that reports only its process.
+    static let processMemory = ActivityFeed.Memory(source: "process", totalMB: 2_150, peakMB: 3_400)
 }

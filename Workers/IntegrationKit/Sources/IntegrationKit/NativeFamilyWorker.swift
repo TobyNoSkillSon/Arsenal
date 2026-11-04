@@ -45,6 +45,15 @@ private final class NativeFamilyHost: @unchecked Sendable {
     private let state = NSLock(), output = NSLock()
     private var active: (Int, NativeCancellation)?
     var model: (any NativeModel)?
+    /// MLX active memory right after the model loaded: its weights, as MLX holds them.
+    private var weightsBytes: Int?
+    /// Whether MLX's peak was reset when the current or last job began (before that it is the process's lifetime peak).
+    private var peakIsPerJob = false
+    /// While a load or an operation runs, its memory is reported every second (`live` status events).
+    private var ticker: DispatchSourceTimer?
+    /// Bumped when a job ends: a tick already under way when its job ended writes nothing (a cancelled timer does not
+    /// wait for a running handler), so no mid-job reading lands after the job's closing status.
+    private var jobSerial = 0
     init(registrations: [NativeRegistration]) { self.registrations = registrations }
     func sendFrame(_ frame: WireFrame) throws { try output.withLock { try FrameIO.write(frame, to: .standardOutput) } }
     func send(_ value: JSONObject) { try? sendFrame(.json(value)) }
@@ -80,12 +89,13 @@ private final class NativeFamilyHost: @unchecked Sendable {
                         let config = FileManager.default.fileExists(atPath: configFile.path) ? try WireJSON.decode(Data(contentsOf: configFile)) : [:]
                         let registration = try NativeRegistration.resolve(checkpoint: config, architecture: context.architecture, registrations: registrations)
                         let instance = registration.make(), start = ProcessInfo.processInfo.systemUptime
+                        beginJob(); defer { endJob() }
                         do { try instance.load(context, cancellation: token); try NativeParameters.requireHalf(instance.parameters); try token.check() } catch {
                             instance.unload(); Memory.clearCache(); throw error
                         }
-                        model = instance
+                        model = instance; let weights = Memory.activeMemory; state.withLock { weightsBytes = weights }
                         result = ["engine": "mlx-swift", "dtype": .string(context.precision), "load_s": .number(ProcessInfo.processInfo.systemUptime - start)]
-                    case "unload": model?.unload(); model = nil; Memory.clearCache()
+                    case "unload": model?.unload(); model = nil; state.withLock { weightsBytes = nil }; Memory.clearCache()
                     case "status": result = ["loaded": .bool(model != nil), "memory": .object(memory()), "peak_bytes": .number(Double(model?.peakBytes ?? Memory.peakMemory))]
                     case "parameter_inventory":
                         guard ProcessInfo.processInfo.environment["ARSENAL_NATIVE_LAB"] == "1", let model else {
@@ -108,6 +118,7 @@ private final class NativeFamilyHost: @unchecked Sendable {
                         guard let model else { throw WorkerFailure(code: "not_loaded", message: "Load a model first.") }
                         guard model.operations.contains(op) else { throw WorkerFailure(code: "unsupported_op", message: "The loaded model does not support \(op).") }
                         var input = request; input.removeValue(forKey: "id"); input.removeValue(forKey: "op")
+                        beginJob(); defer { endJob() }
                         result = try model.run(
                             op, input: input, cancellation: token,
                             emit: { frame in
@@ -137,14 +148,50 @@ private final class NativeFamilyHost: @unchecked Sendable {
         let failure = error as? WorkerFailure ?? WorkerFailure(code: "runner", message: error.localizedDescription)
         return ["id": .number(Double(id)), "ok": false, "error": ["code": .string(failure.code), "message": .string(failure.message)]]
     }
+    /// A job's peak starts from what is held now, and its memory is reported each second until it ends.
+    private func beginJob() {
+        Memory.peakMemory = 0
+        let serial = state.withLock {
+            peakIsPerJob = true; return jobSerial
+        }
+        let timer = DispatchSource.makeTimerSource(queue: .global(qos: .utility))
+        timer.schedule(deadline: .now() + 1, repeating: 1, leeway: .milliseconds(100))
+        timer.setEventHandler { [weak self] in
+            guard let self else { return }
+            let reading: JSONObject = ["event": "status", "live": true, "memory": .object(self.memory())]
+            self.output.withLock {
+                guard self.state.withLock({ self.jobSerial == serial }) else { return }
+                try? FrameIO.write(.json(reading), to: .standardOutput)
+            }
+        }
+        state.withLock {
+            ticker?.cancel(); ticker = timer
+        }
+        timer.resume()
+    }
+    private func endJob() {
+        state.withLock {
+            jobSerial += 1; ticker?.cancel(); ticker = nil
+        }
+    }
     func memory() -> JSONObject {
         var info = task_vm_info_data_t(); var count = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<integer_t>.size)
         let status = withUnsafeMutablePointer(to: &info) { pointer in
             pointer.withMemoryRebound(to: integer_t.self, capacity: Int(count)) { task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count) }
         }
-        return [
+        var memory: JSONObject = [
             "footprint_mb": .number(status == KERN_SUCCESS ? Double(info.phys_footprint) / 1e6 : Double(Memory.activeMemory) / 1e6),
             "mlx_active_mb": .number(Double(Memory.activeMemory) / 1e6), "mlx_cache_mb": .number(Double(Memory.cacheMemory) / 1e6)
         ]
+        let (weights, perJob) = state.withLock { (weightsBytes, peakIsPerJob) }
+        memory.merge(Self.parts(weights: weights, peak: perJob ? Memory.peakMemory : nil)) { a, _ in a }
+        return memory
+    }
+    /// The weights measured at load and the current job's MLX peak, when known.
+    static func parts(weights: Int?, peak: Int?) -> JSONObject {
+        var parts: JSONObject = [:]
+        if let weights { parts["mlx_weights_mb"] = .number(Double(weights) / 1e6) }
+        if let peak { parts["mlx_peak_mb"] = .number(Double(peak) / 1e6) }
+        return parts
     }
 }

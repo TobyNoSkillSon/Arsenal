@@ -1,0 +1,25 @@
+{
+  "chip": "m5-max",
+  "gpu_cores": 40,
+  "method": "Isolated debug Arsenal (own support folder, lab-signed catalog), headless, driven through MCP arsenal_run: one Get (FP16 cast from the local Hugging Face cache, no download), then two upscale_video requests on a 48-frame 640x480 clip at scale 2 (1280x960 out, 1280x1024 padded). peak_footprint_mb is the restoration worker's lifetime phys_footprint_peak from footprint(1) after both requests (Load included); seconds_warm is the second request's wall time. Mac in use; quick check.",
+  "model": "flashvsr-v1.1",
+  "revision": "1466bf43ff8010ba4184d21084f121d1671854dc",
+  "rows": [
+    {
+      "chip": "m5-max",
+      "date": "2026-11-04T01:40:00Z",
+      "machine": "4 Nov 2026 night task: Mac in use, on AC power, no other GPU job started by this task",
+      "ops": {
+        "upscale_video": {
+          "seconds_warm": 72,
+          "status": 200
+        }
+      },
+      "peak_footprint_mb": 20480.0,
+      "precision": "fp16"
+    }
+  ],
+  "run": "lab-2026-11-04",
+  "schema": "quick-check-1",
+  "source": "lab/flashvsr (worktree lab, not tracked)"
+}

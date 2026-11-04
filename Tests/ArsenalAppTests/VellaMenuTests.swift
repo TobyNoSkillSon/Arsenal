@@ -34,11 +34,11 @@ import Testing
         let settings = try #require(app.menu.items.first { $0.title == "Settings" }?.submenu)
         #expect(settings.items.suffix(2).map(\.title) == [AppDelegate.loginTitle, MenuContent.openFiles])
         let support = try item(app, AppDelegate.supportTitle)
-        #expect(support.view is ProminentMenuItemView && support.image != nil && support.toolTip == AppDelegate.supportHelp)
+        #expect(support.view is ProminentMenuItemView && support.image != nil && support.toolTip == nil)
         let quit = try #require(app.menu.items.last)
         #expect(quit.keyEquivalent == "q" && quit.keyEquivalentModifierMask == .command && quit.toolTip == AppDelegate.quitHelp)
-        // Hints on the items Vella hints, each its own sentence.
-        for title in [MenuContent.openFiles, AppDelegate.loginTitle, AppDelegate.supportTitle, "Quit Arsenal"] {
+        // Hints on the items Vella hints, each its own sentence (Support the Developer, the family item, has none).
+        for title in [MenuContent.openFiles, AppDelegate.loginTitle, "Quit Arsenal"] {
             #expect(try item(app, title).toolTip?.hasSuffix(".") == true, "\(title)")
         }
     }
@@ -111,8 +111,12 @@ import Testing
         #expect(login.title == AppDelegate.loginTitle && login.state == .on)
         #expect(app.menu.items.contains { $0 === support } && support.view === view)
         // The row's hint is the item's, read by the view (AppKit shows a view's hint, not its item's) and by VoiceOver.
-        #expect(view.hint == AppDelegate.supportHelp && view.accessibilityHelp() == AppDelegate.supportHelp)
-        #expect(view.view(view, stringForToolTip: 0, point: .zero, userData: nil) == AppDelegate.supportHelp)
+        // Support has none (the family item); a hint set on its item is still the one the view shows.
+        #expect(view.hint == nil)
+        support.toolTip = "A hint"
+        #expect(view.hint == "A hint" && view.accessibilityHelp() == "A hint")
+        #expect(view.view(view, stringForToolTip: 0, point: .zero, userData: nil) == "A hint")
+        support.toolTip = nil
     }
 
     @Test func aRefusedChangeSaysWhereToLook() {

@@ -1,6 +1,20 @@
-# Arsenal
+<p align="center">
+  <img src="docs/images/icon.png" alt="" width="72">
+</p>
 
-**102 open AI models on your Mac, for you and your agents.** Use them from the menu bar, or let Claude Code and Codex call them over MCP. Everything runs on device, on a Mac with Apple silicon and macOS 26 or newer.
+<h1 align="center">Arsenal</h1>
+
+<p align="center">103 open AI models on your Mac, for you and your agents.</p>
+
+<p align="center">
+  <a href="#install"><img src="docs/images/install.svg" alt="Install Arsenal" width="172" height="42"></a>
+  &nbsp;
+  <a href="https://tobynoskillson.com/#support"><img src="docs/images/support.svg" alt="Support the Developer on GitHub Sponsors or Buy Me a Coffee" width="228" height="42"></a>
+</p>
+
+<p align="center"><a href="docs/MODELS.md">Models</a> · <a href="https://github.com/TobyNoSkillSon/Arsenal/releases/latest">Latest release</a> · <a href="#connect-an-agent-over-mcp">MCP</a> · <a href="LICENSE">MIT licence</a></p>
+
+<a name="install"></a>Use them from the menu bar, or let Claude Code and Codex call them over MCP. Everything runs on device, on a Mac with Apple silicon and macOS 26 or newer.
 
 ```sh
 brew tap tobynoskillson/tap
@@ -50,7 +64,7 @@ or open it anyway from System Settings → Privacy & Security.
 </picture>
 </p>
 
-The catalog holds 102 models: transcription and who spoke when, voices, document reading, translation, images, video frames, 3D, music, sound cleanup, detection, search and more. Each downloads on its own, from under 1 MB to 28.5 GB; all of them together take 370 GB. [docs/MODELS.md](docs/MODELS.md) lists each with its download size, weights licence, what it is good for and its limits. No chat model ships by default; you can add your own.
+The catalog holds 103 models: transcription and who spoke when, voices, document reading, translation, images, video, 3D, music, sound cleanup, detection, search and more. Each downloads on its own, from under 1 MB to 28.5 GB; all of them together take 374 GB. [docs/MODELS.md](docs/MODELS.md) lists each with its download size, weights licence, what it is good for and its limits. No chat model ships by default; you can add your own.
 
 ## First run
 

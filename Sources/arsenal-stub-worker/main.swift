@@ -93,6 +93,12 @@ while let frame = try FrameIO.read(from: .standardInput) {
         // `hold_ms`: keep the request running at that size (a worker that stays big while the Mac fills around it).
         if let hold = req["hold_ms"]?.number, hold > 0 { usleep(UInt32(min(hold, 60_000) * 1000)) }
         reply["grown_mb"] = .number(Double(size / 1_048_576))
+    case "test_live_status":
+        // A runner's reading during a job (the native host sends one each second): weights, MLX and the job's MLX peak.
+        try send([
+            "event": "status", "live": true,
+            "memory": ["footprint_mb": 900, "mlx_active_mb": 700, "mlx_cache_mb": 50, "mlx_weights_mb": 400, "mlx_peak_mb": 820]
+        ])
     case "test_crash": exit(23)
     case "test_hang": sleep(60)
     case "test_ignore_term": signal(SIGTERM, SIG_IGN); sleep(60)

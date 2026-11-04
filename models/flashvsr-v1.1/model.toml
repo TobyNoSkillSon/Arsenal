@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: MIT
+schema = 3
+id = "flashvsr-v1.1"
+name = "FlashVSR v1.1"
+kind = "restoration"
+params = "1.8B"
+publisher = "OpenImagingLab"
+released = 2025
+suggested = false
+purpose = "Video super-resolution"
+summary = "Enlarge live-action video up to four times in one streaming diffusion step."
+tasks = ["upscale_video"]
+languages = ["und"]
+good_for = ["Live-action footage", "Long clips in one pass"]
+limits = ["Invents detail; not for anime, cartoons, graphics or text", "Turns soft focus and bokeh into crisp texture", "At most about 4.2 megapixels per output frame", "Job files are limited by the host to 4 GiB"]
+architecture = "flashvsr"
+[facets]
+modalities_in = ["video"]
+modalities_out = ["video"]
+[licence]
+spdx = "Apache-2.0"
+name = "Apache-2.0"
+commercial = true
+url = "https://huggingface.co/mlx-community/FlashVSR-v1.1-bf16/tree/1466bf43ff8010ba4184d21084f121d1671854dc"
+[weights]
+repo = "mlx-community/FlashVSR-v1.1-bf16"
+revision = "1466bf43ff8010ba4184d21084f121d1671854dc"
+dtype = "bf16"
+files = ["config.json", "dit_bf16.safetensors", "lq_proj_bf16.safetensors", "prompt_bf16.safetensors", "tcdecoder_bf16.safetensors"]
+[weights.sha256]
+"config.json" = "c0fd5528d4b135ac920fc09db549ff1aaee14f62340863d4a1e23879bec0b1d6"
+"dit_bf16.safetensors" = "141f48131e72eac0cf0709cc50e7862e16be239058735d14196667760f41fb01"
+"lq_proj_bf16.safetensors" = "6bec96434c240efa808c83f639948a42b31b2877d96667491846d9ba5cfd2b41"
+"prompt_bf16.safetensors" = "7c4f9b13ccc593c6fb4e779720cdf5351c64670f2e5793fa8c887a16c4a1d573"
+"tcdecoder_bf16.safetensors" = "9f0d8096bf8c0f0ecd95ae17f12c62114aac10ef03b498ea3be5839903890d0b"
+[weights.bytes]
+"config.json" = 2585
+"dit_bf16.safetensors" = 2838077584
+"lq_proj_bf16.safetensors" = 575692736
+"prompt_bf16.safetensors" = 4194648
+"tcdecoder_bf16.safetensors" = 90683270
+# Get casts the BF16 release to FP16 file by file (Workers/Restoration FlashVSRAdapter); nothing is quantized.
+[derive]
+fp16 = "cast:restoration-flashvsr"
+[selection]
+default = "native"
+[[runner]]
+name = "native"
+language = "swift"
+worker = "restoration"
+protocol = 1
+chips = ["*"]
+min_macos = "26.0"
+fast_exact = false
+features = ["sequentialOnly"]
+[[op]]
+name = "upscale_video"
+title = "Upscale video"
+input = "ops/upscale_video.input.json"
+output_schema = "kinds/restoration/ops/upscale_video.output.json"
+output = "file"
+stream = false
+timeout_s = 3600
+first_response_timeout_s = 3600
+[gate]
+recipe = "gate/gate.toml"
+[bench]
+recipe = "bench/bench.toml"

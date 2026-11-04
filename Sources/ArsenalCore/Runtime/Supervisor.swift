@@ -15,7 +15,7 @@ public actor Supervisor {
     public init(crashLimit: Int = 3) { self.crashLimit = max(1, crashLimit) }
     public func worker(
         id: String, launch: WorkerLaunch, manual: Bool = false, status: (@Sendable (WorkerMemory) async -> Void)? = nil,
-        statusDetails: (@Sendable (JSONObject) async -> Void)? = nil
+        statusDetails: (@Sendable (JSONObject) async -> Void)? = nil, live: (@Sendable (WorkerMemory) async -> Void)? = nil
     ) async throws -> WorkerProcess {
         guard !closing else { throw WorkerFailure(code: "shutting_down", message: "Worker supervisor is shutting down.") }
         guard !unloading.contains(id) else { throw WorkerFailure(code: "busy", message: "Runner is still unloading; try again after it stops.") }
@@ -37,7 +37,7 @@ public actor Supervisor {
         }
         let worker = WorkerProcess(), token = UUID()
         let task = Task<WorkerProcess, any Error> {
-            do { try Task.checkCancellation(); try await worker.start(launch, status: status, statusDetails: statusDetails); return worker } catch {
+            do { try Task.checkCancellation(); try await worker.start(launch, status: status, statusDetails: statusDetails, live: live); return worker } catch {
                 await worker.unload(grace: 0.2); throw error
             }
         }

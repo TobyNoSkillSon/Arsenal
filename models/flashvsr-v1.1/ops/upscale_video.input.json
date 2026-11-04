@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "video": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "path"
+      ],
+      "additionalProperties": false,
+      "x-arsenal-file": {
+        "accept": [
+          "video/*"
+        ]
+      },
+      "x-arsenal-control": "video-picker"
+    },
+    "scale": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 4,
+      "default": 2
+    },
+    "target_height": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 8192
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295,
+      "default": 0
+    },
+    "color_correction": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "video"
+  ],
+  "additionalProperties": false
+}

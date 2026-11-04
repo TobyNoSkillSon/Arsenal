@@ -16,6 +16,8 @@ final class Worker {
     private var loadSeconds: Double = 0
     private var telemetryStart: Double?
     private var telemetryOp: String?
+    /// MLX active memory right after the load: the weights.
+    private var weightsMB: Double?
     /// load.config.kernels (docs/KERNELS.md); nil when the supervisor sent none.
     private var kernels: FolderKernels?
 
@@ -62,7 +64,7 @@ final class Worker {
             case "cancel":
                 // Ops run one at a time on this thread: a cancel only arrives after its target finished.
                 reply(id, ["cancelled": false])
-            case "load": reply(id, try load(request)); pushStatus()
+            case "load": reply(id, try load(request)); weightsMB = runner == nil ? nil : Double(Memory.activeMemory) / 1e6; pushStatus()
             case "unload":
                 reply(id, [:])
                 return .exit
@@ -246,13 +248,15 @@ final class Worker {
     }
 
     private func memory() -> [String: Any] {
-        [
+        var memory: [String: Any] = [
             "footprint_mb": (Double(Self.footprint()) / 1e6).rounded(),
             "footprint_peak_mb": Double(Self.footprint(peak: true)) / 1e6,
             "mlx_active_mb": (Double(Memory.activeMemory) / 1e6).rounded(),
             "mlx_cache_mb": (Double(Memory.cacheMemory) / 1e6).rounded(),
             "mlx_peak_mb": (Double(Memory.peakMemory) / 1e6).rounded()
         ]
+        if let weightsMB { memory["mlx_weights_mb"] = weightsMB.rounded() }
+        return memory
     }
     /// phys_footprint: what Activity Monitor's Memory column shows for this process.
     /// `peak`: the process's lifetime phys_footprint peak (load and every request so far).

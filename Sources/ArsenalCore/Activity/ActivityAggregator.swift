@@ -25,11 +25,15 @@ private final class ActivityRequestStore: @unchecked Sendable {
     private struct Second {
         var finished = 0, failed = 0, runs = 0, tokens = 0, steps = 0, images = 0
         var runSum = 0.0, waitSum = 0.0, audio = 0.0
+        /// Finished requests that made audio: the audio they made and the seconds they worked, credited together when each
+        /// finishes, so the pair enters and leaves the minute at once.
+        var speechAudio = 0.0, speechRunSum = 0.0
         /// The part of this second in which at least one of the model's requests was running (0…1).
         var busy = 0.0
         mutating func add(_ o: Second) {
             finished += o.finished; failed += o.failed; runs += o.runs; tokens += o.tokens; steps += o.steps; images += o.images
             runSum += o.runSum; waitSum += o.waitSum; audio += o.audio; busy += o.busy
+            speechAudio += o.speechAudio; speechRunSum += o.speechRunSum
         }
     }
     private var jobs: [UUID: Job] = [:]
@@ -171,6 +175,9 @@ private final class ActivityRequestStore: @unchecked Sendable {
                 credit(job.model) { s in
                     s.finished += 1; s.audio += max(0, more); s.images += images
                     if let started = job.started { s.runs += 1; s.runSum += max(0, end - started); s.waitSum += max(0, started - job.accepted) }
+                    if let started = job.started, let made = duration ?? (job.audioCredited > 0 ? job.audioCredited : nil), end > started {
+                        s.speechAudio += made; s.speechRunSum += end - started
+                    }
                 }
             }
         }
@@ -207,7 +214,7 @@ private final class ActivityRequestStore: @unchecked Sendable {
                         requests: requests, queued: own.filter { $0.started == nil }.count, running: own.filter(\.running).count,
                         recent: recent(row.id, current: current),
                         batch: active == nil ? nil : batches[row.id]?.0,
-                        memoryMB: memory.models[row.id]?.footprintMB)
+                        memoryMB: memory.models[row.id]?.currentMB, memory: memory.models[row.id].flatMap(ModelMemoryActivity.init))
                     result.revision = row.revision
                     if row.revision?.swapping == true { result.state = "reloading" }
                     return result
@@ -241,7 +248,8 @@ private final class ActivityRequestStore: @unchecked Sendable {
         return RecentActivity(
             windowS: Self.window, finished: total.finished, failed: total.failed, meanRunS: total.runs > 0 ? total.runSum / Double(total.runs) : nil,
             meanWaitS: total.runs > 0 ? total.waitSum / Double(total.runs) : nil, tokens: total.tokens, steps: total.steps, images: total.images,
-            audioS: total.audio, busyS: total.busy, busy: series.map { min(1, max(0, $0.busy)) })
+            audioS: total.audio, busyS: total.busy, busy: series.map { min(1, max(0, $0.busy)) },
+            realTime: total.speechAudio > 0 && total.speechRunSum > 0 ? total.speechAudio / total.speechRunSum : nil)
     }
 }
 
@@ -426,7 +434,10 @@ public actor ActivityAggregator {
 extension ModelsService {
     public func activity() async -> ActivitySnapshot {
         let rows = await rows(), memory = await memory()
-        return .init(models: rows.filter { $0.residentDType != nil }.map { .init(id: $0.id, kind: $0.kind, memoryMB: memory.models[$0.id]?.footprintMB) })
+        return .init(
+            models: rows.filter { $0.residentDType != nil }.map {
+                .init(id: $0.id, kind: $0.kind, memoryMB: memory.models[$0.id]?.currentMB, memory: memory.models[$0.id].flatMap(ModelMemoryActivity.init))
+            })
     }
     /// The Activity panel's stream: requests and the machine's readings.
     public func activityStream() async -> AsyncStream<ActivitySnapshot> { await activityStream(machine: true) }

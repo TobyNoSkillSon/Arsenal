@@ -20,8 +20,15 @@ class LaunchServicesTests(unittest.TestCase):
     def test_only_installed_is_allowed(self):
         self.assertEqual(ls.check(record(ls.INSTALLED)), [str(ls.INSTALLED)])
 
+    def test_homebrew_install_is_installed_too(self):
+        cask = '/Applications/Arsenal.app'
+        self.assertEqual(ls.check(record(cask) + record(ls.INSTALLED)), [cask, str(ls.INSTALLED)])
+        with patch.object(ls.subprocess, 'run') as run, self.assertRaisesRegex(RuntimeError, 'installed Arsenal'):
+            ls.unregister([pathlib.Path(cask)])
+        run.assert_not_called()
+
     def test_intermediates_and_rollback_fail(self):
-        for path in ['/lab/.build/pkg/stage/Arsenal.app', '/lab/dist/Arsenal.app', str(ls.INSTALLED)+'.previous', '/lab with spaces/Arsenal.app']:
+        for path in ['/lab/.build/pkg/stage/Arsenal.app', '/lab/dist/Arsenal.app', str(ls.INSTALLED)+'.previous', '/Applications/Arsenal.app.previous', '/lab with spaces/Arsenal.app']:
             with self.subTest(path=path), self.assertRaisesRegex(RuntimeError, 'Unexpected production'):
                 ls.check(record(ls.INSTALLED) + record(path))
 

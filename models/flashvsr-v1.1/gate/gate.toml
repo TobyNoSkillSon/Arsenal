@@ -1,0 +1,7 @@
+schema = 1
+id = "flashvsr-v1.1-native-v1"
+reference_runner = "pinned-upstream-mlx-swift"
+precision = "fp16"
+independent_vendor_qualified = false
+status = "pending-reference"
+passing_requires = ["Exact checkpoint names and shapes", "FP16 against the BF16 release on fixed inputs", "Upstream PyTorch reference on the GPU at half precision"]

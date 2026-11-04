@@ -16,6 +16,8 @@ public enum IntegrationReferences {
 
         Arsenal is the Mac app that runs AI models locally. You drive it through its MCP tools; the loopback HTTP API is for scripts. Answers are short text written for you to relay; errors start with a `[category]` tag. The work goes **find → read → choose → run → wait**, then you relay the result.
 
+        For showcases, tests, demos and evaluations, run models through the installed Arsenal, not an isolated copy; isolate only to test an unreleased Arsenal build.
+
         ## Connect
 
         If the `arsenal_*` tools are missing, start Arsenal, then register its stdio bridge once; it finds the app's port and token on every launch:
@@ -920,6 +922,13 @@ public enum IntegrationReferences {
         ```
 
         Numbers are current decimal MB (`bytes / 1,000,000`), finite and non-negative. Report real process memory, not a made-up zero or peak-as-current value. Non-MLX engines report both MLX fields as zero. The checker validates the envelope and bounds, not the accuracy of OS accounting. Push status after load, successful run and unload, and on explicit status requests; never sample continuously at idle. A model-quality/performance result may mark an unavailable metric `null`; a wire memory report is numeric.
+
+        Two optional fields let Activity say what the memory is for: `mlx_weights_mb`, MLX active memory measured once the load
+        has finished (the weights as MLX holds them), and `mlx_peak_mb`, MLX's peak since the current or last load or job began
+        (reset `Memory.peakMemory` when each begins; never send a lifetime peak). While a load or job runs a runner may push
+        `{"event":"status","live":true,"memory":{…}}` about once a second; live readings update Activity without making the menu
+        re-read its rows. The supervisor samples every runner's footprint twice a second during each job and reports the job's
+        highest as the model's peak, so a runner without these fields still shows its peak.
 
         ### Cancellation
 

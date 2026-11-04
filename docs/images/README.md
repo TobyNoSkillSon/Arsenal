@@ -11,3 +11,6 @@ Arsenal 1.0 (2 Nov 2026). Inputs:
   Co., public domain, Library of Congress 3g04637u); TimesFM 2.5 200M forecasting CO2 at Mauna Loa (NOAA Global
   Monitoring Laboratory data), drawn against what was later measured.
 - `readme-app*.webp`: Arsenal 1.0's menu-bar menu and Models table.
+- `icon.png`: Arsenal's app icon, rasterised at 256 px from `Resources/Brand/icon.svg` by `scripts/icon.swift`, the
+  same renderer the build uses. `install.svg` and `support.svg` take their colours from that icon: the tile's silver
+  (#f5f5f3 to #e0e0de) and the cannon's ink (#141414).

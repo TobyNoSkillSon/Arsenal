@@ -21,13 +21,66 @@ public struct ModelActivity: Codable, Sendable, Equatable, Identifiable {
     /// Sequences advanced together, not the number of connected HTTP clients. Absent until reported by a runner.
     public var batch: Double?
     public var memoryMB: Double?
-    enum CodingKeys: String, CodingKey { case id, kind, revision, state, requests, queued, running, recent, batch; case memoryMB = "memory_mb" }
+    /// What that memory is for, and the most the current or last job took (absent until the runner reports).
+    public var memory: ModelMemoryActivity?
+    enum CodingKeys: String, CodingKey { case id, kind, revision, state, requests, queued, running, recent, batch, memory; case memoryMB = "memory_mb" }
     public init(
         id: String, kind: String, state: String = "idle", requests: [RequestActivity] = [], queued: Int = 0, running: Int = 0, recent: RecentActivity? = nil,
-        batch: Double? = nil, memoryMB: Double? = nil
+        batch: Double? = nil, memoryMB: Double? = nil, memory: ModelMemoryActivity? = nil
     ) {
         self.id = id; self.kind = kind; self.state = state; self.requests = requests; self.queued = queued; self.running = running; self.recent = recent
-        self.batch = batch; self.memoryMB = memoryMB
+        self.batch = batch; self.memoryMB = memoryMB; self.memory = memory
+    }
+}
+/// A model's memory by what holds it, in MB (10⁶ bytes). Every figure is measured in the runner's process: the process
+/// footprint (what Activity Monitor shows for it), MLX's own counters where the runner reports them, and the
+/// supervisor's footprint samples, twice a second during each job. Nothing is estimated; a part not reported is absent.
+public struct ModelMemoryActivity: Codable, Sendable, Equatable {
+    /// `mlx`: the runner reports MLX's counters, so its memory splits into weights, working memory and cache. `process`:
+    /// only the process footprint is known (an engine that does not report MLX's counters).
+    public var source: String
+    /// The process footprint now (the supervisor's newest sample during a job, else the runner's reading).
+    public var totalMB: Double
+    /// MLX active memory right after the load: the weights (and whatever else the load keeps alive).
+    public var weightsMB: Double?
+    /// MLX active memory beyond the weights: activations, KV cache or context, and scratch.
+    public var workingMB: Double?
+    /// MLX active memory, when the weights were not measured apart (weights and working memory together).
+    public var arraysMB: Double?
+    /// MLX's buffer cache: freed buffers MLX keeps for reuse; macOS gets them back when the cache is cleared.
+    public var cacheMB: Double?
+    /// What the process grew by during the running job since the runner's last reading (the supervisor's samples), not
+    /// yet split by MLX's counters: a runner that reports only between jobs. Absent when nothing is unsplit.
+    public var unsplitMB: Double?
+    /// The most the process held during the current or last job (or load): the larger of the supervisor's footprint
+    /// samples and MLX's exact active peak (which the footprint always contains). Absent before either is known.
+    public var peakMB: Double?
+    /// MLX's exact active-memory peak in that job (weights plus working memory at its most).
+    public var mlxPeakMB: Double?
+    enum CodingKeys: String, CodingKey {
+        case source; case totalMB = "total_mb", weightsMB = "weights_mb", workingMB = "working_mb", arraysMB = "arrays_mb", cacheMB = "cache_mb"
+        case unsplitMB = "unsplit_mb", peakMB = "peak_mb", mlxPeakMB = "mlx_peak_mb"
+    }
+    public init(
+        source: String, totalMB: Double, weightsMB: Double? = nil, workingMB: Double? = nil, arraysMB: Double? = nil, cacheMB: Double? = nil,
+        unsplitMB: Double? = nil, peakMB: Double? = nil, mlxPeakMB: Double? = nil
+    ) {
+        self.source = source; self.totalMB = totalMB; self.weightsMB = weightsMB; self.workingMB = workingMB; self.arraysMB = arraysMB; self.cacheMB = cacheMB
+        self.unsplitMB = unsplitMB; self.peakMB = peakMB; self.mlxPeakMB = mlxPeakMB
+    }
+    /// From a runner's reading. A runner that reports no MLX memory (zero active and cache) is `process`. The parts come
+    /// from the runner's one reading; the supervisor's newer sample only adds what grew since.
+    public init?(_ m: WorkerMemory) {
+        guard m.footprintMB > 0 else { return nil }
+        let mlx = m.mlxActiveMB > 0 || m.mlxCacheMB > 0
+        let total = m.currentMB, unsplit = max(0, total - m.footprintMB)
+        let mlxPeak = mlx ? m.mlxPeakMB.flatMap { $0 > 0 ? $0 : nil } : nil
+        let peaks = [m.jobPeakMB, mlxPeak].compactMap { $0 }.filter { $0 > 0 }
+        let weights = mlx ? m.mlxWeightsMB.flatMap { $0 > 0 ? $0 : nil } : nil
+        self.init(
+            source: mlx ? "mlx" : "process", totalMB: total, weightsMB: weights, workingMB: weights.map { max(0, m.mlxActiveMB - $0) },
+            arraysMB: mlx && weights == nil ? m.mlxActiveMB : nil, cacheMB: mlx ? m.mlxCacheMB : nil, unsplitMB: mlx && unsplit > 0 ? unsplit : nil,
+            peakMB: peaks.max().map { max($0, total) }, mlxPeakMB: mlxPeak)
     }
 }
 /// A model's last minute, in whole seconds (the second under way is not counted yet): what finished, how long it took,
@@ -48,16 +101,19 @@ public struct RecentActivity: Codable, Sendable, Equatable {
     public var busyS: Double
     /// One value per second of the window, oldest first: the part of that second the model was working (0…1).
     public var busy: [Double]
+    /// Seconds of audio per second of work, over the minute's finished requests that made audio (each request's own run
+    /// time, so idle gaps between requests do not count); nil when none finished.
+    public var realTime: Double?
     enum CodingKeys: String, CodingKey {
         case finished, failed, tokens, steps, images, busy
-        case windowS = "window_s", meanRunS = "mean_run_s", meanWaitS = "mean_wait_s", audioS = "audio_s", busyS = "busy_s"
+        case windowS = "window_s", meanRunS = "mean_run_s", meanWaitS = "mean_wait_s", audioS = "audio_s", busyS = "busy_s", realTime = "real_time"
     }
     public init(
         windowS: Int = 60, finished: Int = 0, failed: Int = 0, meanRunS: Double? = nil, meanWaitS: Double? = nil, tokens: Int = 0, steps: Int = 0, images: Int = 0,
-        audioS: Double = 0, busyS: Double = 0, busy: [Double] = []
+        audioS: Double = 0, busyS: Double = 0, busy: [Double] = [], realTime: Double? = nil
     ) {
         self.windowS = windowS; self.finished = finished; self.failed = failed; self.meanRunS = meanRunS; self.meanWaitS = meanWaitS; self.tokens = tokens
-        self.steps = steps; self.images = images; self.audioS = audioS; self.busyS = busyS; self.busy = busy
+        self.steps = steps; self.images = images; self.audioS = audioS; self.busyS = busyS; self.busy = busy; self.realTime = realTime
     }
 }
 public struct RequestActivity: Codable, Sendable, Equatable, Identifiable {

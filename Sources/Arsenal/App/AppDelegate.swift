@@ -351,10 +351,10 @@ import SwiftUI
         modelsMenu.updateRefresh(enabled: !quitting && !refreshing, notice: refreshNotice)
         menu.addItem(.separator())
         item("About Arsenal", "info.circle", #selector(about), in: menu)
-        // Above Quit, to the author's support page.
-        let support = item(Self.supportTitle, "heart.fill", #selector(supportDeveloper), in: menu)
-        support.toolTip = Self.supportHelp
-        ProminentMenuItemView(item: support).accent = Self.supportAccent
+        // Directly above Quit, to the author's support page: the V-family Support item (outline heart, the lighter row
+        // at rest, the system selection under the pointer, no hint), the same as Heimdall's and Vella's.
+        let support = item(Self.supportTitle, Self.supportSymbol, #selector(supportDeveloper), in: menu)
+        ProminentMenuItemView(item: support).resting = true
         let quit = item("Quit Arsenal", "power", #selector(QuitTarget.quit(_:)), key: "q", in: menu)
         quit.target = QuitTarget.shared; quit.toolTip = Self.quitHelp
         Self.tidySeparators(menu)
@@ -912,9 +912,7 @@ import SwiftUI
     }
     static let supportTitle = "Support the Developer\u{2026}"
     static let supportURL = URL(string: "https://tobynoskillson.com/#support")!
-    /// Support the Developer's warm accent: the system's pink, so it follows the system's light and dark variants.
-    static let supportAccent = NSColor.systemPink
-    static let supportHelp = "Opens tobynoskillson.com: GitHub Sponsors and Buy Me a Coffee."
+    static let supportSymbol = "heart"
     static let quitHelp = "Stops running work and every model, and frees their memory."
     @objc private func supportDeveloper() {
         DispatchQueue.main.async {

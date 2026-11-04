@@ -21,9 +21,27 @@ public struct WorkerMemory: Codable, Sendable, Equatable {
     public var footprintMB: Double
     public var mlxActiveMB: Double
     public var mlxCacheMB: Double
-    enum CodingKeys: String, CodingKey { case footprintMB = "footprint_mb", mlxActiveMB = "mlx_active_mb", mlxCacheMB = "mlx_cache_mb" }
-    public init(footprintMB: Double = 0, mlxActiveMB: Double = 0, mlxCacheMB: Double = 0) {
+    /// MLX active memory measured right after the model finished loading: what its weights (and anything else a load
+    /// keeps alive) hold. Absent from runners that do not report it.
+    public var mlxWeightsMB: Double?
+    /// MLX's active-memory high-water since the current (or last) job started. Absent from runners that do not reset it
+    /// per job (a lifetime peak would mislead).
+    public var mlxPeakMB: Double?
+    /// The worker process's footprint at its highest during the current (or last) job, sampled by the supervisor twice a
+    /// second for every runner. Never sent by a runner.
+    public var jobPeakMB: Double?
+    /// The supervisor's latest footprint sample during a job, newer than the runner's reading (whose `footprint_mb` and
+    /// MLX parts were taken at one moment). Never sent by a runner.
+    public var liveFootprintMB: Double?
+    /// What the process holds now: the newest of the two readings.
+    public var currentMB: Double { liveFootprintMB ?? footprintMB }
+    enum CodingKeys: String, CodingKey {
+        case footprintMB = "footprint_mb", mlxActiveMB = "mlx_active_mb", mlxCacheMB = "mlx_cache_mb", mlxWeightsMB = "mlx_weights_mb", mlxPeakMB = "mlx_peak_mb"
+        case jobPeakMB = "job_peak_mb", liveFootprintMB = "live_footprint_mb"
+    }
+    public init(footprintMB: Double = 0, mlxActiveMB: Double = 0, mlxCacheMB: Double = 0, mlxWeightsMB: Double? = nil, mlxPeakMB: Double? = nil, jobPeakMB: Double? = nil) {
         self.footprintMB = footprintMB; self.mlxActiveMB = mlxActiveMB; self.mlxCacheMB = mlxCacheMB
+        self.mlxWeightsMB = mlxWeightsMB; self.mlxPeakMB = mlxPeakMB; self.jobPeakMB = jobPeakMB
     }
 }
 public struct WorkerRequest: Codable, Sendable {

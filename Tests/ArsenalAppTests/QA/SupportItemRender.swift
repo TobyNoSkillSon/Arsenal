@@ -4,8 +4,9 @@ import Testing
 @testable import Arsenal
 
 /// `ARSENAL_SUPPORT_RENDER=<dir>`: Support the Developer beside About and Quit as the status menu draws them, at 2× pixels,
-/// dark and light, at rest and under the pointer (support-<appearance>-<state>.png). Offscreen; the menu's material is a
-/// flat stand-in, so only the row's own drawing is judged here.
+/// dark and light, at rest and under the pointer (support-<appearance>-<state>.png). No window: the root view carries the
+/// appearance and is drawn into a bitmap, so nothing appears on screen. The menu's material is a flat stand-in, so only
+/// the row's own drawing is judged here.
 @MainActor @Suite(.menuState, .serialized) struct SupportItemRender {
     nonisolated static var directory: URL? { ProcessInfo.processInfo.environment["ARSENAL_SUPPORT_RENDER"].map { URL(fileURLWithPath: $0) } }
 
@@ -18,32 +19,35 @@ import Testing
         ] {
             for lit in [false, true] {
                 let menu = NSMenu()
-                let items = [("About Arsenal", "info.circle"), (AppDelegate.supportTitle, "heart.fill"), ("Quit Arsenal", "power")].map { title, icon in
+                let items = [("About Arsenal", "info.circle"), (AppDelegate.supportTitle, AppDelegate.supportSymbol), ("Quit Arsenal", "power")].map { title, icon in
                     let item = NSMenuItem(title: title, action: nil, keyEquivalent: ""); item.image = Symbol.menu(icon); menu.addItem(item); return item
                 }
                 let width: CGFloat = 250
-                let root = NSView(frame: NSRect(x: 0, y: 0, width: width, height: 24 * 3 + 12))
-                root.wantsLayer = true; root.layer?.backgroundColor = fill.cgColor; root.autoresizesSubviews = false
+                let root = Backdrop(frame: NSRect(x: 0, y: 0, width: width, height: 24 * 3 + 12))
+                root.fill = fill; root.appearance = NSAppearance(named: appearance); root.autoresizesSubviews = false
                 for (i, item) in items.enumerated() {
                     let view = ProminentMenuItemView(item: item)
-                    if i == 1 { view.accent = AppDelegate.supportAccent; view.forcesHighlight = lit }
+                    if i == 1 { view.resting = true; view.forcesHighlight = lit; view.rendersSelectionFill = lit }
                     let row = NSView(frame: NSRect(x: 0, y: root.frame.height - 6 - CGFloat(i + 1) * 24, width: width, height: ProminentMenuItemView.height))
                     row.autoresizesSubviews = false
                     view.frame = row.bounds
                     row.addSubview(view)
                     root.addSubview(row)
                 }
-                let window = NSWindow(contentRect: NSRect(origin: NSPoint(x: -9000, y: -9000), size: root.frame.size), styleMask: .borderless, backing: .buffered, defer: false)
-                window.appearance = NSAppearance(named: appearance); window.contentView = root; window.orderFrontRegardless()
-                root.layoutSubtreeIfNeeded(); root.display()
+                root.layoutSubtreeIfNeeded()
                 let rep = NSBitmapImageRep(
                     bitmapDataPlanes: nil, pixelsWide: Int(root.bounds.width * 2), pixelsHigh: Int(root.bounds.height * 2), bitsPerSample: 8, samplesPerPixel: 4,
                     hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB, bytesPerRow: 0, bitsPerPixel: 0)!
                 rep.size = root.bounds.size
                 root.cacheDisplay(in: root.bounds, to: rep)
                 try rep.representation(using: .png, properties: [:])?.write(to: directory.appendingPathComponent("support-\(name)-\(lit ? "hover" : "rest").png"))
-                window.orderOut(nil)
             }
         }
     }
+}
+
+/// The flat stand-in for the menu's material, drawn by the view itself so a windowless bitmap render includes it.
+private final class Backdrop: NSView {
+    var fill = NSColor.black
+    override func draw(_ dirtyRect: NSRect) { fill.setFill(); bounds.fill() }
 }

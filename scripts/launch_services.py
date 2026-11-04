@@ -10,6 +10,13 @@ import time
 LSREGISTER = '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
 PRODUCTION_ID = 'dev.arsenal.app'
 INSTALLED = pathlib.Path.home() / 'Applications/Arsenal.app'
+# The Homebrew cask puts the app in /Applications (the curl installer uses ~/Applications): an installed app too, never a stray copy.
+INSTALLED_PATHS = (INSTALLED, pathlib.Path('/Applications/Arsenal.app'))
+
+
+def installed(path):
+    path = pathlib.Path(path).resolve()
+    return any(path == app.resolve() or app.resolve() in path.parents for app in INSTALLED_PATHS)
 
 
 def registrations(dump):
@@ -34,7 +41,7 @@ def dump_registrations():
 def unregister(paths):
     paths = sorted(set(map(pathlib.Path, paths)))
     for path in paths:
-        if path.resolve() == INSTALLED.resolve() or INSTALLED.resolve() in path.resolve().parents:
+        if installed(path):
             raise RuntimeError('Refusing to unregister the installed Arsenal: ' + str(path))
     diagnostics = []
     # -u can remove a stale record but report a scan error for an absent/renamed non-.app path.
@@ -67,7 +74,7 @@ def cleanup_tree(root):
 
 def check(dump):
     paths = [r['path'] for r in registrations(dump) if r['identifier'] == PRODUCTION_ID]
-    unexpected = [p for p in paths if pathlib.Path(p) != INSTALLED]
+    unexpected = [p for p in paths if pathlib.Path(p) not in INSTALLED_PATHS]
     if unexpected:
         raise RuntimeError('Unexpected production Arsenal registrations:\n' + '\n'.join(unexpected))
     return paths
@@ -83,7 +90,7 @@ def main():
             parser.error('check takes no paths')
         dump = subprocess.run([LSREGISTER, '-dump'], check=True, capture_output=True, text=True, timeout=30).stdout
         paths = check(dump)
-        print(f'LaunchServices: {len(paths)} production registration(s); only {INSTALLED} allowed')
+        print(f'LaunchServices: {len(paths)} production registration(s); only {" and ".join(map(str, INSTALLED_PATHS))} allowed')
     else:
         if not args.paths:
             parser.error('cleanup requires explicit task-owned paths')

@@ -1100,7 +1100,8 @@ extension RealModelsService {
         try admitWork()
         let worker = try await supervisor.worker(
             id: id, launch: launch, manual: residency == .manual, status: { [weak self] memory in await self?.status(id, memory) },
-            statusDetails: { [weak self] details in await self?.kernelStatus(id, details) })
+            statusDetails: { [weak self] details in await self?.kernelStatus(id, details) },
+            live: { [weak self] memory in await self?.liveMemory(id, memory) })
         do {
             try await worker.verifyOperations(ops.filter { $0.name != "delete_voice" || m.kind != "voices" }.map(\.name))
             let loadReply = try await worker.request(
@@ -1321,6 +1322,12 @@ extension RealModelsService {
         modelRows[id]?.kernels = kernels; changed()
     }
     func status(_ id: String, _ memory: WorkerMemory) { footprints[id] = memory; residents[id]?.memoryMB = memory.footprintMB; emit(.memory(self.memory())) }
+    /// A reading taken while a job runs: Activity reads it on its next tick; the menu is not told (it would re-read
+    /// rows, catalog and settings every second of every job). The job's closing status still notifies.
+    func liveMemory(_ id: String, _ memory: WorkerMemory) {
+        guard residents[id] != nil || footprints[id] != nil else { return }
+        footprints[id] = memory; residents[id]?.memoryMB = memory.currentMB
+    }
     func persist() throws {
         let file = paths.support.appendingPathComponent("config.json")
         var candidate = config

@@ -128,6 +128,13 @@ Successful load returns `load_s` (finite, non-negative seconds), `engine` (nonem
 
 Numbers are current decimal MB (`bytes / 1,000,000`), finite and non-negative. Report real process memory, not a made-up zero or peak-as-current value. Non-MLX engines report both MLX fields as zero. The checker validates the envelope and bounds, not the accuracy of OS accounting. Push status after load, successful run and unload, and on explicit status requests; never sample continuously at idle. A model-quality/performance result may mark an unavailable metric `null`; a wire memory report is numeric.
 
+Two optional fields let Activity say what the memory is for: `mlx_weights_mb`, MLX active memory measured once the load
+has finished (the weights as MLX holds them), and `mlx_peak_mb`, MLX's peak since the current or last load or job began
+(reset `Memory.peakMemory` when each begins; never send a lifetime peak). While a load or job runs a runner may push
+`{"event":"status","live":true,"memory":{…}}` about once a second; live readings update Activity without making the menu
+re-read its rows. The supervisor samples every runner's footprint twice a second during each job and reports the job's
+highest as the model's peak, so a runner without these fields still shows its peak.
+
 ### Cancellation
 
 `{"id":8,"op":"cancel","target":7}` acknowledges with its own terminal `{"id":8,"ok":true}`. Keep the reader responsive while inference runs. Stop the target at an engine-safe boundary, emit no further target events after its terminal reply, and finish it with `ok:false/error.code="cancelled"`. Check a cancellation flag between batches/tokens/steps; output writes must remain frame-atomic. Cancelling an already finished or unknown target is an idempotent successful acknowledgement. If inference finished before cancellation arrived, its original successful result is valid. A deterministic checker cancel fixture must be long enough to demonstrate interruption rather than that race.

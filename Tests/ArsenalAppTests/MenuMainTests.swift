@@ -54,7 +54,7 @@ import Testing
         #expect(tasks.allSatisfy { $0.isEnabled && $0.action != nil })
     }
 
-    /// Core review 9: Copy Last and Support the Developer draw no grey pill at rest. Only the icon and the title are
+    /// Core review 9: Copy Last draws no grey pill at rest (Support the Developer rests on the family's lighter row). Only the icon and the title are
     /// painted; the row's ground beside them stays the menu's own, and the highlight still fills the row.
     @Test func ownDrawnRowsAreUnlitAtRest() throws {
         let item = NSMenuItem(title: "Copy Last Image", action: nil, keyEquivalent: "")
@@ -85,7 +85,7 @@ import Testing
         #expect(QuitTarget.shared.worksWhenModal)
         #expect(support.title == AppDelegate.supportTitle && support.action != nil)
         #expect(!support.isSeparatorItem && support.view is ProminentMenuItemView)
-        #expect(support.toolTip == AppDelegate.supportHelp)
+        #expect(support.toolTip == nil && (support.view as? ProminentMenuItemView)?.resting == true)
     }
 
     /// Homebrew is not a menu item, label or hint in any state, submenus included.

@@ -112,9 +112,10 @@ private func contractInput(_ id: String, kind: String, reference: URL) -> (Strin
         // The final picks of 2 Nov have no random-weights load in their families yet; each is checked by its family's
         // weight-free unit tests and opt-in .heavy parity against the maker (DiariZenTests, ElephantTests' ParityTests,
         // EmbeddingGemma2ParityTests, GIMMTests, LCOParityTests, MelBandRoformerTests, MossTranscribeTests,
-        // SortformerV2Tests, VoxCPM2ParityTests).
+        // SortformerV2Tests, VoxCPM2ParityTests). FlashVSR v1.1 (4 Nov) likewise: FlashVSRTests' geometry and stream-schedule
+        // unit tests, and its opt-in .heavy FP16-against-BF16-release and one-frame-per-input checks.
         let heavyOnly: Set<String> = [
-            "fish-drama-3", "flux3-image-klein", "diarizen-large-v2", "elephant-1", "embeddinggemma-2", "gimm-vfi-r", "lco-embedding-omni-7b",
+            "fish-drama-3", "flux3-image-klein", "diarizen-large-v2", "elephant-1", "embeddinggemma-2", "flashvsr-v1.1", "gimm-vfi-r", "lco-embedding-omni-7b",
             "melband-roformer-kim", "moss-transcribe-diarize", "sortformer-4spk-v2", "voxcpm2"
         ]
         // Kit models moved into the bundled worker (worker = "kit-<id>") and Qwen3 Embedding 0.6B came from a planned

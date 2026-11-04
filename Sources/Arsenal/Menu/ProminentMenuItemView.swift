@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: MIT
 import AppKit
 
-// A menu item drawn by its own view (Copy Last, Support the Developer). It once rested on a slightly lighter
-// background; the 2 Nov review found that grey pill read as a highlight at rest, so at rest it draws nothing but its icon
-// and title, like every native row (nothing is highlighted until the pointer or keyboard reaches it). The view draws
-// what the native item draws, at the native geometry:
+// A menu item drawn by its own view (Copy Last, Support the Developer). Copy Last rests unlit, like every native row
+// (the 2 Nov review found its grey pill read as a highlight). Support the Developer rests on the slightly lighter row
+// (`resting`), the same Support item as the author's other apps. The view draws what the native item draws, at the
+// native geometry:
 //
 // - Title and icon come from the item (`title`, `image`) at every draw, so the title variants and the macOS 27 image
 //   rule (MenuImages) keep working on the item itself.
@@ -21,8 +21,10 @@ import AppKit
 @MainActor final class ProminentMenuItemView: NSView {
     static let height: CGFloat = 24
     static let iconCentre: CGFloat = 23, titleX: CGFloat = 38.5, trailing: CGFloat = 16, stateColumn: CGFloat = 14
-    /// The highlight's inset from the menu's edges, and its corner radius.
+    /// The highlight's (and the resting background's) inset from the menu's edges, and its corner radius.
     static let inset: CGFloat = 5, radius: CGFloat = 6
+    /// The resting background: the label colour at 13 %, slightly lighter than the menu in dark mode.
+    static let restingAlpha: CGFloat = 0.13
     static var font: NSFont { .menuFont(ofSize: 0) }
 
     private let selection = NSVisualEffectView()
@@ -32,13 +34,8 @@ import AppKit
     /// material, so renders fill the accent colour in its place (`rendersSelectionFill`).
     var forcesHighlight = false { didSet { needsDisplay = true } }
     var rendersSelectionFill = false
-    /// A warm accent (Support the Developer): its heart filled in this colour over a faint glow at rest, and under the
-    /// pointer a soft wash of it instead of the blue selection. Static: nothing animates or blinks.
-    var accent: NSColor? { didSet { needsDisplay = true } }
-    /// Increase Contrast: the accent keeps its heart but highlights with the system's selection, like every other row.
-    var increaseContrast: () -> Bool = { NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast }
-    private var accentWash: Bool { accent != nil && !increaseContrast() }
-    static let accentGlow: CGFloat = 0.13, accentWashDark: CGFloat = 0.22, accentWashLight: CGFloat = 0.16, glowRadius: CGFloat = 9
+    /// Rests on the lighter row (Support the Developer); under the pointer it takes the selection like every row.
+    var resting = false { didSet { needsDisplay = true } }
 
     /// Becomes `item`'s view.
     init(item: NSMenuItem) {
@@ -77,7 +74,7 @@ import AppKit
 
     private var menuItem: NSMenuItem? { item ?? enclosingMenuItem }
     var highlighted: Bool { forcesHighlight || menuItem?.isHighlighted == true }
-    /// The rounded row the highlight fills.
+    /// The rounded row both backgrounds fill.
     var rowRect: NSRect { bounds.insetBy(dx: Self.inset, dy: 0) }
     /// The native content shift: the state column, present while any item in the menu has a state.
     var leading: CGFloat { menuItem?.menu?.items.contains { $0.state != .off } == true ? Self.stateColumn : 0 }
@@ -85,34 +82,28 @@ import AppKit
     override func viewWillDraw() {
         super.viewWillDraw()
         selection.frame = rowRect
-        selection.isHidden = !highlighted || rendersSelectionFill || accentWash
+        selection.isHidden = !highlighted || rendersSelectionFill
     }
-    private var isDark: Bool { effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua }
     override func draw(_ dirtyRect: NSRect) {
         let item = menuItem
         let lit = highlighted
-        if lit && rendersSelectionFill && !accentWash {
+        if lit && rendersSelectionFill {
             NSColor.controlAccentColor.setFill()
+            NSBezierPath(roundedRect: rowRect, xRadius: Self.radius, yRadius: Self.radius).fill()
+        } else if !lit && resting {
+            NSColor.labelColor.withAlphaComponent(Self.restingAlpha).setFill()
             NSBezierPath(roundedRect: rowRect, xRadius: Self.radius, yRadius: Self.radius).fill()
         }
         let enabled = item?.isEnabled ?? true
-        var color: NSColor = lit ? .selectedMenuItemTextColor : enabled ? .labelColor : .tertiaryLabelColor
-        var iconColor = color
-        if let accent, enabled, !(lit && !accentWash) {
-            color = .labelColor; iconColor = accent
-            if lit {
-                accent.withAlphaComponent(isDark ? Self.accentWashDark : Self.accentWashLight).setFill()
-                NSBezierPath(roundedRect: rowRect, xRadius: Self.radius, yRadius: Self.radius).fill()
-            }
-            let centre = NSPoint(x: leading + Self.iconCentre, y: bounds.midY)
-            NSGradient(colors: [accent.withAlphaComponent(Self.accentGlow * (isDark ? 1 : 0.8)), accent.withAlphaComponent(0)])?
-                .draw(fromCenter: centre, radius: 0, toCenter: centre, radius: Self.glowRadius, options: [])
-        }
-        if let image = item?.image.map(Self.menuSized), let tinted = Self.tinted(image, iconColor) {
+        let color: NSColor = lit ? .selectedMenuItemTextColor : enabled ? .labelColor : .tertiaryLabelColor
+        // The ink resolved for this appearance: the symbol is filled with it opaque and drawn at its alpha, so none of the
+        // symbol's own colour shows through a translucent ink (the heart's default red did, faintly, at rest).
+        let ink = color.usingColorSpace(.deviceRGB) ?? color
+        if let image = item?.image.map(Self.menuSized), let tinted = Self.tinted(image, ink.withAlphaComponent(1)) {
             let size = tinted.size
             tinted.draw(
                 in: NSRect(x: leading + Self.iconCentre - size.width / 2, y: (bounds.height - size.height) / 2, width: size.width, height: size.height),
-                from: .zero, operation: .sourceOver, fraction: 1)
+                from: .zero, operation: .sourceOver, fraction: ink.alphaComponent)
         }
         let title = NSAttributedString(string: item?.title ?? "", attributes: [.font: Self.font, .foregroundColor: color])
         let size = title.size()

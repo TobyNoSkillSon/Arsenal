@@ -78,5 +78,8 @@ struct VAEFrameTests {
         #expect(events[0]["step"]?.number == 3 && events[0]["total"]?.number == 3 && events[0]["label"]?.string == "Upscaling")
         #expect(events[0]["frames"]?.number == 3)
         #expect(events[1]["step"]?.number == 2 && events[1]["total"]?.number == 3 && events[1]["label"]?.string == "Restoring")
+        // A video job opens with frame 0, so Activity counts it as running before its first batch finishes.
+        try MediaBridge.begin(total: 5, label: "Upscaling", emit: emit)
+        #expect(events[2]["step"]?.number == 0 && events[2]["total"]?.number == 5 && events[2]["label"]?.string == "Upscaling")
     }
 }

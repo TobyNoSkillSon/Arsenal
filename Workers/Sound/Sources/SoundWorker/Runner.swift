@@ -22,7 +22,9 @@ final class Runner {
             "footprint_peak_mb": .number(result == KERN_SUCCESS ? Double(info.ledger_phys_footprint_peak) / 1_000_000 : 0),
             "footprint_mb": .number(result == KERN_SUCCESS ? Double(info.phys_footprint) / 1_000_000 : 0),
             "mlx_active_mb": .number(loaded == nil ? 0 : Double(Memory.activeMemory) / 1_000_000),
-            "mlx_cache_mb": .number(loaded == nil ? 0 : Double(Memory.cacheMemory) / 1_000_000)
+            "mlx_cache_mb": .number(loaded == nil ? 0 : Double(Memory.cacheMemory) / 1_000_000),
+            // Reset when each load or job begins, so this is the current or last job's MLX peak.
+            "mlx_peak_mb": .number(loaded == nil ? 0 : Double(Memory.peakMemory) / 1_000_000)
         ]
     }
     func status() -> JSONObject {

@@ -156,6 +156,7 @@ final class SeedVR2Adapter: NativeModel {
         var writer: NativeVideoWriter?, done = false, index = 0, origin: Double?
         var size: (height: Int, width: Int)?, chunk = 5, noise: MLXArray?
         defer { if !done { writer?.cancel(); try? FileManager.default.removeItem(at: url) } }
+        try MediaBridge.begin(total: expected, label: "Upscaling", emit: emit)
         while true {
             var images: [MLXArray] = [], times: [CMTime] = []
             while images.count < chunk {

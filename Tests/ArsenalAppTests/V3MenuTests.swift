@@ -410,6 +410,16 @@ import ArsenalCore
         #expect(ActivityText.minute(chat.recent!, .chat).text == "1 reply/min \u{00b7} avg 29.9 tok/s")
         #expect(ActivityText.minute(.init(finished: 2, meanRunS: 6.1, steps: 11, images: 2), .image).text == "2 images/min \u{00b7} 6.1 s each")
         #expect(ActivityText.estimate(0.4) == "<1 s" && ActivityText.estimate(7.68) == "8 s" && ActivityText.estimate(150) == "3 min")
+        // Speech reads as its finished requests' audio over the seconds they worked, not over the wall-clock minute: with
+        // idle gaps between requests that is 1.2× real time, not "51 s audio/min".
+        let speech = ActivityFeed.Recent(finished: 9, audioS: 51, busyS: 42, realTime: 1.214)
+        #expect(ActivityText.minute(speech, .voice).text == "1.2\u{00d7} real time")
+        #expect(ActivityText.minute(speech, .default).text == "1.2\u{00d7} real time")
+        #expect(ActivityText.minuteHelp(speech, .voice).contains("Each request made 1.2\u{00d7} real time"))
+        // Before any request finishes, the audio streamed so far.
+        #expect(ActivityText.minute(.init(audioS: 2.4, busyS: 3), .voice).text == "2.4 s audio/min")
+        #expect(ActivityText.minute(.init(finished: 1, audioS: 600, busyS: 40, realTime: 15.04), .voice).text == "15\u{00d7} real time")
+        #expect(ActivityText.minute(.init(finished: 3), .voice).text == "3 clips/min")
         // A request waiting for its model to load is waiting, and the header says the model is loading.
         let loading = ActivityFeed.Model(
             id: "flux", kind: "images", state: "loading", requests: [.init(id: "l", requester: "Arsenal", op: "generate", phase: "loading")], queued: 1, batch: nil,

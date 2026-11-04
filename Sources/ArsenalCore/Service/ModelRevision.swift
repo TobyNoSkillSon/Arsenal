@@ -229,7 +229,8 @@ extension RealModelsService {
         loadReservationReleases.remove(id)
         let worker = try await supervisor.worker(
             id: id, launch: old.launch, manual: true,
-            status: { [weak self] memory in await self?.status(id, memory) }, statusDetails: { [weak self] details in await self?.kernelStatus(id, details) })
+            status: { [weak self] memory in await self?.status(id, memory) }, statusDetails: { [weak self] details in await self?.kernelStatus(id, details) },
+            live: { [weak self] memory in await self?.liveMemory(id, memory) })
         do {
             try await worker.verifyOperations(old.operations.filter { $0.name != "delete_voice" || old.manifest.kind != "voices" }.map(\.name))
             _ = try await worker.request(

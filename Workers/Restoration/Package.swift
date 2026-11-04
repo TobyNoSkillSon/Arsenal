@@ -13,9 +13,12 @@ let package = Package(
         .target(name: "SeedVR2Native", dependencies: mlx, swiftSettings: [.swiftLanguageMode(.v5)]),
         .target(name: "DDColorNative", dependencies: mlx, swiftSettings: [.swiftLanguageMode(.v5)]),
         .target(name: "GIMMNative", dependencies: mlx, swiftSettings: [.swiftLanguageMode(.v5)]),
+        .target(name: "FlashVSRNative", dependencies: mlx, swiftSettings: [.swiftLanguageMode(.v5)]),
         .target(name: "LaMaNative", dependencies: mlx + [.product(name: "MLXFFT", package: "mlx-swift")], swiftSettings: [.swiftLanguageMode(.v5)]),
         .target(
             name: "RestorationWorker",
-            dependencies: [.product(name: "IntegrationKit", package: "IntegrationKit"), "RIFENative", "SeedVR2Native", "DDColorNative", "LaMaNative", "GIMMNative"] + mlx,
+            dependencies: [
+                .product(name: "IntegrationKit", package: "IntegrationKit"), "RIFENative", "SeedVR2Native", "DDColorNative", "LaMaNative", "GIMMNative", "FlashVSRNative"
+            ] + mlx,
             swiftSettings: [.swiftLanguageMode(.v5)])
     ])

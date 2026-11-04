@@ -56,6 +56,8 @@ final class Wire: @unchecked Sendable {
     func cancel(_ id: Int) { stateLock.lock(); cancelled.insert(id); stateLock.unlock() }
     func finished(_ id: Int) { stateLock.lock(); cancelled.remove(id); stateLock.unlock() }
 
+    /// MLX active memory right after the load: the weights.
+    var weightsMB: Double?
     func memory() -> [String: Any] {
         var info = task_vm_info_data_t()
         var count = mach_msg_type_number_t(MemoryLayout<task_vm_info_data_t>.size / MemoryLayout<integer_t>.size)
@@ -63,7 +65,11 @@ final class Wire: @unchecked Sendable {
             $0.withMemoryRebound(to: integer_t.self, capacity: Int(count)) { task_info(mach_task_self_, task_flavor_t(TASK_VM_INFO), $0, &count) }
         }
         let footprint = result == KERN_SUCCESS ? Double(info.phys_footprint) / 1_000_000 : 0
-        return ["footprint_mb": footprint, "mlx_active_mb": Double(Memory.activeMemory) / 1_000_000, "mlx_cache_mb": Double(Memory.cacheMemory) / 1_000_000]
+        var memory: [String: Any] = ["footprint_mb": footprint, "mlx_active_mb": Double(Memory.activeMemory) / 1_000_000, "mlx_cache_mb": Double(Memory.cacheMemory) / 1_000_000]
+        // MLX's peak is reset when each load or job begins: this is the current or last one's.
+        if model != nil { memory["mlx_peak_mb"] = Double(Memory.peakMemory) / 1_000_000 }
+        if let weightsMB { memory["mlx_weights_mb"] = weightsMB }
+        return memory
     }
 
     func perform(_ request: [String: Any]) {
@@ -83,10 +89,11 @@ final class Wire: @unchecked Sendable {
                     failure("invalid_request", "load needs weights_dir and model_dir."); return
                 }
                 let start = Date()
-                model = nil
-                Memory.clearCache()
+                model = nil; weightsMB = nil
+                Memory.clearCache(); Memory.peakMemory = 0
                 let settings = (request["config"] as? [String: Any])?["settings"] as? [String: Any] ?? [:]
                 model = try Model(weightsDir: URL(fileURLWithPath: weights), modelDir: URL(fileURLWithPath: folder), settings: settings)
+                weightsMB = Double(Memory.activeMemory) / 1_000_000
                 reply(["load_s": Date().timeIntervalSince(start), "engine": "arsenal-kit-mlx"])
             case "unload":
                 model = nil; Memory.clearCache(); reply(); exit(0)
@@ -100,6 +107,7 @@ final class Wire: @unchecked Sendable {
                 if isCancelled(id) { failure("cancelled", "Cancelled"); return }
                 var params = request
                 params.removeValue(forKey: "id"); params.removeValue(forKey: "op")
+                Memory.peakMemory = 0
                 let result = try model.run(op: op, params: Params(params, cancelled: { [unowned self] in self.isCancelled(id) }))
                 Memory.clearCache()
                 if let bad = Wire.nonFinite(result) {

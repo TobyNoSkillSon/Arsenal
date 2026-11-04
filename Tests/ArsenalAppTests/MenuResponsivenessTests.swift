@@ -93,24 +93,49 @@ import ArsenalCore
         #expect(changes == 2 && center.currentVoice[row.id] == "bm_lewis")
     }
 
-    @Test func supportTheDeveloperHasAQuietWarmAccent() async throws {
+    /// The V-family Support item (Heimdall's): outline heart, the lighter row at rest, the system selection under the
+    /// pointer, no hint, the support section of the author's site. No pink, no glow (1.0.1 had both; 1.0.2 reverts them).
+    @Test func supportTheDeveloperIsTheFamilyItem() async throws {
         defer { try? FileManager.default.removeItem(at: support) }
         let app = AppDelegate(service: FixtureService(rows: []), paths: ArsenalPaths(support: support))
         app.loginStatus = { .notRegistered }
         app.rebuildMenu()
         let item = try #require(app.menu.items.first { $0.title == AppDelegate.supportTitle })
         let view = try #require(item.view as? ProminentMenuItemView)
-        #expect(view.accent == AppDelegate.supportAccent)
-        #expect(item.image === Symbol.menu("heart.fill"))
-        // Highlighted: the soft wash, not the system selection; with Increase Contrast, the system selection.
+        #expect(AppDelegate.supportTitle == "Support the Developer\u{2026}" && AppDelegate.supportSymbol == "heart")
+        #expect(AppDelegate.supportURL.absoluteString == "https://tobynoskillson.com/#support")
+        #expect(item.image === Symbol.menu("heart") && item.toolTip == nil && view.resting)
+        #expect(ProminentMenuItemView.restingAlpha == 0.13 && ProminentMenuItemView.inset == 5 && ProminentMenuItemView.radius == 6)
+        // At rest: the lighter row past the title. Highlighted: the system selection, like every other row.
+        view.frame = NSRect(x: 0, y: 0, width: 300, height: ProminentMenuItemView.height)
+        let rep = try #require(view.bitmapImageRepForCachingDisplay(in: view.bounds))
+        view.cacheDisplay(in: view.bounds, to: rep)
+        let scale = CGFloat(rep.pixelsWide) / view.bounds.width
+        let ground = try #require(rep.colorAt(x: Int((view.bounds.width - 30) * scale), y: rep.pixelsHigh / 2))
+        #expect(abs(ground.alphaComponent - 0.13) < 0.02)
+        // The heart is drawn in the ink alone, in both appearances: none of the symbol's own red shows through the
+        // translucent label colour (the first family revert drew it with a faint red cast).
+        for name in [NSAppearance.Name.darkAqua, .aqua] {
+            view.appearance = NSAppearance(named: name)
+            let heart = try #require(view.bitmapImageRepForCachingDisplay(in: view.bounds))
+            view.cacheDisplay(in: view.bounds, to: heart)
+            var pixels = 0, worst: CGFloat = 0
+            for x in Int(14 * scale)..<Int(32 * scale) {
+                for y in 0..<heart.pixelsHigh {
+                    guard let pixel = heart.colorAt(x: x, y: y)?.usingColorSpace(.deviceRGB), pixel.alphaComponent > 0.3 else { continue }
+                    pixels += 1
+                    worst = max(worst, pixel.redComponent - max(pixel.greenComponent, pixel.blueComponent))
+                }
+            }
+            #expect(pixels > 20, "\(name.rawValue): the heart is drawn")
+            #expect(worst < 0.03, "\(name.rawValue): red cast \(worst)")
+        }
+        view.appearance = nil
         view.forcesHighlight = true
-        view.viewWillDraw()
-        #expect(view.subviews.compactMap { $0 as? NSVisualEffectView }.allSatisfy { $0.isHidden })
-        view.increaseContrast = { true }
         view.viewWillDraw()
         #expect(view.subviews.compactMap { $0 as? NSVisualEffectView }.contains { !$0.isHidden })
         // Copy Last keeps the plain native look.
-        #expect(ProminentMenuItemView(item: NSMenuItem(title: "Copy", action: nil, keyEquivalent: "")).accent == nil)
+        #expect(!ProminentMenuItemView(item: NSMenuItem(title: "Copy", action: nil, keyEquivalent: "")).resting)
     }
     @Test func aRebuildWithNothingChangedLeavesEveryItemsImageAlone() async throws {
         defer { try? FileManager.default.removeItem(at: support) }

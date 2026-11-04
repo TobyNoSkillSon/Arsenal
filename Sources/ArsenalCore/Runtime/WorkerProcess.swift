@@ -46,6 +46,16 @@ public actor WorkerProcess {
     private var streams: [UInt32: Int] = [:]
     private var statusDetailsSink: (@Sendable (JSONObject) async -> Void)?
     private var statusSink: (@Sendable (WorkerMemory) async -> Void)?
+    /// Memory readings taken while a job runs (the supervisor's samples and a runner's `live` status events): they keep the
+    /// figures current for Activity without the menu re-reading everything each second.
+    private var liveSink: (@Sendable (WorkerMemory) async -> Void)?
+    /// The footprint's high-water mark since the current job (or the last one) began, from the memory sampler.
+    private var jobPeakBytes: UInt64 = 0
+    /// Requests that are not jobs (control, bookkeeping and lab captures): they neither open a peak window nor keep one open.
+    static let controlOps: Set<String> = [
+        "ping", "cancel", "status", "unload", "count_tokens", "voices", "list_voices", "delete_voice", "parameter_inventory", "parse_output", "selftest"
+    ]
+    static func isJob(_ op: String) -> Bool { !controlOps.contains(op) && !op.hasPrefix("measurement_") }
     /// What each pending request is expected to use (`WorkerMemoryCeiling`; requests without one get `defaultCeiling`),
     /// and the sampler that enforces the memory stops while any request runs.
     private var ceilings: [Int: WorkerMemoryCeiling] = [:]
@@ -64,12 +74,14 @@ public actor WorkerProcess {
     }
     deinit { WorkerPIDRegistry.remove(telemetryPIDToken); macMemory.leave(memoryToken); child?.signal(SIGKILL) }
     public func start(
-        _ launch: WorkerLaunch, handshakeTimeout: Double = 10, status: (@Sendable (WorkerMemory) async -> Void)? = nil, statusDetails: (@Sendable (JSONObject) async -> Void)? = nil
+        _ launch: WorkerLaunch, handshakeTimeout: Double = 10, status: (@Sendable (WorkerMemory) async -> Void)? = nil,
+        statusDetails: (@Sendable (JSONObject) async -> Void)? = nil,
+        live: (@Sendable (WorkerMemory) async -> Void)? = nil
     ) async throws {
         guard child == nil else { throw WorkerFailure(code: "already_started", message: "Worker already started.") }
         let spawned = try ChildProcess(executable: launch.executable, arguments: launch.arguments, environment: RunnerEnvironment.scrub(launch.environment), log: launch.log)
         WorkerPIDRegistry.register(spawned.pid, token: telemetryPIDToken)
-        child = spawned; pid = spawned.pid; statusSink = status; statusDetailsSink = statusDetails
+        child = spawned; pid = spawned.pid; statusSink = status; statusDetailsSink = statusDetails; liveSink = live
         defaultCeiling = .unmetered("the \(launch.kind) worker")
         reader = Task.detached { [weak self] in
             defer { spawned.finishOutput() }
@@ -110,6 +122,12 @@ public actor WorkerProcess {
         }
         if op == "measurement_components" || op == "measurement_voice_patch" { componentCaptureRequests += 1 }
         let id = nextID; nextID += 1; let deadline = Date().addingTimeInterval(first)
+        // A job arriving when none runs opens a new peak window, starting from what the worker holds now.
+        if Self.isJob(op), !pending.values.contains(where: { Self.isJob($0.op) }) {
+            jobPeakBytes = WorkerMemoryCeiling.footprint(pid: pid); memory.jobPeakMB = Double(jobPeakBytes) / 1e6
+            // The previous job's MLX peak does not describe this one; the runner's next reading brings this job's.
+            memory.mlxPeakMB = nil; memory.liveFootprintMB = Double(jobPeakBytes) / 1e6
+        }
         // Every request takes part in the Mac-wide stop; a ceiling adds the model's figures and its runaway backstop.
         ceilings[id] = memoryCeiling ?? defaultCeiling; watchMemory()
         return try await withTaskCancellationHandler {
@@ -201,7 +219,16 @@ public actor WorkerProcess {
         switch frame {
         case .json(let object):
             if object["event"]?.string == "status", object["id"] == nil {
-                if let m = object["memory"]?.object { memory = try JSONDecoder().decode(WorkerMemory.self, from: WireJSON.encode(m)); await statusSink?(memory) }
+                if let m = object["memory"]?.object {
+                    var reported = try JSONDecoder().decode(WorkerMemory.self, from: WireJSON.encode(m))
+                    // The job's peak is the supervisor's measurement; a runner's reading can only raise it.
+                    jobPeakBytes = max(jobPeakBytes, UInt64(max(0, reported.footprintMB) * 1e6))
+                    reported.jobPeakMB = jobPeakBytes > 0 ? Double(jobPeakBytes) / 1e6 : nil
+                    // The runner's reading is the newest: its footprint and MLX parts belong to one moment.
+                    reported.liveFootprintMB = nil
+                    memory = reported
+                    if object["live"]?.bool == true { await liveSink?(memory) } else { await statusSink?(memory) }
+                }
                 await statusDetailsSink?(object); return
             }
             guard let value = object["id"]?.number, value.isFinite, value >= 1, value <= Double(Int32.max), value.rounded() == value else { throw WireError.malformedFrame }
@@ -254,7 +281,7 @@ public actor WorkerProcess {
             unexpectedExit
             || (!stopping && !["timeout", "cancel_timeout", "cancelled_exit", "write", "memory"].contains(error?.code ?? "") && !pending.values.contains(where: { $0.reply == nil })
                 && code != 0)
-        exited = true; memory = WorkerMemory()
+        exited = true; memory = WorkerMemory(); jobPeakBytes = 0
         for id in Array(exitWaiters.keys) { finishExitWait(id) }
         await statusSink?(memory)
     }
@@ -301,6 +328,12 @@ public actor WorkerProcess {
             return false
         }
         let footprint = WorkerMemoryCeiling.footprint(pid: pid)
+        if pending.values.contains(where: { Self.isJob($0.op) }) {
+            jobPeakBytes = max(jobPeakBytes, footprint)
+            // Kept apart from the runner's reading, whose footprint and MLX parts were taken together.
+            memory.liveFootprintMB = Double(footprint) / 1e6; memory.jobPeakMB = Double(jobPeakBytes) / 1e6
+            await liveSink?(memory)
+        }
         // The runaway backstop: the lowest bound among the pending requests that have one.
         if let (ceiling, limit) = ceilings.values.compactMap({ c in c.runawayLimitBytes.map { (c, $0) } }).min(by: { $0.1 < $1.1 }), footprint > limit {
             await stopForMemory(ceiling.runawayFailure(footprintBytes: footprint, limitBytes: limit))

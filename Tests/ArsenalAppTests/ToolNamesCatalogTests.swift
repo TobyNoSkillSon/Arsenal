@@ -102,6 +102,7 @@ struct ToolNamesCatalogTests {
         "sam2.1-hiera-tiny": [.select],
         "sam3.1": [.select],
         "seedvr2-3b": [.upscale],
+        "flashvsr-v1.1": [.upscale],
         "smart-turn-v3": [],
         "stable-audio-3-medium": [.sound],
         "stable-audio-3-small-sfx": [.sound],

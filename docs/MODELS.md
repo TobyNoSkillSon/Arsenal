@@ -1,6 +1,6 @@
 # Arsenal models
 
-102 models, 370.2 GB if you get every one. Each downloads on its own, at the precision Arsenal starts it on.
+103 models, 373.7 GB if you get every one. Each downloads on its own, at the precision Arsenal starts it on.
 
 Generated from model folders by `scripts/generate-model-docs.py`. Figures are declarations/evidence, never estimates from parameter counts. An operation may be integrated before its weights or quality are qualified.
 
@@ -31,6 +31,7 @@ Generated from model folders by `scripts/generate-model-docs.py`. Figures are de
 | [ESM-2 8M](../models/esm2-t6-8m/README.md) | Embed protein sequences | 31 MB | [MIT](https://huggingface.co/facebook/esm2_t6_8M_UR50D/blob/c731040fcd8d73dceaa04b0a8e6329b345b0f5df/README.md) |
 | [ESM3 Open Small (esm3-sm-open-v1)](../models/esm3-sm-open-v1/README.md) | Protein design and prediction | 5.4 GB | [MIT](https://huggingface.co/biohub/esm3-sm-open-v1/blob/47f0545b2b6daf26a93439a3cd610f4f7f3d5478/README.md) |
 | [Fish Audio Drama 3](../models/fish-drama-3/README.md) | Expressive speech, voice cloning | 23.8 GB | [Fish Audio Community License 1.0](https://huggingface.co/mlx-community/fish-audio-drama-3-4bit/blob/cc639e27aba7edb73429d3e3806f471dcd79d316/LICENSE) |
+| [FlashVSR v1.1](../models/flashvsr-v1.1/README.md) | Video super-resolution | 3.5 GB | [Apache-2.0](https://huggingface.co/mlx-community/FlashVSR-v1.1-bf16/tree/1466bf43ff8010ba4184d21084f121d1671854dc) |
 | [Florence-2 Base](../models/florence-2-base/README.md) | Caption a photo or read its text | 466 MB | [MIT](https://huggingface.co/microsoft/Florence-2-base/blob/5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac/README.md) |
 | [Florence-2 Large](../models/florence-2-large/README.md) | Caption a photo or read its text | 1.6 GB | [MIT](https://huggingface.co/microsoft/Florence-2-large/blob/21a599d414c4d928c9032694c424fb94458e3594/README.md) |
 | [FLUX.2 Klein 4B](../models/flux2-klein-4b/README.md) | Image generation | 16.0 GB | [Apache-2.0](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B/blob/e7b7dc27f91deacad38e78976d1f2b499d76a294/LICENSE.md) |
@@ -649,6 +650,27 @@ Tools: voice, sound.
 | int4 | 23781106243 | 23781106243 | 25.770 (m5-max, 2026-10-22, quickCheck) |
 
 [Model documentation](../models/fish-drama-3/README.md)
+
+## FlashVSR v1.1 (`flashvsr-v1.1`)
+
+Video super-resolution
+
+Enlarge live-action video up to four times in one streaming diffusion step.
+
+Good for: Live-action footage; Long clips in one pass.
+Limits: Invents detail; not for anime, cartoons, graphics or text; Turns soft focus and bokeh into crisp texture; At most about 4.2 megapixels per output frame; Job files are limited by the host to 4 GiB.
+Parameters: 1.8B.
+Languages: und.
+Licence: [Apache-2.0](https://huggingface.co/mlx-community/FlashVSR-v1.1-bf16/tree/1466bf43ff8010ba4184d21084f121d1671854dc).
+Tools: the generic window built from its operations.
+
+- `upscale_video`: `POST /arsenal/v1/models/flashvsr-v1.1/ops/upscale_video`.
+
+| Precision | Download (bytes) | On disk after Get (bytes) | Peak memory (GB, recorded evidence) |
+|---|---:|---:|---:|
+| fp16 | 3508650823 | 3508650823 | unknown |
+
+[Model documentation](../models/flashvsr-v1.1/README.md)
 
 ## Florence-2 Base (`florence-2-base`)
 

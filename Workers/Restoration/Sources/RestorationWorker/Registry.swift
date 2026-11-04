@@ -9,7 +9,8 @@ public enum RestorationWorker {
             NativeRegistration(["seedvr2"], conversion: NativeConversion(recipe: "native:seedvr2", eligible: SeedVR2Adapter.eligible)) { SeedVR2Adapter() },
             NativeRegistration(["ddcolor"]) { DDColorAdapter() },
             NativeRegistration(["lama"], conversion: LaMaAdapter.conversion) { LaMaAdapter() },
-            NativeRegistration(["gimm_vfi_r"], conversion: GIMMAdapter.conversion) { GIMMAdapter() }
+            NativeRegistration(["gimm_vfi_r"], conversion: GIMMAdapter.conversion) { GIMMAdapter() },
+            NativeRegistration(["flashvsr"], conversion: FlashVSRAdapter.conversion) { FlashVSRAdapter() }
         ]
     }
     public static func run() {

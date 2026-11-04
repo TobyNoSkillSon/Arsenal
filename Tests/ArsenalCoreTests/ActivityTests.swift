@@ -436,6 +436,53 @@ private actor ActivityGenerationGate {
     #expect(recent?.finished == 2 && recent?.audioS == 3.5)
 }
 
+/// A runner's frame-0 progress starts the request: a one-batch video job runs, it does not wait (SeedVR2 on a 5-frame clip
+/// read "1 waiting" for its whole 53 s, then "167 ms each").
+@Test func activityStepZeroStartsTheRequest() async {
+    let time = ActivityTestTime(10)
+    let aggregator = ActivityAggregator(sample: { .init() }, machineInterval: .seconds(1), sleep: { try await Task.sleep(for: $0) }, now: { time.value })
+    let row = ModelRow(id: "seedvr", name: "SeedVR2", kind: "restoration", states: ["bf16": .init(state: .loaded)])
+    let id = aggregator.begin(model: "seedvr", op: "upscale_video", requester: "Fixture")
+    aggregator.receive(id, .json(["event": "progress", "step": 0, "total": 5, "label": "Upscaling", "unit": "frames"]))
+    let model = await aggregator.snapshot(rows: [row], memory: .init()).models.first
+    #expect(model?.running == 1 && model?.queued == 0)
+    time.value = 63
+    aggregator.receive(id, .json(["event": "progress", "step": 5, "total": 5]))
+    aggregator.finish(id, .finished(nil))
+    time.value = 64
+    let recent = await aggregator.snapshot(rows: [row], memory: .init()).models.first?.recent
+    #expect(recent?.meanRunS == 53 && recent?.meanWaitS == 0)
+}
+
+/// Speech speed is each finished request's audio over the seconds it worked, credited together when it finishes: a
+/// sound returned whole at the end (30 s made in 10 s) stays 3× real time while its busy seconds leave the minute, and
+/// the idle gap before the next request does not count.
+@Test func activityRealTimeIsAudioOverEachRequestsWork() async {
+    let time = ActivityTestTime(100)
+    let aggregator = ActivityAggregator(sample: { .init() }, machineInterval: .seconds(1), sleep: { try await Task.sleep(for: $0) }, now: { time.value })
+    let row = ModelRow(id: "sound", name: "Sound", kind: "sound", states: ["bf16": .init(state: .loaded)])
+    func recent() async -> RecentActivity? { await aggregator.snapshot(rows: [row], memory: .init()).models.first?.recent }
+    let first = aggregator.begin(model: "sound", op: "generate_sound", requester: "Fixture")
+    aggregator.receive(first, .json(["event": "progress", "phase": "step"]))
+    #expect(await recent()?.realTime == nil)
+    time.value = 110
+    aggregator.finish(first, .finished(["duration_s": 30.0, "sample_rate": 44_100]))
+    time.value = 111
+    #expect(await recent()?.realTime == 3)
+    time.value = 165
+    let late = await recent()
+    #expect(late?.realTime == 3 && late?.audioS == 30 && late?.busyS == 5)
+    let second = aggregator.begin(model: "sound", op: "generate_sound", requester: "Fixture")
+    aggregator.receive(second, .json(["event": "progress", "phase": "step"]))
+    time.value = 167
+    aggregator.finish(second, .finished(["duration_s": 4.0]))
+    time.value = 168
+    #expect(await recent()?.realTime == 34.0 / 12.0)
+    // Nothing that made audio finished in the minute: no figure.
+    time.value = 240
+    #expect(await recent()?.realTime == nil)
+}
+
 /// The AppleSMC struct must be the kernel's 80 bytes with its data at offset 48; on a Mac whose sensors Arsenal knows
 /// (M5 Max), a reading is a plausible die temperature.
 @Test func smcTemperaturesReadThisMacsDies() {

@@ -24,6 +24,21 @@ struct ActivityFeed: Equatable {
         /// Being worked on now, and the last minute (nil when it was empty).
         var running = 0
         var recent: Recent?
+        /// What its memory is for (C3's `memory`): nil until its runner reports.
+        var memory: Memory?
+    }
+    /// A model's memory by what holds it, in MB, as C3 reports it: all measured in its runner's process.
+    struct Memory: Equatable {
+        /// "mlx" (split by MLX's counters) or "process" (the footprint alone).
+        var source = "process"
+        var totalMB = 0.0
+        var weightsMB: Double?
+        var workingMB: Double?
+        var arraysMB: Double?
+        var cacheMB: Double?
+        var unsplitMB: Double?
+        var peakMB: Double?
+        var mlxPeakMB: Double?
     }
     /// A model's last minute, as C3 reports it: what finished, how long it took, and how much of each second the model
     /// was working.
@@ -39,6 +54,8 @@ struct ActivityFeed: Equatable {
         /// Seconds of the minute with a request running, and per second the part that was (0…1), oldest first.
         var busyS = 0.0
         var busy: [Double] = []
+        /// Seconds of audio per second of work over the minute's finished requests that made audio.
+        var realTime: Double?
     }
     struct Request: Equatable, Identifiable {
         var id: String
@@ -108,11 +125,19 @@ extension ActivityFeed {
                 Recent(
                     finished: int(r["finished"]) ?? 0, failed: int(r["failed"]) ?? 0, meanRunS: double(r["mean_run_s"]), meanWaitS: double(r["mean_wait_s"]),
                     tokens: int(r["tokens"]) ?? 0, steps: int(r["steps"]) ?? 0, images: int(r["images"]) ?? 0, audioS: double(r["audio_s"]) ?? 0,
-                    busyS: double(r["busy_s"]) ?? 0, busy: (r["busy"] as? [Any] ?? []).map { double($0) ?? 0 })
+                    busyS: double(r["busy_s"]) ?? 0, busy: (r["busy"] as? [Any] ?? []).map { double($0) ?? 0 }, realTime: double(r["real_time"]))
             }
             return Model(
                 id: id, kind: m["kind"] as? String ?? "", state: m["state"] as? String ?? "idle", requests: requests, queued: int(m["queued"]) ?? 0,
-                batch: double(m["batch"]), memoryMB: double(m["memory_mb"]), running: int(m["running"]) ?? 0, recent: recent)
+                batch: double(m["batch"]), memoryMB: double(m["memory_mb"]), running: int(m["running"]) ?? 0, recent: recent,
+                memory: (m["memory"] as? [String: Any]).flatMap { r in
+                    double(r["total_mb"]).map {
+                        Memory(
+                            source: r["source"] as? String ?? "process", totalMB: $0, weightsMB: double(r["weights_mb"]), workingMB: double(r["working_mb"]),
+                            arraysMB: double(r["arrays_mb"]), cacheMB: double(r["cache_mb"]),
+                            unsplitMB: double(r["unsplit_mb"]), peakMB: double(r["peak_mb"]), mlxPeakMB: double(r["mlx_peak_mb"]))
+                    }
+                })
         }
         let machine = json["machine"] as? [String: Any] ?? [:]
         self.machine = Machine(
@@ -218,7 +243,7 @@ protocol ActivitySource: Sendable {
             let section = section(m)
             let lines = section == .decision ? [] : ActivityText.lines(m)
             let shown = lines.prefix(ActivityText.maxLines).map { ActivityText.showsBar($0.request, section) ? "bar" : "line" }
-            return "\(m.id) counts:\(ActivityText.counts(m) != nil) \(shown.joined(separator: ",")) minute:\(m.recent != nil)"
+            return "\(m.id) counts:\(ActivityText.counts(m) != nil) \(shown.joined(separator: ",")) minute:\(m.recent != nil) memory:\(m.memory != nil)"
         }
     }
     /// Every model on this Mac, so a model's colour does not depend on which others are loaded.
@@ -286,7 +311,12 @@ extension ActivityFeed {
                 recent: m.recent.map {
                     Recent(
                         finished: $0.finished, failed: $0.failed, meanRunS: $0.meanRunS, meanWaitS: $0.meanWaitS, tokens: $0.tokens, steps: $0.steps, images: $0.images,
-                        audioS: $0.audioS, busyS: $0.busyS, busy: $0.busy)
+                        audioS: $0.audioS, busyS: $0.busyS, busy: $0.busy, realTime: $0.realTime)
+                },
+                memory: m.memory.map {
+                    Memory(
+                        source: $0.source, totalMB: $0.totalMB, weightsMB: $0.weightsMB, workingMB: $0.workingMB, arraysMB: $0.arraysMB, cacheMB: $0.cacheMB,
+                        unsplitMB: $0.unsplitMB, peakMB: $0.peakMB, mlxPeakMB: $0.mlxPeakMB)
                 })
         }
         let m = s.machine
