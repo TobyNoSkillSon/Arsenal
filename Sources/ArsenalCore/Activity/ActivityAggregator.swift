@@ -10,6 +10,8 @@ private final class ActivityRequestStore: @unchecked Sendable {
         var model: String
         var request: RequestActivity
         var accepted: Double
+        /// Its operation declares audio as its output (speak, generate_sound, enhance, …).
+        var audioOutput = false
         /// When its runner reported starting it (a start phase or its first work). The service handing it to the runner
         /// is not a start: a serial runner holds what it was sent until it reaches it.
         var started: Double?
@@ -84,11 +86,11 @@ private final class ActivityRequestStore: @unchecked Sendable {
     }
     private static func positive(_ value: JSONValue?) -> Double? { value?.number.flatMap { $0.isFinite && $0 > 0 && $0 < 1e7 ? $0 : nil } }
 
-    func begin(model: String, op: String, requester: String, title: String? = nil) -> UUID {
+    func begin(model: String, op: String, requester: String, title: String? = nil, audioOutput: Bool = false) -> UUID {
         return lock.withLock {
             var request = RequestActivity(requester: requester, op: op)
             request.title = title
-            jobs[request.id] = Job(model: model, request: request, accepted: now()); return request.id
+            jobs[request.id] = Job(model: model, request: request, accepted: now(), audioOutput: audioOutput); return request.id
         }
     }
     /// The service's own view of a request: waiting for memory or a load, or handed to the runner.
@@ -165,8 +167,14 @@ private final class ActivityRequestStore: @unchecked Sendable {
             case .failed: credit(job.model) { $0.failed += 1 }
             case .finished(let result):
                 let end = now()
-                // Speech returns its audio at the top; a voice design inside its preview.
-                let audio = result?["duration_s"] != nil ? result : result?["preview"]?.object
+                // Speech and sound return the audio they made at the top; a voice design inside its preview. A
+                // `duration_s` is audio made only beside its format (`sample_rate`), after the request streamed audio, or
+                // from an operation that declares audio output. An analysis result's `duration_s` (a classifier's is the
+                // clip it listened to) is none of these: it never counts as audio made, so it gives no real-time figure.
+                let madeAudio = job.audioOutput || job.samples > 0 || job.audioCredited > 0
+                let audio = [result, result?["preview"]?.object].compactMap { $0 }.first {
+                    Self.positive($0["duration_s"]) != nil && (madeAudio || Self.positive($0["sample_rate"]) != nil)
+                }
                 let rate = Self.positive(audio?["sample_rate"]) ?? job.sampleRate
                 let duration = Self.positive(audio?["duration_s"]) ?? rate.flatMap { job.samples > 0 ? Double(job.samples) / $0 : nil }
                 let more = (duration ?? job.audioCredited) - job.audioCredited
@@ -307,8 +315,9 @@ public actor ActivityAggregator {
         sampler = ActivityMachineSampler(fixture: sample); self.machineInterval = machineInterval; self.sleep = sleep; self.now = now
         requests = ActivityRequestStore(now: now)
     }
-    public nonisolated func begin(model: String, op: String, requester: String, title: String? = nil) -> UUID {
-        let id = requests.begin(model: model, op: op, requester: requester, title: title)
+    /// `audioOutput`: the operation declares audio as its output, so a `duration_s` in its result is audio it made.
+    public nonisolated func begin(model: String, op: String, requester: String, title: String? = nil, audioOutput: Bool = false) -> UUID {
+        let id = requests.begin(model: model, op: op, requester: requester, title: title, audioOutput: audioOutput)
         changed(); return id
     }
     public nonisolated func phase(_ id: UUID, _ phase: String) { requests.phase(id, phase) }

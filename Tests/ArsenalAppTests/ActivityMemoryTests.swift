@@ -38,7 +38,9 @@ import ArsenalCore
         #expect(ActivityText.memoryLegend(seedvr).map(\.name) == ["Weights", "Working", "Peak"])
         #expect(ActivityText.memoryLegend(seedvr).map(\.mb) == [8_438, 22_690, 37_900])
         let help = ActivityText.memoryHelp(seedvr)
-        #expect(help.contains("Weights 7.9 GB") && help.contains("Peak 35.3 GB") && help.contains("MLX\u{2019}s own peak was 34.7 GB"))
+        #expect(help.contains("Weights 7.9 GB") && help.contains("Peak 35.3 GB") && help.contains("as macOS counts it"))
+        // MLX's peak counter is not the RAM the job took: the hover no longer quotes it beside the peak.
+        #expect(!help.contains("MLX\u{2019}s own peak") && !help.contains("34.7 GB"))
         let arrays = ActivityFeed.Memory(source: "mlx", totalMB: 610, arraysMB: 420, cacheMB: 90)
         #expect(ActivityText.memoryBar(arrays).map(\.layer) == [.weights, .cache, .outside])
         #expect(ActivityText.memoryLegend(arrays).map(\.name) == ["In use", "Cache", "Peak"])
@@ -49,6 +51,12 @@ import ArsenalCore
         #expect(ActivityText.memoryBar(growing).map(\.mb) == [8_400, 3_000, 100, 500])
         #expect(ActivityText.memoryLegend(growing).map(\.mb) == [8_400, 3_100, 12_500])
         #expect(ActivityText.memoryHelp(growing).contains("grew during this job"))
+        // The hover's Working is the figure under the bar, growth since the runner's last reading included (2.9 GB is
+        // 3,100 MB), and so is In use for a runner that does not measure its weights apart.
+        #expect(ActivityText.memoryHelp(growing).contains("Working 2.9 GB"), "\(ActivityText.memoryHelp(growing))")
+        let growingArrays = ActivityFeed.Memory(source: "mlx", totalMB: 4_000, arraysMB: 1_000, cacheMB: 0, unsplitMB: 2_100, peakMB: 4_000)
+        #expect(ActivityText.memoryLegend(growingArrays).first?.mb == 3_100)
+        #expect(ActivityText.memoryHelp(growingArrays).contains("In use 2.9 GB"), "\(ActivityText.memoryHelp(growingArrays))")
         let process = ActivityFeed.Memory(source: "process", totalMB: 2_150, peakMB: 3_400)
         #expect(ActivityText.memoryBar(process).map(\.mb) == [2_150])
         #expect(ActivityText.memoryLegend(process).map(\.name) == ["In use", "Peak"])

@@ -462,7 +462,7 @@ private actor ActivityGenerationGate {
     let aggregator = ActivityAggregator(sample: { .init() }, machineInterval: .seconds(1), sleep: { try await Task.sleep(for: $0) }, now: { time.value })
     let row = ModelRow(id: "sound", name: "Sound", kind: "sound", states: ["bf16": .init(state: .loaded)])
     func recent() async -> RecentActivity? { await aggregator.snapshot(rows: [row], memory: .init()).models.first?.recent }
-    let first = aggregator.begin(model: "sound", op: "generate_sound", requester: "Fixture")
+    let first = aggregator.begin(model: "sound", op: "generate_sound", requester: "Fixture", audioOutput: true)
     aggregator.receive(first, .json(["event": "progress", "phase": "step"]))
     #expect(await recent()?.realTime == nil)
     time.value = 110
@@ -472,15 +472,54 @@ private actor ActivityGenerationGate {
     time.value = 165
     let late = await recent()
     #expect(late?.realTime == 3 && late?.audioS == 30 && late?.busyS == 5)
-    let second = aggregator.begin(model: "sound", op: "generate_sound", requester: "Fixture")
+    let second = aggregator.begin(model: "sound", op: "generate_sound", requester: "Fixture", audioOutput: true)
     aggregator.receive(second, .json(["event": "progress", "phase": "step"]))
     time.value = 167
+    // An operation that declares audio output counts its duration even without the audio's format.
     aggregator.finish(second, .finished(["duration_s": 4.0]))
     time.value = 168
     #expect(await recent()?.realTime == 34.0 / 12.0)
     // Nothing that made audio finished in the minute: no figure.
     time.value = 240
     #expect(await recent()?.realTime == nil)
+}
+
+/// The voice-gender classifier returns the analysed clip's length as `duration_s`; 1.0.2 counted it as audio made, so its
+/// card showed a large "× real time". Analysis results (classify, label, score_quality, transcribe, diarize) never count
+/// as audio made; speech still does from its result's format alone, and a voice design from its preview.
+@Test func analysisResultsNeverCountAsAudioMade() async {
+    let time = ActivityTestTime(300)
+    let aggregator = ActivityAggregator(sample: { .init() }, machineInterval: .seconds(1), sleep: { try await Task.sleep(for: $0) }, now: { time.value })
+    let rows = [
+        ModelRow(id: "voice-gender-ecapa", name: "Voice gender", kind: "local.gender", states: ["bf16": .init(state: .loaded)]),
+        ModelRow(id: "clap", name: "CLAP", kind: "local.audio-labels", states: ["bf16": .init(state: .loaded)]),
+        ModelRow(id: "asr", name: "ASR", kind: "audio", states: ["bf16": .init(state: .loaded)]),
+        ModelRow(id: "voice", name: "Voice", kind: "voices", states: ["bf16": .init(state: .loaded)])
+    ]
+    func recent(_ id: String) async -> RecentActivity? { await aggregator.snapshot(rows: rows, memory: .init()).models.first { $0.id == id }?.recent }
+    func run(_ model: String, _ op: String, _ result: JSONObject, audioOutput: Bool = false) {
+        let id = aggregator.begin(model: model, op: op, requester: "Fixture", audioOutput: audioOutput)
+        aggregator.receive(id, .json(["event": "progress", "phase": "step"]))
+        time.value += 0.5
+        aggregator.finish(id, .finished(result))
+    }
+    run("voice-gender-ecapa", "classify", ["label": "male", "probabilities": ["male": 0.9, "female": 0.1], "duration_s": 42.0])
+    run("voice-gender-ecapa", "classify", ["label": "female", "probabilities": ["male": 0.2, "female": 0.8], "duration_s": 30.0])
+    run("clap", "label", ["labels": [], "top": "rain", "seconds": 10.0])
+    run("asr", "transcribe", ["text": "Hello.", "duration": 12.0])
+    run("asr", "diarize", ["segments": [], "duration_s": 12.0])
+    run("voice", "speak", ["duration_s": 2.0, "sample_rate": 24_000])
+    run("voice", "design_voice", ["voice_id": "v1", "preview": ["duration_s": 3.0, "sample_rate": 24_000]])
+    time.value = 304
+    let gender = await recent("voice-gender-ecapa")
+    #expect(gender?.finished == 2 && gender?.realTime == nil && gender?.audioS == 0, "\(String(describing: gender))")
+    #expect(gender?.meanRunS == 0.5, "the card keeps the figure analysis models show: requests and time each")
+    let clap = await recent("clap")
+    #expect(clap?.finished == 1 && clap?.realTime == nil)
+    let asr = await recent("asr")
+    #expect(asr?.finished == 2 && asr?.realTime == nil && asr?.audioS == 0)
+    let voice = await recent("voice")
+    #expect(voice?.finished == 2 && voice?.audioS == 5 && voice?.realTime == 5)
 }
 
 /// The AppleSMC struct must be the kernel's 80 bytes with its data at offset 48; on a Mac whose sensors Arsenal knows

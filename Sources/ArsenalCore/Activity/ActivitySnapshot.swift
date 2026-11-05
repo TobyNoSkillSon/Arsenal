@@ -33,8 +33,9 @@ public struct ModelActivity: Codable, Sendable, Equatable, Identifiable {
     }
 }
 /// A model's memory by what holds it, in MB (10⁶ bytes). Every figure is measured in the runner's process: the process
-/// footprint (what Activity Monitor shows for it), MLX's own counters where the runner reports them, and the
-/// supervisor's footprint samples, twice a second during each job. Nothing is estimated; a part not reported is absent.
+/// footprint (what Activity Monitor shows for it), MLX's own counters where the runner reports them, the supervisor's
+/// footprint samples, twice a second during each job, and the kernel's own footprint maximum over the job. Nothing is
+/// estimated; a part not reported is absent.
 public struct ModelMemoryActivity: Codable, Sendable, Equatable {
     /// `mlx`: the runner reports MLX's counters, so its memory splits into weights, working memory and cache. `process`:
     /// only the process footprint is known (an engine that does not report MLX's counters).
@@ -52,10 +53,12 @@ public struct ModelMemoryActivity: Codable, Sendable, Equatable {
     /// What the process grew by during the running job since the runner's last reading (the supervisor's samples), not
     /// yet split by MLX's counters: a runner that reports only between jobs. Absent when nothing is unsplit.
     public var unsplitMB: Double?
-    /// The most the process held during the current or last job (or load): the larger of the supervisor's footprint
-    /// samples and MLX's exact active peak (which the footprint always contains). Absent before either is known.
+    /// The most RAM the process held during the current or last job (or load): the kernel's maximum footprint over that
+    /// job, raised by the supervisor's samples and the runner's readings. Never MLX's peak counter, which also counts
+    /// allocator memory the process does not hold (41.2 GB against the kernel's 35.6 GB for one SeedVR2 clip). Absent
+    /// before a job.
     public var peakMB: Double?
-    /// MLX's exact active-memory peak in that job (weights plus working memory at its most).
+    /// MLX's own active-memory peak counter in that job, as the runner reported it; kept for clients, not the peak.
     public var mlxPeakMB: Double?
     enum CodingKeys: String, CodingKey {
         case source; case totalMB = "total_mb", weightsMB = "weights_mb", workingMB = "working_mb", arraysMB = "arrays_mb", cacheMB = "cache_mb"
@@ -75,12 +78,12 @@ public struct ModelMemoryActivity: Codable, Sendable, Equatable {
         let mlx = m.mlxActiveMB > 0 || m.mlxCacheMB > 0
         let total = m.currentMB, unsplit = max(0, total - m.footprintMB)
         let mlxPeak = mlx ? m.mlxPeakMB.flatMap { $0 > 0 ? $0 : nil } : nil
-        let peaks = [m.jobPeakMB, mlxPeak].compactMap { $0 }.filter { $0 > 0 }
+        let peak = m.jobPeakMB.flatMap { $0 > 0 ? $0 : nil }
         let weights = mlx ? m.mlxWeightsMB.flatMap { $0 > 0 ? $0 : nil } : nil
         self.init(
             source: mlx ? "mlx" : "process", totalMB: total, weightsMB: weights, workingMB: weights.map { max(0, m.mlxActiveMB - $0) },
             arraysMB: mlx && weights == nil ? m.mlxActiveMB : nil, cacheMB: mlx ? m.mlxCacheMB : nil, unsplitMB: mlx && unsplit > 0 ? unsplit : nil,
-            peakMB: peaks.max().map { max($0, total) }, mlxPeakMB: mlxPeak)
+            peakMB: peak.map { max($0, total) }, mlxPeakMB: mlxPeak)
     }
 }
 /// A model's last minute, in whole seconds (the second under way is not counted yet): what finished, how long it took,

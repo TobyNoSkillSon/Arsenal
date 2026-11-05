@@ -927,8 +927,10 @@ public enum IntegrationReferences {
         has finished (the weights as MLX holds them), and `mlx_peak_mb`, MLX's peak since the current or last load or job began
         (reset `Memory.peakMemory` when each begins; never send a lifetime peak). While a load or job runs a runner may push
         `{"event":"status","live":true,"memory":{…}}` about once a second; live readings update Activity without making the menu
-        re-read its rows. The supervisor samples every runner's footprint twice a second during each job and reports the job's
-        highest as the model's peak, so a runner without these fields still shows its peak.
+        re-read its rows. The supervisor resets the kernel's footprint high-water interval when each job begins, samples every
+        runner's footprint twice a second during it, and reports the job's highest (the kernel's maximum included) as the
+        model's peak, so a runner without these fields still shows its peak. `mlx_peak_mb` never sets the peak: MLX's counter
+        also counts allocator memory the process does not hold.
 
         ### Cancellation
 

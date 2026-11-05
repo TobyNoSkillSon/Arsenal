@@ -103,4 +103,37 @@ public struct WorkerMemoryCeiling: Sendable, Equatable {
         }
         return total
     }
+    /// The kernel's own high-water mark of a worker's footprint (and every process it started) since
+    /// `resetFootprintInterval` last ran on it: every page the process held at its most, not only what the half-second
+    /// samples caught. Zero when it cannot be read.
+    static func intervalMaxFootprint(pid: Int32) -> UInt64 {
+        guard pid > 0 else { return 0 }
+        var total: UInt64 = 0
+        for member in ServedFootprintPeak.processTree(roots: [pid]) {
+            var info = rusage_info_v4()
+            let status = withUnsafeMutablePointer(to: &info) { pointer in
+                pointer.withMemoryRebound(to: rusage_info_t?.self, capacity: 1) { proc_pid_rusage(member, RUSAGE_INFO_V4, $0) }
+            }
+            if status == 0 { total += info.ri_interval_max_phys_footprint }
+        }
+        return total
+    }
+    /// Starts a new kernel high-water interval for a worker and its children, so `intervalMaxFootprint` covers one job.
+    /// macOS restarts it at the process's footprint now; the lifetime maximum is untouched. False when any live member
+    /// could not be reset, so a caller never reads an interval that began before the job. A helper that exited between
+    /// listing and reset (ESRCH) adds nothing to the interval, so it does not count as a failure; the worker itself must reset.
+    @discardableResult static func resetFootprintInterval(pid: Int32) -> Bool {
+        guard pid > 0, let reset = rlimitControl else { return false }
+        // RLIMIT_FOOTPRINT_INTERVAL takes its flags in the pointer argument itself.
+        let flags = UnsafeMutableRawPointer(bitPattern: Int(FOOTPRINT_INTERVAL_RESET))
+        return ServedFootprintPeak.processTree(roots: [pid]).allSatisfy { member in
+            if reset(member, RLIMIT_FOOTPRINT_INTERVAL, flags) == 0 { return true }
+            return member != pid && errno == ESRCH
+        }
+    }
+    /// `proc_rlimit_control(2)`: exported by libSystem, declared only in the kernel's private headers.
+    private static let rlimitControl: (@convention(c) (pid_t, Int32, UnsafeMutableRawPointer?) -> Int32)? = {
+        guard let symbol = dlsym(UnsafeMutableRawPointer(bitPattern: -2), "proc_rlimit_control") else { return nil }
+        return unsafeBitCast(symbol, to: (@convention(c) (pid_t, Int32, UnsafeMutableRawPointer?) -> Int32).self)
+    }()
 }

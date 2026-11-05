@@ -49,8 +49,13 @@ public actor WorkerProcess {
     /// Memory readings taken while a job runs (the supervisor's samples and a runner's `live` status events): they keep the
     /// figures current for Activity without the menu re-reading everything each second.
     private var liveSink: (@Sendable (WorkerMemory) async -> Void)?
-    /// The footprint's high-water mark since the current job (or the last one) began, from the memory sampler.
+    /// The footprint's high-water mark since the current job (or the last one) began: the memory sampler's readings and
+    /// the kernel's own interval maximum, never MLX's peak counter (which also counts allocator memory the process does
+    /// not hold: 41.2 GB against the kernel's 35.6 GB for one SeedVR2 clip).
     private var jobPeakBytes: UInt64 = 0
+    /// True from a job's start, when the kernel's footprint interval was reset, until that job ends: only then does the
+    /// interval maximum describe the job.
+    private var kernelPeakWindow = false
     /// Requests that are not jobs (control, bookkeeping and lab captures): they neither open a peak window nor keep one open.
     static let controlOps: Set<String> = [
         "ping", "cancel", "status", "unload", "count_tokens", "voices", "list_voices", "delete_voice", "parameter_inventory", "parse_output", "selftest"
@@ -124,6 +129,7 @@ public actor WorkerProcess {
         let id = nextID; nextID += 1; let deadline = Date().addingTimeInterval(first)
         // A job arriving when none runs opens a new peak window, starting from what the worker holds now.
         if Self.isJob(op), !pending.values.contains(where: { Self.isJob($0.op) }) {
+            kernelPeakWindow = WorkerMemoryCeiling.resetFootprintInterval(pid: pid)
             jobPeakBytes = WorkerMemoryCeiling.footprint(pid: pid); memory.jobPeakMB = Double(jobPeakBytes) / 1e6
             // The previous job's MLX peak does not describe this one; the runner's next reading brings this job's.
             memory.mlxPeakMB = nil; memory.liveFootprintMB = Double(jobPeakBytes) / 1e6
@@ -223,6 +229,7 @@ public actor WorkerProcess {
                     var reported = try JSONDecoder().decode(WorkerMemory.self, from: WireJSON.encode(m))
                     // The job's peak is the supervisor's measurement; a runner's reading can only raise it.
                     jobPeakBytes = max(jobPeakBytes, UInt64(max(0, reported.footprintMB) * 1e6))
+                    raiseJobPeakFromKernel()
                     reported.jobPeakMB = jobPeakBytes > 0 ? Double(jobPeakBytes) / 1e6 : nil
                     // The runner's reading is the newest: its footprint and MLX parts belong to one moment.
                     reported.liveFootprintMB = nil
@@ -243,6 +250,13 @@ public actor WorkerProcess {
                 await deliver(frame, id: id)
             } else {
                 pending[id] = nil; ceilings[id] = nil; p.timer.cancel(); streams = streams.filter { $0.value != id }
+                if Self.isJob(p.op), !pending.values.contains(where: { Self.isJob($0.op) }) {
+                    // The last job ended: its peak takes the kernel's final maximum, and the window closes, so later
+                    // bookkeeping cannot raise it from the kernel.
+                    let before = jobPeakBytes
+                    raiseJobPeakFromKernel(); kernelPeakWindow = false
+                    if jobPeakBytes > before { memory.jobPeakMB = Double(jobPeakBytes) / 1e6; await liveSink?(memory) }
+                }
                 guard let reply = p.reply else { return }
                 if object["ok"]?.bool == true {
                     if !["cancel", "unload"].contains(p.op) { successfulRequests += 1 }
@@ -281,7 +295,7 @@ public actor WorkerProcess {
             unexpectedExit
             || (!stopping && !["timeout", "cancel_timeout", "cancelled_exit", "write", "memory"].contains(error?.code ?? "") && !pending.values.contains(where: { $0.reply == nil })
                 && code != 0)
-        exited = true; memory = WorkerMemory(); jobPeakBytes = 0
+        exited = true; memory = WorkerMemory(); jobPeakBytes = 0; kernelPeakWindow = false
         for id in Array(exitWaiters.keys) { finishExitWait(id) }
         await statusSink?(memory)
     }
@@ -292,6 +306,12 @@ public actor WorkerProcess {
     private func fail(_ failure: WorkerFailure) async {
         if error == nil { error = failure }; if ["wire", "worker_exit"].contains(error?.code ?? "") && !stopping { unexpectedExit = true }
         failPending(error ?? failure); await terminate()
+    }
+    /// Raises the job's peak to the kernel's interval maximum while the job's window is open: the most the worker held,
+    /// including any spike between two half-second samples.
+    private func raiseJobPeakFromKernel() {
+        guard kernelPeakWindow else { return }
+        jobPeakBytes = max(jobPeakBytes, WorkerMemoryCeiling.intervalMaxFootprint(pid: pid))
     }
     /// One sampler per worker, alive only while a request is pending. It joins the Mac-wide guard with the footprint
     /// the worker had when the first of its current requests began.
@@ -329,7 +349,7 @@ public actor WorkerProcess {
         }
         let footprint = WorkerMemoryCeiling.footprint(pid: pid)
         if pending.values.contains(where: { Self.isJob($0.op) }) {
-            jobPeakBytes = max(jobPeakBytes, footprint)
+            jobPeakBytes = max(jobPeakBytes, footprint); raiseJobPeakFromKernel()
             // Kept apart from the runner's reading, whose footprint and MLX parts were taken together.
             memory.liveFootprintMB = Double(footprint) / 1e6; memory.jobPeakMB = Double(jobPeakBytes) / 1e6
             await liveSink?(memory)

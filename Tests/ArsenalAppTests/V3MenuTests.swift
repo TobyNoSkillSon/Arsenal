@@ -420,6 +420,8 @@ import ArsenalCore
         #expect(ActivityText.minute(.init(audioS: 2.4, busyS: 3), .voice).text == "2.4 s audio/min")
         #expect(ActivityText.minute(.init(finished: 1, audioS: 600, busyS: 40, realTime: 15.04), .voice).text == "15\u{00d7} real time")
         #expect(ActivityText.minute(.init(finished: 3), .voice).text == "3 clips/min")
+        // An analysis model (the voice-gender classifier) makes no audio: its minute is requests and time each.
+        #expect(ActivityText.minute(.init(finished: 2, meanRunS: 0.5, busyS: 1), .default).text == "2 requests/min \u{00b7} 500 ms each")
         // A request waiting for its model to load is waiting, and the header says the model is loading.
         let loading = ActivityFeed.Model(
             id: "flux", kind: "images", state: "loading", requests: [.init(id: "l", requester: "Arsenal", op: "generate", phase: "loading")], queued: 1, batch: nil,

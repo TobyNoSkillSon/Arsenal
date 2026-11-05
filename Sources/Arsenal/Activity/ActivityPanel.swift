@@ -850,32 +850,31 @@ enum ActivityText {
         }
         return [.init(name: "In use", mb: m.arraysMB.map { $0 + (m.unsplitMB ?? 0) }, layer: .weights), .init(name: "Cache", mb: m.cacheMB, layer: .cache), peak]
     }
-    /// The bar's hover: each part in words and GB, then where the figures come from.
+    /// The bar's hover: each part in words and GB, then where the figures come from. Its figures are the ones under the
+    /// bar: Working and In use include what grew since the runner's last reading, and the peak is the process's own.
     static func memoryHelp(_ m: ActivityFeed.Memory) -> String {
         func g(_ mb: Double?) -> String { (gb(mb) ?? "\u{2014}") + " GB" }
         var lines: [String] = []
-        let peak: String
+        let grew = m.unsplitMB.map { "Of which \(g($0)) grew during this job since the runner last reported; Arsenal sees it in the process\u{2019}s footprint." }
         if m.source == "mlx" {
             if let weights = m.weightsMB {
                 lines.append("Weights \(g(weights)): what MLX held once the model had loaded.")
                 lines.append(
-                    "Working \(g((m.workingMB ?? 0) + (m.cacheMB ?? 0))): activations, KV cache or context and scratch \(g(m.workingMB)), and buffers MLX keeps for reuse \(g(m.cacheMB))."
+                    "Working \(g((m.workingMB ?? 0) + (m.cacheMB ?? 0) + (m.unsplitMB ?? 0))): activations, KV cache or context and scratch \(g(m.workingMB)), and buffers MLX keeps for reuse \(g(m.cacheMB))."
                 )
+                if let grew { lines.append(grew) }
             } else {
-                lines.append("In use \(g(m.arraysMB)): weights and working memory together; this runner does not measure its weights apart.")
+                lines.append("In use \(g(m.arraysMB.map { $0 + (m.unsplitMB ?? 0) })): weights and working memory together; this runner does not measure its weights apart.")
+                if let grew { lines.append(grew) }
                 lines.append("Cache \(g(m.cacheMB)): buffers MLX keeps for reuse.")
             }
-            if let unsplit = m.unsplitMB {
-                lines.append("Of which \(g(unsplit)) grew during this job since the runner last reported; Arsenal sees it in the process\u{2019}s footprint.")
-            }
             lines.append("Outside MLX \(g(outsideMLX(m))): the runner's code and CPU memory.")
-            peak = m.mlxPeakMB.map { " MLX\u{2019}s own peak was \(g($0))." } ?? ""
         } else {
             lines.append("In use \(g(m.totalMB)): this runner\u{2019}s whole process. Its engine does not report MLX\u{2019}s counters, so the parts are not known.")
-            peak = ""
         }
-        lines.append(m.peakMB == nil ? "Peak: not measured yet." : "Peak \(g(m.peakMB)): the most the current or last job (or the load) took.\(peak)")
-        lines.append("Measured in the runner\u{2019}s process\(m.source == "mlx" ? " with MLX\u{2019}s counters" : ""), and by Arsenal twice a second while a job runs.")
+        let peak = "Peak \(g(m.peakMB)): the most memory the runner\u{2019}s process held during the current or last job (or the load), as macOS counts it."
+        lines.append(m.peakMB == nil ? "Peak: not measured yet." : peak)
+        lines.append("Measured in the runner\u{2019}s process\(m.source == "mlx" ? " with MLX\u{2019}s counters" : ""), and by Arsenal from macOS while a job runs.")
         return lines.joined(separator: "\n")
     }
 

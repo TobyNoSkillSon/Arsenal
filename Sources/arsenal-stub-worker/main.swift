@@ -93,6 +93,13 @@ while let frame = try FrameIO.read(from: .standardInput) {
         // `hold_ms`: keep the request running at that size (a worker that stays big while the Mac fills around it).
         if let hold = req["hold_ms"]?.number, hold > 0 { usleep(UInt32(min(hold, 60_000) * 1000)) }
         reply["grown_mb"] = .number(Double(size / 1_048_576))
+    case "test_spike":
+        // A job whose memory rises and falls between two supervisor samples: map and touch `mb`, give it back, then hold.
+        let size = Int(req["mb"]?.number ?? 0) * 1_048_576
+        if size > 0, let block = mmap(nil, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0), block != MAP_FAILED {
+            memset(block, 1, size); munmap(block, size)
+        }
+        if let hold = req["hold_ms"]?.number, hold > 0 { usleep(UInt32(min(hold, 10_000) * 1000)) }
     case "test_live_status":
         // A runner's reading during a job (the native host sends one each second): weights, MLX and the job's MLX peak.
         try send([

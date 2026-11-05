@@ -17,8 +17,9 @@ extension RealModelsService {
         if let continuing {
             activityID = continuing; sessionActivities[sessionKey!]?.seen = Date()
         } else {
-            let title = try await resolvedOperations(id: id).first { $0.name == op }?.title
-            activityID = aggregator.begin(model: id, op: op, requester: ActivityRequestContext.requester, title: title)
+            let operation = try await resolvedOperations(id: id).first { $0.name == op }
+            activityID = aggregator.begin(
+                model: id, op: op, requester: ActivityRequestContext.requester, title: operation?.title, audioOutput: operation?.output == "audio")
         }
         // The entry stays open after a create that opened a session and after a push into an open entry.
         let keepsOpen: @Sendable (JSONObject) -> Bool = { result in
