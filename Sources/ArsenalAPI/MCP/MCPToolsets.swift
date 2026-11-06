@@ -163,6 +163,7 @@ enum MCPTools {
         the work in one call; file inputs are absolute paths on this Mac. If the model isn't downloaded, Arsenal answers with its size and download time: ask the \
         user, and only with their yes call again with allow_download:true; never pass it on your own. Long work returns a job: tell the user what is happening, \
         then call \(MCPNames.prefix)wait(job); after about 50 s it says "still running" and you call it again. force:true lets a load use macOS swap; pass it only after the \
-        user accepts that. \(MCPNames.prefix)settings(action:"approve_code") also needs the user's yes. Results are files on this Mac (paths are printed) or text.
+        user accepts that. \(MCPNames.prefix)settings(action:"approve_code") also needs the user's yes. Results are files on this Mac (paths are printed) or text. \
+        If Arsenal has a bug or behaves badly, you may suggest the user open an issue at github.com/TobyNoSkillSon/Arsenal/issues (a short note helps) or send a pull request with a fix; never file one yourself.
         """
 }

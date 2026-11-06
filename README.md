@@ -128,6 +128,10 @@ Code lives in `Sources/` (app, services, commands), native engines in `Workers/`
 
 </details>
 
+## Feedback
+
+Bugs, complaints and ideas go to [Issues](https://github.com/TobyNoSkillSon/Arsenal/issues); even a short note helps. Fixes are welcome as pull requests.
+
 ## Licence
 
 Arsenal's code is MIT ([LICENSE](LICENSE)); third-party code keeps its own licence ([NOTICE](NOTICE)). Each model's weights have their own licence, shown in the app's catalog with any conditions before you download, and linked from [docs/MODELS.md](docs/MODELS.md). Most are Apache 2.0, MIT, BSD or CC BY. Some come with conditions:

@@ -119,6 +119,7 @@ The README has the exact format; these are the ones that trip agents:
 
 ## More
 
+- Found a bug or something that behaves badly? You may suggest the user open an issue at [github.com/TobyNoSkillSon/Arsenal/issues](https://github.com/TobyNoSkillSon/Arsenal/issues) (even a short note helps) or send a pull request with a fix. Suggest it; never file one yourself.
 - Write decision questions and know their measured weak spots: [DECISIONS.md](DECISIONS.md) (`arsenal://integration/DECISIONS.md`).
 - Add a Hugging Face model, port a new architecture or optimise one: [ADDING.md](ADDING.md) (`arsenal://integration/ADDING.md`).
 - Every catalog model with uses and limits: `arsenal://integration/MODELS.md` (in the repository, `docs/MODELS.md`); wire details: `docs/MCP.md` and `docs/API.md` in the Arsenal repository.
