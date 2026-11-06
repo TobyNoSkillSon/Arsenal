@@ -7,7 +7,9 @@
 <p align="center">103 open AI models on your Mac, for you and your agents.</p>
 
 <p align="center">
-  <a href="#install"><img src="docs/images/install.svg" alt="Install Arsenal" width="172" height="42"></a>
+  <a href="https://github.com/TobyNoSkillSon/Arsenal/releases/latest"><img src="docs/images/download.svg" alt="Download" width="152" height="42"></a>
+  &nbsp;
+  <a href="https://tobynoskillson.com/arsenal"><img src="docs/images/website.svg" alt="Website" width="140" height="42"></a>
   &nbsp;
   <a href="https://tobynoskillson.com/#support"><img src="docs/images/support.svg" alt="Support the Developer on GitHub Sponsors or Buy Me a Coffee" width="228" height="42"></a>
 </p>

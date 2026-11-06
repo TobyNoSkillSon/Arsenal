@@ -14,3 +14,5 @@ Arsenal 1.0 (2 Nov 2026). Inputs:
 - `icon.png`: Arsenal's app icon, rasterised at 256 px from `Resources/Brand/icon.svg` by `scripts/icon.swift`, the
   same renderer the build uses. `install.svg` and `support.svg` take their colours from that icon: the tile's silver
   (#f5f5f3 to #e0e0de) and the cannon's ink (#141414).
+- `download.svg`, `website.svg` and `support.svg`: the README's top row, copied unchanged from Heimdall's README so
+  the family's rows match.
