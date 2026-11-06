@@ -164,6 +164,7 @@ enum MCPTools {
         user, and only with their yes call again with allow_download:true; never pass it on your own. Long work returns a job: tell the user what is happening, \
         then call \(MCPNames.prefix)wait(job); after about 50 s it says "still running" and you call it again. force:true lets a load use macOS swap; pass it only after the \
         user accepts that. \(MCPNames.prefix)settings(action:"approve_code") also needs the user's yes. Results are files on this Mac (paths are printed) or text. \
-        If Arsenal has a bug or behaves badly, you may suggest the user open an issue at github.com/TobyNoSkillSon/Arsenal/issues (a short note helps) or send a pull request with a fix; never file one yourself.
+        Problem, complaint or idea about Arsenal? Report it so it gets fixed: send it yourself or ask the user to, with no personal data, files or screenshots of the user's content unless \
+        the user has seen them: POST JSON {app:"arsenal",version,kind:bug|feedback|idea,message,details} to https://tobynoskillson.com/api/feedback (GET prints usage). Alternative: GitHub Issues.
         """
 }
