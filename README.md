@@ -17,8 +17,7 @@
 <a name="install"></a>Use them from the menu bar, or let Claude Code and Codex call them over MCP. Everything runs on device, on a Mac with Apple silicon and macOS 26 or newer.
 
 ```sh
-brew tap tobynoskillson/tap
-brew install --cask arsenal
+brew install --cask tobynoskillson/tap/arsenal
 ```
 
 <details>
