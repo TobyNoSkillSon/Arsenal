@@ -16,7 +16,7 @@ import IntegrationKit
 /// start-up, before any suite's MLX work, so the process-wide setting is fixed before the first matmul.
 enum MLXReady {
     private static let streams: Void = {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         NativeRuntime.prepare()
         _ = Stream.defaultStream
     }()

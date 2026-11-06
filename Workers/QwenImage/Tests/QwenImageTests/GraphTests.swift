@@ -10,7 +10,7 @@ import Testing
 @testable import QwenImageNative
 
 @Suite struct GraphTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     /// QwenImage21Transformer2DModel.forward without a cache: one joint sequence, the mask (q ≥ k) or same image block,
     /// prefix tokens modulated from t = 0 and target tokens from t, norm_out per token.

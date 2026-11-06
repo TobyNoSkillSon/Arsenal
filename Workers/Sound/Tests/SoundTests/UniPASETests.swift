@@ -32,7 +32,7 @@ private enum UPGolden {
     }
     static func useTestMetallib() {
         let env = ProcessInfo.processInfo.environment
-        if let library = env["ARSENAL_MLX_METALLIB"] ?? env["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: library) }
+        if let library = env["ARSENAL_MLX_METALLIB"] ?? env["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: library)) }
     }
     static func data() throws -> Data { try Data(contentsOf: folder.appendingPathComponent("golden.json")) }
     static func load() throws -> File { try JSONDecoder().decode(File.self, from: data()) }

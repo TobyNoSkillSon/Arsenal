@@ -117,7 +117,7 @@ import Testing
 }
 
 @Suite struct TensorTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
     func close(_ a: MLXArray, _ b: MLXArray, _ tolerance: Float = 1e-5) -> Bool { abs(a.asType(.float32) - b.asType(.float32)).max().item(Float.self) <= tolerance }
 
     /// AvgDown3D on one frame against the reference's view/permute/mean, written as explicit loops.

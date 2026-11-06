@@ -42,7 +42,7 @@ struct DownloadRolloutNativeTests {
     }
 
     @Test(.heavy) func reUsePacksSSMProjectionAndPreservesOnlyDeclaredHalfFallback() throws {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         let root = FileManager.default.temporaryDirectory.appendingPathComponent("reuse-intake-test-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }
         let source = root.appendingPathComponent("source")
@@ -67,7 +67,7 @@ struct DownloadRolloutNativeTests {
     }
 
     @Test(.heavy) func reUseHalfMatmulsRemainHalfAcrossFusedScanAndConv() throws {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         for half: DType in [.float16, .bfloat16] {
             let model = ReUseMamba(dModel: 64, kernels: .metal)
             let weights = Dictionary(

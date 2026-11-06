@@ -7,7 +7,7 @@ import ModelPrecision
 @testable import IntegrationKit
 
 @Suite(.serialized) struct NativeStoredTierTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
     final class Block: Module {
         @ModuleInfo var projection: Linear
         override init() { _projection.wrappedValue = Linear(64, 64); super.init() }

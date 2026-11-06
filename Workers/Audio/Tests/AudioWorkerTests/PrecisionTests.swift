@@ -12,7 +12,7 @@ import Testing
         guard let path = (ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]) else {
             throw audioFailure("The family GPU test needs the pinned no-fast-math metallib.")
         }
-        GPU.metallib = URL(fileURLWithPath: path)
+        setTestMetallib(URL(fileURLWithPath: path))
         // 70,000 overflows float16 to infinity: values are then held at 65,504 - 1,000, which float16 stores as 64,512.
         let overflowed = t5HalfClamp(MLXArray([Float(70000), -70000, 1]).asType(.float16)).asType(.float32).asArray(Float.self)
         #expect(overflowed == [64512, -64512, 1])
@@ -24,7 +24,7 @@ import Testing
         guard let path = (ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]) else {
             throw audioFailure("The family GPU test needs the pinned no-fast-math metallib.")
         }
-        GPU.metallib = URL(fileURLWithPath: path)
+        setTestMetallib(URL(fileURLWithPath: path))
         let source = LSTM(inputSize: 64, hiddenSize: 64)
         try NativeParameters.initializeRandom(source)
         let raw = Dictionary(uniqueKeysWithValues: source.parameters().flattened())

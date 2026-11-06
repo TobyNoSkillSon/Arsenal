@@ -9,7 +9,7 @@ import Testing
 
 /// The no-fast-math metallib scripts/test.sh lays out beside the native helpers, as every other native suite uses.
 func useTestMetallib() {
-    if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
 }
 
 @Suite struct Schedule {

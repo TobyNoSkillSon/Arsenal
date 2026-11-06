@@ -69,7 +69,7 @@ private func reference() throws -> EG2Reference {
 }
 /// The no-fast-math metallib scripts/test.sh lays out beside the native helpers; MLX's CPU stream still loads it.
 private func cpuMLX() {
-    if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
 }
 private func sha256(_ bytes: [UInt8]) -> String { SHA256.hash(data: Data(bytes)).map { String(format: "%02x", $0) }.joined() }
 

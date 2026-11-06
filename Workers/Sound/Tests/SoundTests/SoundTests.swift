@@ -40,7 +40,7 @@ import MLXNN
 }
 
 @Test(.heavy) func halfDecoderKeepsResidualsAndAttentionHalfWithFloatInput() throws {
-    if let library = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: library) }
+    if let library = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: library)) }
     try Device.withDefaultDevice(.cpu) {
         var config = SAMELConfig()
         config.latentDim = 4; config.dim = 8; config.numHeads = 2; config.headDim = 4

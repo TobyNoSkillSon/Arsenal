@@ -19,7 +19,7 @@ extension Trait where Self == ConditionTrait {
 }
 
 @Suite(.serialized) struct ParityTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     @Test(.heavy) func fp16PortMatchesTheMaker() throws {
         let env = ProcessInfo.processInfo.environment

@@ -11,7 +11,7 @@ import Tokenizers
 /// Loads the real 4.6 GB checkpoint (cast to FP16 in memory): heavy, opt-in, GPU.
 ///   VOXCPM2_PARITY_DIR=<capture dir> VOXCPM2_SNAPSHOT=<mlx-community snapshot> scripts/test.sh --heavy --filter VoxCPM2ParityTests
 @Suite(.serialized) struct VoxCPM2ParityTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     static let environment = ProcessInfo.processInfo.environment
     static var configured: Bool { environment["VOXCPM2_PARITY_DIR"] != nil && environment["VOXCPM2_SNAPSHOT"] != nil }

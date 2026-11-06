@@ -86,7 +86,9 @@ import MCP
             answer = try await h.text("wait", ["job": .string(id)])
             if !answer.hasPrefix("Still") { break }
         }
-        #expect(answer.hasPrefix("Downloaded Laya Decisions (600 MB in 2 min"), "\(answer)")
+        // 120 simulated seconds; under full-suite load the job's last steps can land after a concurrent 50 s wait has
+        // moved the simulated clock on (6 Nov: "3 min"), so either rounding is the same answer.
+        #expect(answer.hasPrefix("Downloaded Laya Decisions (600 MB in 2 min") || answer.hasPrefix("Downloaded Laya Decisions (600 MB in 3 min"), "\(answer)")
         let json = try await h.call("wait", ["job": .string(id), "format": "json"])
         #expect(json.structuredContent == nil, "a download has no output data; its text stays the answer")
     }

@@ -23,7 +23,7 @@ private enum DFGolden {
     static func load() throws -> File { try JSONDecoder().decode(File.self, from: Data(contentsOf: folder.appendingPathComponent("golden.json"))) }
     static func useTestMetallib() {
         let env = ProcessInfo.processInfo.environment
-        if let library = env["ARSENAL_MLX_METALLIB"] ?? env["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: library) }
+        if let library = env["ARSENAL_MLX_METALLIB"] ?? env["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: library)) }
     }
     /// The shared one-second fixture (ReUseEngine.testSignal's formula at 48 kHz).
     static func fixture() -> [Float] {

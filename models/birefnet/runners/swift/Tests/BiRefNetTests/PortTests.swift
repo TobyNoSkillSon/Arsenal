@@ -7,7 +7,7 @@ import Testing
 
 struct PortTests {
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     }
     @Test func pinnedVendorDecoderUsesChannelProportionalInjection() {
         let decoder = BiRefNetDecoder(config: .swinLargeDefault)

@@ -7,7 +7,7 @@ import MLX
 enum NativePrecisionTestRuntime {
     // MLX's global path setter is not thread-safe. Swift initializes this static exactly once.
     static let ready: Bool = {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         return true
     }()
 }

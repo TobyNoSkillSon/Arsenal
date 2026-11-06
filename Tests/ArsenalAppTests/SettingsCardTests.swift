@@ -274,7 +274,8 @@ import Testing
         for (pass, on) in [false, true, false].enumerated() {
             for id in ids {
                 // Every catalog model with tools is more than the table shows at once (it scrolls past
-                // ModelTable.maxHeight): scroll to the row first, as a user does.
+                // ModelTable.maxHeight): scroll to the row first, as a user does (rows out of sight are not built).
+                await host.reveal(row: id)
                 let gear = try #require(host.gear(id))
                 await host.reveal(gear)
                 try host.press(gear)

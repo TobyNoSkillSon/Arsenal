@@ -203,7 +203,7 @@ import Testing
     /// Converts the pinned `.nemo` from the Hugging Face cache (APFS clone) with the Get conversion and loads the adapter.
     static func loadedAdapter(_ root: URL) throws -> SortformerV2Adapter {
         if let metallib = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] {
-            GPU.metallib = URL(fileURLWithPath: metallib)
+            setTestMetallib(URL(fileURLWithPath: metallib))
         }
         let nemo = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent(
             ".cache/huggingface/hub/models--nvidia--diar_streaming_sortformer_4spk-v2/snapshots/84edd514b8ef68004c10086918cd62f2148cbd59/diar_streaming_sortformer_4spk-v2.nemo"
@@ -366,7 +366,7 @@ import Testing
 /// it) MLX otherwise fails to find its shaders.
 func useTestMetallib() {
     if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] {
-        GPU.metallib = URL(fileURLWithPath: path)
+        setTestMetallib(URL(fileURLWithPath: path))
     }
 }
 

@@ -11,7 +11,7 @@ import VireoCore
 
 /// Weight-free VoxCPM2 checks (CPU MLX, tiny shapes): fixed port bugs, the maker's prompt layouts and request rules.
 @Suite struct VoxCPM2Tests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     /// A network small enough for the CPU with every module the real one has.
     static func tinyConfig() -> VoxCPM2Configuration {

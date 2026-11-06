@@ -39,7 +39,7 @@ import MLXNN
 
 @Suite(.serialized) struct TensorRoundTripTests {
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     }
     @Test(arguments: [4, 8]) func streamedPackedWeightsLoadDirectly(bits: Int) throws {
         try Device.withDefaultDevice(.cpu) {

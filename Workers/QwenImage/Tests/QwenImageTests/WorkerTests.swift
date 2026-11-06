@@ -15,7 +15,7 @@ import Testing
         .deletingLastPathComponent().deletingLastPathComponent()
     static let folders = ["qwen-image-2.1", "qwen-image-2.1-turbo"].map { repo.appendingPathComponent("retired-models/\($0)") }
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         setenv("ARSENAL_NATIVE_LAB", "1", 1)
     }
 

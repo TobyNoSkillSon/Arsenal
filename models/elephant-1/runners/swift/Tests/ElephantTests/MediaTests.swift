@@ -207,7 +207,7 @@ func makerDecode() throws -> [String: DecodeEntry] {
 }
 
 @Suite(.serialized) struct MediaParityTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     /// Requests: the tracked fixtures, or ELEPHANT_LAB_REQUESTS with pictures in ELEPHANT_LAB_MEDIA (adds the lab photo).
     func requests() throws -> (ids: [String], texts: [String], media: URL) {

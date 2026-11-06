@@ -7,7 +7,7 @@ import MLX
 /// The shared PyTorch checkpoint reader (Audio, Sound and Restoration use it): a stored-ZIP `torch.save` file built in
 /// the test, read plain and from inside an outer container, plus the pickle subset and its refusals.
 struct TorchCheckpointTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     /// OrderedDict({"w": _rebuild_tensor_v2(storage("0", Float), 4, (2, 3), (3, 1), False, OrderedDict())}), protocol 2.
     static var statePickle: [UInt8] {

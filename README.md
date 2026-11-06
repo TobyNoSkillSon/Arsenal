@@ -134,10 +134,11 @@ Send a bug, complaint or idea to [tobynoskillson.com/feedback](https://tobynoski
 
 ```sh
 curl -d "arsenal: what happened, what you expected, steps to reproduce" https://tobynoskillson.com/api/feedback
-curl -F "message=arsenal: the window goes blank" -F file=@shot.png https://tobynoskillson.com/api/feedback   # with a screenshot or log
+# With a screenshot or log:
+curl --form-string "message=arsenal: the window goes blank" -F file=@shot.png https://tobynoskillson.com/api/feedback
 ```
 
-Any text works; JSON or form fields such as `version`, `kind` (`bug`, `feedback`, `idea`), `details` and `contact` (only if you want a reply) are optional. Up to four files of 5 MB each (PNG, JPEG, WebP, GIF, HEIC or plain-text logs). Five reports a minute per address; `curl https://tobynoskillson.com/api/feedback` prints the full usage. [GitHub Issues](https://github.com/TobyNoSkillSon/Arsenal/issues) work too, and fixes are welcome as pull requests.
+Any text works; JSON or form fields such as `version`, `kind` (`bug`, `feedback`, `idea`), `details` and `contact` (only if you want a reply) are optional. Up to four files, 5 MB each and 12 MB in all (PNG, JPEG, WebP, GIF, HEIC or plain-text logs). Five reports a minute per address; `curl https://tobynoskillson.com/api/feedback` prints the full usage. [GitHub Issues](https://github.com/TobyNoSkillSon/Arsenal/issues) work too, and fixes are welcome as pull requests.
 
 ## Licence
 

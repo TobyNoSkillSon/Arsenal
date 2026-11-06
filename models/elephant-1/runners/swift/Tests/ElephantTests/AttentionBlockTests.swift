@@ -7,7 +7,7 @@ import MLXNN
 import Testing
 
 @Suite struct AttentionBlockTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     @Test(.heavy) func blockedQueriesMatchOneBlock() throws {
         let json: [String: Any] = [

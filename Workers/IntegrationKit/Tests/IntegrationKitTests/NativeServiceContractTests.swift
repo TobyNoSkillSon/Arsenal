@@ -73,7 +73,7 @@ private struct NativeFixtureArtifact: WorkerArtifact {
         try FileManager.default.createDirectory(at: weights, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: root) }
         // The fixture tensors are written in this process; do not depend on an earlier suite having set the metallib.
-        let metallib = try #require(ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]); GPU.metallib = URL(fileURLWithPath: metallib)
+        let metallib = try #require(ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]); setTestMetallib(URL(fileURLWithPath: metallib))
         let writer = try TensorWriter(weights.appendingPathComponent("model.safetensors"))
         try writer.append("projection.weight", MLXArray.zeros([4, 64], dtype: .float16))
         try writer.append("projection.bias", MLXArray.zeros([4], dtype: .float16)); try writer.finish()
@@ -103,7 +103,7 @@ private struct NativeFixtureArtifact: WorkerArtifact {
         let root = URL(fileURLWithPath: "/private/tmp/arsenal-native-service-" + UUID().uuidString)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         defer { try? FileManager.default.removeItem(at: root) }
-        let metallib = try #require(ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]); GPU.metallib = URL(fileURLWithPath: metallib)
+        let metallib = try #require(ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]); setTestMetallib(URL(fileURLWithPath: metallib))
         let fixture = Bundle(for: NativeTestBundleAnchor.self).bundleURL.deletingLastPathComponent().appendingPathComponent("native-integration-fixture")
         #expect(FileManager.default.isExecutableFile(atPath: fixture.path))
         let revision = String(repeating: "a", count: 40), source = root.appendingPathComponent("hf/test/fixture/resolve/" + revision)

@@ -15,7 +15,7 @@ private func vellaMetallib() throws {
     guard let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] else {
         throw audioFailure("The family GPU test needs the pinned no-fast-math metallib.")
     }
-    GPU.metallib = URL(fileURLWithPath: path)
+    setTestMetallib(URL(fileURLWithPath: path))
     setenv("ARSENAL_NATIVE_LAB", "1", 1)
 }
 

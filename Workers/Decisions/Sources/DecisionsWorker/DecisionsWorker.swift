@@ -19,10 +19,10 @@ public enum DecisionsWorker {
         // Metal library: an explicit override, else a signed app's Contents/Resources/mlx.metallib (Verdict's layout);
         // else MLX finds mlx-swift_Cmlx.bundle next to the binary (build.sh output, the app's Helpers layout).
         if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] {
-            GPU.metallib = URL(fileURLWithPath: path)
+            setMetallib(URL(fileURLWithPath: path))
         } else {
             let bundled = executable.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("Resources/mlx.metallib")
-            if FileManager.default.fileExists(atPath: bundled.path) { GPU.metallib = bundled }
+            if FileManager.default.fileExists(atPath: bundled.path) { setMetallib(bundled) }
         }
 
         // stdout carries frames only: keep a private descriptor for them and point fd 1 at stderr, so a stray print from

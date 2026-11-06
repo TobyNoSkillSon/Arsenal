@@ -13,7 +13,7 @@ import Testing
         guard let path = (ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]) else {
             throw audioFailure("The family GPU test needs the pinned no-fast-math metallib.")
         }
-        GPU.metallib = URL(fileURLWithPath: path)
+        setTestMetallib(URL(fileURLWithPath: path))
     }
 
     /// FP16 activations of the first time-branch DConv's shape: mean 0.75, so the FP16 sum passes 65,504.

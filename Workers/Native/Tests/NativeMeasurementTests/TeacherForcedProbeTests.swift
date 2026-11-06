@@ -23,7 +23,7 @@ private final class TinyHalfLM: Module, LanguageModel {
 
 @Suite(.serialized) struct TeacherForcedProbeTests {
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         Device.setDefault(device: .gpu)
     }
     @Test(.heavy) func halfLogitsAreExtractedWithoutAGPUFloat32Cast() throws {

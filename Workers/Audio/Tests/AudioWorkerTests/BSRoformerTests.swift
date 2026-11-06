@@ -11,7 +11,7 @@ import Testing
 func audioPortsLab() throws -> URL {
     guard let path = ProcessInfo.processInfo.environment["ARSENAL_AUDIO_PORTS_LAB"] else { throw audioFailure("Set ARSENAL_AUDIO_PORTS_LAB.") }
     if let metallib = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] {
-        GPU.metallib = URL(fileURLWithPath: metallib)
+        setTestMetallib(URL(fileURLWithPath: metallib))
     }
     return URL(fileURLWithPath: path)
 }

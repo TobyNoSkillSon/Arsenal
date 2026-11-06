@@ -21,7 +21,7 @@ import MLXNN
         let metallib = try #require(
             ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"],
             "the GPU check needs the pinned no-fast-math metallib")
-        GPU.metallib = URL(fileURLWithPath: metallib)
+        setTestMetallib(URL(fileURLWithPath: metallib))
     }
 
     @Test func promptAssemblyMatchesTheMakersEncoder() throws {

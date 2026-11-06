@@ -168,7 +168,7 @@ import Testing
     static var pldaAvailable: Bool { FileManager.default.fileExists(atPath: snapshot.appendingPathComponent("plda/plda.npz").path) }
     static func plda() throws -> Community1PLDA {
         if let metallib = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] {
-            GPU.metallib = URL(fileURLWithPath: metallib)
+            setTestMetallib(URL(fileURLWithPath: metallib))
         }
         func vector(_ a: MLXArray) -> [Double] { a.asArray(Float.self).map { Double(Float(Float16($0))) } } // host-side FP16 rounding, no GPU
         let x = try C1Archive(snapshot.appendingPathComponent("plda/xvec_transform.npz").resolvingSymlinksInPath())
@@ -374,7 +374,7 @@ import Testing
     /// Converts the pinned checkpoints from the Hugging Face cache (APFS clones) with the Get conversion and loads the adapter.
     static func loadedAdapter(_ root: URL) throws -> DiariZenAdapter {
         if let metallib = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] {
-            GPU.metallib = URL(fileURLWithPath: metallib)
+            setTestMetallib(URL(fileURLWithPath: metallib))
         }
         let fm = FileManager.default
         let source = root.appendingPathComponent("source"), asset = root.appendingPathComponent("asset"), weights = root.appendingPathComponent("weights")
@@ -411,7 +411,7 @@ import Testing
     @Test(.heavy, arguments: [(16, 64, 128, 40, true), (16, 64, 128, 799, true), (16, 64, 128, 799, false), (2, 8, 4, 12, false), (1, 64, 128, 799, true)])
     func convolutionMatchesShiftedMatmul(groups: Int, perGroup: Int, kernel: Int, length: Int, half: Bool) throws {
         if let metallib = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] {
-            GPU.metallib = URL(fileURLWithPath: metallib)
+            setTestMetallib(URL(fileURLWithPath: metallib))
         }
         let channels = groups * perGroup, dtype: DType = half ? .float16 : .float32
         MLXRandom.seed(7)

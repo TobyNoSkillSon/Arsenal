@@ -38,6 +38,9 @@ import ArsenalWire
         let child = Process(); child.executableURL = URL(fileURLWithPath: "/bin/sleep"); child.arguments = ["60"] // outlives the test under full-suite load; terminated below
         try child.run(); defer { child.terminate(); child.waitUntilExit() }
         let pid = child.processIdentifier
+        // Under full-suite load the child can still be mid-exec (81,992 bytes on 6 Nov): wait for a running sleep.
+        let deadline = Date().addingTimeInterval(5)
+        while WorkerMemoryCeiling.footprint(pid: pid) <= 100_000, Date() < deadline { usleep(20_000) }
         #expect(WorkerMemoryCeiling.resetFootprintInterval(pid: pid), "the supervisor may reset its own child's interval")
         let now = WorkerMemoryCeiling.footprint(pid: pid), first = WorkerMemoryCeiling.intervalMaxFootprint(pid: pid)
         #expect(first > 100_000 && first < 1_000_000_000, "\(first) bytes")

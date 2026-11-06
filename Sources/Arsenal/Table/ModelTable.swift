@@ -159,7 +159,10 @@ struct ModelTable: View {
             header.frame(width: rowWidth, height: Self.headerHeight)
             Rectangle().fill(pal.hairline.swiftUI).frame(height: 1).padding(.vertical, Self.dividerPadding)
             if Self.scrolls(controller) {
-                ScrollView(.vertical) { groups(slots: slots, width: rowWidth) }
+                // Lazy: only the groups in sight are built. Every Models open moves the table into a new menu window, and
+                // SwiftUI then lays out and walks (for accessibility focus) every row it holds: with 85 models that was
+                // 0.4-1 s on each pass of the pointer over Models (6 Nov 2026).
+                ScrollView(.vertical) { LazyVStack(alignment: .leading, spacing: 0) { groupList(slots: slots, width: rowWidth) } }
                     .frame(width: rowWidth, height: Self.height(controller) - Self.chromeHeight(footer: Self.footer(controller) != nil))
             } else {
                 groups(slots: slots, width: rowWidth)
@@ -196,49 +199,52 @@ struct ModelTable: View {
     }
 
     private func groups(slots: Int, width: CGFloat) -> some View {
+        VStack(alignment: .leading, spacing: 0) { groupList(slots: slots, width: width) }
+    }
+
+    /// The groups, then the rule, the unlisted-weights row and Get more models, for a plain or a lazy stack.
+    @ViewBuilder private func groupList(slots: Int, width: CGFloat) -> some View {
         let groups = controller.groups
-        return VStack(alignment: .leading, spacing: 0) {
-            ForEach(Array(groups.enumerated()), id: \.element.kind.id) { index, group in
-                VStack(alignment: .leading, spacing: 0) {
-                    if index > 0 {
-                        Rectangle().fill(pal.raisedBorder.swiftUI).frame(width: width, height: Self.groupRule)
-                            .padding(.top, Self.groupRuleAbove).padding(.bottom, Self.groupRuleBelow)
-                            .accessibilityHidden(true)
-                    }
-                    let spans = group.rows.map { Self.rowSpan(lines: controller.weights($0).copies.count) }
-                    groupHeader(group.kind, index: index, count: groups.count, extent: Self.groupHeight(heights: spans, first: true), slots: slots, width: width)
-                    let columns = TableStats.columns(group.kind)
-                    ForEach(group.rows) { row in
-                        let weights = controller.weights(row)
-                        let lines = PrecisionLine.make(row, presentation: controller.presentation(row), weights: weights)
-                        ModelTableRow(
-                            row: row, columns: columns, slots: slots, p: controller.presentation(row), chip: controller.chip,
-                            hasSettings: controller.settings[row.id]?.isEmpty == false && row.kind != Unlisted.kind,
-                            hovered: controller.renderHover == row.id, changes: controller.pendingChanges(row),
-                            loadChoices: controller.loadChoices(row), settingsOpen: controller.settingsRow == row.id, pal: pal, controller: controller,
-                            weights: weights, lines: lines, height: Self.rowSpan(lines: lines.count)
-                        ).equatable().padding(.bottom, Self.rowGap)
-                    }
+        ForEach(Array(groups.enumerated()), id: \.element.kind.id) { index, group in
+            VStack(alignment: .leading, spacing: 0) {
+                if index > 0 {
+                    Rectangle().fill(pal.raisedBorder.swiftUI).frame(width: width, height: Self.groupRule)
+                        .padding(.top, Self.groupRuleAbove).padding(.bottom, Self.groupRuleBelow)
+                        .accessibilityHidden(true)
                 }
-                .opacity(controller.drag?.group == group.kind.id ? 0.55 : 1)
-                .overlay(alignment: .top) { if controller.drag.map({ $0.slot == index && $0.group != group.kind.id }) == true { dropLine(width) } }
-                .overlay(alignment: .bottom) {
-                    if index == groups.count - 1, controller.drag.map({ $0.slot == groups.count && $0.group != group.kind.id }) == true { dropLine(width) }
+                let spans = group.rows.map { Self.rowSpan(lines: controller.weights($0).copies.count) }
+                groupHeader(group.kind, index: index, count: groups.count, extent: Self.groupHeight(heights: spans, first: true), slots: slots, width: width)
+                let columns = TableStats.columns(group.kind)
+                ForEach(group.rows) { row in
+                    let weights = controller.weights(row)
+                    let lines = PrecisionLine.make(row, presentation: controller.presentation(row), weights: weights)
+                    ModelTableRow(
+                        row: row, columns: columns, slots: slots, p: controller.presentation(row), chip: controller.chip,
+                        hasSettings: controller.settings[row.id]?.isEmpty == false && row.kind != Unlisted.kind,
+                        hovered: controller.renderHover == row.id, changes: controller.pendingChanges(row),
+                        loadChoices: controller.loadChoices(row), settingsOpen: controller.settingsRow == row.id, pal: pal, controller: controller,
+                        weights: weights, lines: lines, height: Self.rowSpan(lines: lines.count)
+                    ).equatable().padding(.bottom, Self.rowGap)
                 }
             }
-            if !groups.isEmpty {
-                Rectangle().fill(pal.raisedBorder.swiftUI).frame(width: width, height: Self.groupRule)
-                    .padding(.top, Self.groupRuleAbove).padding(.bottom, Self.groupRuleBelow).accessibilityHidden(true)
+            .opacity(controller.drag?.group == group.kind.id ? 0.55 : 1)
+            .overlay(alignment: .top) { if controller.drag.map({ $0.slot == index && $0.group != group.kind.id }) == true { dropLine(width) } }
+            .overlay(alignment: .bottom) {
+                if index == groups.count - 1, controller.drag.map({ $0.slot == groups.count && $0.group != group.kind.id }) == true { dropLine(width) }
             }
-            // Weights no model refers to: one row, deleted in one click.
-            if Self.orphanShown(controller) {
-                OrphanRow(bytes: controller.orphanBytes, busy: controller.removing.contains(WeightsPresentation.orphanKey), controller: controller, pal: pal)
-                    .frame(width: width, height: Self.rowHeight).padding(.bottom, Self.rowGap)
-            }
-            // The last row: Get more models.
-            PinnedRow(hovered: controller.renderHoverPinned, click: { controller.openBrowser() })
+        }
+        if !groups.isEmpty {
+            Rectangle().fill(pal.raisedBorder.swiftUI).frame(width: width, height: Self.groupRule)
+                .padding(.top, Self.groupRuleAbove).padding(.bottom, Self.groupRuleBelow).accessibilityHidden(true)
+        }
+        // Weights no model refers to: one row, deleted in one click.
+        if Self.orphanShown(controller) {
+            OrphanRow(bytes: controller.orphanBytes, busy: controller.removing.contains(WeightsPresentation.orphanKey), controller: controller, pal: pal)
                 .frame(width: width, height: Self.rowHeight).padding(.bottom, Self.rowGap)
         }
+        // The last row: Get more models.
+        PinnedRow(hovered: controller.renderHoverPinned, click: { controller.openBrowser() })
+            .frame(width: width, height: Self.rowHeight).padding(.bottom, Self.rowGap)
     }
 
     /// Where a dragged group would land.
@@ -399,22 +405,22 @@ struct ModelTableRow: View, Equatable {
         let inverted = hot
         let controller = controller, row = row
         HStack(spacing: W.spacing) {
-            // Each line carries its own hover over it (TooltipCell's `cellTooltip`): the name and flame the model's, the
+            // Each line carries its own hover over it (TooltipCell's `rowTooltip`): the name and flame the model's, the
             // status line its own. Not nested, so neither covers the other.
             let modelHelp = ModelHelp.text(row, presentation: p, name: Self.truncates(row.name))
             HStack(spacing: W.iconGap) {
                 Image(systemName: "flame.fill").font(.system(size: W.flameSize)).foregroundStyle(Color.orange)
-                    .frame(width: W.icon).opacity(hot ? 1 : 0).cellTooltip(modelHelp)
+                    .frame(width: W.icon).opacity(hot ? 1 : 0).rowTooltip(modelHelp)
                 VStack(alignment: .leading, spacing: W.lineGap) {
                     Text(row.name).font(.system(size: ModelTable.valueSize)).lineLimit(1)
-                        .frame(maxWidth: .infinity, alignment: .leading).cellTooltip(modelHelp)
+                        .frame(maxWidth: .infinity, alignment: .leading).rowTooltip(modelHelp)
                     if Self.hasStatusLine(row, p) {
                         // What the model does and why a Get failed take two lines when they need them, so neither is
                         // cut mid-word; a busy state (getting, loading) keeps one.
                         Text(p.line.text).font(.system(size: ModelTable.deltaSize, weight: .medium)).lineLimit(Self.purposeLines(p.line))
                             .fixedSize(horizontal: false, vertical: true)
                             .foregroundStyle(ModelTable.tone(p.line.tone, hot: inverted, pal))
-                            .frame(maxWidth: .infinity, alignment: .leading).cellTooltip(p.line.help)
+                            .frame(maxWidth: .infinity, alignment: .leading).rowTooltip(p.line.help)
                     }
                 }
             }.frame(width: W.model, alignment: .leading)
@@ -481,6 +487,8 @@ struct ModelTableRow: View, Equatable {
             }
             .foregroundStyle((inverted ? ArsenalPalette.hotText : pal.t1).swiftUI)
             .contentShape(Rectangle())
+            // The cells' hovers, on one AppKit view for the whole row.
+            .rowTooltips()
     }
 
     /// The name does not fit its line: the Model tooltip names it in full.
@@ -516,7 +524,7 @@ struct ModelTableRow: View, Equatable {
                 Self.triangle(size: Self.triangleSize)
             }
         }.frame(width: W.metric, height: height)
-            .cellTooltip(f.help)
+            .rowTooltip(f.help)
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(([f.value ?? "Not available"] + [f.reference, f.delta?.text].compactMap { $0 }).joined(separator: ", "))
             .accessibilityHint(f.help)

@@ -8,7 +8,7 @@ import Testing
 
 struct PrecisionTests {
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         Memory.memoryLimit = 128 * 1024 * 1024
         Memory.cacheLimit = 8 * 1024 * 1024
     }

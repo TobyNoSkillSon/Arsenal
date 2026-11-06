@@ -32,11 +32,11 @@ public enum RuntimeCaches {
     /// binaries are not that app layout, so `ARSENAL_MLX_METALLIB` (the path the native worker itself reads) applies next.
     public static func useBundledMetallib() {
         if let override = FastPath.current.value("VIREO_METALLIB") ?? ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] {
-            GPU.metallib = URL(fileURLWithPath: override); return
+            setMetallib(URL(fileURLWithPath: override)); return
         }
         guard let executable = Bundle.main.executableURL?.resolvingSymlinksInPath() else { return }
         let library = executable.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("Resources/mlx.metallib")
-        if FileManager.default.fileExists(atPath: library.path) { GPU.metallib = library }
+        if FileManager.default.fileExists(atPath: library.path) { setMetallib(library) }
     }
     private static var configured = false
     /// First model load only: an idle helper never initialises Metal.

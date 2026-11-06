@@ -149,7 +149,7 @@ final class GroupHeaderView: NSView, NSViewToolTipOwner, ToolTipRegions {
     }
 
     /// The slot (0 = before the first group … count = after the last) for a pointer: the first group whose middle lies
-    /// below the pointer, from every group header in the same table.
+    /// below the pointer, from the group headers built in the same table.
     func dropSlot(atWindowPoint point: NSPoint) -> Int {
         var root: NSView = self
         while let parent = root.superview { root = parent }
@@ -161,7 +161,12 @@ final class GroupHeaderView: NSView, NSViewToolTipOwner, ToolTipRegions {
             return (flipped ? r.minY : root.bounds.height - r.maxY, h.extent)
         }
         let pointerY = flipped ? y : root.bounds.height - y
-        return Self.slot(pointerY: pointerY, spans: spans)
+        return Self.tableSlot(Self.slot(pointerY: pointerY, spans: spans), indices: headers.map(\.index))
+    }
+    /// A slot among the headers found, as a slot in the whole table: a scrolled table builds only the groups in sight
+    /// (ModelTable's lazy stack), so the first header found need not be the first group.
+    static func tableSlot(_ found: Int, indices: [Int]) -> Int {
+        indices.indices.contains(found) ? indices[found] : (indices.last ?? -1) + 1
     }
     /// Pure slot rule (unit-tested): spans in table order, y growing downwards.
     static func slot(pointerY: CGFloat, spans: [(top: CGFloat, extent: CGFloat)]) -> Int {

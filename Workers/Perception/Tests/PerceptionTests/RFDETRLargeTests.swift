@@ -64,7 +64,7 @@ struct RFDETRLargeTests {
     /// and a batch of two images selects and decodes each image as it would alone. Heavy only because the deformable
     /// attention is a Metal kernel (GPU only); 16 positions and 4 queries.
     @Test(.heavy) func keypointBranchUsesTheInjectedSelectionAndBatchesMatchSingleImages() throws {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         do {
             MLXRandom.seed(7)
             let config = RFDETRConfig(
@@ -151,7 +151,7 @@ struct RFDETRLargeTests {
     /// lab/evidence/rf-detr-large. Each component consumes the maker's own input tensor.
     /// `ARSENAL_RFDETR_LARGE_EVIDENCE=<that dir> scripts/test.sh --heavy --filter RFDETRLargeTests`
     @Test(.heavy) func matchesMakerPerComponent() throws {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
         let evidence = try #require(ProcessInfo.processInfo.environment["ARSENAL_RFDETR_LARGE_EVIDENCE"].map(URL.init(fileURLWithPath:)))
         // A plain FP16 cast of the pinned checkpoint from the Hugging Face cache, made here and removed afterwards, so no
         // second copy of the weights stays on disk.

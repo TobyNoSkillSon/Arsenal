@@ -11,7 +11,7 @@ import Testing
 /// (lab/drama3-port/scripts/capture_parity.py). Loads the real 24 GB checkpoint: heavy, opt-in, GPU.
 ///   DRAMA3_PARITY_DIR=<capture dir> DRAMA3_SNAPSHOT=<snapshot dir> scripts/test.sh --heavy --filter FishDrama3ParityTests
 @Suite(.serialized) struct FishDrama3ParityTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     static let environment = ProcessInfo.processInfo.environment
     static var configured: Bool { environment["DRAMA3_PARITY_DIR"] != nil && environment["DRAMA3_SNAPSHOT"] != nil }

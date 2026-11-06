@@ -13,7 +13,7 @@ struct ReUseKernelParityTests {
     static let halves: [DType] = [.bfloat16, .float16]
 
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     }
 
     /// Bitwise comparison of two equally shaped half arrays.

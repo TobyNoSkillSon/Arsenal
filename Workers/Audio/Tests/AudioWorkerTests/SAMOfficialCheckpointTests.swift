@@ -16,7 +16,7 @@ import Testing
 
     init() {
         if let metallib = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] {
-            GPU.metallib = URL(fileURLWithPath: metallib)
+            setTestMetallib(URL(fileURLWithPath: metallib))
         }
     }
 

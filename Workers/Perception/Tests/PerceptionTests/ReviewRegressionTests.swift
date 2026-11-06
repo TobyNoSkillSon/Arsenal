@@ -10,7 +10,7 @@ import ArsenalWire
 @testable import MLXLocateAnything
 
 @Suite(.serialized) struct ReviewRegressionTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     private func sam() throws -> (SAM31Model, FrameFeatures) {
         let config = NativeSAM31.smallConfig()

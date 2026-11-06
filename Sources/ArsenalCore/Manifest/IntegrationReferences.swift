@@ -128,6 +128,7 @@ public enum IntegrationReferences {
 
         ## More
 
+        - Problem, complaint or idea about Arsenal? Report it so it gets fixed: send it yourself or ask the user to, with no personal data, files or screenshots of the user's content unless the user has seen them. Any text works: `curl -d "arsenal: what happened, what you expected, steps to reproduce (Arsenal <version>)" https://tobynoskillson.com/api/feedback`. With a screenshot or log: `curl --form-string "message=arsenal: ..." -F file=@shot.png https://tobynoskillson.com/api/feedback`. The reply is an id like r-xxxxxx. Alternative: [GitHub Issues](https://github.com/TobyNoSkillSon/Arsenal/issues).
         - Write decision questions and know their measured weak spots: [DECISIONS.md](DECISIONS.md) (`arsenal://integration/DECISIONS.md`).
         - Add a Hugging Face model, port a new architecture or optimise one: [ADDING.md](ADDING.md) (`arsenal://integration/ADDING.md`).
         - Every catalog model with uses and limits: `arsenal://integration/MODELS.md` (in the repository, `docs/MODELS.md`); wire details: `docs/MCP.md` and `docs/API.md` in the Arsenal repository.

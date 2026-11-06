@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 import Foundation
 import ArsenalCore
+import Synchronization
 
 // What one row shows, from the service's ModelRow and an optimistic preference while it is saved.
 // No AppKit/SwiftUI: unit-tested directly.
@@ -63,6 +64,22 @@ enum PrecisionColumn {
         case "fp32", "f32", "float32": return 32
         default: break
         }
+        if let known = labelBits.withLock({ $0[d] }) { return known }
+        let parsed = labelWidth(d)
+        labelBits.withLock { $0[d] = parsed }
+        return parsed
+    }
+    /// A label's width, read once per label: the table asks for every row's formats many times per render, and a Swift
+    /// Regex match costs tens of microseconds (80% of a whole-table render in a debug build, 6 Nov 2026: the menu lagged).
+    private static let labelBits = Mutex<[String: Double?]>([:])
+    #if DEBUG
+        /// How many times each label was read with the Regex (tests: once).
+        static let labelReads = Mutex<[String: Int]>([:])
+    #endif
+    private static func labelWidth(_ d: String) -> Double? {
+        #if DEBUG
+            labelReads.withLock { $0[d, default: 0] += 1 }
+        #endif
         guard let match = d.wholeMatch(of: /(?:u?int|q|fp|mxfp|nvfp|bf|f)(\d+(?:\.\d+)?)(?:_[a-z0-9]+)*/), let n = Double(match.1), n > 0, n <= 32 else {
             return nil
         }

@@ -8,7 +8,7 @@ import IntegrationKit
 /// TIPSv2's zero-shot segmentation follows `pytorch/TIPS_zeroshot_segmentation.ipynb`: value-attention patch features,
 /// a nine-template label ensemble, bilinear upsampling of the cosine scores, argmax per pixel.
 @Suite(.serialized) struct TIPSRecipeTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     /// `F.interpolate(mode="bilinear", align_corners=False)` written out per pixel, then argmax.
     private func reference(_ grid: [Float], rows: Int, columns: Int, count: Int, height: Int, width: Int) -> [Int32] {

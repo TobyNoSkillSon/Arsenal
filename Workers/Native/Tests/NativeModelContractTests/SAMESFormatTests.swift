@@ -10,7 +10,7 @@ import ModelPrecision
 @Test(.heavy) func sameSFP32SourceHalfQualificationCapture() throws {
     let env = ProcessInfo.processInfo.environment
     guard let root = env["ARSENAL_SAMES_FORMAT_LAB"] else { return }
-    if let path = env["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = env["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     Memory.memoryLimit = 4_000_000_000
     Memory.cacheLimit = 64_000_000
     let lab = URL(fileURLWithPath: root)

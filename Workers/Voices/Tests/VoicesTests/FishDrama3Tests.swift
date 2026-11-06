@@ -11,7 +11,7 @@ import Tokenizers
 /// lab/drama3-port/scripts), the checkpoint key map from safetensors headers (no weight bytes), and tiny random graphs on
 /// the CPU. Real-weight parity is the opt-in heavy check in lab/drama3-port.md.
 @Suite(.serialized) struct FishDrama3Tests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     static let snapshot = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent(
         ".cache/huggingface/hub/models--mlx-community--fish-audio-drama-3-4bit/snapshots/cc639e27aba7edb73429d3e3806f471dcd79d316")

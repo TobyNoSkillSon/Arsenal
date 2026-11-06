@@ -8,7 +8,7 @@ import Testing
 /// Fish S1 DAC (Drama 3's codec) structure and streaming, on the CPU with tiny random weights. No checkpoint is read and the
 /// real-size module is built only to compare parameter names and shapes, never evaluated.
 @Suite(.serialized) struct FishS1CodecTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     /// A codec small enough to run in milliseconds on the CPU; the 3-frame quantizer window makes 7 frames exercise windowing.
     static let tiny: FishS1CodecConfig = {

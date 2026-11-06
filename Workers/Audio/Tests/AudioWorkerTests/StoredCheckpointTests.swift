@@ -11,7 +11,7 @@ extension PrecisionTests {
         guard let metallib = (ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]) else {
             throw audioFailure("Pinned metallib is required.")
         }
-        GPU.metallib = URL(fileURLWithPath: metallib)
+        setTestMetallib(URL(fileURLWithPath: metallib))
         setenv("ARSENAL_NATIVE_LAB", "1", 1)
         let repo = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
             .deletingLastPathComponent()

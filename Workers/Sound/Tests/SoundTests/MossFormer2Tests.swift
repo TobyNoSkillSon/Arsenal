@@ -26,7 +26,7 @@ private enum MF2Golden {
     /// MLX loads its Metal library even for CPU-device work; tests point it at the build's copy.
     static func useTestMetallib() {
         let env = ProcessInfo.processInfo.environment
-        if let library = env["ARSENAL_MLX_METALLIB"] ?? env["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: library) }
+        if let library = env["ARSENAL_MLX_METALLIB"] ?? env["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: library)) }
     }
     static func load() throws -> File { try JSONDecoder().decode(File.self, from: Data(contentsOf: folder.appendingPathComponent("golden.json"))) }
 

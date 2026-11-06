@@ -12,7 +12,7 @@ import PerceptionWorker
 /// 22 Oct: Get of sam3.1 at FP16 failed with "FP16 non-finite tensor: detector_model.text_encoder.text_projection.weight".
 /// The FP32 weights hold -9.58e18 at [6, 0] and [10, 0] of that unused CLIP projection.
 @Suite(.serialized) struct SAM31ConversionTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
     static let unused = "detector_model.text_encoder.text_projection.weight"
 
     @Test func theUnusedProjectionIsOutsideTheGraph() throws {

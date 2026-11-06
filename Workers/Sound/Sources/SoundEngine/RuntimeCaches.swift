@@ -31,11 +31,11 @@ public enum RuntimeCaches {
     /// A signed .app keeps its Metal library in Contents/Resources/mlx.metallib; set the path before MLX starts.
     /// `VIREO_METALLIB` overrides (development runs of a bare helper binary); otherwise MLX's own lookup applies.
     public static func useBundledMetallib() {
-        if let override = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: override); return }
-        if let override = FastPath.current.value("VIREO_METALLIB") { GPU.metallib = URL(fileURLWithPath: override); return }
+        if let override = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setMetallib(URL(fileURLWithPath: override)); return }
+        if let override = FastPath.current.value("VIREO_METALLIB") { setMetallib(URL(fileURLWithPath: override)); return }
         guard let executable = Bundle.main.executableURL?.resolvingSymlinksInPath() else { return }
         let library = executable.deletingLastPathComponent().deletingLastPathComponent().appendingPathComponent("Resources/mlx.metallib")
-        if FileManager.default.fileExists(atPath: library.path) { GPU.metallib = library }
+        if FileManager.default.fileExists(atPath: library.path) { setMetallib(library) }
     }
     private static var configured = false
     /// First model load only: an idle helper never initialises Metal.

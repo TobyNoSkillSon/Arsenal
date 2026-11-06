@@ -11,7 +11,7 @@ import ArsenalWire
 /// into the tensor set the port loads (`cast:sam31-fp16-v3`). No weights: the real layout is a names-and-shapes fixture,
 /// and the converter runs end to end on a tiny synthetic torch.save archive, on the CPU stream.
 @Suite(.serialized) struct SAM31OfficialCheckpointTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
 
     struct Layout {
         let source: [String: OfficialCheckpoint.Entry]

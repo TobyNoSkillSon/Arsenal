@@ -253,8 +253,10 @@ import MCP
                 let calls = await h.service.getCalls
                 #expect(!text.hasPrefix("Not run") && calls == ["laya fp16"], "\(text)")
                 // Core review, 2 Nov: a clone from the user's own files is not a download, and says so.
-                let job = try #require(MCPHarness.job(text))
-                let done = try await h.text("wait", ["job": .string(job)])
+                // Usually a job; under full-suite load the restore can finish inside run's own wait (6 Nov), and the
+                // answer comes back at once.
+                var done = text
+                if let job = MCPHarness.job(text) { done = try await h.text("wait", ["job": .string(job)]) }
                 #expect(!done.contains("Downloaded") && done.contains("Restored Laya Decisions from a copy already on this Mac"), "\(done)")
             } else {
                 #expect(

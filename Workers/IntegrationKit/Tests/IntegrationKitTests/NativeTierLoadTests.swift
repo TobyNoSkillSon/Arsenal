@@ -8,7 +8,7 @@ import ModelPrecision
 
 @Suite(.serialized) struct NativeTierLoadTests {
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     }
     final class Tiny: Module {
         @ModuleInfo var projection: Linear

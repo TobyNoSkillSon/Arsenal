@@ -5,7 +5,8 @@ import Testing
 import MCP
 @testable import ArsenalAPI
 
-/// A router over the stub service with simulated time (200× the wall clock), a fixed Mac (40 of 100 GB in use, 128 GB
+/// A router over the stub service with simulated time (100× the wall clock; at 200× a 25 ms scheduling delay on a loaded
+/// Mac read as 5 simulated seconds and failed timing checks, 6 Nov), a fixed Mac (40 of 100 GB in use, 128 GB
 /// RAM, 500 GB free disk) and a muted playback queue. Nothing downloads, plays or touches the installed app.
 struct MCPHarness {
     static let gib = 1.073741824
@@ -14,7 +15,7 @@ struct MCPHarness {
     let router: APIRouter
     let environment: MCPEnvironment
     init(
-        rows: [ModelRow], metadata: [String: JSONObject] = [:], operations: [String: [ModelOperation]] = [:], factor: Double = 200, freeDisk: Int64? = 500_000_000_000,
+        rows: [ModelRow], metadata: [String: JSONObject] = [:], operations: [String: [ModelOperation]] = [:], factor: Double = 100, freeDisk: Int64? = 500_000_000_000,
         inUseGB: Double = 40 * gib, cloneFile: (@Sendable (Int32, String) -> Int32)? = nil, pathDeadline: Double = 2000
     ) async throws {
         root = FileManager.default.temporaryDirectory.appendingPathComponent("arsenal-mcp-agent-" + UUID().uuidString)

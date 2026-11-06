@@ -8,7 +8,7 @@ import ArsenalWire
 @testable import IntegrationKit
 
 @Suite(.serialized) struct NativeConversionContractTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
     /// Get casts pinned files one at a time, so a recipe may see config.json alone; any weight file still requires tensors.
     @Test(arguments: [("config.json", true), ("weights.bin", false), ("model.pt", false)]) func tensorFreeOutputOnlyForWeightFreeSources(name: String, accepted: Bool) throws {
         let root = URL(fileURLWithPath: "/private/tmp/conversion-" + UUID().uuidString)

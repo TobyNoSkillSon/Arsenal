@@ -9,7 +9,7 @@ import PerceptionSupport
 @testable import SAM31
 
 @Suite(.serialized) struct PrecisionTests {
-    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) } }
+    init() { if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) } }
     @Test(.heavy, arguments: ["fp16", "int8", "int4"]) func sourceConversionThenStoredModelGraph(tier: String) throws {
         let root = FileManager.default.temporaryDirectory.appendingPathComponent("arsenal-tips-" + UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root) }

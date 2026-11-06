@@ -9,7 +9,7 @@ import Testing
 
 struct ImageBoundaryTests {
     init() {
-        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+        if let path = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     }
     private var fixtures: URL { Bundle.module.resourceURL!.appendingPathComponent("Fixtures") }
     private struct Fixture: Decodable {

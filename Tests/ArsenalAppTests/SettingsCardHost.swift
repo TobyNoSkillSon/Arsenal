@@ -109,6 +109,22 @@ import Testing
         view.scrollToVisible(view.bounds)
         await settle()
     }
+    /// Scrolls a long table to a row, as a user does before using it: a scrolling table builds only the rows in sight
+    /// (ModelTable's lazy stack), so a row below the fold has no views until then. Its place comes from the table's
+    /// metrics; a table that does not scroll is left alone.
+    func reveal(row id: String) async {
+        // The table's own scroll view: the one holding the rows (an open card can hold one of its own).
+        guard ModelTable.scrolls(controller), let rect = ModelTable.gearRect(controller, id: id),
+            let scroll = Self.views(NSScrollView.self, view).first(where: { !Self.views(RowActionView.self, $0).isEmpty })
+        else { return }
+        let chrome = ModelTable.verticalPadding + ModelTable.headerHeight + 1 + 2 * ModelTable.dividerPadding
+        let clip = scroll.contentView
+        let top = max(0, rect.minY - chrome - (clip.bounds.height - rect.height) / 2)
+        let limit = max(0, (scroll.documentView?.frame.height ?? 0) - clip.bounds.height)
+        clip.scroll(to: NSPoint(x: clip.bounds.minX, y: min(top, limit)))
+        scroll.reflectScrolledClipView(clip)
+        await settle()
+    }
     /// The mouse event a click at the view's centre makes, in the fixture window.
     func event(_ type: NSEvent.EventType, at view: NSView, number: Int) throws -> NSEvent {
         let window = try #require(self.window)

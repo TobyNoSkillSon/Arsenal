@@ -12,7 +12,7 @@ extension PrecisionTests {
         guard let metallib = ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] else {
             throw audioFailure("Pinned metallib required.")
         }
-        GPU.metallib = URL(fileURLWithPath: metallib)
+        setTestMetallib(URL(fileURLWithPath: metallib))
         let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: root); Memory.clearCache() }
         let source = root.appendingPathComponent("source")

@@ -154,7 +154,7 @@ import Testing
     /// The loop reads MLX's memory counters, which load the metallib: scripts/test.sh provides it.
     @Test(.enabled(if: ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] != nil, "needs ARSENAL_TEST_METALLIB (scripts/test.sh sets it)"))
     func wireLoopReportsCodesAndStatusesAndStopsOnUnload() throws {
-        GPU.metallib = URL(fileURLWithPath: try #require(ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"]))
+        setTestMetallib(URL(fileURLWithPath: try #require(ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"])))
         let pipes = try Pipes()
         let loop = Loop(input: pipes.toWorker[0], out: pipes.fromWorker[1])
         final class Exit: @unchecked Sendable { var status: Int32 = -1; let done = DispatchSemaphore(value: 0) }

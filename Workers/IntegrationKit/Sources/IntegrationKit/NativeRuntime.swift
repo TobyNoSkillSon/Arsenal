@@ -11,7 +11,7 @@ public enum NativeRuntime {
         let library =
             ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"].map { URL(fileURLWithPath: $0) }
             ?? URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent().appendingPathComponent("mlx-swift_Cmlx.bundle/Contents/Resources/default.metallib")
-        if FileManager.default.fileExists(atPath: library.path) { GPU.metallib = library }
+        if FileManager.default.fileExists(atPath: library.path) { setMetallib(library) }
         // MLX keeps freed buffers for reuse up to its cache limit, by default most of the Mac's memory. Buffers that
         // grow every step (KV caches, per-step activations) are freed and never reused at the next size, so an uncapped
         // cache grew a TeleOCR worker by tens of gigabytes over one generation (20 Oct). Every family starts capped; a

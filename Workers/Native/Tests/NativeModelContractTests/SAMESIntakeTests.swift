@@ -8,7 +8,7 @@ import SoundEngine
 import VireoCore
 
 @Test(.heavy) func sameSStoredHalfAndAffineMetadataAreNeverWidened() throws {
-    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     for dtype: DType in [.float16, .bfloat16] {
         var config = SAMESConfig()
         config.latentDim = 4; config.dim = 8; config.numHeads = 2; config.headDim = 4
@@ -41,7 +41,7 @@ import VireoCore
 }
 
 @Test(.heavy) func sharedDecoderDispatchPreservesMediumFixedTensorOutputs() throws {
-    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     var config = SAMELConfig()
     config.latentDim = 4; config.dim = 8; config.numHeads = 2; config.headDim = 4
     config.ropeDims = 2; config.numBlocks = 1; config.ffInner = 16; config.outChannels = 4; config.sinStartBlock = 0
@@ -60,7 +60,7 @@ import VireoCore
 }
 
 @Test(.heavy) func sameSRejectsUnconvertedFP32BeforeConstructingAModel() throws {
-    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     let file = FileManager.default.temporaryDirectory.appendingPathComponent("same-s-legacy-" + UUID().uuidString + ".safetensors")
     defer { try? FileManager.default.removeItem(at: file) }
     try save(arrays: ["running_std": MLXArray([Float(1)])], url: file)
@@ -69,7 +69,7 @@ import VireoCore
 
 @Test(.heavy, arguments: ["stable-audio-3-small-sfx", "stable-audio-3-medium"])
 func soundQuantizationRebuildsReadonlySourceCoverage(id: String) throws {
-    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     let root = FileManager.default.temporaryDirectory.appendingPathComponent("same-s-conversion-" + UUID().uuidString)
     defer { try? FileManager.default.removeItem(at: root) }
     let source = root.appendingPathComponent("source"), output = root.appendingPathComponent("output")
@@ -99,7 +99,7 @@ func soundQuantizationRebuildsReadonlySourceCoverage(id: String) throws {
 }
 
 @Test(.heavy) func smallDurationProjectionPacksWhileMediumKeepsItsOriginalFixedTensorOutput() throws {
-    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { GPU.metallib = URL(fileURLWithPath: path) }
+    if let path = ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"] { setTestMetallib(URL(fileURLWithPath: path)) }
     let weight = MLXArray((0..<(768 * 256)).map { Float($0 % 17 + 1) / 1000 }).reshaped([768, 256]).asType(.float16)
     let bias = MLXArray.zeros([768], dtype: .float16)
     let medium = SecondsTotalEmbedder(weight: weight, bias: bias)

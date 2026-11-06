@@ -14,7 +14,7 @@ struct LyricEncoderPrecisionTests {
         let metallib = try #require(
             ProcessInfo.processInfo.environment["ARSENAL_MLX_METALLIB"] ?? ProcessInfo.processInfo.environment["ARSENAL_TEST_METALLIB"],
             "the GPU check needs the pinned no-fast-math metallib")
-        GPU.metallib = URL(fileURLWithPath: metallib)
+        setTestMetallib(URL(fileURLWithPath: metallib))
         let c = try JSONDecoder().decode(
             ACEStepConfiguration.self,
             from: JSONSerialization.data(withJSONObject: [
